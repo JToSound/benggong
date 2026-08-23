@@ -1,0 +1,25 @@
+{
+  "name": "bing-gang-map",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "《病港》互動地圖：完全離線、本機資產、GitHub Pages 靜態網站",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.46.0",
+    "@typescript-eslint/parser": "^8.46.0",
+    "eslint": "^9.37.0",
+    "typescript": "~5.9.2",
+    "typescript-eslint": "^8.46.0",
+    "vite": "^7.1.7",
+    "vitest": "^3.2.4"
+  }
+}

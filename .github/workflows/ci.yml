@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
+  python-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install pytest
+      - name: Python unit tests
+        run: python -m pytest tests/ -v
+      - name: 小說清理驗證（private data 唔喺 repo 時自動跳過）
+        run: python scripts/validate_novel.py --if-present
+
+  private-data-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: 確保 data/private/ 完全未被追蹤
+        run: |
+          if git ls-files -- 'data/private/*' | grep -q .; then
+            echo "::error::data/private/ 有檔案被 git 追蹤！"
+            git ls-files -- 'data/private/*'
+            exit 1
+          fi
+          echo "OK：data/private/ 無任何檔案被追蹤"

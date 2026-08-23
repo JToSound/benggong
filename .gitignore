@@ -1,0 +1,54 @@
+# ===== 《病港》互動地圖 — gitignore =====
+# 版權規則：小說全文、清理後全文、evidence、可重組全文嘅 corpus 一律 private，不得 commit。
+
+# ---- Private data（絕對不可 commit）----
+data/private/
+data/private/**
+!data/private/.gitkeep
+
+# 防呆：即使上面規則改動，以下檔案都明確排除
+Bing-Gang-_full.jsonl
+Bing-Gang-_full-2.md
+*clean*.jsonl
+*clean*.md
+
+# ---- Node / Vite ----
+node_modules/
+dist/
+dist-ssr/
+.vite/
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- 測試與工具 ----
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# ---- 環境變數（只可 commit .env.example）----
+.env
+.env.*
+!.env.example
+
+# ---- OS / 編輯器 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# ---- Hermes 本機狀態（不部署）----
+.hermes/
+
+# ---- 大型生成資產暫存 ----
+*.log
