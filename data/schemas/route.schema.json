@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/route.schema.json",
+  "title": "《病港》公開角色路線資料",
+  "description": "GeoJSON Feature（LineString）。原始 waypoint 必須保留；平滑只係視覺效果。",
+  "type": "object",
+  "required": ["type", "geometry", "properties"],
+  "properties": {
+    "type": { "const": "Feature" },
+    "geometry": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "const": "LineString" },
+        "coordinates": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "array",
+            "items": { "type": "number" },
+            "minItems": 2,
+            "maxItems": 2
+          }
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "id", "character_id", "character_name", "color", "chapters_span",
+        "precision", "waypoints", "source", "review_status"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^route_[a-z0-9_]+_[0-9]{3}$" },
+        "character_id": { "type": "string" },
+        "character_name": { "type": "string", "maxLength": 40 },
+        "color": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+        "chapters_span": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 198 },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "precision": { "enum": ["reference", "approximate", "fictional"] },
+        "waypoints": {
+          "type": "array",
+          "minItems": 2,
+          "items": {
+            "type": "object",
+            "required": ["location_id", "chapter", "note", "confidence"],
+            "properties": {
+              "location_id": { "type": "string" },
+              "chapter": { "type": "integer", "minimum": 1, "maximum": 198 },
+              "note": { "type": "string", "maxLength": 80 },
+              "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "source": { "enum": ["bing_gang", "bing_gang_2"] },
+        "review_status": { "enum": ["needs_review", "reviewed", "verified"] }
+      }
+    }
+  }
+}

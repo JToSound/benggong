@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/evidence-candidate.schema.json",
+  "title": "《病港》私有 extraction candidate（永不公開）",
+  "description": "LLM 抽取嘅原始候選記錄。evidence_excerpt 屬私有 material，不得離開 data/private/。",
+  "type": "object",
+  "required": [
+    "candidate_id", "run_id", "chapter", "entity_kind",
+    "name", "evidence_excerpt", "claim", "confidence", "model_meta"
+  ],
+  "properties": {
+    "candidate_id": { "type": "string" },
+    "run_id": { "type": "string" },
+    "chapter": { "type": "integer", "minimum": 1, "maximum": 198 },
+    "entity_kind": {
+      "description": "候選實體類型；location/event/route 對應公開 schema，其他只入 evidence。",
+      "enum": ["location", "event", "route", "character", "time_reference", "other"]
+    },
+    "name": { "type": "string", "maxLength": 80 },
+    "evidence_excerpt": {
+      "description": "私有：支援 claim 嘅原文摘錄，最長 300 字。不可進入任何公開檔案。",
+      "type": "string",
+      "maxLength": 300
+    },
+    "claim": {
+      "description": "LLM 根據 evidence 嘅主張；不確定必須用 null／unknown，不得捏造。",
+      "type": ["string", "null"],
+      "maxLength": 400
+    },
+    "status": {
+      "description": "pending=待 resolve；accepted=入 public builder；rejected=剔除。",
+      "default": "pending",
+      "enum": ["pending", "accepted", "rejected"]
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "needs_review_reasons": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "conflict", "low_confidence", "location_unknown", "time_conflict",
+          "high_spoiler", "possible_hallucination", "invalid_schema"
+        ]
+      }
+    },
+    "model_meta": {
+      "type": "object",
+      "required": ["model_id", "temperature", "prompt_hash", "schema_version"],
+      "properties": {
+        "model_id": { "type": "string" },
+        "temperature": { "type": "number" },
+        "prompt_hash": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "schema_version": { "type": "string" },
+        "token_estimate": { "type": "integer" },
+        "cost_estimate_usd": { "type": "number" }
+      }
+    }
+  }
+}

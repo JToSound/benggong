@@ -27,11 +27,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install pytest
+      - run: pip install -r requirements-dev.txt
       - name: Python unit tests
         run: python -m pytest tests/ -v
       - name: 小說清理驗證（private data 唔喺 repo 時自動跳過）
         run: python scripts/validate_novel.py --if-present
+      - name: 公開資料驗證（schema + 治理掃描）
+        run: python scripts/validate_public_data.py
 
   private-data-guard:
     runs-on: ubuntu-latest

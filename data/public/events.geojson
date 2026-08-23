@@ -1,0 +1,81 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.272, 22.37] },
+      "properties": {
+        "id": "bg_event_001",
+        "title": "被困一年，決意走出住所",
+        "description": "主角喺高層單位被困一年，糧食將盡，望住街上一啲日間漫遊、入夜消失嘅「怪物」，終於決定離開住所求生。",
+        "chapter": 1,
+        "chapter_name": "０１",
+        "chapter_refs": [1],
+        "characters": ["protagonist"],
+        "event_type": "major",
+        "spoiler_level": 0,
+        "location_id": "protagonist_home_unknown",
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.272, 22.37] },
+      "properties": {
+        "id": "bg_event_002",
+        "title": "抵達大本營",
+        "description": "主角經歷外出一連串遭遇後到達倖存者據點「大本營」，見識圖書館、廣場等設施同居民生活規律。",
+        "chapter": 3,
+        "chapter_name": "０３",
+        "chapter_refs": [3],
+        "characters": ["protagonist"],
+        "event_type": "major",
+        "spoiler_level": 0,
+        "location_id": "da_ben_ying",
+        "confidence": 0.8,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.256, 22.341] },
+      "properties": {
+        "id": "bg_event_003",
+        "title": "大本營嘅政治",
+        "description": "主角得知大本營內部有派系角力：董倫提出嘅政策將喺會議中大比數通過，阿玲等人只能遊說拖延。",
+        "chapter": 26,
+        "chapter_name": "２６",
+        "chapter_refs": [26, 27],
+        "characters": ["protagonist"],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": "da_ben_ying",
+        "confidence": 0.65,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": { "type": "Point", "coordinates": [114.2415, 22.3229] },
+      "properties": {
+        "id": "bg_event_004",
+        "title": "病獵公會時期",
+        "description": "故事中後期，主角活躍於寶琳一帶並加入病獵公會，與同伴分享情報對抗病者。",
+        "chapter": 91,
+        "chapter_name": "９１",
+        "chapter_refs": [74, 91],
+        "characters": ["protagonist"],
+        "event_type": "travel",
+        "spoiler_level": 2,
+        "location_id": "po_lam_reference",
+        "confidence": 0.5,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    }
+  ]
+}

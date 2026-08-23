@@ -1,0 +1,58 @@
+[
+  {
+    "id": "tl_event_001",
+    "date_label": "按章節先後",
+    "date_sort": "ch001",
+    "chapter": 1,
+    "location_id": "protagonist_home_unknown",
+    "characters": ["protagonist"],
+    "type": "major",
+    "spoiler_level": 0,
+    "description": "被困一年嘅主角決定走出住所，踏入病者橫行嘅世界。",
+    "confidence": 0.85,
+    "review_status": "needs_review",
+    "event_id": "bg_event_001"
+  },
+  {
+    "id": "tl_event_002",
+    "date_label": "按章節先後",
+    "date_sort": "ch003",
+    "chapter": 3,
+    "location_id": "da_ben_ying",
+    "characters": ["protagonist"],
+    "type": "major",
+    "spoiler_level": 0,
+    "description": "主角到達倖存者據點大本營。",
+    "confidence": 0.8,
+    "review_status": "needs_review",
+    "event_id": "bg_event_002"
+  },
+  {
+    "id": "tl_event_003",
+    "date_label": "按章節先後",
+    "date_sort": "ch026",
+    "chapter": 26,
+    "location_id": "da_ben_ying",
+    "characters": ["protagonist"],
+    "type": "minor",
+    "spoiler_level": 1,
+    "description": "大本營內部政治角力浮現，董倫嘅政策即將通過。",
+    "confidence": 0.65,
+    "review_status": "needs_review",
+    "event_id": "bg_event_003"
+  },
+  {
+    "id": "tl_event_004",
+    "date_label": "按章節先後",
+    "date_sort": "ch091",
+    "chapter": 91,
+    "location_id": "po_lam_reference",
+    "characters": ["protagonist"],
+    "type": "travel",
+    "spoiler_level": 2,
+    "description": "主角活躍於寶琳一帶，與病獵公會同伴並肩作戰。",
+    "confidence": 0.5,
+    "review_status": "needs_review",
+    "event_id": "bg_event_004"
+  }
+]

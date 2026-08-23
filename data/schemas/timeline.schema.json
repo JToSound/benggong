@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/timeline.schema.json",
+  "title": "《病港》時間軸記錄",
+  "description": "如無可確認故事日期，date_label 必須係「按章節先後」，date_sort 用章節次序。",
+  "type": "object",
+  "required": [
+    "id", "date_label", "date_sort", "chapter", "location_id",
+    "characters", "type", "spoiler_level", "description",
+    "confidence", "review_status"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^tl_[a-z0-9_]+$" },
+    "date_label": { "type": "string", "maxLength": 40 },
+    "date_sort": {
+      "description": "主排序鍵：有可靠日期用 ISO 字串，否則用 chNNN 章節序。",
+      "type": "string",
+      "maxLength": 32
+    },
+    "chapter": { "type": "integer", "minimum": 1, "maximum": 198 },
+    "location_id": { "type": ["string", "null"] },
+    "characters": { "type": "array", "items": { "type": "string" } },
+    "type": {
+      "enum": ["major", "minor", "battle", "discovery", "death", "reunion", "travel", "landmark"]
+    },
+    "spoiler_level": { "type": "integer", "minimum": 0, "maximum": 3 },
+    "description": { "type": "string", "maxLength": 200 },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "review_status": { "enum": ["needs_review", "reviewed", "verified"] },
+    "event_id": {
+      "description": "對應 events.geojson 嘅 id，支援 deep link「喺地圖睇」。",
+      "type": ["string", "null"]
+    }
+  }
+}

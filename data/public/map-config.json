@@ -1,0 +1,27 @@
+{
+  "map": {
+    "crs": "EPSG:3857",
+    "renderer": "leaflet",
+    "tiles_local_only": true,
+    "default_base_layer": "story-cartography",
+    "base_layers": [
+      { "id": "story-cartography", "label": "故事地圖", "status": "pending_phase_c" },
+      { "id": "ai-aerial-concept", "label": "AI 空拍概念圖", "status": "pending_phase_c", "disclaimer": "AI 生成概念空拍圖，僅供小說世界觀瀏覽，唔代表真實衛星影像。" },
+      { "id": "debug-grid", "label": "除錯格線", "dev_only": true }
+    ],
+    "initial_view": { "center_story_position": [0.68, 0.48], "zoom": 11 },
+    "zoom_range": [8, 15]
+  },
+  "scale_profile": {
+    "status": "unreliable",
+    "note": "故事地圖比例未經審閱校準；所有距離只可顯示為「估算距離」或「地圖單位」。",
+    "meters_per_map_unit": null
+  },
+  "spoiler": { "levels": 0, "1": null, "2": null, "3": null, "default_max_level": 1 },
+  "provisional_mode": {
+    "enabled": true,
+    "banner": "暫定資料模式：以下內容未經人手審閱，僅為最小樣本，可能有不準確之處。"
+  },
+  "sources_enabled": ["bing_gang"],
+  "sources_reserved": ["bing_gang_2"]
+}

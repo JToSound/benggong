@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/event.schema.json",
+  "title": "《病港》公開事件資料",
+  "description": "GeoJSON Feature。description 最多 200 字，不可轉載長段正文。",
+  "type": "object",
+  "required": ["type", "geometry", "properties"],
+  "properties": {
+    "type": { "const": "Feature" },
+    "geometry": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "const": "Point" },
+        "coordinates": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "id", "title", "description", "chapter", "chapter_name", "chapter_refs",
+        "characters", "event_type", "spoiler_level", "location_id",
+        "confidence", "review_status", "source"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^bg_event_[0-9]{3,6}$" },
+        "title": { "type": "string", "maxLength": 60 },
+        "description": { "type": "string", "maxLength": 200 },
+        "chapter": { "type": "integer", "minimum": 1, "maximum": 198 },
+        "chapter_name": { "type": "string", "maxLength": 40 },
+        "chapter_refs": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 198 }, "minItems": 1 },
+        "characters": { "type": "array", "items": { "type": "string" } },
+        "event_type": {
+          "enum": ["major", "minor", "battle", "discovery", "death", "reunion", "travel", "landmark"]
+        },
+        "spoiler_level": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "location_id": { "type": "string" },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "review_status": { "enum": ["needs_review", "reviewed", "verified"] },
+        "source": { "enum": ["bing_gang", "bing_gang_2"] },
+        "provisional_note": { "type": "string", "maxLength": 160 }
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/extraction-run.schema.json",
+  "title": "《病港》OpenRouter extraction run ledger 記錄",
+  "description": "每次 LLM 呼叫一條。只記 metadata 同 hash；敏感正文、完整 request/response 一律不得記錄。",
+  "type": "object",
+  "required": ["run_id", "timestamp", "model_id", "temperature", "prompt_hash", "schema_version", "chapter", "status"],
+  "properties": {
+    "run_id": { "type": "string" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "model_id": { "type": "string" },
+    "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+    "prompt_hash": { "pattern": "^[0-9a-f]{64}$", "type": "string" },
+    "schema_version": { "type": "string" },
+    "chapter": { "type": "integer", "minimum": 1, "maximum": 198 },
+    "segment_index": { "type": "integer", "minimum": 0 },
+    "attempt": { "type": "integer", "minimum": 1, "maximum": 2, "default": 1 },
+    "token_estimate": { "type": "integer" },
+    "cost_estimate_usd": { "type": "number" },
+    "candidates_produced": { "type": "integer", "minimum": 0 },
+    "status": {
+      "description": "invalid_schema 經一次 retry 仍失敗就入 review queue，唔會再自動重試。",
+      "enum": ["ok", "invalid_schema_retry", "invalid_schema_review_queue", "rate_limited_retry", "timeout_retry", "error"]
+    },
+    "error_summary": {
+      "description": "最長 200 字嘅錯誤摘要；不得包含正文或 API key。",
+      "type": ["string", "null"],
+      "maxLength": 200
+    }
+  }
+}

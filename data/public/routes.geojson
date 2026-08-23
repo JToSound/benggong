@@ -1,0 +1,40 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [114.256, 22.341],
+          [114.262, 22.355],
+          [114.272, 22.37]
+        ]
+      },
+      "properties": {
+        "id": "route_protagonist_001",
+        "character_id": "protagonist",
+        "character_name": "我",
+        "color": "#E74C3C",
+        "chapters_span": [1, 3],
+        "precision": "approximate",
+        "waypoints": [
+          {
+            "location_id": "protagonist_home_unknown",
+            "chapter": 1,
+            "note": "離開被困一年嘅住所",
+            "confidence": 0.7
+          },
+          {
+            "location_id": "da_ben_ying",
+            "chapter": 3,
+            "note": "抵達大本營",
+            "confidence": 0.8
+          }
+        ],
+        "source": "bing_gang",
+        "review_status": "needs_review"
+      }
+    }
+  ]
+}
