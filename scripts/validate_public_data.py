@@ -118,7 +118,7 @@ def main() -> int:
 
     def validate_against(instance, schema_name: str, hint: str):
         for e in validators[schema_name].iter_errors(instance):
-            loc = ".".join(str(p) for p in e.absolute_path[:6])
+            loc = ".".join(str(p) for p in list(e.absolute_path)[:6])
             errors.append(f"{hint} [{schema_name}] {loc}: {e.message[:160]}")
 
     for fname, sname in SCHEMA_FILES.items():
