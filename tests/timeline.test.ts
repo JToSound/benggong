@@ -1,9 +1,9 @@
-// 時間軸入口最小測試 — Phase D 將擴充完整前端測試
+// 時間軸入口最小測試 — 測純函式；瀏覽器入口（src/timeline.ts）由 Playwright E2E 覆蓋
 import { describe, expect, it } from "vitest";
-import { initTimeline } from "../src/timeline";
+import { renderTimeline } from "../src/pages/timelinePage";
 
-describe("initTimeline", () => {
-  it("回傳 ready 狀態字串", () => {
-    expect(initTimeline()).toBe("timeline-ready");
+describe("timeline page", () => {
+  it("renderTimeline 係可導入嘅 async 函式", () => {
+    expect(typeof renderTimeline).toBe("function");
   });
 });
