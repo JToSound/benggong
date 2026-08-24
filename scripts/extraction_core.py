@@ -400,6 +400,17 @@ class CandidateStore:
 
     def __post_init__(self):
         self.path.parent.mkdir(parents=True, exist_ok=True)
+        self.count = self.count_existing()
+
+    def count_existing(self) -> int:
+        if not self.path.exists():
+            return 0
+        n = 0
+        with open(self.path, encoding="utf-8") as f:
+            for line in f:
+                if line.strip():
+                    n += 1
+        return n
 
     def append(self, cand: dict) -> None:
         with open(self.path, "a", encoding="utf-8") as f:

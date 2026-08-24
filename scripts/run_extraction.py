@@ -129,7 +129,8 @@ def main() -> int:
     store = CandidateStore()
     done = ledger.completed_keys()
 
-    cand_seq = 0
+    # 斷點續跑：candidate_id 由已有記錄數起跳，避免跨 run 撞號
+    cand_seq = store.count_existing()
     ok_segs = err_segs = queue_segs = 0
     t0 = time.time()
 
