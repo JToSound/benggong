@@ -82,7 +82,8 @@ export interface EventProperties {
   characters: string[];
   event_type: EventType;
   spoiler_level: SpoilerLevel;
-  location_id: string;
+  /** 對應 location id；null = 未指派（待人手審閱或後續 pipeline） */
+  location_id: string | null;
   confidence: number;
   review_status: ReviewStatus;
   source: SourceId;

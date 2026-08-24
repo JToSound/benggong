@@ -10,6 +10,7 @@ import {
   type LoadResult,
 } from "../data/loadDataset";
 import type { EventFeature } from "../types/dataset";
+import { buildSearchIndex, search } from "../lib/search";
 
 const STORY_BOUNDS: L.LatLngBoundsExpression = [
   [22.15, 113.8],
@@ -126,6 +127,116 @@ export async function initMap(rootId = "map-root"): Promise<void> {
   if (label) {
     label.textContent = `資料版本：provisional（${visibleEvents.length} 事件／${locIds.size} 位置可見｜劇透 ≤${maxSpoiler}）`;
   }
+
+  // ---- 搜尋 + deep link + 鍵盤 ----
+  buildSearchIndex(dataset);
+  mountSearchBox(dataset, map);
+  handleDeepLinks(dataset, map);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+    if (e.key === "f" || e.key === "F") {
+      e.preventDefault();
+      document.getElementById("bg-search-input")?.focus();
+    } else if (e.key === "Escape") {
+      document.getElementById("bg-event-panel")?.remove();
+      document.getElementById("bg-search-results")?.remove();
+    } else if (e.key === "t" || e.key === "T") {
+      window.location.href = "./timeline.html";
+    }
+  });
+}
+
+/** deep links：?event=<id> 同 #location=<id> */
+function handleDeepLinks(
+  dataset: import("../types/dataset").BingGangDataset,
+  map: L.Map,
+): void {
+  const params = new URLSearchParams(window.location.search);
+  const eventId = params.get("event");
+  if (eventId) {
+    showEventDetail(dataset, eventId);
+  }
+
+  const flyToStory = (sp: { x: number; y: number }, zoom = 13): void => {
+    map.flyTo(storyToLatLng(sp), zoom, { duration: 0.8 });
+  };
+
+  const applyHash = (): void => {
+    const m = window.location.hash.match(/^#location=(.+)$/);
+    if (m) {
+      const loc = dataset.locations.find((f) => f.properties.id === decodeURIComponent(m[1]));
+      if (loc) flyToStory(loc.properties.story_position);
+    }
+  };
+  applyHash();
+  window.addEventListener("hashchange", applyHash);
+}
+
+/** 搜尋框 + 結果下拉 */
+function mountSearchBox(
+  dataset: import("../types/dataset").BingGangDataset,
+  map: L.Map,
+): void {
+  const header = document.querySelector("header#topbar");
+  if (!header) return;
+
+  header.insertAdjacentHTML(
+    "beforeend",
+    `
+    <div class="bg-search" role="search">
+      <input id="bg-search-input" type="search" placeholder="搵角色／事件／地點／章節（F）"
+             aria-label="搜尋" autocomplete="off" />
+      <ul id="bg-search-results" class="bg-search-results" role="listbox" hidden></ul>
+    </div>
+  `,
+  );
+
+  const input = header.querySelector<HTMLInputElement>("#bg-search-input")!;
+  const resultsEl = header.querySelector<HTMLUListElement>("#bg-search-results")!;
+
+  const render = (): void => {
+    const hits = search(input.value);
+    resultsEl.innerHTML = hits
+      .map(
+        (h) =>
+          `<li role="option"><a href="${escapeHtml(h.href)}" data-kind="${h.kind}">
+             <strong>${escapeHtml(h.title)}</strong>
+             <span class="bg-search-sub">${escapeHtml(h.subtitle)}</span></a></li>`,
+      )
+      .join("");
+    resultsEl.hidden = hits.length === 0;
+    for (const a of Array.from(resultsEl.querySelectorAll("a"))) {
+      a.addEventListener("click", () => {
+        resultsEl.hidden = true;
+        input.value = "";
+      });
+    }
+  };
+
+  input.addEventListener("input", render);
+  input.addEventListener("focus", render);
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      resultsEl.hidden = true;
+      input.blur();
+    }
+  });
+  document.addEventListener("click", (e) => {
+    if (!(e.target as HTMLElement).closest(".bg-search")) resultsEl.hidden = true;
+  });
+
+  // 點 location 結果時飛過去（hash 變化由 hashchange handler 處理）
+  resultsEl.addEventListener("click", (e) => {
+    const href = (e.target as HTMLElement).closest("a")?.getAttribute("href") ?? "";
+    const m = href.match(/^#location=(.+)$/);
+    if (m) {
+      const loc = dataset.locations.find(
+        (f) => f.properties.id === decodeURIComponent(m[1]),
+      );
+      if (loc) map.flyTo(storyToLatLng(loc.properties.story_position), 13);
+    }
+  });
 }
 
 function showEventDetail(dataset: import("../types/dataset").BingGangDataset, eventId: string): void {

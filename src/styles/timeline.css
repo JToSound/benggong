@@ -130,3 +130,61 @@
   gap: 8px 14px;
   padding: 10px 14px;
 }
+
+/* ---- 搜尋 ---- */
+.bg-search {
+  position: relative;
+  margin-left: auto;
+}
+
+#bg-search-input {
+  width: min(280px, 40vw);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #2c3e50);
+  background: rgba(236, 240, 241, 0.08);
+  color: var(--color-text, #ecf0f1);
+  font-family: inherit;
+}
+
+#bg-search-input:focus {
+  outline: 2px solid var(--color-accent, #f39c12);
+}
+
+.bg-search-results {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  width: min(360px, 80vw);
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--color-surface, #1a252f);
+  border: 1px solid var(--color-border, #2c3e50);
+  border-radius: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  z-index: 1200;
+}
+
+.bg-search-results a {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: var(--color-text, #ecf0f1);
+  text-decoration: none;
+}
+
+.bg-search-results a:hover,
+.bg-search-results a:focus {
+  background: rgba(243, 156, 18, 0.15);
+}
+
+.bg-search-sub {
+  color: var(--color-text-muted, #95a5a6);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
