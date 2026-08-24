@@ -20,5 +20,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "node",
+    globalSetup: "./tests/e2e.global-setup.ts",
   },
 });
