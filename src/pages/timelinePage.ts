@@ -92,5 +92,19 @@ export async function renderTimeline(rootId = "timeline-app"): Promise<void> {
   for (const el of Array.from(root.querySelectorAll<HTMLInputElement>(".tl-chk"))) {
     el.addEventListener("change", applyFilter);
   }
+
+  // ---- deep link：?event=<id> 捲到該卡並高亮 ----
+  const params = new URLSearchParams(window.location.search);
+  const targetEvent = params.get("event");
+  if (targetEvent) {
+    const card = Array.from(listEl.children as HTMLCollectionOf<HTMLElement>).find(
+      (li) => li.querySelector(`a[href*="event=${targetEvent}"]`) != null,
+    );
+    if (card) {
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.classList.add("tl-highlight");
+      setTimeout(() => card.classList.remove("tl-highlight"), 3000);
+    }
+  }
 }
 

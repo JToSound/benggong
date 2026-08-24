@@ -122,6 +122,11 @@
   margin-left: 12px;
 }
 
+.tl-item.tl-highlight article {
+  outline: 3px solid var(--color-accent, #f39c12);
+  background: rgba(243, 156, 18, 0.12);
+}
+
 .tl-filter {
   border: 1px solid var(--color-border, #2c3e50);
   border-radius: 8px;
@@ -327,4 +332,40 @@
   color: var(--color-secondary, #2c3e50);
   border: none;
   font-weight: 600;
+}
+
+/* ---- 事件詳情 actions ---- */
+.bg-detail-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.bg-detail-actions button,
+.bg-detail-actions a {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+
+.bg-detail-actions button {
+  background: var(--color-primary, #e74c3c);
+  color: #fff;
+  border: none;
+}
+
+.bg-detail-actions a {
+  background: rgba(46, 204, 113, 0.15);
+  color: var(--color-success, #2ecc71);
+  border: 1px solid var(--color-success, #2ecc71);
+}
+
+#bg-close-detail {
+  background: transparent !important;
+  border: 1px solid var(--color-border, #2c3e50) !important;
+  color: var(--color-text-muted, #95a5a6) !important;
 }

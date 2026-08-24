@@ -146,7 +146,7 @@ export async function initMap(rootId = "map-root"): Promise<void> {
       const sp = loc?.properties.story_position ?? { x: 0.68, y: 0.48 };
       const marker = L.marker(storyToLatLng(sp), { icon: eventIcon(ev.properties.event_type) })
         .bindTooltip(`${ev.properties.title}（第${ev.properties.chapter}章）`, { direction: "top" })
-        .on("click", () => showEventDetail(dataset, ev.properties.id))
+        .on("click", () => showEventDetail(dataset, ev.properties.id, map))
         .addTo(map);
       currentMarkers.push(marker);
     }
@@ -212,7 +212,7 @@ function handleDeepLinks(
   const params = new URLSearchParams(window.location.search);
   const eventId = params.get("event");
   if (eventId) {
-    showEventDetail(dataset, eventId);
+    showEventDetail(dataset, eventId, map);
   }
 
   const flyToStory = (sp: { x: number; y: number }, zoom = 13): void => {
@@ -296,7 +296,11 @@ function mountSearchBox(
   });
 }
 
-function showEventDetail(dataset: import("../types/dataset").BingGangDataset, eventId: string): void {
+function showEventDetail(
+  dataset: import("../types/dataset").BingGangDataset,
+  eventId: string,
+  map?: L.Map,
+): void {
   let panel = document.getElementById("bg-event-panel");
   if (!panel) {
     panel = document.createElement("aside");
@@ -309,14 +313,33 @@ function showEventDetail(dataset: import("../types/dataset").BingGangDataset, ev
   if (!ev) return;
   const p = ev.properties;
   const chars = p.characters.map((c) => `@${c}`).join(" ");
+  const loc =
+    p.location_id != null
+      ? dataset.locations.find((f) => f.properties.id === p.location_id)
+      : undefined;
+
   panel.innerHTML = `
     <h2>${escapeHtml(p.title)}</h2>
     <p class="bg-meta">第${p.chapter}章 · ${p.event_type} · 劇透 ${p.spoiler_level} · confidence ${p.confidence}</p>
     <p>${escapeHtml(p.description)}</p>
+    ${loc ? `<p class="bg-meta">📍 ${escapeHtml(loc.properties.display_name)}（${loc.properties.location_precision}）</p>` : ""}
     <p class="bg-meta">${escapeHtml(chars)}</p>
-    <button type="button" id="bg-close-detail">關閉</button>
+    <div class="bg-detail-actions">
+      ${loc ? `<button type="button" id="bg-fly-loc">飛去位置</button>` : ""}
+      <a href="./timeline.html?event=${encodeURIComponent(p.id)}" id="bg-to-timeline">喺時間軸睇</a>
+      <button type="button" id="bg-close-detail">關閉</button>
+    </div>
   `;
-  panel.querySelector("#bg-close-detail")?.addEventListener("click", () => panel!.remove());
+
+  panel.querySelector("#bg-close-detail")?.addEventListener("click", () => {
+    window.history.replaceState(null, "", "./index.html");
+    panel!.remove();
+  });
+  panel.querySelector("#bg-fly-loc")?.addEventListener("click", () => {
+    if (loc && map) {
+      map.flyTo(storyToLatLng(loc.properties.story_position), 13, { duration: 0.8 });
+    }
+  });
 }
 
 function escapeHtml(s: string): string {
