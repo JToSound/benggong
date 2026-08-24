@@ -283,7 +283,8 @@ def main() -> int:
             "characters": [],
             "event_type": "minor",
             "spoiler_level": spoiler,
-            "location_id": "",
+            # LLM extraction 階段未有 event→location 連結；留 null 待人手/後續 pipeline 指派
+            "location_id": None,
             "confidence": cand.get("confidence") or 0.5,
             "review_status": "needs_review",
             "source": "bing_gang",

@@ -106,9 +106,12 @@ class TestGovernance:
 
 
 def test_event_location_refs_resolve():
+    """location_id 只可以係存在嘅 location 或 null（未指派）；空字串/懸空引用都係 fail。"""
     loc_ids = {f["properties"]["id"] for f in load(PUBLIC / "locations.geojson")["features"]}
     for f in load(PUBLIC / "events.geojson")["features"]:
-        assert f["properties"]["location_id"] in loc_ids
+        lid = f["properties"]["location_id"]
+        if lid is not None:
+            assert lid in loc_ids, f"event {f['properties']['id']} 引用唔存在嘅 location '{lid}'"
 
 
 def test_route_waypoints_resolve():

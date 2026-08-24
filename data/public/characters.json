@@ -1,75 +1,809 @@
 [
   {
-    "id": "protagonist",
-    "name": "我",
+    "id": "a",
+    "name": "A隊",
     "aliases": [],
-    "role": "protagonist",
-    "color": "#E74C3C",
-    "first_appearance": 1,
-    "chapter_refs": [1],
-    "spoiler_level": 0,
-    "description": "以第一人稱敘述嘅主角；開場時喺大廈單位被困一年後決意外出。",
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 15,
+    "chapter_refs": [
+      15
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
     "review_status": "needs_review",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
   {
-    "id": "ha_ching",
-    "name": "夏晴",
-    "aliases": [],
-    "role": "main",
-    "color": "#3498DB",
-    "first_appearance": 1,
-    "chapter_refs": [1],
-    "spoiler_level": 1,
-    "description": "第 1 章已提及嘅角色；與主角關係待審閱確認。",
-    "confidence": 0.6,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "a_ming",
-    "name": "阿明",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#2ECC71",
-    "first_appearance": 1,
-    "chapter_refs": [1],
-    "spoiler_level": 1,
-    "description": "早期章節出現嘅角色；具體情節待審閱補充。",
-    "confidence": 0.55,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "siu_zo",
-    "name": "少佐",
-    "aliases": [],
-    "role": "main",
-    "color": "#F39C12",
-    "first_appearance": 1,
-    "chapter_refs": [3, 198],
-    "spoiler_level": 2,
-    "description": "貫穿全書嘅重要角色，外傳（198 章）仍為核心人物；詳細經歷待審閱。",
-    "confidence": 0.7,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "da_jyu",
-    "name": "大舊",
+    "id": "b",
+    "name": "B隊",
     "aliases": [],
     "role": "supporting",
     "color": "#9B59B6",
-    "first_appearance": 2,
-    "chapter_refs": [2, 50],
+    "first_appearance": 15,
+    "chapter_refs": [
+      15
+    ],
     "spoiler_level": 1,
-    "description": "大本營時期同主角同行嘅同伴；具體事跡待審閱。",
-    "confidence": 0.65,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_05b1ee1378",
+    "name": "病腦",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 3,
+    "chapter_refs": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      12,
+      15
+    ],
+    "spoiler_level": 1,
+    "description": "全書 10 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_0e9756f2f6",
+    "name": "馬尾女生",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 12,
+    "chapter_refs": [
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_1e7255557d",
+    "name": "阿登",
+    "aliases": [
+      "書呆子",
+      "登",
+      "阿明"
+    ],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 1,
+    "chapter_refs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      14,
+      15
+    ],
+    "spoiler_level": 1,
+    "description": "全書 13 章出現；詳情待人手審閱。",
+    "confidence": 0.93,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_29e170584c",
+    "name": "大眼",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 1,
+    "chapter_refs": [
+      1,
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 2 章出現；詳情待人手審閱。",
+    "confidence": 0.95,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_31ac6572fc",
+    "name": "大耳",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#9B59B6",
+    "first_appearance": 12,
+    "chapter_refs": [
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.95,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_369e54e80b",
+    "name": "天明",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 8,
+    "chapter_refs": [
+      8,
+      9,
+      10,
+      11,
+      14
+    ],
+    "spoiler_level": 1,
+    "description": "全書 5 章出現；詳情待人手審閱。",
+    "confidence": 0.89,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_37c89becc7",
+    "name": "舌女",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 1,
+    "chapter_refs": [
+      1,
+      3,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 8 章出現；詳情待人手審閱。",
+    "confidence": 0.87,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_3c0413f11b",
+    "name": "夏晴",
+    "aliases": [
+      "夏暗",
+      "晴"
+    ],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 1,
+    "chapter_refs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "spoiler_level": 1,
+    "description": "全書 11 章出現；詳情待人手審閱。",
+    "confidence": 0.91,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_4375c8b3ed",
+    "name": "大鼻",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 9,
+    "chapter_refs": [
+      9,
+      10,
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 3 章出現；詳情待人手審閱。",
+    "confidence": 0.92,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_4574e89c86",
+    "name": "大眼大耳",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 3,
+    "chapter_refs": [
+      3
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.8,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_4e10f94765",
+    "name": "大腦怪物",
+    "aliases": [
+      "有病腦嘅病者"
+    ],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 2,
+    "chapter_refs": [
+      2
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_50c9d96121",
+    "name": "瑜小六",
+    "aliases": [
+      "小六",
+      "靚女小六"
+    ],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 13,
+    "chapter_refs": [
+      13,
+      14,
+      15,
+      16
+    ],
+    "spoiler_level": 1,
+    "description": "全書 4 章出現；詳情待人手審閱。",
+    "confidence": 0.94,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_50fa619f9c",
+    "name": "送葬隊",
+    "aliases": [
+      "葬屍隊"
+    ],
+    "role": "supporting",
+    "color": "#9B59B6",
+    "first_appearance": 4,
+    "chapter_refs": [
+      4,
+      8,
+      9
+    ],
+    "spoiler_level": 1,
+    "description": "全書 3 章出現；詳情待人手審閱。",
+    "confidence": 0.87,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_531babc507",
+    "name": "天明的妻子",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 11,
+    "chapter_refs": [
+      11
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.85,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_5b5bb7a039",
+    "name": "復仇男學員",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 12,
+    "chapter_refs": [
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.75,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_5d5c1ffda2",
+    "name": "健朗少年",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#9B59B6",
+    "first_appearance": 12,
+    "chapter_refs": [
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.75,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_6c288e91c6",
+    "name": "病爪",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 12,
+    "chapter_refs": [
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_6c7acfa544",
+    "name": "阿陳",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 7,
+    "chapter_refs": [
+      7
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_6c7bae7140",
+    "name": "陌生少年",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 15,
+    "chapter_refs": [
+      15
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_6fe1672edb",
+    "name": "玲玲",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 3,
+    "chapter_refs": [
+      3,
+      6
+    ],
+    "spoiler_level": 1,
+    "description": "全書 2 章出現；詳情待人手審閱。",
+    "confidence": 0.93,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_7f8138e1f9",
+    "name": "阿寶",
+    "aliases": [
+      "怪胎"
+    ],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 5,
+    "chapter_refs": [
+      5,
+      6
+    ],
+    "spoiler_level": 1,
+    "description": "全書 2 章出現；詳情待人手審閱。",
+    "confidence": 0.95,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_80601c0dbe",
+    "name": "病鼻",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#9B59B6",
+    "first_appearance": 8,
+    "chapter_refs": [
+      8
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.85,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_8921c909f4",
+    "name": "少佐",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 1,
+    "chapter_refs": [
+      1,
+      2,
+      3,
+      8,
+      9,
+      10,
+      11,
+      12,
+      14,
+      15,
+      16
+    ],
+    "spoiler_level": 1,
+    "description": "全書 11 章出現；詳情待人手審閱。",
+    "confidence": 0.89,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_8e832258db",
+    "name": "怪物（病者）",
+    "aliases": [
+      "病者"
+    ],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 1,
+    "chapter_refs": [
+      1
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 1.0,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_a7587dbd84",
+    "name": "新型病者「王」",
+    "aliases": [
+      "新型病者",
+      "王"
+    ],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 16,
+    "chapter_refs": [
+      16
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_a8ee5e968d",
+    "name": "醫療室職員",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 4,
+    "chapter_refs": [
+      4
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.85,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_ac57edddaa",
+    "name": "老賢",
+    "aliases": [
+      "首領"
+    ],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 2,
+    "chapter_refs": [
+      2,
+      3,
+      5,
+      6,
+      10,
+      11,
+      12,
+      14
+    ],
+    "spoiler_level": 1,
+    "description": "全書 8 章出現；詳情待人手審閱。",
+    "confidence": 0.88,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_b14b0605ce",
+    "name": "大舊",
+    "aliases": [
+      "大舊Sir"
+    ],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 2,
+    "chapter_refs": [
+      2,
+      3,
+      6,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "spoiler_level": 1,
+    "description": "全書 8 章出現；詳情待人手審閱。",
+    "confidence": 0.91,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_c4afb9384d",
+    "name": "不良人",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#9B59B6",
+    "first_appearance": 12,
+    "chapter_refs": [
+      12
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.95,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_caddbf71c3",
+    "name": "阿登嘅妹妹",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 4,
+    "chapter_refs": [
+      4
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_cae01de86d",
+    "name": "莫文",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 14,
+    "chapter_refs": [
+      14
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.82,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_cd80a102f2",
+    "name": "德國牧羊犬",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 15,
+    "chapter_refs": [
+      15
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_d460958c66",
+    "name": "犬京",
+    "aliases": [
+      "牽犬男"
+    ],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 16,
+    "chapter_refs": [
+      16
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.95,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_ee809e7c96",
+    "name": "肥西",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 14,
+    "chapter_refs": [
+      14,
+      15,
+      16
+    ],
+    "spoiler_level": 1,
+    "description": "全書 3 章出現；詳情待人手審閱。",
+    "confidence": 0.92,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_f7fba74a62",
+    "name": "漢森",
+    "aliases": [
+      "推車手"
+    ],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 7,
+    "chapter_refs": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      14
+    ],
+    "spoiler_level": 1,
+    "description": "全書 6 章出現；詳情待人手審閱。",
+    "confidence": 0.88,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_ff880b76ec",
+    "name": "八字鬍老闆",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 11,
+    "chapter_refs": [
+      11
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "m",
+    "name": "M（主角「我」）",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 4,
+    "chapter_refs": [
+      4
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "mk",
+    "name": "MK妹",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 3,
+    "chapter_refs": [
+      3
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "needs_review",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ricky",
+    "name": "Ricky",
+    "aliases": [],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 16,
+    "chapter_refs": [
+      16
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.95,
     "review_status": "needs_review",
     "portrait_asset_id": null,
     "source": "bing_gang"

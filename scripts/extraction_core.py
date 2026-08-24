@@ -327,6 +327,15 @@ def call_with_retry(
                 ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "error", attempts_log))
                 return None, "error"
             transient_attempt += 1
+            # 每日配額（free-models-per-day）要等重置：10 分鐘週期守夜探測，
+            # 最長約 20 小時；配額恢復後自動全速繼續，唔使人手干預。
+            if "per-day" in msg:
+                if transient_attempt > 120:
+                    ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "error", attempts_log))
+                    return None, "error"
+                attempts_log.append({"attempt": attempt, "note": "daily quota - 守夜等待 600s"})
+                time.sleep(600)
+                continue
             if transient_attempt >= MAX_TRANSIENT:
                 ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "error", attempts_log))
                 return None, "error"

@@ -1,23 +1,23 @@
 {
-  "dataset_version": "0.1.0-provisional",
-  "generated_at": "2026-08-24",
-  "generator": "手寫 provisional sample（Phase B 骨架）；Phase B 正式 run 將由 build_public_dataset.py 生成",
+  "dataset_version": "0.2.0-provisional.20260824",
+  "generated_at": "2026-08-24T09:33:56+00:00",
+  "generator": "scripts/build_public_dataset.py ← data/private/evidence/candidates.jsonl",
   "counts": {
-    "location": 4,
-    "event": 4,
-    "route": 1,
-    "timeline": 4,
-    "character": 5
+    "location": 53,
+    "event": 105,
+    "route": 0,
+    "timeline": 105,
+    "character": 41
   },
   "review_summary": {
     "verified": 0,
     "reviewed": 0,
-    "needs_review": 18
+    "needs_review": 304
   },
   "notes": [
-    "全部記錄 review_status=needs_review；網站必須以 VITE_PROVISIONAL_DATA_MODE=true 運行並顯示 banner。",
-    "所有位置描述、事件摘要均為不超過規格上限嘅粵文短摘要，不含小說原文段落。",
-    "坐標只作 render 投影參考：真實地名屬「參考位置」，虛構地點坐標係故事投影，非真實位置。",
-    "《病港2》零內容；source 欄位僅預留 bing_gang_2 值。"
+    "全部 needs_review；網站必須 VITE_PROVISIONAL_DATA_MODE=true 並顯示 banner。",
+    "事件坐標目前統一投影至故事中心，待人手審閱後逐項指派位置。",
+    "routes 為空：等位置-事件關聯經人手確認後先建立，避免捏造路線。",
+    "本 dataset 由 LLM candidates 經 deterministic rules 生成；無全文、無 evidence excerpt 入公開檔案。"
   ]
 }
