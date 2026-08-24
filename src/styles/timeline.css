@@ -188,3 +188,143 @@
   font-size: 0.8rem;
   white-space: nowrap;
 }
+
+/* ---- Sidebar ---- */
+#bg-sidebar {
+  position: fixed;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+  width: 320px;
+  background: var(--color-surface, #1a252f);
+  border-right: 1px solid var(--color-border, #2c3e50);
+  z-index: 900;
+  transition: transform 0.25s ease;
+}
+
+#bg-sidebar.collapsed {
+  transform: translateX(-320px);
+}
+
+#bg-sidebar-toggle {
+  position: absolute;
+  right: -40px;
+  top: 12px;
+  background: var(--color-surface, #1a252f);
+  border: 1px solid var(--color-border, #2c3e50);
+  border-radius: 0 6px 6px 0;
+  color: var(--color-text, #ecf0f1);
+  font-size: 1.1rem;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.bg-sidebar-inner {
+  padding: 16px;
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+}
+
+#bg-sidebar h3 {
+  margin: 18px 0 8px;
+  font-size: 0.95rem;
+  color: var(--color-accent, #f39c12);
+}
+
+#bg-sidebar section:first-child h3 {
+  margin-top: 0;
+}
+
+.bg-hint {
+  color: var(--color-text-muted, #95a5a6);
+  font-size: 0.78rem;
+  margin: 6px 0 0;
+}
+
+.bg-spoiler-btns {
+  display: flex;
+  gap: 6px;
+}
+
+.bg-spoiler-btns button {
+  flex: 1;
+  padding: 6px 0;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #2c3e50);
+  background: transparent;
+  color: var(--color-text, #ecf0f1);
+  cursor: pointer;
+}
+
+.bg-spoiler-btns button.active {
+  background: var(--color-primary, #e74c3c);
+  border-color: var(--color-primary, #e74c3c);
+  font-weight: 700;
+}
+
+.bg-char-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.bg-char-list button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--color-text, #ecf0f1);
+  cursor: pointer;
+  text-align: left;
+}
+
+.bg-char-list button:hover {
+  background: rgba(243, 156, 18, 0.12);
+}
+
+.bg-char-list button.active {
+  background: rgba(243, 156, 18, 0.22);
+}
+
+.char-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.bg-char-list small {
+  margin-left: auto;
+  color: var(--color-text-muted, #95a5a6);
+}
+
+/* ---- 量度工具 ---- */
+.bg-measure-btn {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 800;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border, #2c3e50);
+  background: var(--color-surface, #1a252f);
+  color: var(--color-text, #ecf0f1);
+  cursor: pointer;
+}
+
+.bg-measure-btn:hover {
+  border-color: var(--color-accent, #f39c12);
+}
+
+.bg-measure-tip {
+  background: var(--color-accent, #f39c12);
+  color: var(--color-secondary, #2c3e50);
+  border: none;
+  font-weight: 600;
+}

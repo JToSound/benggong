@@ -11,6 +11,8 @@ import {
 } from "../data/loadDataset";
 import type { EventFeature } from "../types/dataset";
 import { buildSearchIndex, search } from "../lib/search";
+import { mountSidebar } from "./sidebar";
+import { MeasureTool } from "./measure";
 
 const STORY_BOUNDS: L.LatLngBoundsExpression = [
   [22.15, 113.8],
@@ -132,6 +134,61 @@ export async function initMap(rootId = "map-root"): Promise<void> {
   buildSearchIndex(dataset);
   mountSearchBox(dataset, map);
   handleDeepLinks(dataset, map);
+
+  // ---- Sidebar（劇透／角色）----
+  let currentMarkers: L.Layer[] = [];
+  const rerenderEvents = (maxLevel: number): void => {
+    for (const m of currentMarkers) map.removeLayer(m);
+    currentMarkers = [];
+    const evs = filterFeaturesBySpoiler<EventFeature>(dataset.events, maxLevel);
+    for (const ev of evs) {
+      const loc = dataset.locations.find((f) => f.properties.id === ev.properties.location_id);
+      const sp = loc?.properties.story_position ?? { x: 0.68, y: 0.48 };
+      const marker = L.marker(storyToLatLng(sp), { icon: eventIcon(ev.properties.event_type) })
+        .bindTooltip(`${ev.properties.title}（第${ev.properties.chapter}章）`, { direction: "top" })
+        .on("click", () => showEventDetail(dataset, ev.properties.id))
+        .addTo(map);
+      currentMarkers.push(marker);
+    }
+    if (label) {
+      label.textContent = `資料版本：provisional（${evs.length} 事件／${locIds.size} 位置可見｜劇透 ≤${maxLevel}）`;
+    }
+  };
+
+  mountSidebar(dataset, {
+    onSpoilerChange: rerenderEvents,
+    onSelectCharacter: () => {
+      /* 路線顯示待全書抽取後啟用 */
+    },
+  });
+  rerenderEvents(maxSpoiler);
+
+  // ---- 距離量度工具（M 快速鍵）----
+  const scaleMeters = config.scale_profile.meters_per_map_unit;
+  const measureTool = new MeasureTool(map, (result) => {
+    if (result) {
+      window.alert(`量度結果：${result.label}`);
+    }
+  }, scaleMeters);
+  const measureBtn = document.createElement("button");
+  measureBtn.id = "bg-measure-btn";
+  measureBtn.type = "button";
+  measureBtn.textContent = "📏 量度距離（M）";
+  measureBtn.className = "bg-measure-btn";
+  measureBtn.addEventListener("click", () => {
+    measureTool.start();
+    measureBtn.disabled = true;
+    setTimeout(() => (measureBtn.disabled = false), 500);
+  });
+  root.appendChild(measureBtn);
+
+  document.addEventListener("keydown", (e) => {
+    if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+    if (e.key === "m" || e.key === "M") {
+      e.preventDefault();
+      measureBtn.click();
+    }
+  });
 
   document.addEventListener("keydown", (e) => {
     if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
