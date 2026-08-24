@@ -85,6 +85,81 @@ class CandidateReader:
         return [r for r in self.rows if r.get("entity_kind") == kind and r.get("status") == "pending"]
 
 
+def load_resolution_rules() -> dict:
+    """讀取人手確認嘅 resolution 規則（私有）；無檔案回空規則。"""
+    rules_path = REPO_ROOT / "data/private/review/resolution-rules.json"
+    if not rules_path.exists():
+        return {}
+    try:
+        return json.loads(rules_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as e:
+        print(f"[warn] resolution-rules.json parse 失敗（{e}）——忽略規則")
+        return {}
+
+
+def apply_parenthetical_merge(rows: list[dict]) -> list[dict]:
+    """括號註解合併：「M（主角）」歸入「M」，註解存 alias_note。"""
+    import unicodedata
+
+    out = []
+    for r in rows:
+        name = r.get("name")
+        if not name:
+            continue
+        n = unicodedata.normalize("NFKC", name).strip()
+        m = re.match(r"^(.+?)[（(](.+?)[）)]$", n)
+        if m:
+            main, note = m.group(1).strip(), m.group(2).strip()
+            r2 = dict(r)
+            r2["name"] = main
+            aliases = list(r2.get("aliases") or [])
+            if note and note not in aliases:
+                aliases.append(note)
+            r2["aliases"] = aliases
+            out.append(r2)
+        else:
+            out.append(r)
+    return out
+
+
+def apply_rules(
+    rows: list[dict],
+    kind: str,
+    rules: dict,
+    merge_targets: dict[str, str],
+) -> tuple[list[dict], dict[str, str]]:
+    """套用確認清單：剔除 exclude_*；merge_into 將名稱重寫為 canonical。
+
+    回傳（過濾後 rows, 名稱→canonical 顯示名映射）。
+    """
+    exclude_key = f"exclude_{kind}_names"
+    excluded = set(rules.get(exclude_key) or [])
+
+    # 先攞全部名稱（含被 merge 嘅來源），用嚟搵 canonical 顯示名
+    all_names = {norm_name := unicodedata.normalize("NFKC", r.get("name") or "").strip() for r in rows}
+
+    kept = []
+    rename_map: dict[str, str] = {}
+    for r in rows:
+        name = unicodedata.normalize("NFKC", r.get("name") or "").strip()
+        if not name or name in excluded:
+            continue
+        target = merge_targets.get(name)
+        if target:
+            rename_map[name] = target
+            r2 = dict(r)
+            r2["name"] = target
+            aliases = list(r2.get("aliases") or [])
+            if name != target and name not in aliases:
+                aliases.append(name)
+            r2["aliases"] = aliases
+            kept.append(r2)
+        else:
+            kept.append(r)
+
+    return kept, rename_map
+
+
 def resolve_locations(locs: list[dict]) -> dict[str, dict]:
     """以正規化名稱分組（deterministic）。回傳 canonical_id -> merged record。"""
     groups: dict[str, list[dict]] = defaultdict(list)
@@ -242,8 +317,18 @@ def main() -> int:
 
     print(f"讀入 {len(reader.rows)} candidates：{dict(kinds)}")
 
-    loc_resolved = resolve_locations(reader.by_kind("location"))
-    char_resolved = resolve_characters(reader.by_kind("character"))
+    # ---- 人手確認嘅 resolution 規則（私有）----
+    rules = load_resolution_rules()
+    merge_targets = {k: v for k, v in (rules.get("merge_into") or {}).items() if isinstance(v, str)}
+
+    loc_rows = apply_parenthetical_merge(reader.by_kind("location"))
+    char_rows = apply_parenthetical_merge(reader.by_kind("character"))
+    loc_rows, _loc_renames = apply_rules(loc_rows, "location", rules, merge_targets)
+    char_rows, _char_renames = apply_rules(char_rows, "character", rules, merge_targets)
+    print(f"規則套用後：locations {len(loc_rows)}、characters {len(char_rows)}（剔除了 exclude 清單）")
+
+    loc_resolved = resolve_locations(loc_rows)
+    char_resolved = resolve_characters(char_rows)
 
     print(f"resolved locations: {len(loc_resolved)}；characters: {len(char_resolved)}")
 

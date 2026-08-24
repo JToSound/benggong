@@ -503,8 +503,8 @@
     "source": "bing_gang"
   },
   {
-    "id": "ent_8e832258db",
-    "name": "怪物（病者）",
+    "id": "ent_933b04279e",
+    "name": "怪物",
     "aliases": [
       "病者"
     ],
@@ -566,11 +566,9 @@
     ],
     "role": "supporting",
     "color": "#1ABC9C",
-    "first_appearance": 2,
+    "first_appearance": 3,
     "chapter_refs": [
-      2,
       3,
-      5,
       6,
       10,
       11,
@@ -578,8 +576,8 @@
       14
     ],
     "spoiler_level": 1,
-    "description": "全書 8 章出現；詳情待人手審閱。",
-    "confidence": 0.88,
+    "description": "全書 6 章出現；詳情待人手審閱。",
+    "confidence": 0.92,
     "review_status": "needs_review",
     "portrait_asset_id": null,
     "source": "bing_gang"
@@ -759,17 +757,39 @@
   },
   {
     "id": "m",
-    "name": "M（主角「我」）",
-    "aliases": [],
+    "name": "M",
+    "aliases": [
+      "M先生",
+      "主角",
+      "主角「我」",
+      "悲觀大師",
+      "獵手",
+      "阿M"
+    ],
     "role": "supporting",
     "color": "#1ABC9C",
-    "first_appearance": 4,
+    "first_appearance": 1,
     "chapter_refs": [
-      4
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
     ],
     "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.9,
+    "description": "全書 16 章出現；詳情待人手審閱。",
+    "confidence": 0.94,
     "review_status": "needs_review",
     "portrait_asset_id": null,
     "source": "bing_gang"
