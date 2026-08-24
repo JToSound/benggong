@@ -24,6 +24,16 @@ Extraction 只用一個模型呼叫類型：chat completions + `response_format:
 - 預計輸出：每段 ≤2000 tokens（candidates JSON）
 - 估計全書總消耗：約 **1.2M input + 0.4M output tokens**（視模型定價）
 
+### ⚠️ 實測修正（2026-08-24 試行）
+
+`stealth/ox-alpha` 係 **reasoning 模型**：
+
+1. **max_tokens 必須 ≥16000**——8000 時 reasoning 燒盡預算，content 回 null（finish=length）
+2. 單段實測耗時 **~290 秒**、completion ~11k tokens（含 reasoning）
+3. 全書 248 段估計：**20–24 小時純 API 時間**；建議分夜跑或改用非 reasoning 快模型
+4. 上游間歇性 429：pipeline 已有 6 次 exponential backoff（3→120s cap）應對
+5. 回應可能包 ```json fence——parser 已自動剝除
+
 ## 3. Batch Strategy
 
 ```text

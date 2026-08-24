@@ -37,6 +37,7 @@ from extraction_core import (  # noqa: E402
     OpenRouterClient,
     RunLedger,
     build_segments,
+    call_with_retry,
     iter_cleaned_rows,
     load_env,
     now_iso,

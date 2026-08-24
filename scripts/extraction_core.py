@@ -155,7 +155,7 @@ class OpenRouterClient:
         self.timeout_s = timeout_s
         self.calls_made = 0
 
-    def chat(self, model: str, messages: list[dict], temperature: float, max_tokens: int = 2000) -> str:
+    def chat(self, model: str, messages: list[dict], temperature: float, max_tokens: int = 16000) -> str:
         payload = {
             "model": model,
             "messages": messages,
@@ -181,13 +181,23 @@ class OpenRouterClient:
                 data = json.loads(resp.read().decode("utf-8"))
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8", errors="replace")[:300]
+            if e.code == 429:
+                # 上游限流：標記清楚俾 retry 邏輯用更長 backoff
+                raise RuntimeError(f"OpenRouter HTTP 429 rate-limited：{body}") from e
             raise RuntimeError(f"OpenRouter HTTP {e.code}：{body}") from e
         except urllib.error.URLError as e:
             raise RuntimeError(f"OpenRouter 連線失敗：{e.reason}") from e
         try:
-            return data["choices"][0]["message"]["content"]
+            choice = data["choices"][0]
+            content = choice["message"].get("content")
+            finish = choice.get("finish_reason")
         except (KeyError, IndexError) as e:
             raise RuntimeError(f"OpenRouter 回應格式異常：{e}") from e
+        if not content or not isinstance(content, str):
+            # reasoning 模型可能燒盡 max_tokens 喺 reasoning，content 變 null；
+            # finish_reason=length 即係要加大預算。當作可 retry 錯誤回報。
+            raise RuntimeError(f"OpenRouter 回應 content 空白或非字串（finish_reason={finish}）")
+        return content
 
 
 # ============================================================
@@ -285,45 +295,75 @@ def call_with_retry(
     cached = cache.get(cache_key)
     attempts_log = []
 
-    for attempt in range(1, max_attempts + 1):
-        if cached and attempt == 1 and cached.get("_valid"):
+    # 兩層 retry：暫時性錯誤（429/連線）可以等多幾次；
+    # schema/JSON 錯誤按 master prompt §7.1 只 retry 一次。
+    MAX_TRANSIENT = 6
+    transient_attempt = 0
+    attempt = 0
+    parsed = None
+
+    while True:
+        attempt += 1
+        if cached and cached.get("_valid") and parsed is None:
             parsed = cached["parsed"]
             status = "ok"
-        else:
-            try:
-                raw = client.chat(
-                    model=model,
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ],
-                    temperature=EXTRACTION_TEMPERATURE,
-                )
-            except RuntimeError as e:
-                attempts_log.append({"attempt": attempt, "error": str(e)[:200]})
-                if attempt < max_attempts:
-                    time.sleep(backoff_s * attempt)
-                    continue
+            break
+
+        try:
+            raw = client.chat(
+                model=model,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=EXTRACTION_TEMPERATURE,
+            )
+            assert isinstance(raw, str) and raw.strip(), "回應空白"
+        except (RuntimeError, AssertionError) as e:
+            msg = str(e)
+            is_transient = "429" in msg or "連線" in msg or "回應 content 空白" in msg or "格式異常" in msg
+            attempts_log.append({"attempt": attempt, "error": msg[:200]})
+            if not is_transient:
                 ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "error", attempts_log))
                 return None, "error"
+            transient_attempt += 1
+            if transient_attempt >= MAX_TRANSIENT:
+                ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "error", attempts_log))
+                return None, "error"
+            wait = min(120.0, backoff_s * (2 ** (transient_attempt - 1)))  # 3s→6s→12s→24s→48s(→96s cap 120)
+            time.sleep(wait)
+            continue
 
+        try:
             try:
                 parsed = json.loads(raw)
-            except json.JSONDecodeError as e:
-                attempts_log.append({"attempt": attempt, "error": f"invalid JSON: {e}"})
-                if attempt < max_attempts:
-                    time.sleep(backoff_s * attempt)
-                    continue
+            except json.JSONDecodeError:
+                # 部分模型會包 ```json fence 或前後空白；剝完再試
+                stripped = raw.strip().removeprefix("```json").removeprefix("```").removesuffix("```").strip()
+                parsed = json.loads(stripped)
+        except json.JSONDecodeError as e:
+            attempts_log.append({"attempt": attempt, "error": f"invalid JSON: {e}"})
+            n_json_err = sum(1 for a in attempts_log if "invalid JSON" in a["error"])
+            if n_json_err >= max_attempts:
                 ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "invalid_schema_review_queue", attempts_log))
                 return None, "invalid_schema_review_queue"
+            time.sleep(backoff_s * n_json_err)
+            continue
 
-        # schema 層面檢查由 caller 提供 validator；呢度只確保係 dict
         if isinstance(parsed, dict):
-            cache.put(cache_key, {"_valid": True, "parsed": parsed})
-            ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "ok", attempts_log))
-            return parsed, "ok"
+            status = "ok"
+            break
         attempts_log.append({"attempt": attempt, "error": "response 唔係 object"})
-        time.sleep(backoff_s * attempt)
+        n_bad = sum(1 for a in attempts_log if "object" in a["error"])
+        if n_bad >= max_attempts:
+            ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "invalid_schema_review_queue", attempts_log))
+            return None, "invalid_schema_review_queue"
+        time.sleep(backoff_s)
+
+    if status == "ok":
+        cache.put(cache_key, {"_valid": True, "parsed": parsed})
+        ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "ok", attempts_log))
+        return parsed, "ok"
 
     ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "invalid_schema_review_queue", attempts_log))
     return None, "invalid_schema_review_queue"
