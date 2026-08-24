@@ -1,6 +1,6 @@
 # Phase B Extraction 運行日誌 — 《病港》互動地圖
 
-> 最後更新：2026-08-24（UTC+8 深夜）
+> 最後更新：2026-08-24 17:35（UTC+8）
 > 相關：`phase-b-extraction-plan.md`（設計）、`phase-b-review-preparation.md`（審閱前置）
 
 ## 現狀摘要
@@ -55,3 +55,21 @@
 1. `stealth/ox-alpha` 免費配額 1000 req/日 → 全書需跨兩日跑完
 2. 單段 ~290 秒（reasoning 模型較慢）；如要加速可改用非 reasoning 模型（`.env OPENROUTER_EXTRACTION_MODEL`）
 3. 舊 error/review_queue ledger 記錄保留作稽核（append-only 原則）；統計時以「每段最後一條記錄」為準
+
+## 2026-08-24 下午：下游開發（用現有 366 candidates）
+
+配額等待期間完成咗成條下游 pipeline 嘅首次真實數據演練：
+
+1. **首次真實 public dataset 生成**：locations 53 / events 105 / timeline 105 / characters 41，validate_public_data 全綠
+2. **`resolution_enhance.py`**：四類自動決策建議——括號合併（M（主角）→M 等 9 組）、模糊指代剔除（呢一區／安區／首領）、歧義子設施標記（圖書館／醫療室：大本營內 vs 城市中）、名稱變體群組（商場系 6 個寫法、大本營市集系等 13 組）→ `data/private/review/resolution-decisions.md`
+3. **Bug 修復**：
+   - `strip_parenthetical` NFKC 半形括號失效
+   - candidate_id 斷點續跑撞號（count_existing）
+   - event.location_id 允許 null（未指派狀態）
+4. **測試**：pytest 72 passed（+11 resolution 規則測試）、vitest 9、lint/typecheck/build 全綠
+5. **守夜 run**：背景 process 持續運行，每 10 分鐘探測配額，重置後自動全速續跑 ch17–198
+
+### 待辦（人手）
+
+- 審閱 `data/private/review/resolution-decisions.md`：確認合併/剔除/歧義決定
+- 全書 extraction 完成後重跑 builder + validator 得到最終 provisional dataset
