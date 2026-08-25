@@ -11,6 +11,7 @@ import {
 } from "../data/loadDataset";
 import type { EventFeature } from "../types/dataset";
 import { buildSearchIndex, search } from "../lib/search";
+import { getUIState } from "../lib/uiStore";
 import { mountSidebar } from "./sidebar";
 import { MeasureTool } from "./measure";
 import { mountAbout } from "./about";
@@ -139,10 +140,26 @@ export async function initMap(rootId = "map-root"): Promise<void> {
 
   // ---- Sidebar（劇透／角色）----
   let currentMarkers: L.Layer[] = [];
-  const rerenderEvents = (maxLevel: number): void => {
+  let currentCharFilter: string | null = null;
+  const rerenderEvents = (maxLevel: number, characterId: string | null = currentCharFilter): void => {
     for (const m of currentMarkers) map.removeLayer(m);
     currentMarkers = [];
-    const evs = filterFeaturesBySpoiler<EventFeature>(dataset.events, maxLevel);
+    currentCharFilter = characterId;
+
+    // 角色過濾：經 characters.json 嘅 chapter_refs 攞該角色出場章節
+    const charChapters =
+      characterId != null
+        ? new Set(dataset.characters.find((c) => c.id === characterId)?.chapter_refs ?? [])
+        : null;
+    const charName =
+      characterId != null ? dataset.characters.find((c) => c.id === characterId)?.name : null;
+
+    const evs = filterFeaturesBySpoiler<EventFeature>(dataset.events, maxLevel).filter(
+      (ev) =>
+        charChapters == null ||
+        charChapters.has(ev.properties.chapter) ||
+        ev.properties.characters.includes(characterId!),
+    );
     for (const ev of evs) {
       const loc = dataset.locations.find((f) => f.properties.id === ev.properties.location_id);
       const sp = loc?.properties.story_position ?? { x: 0.68, y: 0.48 };
@@ -153,15 +170,14 @@ export async function initMap(rootId = "map-root"): Promise<void> {
       currentMarkers.push(marker);
     }
     if (label) {
-      label.textContent = `資料版本：provisional（${evs.length} 事件／${locIds.size} 位置可見｜劇透 ≤${maxLevel}）`;
+      const scope = charName ? `｜角色 ${charName}` : "";
+      label.textContent = `資料版本：provisional（${evs.length} 事件／${locIds.size} 位置可見｜劇透 ≤${maxLevel}${scope}）`;
     }
   };
 
   mountSidebar(dataset, {
-    onSpoilerChange: rerenderEvents,
-    onSelectCharacter: () => {
-      /* 路線顯示待全書抽取後啟用 */
-    },
+    onSpoilerChange: (level) => rerenderEvents(level),
+    onSelectCharacter: (id) => rerenderEvents(getUIState().maxSpoiler, id),
   });
   rerenderEvents(maxSpoiler);
 

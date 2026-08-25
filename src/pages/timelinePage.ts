@@ -36,10 +36,19 @@ export async function renderTimeline(rootId = "timeline-app"): Promise<void> {
   // 章節篩選列（有記錄嘅章先顯示）
   const chapters = [...new Set(records.map((r) => r.chapter))].sort((a, b) => a - b);
 
+  // 角色焦點列（按出現次數，取前 12）
+  const charCount = new Map<string, number>();
+  for (const r of records) {
+    for (const c of r.characters) {
+      charCount.set(c, (charCount.get(c) ?? 0) + 1);
+    }
+  }
+  const topChars = [...charCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12);
+
   const listHtml = records
     .map(
       (r: TimelineRecord) => `
-      <li class="tl-item" data-chapter="${r.chapter}">
+      <li class="tl-item" data-chapter="${r.chapter}" data-chars="${escapeHtml(r.characters.join("|"))}">
         <div class="tl-marker" aria-hidden="true"></div>
         <article>
           <header>
@@ -49,7 +58,7 @@ export async function renderTimeline(rootId = "timeline-app"): Promise<void> {
           </header>
           <p class="tl-desc">${escapeHtml(r.description)}</p>
           <p class="tl-meta">
-            ${r.characters.map((c) => `@${escapeHtml(c)}`).join(" ")}
+            ${r.characters.map((c) => `<span class="tl-char-tag">@${escapeHtml(c)}</span>`).join(" ")}
             ${r.event_id ? `<a href="./index.html?event=${encodeURIComponent(r.event_id)}">喺地圖睇</a>` : ""}
           </p>
         </article>
@@ -68,19 +77,45 @@ export async function renderTimeline(rootId = "timeline-app"): Promise<void> {
         .map((c) => `<label><input type="checkbox" class="tl-chk" value="${c}" checked /> 第${c}章</label>`)
         .join("")}
     </fieldset>
+    ${
+      topChars.length
+        ? `<fieldset class="tl-filter">
+      <legend>角色焦點（可多選；空白＝全部）</legend>
+      ${topChars
+        .map(
+          ([name, n]) =>
+            `<label><input type="checkbox" class="tl-cchar" value="${escapeHtml(name)}" /> @${escapeHtml(name)} <small>(${n})</small></label>`,
+        )
+        .join("")}
+    </fieldset>`
+        : ""
+    }
+    <p id="tl-count" class="tl-count"></p>
     <ol id="tl-list" class="tl-list">${listHtml}</ol>
     <p><a href="./index.html">← 返主地圖</a></p>
   `,
   );
 
   const listEl = root.querySelector<HTMLUListElement>("#tl-list")!;
+  const countEl = root.querySelector<HTMLParagraphElement>("#tl-count")!;
   const applyFilter = () => {
-    const checked = new Set(
+    const checkedChapters = new Set(
       [...root.querySelectorAll<HTMLInputElement>(".tl-chk:checked")].map((el) => Number(el.value)),
     );
+    const focusChars = [
+      ...root.querySelectorAll<HTMLInputElement>(".tl-cchar:checked"),
+    ].map((el) => el.value);
+    let visible = 0;
     for (const li of Array.from(listEl.children) as HTMLElement[]) {
-      li.style.display = checked.has(Number(li.dataset.chapter)) ? "" : "none";
+      const chapterOk = checkedChapters.has(Number(li.dataset.chapter));
+      const itemChars = (li.dataset.chars ?? "").split("|").filter(Boolean);
+      const charOk =
+        focusChars.length === 0 || focusChars.some((c) => itemChars.includes(c));
+      const show = chapterOk && charOk;
+      li.style.display = show ? "" : "none";
+      if (show) visible++;
     }
+    countEl.textContent = `顯示 ${visible} / ${records.length} 條記錄`;
   };
   root.querySelector("#tl-all")?.addEventListener("change", (e) => {
     const all = (e.target as HTMLInputElement).checked;
