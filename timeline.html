@@ -11,5 +11,12 @@
       <p><a href="./index.html">返主地圖</a></p>
     </div>
     <script type="module" src="/src/timeline.ts"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js").catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>

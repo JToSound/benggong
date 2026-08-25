@@ -20,5 +20,15 @@
       <p id="map-loading">地圖資產生成中，Phase C 將提供本機 tiles。</p>
     </main>
     <script type="module" src="/src/main.ts"></script>
+    <script>
+      // Service worker：離線快取（只註冊同源；GitHub Pages 子路徑安全）
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./sw.js").catch((e) =>
+            console.warn("[病港] SW 註冊失敗（不影響使用）", e),
+          );
+        });
+      }
+    </script>
   </body>
 </html>
