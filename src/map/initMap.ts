@@ -15,6 +15,7 @@ import { getUIState } from "../lib/uiStore";
 import { mountSidebar } from "./sidebar";
 import { MeasureTool } from "./measure";
 import { mountAbout } from "./about";
+import { RouteLayer } from "./routes";
 
 const STORY_BOUNDS: L.LatLngBoundsExpression = [
   [22.15, 113.8],

@@ -32,8 +32,12 @@ PRIVATE_MARKERS = re.compile(
     re.IGNORECASE,
 )
 
-# ---- §12.3(2)：長引文（>100 連續 CJK，無標點中斷＝疑似原文段落）----
-LONG_CJK = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff][^\x00-\x7f]{100,}")
+# ---- §12.3(2)：長引文（>100 連續 CJK 無標點中斷＝疑似原文段落）----
+# 中文／全形標點算中斷（正常書面中文唔會成百字不斷）
+LONG_CJK = re.compile(
+    r"[\u3400-\u4dbf\u4e00-\u9fff]"
+    r"(?:[^\x00-\x7f\u3000-\u303f\uff00-\uffef\n\r\t ]){100,}"
+)
 
 # ---- §12.3(3)：secrets ----
 SECRET_PATTERNS: dict[str, re.Pattern[str]] = {

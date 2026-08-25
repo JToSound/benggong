@@ -1,100 +1,129 @@
 #!/usr/bin/env python3
-"""《病港》— 角色移動路線推導（provisional）。
+"""《病港》— 角色移動路線推導（master prompt §10.4 routes）。
 
-由 character candidate 嘅 claim 文本抽取地點關鍵詞，配合章節順序，
-為每個主要角色建立「章節→出現位置」序列；連續唔同位置構成 movement route。
+由 candidates 推導角色出現位置嘅時間序列：
+- location candidates 提供「該章存在邊啲地點」
+- character claims 內文提及地點名 → 該章該角色所在
 
-方法（保守、deterministic）：
-1. 只處理 chapter_refs >= MIN_CHAPTERS 嘅角色
-2. claim 入面出現嘅已知 location 名（來自 location candidates 正規化清單）
-   先算「該角色喺該章嘅位置」；一個 claim 多個地名時取最先出現
-3. 連續相同位置去重；無法定位嘅章節跳過
-4. 全部標 provisional + needs_review——只係審閱輔助，唔直接入 public dataset
+規則（保守）：
+- 角色名與地名相同時唔推導（自證問題）
+- 長地名優先匹配（大本營市集 ≠ 大本營）
+- 同一位置連續章節去重，只留首末
+- 少於 MIN_CHAPTERS 章或無位置變化 → 唔產生 route
+- 全部標 provisional + needs_review；waypoint 保留原始章節座標
 
-輸出：data/private/review/character-routes.json
+輸出：data/private/review/character-routes.json（私有，供人手審閱後先入公開 routes.geojson）
 """
 
 from __future__ import annotations
 
 import json
 import re
-import sys
 from collections import defaultdict
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parent.parent
+REPO = Path(__file__).resolve().parent.parent if "__file__" in globals() else Path.cwd()
 CANDIDATES = REPO / "data/private/evidence/candidates.jsonl"
 OUT = REPO / "data/private/review/character-routes.json"
 
 MIN_CHAPTERS = 5
 
 
-def main() -> int:
+def load_candidates() -> list[dict]:
     if not CANDIDATES.exists():
-        print("[blocked] 無 candidates 檔")
-        return 2
-
-    loc_names: set[str] = set()
-    char_ch_claims: dict[str, dict[int, list[str]]] = defaultdict(lambda: defaultdict(list))
-
+        return []
+    rows = []
     for line in CANDIDATES.read_text(encoding="utf-8").splitlines():
-        r = json.loads(line)
-        kind = r.get("entity_kind")
-        ch = r.get("chapter")
-        name = r.get("name") or ""
-        if not ch or not name:
+        line = line.strip()
+        if line:
+            rows.append(json.loads(line))
+    return rows
+
+
+def derive(rows: list[dict]) -> list[dict]:
+    # 每章存在嘅地名清單（長名優先排序）
+    locs_by_chapter: dict[int, list[str]] = defaultdict(list)
+    for r in rows:
+        if r.get("entity_kind") == "location":
+            name = (r.get("name") or "").strip()
+            if name:
+                locs_by_chapter[r["chapter"]].append(name)
+    all_locs = sorted({n for names in locs_by_chapter.values() for n in names}, key=len, reverse=True)
+
+    # 角色 → 章 → 提及嘅地名
+    char_ch_loc: dict[str, dict[int, str]] = defaultdict(dict)
+
+    def find_location(claim: str, char_name: str) -> str | None:
+        """喺 claim 入面搵最長地名；排除與角色名相同／互相包含造成嘅自證。"""
+        for loc in all_locs:
+            if loc == char_name:
+                continue  # 角色名＝地名：唔算
+            if loc in claim:
+                # 避開「角色名+地名」黏埋嘅假匹配已由長名優先處理：
+                # 更長嘅名會先被測試到
+                return loc
+        return None
+
+    for r in rows:
+        if r.get("entity_kind") != "character":
             continue
-        if kind == "location":
-            if name and len(name) >= 2:
-                loc_names.add(name)
-        elif kind == "character":
-            claim = r.get("claim") or ""
-            if claim:
-                char_ch_claims[name][ch].append(claim)
+        name = (r.get("name") or "").strip()
+        if not name:
+            continue
+        claim = r.get("claim") or ""
+        chapter = r["chapter"]
+        if name in {l for l in all_locs}:
+            # 角色名本身係地名（如「公仔」）：完全跳過呢個角色
+            continue
+        loc = find_location(claim, name)
+        if loc and chapter not in char_ch_loc[name]:
+            char_ch_loc[name][chapter] = loc
 
-    # 名長優先匹配（「大本營市集」先過「大本營」）
-    sorted_locs = sorted(loc_names, key=len, reverse=True)
-
-    routes: list[dict] = []
-    for name, ch_map in sorted(char_ch_claims.items()):
-        chapters = sorted(ch_map.keys())
+    routes = []
+    for name in sorted(char_ch_loc):
+        ch_map = char_ch_loc[name]
+        chapters = sorted(ch_map)
         if len(chapters) < MIN_CHAPTERS:
             continue
-        seq: list[dict] = []
-        last_loc: str | None = None
-        for ch in chapters:
-            found: str | None = None
-            for claim in ch_map[ch]:
-                for loc in sorted_locs:
-                    if loc in claim or loc in name:
-                        found = loc
-                        break
-                if found:
-                    break
-            # 角色名同地名同名（例如「公仔」類）唔算移動證據
-            if found and found != last_loc and found not in name:
-                seq.append({"chapter": ch, "location": found})
-                last_loc = found
-        if len(seq) >= 2:
-            routes.append({
+        # 時序壓縮：連續同一位置只留區間端點
+        waypoints = []
+        prev = None
+        for i, ch in enumerate(chapters):
+            loc = ch_map[ch]
+            is_last = i == len(chapters) - 1
+            next_loc = ch_map[chapters[i + 1]] if not is_last else None
+            if loc != prev or next_loc != loc or is_last:
+                waypoints.append({"chapter": ch, "location": loc})
+            prev = loc
+
+        distinct = len({w["location"] for w in waypoints})
+        if distinct < 2:
+            continue  # 冇移動 → 無 route
+
+        routes.append(
+            {
                 "character": name,
-                "chapters_covered": len(chapters),
-                "waypoints": seq,
+                "chapters_covered": [chapters[0], chapters[-1]],
+                "waypoints": waypoints,
                 "provisional": True,
                 "review_status": "needs_review",
-            })
+                "note": "由 LLM candidates 自動推導；未經人手審閱前唔入公開資料。",
+            }
+        )
+    return routes
 
-    routes.sort(key=lambda r: -r["chapters_covered"])
+
+def main() -> int:
+    rows = load_candidates()
+    if not rows:
+        print(f"[blocked] {CANDIDATES} 不存在或空")
+        return 2
+    routes = derive(rows)
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(routes, ensure_ascii=False, indent=2), encoding="utf-8")
-
-    print(f"角色移動路線：{len(routes)} 條（>= {MIN_CHAPTERS} 章）｜已知地名 {len(sorted_locs)} 個")
-    for r in routes[:10]:
-        wps = " → ".join(f"ch{w['chapter']}:{w['location']}" for w in r["waypoints"][:5])
-        print(f"  {r['character']}（{r['chapters_covered']}章）：{wps}{' …' if len(r['waypoints'])>5 else ''}")
-    print(f"輸出：{OUT}")
+    print(f"推導出 {len(routes)} 條角色路線 → {OUT}")
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())

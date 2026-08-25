@@ -43,8 +43,13 @@ FORBIDDEN_PATTERNS: dict[str, re.Pattern[str]] = {
     ),
 }
 
-# 超過 100 字連續 CJK（無標點中斷）視為疑似小說原文段落
-LONG_CJK_RUN = re.compile(r"[\u4e00-\u9fff\u3400-\u4dbf][^\x00-\x7f]{100,}")
+# 超過 100 字連續 CJK（無標點中斷）視為疑似小說原文段落。
+# 標點（U+3000–303F 中文標點、U+FF00–FFEF 全形標點）算中斷——
+# 正常書面中文每十幾字就有標點；真正嘅原文長段引用先會成百字不斷。
+LONG_CJK_RUN = re.compile(
+    r"[\u4e00-\u9fff\u3400-\u4dbf]"
+    r"(?:[^\x00-\x7f\u3000-\u303f\uff00-\uffef\n\r\t ]){100,}"
+)
 
 SCHEMA_FILES = {
     "locations.geojson": "location.schema.json",

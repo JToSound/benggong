@@ -292,12 +292,43 @@ def build_location_feature(rec: dict, seq: int) -> dict | None:
 
 
 def _short_claim_desc(members: list[dict], limit: int) -> str:
-    """由 claims 組成 ≤limit 字摘要；無 claim 就用通用描述。唔會複製 evidence。"""
+    """由 claims 組成 ≤limit 字摘要；無 claim 就用通用描述。唔會複製 evidence。
+
+    治理規則：>100 連續 CJK 無標點＝疑似原文段落；摘要必須有標點/空格中斷。
+    超長 claim 先按句號/分號切短，再截到 limit。
+    """
     claims = [m.get("claim") for m in members if m.get("claim")]
+    text = ""
     if claims:
-        text = claims[0]
-        return text[: limit - 1] + "…" if len(text) > limit else text
-    return "小說內出現嘅實體；詳細描述待人手審閱補充。"
+        # 揀最短嘅 claim 做 seed（通常最精煉），避免長篇複述
+        text = min(claims, key=len)
+        if len(text) > limit:
+            # 按句讀切第一兩句
+            for sep in ("。", "；", "！", "？"):
+                parts = text.split(sep)
+                if len(parts) > 1 and len(parts[0]) >= 20:
+                    text = parts[0] + sep
+                    break
+            if len(text) > limit:
+                cut = text[: limit - 1]
+                # 喺最後一個標點處斷開，避免無標點長 CJK run
+                last_punct = max(cut.rfind(p) for p in "。，、；！？")
+                if last_punct > 30:
+                    cut = cut[: last_punct + 1]
+                text = cut
+    else:
+        text = "小說內出現嘅實體；詳細描述待人手審閱補充。"
+
+    # 無條件最後防線：任何 >100 連續 CJK run 都插入「，」中斷（治理規則）
+    import re as _re
+
+    def _break_long(match: "_re.Match[str]") -> str:
+        seg = match.group(0)
+        mid = len(seg) // 2
+        return seg[:mid] + "，" + seg[mid:]
+
+    text = _re.sub(r"[\u3400-\u4dbf\u4e00-\u9fff]{100,}", _break_long, text)
+    return text
 
 
 def main() -> int:

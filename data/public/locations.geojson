@@ -211,14 +211,15 @@
           "x": 0.365,
           "y": 0.421
         },
-        "description": "瑜小六住喺大本營七樓B區，嗰度多數係平民住嘅地方，大部分人只係「打地鋪」瞓地上。",
+        "description": "全女搜索隊「克里絲娜」小隊的駐地位於B橦二樓，江子千著瑜小六有空去找她。",
         "first_appearance": 55,
         "chapters": [
           55,
-          59
+          59,
+          71
         ],
         "characters": [],
-        "confidence": 0.92,
+        "confidence": 0.9,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -342,7 +343,7 @@
           "x": 0.437,
           "y": 0.615
         },
-        "description": "大本營內的D座大樓（文中亦寫作D橦大樓），其六樓608號房為Dr.D約見M的地方。",
+        "description": "主角將病爪頭交俾Dr.D嘅醫療室。",
         "first_appearance": 21,
         "chapters": [
           21,
@@ -354,10 +355,13 @@
           43,
           57,
           61,
-          63
+          63,
+          69,
+          70,
+          71
         ],
         "characters": [],
-        "confidence": 0.9,
+        "confidence": 0.91,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -388,7 +392,7 @@
           66
         ],
         "characters": [],
-        "confidence": 0.9,
+        "confidence": 0.88,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -398,26 +402,27 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0166,
-          22.236449999999998
+          113.9146,
+          22.322899999999997
         ]
       },
       "properties": {
         "id": "dr_d",
-        "name": "Dr.D嘅房間",
-        "display_name": "Dr.D嘅房間（虛構）",
+        "name": "Dr.D的工作室",
+        "display_name": "Dr.D的工作室（虛構）",
         "location_type": "fictional",
         "fictional": true,
         "location_precision": "fictional",
         "story_position": {
-          "x": 0.361,
-          "y": 0.247
+          "x": 0.191,
+          "y": 0.494
         },
         "description": "Dr.D的房間設有密碼門鎖，密碼為8520，M其後憑密碼自行開門入內。",
         "first_appearance": 22,
         "chapters": [
           22,
-          42
+          42,
+          67
         ],
         "characters": [],
         "confidence": 0.93,
@@ -511,6 +516,37 @@
         "first_appearance": 29,
         "chapters": [
           29
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1588,
+          22.2914
+        ]
+      },
+      "properties": {
+        "id": "ent_0307392d83",
+        "name": "收藏活人嘅雞籠店",
+        "display_name": "收藏活人嘅雞籠店（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.598,
+          "y": 0.404
+        },
+        "description": "街市內一間前身為賣雞地方的店子，籠子被改建成困住人類，共有十多個只有洗衣機大小的鐵籠，活人被迫長期彎腳跪著。",
+        "first_appearance": 88,
+        "chapters": [
+          88
         ],
         "characters": [],
         "confidence": 0.9,
@@ -755,13 +791,77 @@
           "x": 0.75,
           "y": 0.182
         },
-        "description": "醫療大樓係大本營內嘅醫護設施，少佐中毒後被送去治理；馬姑娘隸屬該處，平時甚少離開。",
+        "description": "M住院的醫療大樓內設病房，六樓只有Dr.D一人居住。",
         "first_appearance": 66,
         "chapters": [
-          66
+          66,
+          67,
+          70
         ],
         "characters": [],
         "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0424,
+          22.425449999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_0a6e704f9f",
+        "name": "九龍巴士車廠",
+        "display_name": "九龍巴士車廠（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.404,
+          "y": 0.787
+        },
+        "description": "往寶琳的大直路旁有一個很大的露天九龍巴士車廠，停放多部雙層巴士；兩隻舌女從車廠內步出襲擊喪伯。",
+        "first_appearance": 86,
+        "chapters": [
+          86
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.3082,
+          22.38065
+        ]
+      },
+      "properties": {
+        "id": "ent_0ad2def3f5",
+        "name": "滿天",
+        "display_name": "滿天（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.847,
+          "y": 0.659
+        },
+        "description": "主角打算待時機成熟時將公仔同娃娃帶去的容身之處，文中指唯有滿天那兒容得下兩兄妹。",
+        "first_appearance": 79,
+        "chapters": [
+          79
+        ],
+        "characters": [],
+        "confidence": 0.55,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -786,15 +886,16 @@
           "x": 0.802,
           "y": 0.219
         },
-        "description": "大舌吩咐站崗的人扶受驚的夏晴到大本營的醫療室。",
+        "description": "被警棍毆暈的不良人被安排送去的地方。",
         "first_appearance": 2,
         "chapters": [
           2,
           4,
-          10
+          10,
+          85
         ],
         "characters": [],
-        "confidence": 0.87,
+        "confidence": 0.83,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -943,14 +1044,77 @@
           "x": 0.81,
           "y": 0.326
         },
-        "description": "夏晴指出大本營位於過兩個街口的香港知專設計學院內，是一座約八層高、七樓為落地玻璃窗並連接各大樓的學術大樓。",
+        "description": "出發時眾人身處的位置，是前往靈實醫院路線的起點。",
         "first_appearance": 2,
         "chapters": [
           2,
-          43
+          43,
+          84
         ],
         "characters": [],
-        "confidence": 0.95,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.93679999999999,
+          22.36805
+        ]
+      },
+      "properties": {
+        "id": "ent_0dbe23bd1c",
+        "name": "加護病房",
+        "display_name": "加護病房（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.228,
+          "y": 0.623
+        },
+        "description": "主角跑入嘅加護病房係大本營僅僅受供電嘅地方之一，光管燈一閃一爍。",
+        "first_appearance": 70,
+        "chapters": [
+          70
+        ],
+        "characters": [],
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2554,
+          22.441899999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_1005e11664",
+        "name": "附近一帶的教堂",
+        "display_name": "附近一帶的教堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.759,
+          "y": 0.834
+        },
+        "description": "夏當在拷問中供出其同黨會藏在附近一帶的教堂。",
+        "first_appearance": 91,
+        "chapters": [
+          91
+        ],
+        "characters": [],
+        "confidence": 0.6,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -975,7 +1139,7 @@
           "x": 0.726,
           "y": 0.599
         },
-        "description": "學堂是議案新通過興建的設施，孤兒們現時被安排在該處走廊及室內等候。",
+        "description": "阿玲帶返兩個孩子嘅地方，並被安排暫時喺度照顧細路。",
         "first_appearance": 28,
         "chapters": [
           28,
@@ -986,10 +1150,11 @@
           45,
           62,
           63,
-          66
+          66,
+          68
         ],
         "characters": [],
-        "confidence": 0.88,
+        "confidence": 0.87,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1076,7 +1241,7 @@
           "x": 0.43,
           "y": 0.638
         },
-        "description": "位於大本營七樓，採用落地大玻璃、可看到海景，是居民休息的地方，盡頭的房間為首領老賢的辦公室。",
+        "description": "大本營內有圖書館，老賢日日坐喺圖書館自己間房。",
         "first_appearance": 3,
         "chapters": [
           3,
@@ -1092,6 +1257,37 @@
         ],
         "characters": [],
         "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0148,
+          22.40305
+        ]
+      },
+      "properties": {
+        "id": "ent_162f729c7f",
+        "name": "射擊樂",
+        "display_name": "射擊樂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.358,
+          "y": 0.723
+        },
+        "description": "射擊樂是不良人遊戲室兩個熱門地點之一，參加者以自己的武器或零件作賭注，通關可贏取展示的十字弓。",
+        "first_appearance": 73,
+        "chapters": [
+          73
+        ],
+        "characters": [],
+        "confidence": 0.93,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1150,7 +1346,70 @@
         "description": "天明提到最近尚德巴士站附近病者增多，提醒M外出要小心。",
         "first_appearance": 22,
         "chapters": [
-          22
+          22,
+          80
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.199,
+          22.2396
+        ]
+      },
+      "properties": {
+        "id": "ent_1c2d51e1e1",
+        "name": "社區教會堂",
+        "display_name": "社區教會堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.665,
+          "y": 0.256
+        },
+        "description": "彩明苑附近有一間可容納數十人的社區教會堂，雪白牆身頂上有十字架，主角踢開其殘舊木門後發現內裡無人。",
+        "first_appearance": 94,
+        "chapters": [
+          94
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0052,
+          22.207749999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_1c41a050e3",
+        "name": "酒吧",
+        "display_name": "酒吧（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.342,
+          "y": 0.165
+        },
+        "description": "進入遊戲室首先看到的是酒吧，有大漢在那裡喝啤酒、玩撲克牌和拗手瓜。",
+        "first_appearance": 73,
+        "chapters": [
+          73
         ],
         "characters": [],
         "confidence": 0.9,
@@ -1178,7 +1437,7 @@
           "x": 0.489,
           "y": 0.418
         },
-        "description": "本段戰鬥與療傷均發生在一間實驗室內，滿天從其抽屜取出醫療用品，病腦亦走到實驗室中間要求停戰。",
+        "description": "敘事者回憶起某日滿天曾在實驗室中跟他說話。",
         "first_appearance": 52,
         "chapters": [
           52,
@@ -1186,6 +1445,37 @@
         ],
         "characters": [],
         "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1108,
+          22.24485
+        ]
+      },
+      "properties": {
+        "id": "ent_2163e4dbd8",
+        "name": "海濱長廊",
+        "display_name": "海濱長廊（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.518,
+          "y": 0.271
+        },
+        "description": "班尼帶「我」去到向北嘅海皮一帶海濱長廊，即之前大本營嘅賴三帶佢哋去釣魚嘅地方，長廊下設有大型排水口。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.88,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1226,6 +1516,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.9206,
+          22.268649999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_21d32ea22f",
+        "name": "病窩天國",
+        "display_name": "病窩天國（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.201,
+          "y": 0.339
+        },
+        "description": "夏當以「病窩天國」稱呼該處，似是病者平權組織據點的名稱。",
+        "first_appearance": 89,
+        "chapters": [
+          89
+        ],
+        "characters": [],
+        "confidence": 0.72,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.1462,
           22.320449999999997
         ]
@@ -1257,6 +1578,130 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.2086,
+          22.391849999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_247ec03305",
+        "name": "麵包店",
+        "display_name": "麵包店（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.681,
+          "y": 0.691
+        },
+        "description": "經過一間麵包店時，公仔見到雪櫃入面放住一枝水，主角認為十居其九係陷阱。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0094,
+          22.423
+        ]
+      },
+      "properties": {
+        "id": "ent_249de485e5",
+        "name": "彩明村",
+        "display_name": "彩明村（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.349,
+          "y": 0.78
+        },
+        "description": "主角與銘凱在前往彩明村的路上討論雨傘前端的刺針。",
+        "first_appearance": 94,
+        "chapters": [
+          94
+        ],
+        "characters": [],
+        "confidence": 0.6,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1552,
+          22.261999999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_258819dfa5",
+        "name": "安全屋",
+        "display_name": "安全屋（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.592,
+          "y": 0.32
+        },
+        "description": "M當卧底期間住在一間放滿罐頭食品的安全屋，每天觀察他人。",
+        "first_appearance": 67,
+        "chapters": [
+          67
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2506,
+          22.3077
+        ]
+      },
+      "properties": {
+        "id": "ent_2769a7c732",
+        "name": "調景嶺",
+        "display_name": "調景嶺（參考位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
+        "story_position": {
+          "x": 0.5,
+          "y": 0.5
+        },
+        "description": "Dr.D異變後的震撼咆哮於調景嶺區域迴盪，顯示本章場景位於調景嶺一帶。",
+        "first_appearance": 69,
+        "chapters": [
+          69
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.28359999999999,
           22.423
         ]
@@ -1272,7 +1717,7 @@
           "x": 0.806,
           "y": 0.78
         },
-        "description": "地下層多媒體攝影棚係Dr.D照片背面寫住嘅地點，與Jason Todd嘅名字及日期一同出現。",
+        "description": "Dr.D實驗工作室的實際所在地，入口位於大本營外面，只有其得力助手持有鎖匙。",
         "first_appearance": 42,
         "chapters": [
           42,
@@ -1280,6 +1725,68 @@
         ],
         "characters": [],
         "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9332,
+          22.323249999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_29393af185",
+        "name": "將軍澳廣場二樓超級市場",
+        "display_name": "將軍澳廣場二樓超級市場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.222,
+          "y": 0.495
+        },
+        "description": "二樓左邊的超級市場存放大量乾糧零食，是病童出沒並以哼唱聲施展催眠的主要場所。",
+        "first_appearance": 75,
+        "chapters": [
+          75
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1708,
+          22.38065
+        ]
+      },
+      "properties": {
+        "id": "ent_29cc6c92b4",
+        "name": "尚德商場旁的停車場",
+        "display_name": "尚德商場旁的停車場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.618,
+          "y": 0.659
+        },
+        "description": "王白蛋帶主角等人到尚德商場隔壁的停車場設置陷阱，並登上四樓天台觀察四周。",
+        "first_appearance": 80,
+        "chapters": [
+          80
+        ],
+        "characters": [],
+        "confidence": 0.8,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1304,13 +1811,14 @@
           "x": 0.5,
           "y": 0.5
         },
-        "description": "安區老前輩賴三領隊出外搜索時，意外在近寶琳一帶發現一個由倖存者暫建、供人質易和休息的中立物資倖存點。",
+        "description": "寶琳是「死亡之路」盡頭的目的地，敘事者在此出生，熟悉往寶琳的路。",
         "first_appearance": 25,
         "chapters": [
-          25
+          25,
+          86
         ],
         "characters": [],
-        "confidence": 0.9,
+        "confidence": 0.93,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1397,7 +1905,7 @@
           "x": 0.5,
           "y": 0.5
         },
-        "description": "少佐房間長桌上放有一副將軍澳區的城市規劃圖，標示下水道位置、餐廳超市等物資地點及馬路方向。",
+        "description": "從酒店天台邊緣可以觀望整個將軍澳。",
         "first_appearance": 11,
         "chapters": [
           11,
@@ -1407,7 +1915,14 @@
           18,
           19,
           43,
-          60
+          60,
+          80,
+          83,
+          84,
+          88,
+          92,
+          93,
+          94
         ],
         "characters": [],
         "confidence": 0.94,
@@ -1497,7 +2012,7 @@
           "x": 0.434,
           "y": 0.627
         },
-        "description": "賴三指點主角到海皮附近的將軍澳華人永遠墳場，找一名情報靈通、名叫北賢的人。",
+        "description": "主角沿上坡路到達將軍澳華人永遠墳場，在墓碑間尋找情報販子北賢。",
         "first_appearance": 35,
         "chapters": [
           35,
@@ -1506,6 +2021,130 @@
         ],
         "characters": [],
         "confidence": 0.97,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1438,
+          22.354049999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_2ffc090d7c",
+        "name": "放置斷頭台嘅操場",
+        "display_name": "放置斷頭台嘅操場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.573,
+          "y": 0.583
+        },
+        "description": "操場上放置住斷頭台，被用嚟囚禁俘虜並讓人選擇放走一人。",
+        "first_appearance": 73,
+        "chapters": [
+          73
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.932,
+          22.36805
+        ]
+      },
+      "properties": {
+        "id": "ent_308fbd3393",
+        "name": "海旁排水口與下水道",
+        "display_name": "海旁排水口與下水道（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.22,
+          "y": 0.623
+        },
+        "description": "整條海濱長廊設有自己的排水口，面積足夠一型貨車駛入，渠內水深僅及膝，通往幽黑腥臭、如複雜大迷宮的下水道，是盜屍賊的地盤。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.226,
+          22.40165
+        ]
+      },
+      "properties": {
+        "id": "ent_30cfb46378",
+        "name": "百貨公司",
+        "display_name": "百貨公司（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.71,
+          "y": 0.719
+        },
+        "description": "主角與病童、神秘人在一所百貨公司內交戰，主角曾被逼退至百貨公司外面。",
+        "first_appearance": 77,
+        "chapters": [
+          77
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.24459999999999,
+          22.372249999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_31176c276d",
+        "name": "彩明苑",
+        "display_name": "彩明苑（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.741,
+          "y": 0.635
+        },
+        "description": "主角與銘凱前往彩明苑附近調查，該處有一間社區教會堂。",
+        "first_appearance": 94,
+        "chapters": [
+          94
+        ],
+        "characters": [],
+        "confidence": 0.95,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1546,6 +2185,71 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.9314,
+          22.28895
+        ]
+      },
+      "properties": {
+        "id": "ent_3319064815",
+        "name": "小學",
+        "display_name": "小學（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.219,
+          "y": 0.397
+        },
+        "description": "班尼居住的小學圍牆長有蔓藤，可以攀爬越過而不經大閘離開學校。",
+        "first_appearance": 73,
+        "chapters": [
+          73,
+          75,
+          82,
+          91
+        ],
+        "characters": [],
+        "confidence": 0.87,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0148,
+          22.3033
+        ]
+      },
+      "properties": {
+        "id": "ent_338350a3d0",
+        "name": "吊放人類屍體嘅密室",
+        "display_name": "吊放人類屍體嘅密室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.358,
+          "y": 0.438
+        },
+        "description": "娃娃兄妹開咗間吊放住人類屍體嘅密室，入面屍氣沖天，屍體全部俾人用鐵勾扣住下巴並有切割痕跡。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.0814,
           22.401999999999997
         ]
@@ -1568,6 +2272,37 @@
         ],
         "characters": [],
         "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.899,
+          22.3292
+        ]
+      },
+      "properties": {
+        "id": "ent_33f49f01d2",
+        "name": "「不良人」據點",
+        "display_name": "「不良人」據點（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.165,
+          "y": 0.512
+        },
+        "description": "戰鬥結束後，敘事者與公仔回到「不良人」的據點；敘事者表示總有一日會離開「不良人」。",
+        "first_appearance": 78,
+        "chapters": [
+          78
+        ],
+        "characters": [],
+        "confidence": 0.91,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1630,6 +2365,37 @@
         ],
         "characters": [],
         "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2428,
+          22.33795
+        ]
+      },
+      "properties": {
+        "id": "ent_3558c8092e",
+        "name": "寶康路",
+        "display_name": "寶康路（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.738,
+          "y": 0.537
+        },
+        "description": "寶康路是前往寶琳途中的道路，喪伯最終被病翼帶到寶康路方向並慘死於該處馬路上。",
+        "first_appearance": 86,
+        "chapters": [
+          86
+        ],
+        "characters": [],
+        "confidence": 0.95,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1747,16 +2513,17 @@
           "x": 0.646,
           "y": 0.169
         },
-        "description": "本章主要場景，內有銀行、玩具店、衣店等鋪頭，與將軍澳中心相隔一條街距離。",
+        "description": "大本營內嘅廣場，主角攞住病爪頭經過時巧遇犬京。",
         "first_appearance": 19,
         "chapters": [
           19,
           32,
           33,
-          34
+          34,
+          70
         ],
         "characters": [],
-        "confidence": 0.88,
+        "confidence": 0.86,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1859,6 +2626,43 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.0856,
+          22.39745
+        ]
+      },
+      "properties": {
+        "id": "ent_3aedd43d53",
+        "name": "不良人據點",
+        "display_name": "不良人據點（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.476,
+          "y": 0.707
+        },
+        "description": "主角將受箭傷嘅夏當帶返去嘅地方。",
+        "first_appearance": 74,
+        "chapters": [
+          74,
+          75,
+          79,
+          81,
+          84,
+          86,
+          90
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           113.97879999999999,
           22.266199999999998
         ]
@@ -1874,7 +2678,7 @@
           "x": 0.298,
           "y": 0.332
         },
-        "description": "大本營其中一幢大樓，四樓為食物分配層，五樓儲放食物並有人看守。",
+        "description": "主角離開李惠利大樓，前往大本營市集尋找阿登。",
         "first_appearance": 3,
         "chapters": [
           3,
@@ -1882,10 +2686,11 @@
           10,
           22,
           25,
-          32
+          32,
+          71
         ],
         "characters": [],
-        "confidence": 0.72,
+        "confidence": 0.76,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -1917,6 +2722,99 @@
         ],
         "characters": [],
         "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0448,
+          22.2991
+        ]
+      },
+      "properties": {
+        "id": "ent_406528e42a",
+        "name": "小學隱蔽地下室",
+        "display_name": "小學隱蔽地下室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.408,
+          "y": 0.426
+        },
+        "description": "班尼居住喺一所小學入面牆身地板都係木製嘅隱蔽地下室，收藏病者手工藝品、畫作同酒，離開時要攀爬圍牆蔓藤避開大閘。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0568,
+          22.352999999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_42c3cc32d9",
+        "name": "六樓",
+        "display_name": "六樓（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.428,
+          "y": 0.58
+        },
+        "description": "醫療大樓六樓只有Dr.D一人居住，馬姑娘將動彈不得嘅M送到嗰度最深處擺放魚缸嘅房間。",
+        "first_appearance": 67,
+        "chapters": [
+          67
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2002,
+          22.36
+        ]
+      },
+      "properties": {
+        "id": "ent_42d52510b7",
+        "name": "喪伯的工作室",
+        "display_name": "喪伯的工作室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.667,
+          "y": 0.6
+        },
+        "description": "喪伯昨天工作的工作室已人去樓空，工具與日常用品全部消失。",
+        "first_appearance": 86,
+        "chapters": [
+          86
+        ],
+        "characters": [],
+        "confidence": 0.9,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -2081,6 +2979,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.0562,
+          22.413549999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_47e5b1328d",
+        "name": "魚檔",
+        "display_name": "魚檔（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.427,
+          "y": 0.753
+        },
+        "description": "病腦「大廚」在魚檔內以大鍋烹煮人肉，主角三人逃至魚檔出口時遭白衣人以鐵撬伏擊。",
+        "first_appearance": 89,
+        "chapters": [
+          89
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           113.929,
           22.36385
         ]
@@ -2100,6 +3029,37 @@
         "first_appearance": 26,
         "chapters": [
           26
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.16539999999999,
+          22.299799999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_4919007992",
+        "name": "不良人武器庫",
+        "display_name": "不良人武器庫（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.609,
+          "y": 0.428
+        },
+        "description": "不良人存放大量槍械的武器庫，但庫內幾乎所有槍械都沒有子彈。",
+        "first_appearance": 92,
+        "chapters": [
+          92
         ],
         "characters": [],
         "confidence": 0.9,
@@ -2189,7 +3149,7 @@
           "x": 0.39,
           "y": 0.658
         },
-        "description": "大本營的天台，主角喜歡在雨天到此觀望天空，並曾與少佐在此長談。",
+        "description": "主角出發前一日起上天台凝望外面灰沉風景嘅地方。",
         "first_appearance": 14,
         "chapters": [
           14,
@@ -2287,13 +3247,14 @@
           "x": 0.452,
           "y": 0.21
         },
-        "description": "佛教志蓮小學係一間與大本營相隔幾條街嘅小學，被自稱「不良人」嘅倖存者團隊佔領。",
+        "description": "不良人的倖存區設於佛教志蓮小學，並打通了鄰近左邊的田家炳小學。",
         "first_appearance": 12,
         "chapters": [
-          12
+          12,
+          72
         ],
         "characters": [],
-        "confidence": 0.95,
+        "confidence": 0.93,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -2318,7 +3279,7 @@
           "x": 0.678,
           "y": 0.368
         },
-        "description": "位於B樓、長期被窗簾遮擋陽光的休息房間，M在此遇到玲玲和阿登。",
+        "description": "M睡覺休息之處，大舉推門進來在此找到他。",
         "first_appearance": 3,
         "chapters": [
           3,
@@ -2327,6 +3288,37 @@
         ],
         "characters": [],
         "confidence": 0.87,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9632,
+          22.4363
+        ]
+      },
+      "properties": {
+        "id": "ent_5125a74c64",
+        "name": "富康花園",
+        "display_name": "富康花園（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.272,
+          "y": 0.818
+        },
+        "description": "富康花園是鄰近酒店天台可望到的屋苑，銘凱指該處似乎有很多病者。",
+        "first_appearance": 93,
+        "chapters": [
+          93
+        ],
+        "characters": [],
+        "confidence": 0.9,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -2429,6 +3421,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.96979999999999,
+          22.2774
+        ]
+      },
+      "properties": {
+        "id": "ent_5227a2e71a",
+        "name": "電器部",
+        "display_name": "電器部（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.283,
+          "y": 0.364
+        },
+        "description": "百貨公司的電器部，主角與公仔到此尋找可以蓋過病童聲音的音響器材及電池。",
+        "first_appearance": 76,
+        "chapters": [
+          76
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9296,
+          22.2256
+        ]
+      },
+      "properties": {
+        "id": "ent_53ede020c6",
+        "name": "二樓吉野家",
+        "display_name": "二樓吉野家（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.216,
+          "y": 0.216
+        },
+        "description": "主角預計走到將軍澳廣場二樓吉野家門外時，便會知曉病童用什麼方法殺人的答案。",
+        "first_appearance": 75,
+        "chapters": [
+          75
+        ],
+        "characters": [],
+        "confidence": 0.8,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.17439999999999,
           22.23855
         ]
@@ -2460,6 +3514,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.9644,
+          22.40655
+        ]
+      },
+      "properties": {
+        "id": "ent_54e86462b5",
+        "name": "死亡之路",
+        "display_name": "死亡之路（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.274,
+          "y": 0.733
+        },
+        "description": "行人隧道旁的殘舊木牌警告穿越隧道後為「死亡之路」，實力不足者請三思而行，署名為病獵賴桑。",
+        "first_appearance": 86,
+        "chapters": [
+          86
+        ],
+        "characters": [],
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.0604,
           22.23085
         ]
@@ -2479,6 +3564,192 @@
         "first_appearance": 47,
         "chapters": [
           47
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2764,
+          22.3432
+        ]
+      },
+      "properties": {
+        "id": "ent_5678fabfa9",
+        "name": "商場二樓無欄杆邊緣位置",
+        "display_name": "商場二樓無欄杆邊緣位置（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.794,
+          "y": 0.552
+        },
+        "description": "主角循哼唱聲跑到商場二樓一處因破損而沒欄杆的邊緣位置，稍向前踏便會跌落比一樓更低的地下層致死，病童正在該處對外哼唱。",
+        "first_appearance": 77,
+        "chapters": [
+          77
+        ],
+        "characters": [],
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.238,
+          22.3537
+        ]
+      },
+      "properties": {
+        "id": "ent_567fee2b6e",
+        "name": "攻擊學",
+        "display_name": "攻擊學（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.73,
+          "y": 0.582
+        },
+        "description": "一名已失蹤幾日的病者老師所屬的學院名稱。",
+        "first_appearance": 68,
+        "chapters": [
+          68
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2974,
+          22.220699999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_57132d7e73",
+        "name": "不良人據點六樓課室",
+        "display_name": "不良人據點六樓課室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.829,
+          "y": 0.202
+        },
+        "description": "正式不良人的會議場地，設有玻璃長桌與高椅，數十名正式不良人各有專屬座位。",
+        "first_appearance": 92,
+        "chapters": [
+          92
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0496,
+          22.369799999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_5911e33621",
+        "name": "將軍澳運動場",
+        "display_name": "將軍澳運動場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.416,
+          "y": 0.628
+        },
+        "description": "敘事者指出由其出生地一帶前往寶琳，需先向北行到將軍澳運動場。",
+        "first_appearance": 86,
+        "chapters": [
+          86
+        ],
+        "characters": [],
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.8954,
+          22.3586
+        ]
+      },
+      "properties": {
+        "id": "ent_597b0fd017",
+        "name": "近尚德嘅賽馬會社福機構",
+        "display_name": "近尚德嘅賽馬會社福機構（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.159,
+          "y": 0.596
+        },
+        "description": "不良人在近尚德的賽馬會社福機構找到少量乾糧。",
+        "first_appearance": 92,
+        "chapters": [
+          92
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.96379999999999,
+          22.301199999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_5e57ad2bc6",
+        "name": "海旁下水道",
+        "display_name": "海旁下水道（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.273,
+          "y": 0.432
+        },
+        "description": "海濱長廊下面有巨型排水口通去幽黑腥臭嘅下水道迷宮，水位只到腳膝，係盜屍賊藏身嘅地盤。",
+        "first_appearance": 82,
+        "chapters": [
+          82
         ],
         "characters": [],
         "confidence": 0.9,
@@ -2537,7 +3808,7 @@
           "x": 0.656,
           "y": 0.556
         },
-        "description": "病腦憑高智力會佔據荒廢建築物作為自己的巢穴，簡稱「病窩」，入面可能擺放詭異裝飾品。",
+        "description": "病窩係接收活人貢品嘅地方，夏晴曾被送入去做貢品，M曾深入病窩救她。",
         "first_appearance": 3,
         "chapters": [
           3,
@@ -2550,6 +3821,68 @@
         ],
         "characters": [],
         "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.304,
+          22.2137
+        ]
+      },
+      "properties": {
+        "id": "ent_607bf35f2a",
+        "name": "將軍澳商場",
+        "display_name": "將軍澳商場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.84,
+          "y": 0.182
+        },
+        "description": "不良人據點附近的將軍澳商場第二層物資充足，但因有病者（病童）徘徊而一直無法前往。",
+        "first_appearance": 72,
+        "chapters": [
+          72
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9206,
+          22.27075
+        ]
+      },
+      "properties": {
+        "id": "ent_61c8ec4c2b",
+        "name": "社工室改建的小房",
+        "display_name": "社工室改建的小房（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.201,
+          "y": 0.345
+        },
+        "description": "主角安頓公仔和娃娃的小房間，前身是學校的社工室。",
+        "first_appearance": 79,
+        "chapters": [
+          79
+        ],
+        "characters": [],
+        "confidence": 0.95,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -2605,7 +3938,7 @@
           "x": 0.8,
           "y": 0.176
         },
-        "description": "商場三樓盡頭有一間面積很大嘅玩具反斗城商店，地圖板顯示佢有兩個出入口，其中一個有樓梯可以落到二樓下面。",
+        "description": "商場內的玩具反斗城，眾人穿過該店並借用其樓梯逃往商場二樓。",
         "first_appearance": 9,
         "chapters": [
           9,
@@ -2637,10 +3970,11 @@
           "x": 0.513,
           "y": 0.5
         },
-        "description": "主角被困的攝影棚是大本營的一部分，棚內放滿器材箱，他在該處遭乾屍狀男子持刀襲擊。",
+        "description": "大本營範圍內有一個放滿器材箱嘅攝影棚，敘事者喺度被外形如乾屍嘅持刀男子追斬。",
         "first_appearance": 66,
         "chapters": [
-          66
+          66,
+          67
         ],
         "characters": [],
         "confidence": 0.9,
@@ -2715,6 +4049,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.1468,
+          22.400599999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_678298f9fe",
+        "name": "班尼的房間",
+        "display_name": "班尼的房間（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.578,
+          "y": 0.716
+        },
+        "description": "位於隔離小學偏僻的地下室，是班尼存放病者身體部位收藏之處。",
+        "first_appearance": 81,
+        "chapters": [
+          81
+        ],
+        "characters": [],
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1366,
+          22.278799999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_67b725aa0f",
+        "name": "滿天所在的地方",
+        "display_name": "滿天所在的地方（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.561,
+          "y": 0.368
+        },
+        "description": "公仔和娃娃獨自前往嘅目的地，即滿天身處之處。",
+        "first_appearance": 90,
+        "chapters": [
+          90
+        ],
+        "characters": [],
+        "confidence": 0.75,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2374,
           22.400599999999997
         ]
@@ -2737,6 +4133,37 @@
         ],
         "characters": [],
         "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9164,
+          22.2368
+        ]
+      },
+      "properties": {
+        "id": "ent_6935c09ff7",
+        "name": "將軍澳廣場二樓超市",
+        "display_name": "將軍澳廣場二樓超市（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.194,
+          "y": 0.248
+        },
+        "description": "病童藏身於將軍澳廣場二樓左邊的超級市場，小女孩的笑聲最初從超市東北面擺放冷藏食品的地方傳來。",
+        "first_appearance": 75,
+        "chapters": [
+          75
+        ],
+        "characters": [],
+        "confidence": 0.88,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -2799,6 +4226,68 @@
         ],
         "characters": [],
         "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0106,
+          22.446099999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_6aab8d4dea",
+        "name": "發電房",
+        "display_name": "發電房（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.351,
+          "y": 0.846
+        },
+        "description": "兩人最終退入一間放置數部簡陋小型發電機、無窗只有一道大門的房間背水一戰。",
+        "first_appearance": 70,
+        "chapters": [
+          70
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1498,
+          22.369799999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_6ac7528618",
+        "name": "遊戲室中的酒吧",
+        "display_name": "遊戲室中的酒吧（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.583,
+          "y": 0.628
+        },
+        "description": "敘述者在據點內常坐之處，他在此一邊喝苦澀啤酒一邊繪寫《病者圖鑑》，亦在此初遇班尼。",
+        "first_appearance": 81,
+        "chapters": [
+          81
+        ],
+        "characters": [],
+        "confidence": 0.88,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -2932,6 +4421,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.157,
+          22.2354
+        ]
+      },
+      "properties": {
+        "id": "ent_6eeed2bcf2",
+        "name": "茶水間",
+        "display_name": "茶水間（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.595,
+          "y": 0.244
+        },
+        "description": "主角踢開茶水間嘅門，利用天花板通風口帶同不良人爬入風管逃生。",
+        "first_appearance": 70,
+        "chapters": [
+          70
+        ],
+        "characters": [],
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.1708,
           22.289649999999998
         ]
@@ -2994,6 +4514,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.2428,
+          22.344949999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_74b123ea46",
+        "name": "吉野家",
+        "display_name": "吉野家（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.738,
+          "y": 0.557
+        },
+        "description": "主角在二樓吉野家門外時知曉了病童用什麼方法殺人。",
+        "first_appearance": 75,
+        "chapters": [
+          75
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.118,
+          22.40655
+        ]
+      },
+      "properties": {
+        "id": "ent_7521a46523",
+        "name": "前面廣場",
+        "display_name": "前面廣場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.53,
+          "y": 0.733
+        },
+        "description": "Dr.D位於廣場一帶，不良人稱主角有辦法對付前面廣場的大病者。",
+        "first_appearance": 70,
+        "chapters": [
+          70
+        ],
+        "characters": [],
+        "confidence": 0.75,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.0316,
           22.292099999999998
         ]
@@ -3013,6 +4595,68 @@
         "first_appearance": 43,
         "chapters": [
           43
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.11619999999999,
+          22.40515
+        ]
+      },
+      "properties": {
+        "id": "ent_77f5601c6c",
+        "name": "倖存區",
+        "display_name": "倖存區（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.527,
+          "y": 0.729
+        },
+        "description": "故事場景設喺一個「倖存區」之內，區內突然出現大量病者，令不良人絕望大叫。",
+        "first_appearance": 70,
+        "chapters": [
+          70
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9626,
+          22.273899999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_7b9042570a",
+        "name": "酒店樓上的餐廳",
+        "display_name": "酒店樓上的餐廳（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.271,
+          "y": 0.354
+        },
+        "description": "酒店樓上的餐廳是主角被拖走時遺下雨傘、以及病爪其後遊走徘徊的地方。",
+        "first_appearance": 94,
+        "chapters": [
+          94
         ],
         "characters": [],
         "confidence": 0.9,
@@ -3087,6 +4731,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.1798,
+          22.276
+        ]
+      },
+      "properties": {
+        "id": "ent_80e7369fdc",
+        "name": "病童所在地",
+        "display_name": "病童所在地（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.633,
+          "y": 0.36
+        },
+        "description": "不破尚派F小隊前往病童所在地搜索物資，以查證病童是否已被消滅。",
+        "first_appearance": 79,
+        "chapters": [
+          79
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.163,
           22.361749999999997
         ]
@@ -3118,6 +4793,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.0796,
+          22.249399999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_84fe83064b",
+        "name": "燒味店",
+        "display_name": "燒味店（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.466,
+          "y": 0.284
+        },
+        "description": "街市內一檔前身為燒味店嘅舖頭，其大烤爐入面躺坐一件全身燒得焦黑嘅人類屍體。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2752,
           22.313799999999997
         ]
@@ -3133,7 +4839,7 @@
           "x": 0.792,
           "y": 0.468
         },
-        "description": "送葬隊嘅目的地係一橦廢棄商場，亦即主角昨日遇上怪物（病腦）嘅「病窩」地頭；數十個載屍黑袋其後被擺放到商場中央。",
+        "description": "主角與公仔身處一所商場之內，病童的淒慘哭聲曾響徹整所商場。",
         "first_appearance": 4,
         "chapters": [
           4,
@@ -3146,7 +4852,10 @@
           18,
           24,
           32,
-          48
+          48,
+          76,
+          77,
+          78
         ],
         "characters": [],
         "confidence": 0.9,
@@ -3221,6 +4930,103 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.9164,
+          22.300849999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_86f6311cd4",
+        "name": "下水道",
+        "display_name": "下水道（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.194,
+          "y": 0.431
+        },
+        "description": "主角上次曾在下水道遇見竊屍賊，見識過它的膽小，該處同樣臭氣沖天。",
+        "first_appearance": 82,
+        "chapters": [
+          82,
+          84,
+          93
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9098,
+          22.37015
+        ]
+      },
+      "properties": {
+        "id": "ent_8746838b32",
+        "name": "寶琳倖存區",
+        "display_name": "寶琳倖存區（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.183,
+          "y": 0.629
+        },
+        "description": "一個倖存區，不良人從該處收到的諜報顯示出現了名為「舞者」的新病者。",
+        "first_appearance": 80,
+        "chapters": [
+          80,
+          91,
+          92
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9464,
+          22.3236
+        ]
+      },
+      "properties": {
+        "id": "ent_89dd260ed9",
+        "name": "大早營",
+        "display_name": "大早營（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.244,
+          "y": 0.496
+        },
+        "description": "主角以前待過的地方，他在那裡已習慣隱藏內心、不留痕跡。",
+        "first_appearance": 85,
+        "chapters": [
+          85
+        ],
+        "characters": [],
+        "confidence": 0.6,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2392,
           22.444
         ]
@@ -3236,7 +5042,7 @@
           "x": 0.732,
           "y": 0.84
         },
-        "description": "位於七樓圖書館其中一處玻璃房自修室，光線充足、空間足有幾個班房大，收容一群無家可歸的孩子。",
+        "description": "孤兒所位於大本營內，議案通過後其物品已在當日中午被人搬走。",
         "first_appearance": 26,
         "chapters": [
           26,
@@ -3245,6 +5051,37 @@
         ],
         "characters": [],
         "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.11019999999999,
+          22.3705
+        ]
+      },
+      "properties": {
+        "id": "ent_8af3daf20b",
+        "name": "收藏活人嘅店子",
+        "display_name": "收藏活人嘅店子（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.517,
+          "y": 0.63
+        },
+        "description": "街市內一間前身似賣雞地方嘅店子，籠子改建成困住人類，共有十多個只有洗衣機大細嘅鐵籠。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.9,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -3347,6 +5184,99 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.2662,
+          22.225949999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_8c433a2bba",
+        "name": "醫療大樓六樓",
+        "display_name": "醫療大樓六樓（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.777,
+          "y": 0.217
+        },
+        "description": "醫療大樓六樓只有Dr.D一人居住，M被送到最深處擺放住病爪頭部魚缸嘅房間休息。",
+        "first_appearance": 67,
+        "chapters": [
+          67
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.89,
+          22.407249999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_8cce707aa1",
+        "name": "商場二樓百貨公司",
+        "display_name": "商場二樓百貨公司（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.15,
+          "y": 0.735
+        },
+        "description": "不破尚的手下憑印象指商場二樓有一間很大的百貨公司，應該會有瑞士或德國出產的生存軍刀。",
+        "first_appearance": 74,
+        "chapters": [
+          74
+        ],
+        "characters": [],
+        "confidence": 0.84,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9152,
+          22.324299999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_8fe9ebff74",
+        "name": "紫線區",
+        "display_name": "紫線區（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.192,
+          "y": 0.498
+        },
+        "description": "喪伯哀求時稱寶琳位於「紫線區」，是最好、超大型倖存區之一。",
+        "first_appearance": 86,
+        "chapters": [
+          86
+        ],
+        "characters": [],
+        "confidence": 0.78,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.06219999999999,
           22.4412
         ]
@@ -3409,6 +5339,130 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.0874,
+          22.236449999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_95e1db50fe",
+        "name": "向北的海皮一帶",
+        "display_name": "向北的海皮一帶（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.479,
+          "y": 0.247
+        },
+        "description": "該處位於向北的海旁，東風徐徐，是之前大本營的賴三帶眾人釣魚的地方，設有海濱長廊和鐵欄。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9416,
+          22.38205
+        ]
+      },
+      "properties": {
+        "id": "ent_9810f1deaf",
+        "name": "電梯間",
+        "display_name": "電梯間（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.236,
+          "y": 0.663
+        },
+        "description": "主角逃過追殺後，藏身在百貨公司外面的電梯間上。",
+        "first_appearance": 77,
+        "chapters": [
+          77
+        ],
+        "characters": [],
+        "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0628,
+          22.2613
+        ]
+      },
+      "properties": {
+        "id": "ent_9954d20161",
+        "name": "升降機大堂",
+        "display_name": "升降機大堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.438,
+          "y": 0.318
+        },
+        "description": "酒店的升降機大堂內有沙發，病爪在此四處探摸，並因碰到沙發而發狂將其撕裂。",
+        "first_appearance": 94,
+        "chapters": [
+          94
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1336,
+          22.41985
+        ]
+      },
+      "properties": {
+        "id": "ent_99b97a0d80",
+        "name": "臨時宿舍",
+        "display_name": "臨時宿舍（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.556,
+          "y": 0.771
+        },
+        "description": "主角暫住的細小宿舍房間，他在此向公仔和娃娃交代送走他們的安排。",
+        "first_appearance": 85,
+        "chapters": [
+          85
+        ],
+        "characters": [],
+        "confidence": 0.83,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           113.923,
           22.2599
         ]
@@ -3428,6 +5482,37 @@
         "first_appearance": 56,
         "chapters": [
           56
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.974,
+          22.395699999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_9c4b6c725c",
+        "name": "不良人的據點",
+        "display_name": "不良人的據點（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.29,
+          "y": 0.702
+        },
+        "description": "不良人的據點設有金屬板圍牆和大閘，圍牆外倒吊死人屍體，大閘上更掛滿女性頭部，公仔與娃娃曾在此過著無身份地位的生活。",
+        "first_appearance": 75,
+        "chapters": [
+          75
         ],
         "characters": [],
         "confidence": 0.9,
@@ -3463,6 +5548,68 @@
         ],
         "characters": [],
         "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.22659999999999,
+          22.28475
+        ]
+      },
+      "properties": {
+        "id": "ent_9eaa4bd1b1",
+        "name": "不良人小學據點",
+        "display_name": "不良人小學據點（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.711,
+          "y": 0.385
+        },
+        "description": "不良人以一間小學作為據點，操場用於集結俘虜，四樓課室被改裝成監獄，一樓設有紋身室，不破尚常待在最高層。",
+        "first_appearance": 91,
+        "chapters": [
+          91
+        ],
+        "characters": [],
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.00399999999999,
+          22.25745
+        ]
+      },
+      "properties": {
+        "id": "ent_9ed3c9283b",
+        "name": "學校社工室",
+        "display_name": "學校社工室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.34,
+          "y": 0.307
+        },
+        "description": "主角帶同公仔與娃娃在一間前身是學校社工室的小房中安頓。",
+        "first_appearance": 79,
+        "chapters": [
+          79
+        ],
+        "characters": [],
+        "confidence": 0.92,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -3534,6 +5681,131 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.9236,
+          22.323249999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_a01572c676",
+        "name": "傢俱店",
+        "display_name": "傢俱店（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.206,
+          "y": 0.495
+        },
+        "description": "被催眠的公仔走進二樓一間傢俱店並踏上椅子，他面前正吊住一條用來吊頸的繩子。",
+        "first_appearance": 75,
+        "chapters": [
+          75,
+          76
+        ],
+        "characters": [],
+        "confidence": 0.91,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.115,
+          22.35055
+        ]
+      },
+      "properties": {
+        "id": "ent_a1636fae73",
+        "name": "停車場樓下的梯間",
+        "display_name": "停車場樓下的梯間（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.525,
+          "y": 0.573
+        },
+        "description": "白魂追趕擄走王白蛋之人時回到此梯間，一腳踢門打算奔上石梯時被捕獸夾夾傷。",
+        "first_appearance": 81,
+        "chapters": [
+          81
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0694,
+          22.323249999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_a2ce566a22",
+        "name": "李惠利飯堂",
+        "display_name": "李惠利飯堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.449,
+          "y": 0.495
+        },
+        "description": "李惠利大樓內的飯堂，被不良人佔據為防線及指揮處，不破尚在此接見敘事者。",
+        "first_appearance": 71,
+        "chapters": [
+          71
+        ],
+        "characters": [],
+        "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.8924,
+          22.224899999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_a2d48bdf86",
+        "name": "肉檔",
+        "display_name": "肉檔（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.154,
+          "y": 0.214
+        },
+        "description": "病腦在街市右上角的肉檔肢解人類，王白蛋亦被送上豬肉檔砧板。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.1694,
           22.3193
         ]
@@ -3549,7 +5821,7 @@
           "x": 0.5,
           "y": 0.5
         },
-        "description": "故事舞台位於香港，病毒爆發後第一個星期過去，整個香港就好像停止了運作一樣。",
+        "description": "文中提及香港人健忘的習性，反映故事背景與香港相關。",
         "first_appearance": 1,
         "chapters": [
           1,
@@ -3597,6 +5869,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.1546,
+          22.425099999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_a4e842a02c",
+        "name": "人類屍體收集站",
+        "display_name": "人類屍體收集站（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.591,
+          "y": 0.786
+        },
+        "description": "班尼認識嘅呢個下水道聚水處係最大嘅人類屍體收集站，而且可能仲有第二個分類站。",
+        "first_appearance": 83,
+        "chapters": [
+          83
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.25659999999999,
+          22.21125
+        ]
+      },
+      "properties": {
+        "id": "ent_abd335d55b",
+        "name": "前身是學校社工室的小房",
+        "display_name": "前身是學校社工室的小房（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.761,
+          "y": 0.175
+        },
+        "description": "主角與公仔、娃娃在一間前身是學校社工室的小房內暫時安頓。",
+        "first_appearance": 79,
+        "chapters": [
+          79
+        ],
+        "characters": [],
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2272,
           22.37435
         ]
@@ -3619,6 +5953,37 @@
         ],
         "characters": [],
         "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0616,
+          22.39745
+        ]
+      },
+      "properties": {
+        "id": "ent_adab8b7307",
+        "name": "皇冠假日酒店",
+        "display_name": "皇冠假日酒店（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.436,
+          "y": 0.707
+        },
+        "description": "位於將軍澳地鐵站一旁、全區最高的建築物，亂世初期曾有多方勢力爭奪，九樓走廊堆滿近乎化成白骨的屍骸。",
+        "first_appearance": 92,
+        "chapters": [
+          92
+        ],
+        "characters": [],
+        "confidence": 0.95,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -3690,6 +6055,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.088,
+          22.41005
+        ]
+      },
+      "properties": {
+        "id": "ent_b03da3fb97",
+        "name": "吊放屍體嘅密室",
+        "display_name": "吊放屍體嘅密室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.48,
+          "y": 0.743
+        },
+        "description": "娃娃兄妹開咗一間吊放住人類屍體嘅密室，入面屍氣沖天，屍體全部俾人用鐵勾扣住下巴。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.1174,
           22.228399999999997
         ]
@@ -3712,6 +6108,38 @@
         ],
         "characters": [],
         "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.91579999999999,
+          22.2396
+        ]
+      },
+      "properties": {
+        "id": "ent_b218795d76",
+        "name": "遊戲室",
+        "display_name": "遊戲室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.193,
+          "y": 0.256
+        },
+        "description": "不良人基地內設有射靶遊戲的場所，所有遊戲由銘凱設計，曾沒收公仔的軍刀。",
+        "first_appearance": 73,
+        "chapters": [
+          73,
+          85
+        ],
+        "characters": [],
+        "confidence": 0.92,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -3744,6 +6172,37 @@
         ],
         "characters": [],
         "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2512,
+          22.2627
+        ]
+      },
+      "properties": {
+        "id": "ent_b2a8dbc84f",
+        "name": "永旺百貨公司",
+        "display_name": "永旺百貨公司（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.752,
+          "y": 0.322
+        },
+        "description": "商場內的百貨公司為永旺百貨公司，主角拾到寫有「永旺百貨公司員工出入證」的智能卡。",
+        "first_appearance": 76,
+        "chapters": [
+          76
+        ],
+        "characters": [],
+        "confidence": 0.82,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -3837,6 +6296,38 @@
         ],
         "characters": [],
         "confidence": 0.8,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.064,
+          22.25675
+        ]
+      },
+      "properties": {
+        "id": "ent_bd261bdc6b",
+        "name": "艾寶琳共和國",
+        "display_name": "艾寶琳共和國（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.44,
+          "y": 0.305
+        },
+        "description": "艾寶琳共和國是舊日寶琳在世界劇變後的新名字。",
+        "first_appearance": 73,
+        "chapters": [
+          73,
+          86
+        ],
+        "characters": [],
+        "confidence": 0.88,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4001,6 +6492,69 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.9962,
+          22.221049999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_c078cfc3d4",
+        "name": "將軍澳廣場",
+        "display_name": "將軍澳廣場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.327,
+          "y": 0.203
+        },
+        "description": "主角與公仔前往搜尋病童的商場為將軍澳廣場（文中亦稱將軍澳商場），其與不良人據點僅數十步之隔。",
+        "first_appearance": 75,
+        "chapters": [
+          75
+        ],
+        "characters": [],
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.914,
+          22.336199999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_c0b8da6452",
+        "name": "大本營廣場",
+        "display_name": "大本營廣場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.19,
+          "y": 0.532
+        },
+        "description": "大本營廣場係不良人貨車駛入後，與搜索隊爆發一百多人互相撕殺嘅戰場。",
+        "first_appearance": 68,
+        "chapters": [
+          68,
+          71
+        ],
+        "characters": [],
+        "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2248,
           22.215449999999997
         ]
@@ -4031,6 +6585,68 @@
         ],
         "characters": [],
         "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.20739999999999,
+          22.389049999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_c152be9f50",
+        "name": "渠道",
+        "display_name": "渠道（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.679,
+          "y": 0.683
+        },
+        "description": "敘事者同班尼行經嘅空曠污水渠道，水深蓋過雙膝，盡頭斷口通往下水道中央聚水處。",
+        "first_appearance": 83,
+        "chapters": [
+          83
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9734,
+          22.317649999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_c2a616200d",
+        "name": "附近一帶嘅教堂",
+        "display_name": "附近一帶嘅教堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.289,
+          "y": 0.479
+        },
+        "description": "夏當供出其同黨會在附近一帶的教堂出沒，但表示不知道確實位置。",
+        "first_appearance": 91,
+        "chapters": [
+          91
+        ],
+        "characters": [],
+        "confidence": 0.65,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4071,6 +6687,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.92179999999999,
+          22.33795
+        ]
+      },
+      "properties": {
+        "id": "ent_c429f81832",
+        "name": "商場二樓無欄杆邊緣",
+        "display_name": "商場二樓無欄杆邊緣（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.203,
+          "y": 0.537
+        },
+        "description": "商場二樓有一處因破損而沒有欄杆的邊緣位置，稍為向前多踏幾步便會跌落比一樓更低的地下層，足以致命。",
+        "first_appearance": 77,
+        "chapters": [
+          77
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           113.89059999999999,
           22.33165
         ]
@@ -4089,10 +6736,73 @@
         "description": "娃娃憶述當時地下層有一隻病者行到樓梯口附近，因此她不敢大叫求救。",
         "first_appearance": 52,
         "chapters": [
-          52
+          52,
+          78
         ],
         "characters": [],
-        "confidence": 0.78,
+        "confidence": 0.84,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2608,
+          22.277749999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_c4817a66cf",
+        "name": "學校隱蔽的地下室",
+        "display_name": "學校隱蔽的地下室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.768,
+          "y": 0.365
+        },
+        "description": "班尼住喺一間學校隱蔽嘅地下室，牆身地板都係木製，入面擺住佢養嘅寵物同畫作。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.91,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0442,
+          22.224899999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_c590223c6b",
+        "name": "豬肉檔",
+        "display_name": "豬肉檔（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.407,
+          "y": 0.214
+        },
+        "description": "病腦喺街市右上角嘅肉檔肢解一名清醒嘅男人致其失血而死，之後將王白蛋送上砧板。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.85,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4124,6 +6834,37 @@
         ],
         "characters": [],
         "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1978,
+          22.40655
+        ]
+      },
+      "properties": {
+        "id": "ent_c85eb3ce0b",
+        "name": "田家炳小學禮堂",
+        "display_name": "田家炳小學禮堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.663,
+          "y": 0.733
+        },
+        "description": "董倫一班高級人每日夜晚八點至十點在此舉行聯誼派對的場地。",
+        "first_appearance": 85,
+        "chapters": [
+          85
+        ],
+        "characters": [],
+        "confidence": 0.83,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4226,6 +6967,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.0844,
+          22.23295
+        ]
+      },
+      "properties": {
+        "id": "ent_ca9c91e3c7",
+        "name": "樓梯間",
+        "display_name": "樓梯間（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.474,
+          "y": 0.237
+        },
+        "description": "一隻竊屍賊站在樓梯間前關上門阻擋主角與銘凱逃走，二人後來合力把門踢開。",
+        "first_appearance": 94,
+        "chapters": [
+          94
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.1936,
           22.2858
         ]
@@ -4245,6 +7017,37 @@
         "first_appearance": 18,
         "chapters": [
           18
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.3016,
+          22.287899999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_cd3ebc5cf0",
+        "name": "病房",
+        "display_name": "病房（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.836,
+          "y": 0.394
+        },
+        "description": "M受傷後喺大本營醫療大樓嘅病房連續留醫四日，期間同少佐同房休息。",
+        "first_appearance": 67,
+        "chapters": [
+          67
         ],
         "characters": [],
         "confidence": 0.9,
@@ -4350,6 +7153,99 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.181,
+          22.3187
+        ]
+      },
+      "properties": {
+        "id": "ent_d2b742d895",
+        "name": "操場",
+        "display_name": "操場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.635,
+          "y": 0.482
+        },
+        "description": "大本營內放置斷頭台的操場，是主角選擇放走一人之處。",
+        "first_appearance": 73,
+        "chapters": [
+          73
+        ],
+        "characters": [],
+        "confidence": 0.91,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9452,
+          22.3404
+        ]
+      },
+      "properties": {
+        "id": "ent_d37e1220cf",
+        "name": "小學二樓禮堂",
+        "display_name": "小學二樓禮堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.242,
+          "y": 0.544
+        },
+        "description": "小學二樓禮堂被改裝成不良人共享嘅食飯同休息空間。",
+        "first_appearance": 73,
+        "chapters": [
+          73
+        ],
+        "characters": [],
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.95479999999999,
+          22.389049999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_d38775ae8a",
+        "name": "長者公園",
+        "display_name": "長者公園（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.258,
+          "y": 0.683
+        },
+        "description": "黑衣人把屍體拉到宣基中學附近的長者公園。",
+        "first_appearance": 80,
+        "chapters": [
+          80
+        ],
+        "characters": [],
+        "confidence": 0.73,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.172,
           22.296999999999997
         ]
@@ -4365,7 +7261,7 @@
           "x": 0.62,
           "y": 0.42
         },
-        "description": "大本營是設於香港知專設計學院內的生還者據點，佔地極大有五幢大樓、七樓互通，中央有大營火，兩側有買賣武器食物等的倖存者攤位。",
+        "description": "賴三所屬的大本營全部人都欠主角一個人情。",
         "first_appearance": 1,
         "chapters": [
           1,
@@ -4420,7 +7316,101 @@
           66
         ],
         "characters": [],
-        "confidence": 0.91,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.95779999999999,
+          22.23435
+        ]
+      },
+      "properties": {
+        "id": "ent_d462b72866",
+        "name": "通風管道",
+        "display_name": "通風管道（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.263,
+          "y": 0.241
+        },
+        "description": "主角同不良人喺狹窄、又靜又暗嘅通風管道中向前爬行逃生。",
+        "first_appearance": 70,
+        "chapters": [
+          70
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.9356,
+          22.44295
+        ]
+      },
+      "properties": {
+        "id": "ent_d754346644",
+        "name": "禮堂",
+        "display_name": "禮堂（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.226,
+          "y": 0.837
+        },
+        "description": "主角在禮堂向一名正準備用餐的不破尚飛虎部隊成員查詢關於病童的事。",
+        "first_appearance": 74,
+        "chapters": [
+          74,
+          85
+        ],
+        "characters": [],
+        "confidence": 0.84,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1666,
+          22.425449999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_d7b5398520",
+        "name": "雜貨店",
+        "display_name": "雜貨店（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.611,
+          "y": 0.787
+        },
+        "description": "主角同不良人喺街市內一間雜貨店討論完飼養圈之說後走出店外。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.82,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4492,6 +7482,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.2764,
+          22.215449999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_db1296ec16",
+        "name": "停車場",
+        "display_name": "停車場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.794,
+          "y": 0.187
+        },
+        "description": "王白蛋帶主角與白魂到尚德商場隔壁的停車場設置捕獸陷阱，並登上其四樓天台觀察城市動靜。",
+        "first_appearance": 80,
+        "chapters": [
+          80
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.09219999999999,
+          22.2473
+        ]
+      },
+      "properties": {
+        "id": "ent_db60d54b5e",
+        "name": "下水道中央聚水處",
+        "display_name": "下水道中央聚水處（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.487,
+          "y": 0.278
+        },
+        "description": "一個樓底有幾層高嘅六角型聚水空間；洪水過多時水會聚集於此，慢慢上溢至最高位先流出地面。",
+        "first_appearance": 83,
+        "chapters": [
+          83
+        ],
+        "characters": [],
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.1006,
           22.237849999999998
         ]
@@ -4507,7 +7559,7 @@
           "x": 0.501,
           "y": 0.251
         },
-        "description": "Bomi所屬嘅倖存團體有一個安全區，犬京曾答應大霧散去後送佢返去。",
+        "description": "文中所提的安全區是眾人居住之地，有作為的人早已走出安全區賺錢。",
         "first_appearance": 18,
         "chapters": [
           18,
@@ -4546,6 +7598,39 @@
         ],
         "characters": [],
         "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.19239999999999,
+          22.254649999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_dda1a69ddb",
+        "name": "彩明商場",
+        "display_name": "彩明商場（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.654,
+          "y": 0.299
+        },
+        "description": "據王白蛋聽聞，以前彩明商場一帶有病腦出沒過。",
+        "first_appearance": 67,
+        "chapters": [
+          67,
+          80,
+          89
+        ],
+        "characters": [],
+        "confidence": 0.89,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4619,6 +7704,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.12219999999999,
+          22.225949999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_e095d9c6c6",
+        "name": "宣基中學",
+        "display_name": "宣基中學（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.537,
+          "y": 0.217
+        },
+        "description": "神秘黑衣男拖著屍體由宣基中學一路拉到附近的長者公園。",
+        "first_appearance": 80,
+        "chapters": [
+          80
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.91579999999999,
+          22.352999999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_e0f01b7204",
+        "name": "不良人大本營",
+        "display_name": "不良人大本營（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.193,
+          "y": 0.58
+        },
+        "description": "不良人的據點大本營，內有操場和囚禁俘虜的地方，主角一行人現暫居於此的小房中。",
+        "first_appearance": 80,
+        "chapters": [
+          80
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2338,
           22.276
         ]
@@ -4650,6 +7797,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.1126,
+          22.36105
+        ]
+      },
+      "properties": {
+        "id": "ent_e2218db1b3",
+        "name": "操場斷頭台",
+        "display_name": "操場斷頭台（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.521,
+          "y": 0.603
+        },
+        "description": "主角在雷雨中撐傘走到操場的斷頭台，坐在娃娃身旁用雨傘為她擋雨。",
+        "first_appearance": 74,
+        "chapters": [
+          74
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2284,
           22.2823
         ]
@@ -4665,10 +7843,73 @@
           "x": 0.714,
           "y": 0.378
         },
-        "description": "尚德商場係香港真實商場，故事中少佐所屬嘅不良人小隊喺嗰度同八隻舌女血戰，少佐重傷垂死時被老賢救起。",
+        "description": "一座四層高的商場，以被不良人掠奪得一乾二淨而聞名。",
         "first_appearance": 20,
         "chapters": [
-          20
+          20,
+          80
+        ],
+        "characters": [],
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.29079999999999,
+          22.21335
+        ]
+      },
+      "properties": {
+        "id": "ent_e4514005b4",
+        "name": "海濱長廊排水口",
+        "display_name": "海濱長廊排水口（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.818,
+          "y": 0.181
+        },
+        "description": "海濱長廊設有面積足以讓一型貨車駛入嘅排水口，渠口有鐵製隔物，唔太胖嘅人可以側身穿入去。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0934,
+          22.32605
+        ]
+      },
+      "properties": {
+        "id": "ent_e4b9d69486",
+        "name": "平台",
+        "display_name": "平台（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.489,
+          "y": 0.503
+        },
+        "description": "王白蛋被擄的地點，邊緣設有花圃，除上來的樓梯口外還有左右兩個樓梯間出入口。",
+        "first_appearance": 81,
+        "chapters": [
+          81
         ],
         "characters": [],
         "confidence": 0.9,
@@ -4712,6 +7953,37 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.8948,
+          22.44155
+        ]
+      },
+      "properties": {
+        "id": "ent_ebaaa28a57",
+        "name": "海皮一帶",
+        "display_name": "海皮一帶（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.158,
+          "y": 0.833
+        },
+        "description": "班尼帶敘事者去到向北嘅海皮一帶，即之前大本營賴三帶過佢哋去釣魚、東風徐徐嘅地方。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.0238,
           22.386599999999998
         ]
@@ -4727,7 +7999,7 @@
           "x": 0.373,
           "y": 0.676
         },
-        "description": "南愚要求主角前往區內附近的靈實醫院五樓宿舍，從抽屜中找回一張有南愚樣貌的相片。",
+        "description": "主角上次曾帶該組學生去靈實醫院進行出外實習。",
         "first_appearance": 39,
         "chapters": [
           39,
@@ -4738,10 +8010,13 @@
           47,
           54,
           57,
-          59
+          59,
+          74,
+          86,
+          88
         ],
         "characters": [],
-        "confidence": 0.91,
+        "confidence": 0.93,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4828,7 +8103,7 @@
           "x": 0.494,
           "y": 0.386
         },
-        "description": "董倫舉行轉盤遊戲嘅樓層，主角同王達尼最後一齊逃出八樓。",
+        "description": "與不良人合作的董倫是八樓的人。",
         "first_appearance": 32,
         "chapters": [
           32,
@@ -4839,10 +8114,12 @@
           62,
           63,
           65,
-          66
+          66,
+          67,
+          68
         ],
         "characters": [],
-        "confidence": 0.86,
+        "confidence": 0.8,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -4867,12 +8144,107 @@
           "x": 0.815,
           "y": 0.667
         },
-        "description": "大本營內的設施，分多層運作，包括頂層的病者陷阱設計室及木材加工部等部門。",
+        "description": "漢森最近轉行到此搞武器生意。",
         "first_appearance": 56,
         "chapters": [
           56,
           60,
           62
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.90259999999999,
+          22.39465
+        ]
+      },
+      "properties": {
+        "id": "ent_ef22e06fef",
+        "name": "遊戲室酒吧",
+        "display_name": "遊戲室酒吧（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.171,
+          "y": 0.699
+        },
+        "description": "主角進入遊戲室酒吧，看見裡面的醉漢疏於看管自己的武器，趁機下手盜竊。",
+        "first_appearance": 74,
+        "chapters": [
+          74,
+          81
+        ],
+        "characters": [],
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2434,
+          22.38835
+        ]
+      },
+      "properties": {
+        "id": "ent_f01540c8a6",
+        "name": "酒店",
+        "display_name": "酒店（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.739,
+          "y": 0.681
+        },
+        "description": "主角與銘凱暫住的未命名酒店，多層走廊中央被人堆疊屍體，六樓是住客升降機大堂並設有一間西餐廳。",
+        "first_appearance": 93,
+        "chapters": [
+          93,
+          94
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0544,
+          22.20705
+        ]
+      },
+      "properties": {
+        "id": "ent_f1afd0b292",
+        "name": "西餐廳",
+        "display_name": "西餐廳（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.424,
+          "y": 0.163
+        },
+        "description": "酒店六樓的西餐廳樓底極高、掛有華麗吊燈，中央堆有幾乎碰到吊燈的巨型屍山，病爪藏於其中。",
+        "first_appearance": 93,
+        "chapters": [
+          93
         ],
         "characters": [],
         "confidence": 0.9,
@@ -4916,6 +8288,38 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          113.9344,
+          22.389049999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_f330d5aa9f",
+        "name": "員工室",
+        "display_name": "員工室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.224,
+          "y": 0.683
+        },
+        "description": "公仔被困的房間，其門被神秘人以鐵鎚敲打至爛掉一半，主角最終到此營救公仔。",
+        "first_appearance": 76,
+        "chapters": [
+          76,
+          77
+        ],
+        "characters": [],
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.0478,
           22.42965
         ]
@@ -4947,6 +8351,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.1786,
+          22.425449999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_f432ab3ceb",
+        "name": "向北海皮一帶",
+        "display_name": "向北海皮一帶（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.631,
+          "y": 0.787
+        },
+        "description": "班尼帶「我」去到向北嘅海皮一帶，即之前賴三帶佢哋釣魚嘅地方，嗰度有海濱長廊同大型排水口。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.0844,
+          22.309949999999997
+        ]
+      },
+      "properties": {
+        "id": "ent_f45144f0eb",
+        "name": "大魚檔",
+        "display_name": "大魚檔（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.474,
+          "y": 0.457
+        },
+        "description": "病腦將鐵籠推到一處前身似大魚檔嘅闊大空間，滿地血液同人類殘肢，中間放住底下燒柴火嘅大烹鍋。",
+        "first_appearance": 88,
+        "chapters": [
+          88
+        ],
+        "characters": [],
+        "confidence": 0.91,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.2008,
           22.37015
         ]
@@ -4966,6 +8432,68 @@
         "first_appearance": 3,
         "chapters": [
           3
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.28659999999999,
+          22.40935
+        ]
+      },
+      "properties": {
+        "id": "ent_f4ecd5760f",
+        "name": "手術室",
+        "display_name": "手術室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.811,
+          "y": 0.741
+        },
+        "description": "主角躲進一間明顯被改裝、儀器不算先進的手術室，並藏身其中的抽櫃。",
+        "first_appearance": 70,
+        "chapters": [
+          70
+        ],
+        "characters": [],
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.28359999999999,
+          22.223499999999998
+        ]
+      },
+      "properties": {
+        "id": "ent_f5c71237d4",
+        "name": "四樓天台活動平台",
+        "display_name": "四樓天台活動平台（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.806,
+          "y": 0.21
+        },
+        "description": "停車場四樓天台是連接屋苑公屋的活動平台，設有小公園、涼亭、社工福利中心等設施。",
+        "first_appearance": 80,
+        "chapters": [
+          80
         ],
         "characters": [],
         "confidence": 0.85,
@@ -5071,6 +8599,68 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          114.21459999999999,
+          22.34705
+        ]
+      },
+      "properties": {
+        "id": "ent_f8d63c9ce5",
+        "name": "學校隱蔽地下室",
+        "display_name": "學校隱蔽地下室（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.691,
+          "y": 0.563
+        },
+        "description": "班尼棲身於一所小學內隱蔽的地下室，牆身和地板都是木製，裡面放有桌子、畫作和陳年威士忌。",
+        "first_appearance": 82,
+        "chapters": [
+          82
+        ],
+        "characters": [],
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1036,
+          22.43105
+        ]
+      },
+      "properties": {
+        "id": "ent_f907b88070",
+        "name": "田家炳小學",
+        "display_name": "田家炳小學（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.506,
+          "y": 0.803
+        },
+        "description": "田家炳小學與志蓮小學打通，其操場被用作放置斷頭台的刑場。",
+        "first_appearance": 72,
+        "chapters": [
+          72
+        ],
+        "characters": [],
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           113.91579999999999,
           22.407249999999998
         ]
@@ -5093,6 +8683,70 @@
         ],
         "characters": [],
         "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2494,
+          22.2046
+        ]
+      },
+      "properties": {
+        "id": "ent_fbe7c248d4",
+        "name": "街市",
+        "display_name": "街市（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.749,
+          "y": 0.156
+        },
+        "description": "主角一行人與病腦戰鬥嘅地方，該役於本章正式完結。",
+        "first_appearance": 88,
+        "chapters": [
+          88,
+          89,
+          90
+        ],
+        "characters": [],
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.2674,
+          22.2704
+        ]
+      },
+      "properties": {
+        "id": "ent_fc8f2dafca",
+        "name": "操場的斷頭台",
+        "display_name": "操場的斷頭台（虛構）",
+        "location_type": "fictional",
+        "fictional": true,
+        "location_precision": "fictional",
+        "story_position": {
+          "x": 0.779,
+          "y": 0.344
+        },
+        "description": "雷雨之夜，主角撐傘走到操場的斷頭台上，坐在娃娃身旁用雨傘為她擋雨。",
+        "first_appearance": 74,
+        "chapters": [
+          74
+        ],
+        "characters": [],
+        "confidence": 0.93,
         "review_status": "needs_review",
         "source": "bing_gang"
       }
@@ -5180,7 +8834,7 @@
           "x": 0.222,
           "y": 0.571
         },
-        "description": "G層是故事中醫院的其中一層，敘事者與公仔上到G層後返回瑜小六等四人所在的辦公室。",
+        "description": "G層係醫院入面其中一層，主角形容第二層同G層相差無幾。",
         "first_appearance": 46,
         "chapters": [
           46,
@@ -5212,7 +8866,7 @@
           "x": 0.553,
           "y": 0.302
         },
-        "description": "popcorn商場是一條會通往地鐵站的商場，眾人在其中央發現屍山，並於戲院旁及UNIQLO等位置活動。",
+        "description": "故事中病爪理應在其二樓大中央、被它堆疊屍體成山的地方出沒的真實香港商場。",
         "first_appearance": 18,
         "chapters": [
           18,
