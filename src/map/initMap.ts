@@ -182,6 +182,22 @@ export async function initMap(rootId = "map-root"): Promise<void> {
   });
   rerenderEvents(maxSpoiler);
 
+  // ---- Routes 圖層（§10.4）：資料現時為空，人手審閱後自動生效 ----
+  const routeLayer = new RouteLayer(map);
+  routeLayer.setOnSelect((route) => {
+    const p = route.properties;
+    window.alert(
+      `${p.character_name}路線\n\n` +
+        `章節範圍：第${p.chapters_span[0]}–${p.chapters_span[1]}章\n` +
+        `精度：${p.precision}｜Waypoints：${route.geometry.coordinates.length} 個\n\n` +
+        `原始 waypoint 為準；線段平滑僅為視覺效果。`,
+    );
+  });
+  const charColorById = (id: string): string | undefined =>
+    dataset.characters.find((c) => c.id === id)?.color;
+  routeLayer.addToMap();
+  routeLayer.render(dataset.routes, maxSpoiler, charColorById);
+
   // ---- 距離量度工具（M 快速鍵）----
   const scaleMeters = config.scale_profile.meters_per_map_unit;
   const measureTool = new MeasureTool(map, (result) => {
