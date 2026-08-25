@@ -369,3 +369,62 @@
   border: 1px solid var(--color-border, #2c3e50) !important;
   color: var(--color-text-muted, #95a5a6) !important;
 }
+
+/* ---- 關於對話框 ---- */
+#bg-about {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 18, 0.7);
+  display: grid;
+  place-items: center;
+  z-index: 1300;
+  padding: 24px;
+}
+
+.bg-about-inner {
+  background: var(--color-surface, #1a252f);
+  border: 1px solid var(--color-border, #2c3e50);
+  border-radius: 12px;
+  padding: 24px 28px;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.bg-about-inner h2 {
+  margin: 0 0 12px;
+  color: var(--color-accent, #f39c12);
+}
+
+.bg-about-inner h3 {
+  margin: 16px 0 6px;
+  font-size: 0.95rem;
+}
+
+.bg-about-inner ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.bg-about-inner li {
+  margin-bottom: 6px;
+}
+
+.bg-about-inner .keys kbd {
+  background: rgba(236, 240, 241, 0.1);
+  border: 1px solid var(--color-border, #2c3e50);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-family: monospace;
+}
+
+#bg-about-close {
+  margin-top: 16px;
+  padding: 8px 20px;
+  border-radius: 6px;
+  border: none;
+  background: var(--color-accent, #f39c12);
+  color: var(--color-surface, #1a252f);
+  font-weight: 700;
+  cursor: pointer;
+}

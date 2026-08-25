@@ -13,6 +13,7 @@ import type { EventFeature } from "../types/dataset";
 import { buildSearchIndex, search } from "../lib/search";
 import { mountSidebar } from "./sidebar";
 import { MeasureTool } from "./measure";
+import { mountAbout } from "./about";
 
 const STORY_BOUNDS: L.LatLngBoundsExpression = [
   [22.15, 113.8],
@@ -134,6 +135,7 @@ export async function initMap(rootId = "map-root"): Promise<void> {
   buildSearchIndex(dataset);
   mountSearchBox(dataset, map);
   handleDeepLinks(dataset, map);
+  mountAbout();
 
   // ---- Sidebar（劇透／角色）----
   let currentMarkers: L.Layer[] = [];
