@@ -2835,6 +2835,6000 @@
         "review_status": "needs_review",
         "source": "bing_gang"
       }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_106",
+        "title": "A隊搜索隊七人遇難",
+        "description": "A隊搜索隊七名學生成員早前慘死於病者手下，少佐認為他們存活機率不大，且對付病爪弊多於利。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_107",
+        "title": "圖書館緊急會議",
+        "description": "因大舊失蹤，老賢召見主角與少佐到圖書館私人房間，三人討論大舊離營的原因並表示體諒。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_108",
+        "title": "大舊失蹤",
+        "description": "A隊學生遇難後翌日清晨，病者導師大舊整堂缺課並失蹤，帶走宿舍所有可用物資，估計是外出為學生報仇。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_109",
+        "title": "少佐處決間諜",
+        "description": "少佐在辦公室內以棒球鐵棍毆打間諜，最後手起棍落將其處決，並以白色小手帕蓋住其頭部。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_110",
+        "title": "決定尋找大舊",
+        "description": "少佐承認失職，請求主角協助一同尋回大舊，主角點頭答應。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_111",
+        "title": "發現另一名間諜的線索",
+        "description": "少佐在間諜身上搜出一封準備幫人送返總部的信，暗示大本營內尚有另一名間諜。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_112",
+        "title": "通報新病者「病爪」",
+        "description": "主角向少佐轉述犬京對新病者的描述，少佐判斷那是「病爪」，與其手下之前所見的相似。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_113",
+        "title": "間諜收購武器行動敗露",
+        "description": "間諜企圖在短時間內買斷大本營市集所有武器再帶離大本營，因動作太大而被少佐識破擒獲。",
+        "chapter": 17,
+        "chapter_name": "17",
+        "chapter_refs": [
+          17
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_114",
+        "title": "Bomi自毀雙目",
+        "description": "Bomi忍受唔到自己身上漸漸出現病者特徵紅點，攞利器自毀雙目，盲住向外亂跑。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_115",
+        "title": "Bomi變成病爪",
+        "description": "Bomi喺廣場中心開始異變，皮膚變焦黃、指甲突長，兩日之後成為如今嘅病爪，怨恨地將一切前來之人殺盡。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_116",
+        "title": "Bomi遭舌女夜襲",
+        "description": "一晚閃電照亮室內，眾人發現一隻四肢爬行嘅舌女待喺Bomi身邊，Bomi遭舌女舔擊後一夜陷入瘋狂。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_117",
+        "title": "「病爪係呢區嘅王」傳言真相",
+        "description": "「病爪係呢一區嘅王」只係犬京編出嘅大話，目的係令傳言流傳出去，唔好再有人嚟送死。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_118",
+        "title": "不破尚以虎刺拳殺死病者之傳聞",
+        "description": "據少佐所講，不破尚可以單單用虎刺拳扣去殺死病者。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_119",
+        "title": "困住病爪嘅提議",
+        "description": "主角認為殺唔到病爪，但覺得有辦法可以困住佢。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_120",
+        "title": "大霧中犬京與Bomi培養情感",
+        "description": "因街上異常大霧，犬京同Bomi幾日不敢外出，喺漆黑中靠聲音對話，短短時間內培養咗情感。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_121",
+        "title": "廣播召集瑜小六",
+        "description": "M闖入廣播室用廣播系統呼叫瑜小六兩分鐘內帶同開山刀到北門集合。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_122",
+        "title": "撿獲無線電對講機",
+        "description": "眾人撿獲被舌女舔死的男人緊握的無線電對講機，少佐判斷看似是聯絡人的對講機，其後對講機突然傳出男性的聲音。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_123",
+        "title": "更衣室擊殺舌女",
+        "description": "四人檢查UNIQLO更衣室時發現一隻正舔食男屍的舌女，少佐打斷其鄂骨、M以開山刀刺入其舌喉將其擊殺。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_124",
+        "title": "營救大舊行動",
+        "description": "M與少佐決定走出安全區，前往將軍澳中心及popcorn商場一帶營救失蹤的大舊。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_125",
+        "title": "犬京救Bomi",
+        "description": "大約一個月多前，犬京喺路上救咗一名正被病者襲擊嘅女生Bomi，兩人就此相識。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_126",
+        "title": "犬京敲響火警鐘救人",
+        "description": "犬京在popcorn商場戲院旁用拳頭打碎火警報警器的玻璃，以鐘聲擾亂病爪聽覺，並帶三人經商場接駁通道撤到對面廣場。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_127",
+        "title": "發現屍山與A班搜索隊遺體",
+        "description": "眾人在popcorn商場中央發現約三四十具屍體堆成的屍山，當中包括A班搜索隊七人，屍體均有明顯爪傷致命痕跡，部分死去已久卻未變成病者。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_128",
+        "title": "體育店大戰病爪",
+        "description": "M、少佐與大舊在商場二樓體育店與病爪纏鬥，M刺傷病爪耳朵後拋亂店內球類製造聲響擾亂其聽覺，三人從二樓跳下屍山卸力逃生。",
+        "chapter": 18,
+        "chapter_name": "18",
+        "chapter_refs": [
+          18
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_129",
+        "title": "不良人送人頭「回禮」",
+        "description": "營救大舊一星期後，有人喺大本營北門外放置五個人頭，嘴部塞住寫有「不良人回禮」嘅紙條，死者為前日出發嘅精銳搜索隊成員，標誌住不良人復仇嘅開展。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_130",
+        "title": "冒認第四隊回覆無線電",
+        "description": "廣場電梯傳來腳步聲後，少佐打開無線電對講機，用暗號「不良無道」冒認第四隊成員，令對方確認自己人並表示正向銀行移動。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_131",
+        "title": "少佐與敘述者宿舍飲酒傾談",
+        "description": "少佐因大本營面對嘅壓力而苦悶，叫敘述者上佢宿舍飲酒，訴說糧食缺乏、新型病者、外出受不良人埋伏等重擔。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_132",
+        "title": "廣播系統定時通報危險區域",
+        "description": "大舗通報新病者資訊後，大本營廣播系統每隔兩小時知會一次倖存者不建議前往嘅區域。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_133",
+        "title": "引病爪入銀行計劃",
+        "description": "M提議用綁住鬧鐘等發聲物嘅遙控車，引依賴聽覺嘅病爪好似捉波嘅Ricky咁跟入銀行，再落閘困住佢，三人決定還犬京人情幫手。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_134",
+        "title": "敘述者提議離開大本營",
+        "description": "敘述者向少佐表示一早覺得大本營唔可以長久營運落去，並提議「走」（離開大本營）。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_135",
+        "title": "犬京道別",
+        "description": "犬京協助困住不良人後，婉拒M邀請佢返大本營，表示始終鐘意自己一個，與眾人道別。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_136",
+        "title": "玩具店錄音人偶事件",
+        "description": "犬京喺玩具店發現電動人偶播出「好凍，救我救我」，與之前喺將軍澳中心聽到嘅女聲相同；人偶背部有REC錄音掣，M懷疑有人自他們首次入將軍澳中心起已拎住公仔暗中監視並想引佢哋過去。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_137",
+        "title": "發現新病者「病爪」與「病童」",
+        "description": "經過某次行動後，眾人發現咗新病者「病爪」，並從不良人口中得知另一種病者「病童」。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_138",
+        "title": "醫療室驗血檢查",
+        "description": "M同大舊被病爪抓傷後去醫療室快速抽血，Dr.D檢視後指血液大致搵唔到感染痕跡，但對M露出深長詭笑，令M渾身不安。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_139",
+        "title": "銀行外埋伏不良人",
+        "description": "五名不良人到達後派三人彎身入銀行，四人按少佐戰術突襲：犬京撳落閘制困住入面三人，大舊同少佐對付出面兩人，少佐用棒球棍親手殺死兩名不良人。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_140",
+        "title": "飯堂臭雞蛋晚餐",
+        "description": "眾人喺飯堂照瑜小六所講學日本人食生雞蛋伴白飯，但雞蛋一開即陣陣惡臭，反映大本營物資缺乏、食糧消耗嚴重。",
+        "chapter": 19,
+        "chapter_name": "19",
+        "chapter_refs": [
+          19
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_141",
+        "title": "入營心理測驗",
+        "description": "新入大本營嘅人要接受一位社工嘅心理測驗，M入營時亦做過。",
+        "chapter": 20,
+        "chapter_name": "20",
+        "chapter_refs": [
+          20
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_142",
+        "title": "少佐打斷老賢條腿",
+        "description": "為免老賢被其他不良人殺害，少佐親手用棒球棍打斷老賢條腿，扮作拋下佢自生自滅，之後深感愧疚。",
+        "chapter": 20,
+        "chapter_name": "20",
+        "chapter_refs": [
+          20
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_143",
+        "title": "尚德商場血戰",
+        "description": "少佐同四個不良人同伴喺尚德商場遭遇八隻集體行動嘅舌女，血戰後同伴全數死亡，少佐被撞落一樓、腳插中尖刺木板，動彈不得等死。",
+        "chapter": 20,
+        "chapter_name": "20",
+        "chapter_refs": [
+          20
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_144",
+        "title": "活人貢品幕後主腦疑雲",
+        "description": "送活人貢品入病窩並非大本營高層策劃，少佐同老賢懷疑幕後主腦係Dr.D，但因無證據且如今再無此事而作罷。",
+        "chapter": 20,
+        "chapter_name": "20",
+        "chapter_refs": [
+          20
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 3,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_145",
+        "title": "老賢指派少佐監視M",
+        "description": "少佐承認老賢早在病腦事件前已派他跟蹤監視M，直到發現M去病窩救夏晴先撤下戒心。",
+        "chapter": 20,
+        "chapter_name": "20",
+        "chapter_refs": [
+          20
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_146",
+        "title": "老賢留守商場到黎明",
+        "description": "商場血戰後，老賢嘅同伴天黑前離開，老賢獨自留喺空曠商場陪伴重傷嘅少佐直到黎明，期間病者無接近佢哋。",
+        "chapter": 20,
+        "chapter_name": "20",
+        "chapter_refs": [
+          20
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_147",
+        "title": "M收到無名卡片邀請",
+        "description": "M在公眾休息室熟睡期間，有人在他手臂旁放下一封無名卡片，邀請他前往D橦大樓六樓608號房。",
+        "chapter": 21,
+        "chapter_name": "21",
+        "chapter_refs": [
+          21
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_148",
+        "title": "M與Dr.D於608號房共進晚餐",
+        "description": "M應卡片之邀前往608號房，Dr.D以紅酒、蠟燭和香煎牛排款待他，二人相對用餐。",
+        "chapter": 21,
+        "chapter_name": "21",
+        "chapter_refs": [
+          21
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_149",
+        "title": "回憶：鬼樹下初遇阿晴",
+        "description": "M夢中回憶起學生時代在鬼樹下安慰被欺負的哨牙女生，得知她名叫阿晴，這段往事令他此後對帶「晴」字的女生特別敏感。",
+        "chapter": 21,
+        "chapter_name": "21",
+        "chapter_refs": [
+          21
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_150",
+        "title": "夏晴被當死人運出醫療室",
+        "description": "少佐指出，夏晴當時身在醫療室卻被人當死人運出去，此事十居其九與Dr.D脫不了關係。",
+        "chapter": 21,
+        "chapter_name": "21",
+        "chapter_refs": [
+          21
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_151",
+        "title": "Dr.D招攬M抽取病爪血液被拒",
+        "description": "Dr.D請M吃牛排並要求他幫忙抽取病爪的血液樣本以完成研究，M以自己冇義務為由拒絕並離開。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_152",
+        "title": "M以整盒香煙換購市集全部鬧鐘",
+        "description": "M用之前摧毀病窩後掠奪回來、儲放在大本營倉庫的一盒香煙，向市集大叔換購檔內全部購檔內全部鬧鐘（鬧鐘沒有電池）。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_153",
+        "title": "M接下抽血任務並取得D1藥丸",
+        "description": "一星期後M主動找Dr.D，答應抽取病爪血液樣本，獲發一支空針筒及兩粒聲稱可在藥效內不受病者感染、名叫D1的藥丸。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_154",
+        "title": "M日落後會見黑商王達尼購買電池",
+        "description": "M在太陽西下後於李惠利大樓旁垃圾站等候約一小時，遇見黑商王達尼，打算用香煙換購大量電池，以便運作大量鬧鐘製造固定嘈音來對付病爪抽血。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_155",
+        "title": "九包香煙換電池交易",
+        "description": "主角與王達尼在垃圾場討價還價，由十包壓價至八包，最終以一口價九包香煙換取整袋電池成交。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_156",
+        "title": "大本營物資短缺惡化",
+        "description": "大本營又撐過一星期，物資食糧繼續嚴重短缺，幾乎每人每餐只分到一塊小餐包和一小杯水；Dr.D則過著喝紅酒、煎牛排的奢華生活。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_157",
+        "title": "改裝鬧鐘",
+        "description": "主角在宿舍把電池逐一裝入鬧鐘測試，得出至少十個會響的成品，並全部較到他指定的時間備用。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_158",
+        "title": "第一次摧毀病窩",
+        "description": "此前曾發生第一次摧毀病窩的行動，天明有份參與並很回味當時的回報，但主角勸他不要再出大本營。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_159",
+        "title": "老賢委派M做間諜監視Dr.D",
+        "description": "老賢要求M暫時替Dr.D做事、成為間諜套取其所有研究資料，以一顆糖果象徵M接受任務，並囑咐連少佐也不可以告知。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_160",
+        "title": "老賢指派監視Dr.D",
+        "description": "老賢秘密要求主角監視醫生Dr.D做間諜，主角推斷老賢掌握未公開的資訊，並認為先取得Dr.D信任最重要。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_161",
+        "title": "老賢揭心理測驗真相並道歉",
+        "description": "老賢在圖書館向M道歉，解釋當日心理測驗原是用來測試新入住者中有無混入「不良人」的間諜，並已證實M無辜。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_162",
+        "title": "舌女窺視主角",
+        "description": "主角站在天台觀景時，被一隻藏於幼稚園暗角窗口的舌女長時間凝視，被發現後舌女裂嘴一笑俯身消失，令主角渾身發毛。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_163",
+        "title": "阿玲在Dr.D房外質問並揮拳襲擊M",
+        "description": "M帶著針筒和藥丸離開Dr.D房間時被阿玲攔住質問，阿玲揪住他的頸領推到牆邊，冷不防揮拳被他俯身躲開，拳头打中牆身。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_164",
+        "title": "阿玲跟蹤M被埋伏捉住",
+        "description": "M隔天發現被人跟蹤，由C橦走到A橦後在樓梯間轉角位埋伏，一手捉住跟蹤者——社工阿玲。",
+        "chapter": 22,
+        "chapter_name": "22",
+        "chapter_refs": [
+          22
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_165",
+        "title": "popcorn商場放置鬧鐘設局",
+        "description": "因病爪不在屍堆山，主角在商場一、二樓放置鬧鐘作誘餌，並耐心等候，期間以手語與小六溝通。",
+        "chapter": 23,
+        "chapter_name": "23",
+        "chapter_refs": [
+          23
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_166",
+        "title": "屍堆山蠢蠢欲動",
+        "description": "瑜小六不明白手語示意，不小心衝口而出出了聲，商場內堆疊的屍堆山隨即忽然蠢蠢欲動。",
+        "chapter": 23,
+        "chapter_name": "23",
+        "chapter_refs": [
+          23
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_167",
+        "title": "瑜小六首次隨主角步出大本營",
+        "description": "出發前一天主角在天台答應帶瑜小六出去一次，翌日二人帶同兩把開山刀通過北門守衛，正式步出大本營。",
+        "chapter": 23,
+        "chapter_name": "23",
+        "chapter_refs": [
+          23
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_168",
+        "title": "行人隧道擊殺大耳",
+        "description": "主角站於隧道入口以開山刀拍打地面發聲引大耳靠近，瑜小六從旁衝出把開山刀刺入其大耳，大耳耳水狂流，最終在痛苦中死去。",
+        "chapter": 23,
+        "chapter_name": "23",
+        "chapter_refs": [
+          23
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_169",
+        "title": "Dr.D揭示M免疫與秘密任務",
+        "description": "Dr.D向M確認他沒有出紅點、不會受感染變成病者，並詭異地低聲追問有沒有把任務告知小六，又透露早已在M的袋中找到病爪血液。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 3,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_170",
+        "title": "M被舌女舔傷毀容",
+        "description": "舌女飛撲壓住M並舔其右邊臉頰，造成如火舌般刺熱的劇痛，事後證實為深二度灼傷需用繃帶包住臉部。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_171",
+        "title": "三隻病者圍攻與毒氣瀰漫",
+        "description": "鬧鐘聲引來舌女、大鼻、大耳三隻病者同時圍攻M和小六，大鼻噴出的毒氣令兩人陷入濃煙之中難以逃脫。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_172",
+        "title": "吞服D-1藥丸",
+        "description": "M在白濃煙霧中吞下Dr.D交給他的D-1藥丸賭一把，隨即眼前一黑，醒來時已被送到大本營D橦的隔離病房。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_173",
+        "title": "抽取病爪血液",
+        "description": "M取出Dr.D給他的針筒，刺入病爪另一邊耳朵成功抽出血液樣本，完成Dr.D交託的任務。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_174",
+        "title": "擊殺舌女與大耳",
+        "description": "M一手扯住舌女濕油的頭髮，用刀刺穿其早受過傷的頸喉令它死亡，再發狂狂斬大耳直至刀鋒刺穿其耳膜。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_175",
+        "title": "病爪埋伏屍堆突襲小六",
+        "description": "病爪原本埋藏在商場一樓的屍堆裡，突然跳出並以舞蹈者般的姿態衝向二樓的小六。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_176",
+        "title": "鬧鐘誘敵之計",
+        "description": "M設定鬧鐘作響吸引病爪，令它多次從二樓跳落一樓撞擊地面致神志不清，再與小六重複此舉消耗病爪體力。",
+        "chapter": 24,
+        "chapter_name": "24",
+        "chapter_refs": [
+          24
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_177",
+        "title": "Dr.D贈送瘟疫醫生套裝",
+        "description": "Dr.D親自將他最珍貴的中世紀歐洲瘟疫醫生鳥嘴面具與全黑衣袍送贈給M，並指鳥嘴內放藥草薄荷可防屍臭及大鼻毒氣攻擊。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_178",
+        "title": "M假死計劃",
+        "description": "M主動提議假死，大本營醫療部對外宣稱他已死去並稱屍體已被處理，實際上他一直躺在隔離病房養傷，只有老賢和Dr.D知道真相。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.97,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_179",
+        "title": "M康復離開隔離病房",
+        "description": "在沒見太陽約三個月零十二日後，M穿上瘟疫醫生套裝真正離開病床，跟馬姑娘步出D橦大樓呼吸新鮮空氣。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_180",
+        "title": "傳道者宣揚病王信仰",
+        "description": "一名傳道者在大本營高呼人類應信奉病者與病王、稱教主不久會來打救，其後被大本營守衛趕走。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_181",
+        "title": "大本營分配補給",
+        "description": "大本營實施配給制，每人限領半塊小麥包和125毫升水，老弱婦孺優先，成年男士往左邊排隊。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_182",
+        "title": "橙汁試毒",
+        "description": "M藉口邀馬姑娘一同飲Dr.D私人請客的橙汁，實際想測試橙汁中有沒有毒，結果看來沒毒。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_183",
+        "title": "瑜小六天台放白花",
+        "description": "瑜小六上天台放下一枝白色花束並嘆氣後默默離開，似在悼念已「死去」的M。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_184",
+        "title": "病腦研究論文被破壞",
+        "description": "馬姑娘提到原本有一篇關於病腦的研究論文，病腦是唯一有智慧的病者，但研究某日被人破壞。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_185",
+        "title": "賴三發現寶琳倖存點",
+        "description": "老賢探訪M時告知，安區老前輩賴三領隊出外搜索時意外發現近寶琳一帶的物資倖存點。",
+        "chapter": 25,
+        "chapter_name": "25",
+        "chapter_refs": [
+          25
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_186",
+        "title": "主角以四包香煙向王達尼買下黑色布質雨傘",
+        "description": "主角用四包香煙向王達尼購入一把黑色布質雨傘，認為若把傘頭尖端改成尖刀，會是最適合對付病者的武器。",
+        "chapter": 26,
+        "chapter_name": "26",
+        "chapter_refs": [
+          26
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_187",
+        "title": "主角雨中送阿寶返回孤兒所",
+        "description": "主角在露天停車場為獨坐雨中、身上有被人欺負痕跡的阿寶撐傘擋雨，並送他返回七樓的孤兒所。",
+        "chapter": 26,
+        "chapter_name": "26",
+        "chapter_refs": [
+          26
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_188",
+        "title": "有人行刺董倫慘死收場",
+        "description": "曾有人夠膽拎菜刀衝上去殺董倫，但都慘死收場，其中一人被董倫在九樓推落街，當場跌死。",
+        "chapter": 26,
+        "chapter_name": "26",
+        "chapter_refs": [
+          26
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_189",
+        "title": "董倫到孤兒所嘲諷孤兒為未來童工",
+        "description": "穿狐狸毛皮褸、戴高帽名錶的董倫到孤兒所前，嘲笑孩子是大本營的未來童工及未來私人會所（妓院）的來源，與怒視他的阿玲對峙後優雅離去。",
+        "chapter": 26,
+        "chapter_name": "26",
+        "chapter_refs": [
+          26
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_190",
+        "title": "董倫提議將孤兒所變妓院、孤兒變童工",
+        "description": "董倫一直主張大本營對外開放，想把孤兒所變做妓院換取物資收入，孤兒全部變做童工幫輕人力開支；老賢拖延未敢批准。",
+        "chapter": 26,
+        "chapter_name": "26",
+        "chapter_refs": [
+          26
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_191",
+        "title": "M提議設立學堂",
+        "description": "M在會議上提議設立學堂教育細路，以制衡董倫改建妓院的方案，獲席上富商貴婦支持討論。",
+        "chapter": 27,
+        "chapter_name": "27",
+        "chapter_refs": [
+          27
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_192",
+        "title": "大本營高層會議：孤兒所改建議案",
+        "description": "高層會議決定：七樓孤兒所改建為「董倫私人會所」，六樓６０１室至６０６室改建為學堂並派兩名老師教育十六歲以下孩童，「童工制度」留待下次會議討論。",
+        "chapter": 27,
+        "chapter_name": "27",
+        "chapter_refs": [
+          27
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_193",
+        "title": "董倫九樓慶祝派對",
+        "description": "會議結束後，董倫宣佈為慶祝私人會所改建計劃成功，聽晚九點在九樓舉行派對。",
+        "chapter": 27,
+        "chapter_name": "27",
+        "chapter_refs": [
+          27
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_194",
+        "title": "主角帶孤兒領補給",
+        "description": "主角以老賢給的果汁糖利誘哭鬧的孤兒排隊，帶他們到分配站領取食糧和食水，並斥責抱怨的小孩大人。",
+        "chapter": 28,
+        "chapter_name": "28",
+        "chapter_refs": [
+          28
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_195",
+        "title": "大本營議案通過",
+        "description": "大本營昨晚通過議案，決定起學堂以平衡兩邊細路的利益，之後還會推行「童工政策」，孤兒所物品隨即被搬走。",
+        "chapter": 28,
+        "chapter_name": "28",
+        "chapter_refs": [
+          28
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_196",
+        "title": "果汁糖賄賂看守入八樓",
+        "description": "主角以一顆老賢才派得的果汁糖交給八樓鐵閘看守，藉此獲准進入八樓，事後只餘三顆果汁糖。",
+        "chapter": 28,
+        "chapter_name": "28",
+        "chapter_refs": [
+          28
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_197",
+        "title": "董倫慶祝會",
+        "description": "董倫將於聽晚在大本營八、九樓舉行慶祝會，出席者必須持有邀請卡，主角的邀請卡已被阿玲取用。",
+        "chapter": 28,
+        "chapter_name": "28",
+        "chapter_refs": [
+          28
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_198",
+        "title": "阿玲失蹤",
+        "description": "阿玲捏皺了主角的邀請卡並疑似以此進入八樓找董倫後失去蹤影，至黃昏仍未返回學堂。",
+        "chapter": 28,
+        "chapter_name": "28",
+        "chapter_refs": [
+          28
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_199",
+        "title": "八樓外牆攀爬驚魂",
+        "description": "主角腰間綁上扯下的LED燈線作安全措施，沿八樓欄杆外攀爬往大宅後方，開窗時被突增的風勢吹至險些墮下，靠雨傘柄勾住牆身化險為夷進入大宅。",
+        "chapter": 29,
+        "chapter_name": "29",
+        "chapter_refs": [
+          29
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_200",
+        "title": "十一點潛入董倫大宅行動",
+        "description": "主角與王達尼趁董倫十一點舉行慶祝會、眾人前往活動室之際，逆向而行潛入董倫大宅。",
+        "chapter": 29,
+        "chapter_name": "29",
+        "chapter_refs": [
+          29
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_201",
+        "title": "菁英私藏全營食糧",
+        "description": "大本營建立之初，約20%的菁英把最貴價的美酒食物搬上八、九樓私藏，享用原本應平均分配給全營的100%食糧。",
+        "chapter": 29,
+        "chapter_name": "29",
+        "chapter_refs": [
+          29
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_202",
+        "title": "三人被困上層躲藏過夜",
+        "description": "逃至樓梯時發現鐵閘已被鐵鏈鎖上無法離開，加上阿玲樣貌易被上層權貴認出，三人躲在一間擺放雜物的小房間內過一夜。",
+        "chapter": 30,
+        "chapter_name": "30",
+        "chapter_refs": [
+          30
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_203",
+        "title": "地獄轉盤遊戲",
+        "description": "董倫在慶祝會餘興節目舉辦「地獄轉盤遊戲」，迫一對十歲孖仔在圍板場地中求生，手下掉下小刀、水管棍、斧頭、小錘子等武器，轉盤最後停在類似「狼」的圖案。",
+        "chapter": 30,
+        "chapter_name": "30",
+        "chapter_refs": [
+          30
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_204",
+        "title": "潛入董倫大宅救阿玲",
+        "description": "主角與王達尼潛入董倫大宅，主角誤踩壓力板觸發機關令房門自動關上並播出音樂盒錄音，其後為阿玲鬆繩救她離開。",
+        "chapter": 30,
+        "chapter_name": "30",
+        "chapter_refs": [
+          30
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_205",
+        "title": "與八字鬍青年的戰鬥",
+        "description": "主角以雨傘、王達尼以水果和鐵盤、阿玲從後抱住青年雙臂，合力擊敗持西洋劍的八字鬍青年後逃離大宅。",
+        "chapter": 30,
+        "chapter_name": "30",
+        "chapter_refs": [
+          30
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_206",
+        "title": "阿玲被董倫綁架",
+        "description": "阿玲原本只想打董玲原本只想打董倫幾拳，卻被他夠膽在大本營對人落手，綁架並囚禁在其大宅房間。",
+        "chapter": 30,
+        "chapter_name": "30",
+        "chapter_refs": [
+          30
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_207",
+        "title": "兩個孩子刺死熊男人",
+        "description": "熊男人對小朋友放低警覺時，兩個十歲孩子用小刀連環撕斬其腹部數刀，令熊男人倒伏地上、深紅血液慢慢滲出而死。",
+        "chapter": 31,
+        "chapter_name": "31",
+        "chapter_refs": [
+          31
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_208",
+        "title": "第一關：三隻杜賓犬襲擊",
+        "description": "董倫拉動轉盤後宣布第一場出戰，放出三隻成年杜賓犬攻擊四人；敘述者用雨傘擊殺，阿玲最終用小刀刺頸殺死餘下嘅杜賓。",
+        "chapter": 31,
+        "chapter_name": "31",
+        "chapter_refs": [
+          31
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_209",
+        "title": "第二關：熊男人出場襲擊",
+        "description": "轉盤停喺熊頭圖案後，身高兩米嘅熊頭男人出場襲擊眾人，先一拳打中阿玲腹部，再徒手捏住阿玲頸子舉到半空，其後又以同樣方法對付敘述者。",
+        "chapter": 31,
+        "chapter_name": "31",
+        "chapter_refs": [
+          31
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_210",
+        "title": "Dr.D提議狩獵與研究分工",
+        "description": "Dr.D提議以後主角負責狩獵病者、佢自己負責研究病者。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_211",
+        "title": "Dr.D發現病爪弱點係陽光",
+        "description": "Dr.D經過三個月研究病爪血，發現病爪細胞基因對陽光極脆弱，一照就會好似雞蛋咁碎開。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_212",
+        "title": "主角收割病爪頭顱",
+        "description": "主角用防反光小刀收割病爪身體部位，割低個頭作「戰利品」交俾Dr.D。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_213",
+        "title": "主角救Leo同阿宇",
+        "description": "主角用鬧鐘引開病爪救咗Leo同重傷嘅阿宇，指出佢身上冇紅點唔會受感染，並叫他哋跟自己返大本營。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_214",
+        "title": "商場再現不明女聲",
+        "description": "商場內再次出現不明女聲呼救，主角憑直覺認為追尋來源只會自招死亡而選擇離開。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_215",
+        "title": "王達尼偷紅寶石頸鏈",
+        "description": "王達尼偷咗一條紅寶石頸鏈，話拎嚟送俾意中人。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_216",
+        "title": "病爪被鬧鐘引出商場曬死",
+        "description": "主角打開鬧鐘響鬧引病爪衝出商場平台，病爪喺烈日燒灼下倒臥死亡。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_217",
+        "title": "病爪頭目光異變",
+        "description": "主角離開醫療室前回望，覺得密封膠袋入面嘅病爪頭目光比收割前變得更兇殘。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_218",
+        "title": "老賢監視Dr.D嘅任務",
+        "description": "主角想起自己肩負老賢監視Dr.D嘅任務，感到猶疑不決。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_219",
+        "title": "老賢補償果汁糖",
+        "description": "主角見完老賢出辦公室時口袋多咗一顆果汁糖，補償佢昨晚因賄賂失去嗰顆。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_220",
+        "title": "董倫放走主角等人",
+        "description": "董倫聽完手下耳語後突然停止轉盤遊戲，打開鐵閘放走主角、阿玲同兩個孩子，態度反常得詭異。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_221",
+        "title": "阿玲向主角道歉",
+        "description": "阿玲為琴晚嘅事向主角道歉，主角稱佢係自己喺大本營見過最勇敢嘅人。",
+        "chapter": 32,
+        "chapter_name": "32",
+        "chapter_refs": [
+          32
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_222",
+        "title": "大本營謠言散播",
+        "description": "帶病爪頭返營之後，大本營人心惶惶，謠言如病毒般快速散播，有人稱「我」係「不良人」派嚟嘅內奸，目的係感染全營嘅人。",
+        "chapter": 33,
+        "chapter_name": "33",
+        "chapter_refs": [
+          33
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_223",
+        "title": "天台水瓶之交",
+        "description": "強風吹走瑜小六放在地上嘅水瓶地上嘅水瓶滾到「我」腳旁，「我」拾起交還俾佢，瑜小六驚恐咁道謝並道歉話營內人叫佢小心「我」，之後開始同「我」搭話。",
+        "chapter": 33,
+        "chapter_name": "33",
+        "chapter_refs": [
+          33
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_224",
+        "title": "少佐收押盤問事件",
+        "description": "「我」執行Dr.D任務帶病爪頭返營後，以「攜帶病者身體入營內嘅罪名」被暫時收押拘留所，少佐以棒球棍威嚇盤問，最終老賢回覆「立即放走我」，夜晚先獲釋。",
+        "chapter": 33,
+        "chapter_name": "33",
+        "chapter_refs": [
+          33
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_225",
+        "title": "瑜小六剖白累死之人",
+        "description": "瑜小六喺天台剖白自己幾個月前「累死」咗一個人，並話上天台係為咗記念佢；「我」心知嗰個人正正就係自己。",
+        "chapter": 33,
+        "chapter_name": "33",
+        "chapter_refs": [
+          33
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 3,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_226",
+        "title": "老賢演講與學堂導師任命",
+        "description": "老賢舉行兩小時演講振奮人心，宣佈大本營學堂即將成立並逐一介紹導師，最後介紹「我」出任「病者攻擊學」導師，並為帶頭入營一事公開背鍋。",
+        "chapter": 33,
+        "chapter_name": "33",
+        "chapter_refs": [
+          33
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_227",
+        "title": "Dr.D委託搜集新型病者任務",
+        "description": "Dr.D委託主角M喺半年內出外發掘至少五隻新型病者並割取身體部份返嚟，指明可搵C座攝影大樓嘅人幫手，成功後先會透露真正目的。",
+        "chapter": 34,
+        "chapter_name": "34",
+        "chapter_refs": [
+          34
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_228",
+        "title": "發現錄音娃娃女孩嘅照片",
+        "description": "主角喺攝影大樓放大舌女照片時，發現右上角小女孩手上嘅娃娃，疑似就係佢之前喺廣場拎到嘅錄音娃娃，令佢心中一寒。",
+        "chapter": 34,
+        "chapter_name": "34",
+        "chapter_refs": [
+          34
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_229",
+        "title": "老賢演講大典暨搜索隊成立",
+        "description": "老賢喺演講大典上宣布以自願制招募搜索隊員，半年內要訓練出精銳搜索隊應付資源問題並擴張對外搜索範圍，主角M係負責訓練嘅導師之一。",
+        "chapter": 34,
+        "chapter_name": "34",
+        "chapter_refs": [
+          34
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_230",
+        "title": "主角替大本營處理病爪",
+        "description": "主角此前曾幫賴三的大本營處理了病爪，因此全營人都欠他一個人情。",
+        "chapter": 35,
+        "chapter_name": "35",
+        "chapter_refs": [
+          35
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_231",
+        "title": "主角首日任教「病者攻擊學」",
+        "description": "一星期後，主角開始任教「病者攻擊學」，首堂向三十多名青少年學生教授舌女的知識。",
+        "chapter": 35,
+        "chapter_name": "35",
+        "chapter_refs": [
+          35
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_232",
+        "title": "實戰課三人一組",
+        "description": "主角宣布實戰課三人一組後，八樓子弟與低層子弟各自跟同層的人一組。",
+        "chapter": 35,
+        "chapter_name": "35",
+        "chapter_refs": [
+          35
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_233",
+        "title": "賴三解說病童並指點北賢",
+        "description": "賴三向主角解釋懷疑相中小女孩是病者的原因，並指點他前往將軍澳華人永遠墳場找北賢取得進一步情報。",
+        "chapter": 35,
+        "chapter_name": "35",
+        "chapter_refs": [
+          35
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.96,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_234",
+        "title": "香煙貨幣用光",
+        "description": "主角用作貨幣的香煙已全部用光，因此要專心教書一段時間。",
+        "chapter": 35,
+        "chapter_name": "35",
+        "chapter_refs": [
+          35
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_235",
+        "title": "公仔代家人邀請主角食飯",
+        "description": "下課後公仔返回學堂，表示家人為感激主角而想請他食飯；主角表明不會去八樓，公仔遂提議家人可在七樓、六樓或五樓租房。",
+        "chapter": 36,
+        "chapter_name": "36",
+        "chapter_refs": [
+          36
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_236",
+        "title": "堂上分組扮演病者演練",
+        "description": "主角把學生分成十組，每組一人扮病者、兩人扮人類進行對抗演練，不認真的學生會被他用雨傘敲頭。",
+        "chapter": 36,
+        "chapter_name": "36",
+        "chapter_refs": [
+          36
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_237",
+        "title": "學生背後議論主角外貌",
+        "description": "大舊告知主角，學生們喜歡在背後討論他，稱他為「長髮鳥嘴怪人」、「黑袍死神」之類。",
+        "chapter": 36,
+        "chapter_name": "36",
+        "chapter_refs": [
+          36
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_238",
+        "title": "瑜小六演練中擊敗灰髮兄妹",
+        "description": "演練中瑜小六飾演病者撲向兩兄妹，仰後避開攻擊後把娃娃壓倒地上，令兩兄妹徹底落敗。",
+        "chapter": 36,
+        "chapter_name": "36",
+        "chapter_refs": [
+          36
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_239",
+        "title": "主角借公仔試毒",
+        "description": "主角喺晚宴上先切牛排餵公仔食、再遞紅酒畀公仔飲，藉口話唔慣太生太澀，實際係想公仔幫手試吓有冇毒。",
+        "chapter": 37,
+        "chapter_name": "37",
+        "chapter_refs": [
+          37
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_240",
+        "title": "公仔一家設宴款待主角",
+        "description": "公仔一家按主角要求租咗八樓以下嘅房間（四樓活動室），以水果、美酒及香煎T骨扒宴請主角，全家四口恭敬迎接。",
+        "chapter": 37,
+        "chapter_name": "37",
+        "chapter_refs": [
+          37
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_241",
+        "title": "公仔之父質疑大本營前景",
+        "description": "公仔之父席間追問主角覺得大本營半年之後仲維唔維持得到，並指不論制度定食糧都好難，話中似有暗示。",
+        "chapter": 37,
+        "chapter_name": "37",
+        "chapter_refs": [
+          37
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_242",
+        "title": "上坡路遭遇普通病者",
+        "description": "「我」喺通往將軍澳華人永遠墳場嘅上坡路附近，遇到一名全身佈滿紅點、企喺樹後以微笑窺視窺視嘅普通病者，猶豫應該上前對付定拔腿跑走。",
+        "chapter": 38,
+        "chapter_name": "38",
+        "chapter_refs": [
+          38
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_243",
+        "title": "八樓內奸陰謀推斷",
+        "description": "「我」同老賢推斷不良人內奸已混入大本營一段時間並取得八樓大部份權貴支持，計劃喺適當時機拆開大門障礙結構、中斷重要設施電源引不良人攻入；老賢叫「我」搵出另一個內奸。",
+        "chapter": 38,
+        "chapter_name": "38",
+        "chapter_refs": [
+          38
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 3,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_244",
+        "title": "獨自前往將軍澳華人墳場",
+        "description": "「我」喺翌日獨自離開安全區，由東門向北行去將軍澳華人墳場，打算喺凌晨搵北賢購買新型病者情報。",
+        "chapter": 38,
+        "chapter_name": "38",
+        "chapter_refs": [
+          38
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_245",
+        "title": "馬德梵家宴拉攏",
+        "description": "「我」獲邀到馬德梵屋企食飯，馬德梵整晚試探「我」立場並引導「我」認知「不良人」理念，想拉攏「我」支持佢哋。",
+        "chapter": 38,
+        "chapter_name": "38",
+        "chapter_refs": [
+          38
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_246",
+        "title": "三日後集合出發往市集",
+        "description": "三天後六名學員在學堂集合，Chirs及時趕到，主角帶眾人前往大本營市集揀武器。",
+        "chapter": 39,
+        "chapter_name": "39",
+        "chapter_refs": [
+          39
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_247",
+        "title": "南愚提出以相片換病童情報",
+        "description": "南愚不收物件作交易，要求主角到靈實醫院五樓宿舍拉開每個抽屜，找出一張有南愚樣貌的相片交回，便會講出病童的情報。",
+        "chapter": 39,
+        "chapter_name": "39",
+        "chapter_refs": [
+          39
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_248",
+        "title": "與北賢交涉失敗",
+        "description": "主角以果汁糖向北賢購買病童資料被拒，北賢堅持要十包即溶咖啡，雙方交涉失敗，主角空手而回。",
+        "chapter": 39,
+        "chapter_name": "39",
+        "chapter_refs": [
+          39
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_249",
+        "title": "遴選六名學生出外實習",
+        "description": "主角在學堂宣布選出瑜小六、阿文、奧迪、Chirs、公仔和娃娃共六人，一星期後出外實習殺病者，並任命瑜小六為小隊長。",
+        "chapter": 39,
+        "chapter_name": "39",
+        "chapter_refs": [
+          39
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.96,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_250",
+        "title": "市集選購裝備",
+        "description": "老師讓阿文、Chirs、奧迪及兩兄妹在市集自行挑選裝備，由他評價實用性並付款。",
+        "chapter": 40,
+        "chapter_name": "40",
+        "chapter_refs": [
+          40
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_251",
+        "title": "為兩兄妹分配物資",
+        "description": "老師索性為公仔和娃娃兩兄妹分配物品：娃娃拿急救包，公仔拿電筒屆時幫眾人照路。",
+        "chapter": 40,
+        "chapter_name": "40",
+        "chapter_refs": [
+          40
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_252",
+        "title": "王達尼以短劍試砍圓盾",
+        "description": "王達尼取出精銳短劍砍向瑜小六手上的圓形鐵盾，發出幾乎震耳欲鳴的耳欲鳴的鏗聲，證明武器是真材實料。",
+        "chapter": 40,
+        "chapter_name": "40",
+        "chapter_refs": [
+          40
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_253",
+        "title": "三天武器操作與陣位訓練",
+        "description": "出發前三天，瑜小六充當領隊安排各人負責位置，並訓練突發陣容變換、攻擊病者致命部位等項目。",
+        "chapter": 41,
+        "chapter_name": "41",
+        "chapter_refs": [
+          41
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_254",
+        "title": "主角秘密觀察學生訓練",
+        "description": "主角放任學生三天自由活動，但於第二日偷偷到活動室附近偷看六人的訓練，六人全部到齊並視瑜小六為領導。",
+        "chapter": 41,
+        "chapter_name": "41",
+        "chapter_refs": [
+          41
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_255",
+        "title": "以兩顆果汁糖購入短劍和圓盾送給瑜小六",
+        "description": "主角原本質疑未殺過病者的瑜小六配不上貴重武器，最終以兩顆果汁糖向王達尼買下短劍和圓盾，並謊稱是黑商免費相贈。",
+        "chapter": 41,
+        "chapter_name": "41",
+        "chapter_refs": [
+          41
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_256",
+        "title": "六人搭手儀式",
+        "description": "在瑜小六帶領下，六名學生進行同伴間的「搭手儀式」，最終六個人手貼手搭在一起。",
+        "chapter": 41,
+        "chapter_name": "41",
+        "chapter_refs": [
+          41
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_257",
+        "title": "大本營以果汁糖作貨幣交易",
+        "description": "大本營以果汁糖作交易貨幣，兩顆果汁糖可換取防燙傷藥膏或短劍加圓盾，藥品價值遠高於咖啡、肉類、香煙、電子零件或武器等物資。",
+        "chapter": 41,
+        "chapter_name": "41",
+        "chapter_refs": [
+          41
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_258",
+        "title": "盾牌上的「M」字之謎",
+        "description": "瑜小六的圓盾上畫有一個「M」字，她表示那不是自己英文名開頭，而是代表一個她十分尊敬的人。",
+        "chapter": 41,
+        "chapter_name": "41",
+        "chapter_refs": [
+          41
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_259",
+        "title": "搜查Dr.D宿舍發現病爪實驗記錄",
+        "description": "「我」趁Dr.D煎牛排期間搜查其宿舍，喺最後一間房發現病爪嘅實驗手札，記錄顯示病爪雜食、黑暗中傷口極速治癒、紫外光下會假死、不會複雜思考。",
+        "chapter": 42,
+        "chapter_name": "42",
+        "chapter_refs": [
+          42
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_260",
+        "title": "發現病爪頭部浮沉喺魚缸",
+        "description": "「我」揭開魚缸上嘅黑布，發現病爪嘅頭正浮沉喺水中，一旁有青蛙、金魚、蝦毛游動，魚缸玻璃面貼住「第３４６次實驗」紙條，缸底有大量被咬斷一半嘅動物屍骸。",
+        "chapter": 42,
+        "chapter_name": "42",
+        "chapter_refs": [
+          42
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_261",
+        "title": "確認新病者「病童」",
+        "description": "「我」向Dr.D報告暫時確認到有一種病者叫做「病童」，但其能力、弱點仲未清楚。",
+        "chapter": 42,
+        "chapter_name": "42",
+        "chapter_refs": [
+          42
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_262",
+        "title": "關閉紫外光燈測試病爪",
+        "description": "「我」按熄魚缸紫外光燈做測試，病爪隨即發出喝水咀嚼怪聲並猛烈撞擊魚缸；「我」重新開燈後病爪如石化般靜止，數條金魚青蛙瞬間死亡，其中一隻小青蛙上半身被病爪含喺嘴中半死不活。",
+        "chapter": 42,
+        "chapter_name": "42",
+        "chapter_refs": [
+          42
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_263",
+        "title": "向老賢查詢照片上的名字",
+        "description": "主角默默記下Dr.D房間照片上所寫的兩個名字，向老賢查詢，但老賢表示沒有印象並答應幫忙問周圍的人。",
+        "chapter": 43,
+        "chapter_name": "43",
+        "chapter_refs": [
+          43
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_264",
+        "title": "帶六名學生離開大本營遠征",
+        "description": "主角帶領六名學生於早上八時在大本營南門集合，通過職員開門後正式步出營外，前往靈實醫院。",
+        "chapter": 43,
+        "chapter_name": "43",
+        "chapter_refs": [
+          43
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_265",
+        "title": "得知Dr.D工作室位置",
+        "description": "老賢透露Dr.D的實驗工作室位於地下層多媒體攝影棚，且只有其得力助手馬姑娘持有進入的鎖匙。",
+        "chapter": 43,
+        "chapter_name": "43",
+        "chapter_refs": [
+          43
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_266",
+        "title": "舌女山林襲擊戰",
+        "description": "一行人在寶琳南路遭舌女突襲，Chris險被舔中，小六被拖入草叢，最終主角用鐵長矛貫穿其舌喉至腸部，將它殺死。",
+        "chapter": 43,
+        "chapter_name": "43",
+        "chapter_refs": [
+          43
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_267",
+        "title": "野貓預警",
+        "description": "草叢中一隻野貓尾巴伸高、毛都豎起後逃走，主角憑動物第六感的本能判斷附近有危險，下令全員提起武器警戒。",
+        "chapter": 43,
+        "chapter_name": "43",
+        "chapter_refs": [
+          43
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_268",
+        "title": "馬德梵一家託付子女",
+        "description": "出發當天馬德梵一家四口前來送行，出乎主角意料地把公仔和娃娃交託給他，表示全家絕對信任。",
+        "chapter": 43,
+        "chapter_name": "43",
+        "chapter_refs": [
+          43
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_269",
+        "title": "Chris崩潰後重拾長矛擔當前鋒",
+        "description": "Chris因恐懼與不滿而崩潰掉下鐵長矛，經老師講解前後位置責任相同、阿文與奧迪勸說，以及娃娃遞回長矛後，全身抖顫地重新擔當隊伍最前。",
+        "chapter": 44,
+        "chapter_name": "44",
+        "chapter_refs": [
+          44
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_270",
+        "title": "奧迪死裡逃生後向老師道歉",
+        "description": "奧迪在剛結束的危機中幸運逃過一死，走到老師身邊抱住他並哭著說對不起，老師安慰他下次小心。",
+        "chapter": 44,
+        "chapter_name": "44",
+        "chapter_refs": [
+          44
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_271",
+        "title": "屍體咬傷痕跡之謎",
+        "description": "醫院內的屍體上有咬傷痕跡，但瑜小六指印象中沒有病者會咬人，奧迪猜測可能是野狗太餓入內食屍體，答案有待深入調查。",
+        "chapter": 44,
+        "chapter_name": "44",
+        "chapter_refs": [
+          44
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.89,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_272",
+        "title": "眾人進入靈實醫院",
+        "description": "眾人整理隊形後抵達靈實醫院，見到正門接待處躺著屍體，其後一同進入醫院大堂，發現幾具被咬傷過的屍體。",
+        "chapter": 44,
+        "chapter_name": "44",
+        "chapter_refs": [
+          44
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_273",
+        "title": "停屍房發現無舌屍體",
+        "description": "眾人在停屍房發現所有被人從冰箱強行拉出的屍體，舌頭全部被奪去。",
+        "chapter": 45,
+        "chapter_name": "45",
+        "chapter_refs": [
+          45
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_274",
+        "title": "大眼尖叫引走病嘴",
+        "description": "樓上傳來大眼的尖叫聲，病嘴聽到後眼神活過來，朝聲音來源跑去，顯示留守的學生可能已被大眼發現。",
+        "chapter": 45,
+        "chapter_name": "45",
+        "chapter_refs": [
+          45
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_275",
+        "title": "老師以雨傘對抗病嘴",
+        "description": "病嘴向老師衝前企圖強吻，老師先用雨傘阻擋再戳其嘴巴，結果雨傘被病嘴的嘴巴及唾液緊緊黏為一體。",
+        "chapter": 45,
+        "chapter_name": "45",
+        "chapter_refs": [
+          45
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_276",
+        "title": "以小軍刀狂刺病嘴失敗",
+        "description": "敘事者接過公仔的小軍刀往病嘴身上狂刺，但傷害完全無效，軍刀刺入其臉頰後更被吸收，再也扯不出來。",
+        "chapter": 46,
+        "chapter_name": "46",
+        "chapter_refs": [
+          46
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_277",
+        "title": "四人在樓上被大眼襲擊",
+        "description": "瑜小六等四人沒有跑出醫院反而跑去樓上，在樓上發出叫聲及奔跑聲，疑被大眼發現追趕。",
+        "chapter": 46,
+        "chapter_name": "46",
+        "chapter_refs": [
+          46
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_278",
+        "title": "娃娃失蹤，眾人決定回頭尋找",
+        "description": "眾人發現娃娃在逃跑途中失散失蹤，公仔懇求老師先找回妹妹，老師思考後決定放棄前進、返轉頭尋找娃娃。",
+        "chapter": 46,
+        "chapter_name": "46",
+        "chapter_refs": [
+          46
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_279",
+        "title": "雨傘被病嘴啜住扯不出",
+        "description": "敘事者握緊雨傘想從病嘴嘴部拉出，但雨傘如同深入泥漿般緊貼，任多大力量也無法拔出。",
+        "chapter": 46,
+        "chapter_name": "46",
+        "chapter_refs": [
+          46
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_280",
+        "title": "二樓遭遇病牙",
+        "description": "主角一行喺二樓聽到玻璃碎裂聲，發現一隻滿身紅點、成口密麻麻牙齒嘅新型病者（病牙）；主角用雨傘戳佢個口無效，傘尖仲被咬至破損。",
+        "chapter": 47,
+        "chapter_name": "47",
+        "chapter_refs": [
+          47
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_281",
+        "title": "二樓重逢阿文",
+        "description": "阿文聽到玻璃碎裂聲後藏喺房入面輕敲示意，主角用電筒照入房先發現佢，阿文激動跑出嚟抱住主角。",
+        "chapter": 47,
+        "chapter_name": "47",
+        "chapter_refs": [
+          47
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_282",
+        "title": "公仔被迫脫鞋赤腳行",
+        "description": "公仔對鞋被地上病嘴遠低嘅奶白色接近透明嘅舔液黐住，花大力氣都扯唔甩，最後放棄對真皮男裝鞋赤腳行走。",
+        "chapter": 47,
+        "chapter_name": "47",
+        "chapter_refs": [
+          47
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_283",
+        "title": "大眼闖入醫院",
+        "description": "據阿文講述，一隻大眼入咗醫院，見到佢哋之後尖叫，好快就有隻成口牙齒嘅病者嚟追殺佢哋。",
+        "chapter": 47,
+        "chapter_name": "47",
+        "chapter_refs": [
+          47
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.8,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_284",
+        "title": "沿灰色頭髮追尋娃娃",
+        "description": "娃娃沿途跌落灰色頭髮，髮絲形成一條路引導主角同公仔由地下層一路追上二樓樓梯再往上。",
+        "chapter": 47,
+        "chapter_name": "47",
+        "chapter_refs": [
+          47
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_285",
+        "title": "病嘴離奇死亡",
+        "description": "病嘴被發現死喺樓梯口前，死因疑似嘴部受硬物襲擊；主角推斷醫院內有知道病嘴弱點嘅人類第三者存在。",
+        "chapter": 47,
+        "chapter_name": "47",
+        "chapter_refs": [
+          47
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_286",
+        "title": "二樓鐵櫃尋回奧迪",
+        "description": "眾人潛行搜遍二樓將近樓梯口時，藏在鐵製長櫃中的奧迪走出會合，並透露小六已帶Chris上三樓，眾人遂一同前往第三層。",
+        "chapter": 48,
+        "chapter_name": "48",
+        "chapter_refs": [
+          48
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_287",
+        "title": "娃娃被帶走",
+        "description": "娃娃遭人帶走而非即時殺害，敘事者認為這證明對方無意即時殺死她，因此決定先尋找小六等人，途中或可找到娃娃。",
+        "chapter": 48,
+        "chapter_name": "48",
+        "chapter_refs": [
+          48
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_288",
+        "title": "病者進化與社會行為觀察",
+        "description": "敘事者根據病者的群體行為（如大鼻交換鼻液、大眼跟蹤舌女、大耳集體抹玻璃窗）推斷病者正在不斷進化，可能擁有獨特的生活方式、語言和社會文明。",
+        "chapter": 48,
+        "chapter_name": "48",
+        "chapter_refs": [
+          48
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_289",
+        "title": "走廊圍攻擊殺病牙",
+        "description": "阿文、公仔與敘事者合作：敘事者踏牆而上以傘扼住病牙頸部，阿文因恐慌掉下釘槍，公仔拾起後向病牙口腔及腦部連開數槍，終於將牠擊倒。",
+        "chapter": 48,
+        "chapter_name": "48",
+        "chapter_refs": [
+          48
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_290",
+        "title": "三隻病牙追逐小六",
+        "description": "小六在走廊被三隻病牙窮追不捨，她滑過橫放的推床並跨過藥車，體力接近上限地逃回大隊。",
+        "chapter": 49,
+        "chapter_name": "49",
+        "chapter_refs": [
+          49
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.94,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_291",
+        "title": "以資料板夾封住病嘴",
+        "description": "「我」遇上病嘴時沒有殺死它，而是撿起資料板夾貼住其嘴部，利用病者吸附的特性限制其行動。",
+        "chapter": 49,
+        "chapter_name": "49",
+        "chapter_refs": [
+          49
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_292",
+        "title": "伏在病床下躲避病者",
+        "description": "為避開在走廊徘徊的病者，「我」指示三名學生分別躲在不同病床之下，待病者影子掠過後才爬出繼續潛行搜索。",
+        "chapter": 49,
+        "chapter_name": "49",
+        "chapter_refs": [
+          49
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_293",
+        "title": "堵塞三樓至四樓樓梯間",
+        "description": "「我」、小六與Chris先以雨傘、長鐵矛和圓盾在四樓樓梯口迫退病者，再由學生推落文件櫃、病床及帶輪醫療器材，成功堵住三樓上四樓的樓梯間。",
+        "chapter": 49,
+        "chapter_name": "49",
+        "chapter_refs": [
+          49
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_294",
+        "title": "撤上第四層",
+        "description": "因下層病者開始沿樓梯上湧、三隻病牙又追至樓梯間，「我」判斷硬戰必非死即傷，遂指示全員撤上第四層。",
+        "chapter": 49,
+        "chapter_name": "49",
+        "chapter_refs": [
+          49
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_295",
+        "title": "五人合力推開強化門",
+        "description": "喺門差啲完全關上之際，公仔、奧迪、阿文、Chris先後幫手，集五人之力將強化門完全推開。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_296",
+        "title": "公仔觸發玻璃樽機關",
+        "description": "公仔衝向走廊盡頭時踩中用幼線繫住兩個玻璃樽嘅機關，跌樽發出清脆玻璃聲。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_297",
+        "title": "娃娃被注射鎮定劑",
+        "description": "「我」根據房內嘅針筒判斷娃娃被人注射咗鎮定劑，所以眼神凝滯、見到人都冇太大反應。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_298",
+        "title": "小六被電槍射中",
+        "description": "交換期間病腦從醫生袋取出電槍射向小六背部，令佢全身麻痺，並捉住佢條腿想拖入實驗室。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_299",
+        "title": "捉走娃娃嘅人匿藏喺四樓",
+        "description": "敘事者根據四樓仍有生活痕跡，推斷捉走娃娃嘅人就喺呢一層。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_300",
+        "title": "病腦提出交易",
+        "description": "房內傳出唔屬於團隊嘅神秘男聲提出交易，要求用出面嘅女仔（小六）嚟交換娃娃。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_301",
+        "title": "發現病腦識講人類語言",
+        "description": "眾人震驚發現病腦識得講人類語言，腔調完美到似一個標準香港人。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_302",
+        "title": "軍刀卡門",
+        "description": "小六被拖入實驗室之際擲出公仔給嘅軍刀卡住門縫，之後「我」再擲傘子接力，阻止強化門完全關上。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_303",
+        "title": "醫生袍男人擲綠色藥瓶放毒氣",
+        "description": "穿醫生袍嘅男人向眾人擲出一瓶綠色藥瓶，藥瓶破裂後蒸發成灰白色毒煙，令奧迪等人咳嗽刺痛。",
+        "chapter": 50,
+        "chapter_name": "50",
+        "chapter_refs": [
+          50
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_304",
+        "title": "主角以傘反擊迫退滿天",
+        "description": "主角收起傘子上前毆打攻擊，最終用傘子將滿天迫到牆角不能再退。",
+        "chapter": 51,
+        "chapter_name": "51",
+        "chapter_refs": [
+          51
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_305",
+        "title": "小六呼叫助主角擋下頭頂一擊",
+        "description": "在滿天舉傘準備擊向主角天靈蓋之際，小六的呼叫令主角回神，以未被麻痺的左手緊握傘身擋下攻擊。",
+        "chapter": 51,
+        "chapter_name": "51",
+        "chapter_refs": [
+          51
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_306",
+        "title": "手術刀飛擲攻擊",
+        "description": "醫生袍男人從白布中取出數十把手術刀擲向主角，其中一把刺穿傘子插入主角前膊。",
+        "chapter": 51,
+        "chapter_name": "51",
+        "chapter_refs": [
+          51
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_307",
+        "title": "毒刀麻痺發作與傘擊重傷",
+        "description": "刺中主角前膊的手術刀有毒，麻痺發作後滿天踢起傘子並順勢重擊主角肩頸，令主角膊頭骨骼作響、近乎散掉。",
+        "chapter": 51,
+        "chapter_name": "51",
+        "chapter_refs": [
+          51
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_308",
+        "title": "Chris以長矛刺入病腦",
+        "description": "在敘事者快被滿天殺掉之際，Chris把鐵製長矛刺入病腦腦中，令病腦痛苦按頭退後，扭轉戰局。",
+        "chapter": 52,
+        "chapter_name": "52",
+        "chapter_refs": [
+          52
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_309",
+        "title": "滿天揭示被大本營拋棄的過去",
+        "description": "滿天表示自己清楚大本營防禦術，是因為他是被大本營拋棄的人，並稱自己已永遠不再是大本營的人。",
+        "chapter": 52,
+        "chapter_name": "52",
+        "chapter_refs": [
+          52
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_310",
+        "title": "滿天為學生治理傷口",
+        "description": "停戰後滿天從實驗室抽屜取出藥物、消毒藥水、繃帶和能量乾糧，逐個為受傷學生消毒醫治。",
+        "chapter": 52,
+        "chapter_name": "52",
+        "chapter_refs": [
+          52
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_311",
+        "title": "病腦向學生派發食物",
+        "description": "病腦拿著餅乾糖果半拐走到學生面前伸出微抖雙手請他們吃，眾人不敢取用，最終瑜小六主動伸手接過果汁糖和餅乾並道謝。",
+        "chapter": 52,
+        "chapter_name": "52",
+        "chapter_refs": [
+          52
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_312",
+        "title": "病腦開口說話要求停戰",
+        "description": "病腦忍著腦中矛刺之痛走到實驗室中間，以沙啞腔調說出「停戰」，是敘事者首次遇到懂得說話的病者。",
+        "chapter": 52,
+        "chapter_name": "52",
+        "chapter_refs": [
+          52
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.98,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_313",
+        "title": "老師偷襲扣住滿天頸喉",
+        "description": "滿天察覺異樣回頭前，負傷的敘事者已潛行至其面前，單手扣抓其頸喉並迫他退到牆邊，指甲深至入肉。",
+        "chapter": 52,
+        "chapter_name": "52",
+        "chapter_refs": [
+          52
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_314",
+        "title": "老師與小六並肩戰平滿天",
+        "description": "小六以圓盾抵擋、老師持短劍砍擊，二人合力令滿火力不勝支，最終雙方互相一推各自滑退，打成平手，而敘事者相信滿天猶勝一籌。",
+        "chapter": 52,
+        "chapter_name": "52",
+        "chapter_refs": [
+          52
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_315",
+        "title": "學生同大BOSS握手",
+        "description": "小六、公仔、娃娃三個都成功同病腦大BOSS握手，大BOSS稱呼佢哋做朋友並歡迎佢哋再嚟。",
+        "chapter": 53,
+        "chapter_name": "53",
+        "chapter_refs": [
+          53
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_316",
+        "title": "滿天為敘事者處理傷口",
+        "description": "滿天幫前膊中刀傷嘅敘事者清理傷口，期間讚賞佢係有人性有血性、唔會離棄學生逃走嘅老師。",
+        "chapter": 53,
+        "chapter_name": "53",
+        "chapter_refs": [
+          53
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_317",
+        "title": "滿天發現並研究病腦大BOSS",
+        "description": "好耐之前滿天喺醫院發現病腦，任務係研究佢並將佢命名為「大BOSS」。",
+        "chapter": 53,
+        "chapter_name": "53",
+        "chapter_refs": [
+          53
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_318",
+        "title": "臨走前問起放相嘅地方",
+        "description": "敘事者臨走前問醫院有冇一個特別放住好多相嘅地方，暗示下一個目標地點。",
+        "chapter": 53,
+        "chapter_name": "53",
+        "chapter_refs": [
+          53
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.85,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_319",
+        "title": "語言學習實驗",
+        "description": "滿天刻意留低一本語言學習錄影帶同相關書籍俾大BOSS，一個月後返嚟，大BOSS已識得同佢進行簡單對答。",
+        "chapter": 53,
+        "chapter_name": "53",
+        "chapter_refs": [
+          53
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.95,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_320",
+        "title": "追查Dick Grayson身份線索",
+        "description": "敘事者問滿天係咪叫Dick Grayson或Jason Todd，滿天否認有英文名；三人組笑指兩個名分別係蝙蝠俠入面第一、二代羅賓。",
+        "chapter": 53,
+        "chapter_name": "53",
+        "chapter_refs": [
+          53
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_321",
+        "title": "主角一行人返回大本營",
+        "description": "主角帶學生平安返回大本營，學生各自與家人團聚，大舊讚揚主角無穿無爛帶回所有學生。",
+        "chapter": 54,
+        "chapter_name": "54",
+        "chapter_refs": [
+          54
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 0,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_322",
+        "title": "主角為病者恐怖程度分三級",
+        "description": "主角將病者暫分三級：第一級是大眼、病嘴、大鼻、大耳；第二級是舌女、病牙；第三級是病爪、病腦，遇見即逃。",
+        "chapter": 54,
+        "chapter_name": "54",
+        "chapter_refs": [
+          54
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.93,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_323",
+        "title": "以照片交換「病童」情報",
+        "description": "主角靠南愚的照片交換「病童」情報，因不良人與病童位置相近卻刻意回避，證明病童非單靠不良人能處理。",
+        "chapter": 54,
+        "chapter_name": "54",
+        "chapter_refs": [
+          54
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.9,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_324",
+        "title": "全港醫院精神科病人的下棋大賽",
+        "description": "照片記錄了XXXX年份的全港醫院精神科病人下棋大賽，南愚得銀牌，北賢捧金杯取第一，顯示二人早已認識。",
+        "chapter": 54,
+        "chapter_name": "54",
+        "chapter_refs": [
+          54
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_325",
+        "title": "取得病牙與病嘴的身體部位",
+        "description": "滿天安排後，公仔和娃娃幫主角拿着一袋病牙與病嘴的身體部位離開醫院；病嘴唾液需高熱火燒軟化，病牙牙齒需大鎚摧毀。",
+        "chapter": 54,
+        "chapter_name": "54",
+        "chapter_refs": [
+          54
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.91,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_326",
+        "title": "大舊推薦小六加入克里絲娜前線女子搜索隊",
+        "description": "大舊向小六介紹大本營唯一全女班的04小隊——克里絲娜前線女子搜索隊，並建議她考慮加入，主角認為再觀察多一排都冇壞。",
+        "chapter": 54,
+        "chapter_name": "54",
+        "chapter_refs": [
+          54
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 1,
+        "location_id": null,
+        "confidence": 0.92,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.1694,
+          22.3193
+        ]
+      },
+      "properties": {
+        "id": "bg_event_327",
+        "title": "大舊提及已離開的前半個學生",
+        "description": "大舊感慨提到一位已離開的人物，是他以前半個學生，與黑袍老師一樣厲害，小六以前很喜歡跟着他。",
+        "chapter": 54,
+        "chapter_name": "54",
+        "chapter_refs": [
+          54
+        ],
+        "characters": [],
+        "event_type": "minor",
+        "spoiler_level": 2,
+        "location_id": null,
+        "confidence": 0.88,
+        "review_status": "needs_review",
+        "source": "bing_gang"
+      }
     }
   ]
 }

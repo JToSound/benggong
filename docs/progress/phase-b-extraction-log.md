@@ -1,9 +1,18 @@
 # Phase B Extraction 運行日誌 — 《病港》互動地圖
 
-> 最後更新：2026-08-24 17:35（UTC+8）
+> 最後更新：2026-08-25 21:55（UTC+8）
 > 相關：`phase-b-extraction-plan.md`（設計）、`phase-b-review-preparation.md`（審閱前置）
 
-## 現狀摘要
+## 現狀摘要（2026-08-25 晚）
+
+| 項目 | 數值 |
+|---|---|
+| 已完成章節 | **ch1–54 / 198**（57 段全 ok，零錯誤）|
+| Candidates | **1,212**（schema 違規 0）|
+| 公開 dataset | locations 131 · events 327 · timeline 327 · characters 86（全 needs_review + banner）|
+| 剩餘 | ch55–198（約 190 段；run 運行中）|
+
+守夜 run 昨晚配額重置後自動跑了 ch17–54；今早重啟後由 cache 秒過 ch1–54，現正真實呼叫 ch55 起。
 
 | 項目 | 數值 |
 |---|---|
