@@ -178,7 +178,7 @@ class OpenRouterClient:
         self.calls_made += 1
         try:
             with urllib.request.urlopen(req, timeout=self.timeout_s) as resp:
-                data = json.loads(resp.read().decode("utf-8"))
+                body_bytes = resp.read()
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8", errors="replace")[:300]
             if e.code == 429:
@@ -187,6 +187,13 @@ class OpenRouterClient:
             raise RuntimeError(f"OpenRouter HTTP {e.code}：{body}") from e
         except urllib.error.URLError as e:
             raise RuntimeError(f"OpenRouter 連線失敗：{e.reason}") from e
+        # 上游間歇性會回傳截斷／HTML 錯誤頁（非 JSON）——當作可 retry，
+        # 唔可以令成個 pipeline crash。
+        try:
+            data = json.loads(body_bytes.decode("utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError) as e:
+            preview = body_bytes[:120].decode("utf-8", errors="replace")
+            raise RuntimeError(f"OpenRouter 回應非 JSON（{e}）：{preview!r}") from e
         try:
             choice = data["choices"][0]
             content = choice["message"].get("content")
@@ -321,7 +328,13 @@ def call_with_retry(
             assert isinstance(raw, str) and raw.strip(), "回應空白"
         except (RuntimeError, AssertionError) as e:
             msg = str(e)
-            is_transient = "429" in msg or "連線" in msg or "回應 content 空白" in msg or "格式異常" in msg
+            is_transient = (
+                "429" in msg
+                or "連線" in msg
+                or "回應 content 空白" in msg
+                or "格式異常" in msg
+                or "回應非 JSON" in msg
+            )
             attempts_log.append({"attempt": attempt, "error": msg[:200]})
             if not is_transient:
                 ledger.append(_ledger_rec(chapter, segment_index, model, user_prompt, schema_version, "error", attempts_log))
