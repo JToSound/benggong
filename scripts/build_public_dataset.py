@@ -281,6 +281,7 @@ def build_location_feature(rec: dict, seq: int) -> dict | None:
         "chapters": rec["chapters"][:50],
         "characters": [],
         "confidence": rec["confidence"],
+        # spec：provisional mode 期間全部 needs_review；批准後先可以 flip
         "review_status": "needs_review",
         "source": "bing_gang",
     }
