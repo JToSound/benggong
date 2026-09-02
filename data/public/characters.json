@@ -12,7 +12,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -29,7 +29,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.7,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -46,7 +46,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -63,7 +63,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -86,7 +86,40 @@
     "spoiler_level": 1,
     "description": "全書 5 章出現；詳情待人手審閱。",
     "confidence": 0.87,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "boss",
+    "name": "大BOSS",
+    "aliases": [
+      "大B OSS"
+    ],
+    "role": "supporting",
+    "color": "#E67E22",
+    "first_appearance": 52,
+    "chapter_refs": [
+      52,
+      53,
+      54,
+      66,
+      82,
+      85,
+      89,
+      131,
+      132,
+      142,
+      143,
+      144,
+      175,
+      178,
+      192
+    ],
+    "spoiler_level": 1,
+    "description": "全書 15 章出現；詳情待人手審閱。",
+    "confidence": 0.87,
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -125,7 +158,7 @@
     "spoiler_level": 1,
     "description": "全書 19 章出現；詳情待人手審閱。",
     "confidence": 0.91,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -143,7 +176,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -162,7 +195,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.97,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -179,7 +212,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -196,7 +229,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -226,7 +259,7 @@
     "spoiler_level": 1,
     "description": "全書 12 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -245,24 +278,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_0419da20ee",
-    "name": "食人魔",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#1ABC9C",
-    "first_appearance": 45,
-    "chapter_refs": [
-      45
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.6,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -279,7 +295,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 1.0,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -296,7 +312,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -304,11 +320,6 @@
     "id": "ent_05b1ee1378",
     "name": "病腦",
     "aliases": [
-      "三腦",
-      "三腦大人",
-      "大B OSS",
-      "大BOSS",
-      "大佬",
       "大廚",
       "病廚"
     ],
@@ -331,41 +342,31 @@
       44,
       45,
       50,
-      52,
-      53,
-      54,
-      66,
       76,
       80,
-      82,
-      85,
       87,
       88,
       89,
       90,
       91,
       99,
-      131,
-      132,
       138,
       139,
       140,
       141,
       142,
-      143,
       144,
       163,
       172,
       175,
       178,
       180,
-      186,
-      192
+      186
     ],
     "spoiler_level": 1,
-    "description": "全書 45 章出現；詳情待人手審閱。",
-    "confidence": 0.88,
-    "review_status": "needs_review",
+    "description": "全書 35 章出現；詳情待人手審閱。",
+    "confidence": 0.89,
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -386,7 +387,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -405,7 +406,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.84,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -422,7 +423,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -439,7 +440,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -456,7 +457,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -473,7 +474,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -490,7 +491,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -507,7 +508,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -525,7 +526,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -542,7 +543,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -559,7 +560,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -578,7 +579,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -598,7 +599,7 @@
     "spoiler_level": 1,
     "description": "全書 4 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -615,7 +616,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -634,7 +635,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -654,7 +655,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.98,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -671,7 +672,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -688,7 +689,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -705,7 +706,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -722,7 +723,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -741,7 +742,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -758,7 +759,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -813,7 +814,7 @@
     "spoiler_level": 1,
     "description": "全書 28 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -849,7 +850,7 @@
     "spoiler_level": 1,
     "description": "全書 20 章出現；詳情待人手審閱。",
     "confidence": 0.91,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -866,7 +867,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.82,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -915,7 +916,7 @@
     "spoiler_level": 1,
     "description": "全書 25 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -962,7 +963,7 @@
     "spoiler_level": 1,
     "description": "全書 26 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -979,7 +980,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.94,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -996,7 +997,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.97,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1049,7 +1050,7 @@
     "spoiler_level": 1,
     "description": "全書 31 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1066,7 +1067,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1096,7 +1097,7 @@
     "spoiler_level": 1,
     "description": "全書 14 章出現；詳情待人手審閱。",
     "confidence": 0.83,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1172,24 +1173,7 @@
     "spoiler_level": 1,
     "description": "全書 50 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_2d06b425cc",
-    "name": "服康主診醫生",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#1ABC9C",
-    "first_appearance": 49,
-    "chapter_refs": [
-      49
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.55,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1206,7 +1190,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1227,7 +1211,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1244,7 +1228,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 1.0,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1261,7 +1245,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1287,7 +1271,7 @@
     "spoiler_level": 1,
     "description": "全書 10 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1308,7 +1292,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1326,7 +1310,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1343,7 +1327,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1360,7 +1344,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1377,7 +1361,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1394,7 +1378,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1423,7 +1407,7 @@
     "spoiler_level": 1,
     "description": "全書 13 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1440,7 +1424,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1457,7 +1441,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.97,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1476,7 +1460,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1493,7 +1477,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1510,7 +1494,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1527,7 +1511,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1544,7 +1528,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1600,7 +1584,7 @@
     "spoiler_level": 1,
     "description": "全書 35 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1632,7 +1616,7 @@
     "spoiler_level": 1,
     "description": "全書 12 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1651,7 +1635,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1682,7 +1666,7 @@
     "spoiler_level": 1,
     "description": "全書 9 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1706,7 +1690,7 @@
     "spoiler_level": 1,
     "description": "全書 8 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1727,7 +1711,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1746,7 +1730,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1768,7 +1752,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1785,7 +1769,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1802,7 +1786,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.75,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1825,7 +1809,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.94,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1842,7 +1826,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1863,7 +1847,7 @@
     "spoiler_level": 1,
     "description": "全書 5 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1882,7 +1866,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1901,27 +1885,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_49b18b8763",
-    "name": "酒暗紅色皮褸男",
-    "aliases": [
-      "奎斯（疑似）",
-      "酒紅皮褸男"
-    ],
-    "role": "supporting",
-    "color": "#9B59B6",
-    "first_appearance": 132,
-    "chapter_refs": [
-      132
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1938,7 +1902,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1970,7 +1934,7 @@
     "spoiler_level": 1,
     "description": "全書 13 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -1987,7 +1951,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2013,7 +1977,7 @@
     "spoiler_level": 1,
     "description": "全書 7 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2032,7 +1996,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2049,7 +2013,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.75,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2066,7 +2030,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2087,7 +2051,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.87,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2104,7 +2068,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2121,7 +2085,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2138,7 +2102,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2157,7 +2121,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2185,7 +2149,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.91,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2202,7 +2166,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.78,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2220,7 +2184,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2237,7 +2201,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2260,7 +2224,7 @@
     "spoiler_level": 1,
     "description": "全書 5 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2277,7 +2241,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2300,7 +2264,7 @@
     "spoiler_level": 1,
     "description": "全書 7 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2317,7 +2281,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2334,7 +2298,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.75,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2356,7 +2320,7 @@
     "spoiler_level": 1,
     "description": "全書 6 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2375,7 +2339,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2394,7 +2358,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2411,7 +2375,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.75,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2428,7 +2392,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2445,7 +2409,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2462,7 +2426,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2485,7 +2449,7 @@
     "spoiler_level": 1,
     "description": "全書 7 章出現；詳情待人手審閱。",
     "confidence": 0.87,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2505,7 +2469,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2522,7 +2486,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.7,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2539,7 +2503,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2562,7 +2526,7 @@
     "spoiler_level": 1,
     "description": "全書 7 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2579,7 +2543,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2596,7 +2560,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2613,7 +2577,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2632,7 +2596,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2666,7 +2630,7 @@
     "spoiler_level": 1,
     "description": "全書 18 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2683,7 +2647,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2700,7 +2664,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2717,7 +2681,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2737,7 +2701,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2760,7 +2724,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2779,7 +2743,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2799,7 +2763,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2816,7 +2780,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2835,7 +2799,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2852,7 +2816,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2869,7 +2833,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2899,7 +2863,7 @@
     "spoiler_level": 1,
     "description": "全書 12 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2916,46 +2880,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_7b38a96a9a",
-    "name": "南愚北賢",
-    "aliases": [
-      "呢兩個人",
-      "嗰兩條友"
-    ],
-    "role": "supporting",
-    "color": "#9B59B6",
-    "first_appearance": 119,
-    "chapter_refs": [
-      119,
-      120,
-      189
-    ],
-    "spoiler_level": 1,
-    "description": "全書 3 章出現；詳情待人手審閱。",
-    "confidence": 0.88,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_7bdfdf1e86",
-    "name": "德哥",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#1ABC9C",
-    "first_appearance": 85,
-    "chapter_refs": [
-      85
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.6,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2972,7 +2897,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.7,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -2989,24 +2914,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_7d0a7dd9ee",
-    "name": "明仔",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#E67E22",
-    "first_appearance": 85,
-    "chapter_refs": [
-      85
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.6,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3023,7 +2931,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3040,7 +2948,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3078,7 +2986,7 @@
     "spoiler_level": 1,
     "description": "全書 15 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3086,16 +2994,8 @@
     "id": "ent_7f6734f51b",
     "name": "公仔",
     "aliases": [
-      "兩兄妹",
-      "公仔與娃娃",
-      "南瓜貝果少女",
-      "哥哥",
-      "天使",
-      "妹",
-      "娃娃",
       "灰髮兄長",
-      "灰髮姊妹",
-      "貝果天使"
+      "阿哥"
     ],
     "role": "supporting",
     "color": "#E67E22",
@@ -3141,7 +3041,6 @@
       90,
       131,
       132,
-      133,
       142,
       144,
       146,
@@ -3150,12 +3049,13 @@
       179,
       180,
       187,
-      192
+      192,
+      193
     ],
     "spoiler_level": 1,
-    "description": "全書 52 章出現；詳情待人手審閱。",
+    "description": "全書 50 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3181,7 +3081,7 @@
     "spoiler_level": 1,
     "description": "全書 7 章出現；詳情待人手審閱。",
     "confidence": 0.94,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3198,7 +3098,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3215,7 +3115,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3232,7 +3132,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3249,7 +3149,72 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_82a21d93ae",
+    "name": "娃娃",
+    "aliases": [
+      "南瓜貝果少女",
+      "天使",
+      "妹",
+      "灰髮姊妹",
+      "貝果天使",
+      "貝果少女"
+    ],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 36,
+    "chapter_refs": [
+      36,
+      37,
+      38,
+      40,
+      41,
+      43,
+      45,
+      46,
+      47,
+      48,
+      50,
+      52,
+      53,
+      54,
+      60,
+      61,
+      62,
+      64,
+      65,
+      66,
+      72,
+      73,
+      74,
+      75,
+      79,
+      80,
+      85,
+      87,
+      88,
+      89,
+      90,
+      131,
+      132,
+      133,
+      142,
+      144,
+      175,
+      178,
+      179,
+      180,
+      192,
+      197
+    ],
+    "spoiler_level": 1,
+    "description": "全書 42 章出現；詳情待人手審閱。",
+    "confidence": 0.91,
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3266,7 +3231,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3289,7 +3254,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.94,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3310,7 +3275,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3379,7 +3344,7 @@
     "spoiler_level": 1,
     "description": "全書 67 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3397,7 +3362,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3414,7 +3379,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3431,7 +3396,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3448,7 +3413,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3465,7 +3430,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3485,7 +3450,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3502,7 +3467,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3519,7 +3484,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3545,7 +3510,7 @@
     "spoiler_level": 1,
     "description": "全書 7 章出現；詳情待人手審閱。",
     "confidence": 0.91,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3565,7 +3530,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3585,7 +3550,7 @@
     "spoiler_level": 1,
     "description": "全書 4 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3607,7 +3572,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3624,7 +3589,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3663,7 +3628,7 @@
     "spoiler_level": 1,
     "description": "全書 15 章出現；詳情待人手審閱。",
     "confidence": 0.94,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3680,7 +3645,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3697,7 +3662,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.87,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3714,7 +3679,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3731,7 +3696,65 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_970c603b4f",
+    "name": "奎斯",
+    "aliases": [
+      "奎斯老師",
+      "奎斯阿Sir",
+      "奎斯（疑似）",
+      "酒暗紅色皮褸男",
+      "酒紅皮褸男",
+      "阿奎"
+    ],
+    "role": "supporting",
+    "color": "#1ABC9C",
+    "first_appearance": 117,
+    "chapter_refs": [
+      117,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      142,
+      144,
+      145,
+      146,
+      147,
+      175,
+      176,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      195
+    ],
+    "spoiler_level": 1,
+    "description": "全書 35 章出現；詳情待人手審閱。",
+    "confidence": 0.92,
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3750,7 +3773,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3767,7 +3790,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3788,7 +3811,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3805,7 +3828,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3822,7 +3845,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3841,7 +3864,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3860,7 +3883,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3877,7 +3900,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 1.0,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3894,7 +3917,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3911,7 +3934,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3930,7 +3953,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -3947,7 +3970,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4024,7 +4047,7 @@
     "spoiler_level": 1,
     "description": "全書 193 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4041,7 +4064,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.7,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4058,7 +4081,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4078,7 +4101,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4095,7 +4118,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4112,7 +4135,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4121,17 +4144,14 @@
     "name": "南愚",
     "aliases": [
       "假病者",
-      "北賢",
-      "北賢南愚",
-      "情報專家",
-      "雷佬"
+      "呢兩個人",
+      "嗰兩條友",
+      "情報專家"
     ],
     "role": "supporting",
     "color": "#9B59B6",
-    "first_appearance": 35,
+    "first_appearance": 39,
     "chapter_refs": [
-      35,
-      38,
       39,
       43,
       54,
@@ -4144,7 +4164,6 @@
       120,
       121,
       122,
-      166,
       169,
       171,
       172,
@@ -4154,12 +4173,12 @@
       183,
       184,
       185,
-      191
+      189
     ],
     "spoiler_level": 1,
-    "description": "全書 25 章出現；詳情待人手審閱。",
-    "confidence": 0.93,
-    "review_status": "needs_review",
+    "description": "全書 22 章出現；詳情待人手審閱。",
+    "confidence": 0.91,
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4230,7 +4249,44 @@
     "spoiler_level": 1,
     "description": "全書 50 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_b18b574748",
+    "name": "北賢",
+    "aliases": [
+      "雷佬"
+    ],
+    "role": "supporting",
+    "color": "#9B59B6",
+    "first_appearance": 35,
+    "chapter_refs": [
+      35,
+      38,
+      39,
+      54,
+      119,
+      120,
+      121,
+      122,
+      166,
+      169,
+      171,
+      172,
+      175,
+      178,
+      181,
+      183,
+      184,
+      185,
+      191
+    ],
+    "spoiler_level": 1,
+    "description": "全書 19 章出現；詳情待人手審閱。",
+    "confidence": 0.94,
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4247,7 +4303,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4264,7 +4320,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4281,7 +4337,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4298,7 +4354,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4375,7 +4431,7 @@
     "spoiler_level": 1,
     "description": "全書 100 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4392,7 +4448,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4411,7 +4467,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4428,7 +4484,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4447,7 +4503,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4464,7 +4520,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4481,7 +4537,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4498,7 +4554,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4515,7 +4571,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4534,7 +4590,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4553,7 +4609,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4570,7 +4626,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4587,7 +4643,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.7,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4606,7 +4662,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4628,7 +4684,7 @@
     "spoiler_level": 1,
     "description": "全書 4 章出現；詳情待人手審閱。",
     "confidence": 0.76,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4645,7 +4701,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4662,7 +4718,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4679,7 +4735,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4696,7 +4752,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4741,7 +4797,7 @@
     "spoiler_level": 1,
     "description": "全書 24 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4761,7 +4817,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4778,7 +4834,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4795,7 +4851,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4814,7 +4870,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4831,7 +4887,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4848,7 +4904,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.82,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4868,7 +4924,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4885,7 +4941,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4919,7 +4975,7 @@
     "spoiler_level": 1,
     "description": "全書 18 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4936,7 +4992,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4955,7 +5011,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4972,7 +5028,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -4989,7 +5045,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5006,7 +5062,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5023,7 +5079,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5043,7 +5099,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.91,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5076,7 +5132,7 @@
     "spoiler_level": 1,
     "description": "全書 14 章出現；詳情待人手審閱。",
     "confidence": 0.91,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5101,7 +5157,7 @@
     "spoiler_level": 1,
     "description": "全書 7 章出現；詳情待人手審閱。",
     "confidence": 0.91,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5121,7 +5177,7 @@
     "spoiler_level": 1,
     "description": "全書 4 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5138,7 +5194,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5155,7 +5211,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5205,7 +5261,7 @@
     "spoiler_level": 1,
     "description": "全書 30 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5222,7 +5278,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5239,7 +5295,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5256,7 +5312,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5275,7 +5331,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5292,7 +5348,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5311,7 +5367,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5328,7 +5384,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5345,7 +5401,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5416,7 +5472,7 @@
     "spoiler_level": 1,
     "description": "全書 44 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5433,7 +5489,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5450,7 +5506,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5467,7 +5523,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5484,7 +5540,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5501,7 +5557,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.96,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5522,7 +5578,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5539,7 +5595,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 1.0,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5572,7 +5628,7 @@
     "spoiler_level": 1,
     "description": "全書 14 章出現；詳情待人手審閱。",
     "confidence": 0.87,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5589,7 +5645,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5606,7 +5662,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5631,7 +5687,7 @@
     "spoiler_level": 1,
     "description": "全書 6 章出現；詳情待人手審閱。",
     "confidence": 0.96,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5648,7 +5704,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5667,7 +5723,26 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
+    "portrait_asset_id": null,
+    "source": "bing_gang"
+  },
+  {
+    "id": "ent_e68dacadca",
+    "name": "兩兄妹",
+    "aliases": [
+      "公仔與娃娃"
+    ],
+    "role": "supporting",
+    "color": "#F39C12",
+    "first_appearance": 132,
+    "chapter_refs": [
+      132
+    ],
+    "spoiler_level": 1,
+    "description": "全書 1 章出現；詳情待人手審閱。",
+    "confidence": 0.9,
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5686,7 +5761,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5703,7 +5778,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5724,7 +5799,7 @@
     "spoiler_level": 1,
     "description": "全書 5 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5744,7 +5819,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5761,7 +5836,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.7,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5778,7 +5853,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5797,7 +5872,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5814,7 +5889,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5835,7 +5910,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5854,7 +5929,7 @@
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5871,7 +5946,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5889,7 +5964,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.89,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5912,7 +5987,7 @@
     "spoiler_level": 1,
     "description": "全書 4 章出現；詳情待人手審閱。",
     "confidence": 0.94,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5931,7 +6006,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5948,7 +6023,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5965,7 +6040,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -5982,7 +6057,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6002,7 +6077,7 @@
     "spoiler_level": 1,
     "description": "全書 4 章出現；詳情待人手審閱。",
     "confidence": 0.94,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6019,7 +6094,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6049,7 +6124,7 @@
     "spoiler_level": 1,
     "description": "全書 12 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6066,7 +6141,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.75,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6085,7 +6160,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6102,7 +6177,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.88,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6119,7 +6194,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6138,7 +6213,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6155,7 +6230,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6172,7 +6247,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6189,7 +6264,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6206,7 +6281,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6223,7 +6298,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6240,7 +6315,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.85,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6257,7 +6332,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6274,7 +6349,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6292,7 +6367,7 @@
     "spoiler_level": 1,
     "description": "全書 2 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6309,7 +6384,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6326,7 +6401,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6349,7 +6424,7 @@
     "spoiler_level": 1,
     "description": "全書 5 章出現；詳情待人手審閱。",
     "confidence": 0.92,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6368,7 +6443,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.98,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6400,7 +6475,7 @@
     "spoiler_level": 1,
     "description": "全書 12 章出現；詳情待人手審閱。",
     "confidence": 0.93,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   },
@@ -6417,7 +6492,7 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.95,
-    "review_status": "needs_review",
+    "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
   }

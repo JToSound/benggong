@@ -27,12 +27,30 @@ describe("provisional sample dataset", () => {
   const timeline = loadJson("timeline.json") as BingGangDataset["timeline"];
   const characters = loadJson("characters.json") as BingGangDataset["characters"];
 
-  it("全部記錄係 needs_review（provisional 要求）", () => {
-    for (const f of locations.features) expect(f.properties.review_status).toBe("needs_review");
-    for (const f of events.features) expect(f.properties.review_status).toBe("needs_review");
-    for (const f of routes.features) expect(f.properties.review_status).toBe("needs_review");
-    for (const t of timeline) expect(t.review_status).toBe("needs_review");
-    for (const c of characters) expect(c.review_status).toBe("needs_review");
+  it("review_status 跟 confidence：≥0.7 reviewed / <0.7 needs_review（Phase C）", () => {
+    for (const f of locations.features) {
+      const conf = f.properties.confidence ?? 0;
+      const expected = conf >= 0.7 ? "reviewed" : "needs_review";
+      expect(f.properties.review_status).toBe(expected);
+    }
+    for (const f of events.features) {
+      const conf = f.properties.confidence ?? 0;
+      const expected = conf >= 0.7 ? "reviewed" : "needs_review";
+      expect(f.properties.review_status).toBe(expected);
+    }
+    for (const f of routes.features) {
+      expect(f.properties.review_status).toBe("needs_review");  // routes 仍空
+    }
+    for (const t of timeline) {
+      const conf = (t as { confidence?: number }).confidence ?? 0;
+      const expected = conf >= 0.7 ? "reviewed" : "needs_review";
+      expect(t.review_status).toBe(expected);
+    }
+    for (const c of characters) {
+      const conf = (c as { confidence?: number }).confidence ?? 0;
+      const expected = conf >= 0.7 ? "reviewed" : "needs_review";
+      expect(c.review_status).toBe(expected);
+    }
   });
 
   it("source 只用 bing_gang（《病港2》零內容）", () => {

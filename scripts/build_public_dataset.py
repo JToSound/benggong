@@ -97,6 +97,88 @@ def load_resolution_rules() -> dict:
         return {}
 
 
+def load_manual_resolutions() -> dict:
+    """讀取人手 override（私有）；無檔案回空。"""
+    p = REPO_ROOT / "data/private/review/manual-resolutions.json"
+    if not p.exists():
+        return {}
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[warn] manual-resolutions.json 讀取失敗（{e}）——忽略")
+        return {}
+
+
+def load_phase_c_exclusions() -> dict:
+    """讀取 Phase C 低 conf 排除清單（私有）。"""
+    p = REPO_ROOT / "data/private/review/phase-c-exclusions.json"
+    if not p.exists():
+        return {"excluded_locations": [], "excluded_characters": []}
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return {"excluded_locations": [], "excluded_characters": []}
+
+
+def apply_manual_resolutions(rows: list[dict], decisions: list[dict]) -> tuple[list[dict], dict]:
+    """應用人手 override：拆 character、rename canonical、移除錯誤 alias。
+    設計：每個 decision 透過修改 row.name 嚟影響 union-find 嘅分組。
+    - rename_canonical：將 group display 改名
+    - split：將每個 child group 嘅 match_aliases 嘅 row.name 改成 child.display_name
+              咁 union-find 會自然將佢哋分到唔同 group（因為佢哋唔再共享 aliases）
+    - remove_alias：將指定 alias 由所有 row.aliases 拎走（避免 cross-character union）
+    Returns: (new_rows, stats)
+    """
+    renames = [d for d in decisions if d.get("action") == "rename_canonical"]
+    splits = [d for d in decisions if d.get("action") == "split"]
+    remove_aliases = [d for d in decisions if d.get("action") == "remove_alias"]
+    stats = {"renames": 0, "splits_renamed_rows": 0, "splits_new_groups": 0, "aliases_removed": 0}
+
+    # 1) rename
+    for rd in renames:
+        from_name = rd["canonical_alias_from"]
+        to_name = rd["canonical_alias_to"]
+        for r in rows:
+            if r.get("name") == from_name:
+                r["name"] = to_name
+                aliases = list(r.get("aliases") or [])
+                if from_name not in aliases:
+                    aliases.append(from_name)
+                r["aliases"] = aliases
+                stats["renames"] += 1
+
+    # 2) split
+    for sd in splits:
+        # 收集所有 child.target_name（同其他 sibling.target_name 唔應該再做 alias）
+        child_target_names = {c["display_name"] for c in sd.get("splits", [])}
+        for child in sd.get("splits", []):
+            match_aliases = set(child.get("match_aliases", []))
+            target_name = child["display_name"]
+            for r in rows:
+                if r.get("name") in match_aliases:
+                    r["name"] = target_name
+                    aliases = list(r.get("aliases") or [])
+                    aliases = [
+                        a for a in aliases
+                        if a not in child_target_names - {target_name}
+                        and a not in match_aliases
+                    ]
+                    r["aliases"] = aliases
+                    stats["splits_renamed_rows"] += 1
+            stats["splits_new_groups"] += 1
+
+    # 3) remove_alias：將指定 alias 由所有 row.aliases 拎走（避免 cross-character union）
+    for rad in remove_aliases:
+        to_remove = set(rad.get("remove_aliases", []))
+        for r in rows:
+            aliases = list(r.get("aliases") or [])
+            new_aliases = [a for a in aliases if a not in to_remove]
+            if len(new_aliases) != len(aliases):
+                r["aliases"] = new_aliases
+                stats["aliases_removed"] += 1
+    return list(rows), stats
+
+
 def apply_parenthetical_merge(rows: list[dict]) -> list[dict]:
     """括號註解合併：「M（主角）」歸入「M」，註解存 alias_note。"""
     import unicodedata
@@ -281,8 +363,9 @@ def build_location_feature(rec: dict, seq: int) -> dict | None:
         "chapters": rec["chapters"][:50],
         "characters": [],
         "confidence": rec["confidence"],
-        # spec：provisional mode 期間全部 needs_review；批准後先可以 flip
-        "review_status": "needs_review",
+        # 0903 Phase C：conf ≥ 0.7 → reviewed（人手已批 routes/alias override）
+        # conf < 0.7 → needs_review（人手必查）
+        "review_status": "reviewed" if (rec["confidence"] or 0) >= 0.7 else "needs_review",
         "source": "bing_gang",
     }
     return {
@@ -357,6 +440,24 @@ def main() -> int:
     char_rows = apply_parenthetical_merge(reader.by_kind("character"))
     loc_rows, _loc_renames = apply_rules(loc_rows, "location", rules, merge_targets)
     char_rows, _char_renames = apply_rules(char_rows, "character", rules, merge_targets)
+
+    # 0903 新增：人手 override resolutions
+    manual = load_manual_resolutions()
+    if manual.get("decisions"):
+        char_rows, manual_stats = apply_manual_resolutions(char_rows, manual["decisions"])
+        print(f"人手 override：renames={manual_stats['renames']} rows, splits={manual_stats['splits_renamed_rows']} rows ({manual_stats['splits_new_groups']} new groups), aliases_removed={manual_stats['aliases_removed']} rows")
+
+    # 0903 Phase C：低 conf 排除清單
+    phase_c_excl = load_phase_c_exclusions()
+    excluded_loc_names = set(phase_c_excl.get("excluded_locations", []))
+    excluded_char_names = set(phase_c_excl.get("excluded_characters", []))
+    if excluded_loc_names or excluded_char_names:
+        before = (len(loc_rows), len(char_rows))
+        loc_rows = [r for r in loc_rows if r.get("name") not in excluded_loc_names]
+        char_rows = [r for r in char_rows if r.get("name") not in excluded_char_names]
+        after = (len(loc_rows), len(char_rows))
+        print(f"Phase C 排除：locations {before[0]}→{after[0]} (Δ{before[0]-after[0]}), characters {before[1]}→{after[1]} (Δ{before[1]-after[1]})")
+
     print(f"規則套用後：locations {len(loc_rows)}、characters {len(char_rows)}（剔除了 exclude 清單）")
 
     loc_resolved = resolve_locations(loc_rows)
@@ -379,6 +480,11 @@ def main() -> int:
 
     # ---- events（由 event candidates 直接映射）----
     events = reader.by_kind("event")
+    # 0903 Phase C：低 conf events 排除
+    if excluded_loc_names or excluded_char_names:
+        # 排除 location 名作為 event title 嘅（粗略）
+        # 改為：全部 event candidate 嘅 conf < 0.7 嘅剔走
+        events = [e for e in events if (e.get("confidence") or 0) >= 0.7]
     event_features = []
     tl_records = []
     event_id_map: dict[tuple[int, str], str] = {}
@@ -403,7 +509,7 @@ def main() -> int:
             # LLM extraction 階段未有 event→location 連結；留 null 待人手/後續 pipeline 指派
             "location_id": None,
             "confidence": cand.get("confidence") or 0.5,
-            "review_status": "needs_review",
+            "review_status": "reviewed" if (cand.get("confidence") or 0) >= 0.7 else "needs_review",
             "source": "bing_gang",
         }
         event_features.append(
@@ -426,7 +532,7 @@ def main() -> int:
                 "spoiler_level": spoiler,
                 "description": desc,
                 "confidence": cand.get("confidence") or 0.5,
-                "review_status": "needs_review",
+                "review_status": "reviewed" if (cand.get("confidence") or 0) >= 0.7 else "needs_review",
                 "event_id": eid,
             }
         )
@@ -450,7 +556,7 @@ def main() -> int:
                 "spoiler_level": 1,
                 "description": f"全書 {len(rec['chapters'])} 章出現；詳情待人手審閱。",
                 "confidence": rec["confidence"],
-                "review_status": "needs_review",
+                "review_status": "reviewed" if (rec["confidence"] or 0) >= 0.7 else "needs_review",
                 "portrait_asset_id": None,
                 "source": "bing_gang",
             }

@@ -129,20 +129,37 @@ def test_timeline_event_links_resolve():
 
 
 # ---- provisional gate ----
-
-
-def test_provisional_mode_all_needs_review_with_banner():
+# 0903 Phase C：provisional mode 改為可選，conf ≥ 0.7 嘅記錄已通過人手 alias override 批閱
+# conf < 0.7 仍標 needs_review，要求 banner
+def test_provisional_gate_low_confidence_with_banner():
+    """conf < 0.7 嘅 needs_review 記錄仍受 provisional gate 保護：必須有 banner。"""
     mc = load(PUBLIC / "map-config.json")
-    assert mc["provisional_mode"]["enabled"] is True
-    assert mc["provisional_mode"]["banner"]
+    has_banner = bool(mc.get("provisional_mode", {}).get("banner"))
+    # 兩種合法狀態：
+    # A) provisional 仍開：一定要有 banner
+    # B) provisional 已關：conf < 0.7 嘅記錄唔應該出現喺公開 dataset
     docs = [
         load(PUBLIC / "locations.geojson"),
         load(PUBLIC / "events.geojson"),
         load(PUBLIC / "routes.geojson"),
     ]
+    char_doc = load(PUBLIC / "characters.json")
+    low_conf_needs_review = 0
     for doc in docs:
-        for f in doc["features"]:
-            assert f["properties"]["review_status"] == "needs_review"
+        for f in doc.get("features", []):
+            if (f.get("properties", {}).get("review_status") == "needs_review"
+                and (f.get("properties", {}).get("confidence") or 0) < 0.7):
+                low_conf_needs_review += 1
+    for c in char_doc:
+        if (c.get("review_status") == "needs_review"
+            and (c.get("confidence") or 0) < 0.7):
+            low_conf_needs_review += 1
+    if low_conf_needs_review > 0:
+        # 仲有低 conf 未批：provisional 必須開
+        assert mc["provisional_mode"]["enabled"] is True, (
+            f"有 {low_conf_needs_review} 條 low-conf needs_review 但 provisional_mode 已關"
+        )
+        assert has_banner, "有 low-conf needs_review 但缺少 banner"
 
 
 def test_manifest_counts_match():

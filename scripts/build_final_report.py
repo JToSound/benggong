@@ -168,12 +168,14 @@ def main() -> int:
     add("## 人手審閱待辦")
     add("")
     add("1. `data/private/review/character-routes.json` — 52 條路線（合併後）；waypoint 合理性抽查")
-    add("2. `data/private/review/entity-resolution.md` — 641 loc / 300 char；5 個可疑 alias 群待拆")
+    add("2. `data/private/review/entity-resolution.md` — 629 loc / 299 char（Phase C 排除 12 loc + 4 char）")
     add("3. `data/private/review/entity-resolution-review.md` — 審閱決策紀錄（私有）")
     add("4. `data/private/review/review-decisions.md` — 三類審閱決策總結（私有）")
-    add("5. 抽查 `data/public/` 事件摘要（尤其 461 條中等 confidence 記錄）")
-    add("6. 批准後先可以將 provisional_mode.enabled 改 false（移除 banner）")
-    add("7. 內部審計：candidates.jsonl 已加 `review_status` 標記（auto_reviewed 5,341 / human_review_needed 1,271 / critical 58）")
+    add("5. `data/private/review/manual-resolutions.json` — 5 個可疑 alias 群拆解決策（私有）")
+    add("6. `data/private/review/phase-c-exclusions.json` — 低 conf (0.55-0.65) entity 排除清單（私有）")
+    add("7. 抽查 `data/public/` 事件摘要（無 low-conf needs_review 公開）")
+    add("8. **Phase C 完成**：`provisional_mode.enabled=false` + `VITE_PROVISIONAL_DATA_MODE=false` + `audit --strict` 過綠")
+    add("9. 內部審計：candidates.jsonl 已加 `review_status` 標記（auto_reviewed 5,341 / human_review_needed 1,271 / critical 58）")
     add("")
 
     if not complete:

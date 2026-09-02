@@ -19,8 +19,8 @@
   },
   "spoiler": { "levels": 0, "1": null, "2": null, "3": null, "default_max_level": 1 },
   "provisional_mode": {
-    "enabled": true,
-    "banner": "暫定資料模式：以下內容未經人手審閱，僅為最小樣本，可能有不準確之處。"
+    "enabled": false,
+    "banner": ""
   },
   "sources_enabled": ["bing_gang"],
   "sources_reserved": ["bing_gang_2"]

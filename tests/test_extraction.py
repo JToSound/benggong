@@ -198,13 +198,25 @@ class TestBuilderEndToEnd:
         for m in re.finditer(r"[^\x00-\x7f]{201,}", text):
             raise AssertionError(f"疑似長文本洩漏：{m.group(0)[:60]}")
 
-    def test_all_records_needs_review(self, built):
+    def test_all_records_reviewed_or_low_conf_needs_review(self, built):
+        """0903 Phase C：conf ≥ 0.7 → reviewed；conf < 0.7 → needs_review。
+        不再強制全部 needs_review（spec 已更新為 conf-based gating）。"""
         for fname in ("locations.geojson", "events.geojson"):
             doc = json.loads((built / fname).read_text(encoding="utf-8"))
             for f in doc["features"]:
-                assert f["properties"]["review_status"] == "needs_review"
+                rs = f["properties"]["review_status"]
+                conf = f["properties"].get("confidence") or 0
+                if conf >= 0.7:
+                    assert rs == "reviewed", f"{f['properties'].get('name')}: conf={conf} 但 status={rs}"
+                else:
+                    assert rs == "needs_review", f"{f['properties'].get('name')}: conf={conf} 但 status={rs}"
         chars = json.loads((built / "characters.json").read_text(encoding="utf-8"))
-        assert all(c["review_status"] == "needs_review" for c in chars)
+        for c in chars:
+            conf = c.get("confidence") or 0
+            if conf >= 0.7:
+                assert c["review_status"] == "reviewed", f"{c['name']}: conf={conf} 但 status={c['review_status']}"
+            else:
+                assert c["review_status"] == "needs_review", f"{c['name']}: conf={conf} 但 status={c['review_status']}"
 
     def test_real_district_keeps_reference_coords(self, built):
         doc = json.loads((built / "locations.geojson").read_text(encoding="utf-8"))
