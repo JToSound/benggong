@@ -183,10 +183,20 @@ def main() -> int:
         add(f"- review_queue/error 段落 {queue_segments} 個——重跑 `python scripts/run_extraction.py` 自動補")
         add("")
 
+    # 讀 extraction-last-run.json 拎真實 model（stealth 已退役；當前係 minimax m3）
+    last_run_path = PRIVATE / "review/extraction-last-run.json"
+    model_name = "OpenRouter model（見 extraction-last-run.json）"
+    if last_run_path.exists():
+        try:
+            lr = json.loads(last_run_path.read_text(encoding="utf-8"))
+            model_name = f"OpenRouter {lr.get('model', '?')}"
+        except (json.JSONDecodeError, OSError):
+            pass
+
     add("## 版本紀錄")
     add("")
     add("- Phase A 清理 pipeline：human-sampled-approved（25 章抽樣）")
-    add("- Extraction：OpenRouter stealth/ox-alpha，temp 0.1，strict JSON schema，run ledger + cache")
+    add(f"- Extraction：{model_name}，temp 0.1，strict JSON schema，run ledger + cache")
     add("- Resolution：用戶確認規則（resolution-rules.json v1）")
     add("- 前端：vite + leaflet 本機 tiles；網絡紅線雙層審計通過")
     add("")

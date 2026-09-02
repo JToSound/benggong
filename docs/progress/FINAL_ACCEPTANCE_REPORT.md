@@ -1,6 +1,6 @@
 # 《病港》互動地圖 — 最終驗收報告
 
-> 生成時間：2026-08-25 23:18 +0800
+> 生成時間：2026-09-03 04:57 +0800
 > 本報告由 `scripts/build_final_report.py` 自動生成；只含統計與路徑引用，無小說內容。
 
 ## Extraction 完成度
@@ -8,31 +8,32 @@
 | 指標 | 數值 |
 |---|---|
 | 預期章節 | 198 |
-| 已有記錄章節 | 66 |
-| 全段 ok 嘅章節 | **66** |
-| 段落狀態 | ok 69 · review_queue/error 1 |
-| Candidates 入庫 | **1,522** |
+| 已有記錄章節 | 198 |
+| 全段 ok 嘅章節 | **198** |
+| 段落狀態 | ok 248 · review_queue/error 0 |
+| Candidates 入庫 | **6,670** |
 
 ### Candidates 分佈（kind/status）
 
 | 類別/狀態 | 數量 |
 |---|---|
-| character/pending | 654 |
-| event/pending | 400 |
-| location/pending | 339 |
-| time_reference/pending | 129 |
+| character/pending | 2679 |
+| event/pending | 1796 |
+| location/pending | 1653 |
+| organization/pending | 2 |
+| time_reference/pending | 540 |
 
 ## 公開 Dataset
 
 | 實體 | 數量 |
 |---|---|
-| location | 131 |
-| event | 327 |
+| location | 641 |
+| event | 1796 |
 | route | 0 |
-| timeline | 327 |
-| character | 86 |
+| timeline | 1796 |
+| character | 300 |
 
-- needs_review 記錄：871（全部喺 provisional mode + banner 下運行）
+- needs_review 記錄：4533（全部喺 provisional mode + banner 下運行）
 - 驗證：`python scripts/validate_public_data.py` ✅（schema／治理掃描／manifest／provisional gate）
 - Release audit：`python scripts/audit_release.py --strict` 於 CI 執行
 
@@ -48,14 +49,9 @@
 3. 抽查 `data/public/` 事件摘要（尤其低 confidence 記錄）
 4. 批准後先可以將 provisional_mode.enabled 改 false（移除 banner）
 
-## ⚠️ 現狀：extraction 未完全
-
-- 未完成章節 132 個：67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86…
-- review_queue/error 段落 1 個——重跑 `python scripts/run_extraction.py` 自動補
-
 ## 版本紀錄
 
 - Phase A 清理 pipeline：human-sampled-approved（25 章抽樣）
-- Extraction：OpenRouter stealth/ox-alpha，temp 0.1，strict JSON schema，run ledger + cache
+- Extraction：OpenRouter minimax/minimax-m3:free，temp 0.1，strict JSON schema，run ledger + cache
 - Resolution：用戶確認規則（resolution-rules.json v1）
 - 前端：vite + leaflet 本機 tiles；網絡紅線雙層審計通過

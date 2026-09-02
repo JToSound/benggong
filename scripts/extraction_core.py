@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import sys
 import time
@@ -156,13 +157,17 @@ class OpenRouterClient:
         self.calls_made = 0
 
     def chat(self, model: str, messages: list[dict], temperature: float, max_tokens: int = 16000) -> str:
-        payload = {
+        payload: dict = {
             "model": model,
             "messages": messages,
             "temperature": temperature,
             "max_tokens": max_tokens,
             "response_format": {"type": "json_object"},
         }
+        # 新 model（如 minimax m3）支援 effort 參數；其他 model 忽略即可。
+        # 讀 OPENROUTER_EFFORT 環境變數；默認 'ultra'（0903 起用 m3 之設定）。
+        effort = os.environ.get("OPENROUTER_EFFORT", "").strip() or "ultra"
+        payload["extra_body"] = {"effort": effort}
         req = urllib.request.Request(
             f"{self.base_url}/chat/completions",
             data=json.dumps(payload).encode("utf-8"),

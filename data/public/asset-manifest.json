@@ -1,18 +1,18 @@
 {
-  "dataset_version": "0.2.0-provisional.20260825",
-  "generated_at": "2026-08-25T17:53:31+00:00",
+  "dataset_version": "0.2.0-provisional.20260902",
+  "generated_at": "2026-09-02T20:50:40+00:00",
   "generator": "scripts/build_public_dataset.py ← data/private/evidence/candidates.jsonl",
   "counts": {
-    "location": 280,
-    "event": 980,
+    "location": 641,
+    "event": 1796,
     "route": 0,
-    "timeline": 980,
-    "character": 143
+    "timeline": 1796,
+    "character": 300
   },
   "review_summary": {
     "verified": 0,
     "reviewed": 0,
-    "needs_review": 2383
+    "needs_review": 4533
   },
   "notes": [
     "全部 needs_review；網站必須 VITE_PROVISIONAL_DATA_MODE=true 並顯示 banner。",
