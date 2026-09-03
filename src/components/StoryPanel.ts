@@ -9,7 +9,7 @@
  */
 
 import type { App } from "../app";
-import type { AppData } from "../data/loadAllData";
+import type { AppData, RouteFeature } from "../data/loadAllData";
 import type { EventFeature } from "../types/dataset";
 
 export class StoryPanel {
@@ -73,7 +73,7 @@ export class StoryPanel {
       <section class="story-routes">
         <h3>本章路線起點 <span class="badge">${routesInChapter.length}</span></h3>
         <ul class="route-list">
-          ${routesInChapter.slice(0, 8).map((r: any) => `
+          ${routesInChapter.slice(0, 8).map((r: RouteFeature) => `
             <li class="route-item" data-route-id="${r.properties.id}">
               <span class="route-color" style="background:${r.properties.color}"></span>
               <span class="route-name">${this.escapeHtml(r.properties.character_name)}</span>
@@ -144,7 +144,7 @@ export class StoryPanel {
     this.root.querySelectorAll(".route-item").forEach((el) => {
       el.addEventListener("click", () => {
         const id = (el as HTMLElement).dataset.routeId;
-        const route = this.data.routes.features.find((r: any) => r.properties.id === id);
+        const route = this.data.routes.features.find((r: RouteFeature) => r.properties.id === id);
         if (route) this.app.setChapter(route.properties.chapters_span[0]);
       });
     });
@@ -165,8 +165,8 @@ export class StoryPanel {
     const loc = this.data.locationsById.get(locId);
     if (!loc) return;
     const p = loc.properties;
-    const eventsHere = (this.data.events.features as any[]).filter(
-      (e) => e.properties.location_id === locId,
+    const eventsHere = this.data.events.features.filter(
+      (e: EventFeature) => e.properties.location_id === locId,
     );
     this.root.innerHTML = `
       <header class="story-header">
@@ -191,7 +191,7 @@ export class StoryPanel {
       <section class="story-events">
         <h3>此地點事件 <span class="badge">${eventsHere.length}</span></h3>
         <ul class="event-list">
-          ${eventsHere.slice(0, 20).map((ev: any) => this.renderEventItem(ev)).join("")}
+          ${eventsHere.slice(0, 20).map((ev: EventFeature) => this.renderEventItem(ev)).join("")}
         </ul>
       </section>
       ` : ""}
@@ -206,7 +206,9 @@ export class StoryPanel {
       this.updateForChapter(this.app.getCurrentChapter());
       return;
     }
-    const ev = (this.data.events.features as any[]).find((e) => e.properties.id === eventId);
+    const ev = this.data.events.features.find(
+      (e: EventFeature) => e.properties.id === eventId,
+    );
     if (!ev) return;
     const p = ev.properties;
     this.root.innerHTML = `

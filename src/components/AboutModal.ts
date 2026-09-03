@@ -2,7 +2,7 @@
  * AboutModal: 顯示版權、資料來源、limitation 嘅 modal.
  */
 
-import type { AppData } from "../data/loadAllData";
+import type { AppData, LocationFeature } from "../data/loadAllData";
 
 export class AboutModal {
   root: HTMLElement;
@@ -53,7 +53,7 @@ export class AboutModal {
           <section>
             <h3>資料統計</h3>
             <ul>
-              <li>${nLoc} 個地點（${this.data.locations.features.filter((f: any) => !f.properties.fictional).length} 真實 HK / ${this.data.locations.features.filter((f: any) => f.properties.fictional).length} 虛構）</li>
+              <li>${nLoc} 個地點（${this.data.locations.features.filter((f: LocationFeature) => !f.properties.fictional).length} 真實 HK / ${this.data.locations.features.filter((f: LocationFeature) => f.properties.fictional).length} 虛構）</li>
               <li>${nEv} 個事件</li>
               <li>${nCh} 個角色</li>
               <li>${nRoute} 條角色路線</li>

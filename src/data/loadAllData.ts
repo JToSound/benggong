@@ -17,6 +17,20 @@ import type {
   RouteFeature,
 } from "../types/dataset";
 
+export type {
+  LocationFeature,
+  EventFeature,
+  RouteFeature,
+  MapConfig,
+  CharactersData,
+  ChapterAppearances,
+  ChapterSummaries,
+  LocationsFeatureCollection,
+  EventsFeatureCollection,
+  RoutesFeatureCollection,
+  TimelineRecord,
+};
+
 export interface AppData {
   config: MapConfig;
   locations: LocationsFeatureCollection;

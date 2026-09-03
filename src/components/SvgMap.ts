@@ -8,8 +8,7 @@
  */
 
 import type { App } from "../app";
-import type { AppData } from "../data/loadAllData";
-import type { EventFeature } from "../types/dataset";
+import type { AppData, RouteFeature, EventFeature } from "../data/loadAllData";
 
 const VIEWBOX = "113.85 22.18 0.60 0.37";
 
@@ -143,7 +142,7 @@ export class SvgMap {
     const basemapURL = `./${basemapPath}`;
 
     // Active character routes (show routes for current chapter)
-    const activeRoutes = (this.data.routesByChapter.get(cur) || []).filter((r: any) => {
+    const activeRoutes = (this.data.routesByChapter.get(cur) || []).filter((r: RouteFeature) => {
       const span = r.properties.chapters_span;
       return span && cur >= span[0] && cur <= span[1];
     });
@@ -169,7 +168,7 @@ export class SvgMap {
     // Render routes
     const routesLayer = content.querySelector("#routes-layer")!;
     for (const route of activeRoutes) {
-      const coords = (route as any).geometry.coordinates as [number, number][];
+      const coords = route.geometry.coordinates as [number, number][];
       if (coords.length < 2) continue;
       const d = coords.map((c, i) => `${i === 0 ? "M" : "L"} ${c[0]} ${c[1]}`).join(" ");
       const span = route.properties.chapters_span;
@@ -192,7 +191,7 @@ export class SvgMap {
     // Render locations (only those in current chapter area)
     const locLayer = content.querySelector("#locations-layer")!;
     for (const loc of locationsToShow) {
-      const coords = (loc as any).geometry.coordinates as [number, number];
+      const coords = loc.geometry.coordinates as [number, number];
       const props = loc.properties;
       const active = props.chapters.includes(cur) || (props.first_appearance <= cur && cur < props.first_appearance + 5);
       const isSelected = this.app.selectedLocationId === props.id;
@@ -218,7 +217,7 @@ export class SvgMap {
     // Render events (current chapter prominent)
     const evLayer = content.querySelector("#events-layer")!;
     for (const ev of eventsToShow) {
-      const coords = (ev as any).geometry.coordinates as [number, number];
+      const coords = ev.geometry.coordinates as [number, number];
       const props = ev.properties;
       const isCurrent = props.chapter === cur;
       const isSelected = this.app.selectedEventId === props.id;
