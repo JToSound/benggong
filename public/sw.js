@@ -8,7 +8,7 @@ const CACHE = "binggang-v1";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((cache) => cache.addAll(["./", "./index.html", "./timeline.html"])),
+    caches.open(CACHE).then((cache) => cache.addAll(["./", "./index.html"])),
   );
   self.skipWaiting();
 });
