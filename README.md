@@ -15,6 +15,7 @@
 - **距離量度**：多點路徑，以「故事單位」顯示（比例未校準前唔會扮 km）
 - **鍵盤導覽**：`F` 搜尋 · `M` 量度 · `S` 面板 · `T` 時間軸 · `Esc` 關閉
 - **Deep links**：`?event=<id>` 開詳情、`#location=<id>` 飛去位置
+- **角色路線**（Phase D 暫停）：51 條 character-routes 已喺私有審閱檔推導完成；公開 routes.geojson 因 character cross-alias 衝突延後（見 `data/private/review/route-blockers.md`）
 
 ## 快速開始
 

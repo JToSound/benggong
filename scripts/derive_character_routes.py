@@ -12,6 +12,10 @@
 - 少於 MIN_CHAPTERS 章或無位置變化 → 唔產生 route
 - 全部標 provisional + needs_review；waypoint 保留原始章節座標
 
+Phase D 擴充（0903）：
+- 讀 manual-resolutions.json 應用 alias 合併／拆分／rename／remove_alias
+- 合併後嘅 group 統一 display name（例：「主角」吸收 4 條 alias 路線）
+
 輸出：data/private/review/character-routes.json（私有，供人手審閱後先入公開 routes.geojson）
 """
 
@@ -21,10 +25,12 @@ import json
 import re
 from collections import defaultdict
 from pathlib import Path
+import sys
 
 REPO = Path(__file__).resolve().parent.parent if "__file__" in globals() else Path.cwd()
 CANDIDATES = REPO / "data/private/evidence/candidates.jsonl"
 OUT = REPO / "data/private/review/character-routes.json"
+MANUAL = REPO / "data/private/review/manual-resolutions.json"
 
 MIN_CHAPTERS = 5
 
@@ -40,7 +46,78 @@ def load_candidates() -> list[dict]:
     return rows
 
 
+def load_manual_resolutions() -> list[dict]:
+    if not MANUAL.exists():
+        return []
+    try:
+        return json.loads(MANUAL.read_text(encoding="utf-8")).get("decisions", [])
+    except (json.JSONDecodeError, OSError):
+        return []
+
+
+def apply_manual(rows: list[dict], decisions: list[dict]) -> list[dict]:
+    """應用 alias 合併／拆分／rename／remove_alias 到 character candidates。"""
+    renames = [d for d in decisions if d.get("action") == "rename_canonical"]
+    splits = [d for d in decisions if d.get("action") == "split"]
+    remove_aliases = [d for d in decisions if d.get("action") == "remove_alias"]
+    merge_routes = [d for d in decisions if d.get("action") == "merge_routes"]
+
+    for rd in renames:
+        from_name, to_name = rd["canonical_alias_from"], rd["canonical_alias_to"]
+        for r in rows:
+            if r.get("name") == from_name:
+                r["name"] = to_name
+                aliases = list(r.get("aliases") or [])
+                if from_name not in aliases:
+                    aliases.append(from_name)
+                r["aliases"] = aliases
+
+    for sd in splits:
+        child_target_names = {c["display_name"] for c in sd.get("splits", [])}
+        for child in sd.get("splits", []):
+            match_aliases = set(child.get("match_aliases", []))
+            target_name = child["display_name"]
+            for r in rows:
+                if r.get("name") in match_aliases:
+                    r["name"] = target_name
+                    aliases = list(r.get("aliases") or [])
+                    aliases = [
+                        a for a in aliases
+                        if a not in child_target_names - {target_name}
+                        and a not in match_aliases
+                    ]
+                    r["aliases"] = aliases
+
+    for rad in remove_aliases:
+        to_remove = set(rad.get("remove_aliases", []))
+        for r in rows:
+            aliases = list(r.get("aliases") or [])
+            new_aliases = [a for a in aliases if a not in to_remove]
+            if len(new_aliases) != len(aliases):
+                r["aliases"] = new_aliases
+
+    # merge_routes：將 alias 嘅 character name rename 到 target
+    # 喺 derive 之前用，所以 routes 入面會見到 target name
+    for mr in merge_routes:
+        for m in mr.get("merges", []):
+            target = m["into"]
+            sources = set(m.get("from_aliases", []))
+            for r in rows:
+                if r.get("name") in sources:
+                    r["name"] = target
+                    aliases = list(r.get("aliases") or [])
+                    for s in sources - {target}:
+                        if s not in aliases:
+                            aliases.append(s)
+                    r["aliases"] = aliases
+    return rows
+
+
 def derive(rows: list[dict]) -> list[dict]:
+    # 套用人手 override（Phase D）
+    decisions = load_manual_resolutions()
+    rows = apply_manual(rows, decisions)
+
     # 每章存在嘅地名清單（長名優先排序）
     locs_by_chapter: dict[int, list[str]] = defaultdict(list)
     for r in rows:

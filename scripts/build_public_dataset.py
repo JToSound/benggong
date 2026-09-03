@@ -121,18 +121,20 @@ def load_phase_c_exclusions() -> dict:
 
 
 def apply_manual_resolutions(rows: list[dict], decisions: list[dict]) -> tuple[list[dict], dict]:
-    """應用人手 override：拆 character、rename canonical、移除錯誤 alias。
+    """應用人手 override：拆 character、rename canonical、移除錯誤 alias、合併 routes。
     設計：每個 decision 透過修改 row.name 嚟影響 union-find 嘅分組。
     - rename_canonical：將 group display 改名
     - split：將每個 child group 嘅 match_aliases 嘅 row.name 改成 child.display_name
               咁 union-find 會自然將佢哋分到唔同 group（因為佢哋唔再共享 aliases）
     - remove_alias：將指定 alias 由所有 row.aliases 拎走（避免 cross-character union）
+    - merge_routes：將 alias 群嘅 character name rename 到 target（routes 會將佢哋合併）
     Returns: (new_rows, stats)
     """
     renames = [d for d in decisions if d.get("action") == "rename_canonical"]
     splits = [d for d in decisions if d.get("action") == "split"]
     remove_aliases = [d for d in decisions if d.get("action") == "remove_alias"]
-    stats = {"renames": 0, "splits_renamed_rows": 0, "splits_new_groups": 0, "aliases_removed": 0}
+    merge_routes = [d for d in decisions if d.get("action") == "merge_routes"]
+    stats = {"renames": 0, "splits_renamed_rows": 0, "splits_new_groups": 0, "aliases_removed": 0, "routes_merged_rows": 0}
 
     # 1) rename
     for rd in renames:
@@ -176,6 +178,21 @@ def apply_manual_resolutions(rows: list[dict], decisions: list[dict]) -> tuple[l
             if len(new_aliases) != len(aliases):
                 r["aliases"] = new_aliases
                 stats["aliases_removed"] += 1
+
+    # 4) merge_routes：將 alias 群嘅 character name rename 到 target
+    for mr in merge_routes:
+        for m in mr.get("merges", []):
+            target = m["into"]
+            sources = set(m.get("from_aliases", []))
+            for r in rows:
+                if r.get("name") in sources:
+                    r["name"] = target
+                    aliases = list(r.get("aliases") or [])
+                    for s in sources - {target}:
+                        if s not in aliases:
+                            aliases.append(s)
+                    r["aliases"] = aliases
+                    stats["routes_merged_rows"] += 1
     return list(rows), stats
 
 
@@ -445,7 +462,7 @@ def main() -> int:
     manual = load_manual_resolutions()
     if manual.get("decisions"):
         char_rows, manual_stats = apply_manual_resolutions(char_rows, manual["decisions"])
-        print(f"人手 override：renames={manual_stats['renames']} rows, splits={manual_stats['splits_renamed_rows']} rows ({manual_stats['splits_new_groups']} new groups), aliases_removed={manual_stats['aliases_removed']} rows")
+        print(f"人手 override：renames={manual_stats['renames']} rows, splits={manual_stats['splits_renamed_rows']} rows ({manual_stats['splits_new_groups']} new groups), aliases_removed={manual_stats['aliases_removed']} rows, routes_merged={manual_stats['routes_merged_rows']} rows")
 
     # 0903 Phase C：低 conf 排除清單
     phase_c_excl = load_phase_c_exclusions()

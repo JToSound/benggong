@@ -167,15 +167,16 @@ def main() -> int:
 
     add("## 人手審閱待辦")
     add("")
-    add("1. `data/private/review/character-routes.json` — 52 條路線（合併後）；waypoint 合理性抽查")
+    add("1. `data/private/review/character-routes.json` — 51 條路線（已套用 alias 合併，4 群合併：主角/艾匡/賴三/奎斯等）")
     add("2. `data/private/review/entity-resolution.md` — 629 loc / 299 char（Phase C 排除 12 loc + 4 char）")
     add("3. `data/private/review/entity-resolution-review.md` — 審閱決策紀錄（私有）")
     add("4. `data/private/review/review-decisions.md` — 三類審閱決策總結（私有）")
-    add("5. `data/private/review/manual-resolutions.json` — 5 個可疑 alias 群拆解決策（私有）")
+    add("5. `data/private/review/manual-resolutions.json` — 6 個 alias 群決策（私有：split×3, rename×1, no_op×1, remove_alias×1, merge_routes×3）")
     add("6. `data/private/review/phase-c-exclusions.json` — 低 conf (0.55-0.65) entity 排除清單（私有）")
-    add("7. 抽查 `data/public/` 事件摘要（無 low-conf needs_review 公開）")
+    add("7. `data/private/review/route-blockers.md` — Phase D routes 阻擋報告 + 修復手冊（私有）")
     add("8. **Phase C 完成**：`provisional_mode.enabled=false` + `VITE_PROVISIONAL_DATA_MODE=false` + `audit --strict` 過綠")
     add("9. 內部審計：candidates.jsonl 已加 `review_status` 標記（auto_reviewed 5,341 / human_review_needed 1,271 / critical 58）")
+    add("10. **Phase D 暫停**：51 條 routes 推導完成但 routes.geojson 因 character cross-alias 衝突延後（見 blockers 報告）")
     add("")
 
     if not complete:

@@ -1,6 +1,6 @@
 {
-  "dataset_version": "0.2.0-provisional.20260902",
-  "generated_at": "2026-09-02T21:58:08+00:00",
+  "dataset_version": "0.2.0-provisional.20260903",
+  "generated_at": "2026-09-03T02:09:49+00:00",
   "generator": "scripts/build_public_dataset.py ← data/private/evidence/candidates.jsonl",
   "counts": {
     "location": 629,
