@@ -1,13 +1,21 @@
-// 《病港》互動地圖 — 主入口
+// 《病港》互動地圖 — Phase F 主入口
+// Single-page app with: Chapter Strip + SVG Map + Story Panel
 import "./styles/main.css";
 import "./styles/timeline.css";
-import { initMap } from "./map/initMap";
+import { App } from "./app";
+import { initRouter } from "./router";
+import { loadAllData } from "./data/loadAllData";
 
-void initMap("map-root").catch((e) => {
-  console.error("[病港地圖] 初始化失敗", e);
-  const root = document.getElementById("map-root");
-  if (root) {
-    root.innerHTML = `<p class="bg-error">地圖初始化失敗：${String(e)}</p>`;
-  }
-});
-
+// 預載 data 然後啟動 SPA
+const root = document.getElementById("app-root") || document.body;
+if (root) {
+  loadAllData()
+    .then((data) => {
+      const app = new App(root, data);
+      initRouter(app);
+    })
+    .catch((e) => {
+      console.error("[病港地圖] 初始化失敗", e);
+      root.innerHTML = `<p class="bg-error">地圖初始化失敗：${String(e)}</p>`;
+    });
+}

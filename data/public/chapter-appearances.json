@@ -1,0 +1,3835 @@
+{
+  "generated_at": "2026-09-03",
+  "total_characters": 323,
+  "appearances": {
+    "夏晴": {
+      "first_appearance": 1,
+      "last_appearance": 198,
+      "chapter_count": 35,
+      "chapters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        20,
+        21,
+        22,
+        28,
+        33,
+        35,
+        62,
+        65,
+        67,
+        115,
+        149,
+        152,
+        155,
+        156,
+        158,
+        164,
+        165,
+        167,
+        172,
+        174,
+        192,
+        194,
+        195,
+        198
+      ]
+    },
+    "大舊": {
+      "first_appearance": 2,
+      "last_appearance": 197,
+      "chapter_count": 43,
+      "chapters": [
+        2,
+        3,
+        6,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        25,
+        33,
+        35,
+        36,
+        37,
+        39,
+        40,
+        44,
+        52,
+        55,
+        59,
+        62,
+        63,
+        64,
+        67,
+        68,
+        71,
+        94,
+        96,
+        105,
+        108,
+        148,
+        149,
+        167,
+        170,
+        172,
+        173,
+        174,
+        175,
+        191,
+        192,
+        197
+      ]
+    },
+    "阿明": {
+      "first_appearance": 1,
+      "last_appearance": 3,
+      "chapter_count": 3,
+      "chapters": [
+        1,
+        2,
+        3
+      ]
+    },
+    "少佐": {
+      "first_appearance": 1,
+      "last_appearance": 198,
+      "chapter_count": 67,
+      "chapters": [
+        1,
+        2,
+        3,
+        8,
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        25,
+        26,
+        33,
+        34,
+        38,
+        44,
+        55,
+        61,
+        62,
+        63,
+        65,
+        66,
+        67,
+        68,
+        71,
+        88,
+        96,
+        105,
+        106,
+        107,
+        108,
+        109,
+        113,
+        146,
+        148,
+        149,
+        150,
+        151,
+        152,
+        155,
+        156,
+        158,
+        159,
+        162,
+        163,
+        164,
+        165,
+        167,
+        169,
+        170,
+        172,
+        173,
+        174,
+        175,
+        191,
+        192,
+        194,
+        195,
+        196,
+        198
+      ]
+    },
+    "大腦怪物": {
+      "first_appearance": 2,
+      "last_appearance": 2,
+      "chapter_count": 1,
+      "chapters": [
+        2
+      ]
+    },
+    "老賢": {
+      "first_appearance": 3,
+      "last_appearance": 198,
+      "chapter_count": 69,
+      "chapters": [
+        3,
+        6,
+        10,
+        11,
+        12,
+        14,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        25,
+        26,
+        27,
+        28,
+        30,
+        32,
+        33,
+        34,
+        35,
+        37,
+        38,
+        42,
+        43,
+        52,
+        55,
+        56,
+        59,
+        62,
+        63,
+        65,
+        67,
+        68,
+        69,
+        71,
+        72,
+        73,
+        77,
+        78,
+        79,
+        85,
+        97,
+        105,
+        106,
+        108,
+        112,
+        113,
+        115,
+        131,
+        143,
+        146,
+        148,
+        149,
+        158,
+        160,
+        161,
+        163,
+        164,
+        165,
+        167,
+        170,
+        172,
+        175,
+        183,
+        187,
+        192,
+        194,
+        198
+      ]
+    },
+    "玲玲": {
+      "first_appearance": 3,
+      "last_appearance": 6,
+      "chapter_count": 2,
+      "chapters": [
+        3,
+        6
+      ]
+    },
+    "阿登": {
+      "first_appearance": 3,
+      "last_appearance": 173,
+      "chapter_count": 19,
+      "chapters": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        14,
+        15,
+        22,
+        25,
+        33,
+        62,
+        67,
+        164,
+        172,
+        173
+      ]
+    },
+    "MK妹": {
+      "first_appearance": 3,
+      "last_appearance": 3,
+      "chapter_count": 1,
+      "chapters": [
+        3
+      ]
+    },
+    "病腦": {
+      "first_appearance": 3,
+      "last_appearance": 186,
+      "chapter_count": 21,
+      "chapters": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12,
+        15,
+        18,
+        43,
+        44,
+        45,
+        50,
+        76,
+        80,
+        88,
+        89,
+        90,
+        186
+      ]
+    },
+    "大眼大耳": {
+      "first_appearance": 3,
+      "last_appearance": 3,
+      "chapter_count": 1,
+      "chapters": [
+        3
+      ]
+    },
+    "大眼": {
+      "first_appearance": 1,
+      "last_appearance": 179,
+      "chapter_count": 14,
+      "chapters": [
+        1,
+        12,
+        45,
+        46,
+        47,
+        48,
+        75,
+        81,
+        82,
+        86,
+        93,
+        131,
+        153,
+        179
+      ]
+    },
+    "阿登嘅妹妹": {
+      "first_appearance": 4,
+      "last_appearance": 4,
+      "chapter_count": 1,
+      "chapters": [
+        4
+      ]
+    },
+    "送葬隊": {
+      "first_appearance": 4,
+      "last_appearance": 9,
+      "chapter_count": 3,
+      "chapters": [
+        4,
+        8,
+        9
+      ]
+    },
+    "醫療室職員": {
+      "first_appearance": 4,
+      "last_appearance": 4,
+      "chapter_count": 1,
+      "chapters": [
+        4
+      ]
+    },
+    "阿寶": {
+      "first_appearance": 5,
+      "last_appearance": 195,
+      "chapter_count": 7,
+      "chapters": [
+        5,
+        6,
+        26,
+        28,
+        109,
+        149,
+        195
+      ]
+    },
+    "阿陳": {
+      "first_appearance": 7,
+      "last_appearance": 7,
+      "chapter_count": 1,
+      "chapters": [
+        7
+      ]
+    },
+    "推車手": {
+      "first_appearance": 7,
+      "last_appearance": 7,
+      "chapter_count": 1,
+      "chapters": [
+        7
+      ]
+    },
+    "漢森": {
+      "first_appearance": 8,
+      "last_appearance": 106,
+      "chapter_count": 11,
+      "chapters": [
+        8,
+        9,
+        10,
+        11,
+        14,
+        22,
+        44,
+        62,
+        63,
+        67,
+        106
+      ]
+    },
+    "天明": {
+      "first_appearance": 8,
+      "last_appearance": 150,
+      "chapter_count": 13,
+      "chapters": [
+        8,
+        9,
+        10,
+        11,
+        14,
+        22,
+        25,
+        62,
+        67,
+        71,
+        72,
+        146,
+        150
+      ]
+    },
+    "病鼻": {
+      "first_appearance": 8,
+      "last_appearance": 8,
+      "chapter_count": 1,
+      "chapters": [
+        8
+      ]
+    },
+    "大鼻": {
+      "first_appearance": 9,
+      "last_appearance": 86,
+      "chapter_count": 8,
+      "chapters": [
+        9,
+        10,
+        12,
+        24,
+        48,
+        60,
+        81,
+        86
+      ]
+    },
+    "天明的妻子": {
+      "first_appearance": 11,
+      "last_appearance": 11,
+      "chapter_count": 1,
+      "chapters": [
+        11
+      ]
+    },
+    "八字鬍老闆": {
+      "first_appearance": 11,
+      "last_appearance": 11,
+      "chapter_count": 1,
+      "chapters": [
+        11
+      ]
+    },
+    "馬尾女生": {
+      "first_appearance": 12,
+      "last_appearance": 12,
+      "chapter_count": 1,
+      "chapters": [
+        12
+      ]
+    },
+    "不良人": {
+      "first_appearance": 12,
+      "last_appearance": 170,
+      "chapter_count": 20,
+      "chapters": [
+        12,
+        18,
+        19,
+        21,
+        33,
+        38,
+        67,
+        73,
+        75,
+        77,
+        80,
+        81,
+        97,
+        101,
+        105,
+        108,
+        119,
+        138,
+        151,
+        170
+      ]
+    },
+    "大耳": {
+      "first_appearance": 12,
+      "last_appearance": 126,
+      "chapter_count": 10,
+      "chapters": [
+        12,
+        23,
+        24,
+        32,
+        35,
+        48,
+        76,
+        81,
+        110,
+        126
+      ]
+    },
+    "病爪": {
+      "first_appearance": 12,
+      "last_appearance": 172,
+      "chapter_count": 18,
+      "chapters": [
+        12,
+        18,
+        19,
+        22,
+        23,
+        24,
+        32,
+        33,
+        42,
+        67,
+        68,
+        93,
+        94,
+        103,
+        121,
+        151,
+        171,
+        172
+      ]
+    },
+    "復仇男學員": {
+      "first_appearance": 12,
+      "last_appearance": 12,
+      "chapter_count": 1,
+      "chapters": [
+        12
+      ]
+    },
+    "健朗少年": {
+      "first_appearance": 12,
+      "last_appearance": 12,
+      "chapter_count": 1,
+      "chapters": [
+        12
+      ]
+    },
+    "瑜小六": {
+      "first_appearance": 13,
+      "last_appearance": 195,
+      "chapter_count": 43,
+      "chapters": [
+        13,
+        14,
+        15,
+        16,
+        18,
+        19,
+        23,
+        24,
+        25,
+        33,
+        36,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        52,
+        54,
+        55,
+        59,
+        61,
+        63,
+        64,
+        65,
+        67,
+        69,
+        105,
+        106,
+        109,
+        115,
+        150,
+        172,
+        173,
+        174,
+        191,
+        192,
+        193,
+        194,
+        195
+      ]
+    },
+    "肥西": {
+      "first_appearance": 14,
+      "last_appearance": 16,
+      "chapter_count": 3,
+      "chapters": [
+        14,
+        15,
+        16
+      ]
+    },
+    "莫文": {
+      "first_appearance": 14,
+      "last_appearance": 14,
+      "chapter_count": 1,
+      "chapters": [
+        14
+      ]
+    },
+    "陌生少年": {
+      "first_appearance": 15,
+      "last_appearance": 15,
+      "chapter_count": 1,
+      "chapters": [
+        15
+      ]
+    },
+    "德國牧羊犬": {
+      "first_appearance": 15,
+      "last_appearance": 15,
+      "chapter_count": 1,
+      "chapters": [
+        15
+      ]
+    },
+    "A隊": {
+      "first_appearance": 15,
+      "last_appearance": 15,
+      "chapter_count": 1,
+      "chapters": [
+        15
+      ]
+    },
+    "B隊": {
+      "first_appearance": 15,
+      "last_appearance": 15,
+      "chapter_count": 1,
+      "chapters": [
+        15
+      ]
+    },
+    "犬京": {
+      "first_appearance": 16,
+      "last_appearance": 191,
+      "chapter_count": 30,
+      "chapters": [
+        16,
+        17,
+        18,
+        19,
+        23,
+        25,
+        32,
+        33,
+        67,
+        103,
+        104,
+        127,
+        128,
+        129,
+        130,
+        131,
+        142,
+        144,
+        145,
+        146,
+        175,
+        178,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        188,
+        191
+      ]
+    },
+    "Ricky": {
+      "first_appearance": 16,
+      "last_appearance": 185,
+      "chapter_count": 10,
+      "chapters": [
+        16,
+        19,
+        103,
+        104,
+        144,
+        181,
+        182,
+        183,
+        184,
+        185
+      ]
+    },
+    "新型病者「王」": {
+      "first_appearance": 16,
+      "last_appearance": 16,
+      "chapter_count": 1,
+      "chapters": [
+        16
+      ]
+    },
+    "小六": {
+      "first_appearance": 17,
+      "last_appearance": 60,
+      "chapter_count": 8,
+      "chapters": [
+        17,
+        22,
+        48,
+        49,
+        50,
+        51,
+        53,
+        60
+      ]
+    },
+    "啤酒佬": {
+      "first_appearance": 17,
+      "last_appearance": 17,
+      "chapter_count": 1,
+      "chapters": [
+        17
+      ]
+    },
+    "間諜": {
+      "first_appearance": 17,
+      "last_appearance": 17,
+      "chapter_count": 1,
+      "chapters": [
+        17
+      ]
+    },
+    "地中海大叔": {
+      "first_appearance": 18,
+      "last_appearance": 18,
+      "chapter_count": 1,
+      "chapters": [
+        18
+      ]
+    },
+    "王": {
+      "first_appearance": 18,
+      "last_appearance": 18,
+      "chapter_count": 1,
+      "chapters": [
+        18
+      ]
+    },
+    "不破尚": {
+      "first_appearance": 18,
+      "last_appearance": 193,
+      "chapter_count": 44,
+      "chapters": [
+        18,
+        55,
+        65,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        79,
+        80,
+        81,
+        84,
+        85,
+        87,
+        88,
+        91,
+        92,
+        94,
+        96,
+        97,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        119,
+        122,
+        143,
+        146,
+        158,
+        165,
+        166,
+        167,
+        169,
+        170,
+        171,
+        183,
+        186,
+        193
+      ]
+    },
+    "病童": {
+      "first_appearance": 19,
+      "last_appearance": 188,
+      "chapter_count": 16,
+      "chapters": [
+        19,
+        35,
+        39,
+        60,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        110,
+        127,
+        183,
+        186,
+        187,
+        188
+      ]
+    },
+    "看守": {
+      "first_appearance": 19,
+      "last_appearance": 19,
+      "chapter_count": 1,
+      "chapters": [
+        19
+      ]
+    },
+    "賴三": {
+      "first_appearance": 20,
+      "last_appearance": 195,
+      "chapter_count": 17,
+      "chapters": [
+        20,
+        25,
+        33,
+        34,
+        35,
+        36,
+        38,
+        43,
+        55,
+        59,
+        60,
+        62,
+        63,
+        67,
+        82,
+        175,
+        195
+      ]
+    },
+    "阿玲": {
+      "first_appearance": 22,
+      "last_appearance": 195,
+      "chapter_count": 28,
+      "chapters": [
+        22,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        62,
+        63,
+        65,
+        67,
+        71,
+        72,
+        105,
+        106,
+        115,
+        148,
+        149,
+        170,
+        172,
+        191,
+        192,
+        195
+      ]
+    },
+    "天明老婆": {
+      "first_appearance": 22,
+      "last_appearance": 22,
+      "chapter_count": 1,
+      "chapters": [
+        22
+      ]
+    },
+    "王達尼": {
+      "first_appearance": 22,
+      "last_appearance": 198,
+      "chapter_count": 59,
+      "chapters": [
+        22,
+        26,
+        28,
+        29,
+        30,
+        32,
+        35,
+        40,
+        41,
+        55,
+        56,
+        57,
+        58,
+        59,
+        62,
+        63,
+        65,
+        112,
+        115,
+        116,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        128,
+        129,
+        130,
+        131,
+        142,
+        144,
+        145,
+        146,
+        147,
+        148,
+        171,
+        172,
+        175,
+        176,
+        178,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        189,
+        190,
+        191,
+        192,
+        194,
+        195,
+        197,
+        198
+      ]
+    },
+    "病王": {
+      "first_appearance": 25,
+      "last_appearance": 102,
+      "chapter_count": 2,
+      "chapters": [
+        25,
+        102
+      ]
+    },
+    "董倫": {
+      "first_appearance": 26,
+      "last_appearance": 195,
+      "chapter_count": 50,
+      "chapters": [
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        34,
+        55,
+        56,
+        61,
+        62,
+        63,
+        65,
+        66,
+        67,
+        68,
+        71,
+        72,
+        79,
+        85,
+        92,
+        97,
+        102,
+        104,
+        105,
+        106,
+        107,
+        116,
+        117,
+        134,
+        146,
+        147,
+        153,
+        154,
+        155,
+        156,
+        157,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        170,
+        183,
+        190,
+        193,
+        195
+      ]
+    },
+    "八字鬍青年": {
+      "first_appearance": 30,
+      "last_appearance": 30,
+      "chapter_count": 1,
+      "chapters": [
+        30
+      ]
+    },
+    "十歲孖仔": {
+      "first_appearance": 30,
+      "last_appearance": 30,
+      "chapter_count": 1,
+      "chapters": [
+        30
+      ]
+    },
+    "熊人先生": {
+      "first_appearance": 31,
+      "last_appearance": 31,
+      "chapter_count": 1,
+      "chapters": [
+        31
+      ]
+    },
+    "兩個十歲小孩": {
+      "first_appearance": 31,
+      "last_appearance": 31,
+      "chapter_count": 1,
+      "chapters": [
+        31
+      ]
+    },
+    "Leo": {
+      "first_appearance": 32,
+      "last_appearance": 32,
+      "chapter_count": 1,
+      "chapters": [
+        32
+      ]
+    },
+    "阿宇": {
+      "first_appearance": 32,
+      "last_appearance": 32,
+      "chapter_count": 1,
+      "chapters": [
+        32
+      ]
+    },
+    "金美娜": {
+      "first_appearance": 33,
+      "last_appearance": 33,
+      "chapter_count": 1,
+      "chapters": [
+        33
+      ]
+    },
+    "Ann": {
+      "first_appearance": 33,
+      "last_appearance": 33,
+      "chapter_count": 1,
+      "chapters": [
+        33
+      ]
+    },
+    "北賢": {
+      "first_appearance": 35,
+      "last_appearance": 191,
+      "chapter_count": 19,
+      "chapters": [
+        35,
+        38,
+        39,
+        54,
+        119,
+        120,
+        121,
+        122,
+        166,
+        169,
+        171,
+        172,
+        175,
+        178,
+        181,
+        183,
+        184,
+        185,
+        191
+      ]
+    },
+    "Chirs": {
+      "first_appearance": 35,
+      "last_appearance": 59,
+      "chapter_count": 4,
+      "chapters": [
+        35,
+        39,
+        40,
+        59
+      ]
+    },
+    "灰髮貴家女子": {
+      "first_appearance": 35,
+      "last_appearance": 35,
+      "chapter_count": 1,
+      "chapters": [
+        35
+      ]
+    },
+    "灰髮男生": {
+      "first_appearance": 35,
+      "last_appearance": 35,
+      "chapter_count": 1,
+      "chapters": [
+        35
+      ]
+    },
+    "戴眼鏡的胖子": {
+      "first_appearance": 35,
+      "last_appearance": 35,
+      "chapter_count": 1,
+      "chapters": [
+        35
+      ]
+    },
+    "垃圾場黑商": {
+      "first_appearance": 35,
+      "last_appearance": 35,
+      "chapter_count": 1,
+      "chapters": [
+        35
+      ]
+    },
+    "公仔": {
+      "first_appearance": 36,
+      "last_appearance": 193,
+      "chapter_count": 47,
+      "chapters": [
+        36,
+        37,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        50,
+        52,
+        53,
+        54,
+        60,
+        61,
+        62,
+        64,
+        65,
+        66,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        85,
+        87,
+        88,
+        89,
+        90,
+        131,
+        132,
+        144,
+        146,
+        175,
+        178,
+        179,
+        180,
+        187,
+        192,
+        193
+      ]
+    },
+    "娃娃": {
+      "first_appearance": 36,
+      "last_appearance": 197,
+      "chapter_count": 42,
+      "chapters": [
+        36,
+        37,
+        38,
+        40,
+        41,
+        43,
+        45,
+        46,
+        47,
+        48,
+        50,
+        52,
+        53,
+        54,
+        60,
+        61,
+        62,
+        64,
+        65,
+        66,
+        72,
+        73,
+        74,
+        75,
+        79,
+        80,
+        85,
+        87,
+        88,
+        89,
+        90,
+        131,
+        132,
+        133,
+        142,
+        144,
+        175,
+        178,
+        179,
+        180,
+        192,
+        197
+      ]
+    },
+    "公仔之父": {
+      "first_appearance": 37,
+      "last_appearance": 37,
+      "chapter_count": 1,
+      "chapters": [
+        37
+      ]
+    },
+    "公仔之母": {
+      "first_appearance": 37,
+      "last_appearance": 37,
+      "chapter_count": 1,
+      "chapters": [
+        37
+      ]
+    },
+    "馬德梵": {
+      "first_appearance": 38,
+      "last_appearance": 193,
+      "chapter_count": 13,
+      "chapters": [
+        38,
+        43,
+        54,
+        61,
+        62,
+        63,
+        65,
+        66,
+        67,
+        91,
+        92,
+        94,
+        193
+      ]
+    },
+    "馬德梵老婆": {
+      "first_appearance": 38,
+      "last_appearance": 65,
+      "chapter_count": 2,
+      "chapters": [
+        38,
+        65
+      ]
+    },
+    "南愚": {
+      "first_appearance": 39,
+      "last_appearance": 185,
+      "chapter_count": 20,
+      "chapters": [
+        39,
+        43,
+        54,
+        59,
+        60,
+        74,
+        75,
+        119,
+        120,
+        121,
+        122,
+        169,
+        171,
+        172,
+        175,
+        178,
+        181,
+        183,
+        184,
+        185
+      ]
+    },
+    "阿文": {
+      "first_appearance": 39,
+      "last_appearance": 105,
+      "chapter_count": 20,
+      "chapters": [
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        52,
+        53,
+        54,
+        59,
+        60,
+        61,
+        64,
+        105
+      ]
+    },
+    "奧迪": {
+      "first_appearance": 39,
+      "last_appearance": 173,
+      "chapter_count": 18,
+      "chapters": [
+        39,
+        40,
+        41,
+        43,
+        44,
+        45,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        59,
+        60,
+        61,
+        105,
+        173
+      ]
+    },
+    "Chris": {
+      "first_appearance": 41,
+      "last_appearance": 173,
+      "chapter_count": 15,
+      "chapters": [
+        41,
+        43,
+        44,
+        45,
+        48,
+        49,
+        50,
+        52,
+        53,
+        54,
+        60,
+        61,
+        63,
+        105,
+        173
+      ]
+    },
+    "Dick Grayson": {
+      "first_appearance": 42,
+      "last_appearance": 43,
+      "chapter_count": 2,
+      "chapters": [
+        42,
+        43
+      ]
+    },
+    "Jason Todd": {
+      "first_appearance": 42,
+      "last_appearance": 43,
+      "chapter_count": 2,
+      "chapters": [
+        42,
+        43
+      ]
+    },
+    "病嘴": {
+      "first_appearance": 45,
+      "last_appearance": 183,
+      "chapter_count": 7,
+      "chapters": [
+        45,
+        46,
+        47,
+        48,
+        52,
+        60,
+        183
+      ]
+    },
+    "老師": {
+      "first_appearance": 46,
+      "last_appearance": 180,
+      "chapter_count": 10,
+      "chapters": [
+        46,
+        50,
+        74,
+        75,
+        87,
+        88,
+        89,
+        132,
+        179,
+        180
+      ]
+    },
+    "病牙": {
+      "first_appearance": 47,
+      "last_appearance": 153,
+      "chapter_count": 3,
+      "chapters": [
+        47,
+        48,
+        153
+      ]
+    },
+    "穿醫生袍男人": {
+      "first_appearance": 50,
+      "last_appearance": 50,
+      "chapter_count": 1,
+      "chapters": [
+        50
+      ]
+    },
+    "滿天": {
+      "first_appearance": 51,
+      "last_appearance": 195,
+      "chapter_count": 47,
+      "chapters": [
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        65,
+        67,
+        74,
+        79,
+        84,
+        85,
+        88,
+        89,
+        90,
+        91,
+        94,
+        97,
+        121,
+        126,
+        131,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        140,
+        142,
+        143,
+        144,
+        146,
+        147,
+        163,
+        168,
+        171,
+        173,
+        174,
+        175,
+        178,
+        179,
+        183,
+        192,
+        193,
+        195
+      ]
+    },
+    "傑夫丸": {
+      "first_appearance": 55,
+      "last_appearance": 58,
+      "chapter_count": 4,
+      "chapters": [
+        55,
+        56,
+        57,
+        58
+      ]
+    },
+    "木工部老主管": {
+      "first_appearance": 56,
+      "last_appearance": 56,
+      "chapter_count": 1,
+      "chapters": [
+        56
+      ]
+    },
+    "愛紗": {
+      "first_appearance": 57,
+      "last_appearance": 198,
+      "chapter_count": 13,
+      "chapters": [
+        57,
+        58,
+        59,
+        62,
+        63,
+        131,
+        148,
+        149,
+        172,
+        191,
+        192,
+        195,
+        198
+      ]
+    },
+    "武器製造室主管": {
+      "first_appearance": 57,
+      "last_appearance": 57,
+      "chapter_count": 1,
+      "chapters": [
+        57
+      ]
+    },
+    "神秘商人": {
+      "first_appearance": 57,
+      "last_appearance": 57,
+      "chapter_count": 1,
+      "chapters": [
+        57
+      ]
+    },
+    "鐵匠主管": {
+      "first_appearance": 59,
+      "last_appearance": 59,
+      "chapter_count": 1,
+      "chapters": [
+        59
+      ]
+    },
+    "馬德梵一家": {
+      "first_appearance": 59,
+      "last_appearance": 59,
+      "chapter_count": 1,
+      "chapters": [
+        59
+      ]
+    },
+    "攻擊學老師": {
+      "first_appearance": 61,
+      "last_appearance": 61,
+      "chapter_count": 1,
+      "chapters": [
+        61
+      ]
+    },
+    "帥氣男同學": {
+      "first_appearance": 64,
+      "last_appearance": 64,
+      "chapter_count": 1,
+      "chapters": [
+        64
+      ]
+    },
+    "冰": {
+      "first_appearance": 66,
+      "last_appearance": 66,
+      "chapter_count": 1,
+      "chapters": [
+        66
+      ]
+    },
+    "會說話嘅病者": {
+      "first_appearance": 66,
+      "last_appearance": 66,
+      "chapter_count": 1,
+      "chapters": [
+        66
+      ]
+    },
+    "可可": {
+      "first_appearance": 67,
+      "last_appearance": 67,
+      "chapter_count": 1,
+      "chapters": [
+        67
+      ]
+    },
+    "大本營": {
+      "first_appearance": 67,
+      "last_appearance": 150,
+      "chapter_count": 4,
+      "chapters": [
+        67,
+        108,
+        119,
+        150
+      ]
+    },
+    "攻擊學嘅病者老師": {
+      "first_appearance": 68,
+      "last_appearance": 68,
+      "chapter_count": 1,
+      "chapters": [
+        68
+      ]
+    },
+    "電鋸男": {
+      "first_appearance": 68,
+      "last_appearance": 68,
+      "chapter_count": 1,
+      "chapters": [
+        68
+      ]
+    },
+    "光頭不良人": {
+      "first_appearance": 68,
+      "last_appearance": 68,
+      "chapter_count": 1,
+      "chapters": [
+        68
+      ]
+    },
+    "光頭不良人首領": {
+      "first_appearance": 68,
+      "last_appearance": 68,
+      "chapter_count": 1,
+      "chapters": [
+        68
+      ]
+    },
+    "小佐": {
+      "first_appearance": 68,
+      "last_appearance": 68,
+      "chapter_count": 1,
+      "chapters": [
+        68
+      ]
+    },
+    "攻擊學病者老師": {
+      "first_appearance": 68,
+      "last_appearance": 68,
+      "chapter_count": 1,
+      "chapters": [
+        68
+      ]
+    },
+    "無名不良人": {
+      "first_appearance": 70,
+      "last_appearance": 70,
+      "chapter_count": 1,
+      "chapters": [
+        70
+      ]
+    },
+    "掃把頭大叔": {
+      "first_appearance": 71,
+      "last_appearance": 71,
+      "chapter_count": 1,
+      "chapters": [
+        71
+      ]
+    },
+    "木箭手": {
+      "first_appearance": 71,
+      "last_appearance": 71,
+      "chapter_count": 1,
+      "chapters": [
+        71
+      ]
+    },
+    "掃把頭不良人大叔": {
+      "first_appearance": 71,
+      "last_appearance": 71,
+      "chapter_count": 1,
+      "chapters": [
+        71
+      ]
+    },
+    "王白蛋": {
+      "first_appearance": 73,
+      "last_appearance": 97,
+      "chapter_count": 11,
+      "chapters": [
+        73,
+        74,
+        80,
+        81,
+        84,
+        86,
+        87,
+        88,
+        91,
+        92,
+        97
+      ]
+    },
+    "標準不良人大叔": {
+      "first_appearance": 72,
+      "last_appearance": 72,
+      "chapter_count": 1,
+      "chapters": [
+        72
+      ]
+    },
+    "不破尚的飛虎部隊成員": {
+      "first_appearance": 74,
+      "last_appearance": 74,
+      "chapter_count": 1,
+      "chapters": [
+        74
+      ]
+    },
+    "敘事者": {
+      "first_appearance": 73,
+      "last_appearance": 171,
+      "chapter_count": 5,
+      "chapters": [
+        73,
+        148,
+        162,
+        170,
+        171
+      ]
+    },
+    "我的母親": {
+      "first_appearance": 76,
+      "last_appearance": 76,
+      "chapter_count": 1,
+      "chapters": [
+        76
+      ]
+    },
+    "清道夫": {
+      "first_appearance": 76,
+      "last_appearance": 76,
+      "chapter_count": 1,
+      "chapters": [
+        76
+      ]
+    },
+    "米奇老鼠男人": {
+      "first_appearance": 77,
+      "last_appearance": 77,
+      "chapter_count": 1,
+      "chapters": [
+        77
+      ]
+    },
+    "我母親": {
+      "first_appearance": 77,
+      "last_appearance": 77,
+      "chapter_count": 1,
+      "chapters": [
+        77
+      ]
+    },
+    "我父親": {
+      "first_appearance": 77,
+      "last_appearance": 77,
+      "chapter_count": 1,
+      "chapters": [
+        77
+      ]
+    },
+    "欺凌主角的同學": {
+      "first_appearance": 77,
+      "last_appearance": 77,
+      "chapter_count": 1,
+      "chapters": [
+        77
+      ]
+    },
+    "那個男人": {
+      "first_appearance": 78,
+      "last_appearance": 78,
+      "chapter_count": 1,
+      "chapters": [
+        78
+      ]
+    },
+    "小男孩": {
+      "first_appearance": 78,
+      "last_appearance": 78,
+      "chapter_count": 1,
+      "chapters": [
+        78
+      ]
+    },
+    "我嘅母親": {
+      "first_appearance": 76,
+      "last_appearance": 76,
+      "chapter_count": 1,
+      "chapters": [
+        76
+      ]
+    },
+    "公仔嘅養父母": {
+      "first_appearance": 76,
+      "last_appearance": 76,
+      "chapter_count": 1,
+      "chapters": [
+        76
+      ]
+    },
+    "聽不破尚": {
+      "first_appearance": 75,
+      "last_appearance": 75,
+      "chapter_count": 1,
+      "chapters": [
+        75
+      ]
+    },
+    "凱銘": {
+      "first_appearance": 79,
+      "last_appearance": 81,
+      "chapter_count": 3,
+      "chapters": [
+        79,
+        80,
+        81
+      ]
+    },
+    "主角的母親": {
+      "first_appearance": 77,
+      "last_appearance": 77,
+      "chapter_count": 1,
+      "chapters": [
+        77
+      ]
+    },
+    "主角的父親": {
+      "first_appearance": 77,
+      "last_appearance": 77,
+      "chapter_count": 1,
+      "chapters": [
+        77
+      ]
+    },
+    "F小隊": {
+      "first_appearance": 79,
+      "last_appearance": 79,
+      "chapter_count": 1,
+      "chapters": [
+        79
+      ]
+    },
+    "不良人廚師": {
+      "first_appearance": 79,
+      "last_appearance": 79,
+      "chapter_count": 1,
+      "chapters": [
+        79
+      ]
+    },
+    "欺凌我的同學": {
+      "first_appearance": 77,
+      "last_appearance": 77,
+      "chapter_count": 1,
+      "chapters": [
+        77
+      ]
+    },
+    "白魂": {
+      "first_appearance": 80,
+      "last_appearance": 191,
+      "chapter_count": 42,
+      "chapters": [
+        80,
+        81,
+        82,
+        84,
+        86,
+        87,
+        88,
+        97,
+        99,
+        100,
+        102,
+        103,
+        104,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113,
+        115,
+        116,
+        117,
+        126,
+        135,
+        136,
+        137,
+        138,
+        145,
+        175,
+        176,
+        178,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        191
+      ]
+    },
+    "廚子": {
+      "first_appearance": 80,
+      "last_appearance": 80,
+      "chapter_count": 1,
+      "chapters": [
+        80
+      ]
+    },
+    "病翼": {
+      "first_appearance": 80,
+      "last_appearance": 188,
+      "chapter_count": 7,
+      "chapters": [
+        80,
+        86,
+        121,
+        123,
+        133,
+        185,
+        188
+      ]
+    },
+    "鳥嘴": {
+      "first_appearance": 81,
+      "last_appearance": 153,
+      "chapter_count": 11,
+      "chapters": [
+        81,
+        96,
+        97,
+        99,
+        100,
+        102,
+        105,
+        110,
+        142,
+        152,
+        153
+      ]
+    },
+    "班尼": {
+      "first_appearance": 81,
+      "last_appearance": 138,
+      "chapter_count": 12,
+      "chapters": [
+        81,
+        82,
+        83,
+        84,
+        85,
+        87,
+        97,
+        99,
+        100,
+        110,
+        135,
+        138
+      ]
+    },
+    "八樓權貴": {
+      "first_appearance": 81,
+      "last_appearance": 81,
+      "chapter_count": 1,
+      "chapters": [
+        81
+      ]
+    },
+    "盜屍賊": {
+      "first_appearance": 82,
+      "last_appearance": 84,
+      "chapter_count": 3,
+      "chapters": [
+        82,
+        83,
+        84
+      ]
+    },
+    "紅點病者": {
+      "first_appearance": 80,
+      "last_appearance": 80,
+      "chapter_count": 1,
+      "chapters": [
+        80
+      ]
+    },
+    "銘凱": {
+      "first_appearance": 84,
+      "last_appearance": 196,
+      "chapter_count": 23,
+      "chapters": [
+        84,
+        85,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        99,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        129,
+        143,
+        169,
+        170,
+        171,
+        192,
+        196
+      ]
+    },
+    "喪伯": {
+      "first_appearance": 85,
+      "last_appearance": 87,
+      "chapter_count": 3,
+      "chapters": [
+        85,
+        86,
+        87
+      ]
+    },
+    "遊戲負責人": {
+      "first_appearance": 85,
+      "last_appearance": 85,
+      "chapter_count": 1,
+      "chapters": [
+        85
+      ]
+    },
+    "阿漢": {
+      "first_appearance": 88,
+      "last_appearance": 172,
+      "chapter_count": 3,
+      "chapters": [
+        88,
+        89,
+        172
+      ]
+    },
+    "大偉": {
+      "first_appearance": 88,
+      "last_appearance": 88,
+      "chapter_count": 1,
+      "chapters": [
+        88
+      ]
+    },
+    "夏當": {
+      "first_appearance": 89,
+      "last_appearance": 100,
+      "chapter_count": 7,
+      "chapters": [
+        89,
+        90,
+        91,
+        94,
+        97,
+        99,
+        100
+      ]
+    },
+    "竊屍賊": {
+      "first_appearance": 93,
+      "last_appearance": 94,
+      "chapter_count": 2,
+      "chapters": [
+        93,
+        94
+      ]
+    },
+    "健仁": {
+      "first_appearance": 95,
+      "last_appearance": 96,
+      "chapter_count": 2,
+      "chapters": [
+        95,
+        96
+      ]
+    },
+    "健仁嘅友人": {
+      "first_appearance": 95,
+      "last_appearance": 95,
+      "chapter_count": 1,
+      "chapters": [
+        95
+      ]
+    },
+    "阿洛": {
+      "first_appearance": 96,
+      "last_appearance": 96,
+      "chapter_count": 1,
+      "chapters": [
+        96
+      ]
+    },
+    "國王": {
+      "first_appearance": 98,
+      "last_appearance": 195,
+      "chapter_count": 12,
+      "chapters": [
+        98,
+        101,
+        109,
+        115,
+        116,
+        117,
+        144,
+        145,
+        146,
+        163,
+        176,
+        195
+      ]
+    },
+    "星宇": {
+      "first_appearance": 99,
+      "last_appearance": 111,
+      "chapter_count": 5,
+      "chapters": [
+        99,
+        100,
+        102,
+        110,
+        111
+      ]
+    },
+    "平子": {
+      "first_appearance": 99,
+      "last_appearance": 99,
+      "chapter_count": 1,
+      "chapters": [
+        99
+      ]
+    },
+    "寶琳王國公主": {
+      "first_appearance": 99,
+      "last_appearance": 99,
+      "chapter_count": 1,
+      "chapters": [
+        99
+      ]
+    },
+    "戴眼鏡的斯文男": {
+      "first_appearance": 99,
+      "last_appearance": 99,
+      "chapter_count": 1,
+      "chapters": [
+        99
+      ]
+    },
+    "平子小姐": {
+      "first_appearance": 100,
+      "last_appearance": 102,
+      "chapter_count": 3,
+      "chapters": [
+        100,
+        101,
+        102
+      ]
+    },
+    "昇明": {
+      "first_appearance": 100,
+      "last_appearance": 100,
+      "chapter_count": 1,
+      "chapters": [
+        100
+      ]
+    },
+    "寶琳倖存區公主": {
+      "first_appearance": 100,
+      "last_appearance": 100,
+      "chapter_count": 1,
+      "chapters": [
+        100
+      ]
+    },
+    "舞者": {
+      "first_appearance": 101,
+      "last_appearance": 184,
+      "chapter_count": 5,
+      "chapters": [
+        101,
+        102,
+        109,
+        110,
+        184
+      ]
+    },
+    "病者平權組織": {
+      "first_appearance": 101,
+      "last_appearance": 127,
+      "chapter_count": 4,
+      "chapters": [
+        101,
+        119,
+        124,
+        127
+      ]
+    },
+    "三名年輕成員": {
+      "first_appearance": 101,
+      "last_appearance": 101,
+      "chapter_count": 1,
+      "chapters": [
+        101
+      ]
+    },
+    "艾匡": {
+      "first_appearance": 102,
+      "last_appearance": 189,
+      "chapter_count": 17,
+      "chapters": [
+        102,
+        103,
+        104,
+        110,
+        111,
+        112,
+        113,
+        115,
+        116,
+        117,
+        134,
+        145,
+        175,
+        176,
+        178,
+        188,
+        189
+      ]
+    },
+    "Bomi": {
+      "first_appearance": 103,
+      "last_appearance": 131,
+      "chapter_count": 4,
+      "chapters": [
+        103,
+        104,
+        128,
+        131
+      ]
+    },
+    "教主": {
+      "first_appearance": 97,
+      "last_appearance": 103,
+      "chapter_count": 2,
+      "chapters": [
+        97,
+        103
+      ]
+    },
+    "病皇": {
+      "first_appearance": 103,
+      "last_appearance": 104,
+      "chapter_count": 2,
+      "chapters": [
+        103,
+        104
+      ]
+    },
+    "病者平權組織教主": {
+      "first_appearance": 104,
+      "last_appearance": 104,
+      "chapter_count": 1,
+      "chapters": [
+        104
+      ]
+    },
+    "美容中心男店員": {
+      "first_appearance": 111,
+      "last_appearance": 111,
+      "chapter_count": 1,
+      "chapters": [
+        111
+      ]
+    },
+    "寶琳柒拾老闆": {
+      "first_appearance": 111,
+      "last_appearance": 112,
+      "chapter_count": 2,
+      "chapters": [
+        111,
+        112
+      ]
+    },
+    "W": {
+      "first_appearance": 112,
+      "last_appearance": 114,
+      "chapter_count": 3,
+      "chapters": [
+        112,
+        113,
+        114
+      ]
+    },
+    "雨川": {
+      "first_appearance": 113,
+      "last_appearance": 137,
+      "chapter_count": 7,
+      "chapters": [
+        113,
+        114,
+        119,
+        121,
+        122,
+        123,
+        137
+      ]
+    },
+    "「漁味」老闆": {
+      "first_appearance": 113,
+      "last_appearance": 113,
+      "chapter_count": 1,
+      "chapters": [
+        113
+      ]
+    },
+    "瓦安": {
+      "first_appearance": 113,
+      "last_appearance": 175,
+      "chapter_count": 14,
+      "chapters": [
+        113,
+        114,
+        118,
+        119,
+        123,
+        134,
+        135,
+        136,
+        137,
+        138,
+        139,
+        146,
+        147,
+        175
+      ]
+    },
+    "書呆子青年": {
+      "first_appearance": 114,
+      "last_appearance": 114,
+      "chapter_count": 1,
+      "chapters": [
+        114
+      ]
+    },
+    "帶路的女子信徒": {
+      "first_appearance": 114,
+      "last_appearance": 114,
+      "chapter_count": 1,
+      "chapters": [
+        114
+      ]
+    },
+    "老闆": {
+      "first_appearance": 115,
+      "last_appearance": 117,
+      "chapter_count": 3,
+      "chapters": [
+        115,
+        116,
+        117
+      ]
+    },
+    "白鯨": {
+      "first_appearance": 116,
+      "last_appearance": 195,
+      "chapter_count": 26,
+      "chapters": [
+        116,
+        117,
+        122,
+        123,
+        128,
+        145,
+        146,
+        166,
+        169,
+        172,
+        173,
+        176,
+        178,
+        179,
+        180,
+        181,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        192,
+        195
+      ]
+    },
+    "小老鼠寶拉": {
+      "first_appearance": 118,
+      "last_appearance": 119,
+      "chapter_count": 2,
+      "chapters": [
+        118,
+        119
+      ]
+    },
+    "黑鴉": {
+      "first_appearance": 118,
+      "last_appearance": 128,
+      "chapter_count": 6,
+      "chapters": [
+        118,
+        119,
+        123,
+        125,
+        126,
+        128
+      ]
+    },
+    "守寡舌女": {
+      "first_appearance": 119,
+      "last_appearance": 119,
+      "chapter_count": 1,
+      "chapters": [
+        119
+      ]
+    },
+    "說書人": {
+      "first_appearance": 119,
+      "last_appearance": 119,
+      "chapter_count": 1,
+      "chapters": [
+        119
+      ]
+    },
+    "胡子老闆": {
+      "first_appearance": 119,
+      "last_appearance": 122,
+      "chapter_count": 4,
+      "chapters": [
+        119,
+        120,
+        121,
+        122
+      ]
+    },
+    "賣木雕婆婆": {
+      "first_appearance": 119,
+      "last_appearance": 119,
+      "chapter_count": 1,
+      "chapters": [
+        119
+      ]
+    },
+    "抽血醫生": {
+      "first_appearance": 121,
+      "last_appearance": 121,
+      "chapter_count": 1,
+      "chapters": [
+        121
+      ]
+    },
+    "哈姆雷特": {
+      "first_appearance": 122,
+      "last_appearance": 122,
+      "chapter_count": 1,
+      "chapters": [
+        122
+      ]
+    },
+    "Nina": {
+      "first_appearance": 117,
+      "last_appearance": 195,
+      "chapter_count": 5,
+      "chapters": [
+        117,
+        123,
+        125,
+        126,
+        195
+      ]
+    },
+    "寶拉": {
+      "first_appearance": 115,
+      "last_appearance": 175,
+      "chapter_count": 3,
+      "chapters": [
+        115,
+        123,
+        175
+      ]
+    },
+    "老木匠": {
+      "first_appearance": 123,
+      "last_appearance": 123,
+      "chapter_count": 1,
+      "chapters": [
+        123
+      ]
+    },
+    "漢木": {
+      "first_appearance": 124,
+      "last_appearance": 124,
+      "chapter_count": 1,
+      "chapters": [
+        124
+      ]
+    },
+    "村長": {
+      "first_appearance": 124,
+      "last_appearance": 126,
+      "chapter_count": 3,
+      "chapters": [
+        124,
+        125,
+        126
+      ]
+    },
+    "奎斯": {
+      "first_appearance": 117,
+      "last_appearance": 195,
+      "chapter_count": 35,
+      "chapters": [
+        117,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130,
+        131,
+        132,
+        133,
+        134,
+        135,
+        142,
+        144,
+        145,
+        146,
+        147,
+        175,
+        176,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        188,
+        189,
+        190,
+        191,
+        192,
+        193,
+        195
+      ]
+    },
+    "漢木老伯": {
+      "first_appearance": 126,
+      "last_appearance": 126,
+      "chapter_count": 1,
+      "chapters": [
+        126
+      ]
+    },
+    "白衣教徒": {
+      "first_appearance": 126,
+      "last_appearance": 126,
+      "chapter_count": 1,
+      "chapters": [
+        126
+      ]
+    },
+    "德蘭女教主": {
+      "first_appearance": 127,
+      "last_appearance": 131,
+      "chapter_count": 2,
+      "chapters": [
+        127,
+        131
+      ]
+    },
+    "男教主": {
+      "first_appearance": 127,
+      "last_appearance": 127,
+      "chapter_count": 1,
+      "chapters": [
+        127
+      ]
+    },
+    "米奇瘋子倖存者": {
+      "first_appearance": 127,
+      "last_appearance": 127,
+      "chapter_count": 1,
+      "chapters": [
+        127
+      ]
+    },
+    "病獵公會": {
+      "first_appearance": 127,
+      "last_appearance": 184,
+      "chapter_count": 2,
+      "chapters": [
+        127,
+        184
+      ]
+    },
+    "德蘭": {
+      "first_appearance": 128,
+      "last_appearance": 128,
+      "chapter_count": 1,
+      "chapters": [
+        128
+      ]
+    },
+    "南愚與北賢": {
+      "first_appearance": 128,
+      "last_appearance": 128,
+      "chapter_count": 1,
+      "chapters": [
+        128
+      ]
+    },
+    "德蘭教主": {
+      "first_appearance": 130,
+      "last_appearance": 130,
+      "chapter_count": 1,
+      "chapters": [
+        130
+      ]
+    },
+    "光頭教主": {
+      "first_appearance": 130,
+      "last_appearance": 130,
+      "chapter_count": 1,
+      "chapters": [
+        130
+      ]
+    },
+    "烏鴉先生": {
+      "first_appearance": 131,
+      "last_appearance": 131,
+      "chapter_count": 1,
+      "chapters": [
+        131
+      ]
+    },
+    "寶琳倖存區守衛": {
+      "first_appearance": 110,
+      "last_appearance": 110,
+      "chapter_count": 1,
+      "chapters": [
+        110
+      ]
+    },
+    "戴米奇面具的人類瘋子": {
+      "first_appearance": 110,
+      "last_appearance": 110,
+      "chapter_count": 1,
+      "chapters": [
+        110
+      ]
+    },
+    "大佬傑": {
+      "first_appearance": 132,
+      "last_appearance": 132,
+      "chapter_count": 1,
+      "chapters": [
+        132
+      ]
+    },
+    "兩米高惡漢": {
+      "first_appearance": 132,
+      "last_appearance": 132,
+      "chapter_count": 1,
+      "chapters": [
+        132
+      ]
+    },
+    "製毒廠男人": {
+      "first_appearance": 133,
+      "last_appearance": 133,
+      "chapter_count": 1,
+      "chapters": [
+        133
+      ]
+    },
+    "阿禮": {
+      "first_appearance": 134,
+      "last_appearance": 191,
+      "chapter_count": 6,
+      "chapters": [
+        134,
+        135,
+        137,
+        138,
+        142,
+        191
+      ]
+    },
+    "小老鼠": {
+      "first_appearance": 136,
+      "last_appearance": 137,
+      "chapter_count": 2,
+      "chapters": [
+        136,
+        137
+      ]
+    },
+    "雙腳殘廢嘅乞丐": {
+      "first_appearance": 136,
+      "last_appearance": 136,
+      "chapter_count": 1,
+      "chapters": [
+        136
+      ]
+    },
+    "瘋狂嘅醫師": {
+      "first_appearance": 136,
+      "last_appearance": 136,
+      "chapter_count": 1,
+      "chapters": [
+        136
+      ]
+    },
+    "老鄧": {
+      "first_appearance": 138,
+      "last_appearance": 178,
+      "chapter_count": 4,
+      "chapters": [
+        138,
+        139,
+        140,
+        178
+      ]
+    },
+    "艾康王子": {
+      "first_appearance": 134,
+      "last_appearance": 138,
+      "chapter_count": 2,
+      "chapters": [
+        134,
+        138
+      ]
+    },
+    "大眼病者": {
+      "first_appearance": 138,
+      "last_appearance": 138,
+      "chapter_count": 1,
+      "chapters": [
+        138
+      ]
+    },
+    "病者和平協會": {
+      "first_appearance": 138,
+      "last_appearance": 138,
+      "chapter_count": 1,
+      "chapters": [
+        138
+      ]
+    },
+    "那個人": {
+      "first_appearance": 139,
+      "last_appearance": 139,
+      "chapter_count": 1,
+      "chapters": [
+        139
+      ]
+    },
+    "佬大傑": {
+      "first_appearance": 133,
+      "last_appearance": 133,
+      "chapter_count": 1,
+      "chapters": [
+        133
+      ]
+    },
+    "老太婆": {
+      "first_appearance": 134,
+      "last_appearance": 134,
+      "chapter_count": 1,
+      "chapters": [
+        134
+      ]
+    },
+    "皇室御用劍客": {
+      "first_appearance": 134,
+      "last_appearance": 134,
+      "chapter_count": 1,
+      "chapters": [
+        134
+      ]
+    },
+    "艾氏皇室": {
+      "first_appearance": 139,
+      "last_appearance": 139,
+      "chapter_count": 1,
+      "chapters": [
+        139
+      ]
+    },
+    "不明男人": {
+      "first_appearance": 142,
+      "last_appearance": 142,
+      "chapter_count": 1,
+      "chapters": [
+        142
+      ]
+    },
+    "未命名超級病者": {
+      "first_appearance": 142,
+      "last_appearance": 142,
+      "chapter_count": 1,
+      "chapters": [
+        142
+      ]
+    },
+    "公仔和娃娃": {
+      "first_appearance": 144,
+      "last_appearance": 144,
+      "chapter_count": 1,
+      "chapters": [
+        144
+      ]
+    },
+    "財務大臣": {
+      "first_appearance": 145,
+      "last_appearance": 145,
+      "chapter_count": 1,
+      "chapters": [
+        145
+      ]
+    },
+    "瓦禮": {
+      "first_appearance": 146,
+      "last_appearance": 195,
+      "chapter_count": 7,
+      "chapters": [
+        146,
+        147,
+        148,
+        168,
+        192,
+        193,
+        195
+      ]
+    },
+    "艾寶琳": {
+      "first_appearance": 147,
+      "last_appearance": 191,
+      "chapter_count": 4,
+      "chapters": [
+        147,
+        165,
+        189,
+        191
+      ]
+    },
+    "病獸": {
+      "first_appearance": 151,
+      "last_appearance": 181,
+      "chapter_count": 2,
+      "chapters": [
+        151,
+        181
+      ]
+    },
+    "不法者": {
+      "first_appearance": 151,
+      "last_appearance": 162,
+      "chapter_count": 5,
+      "chapters": [
+        151,
+        152,
+        158,
+        159,
+        162
+      ]
+    },
+    "明雲": {
+      "first_appearance": 152,
+      "last_appearance": 191,
+      "chapter_count": 15,
+      "chapters": [
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        164,
+        165,
+        170,
+        191
+      ]
+    },
+    "阿偉": {
+      "first_appearance": 155,
+      "last_appearance": 155,
+      "chapter_count": 1,
+      "chapters": [
+        155
+      ]
+    },
+    "五爺": {
+      "first_appearance": 155,
+      "last_appearance": 155,
+      "chapter_count": 1,
+      "chapters": [
+        155
+      ]
+    },
+    "醫療姑娘": {
+      "first_appearance": 156,
+      "last_appearance": 156,
+      "chapter_count": 1,
+      "chapters": [
+        156
+      ]
+    },
+    "哨兵哥": {
+      "first_appearance": 156,
+      "last_appearance": 158,
+      "chapter_count": 2,
+      "chapters": [
+        156,
+        158
+      ]
+    },
+    "胖守衛": {
+      "first_appearance": 156,
+      "last_appearance": 156,
+      "chapter_count": 1,
+      "chapters": [
+        156
+      ]
+    },
+    "電腦青年": {
+      "first_appearance": 156,
+      "last_appearance": 156,
+      "chapter_count": 1,
+      "chapters": [
+        156
+      ]
+    },
+    "明哥": {
+      "first_appearance": 157,
+      "last_appearance": 161,
+      "chapter_count": 3,
+      "chapters": [
+        157,
+        160,
+        161
+      ]
+    },
+    "陸軒": {
+      "first_appearance": 154,
+      "last_appearance": 166,
+      "chapter_count": 6,
+      "chapters": [
+        154,
+        155,
+        157,
+        160,
+        161,
+        166
+      ]
+    },
+    "森威克": {
+      "first_appearance": 154,
+      "last_appearance": 157,
+      "chapter_count": 2,
+      "chapters": [
+        154,
+        157
+      ]
+    },
+    "不破尚手下": {
+      "first_appearance": 87,
+      "last_appearance": 87,
+      "chapter_count": 1,
+      "chapters": [
+        87
+      ]
+    },
+    "不良人首領嘅副手": {
+      "first_appearance": 109,
+      "last_appearance": 109,
+      "chapter_count": 1,
+      "chapters": [
+        109
+      ]
+    },
+    "阿玲姑娘": {
+      "first_appearance": 109,
+      "last_appearance": 109,
+      "chapter_count": 1,
+      "chapters": [
+        109
+      ]
+    },
+    "小男孩病者": {
+      "first_appearance": 109,
+      "last_appearance": 109,
+      "chapter_count": 1,
+      "chapters": [
+        109
+      ]
+    },
+    "全身黑色衣著的人": {
+      "first_appearance": 115,
+      "last_appearance": 115,
+      "chapter_count": 1,
+      "chapters": [
+        115
+      ]
+    },
+    "光頭大叔": {
+      "first_appearance": 120,
+      "last_appearance": 120,
+      "chapter_count": 1,
+      "chapters": [
+        120
+      ]
+    },
+    "燒海鮮店大嬸": {
+      "first_appearance": 120,
+      "last_appearance": 120,
+      "chapter_count": 1,
+      "chapters": [
+        120
+      ]
+    },
+    "西餐廳女侍應": {
+      "first_appearance": 120,
+      "last_appearance": 120,
+      "chapter_count": 1,
+      "chapters": [
+        120
+      ]
+    },
+    "食店大叔": {
+      "first_appearance": 120,
+      "last_appearance": 120,
+      "chapter_count": 1,
+      "chapters": [
+        120
+      ]
+    },
+    "女主唱": {
+      "first_appearance": 120,
+      "last_appearance": 120,
+      "chapter_count": 1,
+      "chapters": [
+        120
+      ]
+    },
+    "大輝": {
+      "first_appearance": 132,
+      "last_appearance": 132,
+      "chapter_count": 1,
+      "chapters": [
+        132
+      ]
+    },
+    "肌肉惡漢": {
+      "first_appearance": 132,
+      "last_appearance": 132,
+      "chapter_count": 1,
+      "chapters": [
+        132
+      ]
+    },
+    "青少年": {
+      "first_appearance": 132,
+      "last_appearance": 132,
+      "chapter_count": 1,
+      "chapters": [
+        132
+      ]
+    },
+    "賣羊肉老太婆": {
+      "first_appearance": 132,
+      "last_appearance": 132,
+      "chapter_count": 1,
+      "chapters": [
+        132
+      ]
+    },
+    "Angel小姐": {
+      "first_appearance": 144,
+      "last_appearance": 144,
+      "chapter_count": 1,
+      "chapters": [
+        144
+      ]
+    },
+    "南北兄弟": {
+      "first_appearance": 146,
+      "last_appearance": 146,
+      "chapter_count": 1,
+      "chapters": [
+        146
+      ]
+    },
+    "阿乃": {
+      "first_appearance": 149,
+      "last_appearance": 149,
+      "chapter_count": 1,
+      "chapters": [
+        149
+      ]
+    },
+    "大威": {
+      "first_appearance": 152,
+      "last_appearance": 152,
+      "chapter_count": 1,
+      "chapters": [
+        152
+      ]
+    },
+    "巴力": {
+      "first_appearance": 153,
+      "last_appearance": 162,
+      "chapter_count": 3,
+      "chapters": [
+        153,
+        159,
+        162
+      ]
+    },
+    "金鷹頭凶手": {
+      "first_appearance": 153,
+      "last_appearance": 153,
+      "chapter_count": 1,
+      "chapters": [
+        153
+      ]
+    },
+    "小混混": {
+      "first_appearance": 154,
+      "last_appearance": 154,
+      "chapter_count": 1,
+      "chapters": [
+        154
+      ]
+    },
+    "一期持刀男": {
+      "first_appearance": 154,
+      "last_appearance": 154,
+      "chapter_count": 1,
+      "chapters": [
+        154
+      ]
+    },
+    "胖主任": {
+      "first_appearance": 158,
+      "last_appearance": 158,
+      "chapter_count": 1,
+      "chapters": [
+        158
+      ]
+    },
+    "心理醫生": {
+      "first_appearance": 158,
+      "last_appearance": 159,
+      "chapter_count": 2,
+      "chapters": [
+        158,
+        159
+      ]
+    },
+    "IT男": {
+      "first_appearance": 158,
+      "last_appearance": 158,
+      "chapter_count": 1,
+      "chapters": [
+        158
+      ]
+    },
+    "護士姑娘": {
+      "first_appearance": 158,
+      "last_appearance": 158,
+      "chapter_count": 1,
+      "chapters": [
+        158
+      ]
+    },
+    "康城大本營首領": {
+      "first_appearance": 158,
+      "last_appearance": 158,
+      "chapter_count": 1,
+      "chapters": [
+        158
+      ]
+    },
+    "康城十二元老": {
+      "first_appearance": 158,
+      "last_appearance": 158,
+      "chapter_count": 1,
+      "chapters": [
+        158
+      ]
+    },
+    "雙刀嘅男人": {
+      "first_appearance": 159,
+      "last_appearance": 159,
+      "chapter_count": 1,
+      "chapters": [
+        159
+      ]
+    },
+    "老男人": {
+      "first_appearance": 159,
+      "last_appearance": 159,
+      "chapter_count": 1,
+      "chapters": [
+        159
+      ]
+    },
+    "Sona嘅雙親": {
+      "first_appearance": 159,
+      "last_appearance": 159,
+      "chapter_count": 1,
+      "chapters": [
+        159
+      ]
+    },
+    "明哥的助手": {
+      "first_appearance": 160,
+      "last_appearance": 160,
+      "chapter_count": 1,
+      "chapters": [
+        160
+      ]
+    },
+    "明哥旗下殺手": {
+      "first_appearance": 160,
+      "last_appearance": 160,
+      "chapter_count": 1,
+      "chapters": [
+        160
+      ]
+    },
+    "熱心好青年": {
+      "first_appearance": 162,
+      "last_appearance": 162,
+      "chapter_count": 1,
+      "chapters": [
+        162
+      ]
+    },
+    "英國紳士": {
+      "first_appearance": 162,
+      "last_appearance": 162,
+      "chapter_count": 1,
+      "chapters": [
+        162
+      ]
+    },
+    "被囚男子": {
+      "first_appearance": 162,
+      "last_appearance": 162,
+      "chapter_count": 1,
+      "chapters": [
+        162
+      ]
+    },
+    "鐵門後嘅男人": {
+      "first_appearance": 162,
+      "last_appearance": 162,
+      "chapter_count": 1,
+      "chapters": [
+        162
+      ]
+    },
+    "不法者佬大": {
+      "first_appearance": 164,
+      "last_appearance": 164,
+      "chapter_count": 1,
+      "chapters": [
+        164
+      ]
+    },
+    "大本營失蹤男孩": {
+      "first_appearance": 164,
+      "last_appearance": 164,
+      "chapter_count": 1,
+      "chapters": [
+        164
+      ]
+    },
+    "華哥": {
+      "first_appearance": 165,
+      "last_appearance": 165,
+      "chapter_count": 1,
+      "chapters": [
+        165
+      ]
+    },
+    "不速之客": {
+      "first_appearance": 165,
+      "last_appearance": 165,
+      "chapter_count": 1,
+      "chapters": [
+        165
+      ]
+    },
+    "Eagle": {
+      "first_appearance": 165,
+      "last_appearance": 165,
+      "chapter_count": 1,
+      "chapters": [
+        165
+      ]
+    },
+    "天明兩夫婦": {
+      "first_appearance": 167,
+      "last_appearance": 167,
+      "chapter_count": 1,
+      "chapters": [
+        167
+      ]
+    },
+    "煎餅小販": {
+      "first_appearance": 168,
+      "last_appearance": 168,
+      "chapter_count": 1,
+      "chapters": [
+        168
+      ]
+    },
+    "哈姆雷特雜貨店女店員": {
+      "first_appearance": 168,
+      "last_appearance": 168,
+      "chapter_count": 1,
+      "chapters": [
+        168
+      ]
+    },
+    "五人拍攝團隊": {
+      "first_appearance": 168,
+      "last_appearance": 168,
+      "chapter_count": 1,
+      "chapters": [
+        168
+      ]
+    },
+    "余智海": {
+      "first_appearance": 169,
+      "last_appearance": 194,
+      "chapter_count": 6,
+      "chapters": [
+        169,
+        189,
+        191,
+        192,
+        193,
+        194
+      ]
+    },
+    "病童雙胞胎女孩": {
+      "first_appearance": 169,
+      "last_appearance": 169,
+      "chapter_count": 1,
+      "chapters": [
+        169
+      ]
+    },
+    "余智海博士": {
+      "first_appearance": 169,
+      "last_appearance": 175,
+      "chapter_count": 6,
+      "chapters": [
+        169,
+        170,
+        171,
+        172,
+        173,
+        175
+      ]
+    },
+    "戴紅色冷帽竊屍賊": {
+      "first_appearance": 171,
+      "last_appearance": 171,
+      "chapter_count": 1,
+      "chapters": [
+        171
+      ]
+    },
+    "戴綠色冷帽竊屍賊": {
+      "first_appearance": 171,
+      "last_appearance": 171,
+      "chapter_count": 1,
+      "chapters": [
+        171
+      ]
+    },
+    "七隻彩色冷帽竊屍賊": {
+      "first_appearance": 171,
+      "last_appearance": 171,
+      "chapter_count": 1,
+      "chapters": [
+        171
+      ]
+    },
+    "余智海博士之女": {
+      "first_appearance": 171,
+      "last_appearance": 171,
+      "chapter_count": 1,
+      "chapters": [
+        171
+      ]
+    },
+    "七隻小矮人": {
+      "first_appearance": 172,
+      "last_appearance": 172,
+      "chapter_count": 1,
+      "chapters": [
+        172
+      ]
+    },
+    "飛虎隊員": {
+      "first_appearance": 172,
+      "last_appearance": 172,
+      "chapter_count": 1,
+      "chapters": [
+        172
+      ]
+    },
+    "釘槍阿文": {
+      "first_appearance": 173,
+      "last_appearance": 173,
+      "chapter_count": 1,
+      "chapters": [
+        173
+      ]
+    },
+    "余智海博士嘅老婆": {
+      "first_appearance": 173,
+      "last_appearance": 173,
+      "chapter_count": 1,
+      "chapters": [
+        173
+      ]
+    },
+    "余智海博士嘅女兒": {
+      "first_appearance": 173,
+      "last_appearance": 173,
+      "chapter_count": 1,
+      "chapters": [
+        173
+      ]
+    },
+    "Dr.D第二任助手": {
+      "first_appearance": 174,
+      "last_appearance": 174,
+      "chapter_count": 1,
+      "chapters": [
+        174
+      ]
+    },
+    "禁軍隊長": {
+      "first_appearance": 176,
+      "last_appearance": 176,
+      "chapter_count": 1,
+      "chapters": [
+        176
+      ]
+    },
+    "博士": {
+      "first_appearance": 184,
+      "last_appearance": 184,
+      "chapter_count": 1,
+      "chapters": [
+        184
+      ]
+    },
+    "Nosyag": {
+      "first_appearance": 186,
+      "last_appearance": 186,
+      "chapter_count": 1,
+      "chapters": [
+        186
+      ]
+    },
+    "偉托": {
+      "first_appearance": 186,
+      "last_appearance": 186,
+      "chapter_count": 1,
+      "chapters": [
+        186
+      ]
+    },
+    "肥寶": {
+      "first_appearance": 186,
+      "last_appearance": 186,
+      "chapter_count": 1,
+      "chapters": [
+        186
+      ]
+    },
+    "梁振中": {
+      "first_appearance": 186,
+      "last_appearance": 186,
+      "chapter_count": 1,
+      "chapters": [
+        186
+      ]
+    },
+    "披雨衣嘅男人": {
+      "first_appearance": 186,
+      "last_appearance": 186,
+      "chapter_count": 1,
+      "chapters": [
+        186
+      ]
+    },
+    "阿斯": {
+      "first_appearance": 186,
+      "last_appearance": 186,
+      "chapter_count": 1,
+      "chapters": [
+        186
+      ]
+    },
+    "阿桑": {
+      "first_appearance": 186,
+      "last_appearance": 186,
+      "chapter_count": 1,
+      "chapters": [
+        186
+      ]
+    },
+    "阿達尼": {
+      "first_appearance": 188,
+      "last_appearance": 188,
+      "chapter_count": 1,
+      "chapters": [
+        188
+      ]
+    },
+    "余三村": {
+      "first_appearance": 189,
+      "last_appearance": 192,
+      "chapter_count": 2,
+      "chapters": [
+        189,
+        192
+      ]
+    },
+    "阿尼、阿京、阿奎、阿桑": {
+      "first_appearance": 189,
+      "last_appearance": 189,
+      "chapter_count": 1,
+      "chapters": [
+        189
+      ]
+    },
+    "守衛長": {
+      "first_appearance": 191,
+      "last_appearance": 191,
+      "chapter_count": 1,
+      "chapters": [
+        191
+      ]
+    },
+    "黑鼠商團": {
+      "first_appearance": 191,
+      "last_appearance": 191,
+      "chapter_count": 1,
+      "chapters": [
+        191
+      ]
+    },
+    "大本營高級職員": {
+      "first_appearance": 191,
+      "last_appearance": 191,
+      "chapter_count": 1,
+      "chapters": [
+        191
+      ]
+    },
+    "三村": {
+      "first_appearance": 192,
+      "last_appearance": 192,
+      "chapter_count": 1,
+      "chapters": [
+        192
+      ]
+    },
+    "艾寶琳瓦安": {
+      "first_appearance": 193,
+      "last_appearance": 193,
+      "chapter_count": 1,
+      "chapters": [
+        193
+      ]
+    },
+    "艾寶琳病獵": {
+      "first_appearance": 196,
+      "last_appearance": 196,
+      "chapter_count": 1,
+      "chapters": [
+        196
+      ]
+    },
+    "書記": {
+      "first_appearance": 196,
+      "last_appearance": 196,
+      "chapter_count": 1,
+      "chapters": [
+        196
+      ]
+    },
+    "胡師傅": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "肥施": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "貴華嘅母親": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "貴華嘅父親": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "貪鼠": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "貴華母親": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "貴華父親": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "結他男": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "守衛": {
+      "first_appearance": 197,
+      "last_appearance": 197,
+      "chapter_count": 1,
+      "chapters": [
+        197
+      ]
+    },
+    "海洋公園病腦": {
+      "first_appearance": 198,
+      "last_appearance": 198,
+      "chapter_count": 1,
+      "chapters": [
+        198
+      ]
+    },
+    "天腦": {
+      "first_appearance": 198,
+      "last_appearance": 198,
+      "chapter_count": 1,
+      "chapters": [
+        198
+      ]
+    }
+  }
+}

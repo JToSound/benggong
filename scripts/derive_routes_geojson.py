@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""《病港》— Phase D routes geojson generator（master prompt §10.4）。
+"""《病港》— Phase E routes geojson generator（master prompt §10.4）。
 
 讀 data/private/review/character-routes.json（人手已審 alias 合併版）
 + data/public/locations.geojson（取每個 waypoint 嘅 story_position x/y → 投影到香港座標）
++ data/public/characters.json（取 character_id）
 → 輸出 data/public/routes.geojson
 
-每條 route 包含：
-- character（取自 character-routes.json）
-- chapters_covered [first, last]
-- waypoints 對應嘅座標
-- LineString geometry 將 waypoints 順序連起來
-- review_status: reviewed（conf-based gate 已過，Phase C 完成）
-- source: bing_gang
+每條 route 包含（按 data/schemas/route.schema.json）：
+- id: route_<char_slug>_<seq>
+- character_id, character_name, color
+- chapters_span: [first, last]
+- precision: fictional (location 為虛構)
+- waypoints: [{location_id, chapter, note, confidence}]
+- source, review_status
 
 用法：python scripts/derive_routes_geojson.py [--dry-run]
 """
@@ -20,26 +21,29 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 from collections import defaultdict
 
 REPO = Path(__file__).resolve().parent.parent
 PRIVATE_ROUTES = REPO / "data/private/review/character-routes.json"
 PUBLIC_LOC = REPO / "data/public/locations.geojson"
+PUBLIC_CHARS = REPO / "data/public/characters.json"
 PUBLIC_ROUTES = REPO / "data/public/routes.geojson"
 
-# 同 build_public_dataset.py 一致：fictional 投影到香港範圍附近
-def story_pos_to_lonlat(x: float, y: float) -> list[float]:
-    """0-1 normalized → EPSG:4326 投影（僅供 render 顯示，唔代表真實位置）"""
-    return [113.80 + x * 0.60, 22.15 + y * 0.35]
+
+def slugify(s: str) -> str:
+    s = re.sub(r"[\s\u3000]+", "_", s)
+    s = re.sub(r"[^\w\u4e00-\u9fff]+", "", s)
+    return s.lower()[:40] or "char"
 
 
-def load_location_coords() -> dict[str, list[float]]:
-    """location name → [lon, lat]。Fictional 用 story_position；district 用真實中心。"""
+def load_location_coords() -> dict[str, dict]:
+    """location name → {id, coordinates, fictional}"""
     if not PUBLIC_LOC.exists():
         return {}
     doc = json.loads(PUBLIC_LOC.read_text(encoding="utf-8"))
-    coords: dict[str, list[float]] = {}
+    coords: dict[str, dict] = {}
     for feat in doc.get("features", []):
         p = feat.get("properties", {})
         name = p.get("name", "")
@@ -47,34 +51,85 @@ def load_location_coords() -> dict[str, list[float]]:
             continue
         geom = feat.get("geometry", {}).get("coordinates", [None, None])
         if geom and len(geom) == 2:
-            coords[name] = list(geom)
+            coords[name] = {
+                "id": p.get("id", name),
+                "coordinates": list(geom),
+                "fictional": bool(p.get("fictional", True)),
+            }
     return coords
 
 
-def build_routes(char_routes: list[dict], loc_coords: dict[str, list[float]]) -> dict:
-    features = []
-    skipped_no_coords = []
-    skipped_short = []
-    for r in char_routes:
-        waypoints = r.get("waypoints", [])
-        if len(waypoints) < 2:
-            skipped_short.append(r["character"])
+def load_characters() -> dict[str, dict]:
+    """character name → {id, color, fictional_aliases}"""
+    if not PUBLIC_CHARS.exists():
+        return {}
+    chars_doc = json.loads(PUBLIC_CHARS.read_text(encoding="utf-8"))
+    chars: dict[str, dict] = {}
+    for c in chars_doc:
+        name = c.get("name", "")
+        if not name:
             continue
-        # 將 waypoints 轉座標
+        chars[name] = {
+            "id": c.get("id", name),
+            "color": c.get("color", "#888888"),
+        }
+    return chars
+
+
+def build_routes(
+    char_routes: list[dict],
+    loc_coords: dict[str, dict],
+    characters: dict[str, dict],
+) -> dict:
+    features = []
+    skipped_short = []
+    skipped_no_coords = []
+
+    for seq, r in enumerate(char_routes, 1):
+        waypoints = r.get("waypoints", [])
+        character_name = r.get("character", "")
+        if len(waypoints) < 2:
+            skipped_short.append(character_name)
+            continue
+
+        # 將 waypoints 轉座標 + waypoint entries
         line_coords = []
+        wp_entries = []
         missing = []
+        chapters_seen = []
         for w in waypoints:
             loc = w.get("location")
-            coord = loc_coords.get(loc)
-            if coord is None:
+            ch = w.get("chapter")
+            if ch is not None:
+                chapters_seen.append(ch)
+            info = loc_coords.get(loc)
+            if info is None:
                 missing.append(loc)
                 continue
-            line_coords.append(coord)
+            line_coords.append(info["coordinates"])
+            wp_entries.append({
+                "location_id": info["id"],
+                "chapter": ch,
+                "note": (loc or "")[:80],
+                "confidence": 0.85,  # routes 推導 conf — Phase E auto-generated
+            })
         if len(line_coords) < 2:
-            skipped_no_coords.append((r["character"], missing))
+            skipped_no_coords.append((character_name, missing))
             continue
-        # chapters
-        chapters_seen = sorted({w["chapter"] for w in waypoints if w.get("chapter") is not None})
+
+        char_info = characters.get(character_name, {})
+        if not char_info:
+            # character name 唔喺 public characters.json — skip（Phase E 仍未拆出）
+            skipped_no_coords.append((character_name, ["character not in public dataset"]))
+            continue
+        # ID: route_<char_id_slug>_<seq> (ASCII only to match schema regex)
+        # characters.json 入面 id 例如 "ent_970c603b4f" 或 "w" 或 "boss" — 取 alphanumeric part
+        char_id = char_info.get("id", character_name)
+        # slugify: keep alnum + underscore
+        char_id_slug = re.sub(r"[^a-z0-9_]", "_", char_id.lower())[:30].strip("_") or "x"
+        route_id = f"route_{char_id_slug}_{seq:03d}"
+        chapters_span = [min(chapters_seen), max(chapters_seen)] if chapters_seen else [0, 0]
+
         feat = {
             "type": "Feature",
             "geometry": {
@@ -82,18 +137,23 @@ def build_routes(char_routes: list[dict], loc_coords: dict[str, list[float]]) ->
                 "coordinates": line_coords,
             },
             "properties": {
-                "id": f"rt_{len(features) + 1:03d}",
-                "character": r["character"],
-                "chapters_covered": r.get("chapters_covered", [chapters_seen[0], chapters_seen[-1]] if chapters_seen else [0, 0]),
-                "chapters": chapters_seen[:50],
-                "waypoint_count": len(waypoints),
+                "id": route_id,
+                "character_id": char_info.get("id", character_name),
+                "character_name": character_name,
+                "color": char_info.get("color", "#888888"),
+                "chapters_span": chapters_span,
+                "chapters": sorted(set(chapters_seen))[:50],
+                "precision": "fictional",  # 全部 fictional 投影
+                "waypoints": wp_entries,
                 "missing_waypoint_locations": missing if missing else None,
-                "review_status": "reviewed",  # Phase C conf-based gate 已過（routes 由 ≥ 0.7 conf 嘅 location candidates 推導）
                 "provenance": "character-routes.json → derive_routes_geojson.py",
                 "source": "bing_gang",
+                "confidence": 0.8,
+                "review_status": "needs_review",  # routes from private review need manual review
             },
         }
         features.append(feat)
+
     return {
         "type": "FeatureCollection",
         "features": features,
@@ -105,7 +165,7 @@ def build_routes(char_routes: list[dict], loc_coords: dict[str, list[float]]) ->
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Phase D routes geojson generator")
+    parser = argparse.ArgumentParser(description="Phase E routes geojson generator")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -118,7 +178,10 @@ def main() -> int:
     loc_coords = load_location_coords()
     print(f"讀取 {len(loc_coords)} 個 location 座標")
 
-    fc = build_routes(char_routes, loc_coords)
+    characters = load_characters()
+    print(f"讀取 {len(characters)} 個 character 記錄")
+
+    fc = build_routes(char_routes, loc_coords, characters)
     n_feats = len(fc["features"])
     n_short = len(fc["_meta"]["skipped_short"])
     n_no = len(fc["_meta"]["skipped_no_coords"])
@@ -135,7 +198,6 @@ def main() -> int:
         print(f"\n[dry-run] 未寫入 {PUBLIC_ROUTES}")
         return 0
 
-    # 寫公開 routes.geojson（移除 _meta）
     public_doc = {
         "type": "FeatureCollection",
         "features": fc["features"],

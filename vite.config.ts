@@ -7,12 +7,6 @@ export default defineConfig({
   build: {
     outDir: "dist",
     sourcemap: false,
-    rollupOptions: {
-      input: {
-        main: "index.html",
-        timeline: "timeline.html",
-      },
-    },
   },
   server: {
     port: 5173,

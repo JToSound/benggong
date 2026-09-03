@@ -121,20 +121,23 @@ def load_phase_c_exclusions() -> dict:
 
 
 def apply_manual_resolutions(rows: list[dict], decisions: list[dict]) -> tuple[list[dict], dict]:
-    """應用人手 override：拆 character、rename canonical、移除錯誤 alias、合併 routes。
+    """應用人手 override：拆 character、rename canonical、移除錯誤 alias、合併 routes、定義 character alias。
     設計：每個 decision 透過修改 row.name 嚟影響 union-find 嘅分組。
     - rename_canonical：將 group display 改名
     - split：將每個 child group 嘅 match_aliases 嘅 row.name 改成 child.display_name
               咁 union-find 會自然將佢哋分到唔同 group（因為佢哋唔再共享 aliases）
     - remove_alias：將指定 alias 由所有 row.aliases 拎走（避免 cross-character union）
     - merge_routes：將 alias 群嘅 character name rename 到 target（routes 會將佢哋合併）
+    - character_definitions：完全覆寫 character 嘅 alias 列表（Phase E 核心方案）
     Returns: (new_rows, stats)
     """
     renames = [d for d in decisions if d.get("action") == "rename_canonical"]
     splits = [d for d in decisions if d.get("action") == "split"]
     remove_aliases = [d for d in decisions if d.get("action") == "remove_alias"]
     merge_routes = [d for d in decisions if d.get("action") == "merge_routes"]
-    stats = {"renames": 0, "splits_renamed_rows": 0, "splits_new_groups": 0, "aliases_removed": 0, "routes_merged_rows": 0}
+    char_defs = [d for d in decisions if d.get("action") == "character_definitions"]
+    bulk_remove = [d for d in decisions if d.get("action") == "bulk_remove_alias"]
+    stats = {"renames": 0, "splits_renamed_rows": 0, "splits_new_groups": 0, "aliases_removed": 0, "routes_merged_rows": 0, "bulk_alias_removed": 0, "characters_defined": 0}
 
     # 1) rename
     for rd in renames:
@@ -179,6 +182,19 @@ def apply_manual_resolutions(rows: list[dict], decisions: list[dict]) -> tuple[l
                 r["aliases"] = new_aliases
                 stats["aliases_removed"] += 1
 
+    # 3.5) Phase E: 對所有 character row 拎走其他 character 嘅 name alias
+    # 計算 evidence 入面所有 character name
+    all_char_names = set()
+    for r in rows:
+        n = (r.get("name") or "").strip()
+        if n:
+            all_char_names.add(n)
+    for r in rows:
+        aliases = list(r.get("aliases") or [])
+        new_aliases = [a for a in aliases if a not in all_char_names or a == r.get("name")]
+        if len(new_aliases) != len(aliases):
+            r["aliases"] = new_aliases
+
     # 4) merge_routes：將 alias 群嘅 character name rename 到 target
     for mr in merge_routes:
         for m in mr.get("merges", []):
@@ -193,6 +209,86 @@ def apply_manual_resolutions(rows: list[dict], decisions: list[dict]) -> tuple[l
                             aliases.append(s)
                     r["aliases"] = aliases
                     stats["routes_merged_rows"] += 1
+
+    # 5) bulk_remove_alias：自動 cross-alias 衝突清理
+    for ba in bulk_remove:
+        remove_map = ba.get("remove_map", {})
+        for char_name, alias_list in remove_map.items():
+            to_remove = set(alias_list)
+            for r in rows:
+                if r.get("name") == char_name:
+                    aliases = list(r.get("aliases") or [])
+                    new_aliases = [a for a in aliases if a not in to_remove]
+                    if len(new_aliases) != len(aliases):
+                        r["aliases"] = new_aliases
+                        stats["bulk_alias_removed"] += 1
+
+    # 6) character_definitions：完全覆寫 character alias list + 同步 entry rename
+    # 對 definitions 入面每個 character，搵所有 row 將 aliases 改成定義
+    # 同時將所有 alias entry rename 為 target character name
+    # 支援 keep_aliases_map：明確指定某 character 嘅 self-aliases
+    # 支援 remove_map：對 character 拎走指定 alias（但保留其他 self-aliases）
+    for cd in char_defs:
+        definitions = cd.get("definitions", {})
+        keep_map = cd.get("keep_aliases_map", {})
+        remove_map_full = cd.get("remove_map", {})
+
+        for char_name, defn in definitions.items():
+            # 支援兩種格式：{char: [aliases]} 或 {char: {'aliases': [...]}}
+            if isinstance(defn, list):
+                defined_aliases = set(defn)
+            else:
+                defined_aliases = set(defn.get("aliases", []))
+            defined_aliases.add(char_name)
+            for r in rows:
+                if r.get("name") == char_name:
+                    r["aliases"] = sorted(defined_aliases)
+                    stats["characters_defined"] += 1
+
+        # keep_aliases_map：明確指定 self-aliases（清走 entry 其他 alias）
+        for char_name, keep_aliases in keep_map.items():
+            keep_set = set(keep_aliases) | {char_name}
+            for r in rows:
+                if r.get("name") == char_name:
+                    current = set(r.get("aliases") or [])
+                    new = sorted(current & keep_set)
+                    r["aliases"] = new if new else sorted(keep_set)
+                    stats["characters_defined"] += 1
+
+        # remove_map：每 character 拎走指定 alias（保留其他）
+        for char_name, alias_list in remove_map_full.items():
+            to_remove = set(alias_list)
+            for r in rows:
+                if r.get("name") == char_name:
+                    current = set(r.get("aliases") or [])
+                    new = sorted(current - to_remove)
+                    r["aliases"] = new if new else [char_name]
+                    stats["characters_defined"] += 1
+
+        # 同步 entry rename：所有 alias entry 改為 target name
+        for merge in cd.get("merge_into", []):
+            target = merge["into"]
+            sources = set(merge.get("from_aliases", []))
+            # 嘗試從 definitions 拎 target 嘅 self-aliases
+            defn = definitions.get(target, [])
+            if isinstance(defn, list):
+                target_defined = set(defn)
+            else:
+                target_defined = set(defn.get("aliases", []))
+            # 否則從 keep_map
+            if not target_defined:
+                target_defined = set(keep_map.get(target, []))
+            target_defined.add(target)
+            for r in rows:
+                if r.get("name") in sources and r.get("name") != target:
+                    r["name"] = target
+                    if target_defined == {target}:
+                        orig_aliases = r.get("aliases") or []
+                        new_aliases = sorted(set(orig_aliases) | {target})
+                        r["aliases"] = new_aliases
+                    else:
+                        r["aliases"] = sorted(target_defined)
+
     return list(rows), stats
 
 
@@ -462,7 +558,7 @@ def main() -> int:
     manual = load_manual_resolutions()
     if manual.get("decisions"):
         char_rows, manual_stats = apply_manual_resolutions(char_rows, manual["decisions"])
-        print(f"人手 override：renames={manual_stats['renames']} rows, splits={manual_stats['splits_renamed_rows']} rows ({manual_stats['splits_new_groups']} new groups), aliases_removed={manual_stats['aliases_removed']} rows, routes_merged={manual_stats['routes_merged_rows']} rows")
+        print(f"人手 override：renames={manual_stats['renames']} rows, splits={manual_stats['splits_renamed_rows']} rows ({manual_stats['splits_new_groups']} new groups), aliases_removed={manual_stats['aliases_removed']} rows, routes_merged={manual_stats['routes_merged_rows']} rows, bulk_alias_removed={manual_stats['bulk_alias_removed']} rows, characters_defined={manual_stats['characters_defined']} rows")
 
     # 0903 Phase C：低 conf 排除清單
     phase_c_excl = load_phase_c_exclusions()

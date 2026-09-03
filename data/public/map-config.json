@@ -1,27 +1,32 @@
 {
   "map": {
-    "crs": "EPSG:3857",
-    "renderer": "leaflet",
+    "renderer": "svg",
+    "svg_basemap": "assets/tseung-kwan-o-basemap.svg",
     "tiles_local_only": true,
     "default_base_layer": "story-cartography",
     "base_layers": [
-      { "id": "story-cartography", "label": "故事地圖", "status": "pending_phase_c" },
-      { "id": "ai-aerial-concept", "label": "AI 空拍概念圖", "status": "pending_phase_c", "disclaimer": "AI 生成概念空拍圖，僅供小說世界觀瀏覽，唔代表真實衛星影像。" },
+      { "id": "story-cartography", "label": "故事地圖（將軍澳）", "status": "available", "svg": "assets/tseung-kwan-o-basemap.svg" },
+      { "id": "ai-aerial-concept", "label": "AI 空拍概念圖", "status": "unavailable", "disclaimer": "AI 生成概念空拍圖，僅供小說世界觀瀏覽，唔代表真實衛星影像。" },
       { "id": "debug-grid", "label": "除錯格線", "dev_only": true }
     ],
-    "initial_view": { "center_story_position": [0.68, 0.48], "zoom": 11 },
-    "zoom_range": [8, 15]
+    "initial_view": { "center_lonlat": [114.255, 22.318], "zoom": 1.0 },
+    "coordinate_system": "EPSG:4326",
+    "show_scale_bar": true
   },
   "scale_profile": {
-    "status": "unreliable",
-    "note": "故事地圖比例未經審閱校準；所有距離只可顯示為「估算距離」或「地圖單位」。",
+    "status": "approximate",
+    "note": "將軍澳 district 為主嘅 SVG 簡化地圖；距離比例為近似。",
     "meters_per_map_unit": null
   },
   "spoiler": { "levels": 0, "1": null, "2": null, "3": null, "default_max_level": 1 },
   "provisional_mode": {
-    "enabled": false,
-    "banner": ""
+    "enabled": true,
+    "banner": "⚠️ 部份資料（角色路線）仍待人工審閱。已發佈內容經自動驗證，但角色路線來源自私有審閱文件，未經最終人工確認。請勿引用作準確資料。"
   },
   "sources_enabled": ["bing_gang"],
-  "sources_reserved": ["bing_gang_2"]
+  "sources_reserved": ["bing_gang_2"],
+  "chapters": {
+    "total": 198,
+    "first_chapter_with_content": 1
+  }
 }

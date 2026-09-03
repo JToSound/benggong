@@ -158,25 +158,85 @@ export interface TimelineRecord {
 
 // ---- Dataset bundle（前端單一載入點）----
 
-export interface ProvisionalMeta {
-  provisional: true;
-  banner: string; // 粵文醒目提示
-  reviewed_count: number;
-  needs_review_count: number;
-}
+export type FeatureCollection<F> = {
+  type: "FeatureCollection";
+  features: F[];
+};
 
-/**
- * 前端資料 bundle：data/public/ 全部檔案嘅型別化集合。
- * provisional mode 下只載入最小 sample，並帶 meta.banner。
- */
+export type LocationsFeatureCollection = FeatureCollection<LocationFeature>;
+export type EventsFeatureCollection = FeatureCollection<EventFeature>;
+export type RoutesFeatureCollection = FeatureCollection<RouteFeature>;
+
+export type CharactersData = CharacterRecord[];
+
+/** Phase B legacy: 統一 bundle 包含全部 dataset. Phase F 改用獨立 fetch. */
 export interface BingGangDataset {
-  meta: ProvisionalMeta | null; // null = 已有人手 review 嘅正式版
+  meta: {
+    provisional: true;
+    banner: string;
+    reviewed_count: number;
+    needs_review_count: number;
+  } | null;
   locations: LocationFeature[];
   events: EventFeature[];
   routes: RouteFeature[];
   timeline: TimelineRecord[];
   characters: CharacterRecord[];
 }
+
+export interface MapConfig {
+  map: {
+    renderer: "svg" | "leaflet";
+    svg_basemap?: string;
+    tiles_local_only: boolean;
+    default_base_layer: string;
+    base_layers: BaseLayer[];
+    initial_view: { center_lonlat?: [number, number]; center_story_position?: [number, number]; zoom: number };
+    coordinate_system: string;
+    show_scale_bar: boolean;
+  };
+  scale_profile: {
+    status: string;
+    note: string;
+    meters_per_map_unit: number | null;
+  };
+  spoiler: {
+    levels: 0 | 1 | 2 | 3;
+    default_max_level: number;
+  };
+  provisional_mode: {
+    enabled: boolean;
+    banner: string;
+  };
+  sources_enabled: SourceId[];
+  sources_reserved: SourceId[];
+  chapters?: {
+    total: number;
+    first_chapter_with_content: number;
+  };
+}
+
+export interface BaseLayer {
+  id: string;
+  label: string;
+  status: string;
+  svg?: string;
+  disclaimer?: string;
+  dev_only?: boolean;
+}
+
+export interface ChapterAppearances {
+  generated_at: string;
+  total_characters: number;
+  appearances: Record<string, {
+    first_appearance: number;
+    last_appearance: number;
+    chapter_count: number;
+    chapters: number[];
+  }>;
+}
+
+export type ChapterSummaries = Record<number, string>;
 
 /** 預設角色配色（master prompt §7.7）。 */
 export const CHARACTER_COLORS: Record<string, string> = {

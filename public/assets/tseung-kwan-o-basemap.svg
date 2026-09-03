@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="113.85 22.18 0.60 0.37" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <linearGradient id="seaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f2238;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="landGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d4a3e;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#1a2e26;stop-opacity:0.6" />
+    </linearGradient>
+    <radialGradient id="tsoGrad">
+      <stop offset="0%" style="stop-color:#4a6b4a;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#2d4a3e;stop-opacity:0.5" />
+    </radialGradient>
+    <pattern id="grid" width="0.02" height="0.02" patternUnits="userSpaceOnUse">
+      <path d="M 0.02 0 L 0 0 0 0.02" fill="none" stroke="#3a5a7a" stroke-width="0.0005" opacity="0.3"/>
+    </pattern>
+  </defs>
+  
+  <!-- 海洋 background -->
+  <rect x="113.85" y="22.18" width="0.60" height="0.37" fill="url(#seaGrad)"/>
+  <rect x="113.85" y="22.18" width="0.60" height="0.37" fill="url(#grid)"/>
+  
+  <!-- 港島簡化輪廓 -->
+  <path d="M 113.92,22.27 L 113.95,22.26 L 114.00,22.25 L 114.05,22.24 L 114.10,22.24 L 114.15,22.25 L 114.18,22.27 L 114.18,22.30 L 114.15,22.32 L 114.10,22.32 L 114.05,22.30 L 114.00,22.30 L 113.95,22.30 L 113.92,22.28 Z" 
+        fill="url(#landGrad)" stroke="#5a7a6a" stroke-width="0.001" opacity="0.5"/>
+  
+  <!-- 九龍簡化輪廓 -->
+  <path d="M 114.13,22.30 L 114.20,22.30 L 114.22,22.32 L 114.23,22.34 L 114.20,22.35 L 114.15,22.35 L 114.13,22.34 Z"
+        fill="url(#landGrad)" stroke="#5a7a6a" stroke-width="0.001" opacity="0.5"/>
+  
+  <!-- 西貢簡化輪廓 (將軍澳周邊新界) -->
+  <path d="M 114.20,22.35 L 114.30,22.36 L 114.35,22.36 L 114.40,22.40 L 114.40,22.45 L 114.35,22.50 L 114.25,22.50 L 114.15,22.50 L 114.10,22.50 L 114.05,22.45 L 114.10,22.42 L 114.15,22.40 L 114.20,22.38 Z"
+        fill="url(#landGrad)" stroke="#5a7a6a" stroke-width="0.001" opacity="0.5"/>
+
+  <!-- 將軍澳 district (highlighted) -->
+  <path d="M114.205,22.35 L114.225,22.355 L114.25,22.358 L114.27,22.355 L114.29,22.345 L114.3,22.33 L114.305,22.315 L114.3,22.3 L114.29,22.29 L114.28,22.275 L114.265,22.27 L114.25,22.275 L114.24,22.29 L114.23,22.3 L114.22,22.31 L114.21,22.325 L114.205,22.34 L114.205,22.35 Z" fill="url(#tsoGrad)" stroke="#8ac78a" stroke-width="0.002" opacity="0.85"/>
+  <circle cx="114.2415" cy="22.3229" r="0.012" fill="none" stroke="#a8d8a8" stroke-width="0.001" opacity="0.4"/>
+  <text x="114.2415" y="22.3469" text-anchor="middle" fill="#b8e8b8" font-size="0.012" font-family="sans-serif" opacity="0.9">寶琳</text>
+  <circle cx="114.2729" cy="22.3166" r="0.01" fill="none" stroke="#a8d8a8" stroke-width="0.001" opacity="0.4"/>
+  <text x="114.2729" y="22.338600000000003" text-anchor="middle" fill="#b8e8b8" font-size="0.012" font-family="sans-serif" opacity="0.9">坑口</text>
+  <circle cx="114.2506" cy="22.3077" r="0.011" fill="none" stroke="#a8d8a8" stroke-width="0.001" opacity="0.4"/>
+  <text x="114.2506" y="22.3307" text-anchor="middle" fill="#b8e8b8" font-size="0.012" font-family="sans-serif" opacity="0.9">調景嶺</text>
+  <circle cx="114.259" cy="22.316" r="0.009" fill="none" stroke="#a8d8a8" stroke-width="0.001" opacity="0.4"/>
+  <text x="114.259" y="22.337" text-anchor="middle" fill="#b8e8b8" font-size="0.012" font-family="sans-serif" opacity="0.9">將軍澳市中心</text>
+  <circle cx="114.262" cy="22.317" r="0.005" fill="none" stroke="#a8d8a8" stroke-width="0.001" opacity="0.4"/>
+  <text x="114.262" y="22.334" text-anchor="middle" fill="#b8e8b8" font-size="0.012" font-family="sans-serif" opacity="0.9">尚德</text>
+  <circle cx="114.265" cy="22.3165" r="0.005" fill="none" stroke="#a8d8a8" stroke-width="0.001" opacity="0.4"/>
+  <text x="114.265" y="22.3335" text-anchor="middle" fill="#b8e8b8" font-size="0.012" font-family="sans-serif" opacity="0.9">彩明</text>
+  <circle cx="114.275" cy="22.295" r="0.008" fill="none" stroke="#a8d8a8" stroke-width="0.001" opacity="0.4"/>
+  <text x="114.275" y="22.315" text-anchor="middle" fill="#b8e8b8" font-size="0.012" font-family="sans-serif" opacity="0.9">日出康城</text>
+
+  <text x="114.27" y="22.34" text-anchor="middle" fill="#d8f0d8" font-size="0.022" font-weight="bold" font-family="sans-serif">將軍澳</text>
+
+  <g opacity="0.5">
+    <text x="113.86" y="22.20" fill="#8ab8d8" font-size="0.012" font-family="sans-serif">N ↑</text>
+  </g>
+</svg>
