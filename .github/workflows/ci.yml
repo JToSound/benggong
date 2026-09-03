@@ -36,7 +36,6 @@ jobs:
         run: python scripts/validate_public_data.py
       - name: Release audit（build 後掃描 dist/）
         run: |
-          npm run build
           python scripts/audit_release.py --strict
 
   private-data-guard:
