@@ -1,0 +1,11 @@
+{
+  "size_px": 2048,
+  "bbox": {
+    "lon_min": 113.85,
+    "lon_max": 114.45,
+    "lat_min": 22.18,
+    "lat_max": 22.55
+  },
+  "projection": "lonlat_to_xy_linear",
+  "note": "lon=x*scale+lon_min; lat=lat_max-y*scale (image y axis points down)"
+}
