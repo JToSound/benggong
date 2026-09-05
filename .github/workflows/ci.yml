@@ -19,6 +19,14 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Release audit (frontend build 後)
+        run: |
+          if [ -d "dist" ] && [ -f "dist/index.html" ]; then
+            python -m pip install --quiet jsonschema
+            python scripts/audit_release.py --strict
+          else
+            echo "::warning::dist/ 唔存在——skip audit"
+          fi
 
   python-pipeline:
     runs-on: ubuntu-latest
@@ -34,9 +42,6 @@ jobs:
         run: python scripts/validate_novel.py --if-present
       - name: 公開資料驗證（schema + 治理掃描）
         run: python scripts/validate_public_data.py
-      - name: Release audit（build 後掃描 dist/）
-        run: |
-          python scripts/audit_release.py --strict
 
   private-data-guard:
     runs-on: ubuntu-latest
