@@ -1,13 +1,14 @@
 {
   "dataset_version": "0.2.0-provisional.20260903",
-  "generated_at": "2026-09-03T08:51:35+00:00",
+  "generated_at": "2026-09-05T01:40:30+00:00",
   "generator": "scripts/build_public_dataset.py",
   "counts": {
     "location": 714,
     "event": 1796,
-    "route": 44,
+    "route": 42,
     "timeline": 1796,
-    "character": 342
+    "character": 342,
+    "chapter_summary": 195
   },
   "review_summary": {
     "verified": 0,

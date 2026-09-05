@@ -30,6 +30,7 @@ PRIVATE_ROUTES = REPO / "data/private/review/character-routes.json"
 PUBLIC_LOC = REPO / "data/public/locations.geojson"
 PUBLIC_CHARS = REPO / "data/public/characters.json"
 PUBLIC_ROUTES = REPO / "data/public/routes.geojson"
+MANUAL = REPO / "data/private/review/manual-resolutions.json"
 
 
 def slugify(s: str) -> str:
@@ -60,7 +61,11 @@ def load_location_coords() -> dict[str, dict]:
 
 
 def load_characters() -> dict[str, dict]:
-    """character name → {id, color, fictional_aliases}"""
+    """character name → {id, color, fictional_aliases}
+
+    Phase E: 套用 manual-resolutions.json 嘅 merge_routes，將 alias character records
+    合併到 target。例：「老師」、「鳥嘴」、「奎斯老師」等 alias → 主角
+    """
     if not PUBLIC_CHARS.exists():
         return {}
     chars_doc = json.loads(PUBLIC_CHARS.read_text(encoding="utf-8"))
@@ -73,6 +78,34 @@ def load_characters() -> dict[str, dict]:
             "id": c.get("id", name),
             "color": c.get("color", "#888888"),
         }
+
+    # Phase E: 套用 manual-resolutions.json 嘅 merge_routes
+    if MANUAL.exists():
+        try:
+            res = json.loads(MANUAL.read_text(encoding="utf-8"))
+            decisions = res.get("decisions", [])
+            for d in decisions:
+                if d.get("action") != "merge_routes":
+                    continue
+                for m in d.get("merges", []):
+                    target = m.get("into", "")
+                    sources = set(m.get("from_aliases", []))
+                    if not target or target not in chars:
+                        continue
+                    target_info = chars[target]
+                    for src in sources:
+                        if src == target or src not in chars:
+                            continue
+                        # 將 src 嘅 record 移除，並將 src name 標為 alias of target
+                        src_info = chars.pop(src)
+                        # Phase E: 用 target 嘅 id 統一（routes 會有相同 character_id）
+                        # 但要保留 src 嘅 color if target 冇（其實 target 已 ok）
+                        chars[src] = {
+                            "id": target_info["id"],  # 統一 id
+                            "color": target_info.get("color", src_info.get("color")),
+                        }
+        except (json.JSONDecodeError, OSError):
+            pass
     return chars
 
 

@@ -170,6 +170,7 @@ def test_manifest_counts_match():
         "route": len(load(PUBLIC / "routes.geojson")["features"]),
         "timeline": len(load(PUBLIC / "timeline.json")),
         "character": len(load(PUBLIC / "characters.json")),
+        "chapter_summary": len(load(PUBLIC / "chapter-summaries.json")),
     }
     assert mf["counts"] == counts
 
@@ -219,3 +220,83 @@ def test_evidence_candidate_sample_and_private_guard():
         open(p, encoding="utf-8").read() for p in PUBLIC.glob("*.json*")
     )
     assert "evidence_excerpt" not in pub_text
+
+
+# ---- Phase E: structured chapter summaries + alias override + event coords ----
+
+
+def test_chapter_summaries_schema_is_valid():
+    """Phase E: chapter-summaries.schema.json 必須係有效 JSON Schema。"""
+    schema = load(SCHEMAS / "chapter-summaries.schema.json")
+    Draft202012Validator.check_schema(schema)
+
+
+def test_chapter_summaries_structure():
+    """Phase E: chapter-summaries.json 結構應為 {chapter: {locations: [...]}}。"""
+    data = load(PUBLIC / "chapter-summaries.json")
+    assert isinstance(data, dict), "chapter-summaries.json top-level 必須係 object"
+    assert len(data) > 100, f"應有 ≥100 chapters, got {len(data)}"
+
+    # 抽 chapter 1 驗證結構
+    ch1 = data.get("1")
+    assert ch1 is not None, "必須有 chapter 1"
+    assert "locations" in ch1, "chapter 1 必須有 locations 字段"
+    assert isinstance(ch1["locations"], list)
+    assert len(ch1["locations"]) > 0, "chapter 1 至少要有 1 個 location"
+
+    # 每個 location entry 必須有 id, name, summary, confidence
+    for entry in ch1["locations"]:
+        assert "id" in entry
+        assert "name" in entry
+        assert "summary" in entry
+        assert "confidence" in entry
+        assert 0 <= entry["confidence"] <= 1, f"confidence 必須 0-1: {entry['confidence']}"
+        assert entry["id"].startswith("loc_"), f"id 必須係 loc_ 開頭: {entry['id']}"
+        assert len(entry["summary"]) <= 200, f"summary 過長: {len(entry['summary'])}"
+
+
+def test_chapter_summaries_validate_against_schema():
+    """Phase E: chapter-summaries.json 全部 chapters 必須通過 schema validation。"""
+    schema = load(SCHEMAS / "chapter-summaries.schema.json")
+    validator = Draft202012Validator(schema)
+    data = load(PUBLIC / "chapter-summaries.json")
+
+    for ch_key, ch_val in data.items():
+        # 將 chapter 整體包成 {ch_key: ch_val} 嚟 match additionalProperties
+        wrapped = {ch_key: ch_val}
+        errors = list(validator.iter_errors(wrapped))
+        assert not errors, f"chapter-summaries[{ch_key}]: {[e.message for e in errors][:1]}"
+
+
+def test_event_coords_match_location():
+    """Phase E 修：event.geometry.coordinates 必須同 location_id 對應嘅 location 一致。
+    之前嘅 bug：38% events 冇 location_id，仲有 3 個有 loc_id 但 coords 錯。"""
+    locs = {f["properties"]["id"]: f for f in load(PUBLIC / "locations.geojson")["features"]}
+    mismatch = []
+    for ev in load(PUBLIC / "events.geojson")["features"]:
+        lid = ev["properties"].get("location_id")
+        if lid and lid in locs:
+            loc_coords = locs[lid]["geometry"]["coordinates"]
+            ev_coords = ev["geometry"]["coordinates"]
+            if abs(loc_coords[0] - ev_coords[0]) > 0.0001 or abs(loc_coords[1] - ev_coords[1]) > 0.0001:
+                mismatch.append((ev["properties"]["id"], lid, ev_coords, loc_coords))
+    assert not mismatch, f"Phase E bug 復活：{len(mismatch)} 個 events coords 唔 match: {mismatch[:3]}"
+
+
+def test_routes_no_alias_collisions():
+    """Phase E 修：routes.character_name 唔應該再出現「老師」、「鳥嘴」、「我（敘事者）」等
+    應該 merge 入 主角 嘅 alias 記錄。"""
+    routes = load(PUBLIC / "routes.geojson")["features"]
+    for r in routes:
+        name = r["properties"]["character_name"]
+        assert name != "老師", f"Phase E bug: '老師' 應該 merge 入 主角: {r['properties']['id']}"
+        assert name != "鳥嘴", f"Phase E bug: '鳥嘴' 應該 merge 入 主角: {r['properties']['id']}"
+        assert name != "我（敘事者）", f"Phase E bug: '我（敘事者）' 應該 merge 入 主角: {r['properties']['id']}"
+
+
+def test_event_location_id_coverage():
+    """Phase E: events 至少 95% 應該有 location_id。"""
+    events = load(PUBLIC / "events.geojson")["features"]
+    with_loc = sum(1 for e in events if e["properties"].get("location_id"))
+    ratio = with_loc / len(events)
+    assert ratio >= 0.95, f"events with location_id 應 ≥ 95% (currently {ratio*100:.1f}%)"

@@ -256,9 +256,13 @@ def build_location_index(locations: list[dict]) -> dict[str, dict]:
     return {f["properties"]["name"]: f for f in locations}
 
 
-def match_event_to_location(event_cand, location_index: dict, hk: dict) -> Optional[dict]:
+def match_event_to_location(event_cand, location_index: dict, hk: dict, chapter_locs: dict[int, list[str]] | None = None) -> Optional[dict]:
     """為 event candidate 配對 location。
-    優先級: (1) chapter context (2) claim 內地點名 (3) name match
+    優先級:
+      1. exact name match
+      2. claim 內地點 keyword (longest)
+      3. HK district partial match
+      4. chapter-context fallback (Phase E 新加): 攞同章其他已 matched 嘅 event 嘅 location
     """
     name = (event_cand.get("name") or "").strip()
     claim = (event_cand.get("claim") or "")
@@ -292,12 +296,49 @@ def match_event_to_location(event_cand, location_index: dict, hk: dict) -> Optio
                 "geometry": {"type": "Point", "coordinates": hk[matched]},
             }
 
+    # 4. Phase E chapter-context fallback:
+    #    用同章其他已 matched events/locations 嘅 most-common location
+    if chapter_locs is not None:
+        ch = event_cand.get("chapter", 0)
+        ch_loc_names = chapter_locs.get(ch, [])
+        if ch_loc_names:
+            # Counter by frequency
+            from collections import Counter
+            most_common_name, _ = Counter(ch_loc_names).most_common(1)[0]
+            if most_common_name in location_index:
+                return location_index[most_common_name]
+
     return None
 
 
 def build_events(cands, location_features, hk) -> list[dict]:
-    """Build events with auto-matched location_id."""
+    """Build events with auto-matched location_id.
+
+    Phase E 修：當 matched_loc 有值時一定要用佢嘅 coords，唔可以 fallback 落 將軍澳中心。
+    否則會見到所有 events cluster 喺 [114.272, 22.332] 一點（截圖 bug 確認）。
+
+    Phase E 第二輪：加 chapter-context fallback。
+    """
     loc_index = build_location_index(location_features)
+
+    # Pre-compute per-chapter location names（用 events 嘅 chapter 對應 locations）
+    chapter_locs: dict[int, list[str]] = defaultdict(list)
+    for c in cands:
+        if c.get("entity_kind") != "event":
+            continue
+        if c.get("status") not in ("pending", "reviewed"):
+            continue
+        ch = c.get("chapter", 0)
+        # 先用 loc name match 攞個 rough chapter loc
+        # 簡化：每 event 攞佢 claim 內地點 keyword
+        claim = c.get("claim") or ""
+        name = c.get("name") or ""
+        text = f"{name} {claim}"
+        for loc_name, _ in loc_index.items():
+            if loc_name in text:
+                chapter_locs[ch].append(loc_name)
+                break
+
     features = []
     seq = 0
     for c in cands:
@@ -312,16 +353,22 @@ def build_events(cands, location_features, hk) -> list[dict]:
         desc = (c.get("claim") or "")[:200]
         spoiler = min(3, max(0, int(c.get("spoiler_level") or 0)))
 
-        matched_loc = match_event_to_location(c, loc_index, hk)
+        matched_loc = match_event_to_location(c, loc_index, hk, chapter_locs=chapter_locs)
         loc_id = matched_loc["properties"]["id"] if matched_loc else None
         loc_name = matched_loc["properties"]["name"] if matched_loc else None
-        coords = matched_loc["geometry"]["coordinates"] if matched_loc else None
+        # Phase E: 用 matched_loc 真實座標；無 match 先 fallback。
+        # 之前嘅 bug：`coords or fallback` 喺 loc_id=None 時 fallback，但都會處理。
+        coords = (
+            matched_loc["geometry"]["coordinates"]
+            if matched_loc and matched_loc.get("geometry", {}).get("coordinates")
+            else [114.272, 22.332]
+        )
 
         feat = {
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": coords or [114.272, 22.332],  # default 將軍澳
+                "coordinates": coords,
             },
             "properties": {
                 "id": eid,
@@ -368,46 +415,60 @@ def build_timeline(events: list[dict]) -> list[dict]:
     return records
 
 
-def build_chapter_summaries(cands) -> dict[int, str]:
-    """每章生成 30-50 字 summary（從 events/characters/locations claim 抽出）"""
-    chapter_content = defaultdict(list)
+def build_chapter_summaries(cands, location_features: list[dict]) -> dict[int, dict]:
+    """Phase E 結構化 chapter summaries：每章列 N 個地點，每地點配粵文短摘要。
+
+    由 location candidates 抽出 (location name + claim + chapter)，
+    然後按 chapter 分組。
+    結構：{chapter: {locations: [{id, name, summary, confidence}]}}
+    """
+    loc_by_name: dict[str, dict] = {}
+    for f in location_features:
+        n = f["properties"]["name"]
+        if n:
+            loc_by_name[n] = f
+
+    chapter_locs: dict[int, list[dict]] = defaultdict(list)
+    seen_by_chapter: dict[int, set[str]] = defaultdict(set)
     for c in cands:
+        if c.get("entity_kind") != "location":
+            continue
         if c.get("status") not in ("pending", "reviewed"):
             continue
-        ch = c.get("chapter", 0)
-        kind = c.get("entity_kind", "")
-        claim = (c.get("claim") or "").strip()
-        name = (c.get("name") or "").strip()
-        if not claim and not name:
-            continue
-        # 高信心優先
         conf = c.get("confidence") or 0
         if conf < 0.6:
             continue
-        text = ""
-        if name and claim:
-            text = f"{name}：{claim[:60]}"
-        elif claim:
-            text = claim[:80]
-        else:
-            text = name
-        chapter_content[ch].append(text)
+        name = (c.get("name") or "").strip()
+        if not name:
+            continue
+        ch = c.get("chapter", 0)
+        if not ch or ch < 1 or ch > 198:
+            continue
+        # Per chapter 去重
+        if name in seen_by_chapter[ch]:
+            continue
+        seen_by_chapter[ch].add(name)
+        # 揾 location 對應 feature
+        loc = loc_by_name.get(name)
+        loc_id = loc["properties"]["id"] if loc else f"loc_unknown_{ch:03d}_{len(chapter_locs[ch]):02d}"
+        desc = (c.get("claim") or "").strip()[:200]
+        if not desc:
+            desc = f"（{name} 出現）"
+        chapter_locs[ch].append({
+            "id": loc_id,
+            "name": name[:60],
+            "summary": desc,
+            "confidence": round(min(1.0, max(0.0, conf)), 2),
+        })
 
-    summaries = {}
-    for ch, lines in chapter_content.items():
-        # 揀 3-5 個最 representative lines
-        unique_lines = []
-        seen = set()
-        for ln in lines:
-            key = ln[:30]
-            if key not in seen:
-                seen.add(key)
-                unique_lines.append(ln)
-        # 截 5 個
-        sample = unique_lines[:5]
-        if sample:
-            summary = "；".join(sample)[:150]
-            summaries[ch] = summary + "..." if len(summary) >= 150 else summary
+    # 截每章 5 個 locations（最 representative）
+    summaries: dict[int, dict] = {}
+    for ch, locs in chapter_locs.items():
+        # Sort by confidence desc
+        locs_sorted = sorted(locs, key=lambda x: -x["confidence"])
+        top = locs_sorted[:5]
+        summaries[ch] = {"locations": top}
+
     return summaries
 
 
@@ -460,35 +521,38 @@ def main() -> int:
     print(f"  Total timeline entries: {len(timeline)}")
     print(f"  Written: {PUBLIC_DIR / 'timeline.json'}")
 
-    # 4. Chapter summaries
-    print("\n--- Generating chapter summaries ---")
-    summaries = build_chapter_summaries(cands)
+    # 4. Chapter summaries (Phase E 結構化)
+    print("\n--- Generating structured chapter summaries ---")
+    summaries = build_chapter_summaries(cands, locations)
     (PUBLIC_DIR / "chapter-summaries.json").write_text(
         json.dumps(summaries, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    print(f"  Chapter summaries: {len(summaries)}/198")
+    print(f"  Chapter summaries: {len(summaries)}/198 (structured by location)")
     print(f"  Written: {PUBLIC_DIR / 'chapter-summaries.json'}")
 
     # 5. Update asset-manifest
     manifest = load_json(PUBLIC_DIR / "asset-manifest.json")
     if manifest:
-        # 讀 routes.geojson + characters.json 計 actual count
+        # 讀 routes.geojson + characters.json + chapter-summaries.json 計 actual count
         routes_doc = load_json(PUBLIC_DIR / "routes.geojson")
         n_routes = len(routes_doc.get("features", [])) if routes_doc else 0
         chars_doc = load_json(PUBLIC_DIR / "characters.json")
         n_chars = len(chars_doc) if chars_doc else 0
+        summaries_doc = load_json(PUBLIC_DIR / "chapter-summaries.json")
+        n_summaries = len(summaries_doc) if summaries_doc else 0
         manifest["counts"] = {
             "location": len(locations),
             "event": len(events),
             "route": n_routes,
             "timeline": len(timeline),
             "character": n_chars,
+            "chapter_summary": n_summaries,
         }
         manifest["generated_at"] = __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat(timespec="seconds")
         (PUBLIC_DIR / "asset-manifest.json").write_text(
             json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
         )
-        print(f"\n  Updated asset-manifest.json counts (loc={len(locations)}, event={len(events)}, route={n_routes}, char={n_chars})")
+        print(f"\n  Updated asset-manifest.json counts (loc={len(locations)}, event={len(events)}, route={n_routes}, char={n_chars}, ch_summary={n_summaries})")
 
     return 0
 

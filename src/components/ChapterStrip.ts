@@ -41,9 +41,11 @@ export class ChapterStrip {
     const summaries = this.data.chapterSummaries || {};
     const items: string[] = [];
     for (let ch = 1; ch <= total; ch++) {
-      const summary = summaries[ch] || "";
+      // Phase E: summary 係 {locations: [...]}，攞第一個 location 嘅 name
+      const summaryObj = summaries[ch];
+      const titleHint = summaryObj?.locations?.[0]?.name || `第 ${ch} 章`;
       items.push(
-        `<button class="ch-pill" data-ch="${ch}" aria-label="第 ${ch} 章: ${this.escapeHtml(summary.slice(0, 30))}">${ch}</button>`,
+        `<button class="ch-pill" data-ch="${ch}" aria-label="第 ${ch} 章: ${this.escapeHtml(titleHint.slice(0, 30))}">${ch}</button>`,
       );
     }
     return items.join("");
@@ -76,8 +78,11 @@ export class ChapterStrip {
     if (numEl) numEl.textContent = String(cur);
     const sumEl = this.root.querySelector("#strip-summary");
     if (sumEl) {
-      const summary = this.data.chapterSummaries?.[cur] || "";
-      sumEl.textContent = summary.slice(0, 60) + (summary.length > 60 ? "…" : "");
+      // Phase E: 攞第一個 location 嘅 summary text
+      const summaryObj = this.data.chapterSummaries?.[this.app.getCurrentChapter()];
+      const first = summaryObj?.locations?.[0];
+      const text = first ? `${first.name}：${first.summary}` : `第 ${this.app.getCurrentChapter()} 章`;
+      sumEl.textContent = text.slice(0, 60) + (text.length > 60 ? "…" : "");
     }
   }
 }

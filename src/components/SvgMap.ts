@@ -9,8 +9,24 @@
 
 import type { App } from "../app";
 import type { AppData, RouteFeature, EventFeature } from "../data/loadAllData";
+import basemapSvgRaw from "../../public/assets/tseung-kwan-o-basemap.svg?raw";
 
 const VIEWBOX = "113.85 22.18 0.60 0.37";
+
+/**
+ * Extract inner content of <svg>...</svg> 嘅 SVG markup。
+ * Phase E：inline 載入 basemap，避免 <image href> CORS / path 問題。
+ */
+function extractBasemapInner(svg: string): string {
+  // Skip XML declaration
+  const s = svg.replace(/<\?xml[^?]*\?>/g, "");
+  // 抽出 <svg ...> 開 tag 嘅 inner content
+  const openMatch = s.match(/<svg[^>]*>/i);
+  if (!openMatch) return "";
+  const closeIdx = s.lastIndexOf("</svg>");
+  if (closeIdx < 0) return "";
+  return s.slice(openMatch.index! + openMatch[0].length, closeIdx);
+}
 
 export class SvgMap {
   root: HTMLElement;
@@ -137,9 +153,8 @@ export class SvgMap {
     const newH = vh / this.viewScale;
     this.svg.setAttribute("viewBox", `${cx - newW/2} ${cy - newH/2} ${newW} ${newH}`);
 
-    // Inline the basemap SVG content
-    const basemapPath = this.data.config.map.svg_basemap || "assets/tseung-kwan-o-basemap.svg";
-    const basemapURL = `./${basemapPath}`;
+    // Inline the basemap SVG content (Vite ?raw import - extract <g id="basemap-content">)
+    const basemapInner = extractBasemapInner(basemapSvgRaw);
 
     // Active character routes (show routes for current chapter)
     const activeRoutes = (this.data.routesByChapter.get(cur) || []).filter((r: RouteFeature) => {
@@ -147,8 +162,12 @@ export class SvgMap {
       return span && cur >= span[0] && cur <= span[1];
     });
 
-    // Active locations (show all locations — clicking reveals details)
-    const locationsToShow = this.data.locations.features;
+    // Active locations (Phase E: 只顯示 current chapter ± 3 嘅 locations，避免大 cluster)
+    const locationsToShow = this.data.locations.features.filter((l) => {
+      const fp = l.properties.first_appearance;
+      const chs = l.properties.chapters || [fp];
+      return chs.some((c: number) => Math.abs(c - cur) <= 3) || fp === cur;
+    });
 
     // Active events (current chapter + 1-2 surrounding for context)
     const eventsToShow: EventFeature[] = [];
@@ -159,7 +178,7 @@ export class SvgMap {
     }
 
     content.innerHTML = `
-      <image id="basemap-group" href="${basemapURL}" x="113.85" y="22.18" width="0.60" height="0.37" preserveAspectRatio="xMidYMid slice" />
+      <g id="basemap-group" class="basemap-layer">${basemapInner}</g>
       <g id="routes-layer" class="routes-layer"></g>
       <g id="locations-layer" class="locations-layer"></g>
       <g id="events-layer" class="events-layer"></g>

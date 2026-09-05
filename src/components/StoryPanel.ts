@@ -10,7 +10,7 @@
 
 import type { App } from "../app";
 import type { AppData, RouteFeature } from "../data/loadAllData";
-import type { EventFeature } from "../types/dataset";
+import type { EventFeature, ChapterSummaryEntry } from "../types/dataset";
 
 export class StoryPanel {
   root: HTMLElement;
@@ -30,7 +30,9 @@ export class StoryPanel {
 
   updateForChapter(ch: number): void {
     const events = this.data.eventsByChapter.get(ch) || [];
-    const summary = this.data.chapterSummaries?.[ch] || "";
+    const summaryObj = this.data.chapterSummaries?.[ch];
+    // Phase E: summary 係 {locations: [{id, name, summary, confidence}]}
+    const summary = summaryObj?.locations || [];
     const chars = this.data.chapterAppearances?.appearances || {};
     const charList = Object.entries(chars)
       .filter(([_, info]) => info.chapters.includes(ch))
@@ -46,8 +48,18 @@ export class StoryPanel {
       </header>
 
       <section class="story-summary">
-        <h3>本章摘要</h3>
-        <p>${summary ? this.escapeHtml(summary) : "<em>（未有摘要）</em>"}</p>
+        <h3>本章摘要 <span class="badge">${summary.length} 個地點</span></h3>
+        ${summary.length === 0 ? "<p class=\"empty\"><em>（未有摘要）</em></p>" : `
+        <ul class="summary-locations">
+          ${summary.map((s: ChapterSummaryEntry) => `
+            <li class="summary-loc" data-loc-id="${s.id}">
+              <span class="summary-loc-name">${this.escapeHtml(s.name)}</span>
+              <span class="summary-loc-conf">${(s.confidence * 100).toFixed(0)}%</span>
+              <p class="summary-loc-desc">${this.escapeHtml(s.summary)}</p>
+            </li>
+          `).join("")}
+        </ul>
+        `}
       </section>
 
       <section class="story-events">
@@ -94,14 +106,24 @@ export class StoryPanel {
     `;
 
     this.bindEvents();
+    this.bindSummaryEvents();
+  }
+
+  private bindSummaryEvents(): void {
+    // Phase E: click summary location → select on map
+    this.root.querySelectorAll(".summary-loc").forEach((el) => {
+      el.addEventListener("click", () => {
+        const id = (el as HTMLElement).dataset.locId;
+        if (id) this.app.setSelectedLocation(id);
+      });
+    });
   }
 
   private storyTitleForChapter(ch: number): string {
-    // 從 chapter summary 抽 title, 或者用 default
-    const summary = this.data.chapterSummaries?.[ch] || "";
-    if (summary) {
-      // 第一句首 12 字
-      const first = summary.split(/[，。！？；]/)[0].trim();
+    // Phase E: summary 結構改為 {locations: [...]}，攞第一個 location 嘅 name 做 title
+    const summaryObj = this.data.chapterSummaries?.[ch];
+    if (summaryObj?.locations && summaryObj.locations.length > 0) {
+      const first = summaryObj.locations[0].name;
       if (first) return first.slice(0, 20);
     }
     return `第 ${ch} 章`;

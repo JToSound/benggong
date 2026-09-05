@@ -6,7 +6,7 @@
   "required": [
     "id", "name", "aliases", "role", "color", "first_appearance",
     "chapter_refs", "spoiler_level", "description",
-    "confidence", "review_status", "portrait_asset_id"
+    "confidence", "review_status", "portrait_asset_id", "source"
   ],
   "properties": {
     "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },

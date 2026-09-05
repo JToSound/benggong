@@ -140,3 +140,56 @@ class TestDeriveRoutes:
         assert len(routes) == 1
         wps = [w["location"] for w in routes[0]["waypoints"]]
         assert "大本營市集" in wps  # 長名優先，唔會錯配做「大本營」
+
+
+# ---- Phase E: alias override (manual-resolutions.json) ----
+
+
+class TestAliasOverride:
+    """Phase E：manual-resolutions.json 嘅 merge_routes 規則必須令
+    '老師' / '鳥嘴' / '我（敘事者）' 等 alias merge 入 '主角'，避免 route 衝突。"""
+
+    def test_manual_resolutions_has_主角_aliases(self):
+        """manual-resolutions.json 必須有 merge_routes 將 53+ aliases 合併到 主角。"""
+        path = REPO / "data/private/review/manual-resolutions.json"
+        if not path.exists():
+            pytest.skip("manual-resolutions.json 不存在 (私有不入 repo)")
+        res = json.loads(path.read_text(encoding="utf-8"))
+        merge = None
+        for d in res.get("decisions", []):
+            if d.get("action") == "merge_routes":
+                for m in d.get("merges", []):
+                    if m.get("into") == "主角":
+                        merge = m
+                        break
+            if merge:
+                break
+        assert merge, "manual-resolutions.json 必須有 merge_routes → 主角"
+        aliases = set(merge.get("from_aliases", []))
+        # 確認 Phase E 已加入 plain-name aliases
+        for required in ("M", "M先生", "老師", "鳥嘴", "我（敘事者）"):
+            assert required in aliases, f"必須包含 alias '{required}'"
+
+    def test_character_routes_no_主角_aliases(self):
+        """Phase E：derive_character_routes 嘅 output 唔應該再包含 主角 aliases 嘅獨立 route。
+        應該全部 rename 做 主角。"""
+        path = REPO / "data/private/review/character-routes.json"
+        if not path.exists():
+            pytest.skip("character-routes.json 尚未生成")
+        routes = json.loads(path.read_text(encoding="utf-8"))
+        for r in routes:
+            assert r["character"] != "老師", "Phase E bug: 老師 應該 merge 入 主角"
+            assert r["character"] != "鳥嘴", "Phase E bug: 鳥嘴 應該 merge 入 主角"
+            assert r["character"] != "我（敘事者）", "Phase E bug: 我（敘事者） 應該 merge 入 主角"
+
+    def test_routes_geojson_no_alias_character_names(self):
+        """Phase E：routes.geojson 嘅 character_name 唔應有 alias 衝突。"""
+        path = REPO / "data/public/routes.geojson"
+        if not path.exists():
+            pytest.skip("routes.geojson 尚未生成")
+        routes = json.loads(path.read_text(encoding="utf-8"))["features"]
+        for r in routes:
+            name = r["properties"]["character_name"]
+            assert name not in ("老師", "鳥嘴", "我（敘事者）"), (
+                f"Phase E bug: route {r['properties']['id']} 仍用 alias '{name}'"
+            )

@@ -19,6 +19,8 @@
     },
     "chapter": { "type": "integer", "minimum": 1, "maximum": 198 },
     "location_id": { "type": ["string", "null"] },
+    "location_name": { "type": ["string", "null"] },
+    "title": { "type": "string", "maxLength": 80 },
     "characters": { "type": "array", "items": { "type": "string" } },
     "type": {
       "enum": ["major", "minor", "battle", "discovery", "death", "reunion", "travel", "landmark"]

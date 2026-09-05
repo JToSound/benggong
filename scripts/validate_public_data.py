@@ -57,6 +57,7 @@ SCHEMA_FILES = {
     "routes.geojson": "route.schema.json",
     "timeline.json": "timeline.schema.json",
     "characters.json": "character.schema.json",
+    "chapter-summaries.json": "chapter-summaries.schema.json",
 }
 
 
@@ -134,14 +135,41 @@ def main() -> int:
         items = list(iter_features(doc)) if fname.endswith(".geojson") else doc
 
         if sname:
-            for i, item in enumerate(items):
-                # schema 定義喺 Feature 層（type/geometry/properties）
-                validate_against(item, sname, f"{fname}[{i}]")
+            if fname.endswith(".geojson"):
+                for i, item in enumerate(items):
+                    # schema 定義喺 Feature 層（type/geometry/properties）
+                    validate_against(item, sname, f"{fname}[{i}]")
+            else:
+                # 非 geojson：例如 chapter-summaries.json 係 object 結構
+                # 為每個 chapter key 個別 validate
+                if fname == "chapter-summaries.json" and isinstance(doc, dict):
+                    for ch_key, ch_val in doc.items():
+                        try:
+                            int(ch_key)  # 確認係 numeric key
+                        except ValueError:
+                            errors.append(f"{fname}: chapter key 必須係 numeric string: '{ch_key}'")
+                            continue
+                        # 將 chapter value 包成 {chapter: ch_val} 嚟 match schema 嘅 additionalProperties
+                        # Phase E: chapter-summaries 結構係 {chapter: {locations: [...]}}
+                        wrapped = {ch_key: ch_val}
+                        validate_against(wrapped, sname, f"{fname}[{ch_key}]")
+                elif isinstance(doc, list):
+                    # timeline.json / characters.json：array of records，per-record validate
+                    for i, item in enumerate(doc):
+                        validate_against(item, sname, f"{fname}[{i}]")
+                else:
+                    validate_against(doc, sname, fname)
 
         # 收集統計同 id
         key_map = {"locations.geojson": "location", "events.geojson": "event", "routes.geojson": "route",
-                   "timeline.json": "timeline", "characters.json": "character"}
-        stats[key_map[fname]] = len(items)
+                   "timeline.json": "timeline", "characters.json": "character", "chapter-summaries.json": "chapter_summary"}
+        if fname in key_map:
+            stats[key_map[fname]] = len(items) if isinstance(items, list) else sum(
+                1 for _ in items
+            )
+        # chapter-summaries.json 唔需要 per-item review_status check (schema 已驗)
+        if fname == "chapter-summaries.json":
+            continue
         for item in items:
             p = item.get("properties", item)
             rs = p.get("review_status")
@@ -159,10 +187,27 @@ def main() -> int:
     # ---- 引用一致性 ----
     ev_path = public_dir / "events.geojson"
     if ev_path.exists():
+        # 先 load locations by id (for coord consistency check)
+        loc_path = public_dir / "locations.geojson"
+        loc_by_id = {}
+        if loc_path.exists():
+            for f in iter_features(json.loads(loc_path.read_text(encoding="utf-8"))):
+                loc_by_id[f["properties"]["id"]] = f
         for feat in iter_features(json.loads(ev_path.read_text(encoding="utf-8"))):
-            lid = feat["properties"].get("location_id")
+            p = feat["properties"]
+            lid = p.get("location_id")
             if lid and lid not in location_ids:
                 errors.append(f"events.geojson: location_id '{lid}' 唔存在於 locations")
+            # Phase E: 如果有 location_id，coords 應同 location 一致
+            if lid and lid in loc_by_id:
+                loc_coords = loc_by_id[lid]["geometry"]["coordinates"]
+                ev_coords = feat["geometry"]["coordinates"]
+                # 容許微差（因為 floating point）
+                if abs(loc_coords[0] - ev_coords[0]) > 0.0001 or abs(loc_coords[1] - ev_coords[1]) > 0.0001:
+                    errors.append(
+                        f"events.geojson: event '{p.get('id')}' location_id '{lid}' 嘅 coords "
+                        f"{ev_coords} 與 location 嘅 coords {loc_coords} 唔一致（Phase E bug 確認）"
+                    )
 
     rt_path = public_dir / "routes.geojson"
     if rt_path.exists():

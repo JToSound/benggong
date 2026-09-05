@@ -378,6 +378,10 @@
             22.343124399176013
           ],
           [
+            114.270469329366,
+            22.343124399176013
+          ],
+          [
             114.07715587090867,
             22.378278667887386
           ],
@@ -412,6 +416,10 @@
           [
             114.01747081712062,
             22.22027264057374
+          ],
+          [
+            113.97705058365759,
+            22.226078469520104
           ],
           [
             114.272,
@@ -450,6 +458,10 @@
             22.22027264057374
           ],
           [
+            114.262,
+            22.328
+          ],
+          [
             114.1331046005951,
             22.445754139009686
           ],
@@ -462,6 +474,10 @@
             22.22027264057374
           ],
           [
+            114.270469329366,
+            22.343124399176013
+          ],
+          [
             114.26275440604257,
             22.215464980544745
           ],
@@ -474,8 +490,36 @@
             22.22027264057374
           ],
           [
+            114.01747081712062,
+            22.22027264057374
+          ],
+          [
+            114.28348565651942,
+            22.337559433890288
+          ],
+          [
             114.0093701075761,
             22.334067635614556
+          ],
+          [
+            114.270469329366,
+            22.343124399176013
+          ],
+          [
+            114.08566674296178,
+            22.24138746471351
+          ],
+          [
+            114.28348565651942,
+            22.337559433890288
+          ],
+          [
+            114.28348565651942,
+            22.337559433890288
+          ],
+          [
+            114.01747081712062,
+            22.22027264057374
           ],
           [
             114.270469329366,
@@ -490,8 +534,12 @@
             22.319103891050585
           ],
           [
-            114.08798672465095,
-            22.299954184786753
+            114.270469329366,
+            22.343124399176013
+          ],
+          [
+            114.28348565651942,
+            22.337559433890288
           ],
           [
             114.01142732890821,
@@ -504,6 +552,18 @@
           [
             114.270469329366,
             22.343124399176013
+          ],
+          [
+            114.270469329366,
+            22.343124399176013
+          ],
+          [
+            114.26407465476464,
+            22.32506420233463
+          ],
+          [
+            114.26407465476464,
+            22.32506420233463
           ],
           [
             114.28306527046617,
@@ -532,6 +592,14 @@
           [
             113.98584344243534,
             22.254113183794917
+          ],
+          [
+            114.26346985580224,
+            22.31863094529641
+          ],
+          [
+            114.26193724727246,
+            22.31970370794232
           ],
           [
             113.99833417257953,
@@ -580,6 +648,7 @@
           15,
           17,
           18,
+          19,
           20,
           21,
           23,
@@ -590,6 +659,7 @@
           33,
           37,
           38,
+          46,
           48,
           56,
           57,
@@ -598,27 +668,25 @@
           66,
           67,
           68,
-          72,
+          74,
+          75,
           77,
           78,
           80,
+          81,
           82,
           83,
           84,
+          87,
+          88,
           89,
+          96,
+          97,
+          99,
+          102,
+          105,
           108,
-          109,
-          113,
-          121,
-          127,
-          130,
-          146,
-          151,
-          155,
-          158,
-          164,
-          170,
-          172
+          109
         ],
         "precision": "fictional",
         "waypoints": [
@@ -690,6 +758,12 @@
           },
           {
             "location_id": "loc_0004",
+            "chapter": 19,
+            "note": "大本營",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0004",
             "chapter": 20,
             "note": "大本營",
             "confidence": 0.85
@@ -749,6 +823,12 @@
             "confidence": 0.85
           },
           {
+            "location_id": "loc_0141",
+            "chapter": 46,
+            "note": "G層",
+            "confidence": 0.85
+          },
+          {
             "location_id": "loc_0143",
             "chapter": 48,
             "note": "醫院",
@@ -798,8 +878,14 @@
           },
           {
             "location_id": "loc_0592",
-            "chapter": 72,
+            "chapter": 74,
             "note": "不良人",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0104",
+            "chapter": 75,
+            "note": "學堂",
             "confidence": 0.85
           },
           {
@@ -821,6 +907,12 @@
             "confidence": 0.85
           },
           {
+            "location_id": "loc_0004",
+            "chapter": 81,
+            "note": "大本營",
+            "confidence": 0.85
+          },
+          {
             "location_id": "loc_0291",
             "chapter": 82,
             "note": "下水道",
@@ -839,9 +931,51 @@
             "confidence": 0.85
           },
           {
+            "location_id": "loc_0592",
+            "chapter": 87,
+            "note": "不良人",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0634",
+            "chapter": 88,
+            "note": "病者平權組織",
+            "confidence": 0.85
+          },
+          {
             "location_id": "loc_0305",
             "chapter": 89,
             "note": "街市",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0004",
+            "chapter": 96,
+            "note": "大本營",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0450",
+            "chapter": 97,
+            "note": "真實之房",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0634",
+            "chapter": 99,
+            "note": "病者平權組織",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0634",
+            "chapter": 102,
+            "note": "病者平權組織",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0592",
+            "chapter": 105,
+            "note": "不良人",
             "confidence": 0.85
           },
           {
@@ -863,9 +997,15 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0394",
+            "location_id": "loc_0004",
             "chapter": 121,
-            "note": "康林樓",
+            "note": "大本營",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0634",
+            "chapter": 124,
+            "note": "病者平權組織",
             "confidence": 0.85
           },
           {
@@ -882,8 +1022,26 @@
           },
           {
             "location_id": "loc_0004",
+            "chapter": 132,
+            "note": "大本營",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0004",
             "chapter": 146,
             "note": "大本營",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0224",
+            "chapter": 152,
+            "note": "倖存區",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0224",
+            "chapter": 153,
+            "note": "倖存區",
             "confidence": 0.85
           },
           {
@@ -929,6 +1087,18 @@
             "confidence": 0.85
           },
           {
+            "location_id": "loc_0380",
+            "chapter": 179,
+            "note": "寶康公園",
+            "confidence": 0.85
+          },
+          {
+            "location_id": "loc_0399",
+            "chapter": 180,
+            "note": "病獵公會",
+            "confidence": 0.85
+          },
+          {
             "location_id": "loc_0647",
             "chapter": 182,
             "note": "對面大樓",
@@ -954,7 +1124,7 @@
           },
           {
             "location_id": "loc_0004",
-            "chapter": 191,
+            "chapter": 192,
             "note": "大本營",
             "confidence": 0.85
           },
@@ -1076,8 +1246,8 @@
             22.344081521324483
           ],
           [
-            114.23868352025636,
-            22.327698809796292
+            114.24518020141909,
+            22.32275745021744
           ]
         ]
       },
@@ -1264,9 +1434,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0507",
+            "location_id": "loc_0635",
             "chapter": 197,
-            "note": "寶琳村",
+            "note": "艾寶琳",
             "confidence": 0.85
           }
         ],
@@ -3084,12 +3254,12 @@
             22.29762146944381
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.270469329366,
+            22.343124399176013
           ],
           [
-            113.94484000915541,
-            22.435364957656212
+            114.28306527046617,
+            22.336107919432365
           ],
           [
             113.89597940032044,
@@ -3306,15 +3476,15 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0224",
+            "location_id": "loc_0004",
             "chapter": 156,
-            "note": "倖存區",
+            "note": "大本營",
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0552",
+            "location_id": "loc_0486",
             "chapter": 158,
-            "note": "不法者監獄",
+            "note": "康城倖存區",
             "confidence": 0.85
           },
           {
@@ -3375,8 +3545,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            114.06277454795148,
-            22.247365262836652
+            114.21530373083085,
+            22.391583848325322
           ],
           [
             114.2610808346685,
@@ -3430,9 +3600,9 @@
         "precision": "fictional",
         "waypoints": [
           {
-            "location_id": "loc_0164",
+            "location_id": "loc_0158",
             "chapter": 57,
-            "note": "C橦",
+            "note": "工坊",
             "confidence": 0.85
           },
           {
@@ -3525,7 +3695,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_92f5c87f6d_017",
+        "id": "route_ent_92f5c87f6d_016",
         "character_id": "ent_92f5c87f6d",
         "character_name": "明雲",
         "color": "#F39C12",
@@ -3752,7 +3922,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_0ad2def3f5_018",
+        "id": "route_ent_0ad2def3f5_017",
         "character_id": "ent_0ad2def3f5",
         "character_name": "滿天",
         "color": "#E67E22",
@@ -4061,7 +4231,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_f7fba74a62_019",
+        "id": "route_ent_f7fba74a62_018",
         "character_id": "ent_f7fba74a62",
         "character_name": "漢森",
         "color": "#E67E22",
@@ -4220,7 +4390,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_d460958c66_020",
+        "id": "route_ent_d460958c66_019",
         "character_id": "ent_d460958c66",
         "character_name": "犬京",
         "color": "#F39C12",
@@ -4391,7 +4561,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_0314d499b9_021",
+        "id": "route_ent_0314d499b9_020",
         "character_id": "ent_0314d499b9",
         "character_name": "王白蛋",
         "color": "#1ABC9C",
@@ -4595,8 +4765,8 @@
             22.31970370794232
           ],
           [
-            113.90385580224307,
-            22.355014229037916
+            114.26193724727246,
+            22.31970370794232
           ],
           [
             114.07541908903639,
@@ -4609,7 +4779,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_d61cc93d26_022",
+        "id": "route_ent_d61cc93d26_021",
         "character_id": "ent_d61cc93d26",
         "character_name": "王達尼",
         "color": "#1ABC9C",
@@ -4863,9 +5033,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0470",
+            "location_id": "loc_0399",
             "chapter": 195,
-            "note": "地下水道",
+            "note": "病獵公會",
             "confidence": 0.85
           },
           {
@@ -4918,8 +5088,8 @@
             22.337559433890288
           ],
           [
-            114.01747081712062,
-            22.22027264057374
+            114.26275440604257,
+            22.215464980544745
           ],
           [
             114.26407465476464,
@@ -4928,7 +5098,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_3f7166ade6_023",
+        "id": "route_ent_3f7166ade6_022",
         "character_id": "ent_3f7166ade6",
         "character_name": "班尼",
         "color": "#E67E22",
@@ -4985,9 +5155,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0592",
+            "location_id": "loc_0291",
             "chapter": 110,
-            "note": "不良人",
+            "note": "下水道",
             "confidence": 0.85
           },
           {
@@ -5022,8 +5192,8 @@
             22.343124399176013
           ],
           [
-            114.262,
-            22.328
+            113.91746166170748,
+            22.366315594720376
           ],
           [
             114.15781689173724,
@@ -5124,7 +5294,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_50c9d96121_024",
+        "id": "route_ent_50c9d96121_023",
         "character_id": "ent_50c9d96121",
         "character_name": "瑜小六",
         "color": "#E67E22",
@@ -5183,9 +5353,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0104",
+            "location_id": "loc_0051",
             "chapter": 33,
-            "note": "學堂",
+            "note": "天台",
             "confidence": 0.85
           },
           {
@@ -5362,8 +5532,8 @@
             22.30539364461738
           ],
           [
-            114.23660798809796,
-            22.32697296864271
+            114.28348565651942,
+            22.337559433890288
           ],
           [
             114.26027172503242,
@@ -5384,7 +5554,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_e0f7ae0d6d_025",
+        "id": "route_ent_e0f7ae0d6d_024",
         "character_id": "ent_e0f7ae0d6d",
         "character_name": "瓦安",
         "color": "#F39C12",
@@ -5430,9 +5600,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0435",
+            "location_id": "loc_0634",
             "chapter": 134,
-            "note": "艾寶琳倖存區",
+            "note": "病者平權組織",
             "confidence": 0.85
           },
           {
@@ -5473,10 +5643,6 @@
         "type": "LineString",
         "coordinates": [
           [
-            114.26407465476464,
-            22.32506420233463
-          ],
-          [
             114.270469329366,
             22.343124399176013
           ],
@@ -5495,7 +5661,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_3cae31cbd2_026",
+        "id": "route_ent_3cae31cbd2_025",
         "character_id": "ent_3cae31cbd2",
         "character_name": "瓦禮",
         "color": "#9B59B6",
@@ -5505,7 +5671,6 @@
         ],
         "chapters": [
           146,
-          147,
           192,
           193,
           195
@@ -5513,14 +5678,8 @@
         "precision": "fictional",
         "waypoints": [
           {
-            "location_id": "loc_0224",
-            "chapter": 146,
-            "note": "倖存區",
-            "confidence": 0.85
-          },
-          {
             "location_id": "loc_0004",
-            "chapter": 147,
+            "chapter": 146,
             "note": "大本營",
             "confidence": 0.85
           },
@@ -5598,7 +5757,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_6c288e91c6_027",
+        "id": "route_ent_6c288e91c6_026",
         "character_id": "ent_6c288e91c6",
         "character_name": "病爪",
         "color": "#F39C12",
@@ -5732,7 +5891,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_b9773b2977_028",
+        "id": "route_ent_b9773b2977_027",
         "character_id": "ent_b9773b2977",
         "character_name": "病童",
         "color": "#9B59B6",
@@ -5847,7 +6006,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_64c25f2cd7_029",
+        "id": "route_ent_64c25f2cd7_028",
         "character_id": "ent_64c25f2cd7",
         "character_name": "病翼",
         "color": "#1ABC9C",
@@ -5975,12 +6134,12 @@
             22.3165
           ],
           [
-            114.02171343556877,
-            22.415345502403294
-          ],
-          [
             114.0093701075761,
             22.334067635614556
+          ],
+          [
+            114.24652094300755,
+            22.292686617837795
           ],
           [
             114.0093701075761,
@@ -6037,7 +6196,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_05b1ee1378_030",
+        "id": "route_ent_05b1ee1378_029",
         "character_id": "ent_05b1ee1378",
         "character_name": "病腦",
         "color": "#F39C12",
@@ -6170,15 +6329,15 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0575",
+            "location_id": "loc_0305",
             "chapter": 88,
-            "note": "鐵籠",
+            "note": "街市",
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0305",
+            "location_id": "loc_0316",
             "chapter": 89,
-            "note": "街市",
+            "note": "魚檔",
             "confidence": 0.85
           },
           {
@@ -6387,7 +6546,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_da5ac3f022_031",
+        "id": "route_ent_da5ac3f022_030",
         "character_id": "ent_da5ac3f022",
         "character_name": "白魂",
         "color": "#1ABC9C",
@@ -6653,8 +6812,8 @@
             22.32275745021744
           ],
           [
-            114.26193724727246,
-            22.31970370794232
+            114.26346985580224,
+            22.31863094529641
           ],
           [
             114.26193724727246,
@@ -6673,8 +6832,8 @@
             22.239450942244602
           ],
           [
-            114.26193724727246,
-            22.31970370794232
+            114.26346985580224,
+            22.31863094529641
           ],
           [
             114.24518020141909,
@@ -6691,7 +6850,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_1a9762c26d_032",
+        "id": "route_ent_1a9762c26d_031",
         "character_id": "ent_1a9762c26d",
         "character_name": "白鯨",
         "color": "#E67E22",
@@ -6790,9 +6949,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0399",
+            "location_id": "loc_0380",
             "chapter": 179,
-            "note": "病獵公會",
+            "note": "寶康公園",
             "confidence": 0.85
           },
           {
@@ -6820,9 +6979,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0399",
+            "location_id": "loc_0380",
             "chapter": 186,
-            "note": "病獵公會",
+            "note": "寶康公園",
             "confidence": 0.85
           },
           {
@@ -6840,122 +6999,6 @@
           {
             "location_id": "loc_0399",
             "chapter": 195,
-            "note": "病獵公會",
-            "confidence": 0.85
-          }
-        ],
-        "missing_waypoint_locations": null,
-        "provenance": "character-routes.json → derive_routes_geojson.py",
-        "source": "bing_gang",
-        "confidence": 0.8,
-        "review_status": "needs_review"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            113.97705058365759,
-            22.226078469520104
-          ],
-          [
-            114.01747081712062,
-            22.22027264057374
-          ],
-          [
-            114.262,
-            22.328
-          ],
-          [
-            114.01747081712062,
-            22.22027264057374
-          ],
-          [
-            114.28348565651942,
-            22.337559433890288
-          ],
-          [
-            114.270469329366,
-            22.343124399176013
-          ],
-          [
-            114.26346985580224,
-            22.31863094529641
-          ],
-          [
-            114.26193724727246,
-            22.31970370794232
-          ]
-        ]
-      },
-      "properties": {
-        "id": "route_ent_40e6666820_033",
-        "character_id": "ent_40e6666820",
-        "character_name": "老師",
-        "color": "#9B59B6",
-        "chapters_span": [
-          46,
-          180
-        ],
-        "chapters": [
-          46,
-          74,
-          75,
-          87,
-          88,
-          132,
-          179,
-          180
-        ],
-        "precision": "fictional",
-        "waypoints": [
-          {
-            "location_id": "loc_0141",
-            "chapter": 46,
-            "note": "G層",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0592",
-            "chapter": 74,
-            "note": "不良人",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0104",
-            "chapter": 75,
-            "note": "學堂",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0592",
-            "chapter": 87,
-            "note": "不良人",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0634",
-            "chapter": 88,
-            "note": "病者平權組織",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0004",
-            "chapter": 132,
-            "note": "大本營",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0380",
-            "chapter": 179,
-            "note": "寶康公園",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0399",
-            "chapter": 180,
             "note": "病獵公會",
             "confidence": 0.85
           }
@@ -7159,7 +7202,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_ac57edddaa_034",
+        "id": "route_ent_ac57edddaa_032",
         "character_id": "ent_ac57edddaa",
         "character_name": "老賢",
         "color": "#1ABC9C",
@@ -7565,7 +7608,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_9a4a48cbc9_035",
+        "id": "route_ent_9a4a48cbc9_033",
         "character_id": "ent_9a4a48cbc9",
         "character_name": "艾匡",
         "color": "#E67E22",
@@ -7689,8 +7732,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            114.270469329366,
-            22.343124399176013
+            114.04369558251315,
+            22.288065880827038
           ],
           [
             114.04369558251315,
@@ -7835,7 +7878,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_2ce4d2d78f_036",
+        "id": "route_ent_2ce4d2d78f_034",
         "character_id": "ent_2ce4d2d78f",
         "character_name": "董倫",
         "color": "#E67E22",
@@ -7884,9 +7927,9 @@
         "precision": "fictional",
         "waypoints": [
           {
-            "location_id": "loc_0004",
+            "location_id": "loc_0097",
             "chapter": 26,
-            "note": "大本營",
+            "note": "孤兒所",
             "confidence": 0.85
           },
           {
@@ -8229,8 +8272,8 @@
             22.343124399176013
           ],
           [
-            114.09834973678187,
-            22.221704470893414
+            113.9590418860151,
+            22.296511062790874
           ],
           [
             114.270469329366,
@@ -8283,7 +8326,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_7c6543f83e_037",
+        "id": "route_ent_7c6543f83e_035",
         "character_id": "ent_7c6543f83e",
         "character_name": "賴三",
         "color": "#E67E22",
@@ -8512,9 +8555,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0682",
+            "location_id": "loc_0298",
             "chapter": 174,
-            "note": "攝影大樓",
+            "note": "死亡之路",
             "confidence": 0.85
           },
           {
@@ -8665,7 +8708,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_21ab52894b_038",
+        "id": "route_ent_21ab52894b_036",
         "character_id": "ent_21ab52894b",
         "character_name": "銘凱",
         "color": "#F39C12",
@@ -8818,7 +8861,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_1ad97dd7c0_039",
+        "id": "route_ent_1ad97dd7c0_037",
         "character_id": "ent_1ad97dd7c0",
         "character_name": "阿文",
         "color": "#1ABC9C",
@@ -8883,12 +8926,12 @@
             22.278013160906383
           ],
           [
-            114.270469329366,
-            22.343124399176013
+            114.04369558251315,
+            22.288065880827038
           ],
           [
-            114.270469329366,
-            22.343124399176013
+            114.04369558251315,
+            22.288065880827038
           ],
           [
             114.20674158846418,
@@ -8899,8 +8942,8 @@
             22.343124399176013
           ],
           [
-            114.262,
-            22.328
+            113.941827878233,
+            22.34932429236286
           ],
           [
             114.262,
@@ -8953,7 +8996,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_24402a9d9b_040",
+        "id": "route_ent_24402a9d9b_038",
         "character_id": "ent_24402a9d9b",
         "character_name": "阿玲",
         "color": "#F39C12",
@@ -8990,15 +9033,15 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0004",
+            "location_id": "loc_0097",
             "chapter": 26,
-            "note": "大本營",
+            "note": "孤兒所",
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0004",
+            "location_id": "loc_0097",
             "chapter": 27,
-            "note": "大本營",
+            "note": "孤兒所",
             "confidence": 0.85
           },
           {
@@ -9014,9 +9057,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0104",
+            "location_id": "loc_0113",
             "chapter": 32,
-            "note": "學堂",
+            "note": "八樓",
             "confidence": 0.85
           },
           {
@@ -9117,14 +9160,6 @@
             22.343124399176013
           ],
           [
-            113.97539070725566,
-            22.383202220187684
-          ],
-          [
-            114.270469329366,
-            22.343124399176013
-          ],
-          [
             114.270469329366,
             22.343124399176013
           ],
@@ -9147,7 +9182,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_1e7255557d_041",
+        "id": "route_ent_1e7255557d_039",
         "character_id": "ent_1e7255557d",
         "character_name": "阿登",
         "color": "#1ABC9C",
@@ -9159,8 +9194,6 @@
           3,
           7,
           11,
-          14,
-          15,
           25,
           33,
           67,
@@ -9184,18 +9217,6 @@
           {
             "location_id": "loc_0004",
             "chapter": 11,
-            "note": "大本營",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0028",
-            "chapter": 14,
-            "note": "休息室",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0004",
-            "chapter": 15,
             "note": "大本營",
             "confidence": 0.85
           },
@@ -9265,7 +9286,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_7ed34c8449_042",
+        "id": "route_ent_7ed34c8449_040",
         "character_id": "ent_7ed34c8449",
         "character_name": "阿禮",
         "color": "#1ABC9C",
@@ -9342,13 +9363,13 @@
             22.39151281757839
           ],
           [
-            114.12547173266194,
-            22.294697909514
+            113.95463263904783,
+            22.320672732127868
           ]
         ]
       },
       "properties": {
-        "id": "route_ent_e3d589126a_043",
+        "id": "route_ent_e3d589126a_041",
         "character_id": "ent_e3d589126a",
         "character_name": "陸軒",
         "color": "#9B59B6",
@@ -9390,9 +9411,9 @@
             "confidence": 0.85
           },
           {
-            "location_id": "loc_0684",
+            "location_id": "loc_0258",
             "chapter": 166,
-            "note": "暗房",
+            "note": "酒吧",
             "confidence": 0.85
           }
         ],
@@ -9435,7 +9456,7 @@
         ]
       },
       "properties": {
-        "id": "route_ent_4b04ca5989_045",
+        "id": "route_ent_4b04ca5989_043",
         "character_id": "ent_4b04ca5989",
         "character_name": "馬德梵",
         "color": "#9B59B6",
@@ -9487,122 +9508,6 @@
             "location_id": "loc_0592",
             "chapter": 92,
             "note": "不良人",
-            "confidence": 0.85
-          }
-        ],
-        "missing_waypoint_locations": null,
-        "provenance": "character-routes.json → derive_routes_geojson.py",
-        "source": "bing_gang",
-        "confidence": 0.8,
-        "review_status": "needs_review"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            114.270469329366,
-            22.343124399176013
-          ],
-          [
-            114.270469329366,
-            22.343124399176013
-          ],
-          [
-            114.08566674296178,
-            22.24138746471351
-          ],
-          [
-            114.28348565651942,
-            22.337559433890288
-          ],
-          [
-            114.28348565651942,
-            22.337559433890288
-          ],
-          [
-            114.01747081712062,
-            22.22027264057374
-          ],
-          [
-            114.26407465476464,
-            22.32506420233463
-          ],
-          [
-            114.26407465476464,
-            22.32506420233463
-          ]
-        ]
-      },
-      "properties": {
-        "id": "route_ent_d79c59bfef_046",
-        "character_id": "ent_d79c59bfef",
-        "character_name": "鳥嘴",
-        "color": "#9B59B6",
-        "chapters_span": [
-          81,
-          153
-        ],
-        "chapters": [
-          81,
-          96,
-          97,
-          99,
-          102,
-          105,
-          152,
-          153
-        ],
-        "precision": "fictional",
-        "waypoints": [
-          {
-            "location_id": "loc_0004",
-            "chapter": 81,
-            "note": "大本營",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0004",
-            "chapter": 96,
-            "note": "大本營",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0450",
-            "chapter": 97,
-            "note": "真實之房",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0634",
-            "chapter": 99,
-            "note": "病者平權組織",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0634",
-            "chapter": 102,
-            "note": "病者平權組織",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0592",
-            "chapter": 105,
-            "note": "不良人",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0224",
-            "chapter": 152,
-            "note": "倖存區",
-            "confidence": 0.85
-          },
-          {
-            "location_id": "loc_0224",
-            "chapter": 153,
-            "note": "倖存區",
             "confidence": 0.85
           }
         ],

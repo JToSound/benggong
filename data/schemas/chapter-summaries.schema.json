@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/chapter-summaries.schema.json",
+  "title": "《病港》公開章節摘要（Phase E 結構化）",
+  "description": "JSON object 形式：{chapter: {locations: [{id, name, summary, confidence}]}}",
+  "type": "object",
+  "additionalProperties": { "$ref": "#/$defs/chapterSummary" },
+  "$defs": {
+    "chapterSummary": {
+      "type": "object",
+      "required": ["locations"],
+      "properties": {
+        "locations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/locationEntry" }
+        }
+      }
+    },
+    "locationEntry": {
+      "type": "object",
+      "required": ["id", "name", "summary", "confidence"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^loc_[a-z0-9_]+$"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "summary": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

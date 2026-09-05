@@ -236,7 +236,18 @@ export interface ChapterAppearances {
   }>;
 }
 
-export type ChapterSummaries = Record<number, string>;
+export interface ChapterSummaryEntry {
+  id: string;
+  name: string;
+  summary: string;
+  confidence: number;
+}
+
+export interface ChapterSummary {
+  locations: ChapterSummaryEntry[];
+}
+
+export type ChapterSummaries = Record<number, ChapterSummary>;
 
 /** 預設角色配色（master prompt §7.7）。 */
 export const CHARACTER_COLORS: Record<string, string> = {
