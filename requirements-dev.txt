@@ -1,3 +1,6 @@
 # ===== 《病港》互動地圖 — Python pipeline 依賴 =====
 pytest>=8.0
 jsonschema>=4.20
+# Phase G: HK basemap renderer (PIL + requests, used in tests too)
+Pillow>=10.0
+requests>=2.31
