@@ -234,6 +234,52 @@ html, body {
   border: 1px solid var(--border);
 }
 
+.map-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: auto;
+  min-width: 130px;
+}
+
+.legend-title {
+  color: var(--fg);
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: 0.5px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.legend-item .dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+.legend-item .line {
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  flex-shrink: 0;
+}
+
+.dot-event-current { background: #e74c3c; }
+.dot-event-other   { background: #f39c12; }
+.dot-loc-real      { background: #e67e22; }
+.dot-loc-fictional { background: #9b59b6; }
+.dot-selected      { background: #ffeb3b; }
+.route-legend      { background: #F39C12; border-radius: 2px; }
+
 .map-controls {
   position: absolute;
   bottom: 12px;

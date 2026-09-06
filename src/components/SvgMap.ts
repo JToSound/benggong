@@ -128,7 +128,17 @@ export class SvgMap {
           </defs>
           <g id="map-content"></g>
         </svg>
-        <div class="map-overlay" id="map-overlay"></div>
+        <div class="map-overlay" id="map-overlay">
+          <div class="map-legend" id="map-legend">
+            <div class="legend-title">地圖標記</div>
+            <div class="legend-item"><span class="dot dot-event-current"></span>本章事件</div>
+            <div class="legend-item"><span class="dot dot-event-other"></span>其他章事件</div>
+            <div class="legend-item"><span class="dot dot-loc-real"></span>真實地點</div>
+            <div class="legend-item"><span class="dot dot-loc-fictional"></span>虛構地點</div>
+            <div class="legend-item"><span class="dot dot-selected"></span>選中</div>
+            <div class="legend-item"><span class="line route-legend"></span>角色路線</div>
+          </div>
+        </div>
         <div class="map-controls">
           <button id="map-zoom-in" class="map-ctrl" title="放大">+</button>
           <button id="map-zoom-out" class="map-ctrl" title="縮小">−</button>
@@ -336,7 +346,58 @@ export class SvgMap {
   }
 
   flyToChapter(_ch: number): void {
-    // Optional: pan slightly to focus events of this chapter
+    // Phase H: smart zoom — compute the bounding box of all locations
+    // referenced by the chapter (and surrounding ±3 chapters for context)
+    // and re-pan the viewBox to fit. Falls back to the full HK bbox if no
+    // locations are present.
+    const cur = _ch;
+    const contextChs = new Set<number>();
+    for (let d = -2; d <= 2; d++) contextChs.add(cur + d);
+    let lonMin = Infinity, lonMax = -Infinity, latMin = Infinity, latMax = -Infinity;
+    let has = false;
+    for (const loc of this.data.locations.features) {
+      const fp = loc.properties.first_appearance;
+      const chs = loc.properties.chapters || [fp];
+      if (chs.some((c: number) => contextChs.has(c))) {
+        const [lon, lat] = (loc.geometry.coordinates as [number, number]);
+        // Also try FALLBACK_ANCHORS for fictional locations
+        const fb = FALLBACK_ANCHORS[loc.properties.name];
+        const useLon = fb ? fb.lon : lon;
+        const useLat = fb ? fb.lat : lat;
+        if (useLon >= BASEMAP_BBOX.lon_min && useLon <= BASEMAP_BBOX.lon_max) {
+          lonMin = Math.min(lonMin, useLon);
+          lonMax = Math.max(lonMax, useLon);
+          latMin = Math.min(latMin, useLat);
+          latMax = Math.max(latMax, useLat);
+          has = true;
+        }
+      }
+    }
+    if (!has) {
+      this.render();
+      return;
+    }
+    // Pad bbox by 25% to give some breathing room
+    const lonPad = (lonMax - lonMin) * 0.25;
+    const latPad = (latMax - latMin) * 0.25;
+    lonMin = Math.max(BASEMAP_BBOX.lon_min, lonMin - lonPad);
+    lonMax = Math.min(BASEMAP_BBOX.lon_max, lonMax + lonPad);
+    latMin = Math.max(BASEMAP_BBOX.lat_min, latMin - latPad);
+    latMax = Math.min(BASEMAP_BBOX.lat_max, latMax + latPad);
+    // Convert to viewBox coords
+    const fx0 = (lonMin - BASEMAP_BBOX.lon_min) / (BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min);
+    const fx1 = (lonMax - BASEMAP_BBOX.lon_min) / (BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min);
+    // Y-axis inverted (SVG y points down, lat points up)
+    const fy0 = (BASEMAP_BBOX.lat_max - latMax) / (BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min);
+    const fy1 = (BASEMAP_BBOX.lat_max - latMin) / (BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min);
+    const x = 113.85 + Math.min(fx0, fx1) * 0.60;
+    const y = 22.18 + Math.min(fy0, fy1) * 0.37;
+    const w = Math.abs(fx1 - fx0) * 0.60;
+    const h = Math.abs(fy1 - fy0) * 0.37;
+    this.svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
+    this.viewX = 0;
+    this.viewY = 0;
+    this.viewScale = 1.0;
     this.render();
   }
 }

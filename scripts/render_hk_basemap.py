@@ -32,7 +32,7 @@ from pathlib import Path
 from typing import Any
 
 import requests
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 REPO = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT_PNG = REPO / "public" / "assets" / "hk-basemap.png"
@@ -270,7 +270,97 @@ def render_basemap(data: dict[str, Any], size: int) -> Image.Image:
             draw.polygon(poly, fill=PALETTE["building"], outline=None)
         n_bldg += 1
 
-    print(f"  water={n_water} coast={n_coast} park={n_park} road={n_road} bldg={n_bldg} other={n_other}")
+    # Pass 5: street / place labels
+    # Render major road names + landmark names (parks, hospitals) at low
+    # alpha so they don't dominate the basemap. The text uses the same aged-
+    # paper colour as the rest of the bing-gang palette.
+    n_label = 0
+    n_skipped_small = 0
+    try:
+        # Try a CJK font if available; fall back to default bitmap font
+        font_path = None
+        for cand in (
+            "C:/Windows/Fonts/msgothic.ttc",
+            "C:/Windows/Fonts/msyh.ttc",
+            "C:/Windows/Fonts/NotoSansCJK-Regular.ttc",
+            "/System/Library/Fonts/PingFang.ttc",
+        ):
+            if Path(cand).exists():
+                font_path = cand
+                break
+        label_font = ImageFont.truetype(font_path, size=max(10, size // 100)) if font_path else ImageFont.load_default()
+        label_font_small = ImageFont.truetype(font_path, size=max(8, size // 140)) if font_path else ImageFont.load_default()
+    except Exception as e:
+        print(f"  (label font unavailable: {e}; skipping label pass)", file=sys.stderr)
+        label_font = None
+        label_font_small = None
+
+    if label_font is not None:
+        import math
+        # 5a) Road labels — only major highways with name, single midpoint
+        major_roads = ("motorway", "trunk", "primary")
+        for el in elements:
+            if el.get("type") != "way":
+                continue
+            tags = el.get("tags", {}) or {}
+            if tags.get("highway") not in major_roads:
+                continue
+            name = tags.get("name")
+            if not name:
+                continue
+            pts = way_to_points(el)
+            if len(pts) < 2:
+                continue
+            # Midpoint of way
+            mid = pts[len(pts) // 2]
+            x, y = lonlat_to_px(mid[0], mid[1], size)
+            # Truncate to 14 CJK chars
+            txt = name[:14] if len(name) > 14 else name
+            try:
+                draw.text(
+                    (x, y), txt, fill=(220, 210, 180, 200),
+                    font=label_font, anchor="mm", spacing=2,
+                )
+                n_label += 1
+            except Exception:
+                n_skipped_small += 1
+        # 5b) Place labels — parks, hospitals, malls, schools (top 200)
+        place_count = 0
+        for el in elements:
+            if el.get("type") != "way":
+                continue
+            tags = el.get("tags", {}) or {}
+            kind = (
+                "park" if tags.get("leisure") == "park" or tags.get("landuse") == "park"
+                else "hospital" if tags.get("amenity") == "hospital"
+                else "school" if tags.get("amenity") in ("school", "kindergarten")
+                else "university" if tags.get("amenity") == "university"
+                else "mall" if tags.get("shop") == "mall"
+                else None
+            )
+            if not kind:
+                continue
+            name = tags.get("name")
+            if not name or len(name) < 2:
+                continue
+            n = el.get("geometry", [])
+            if not n:
+                continue
+            x, y = lonlat_to_px(n[0]["lon"], n[0]["lat"], size)
+            try:
+                txt = name[:10]
+                draw.text(
+                    (x, y), txt, fill=(200, 220, 240, 180),
+                    font=label_font_small, anchor="lm", spacing=1,
+                )
+                place_count += 1
+                if place_count >= 200:
+                    break
+            except Exception:
+                pass
+        n_label += place_count
+
+    print(f"  water={n_water} coast={n_coast} park={n_park} road={n_road} bldg={n_bldg} labels={n_label} other={n_other}")
 
     # Post-processing: subtle blur to soften pixel edges, slight desaturation
     # for a "weathered" look without losing sharpness.
