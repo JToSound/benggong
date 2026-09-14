@@ -149,7 +149,7 @@ const LEGEND_EN: Record<string, string> = {
   "legend.loc-real": "Real location",
   "legend.loc-fictional": "Fictional location",
   "legend.selected": "Selected",
-  "legend.route": "Character route",
+  "legend.route": "Character route (real places only)",
 };
 
 /** 視圖狀態（單一真相來源）。 */

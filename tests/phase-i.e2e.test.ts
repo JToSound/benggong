@@ -126,12 +126,21 @@ describe("Phase I 互動驗證（Playwright）", () => {
       ).toContain("Current-chapter event");
       expect(await page.textContent("#legend-lang-btn")).toContain("中文");
 
+      // 路線圖例嘅誠實披露必須中英同步：中文講「僅真實地點之間」，
+      // 英文必須有對應說明，唔可以只寫 "Character route"。
+      expect(
+        await page.locator('[data-i18n="legend.route"]').textContent(),
+      ).toContain("real places only");
+
       // 再切一次應該回到中文
       await page.click("#legend-lang-btn");
       expect(await title.textContent()).toContain("地圖標記");
       expect(
         await page.locator('[data-i18n="legend.route"]').textContent(),
       ).toContain("角色路線");
+      expect(
+        await page.locator('[data-i18n="legend.route"]').textContent(),
+      ).toContain("僅真實地點之間");
 
       // dot / line 樣本 span 必須保留（唔可以被文字替換清走）
       expect(await page.locator(".legend-item .dot").count()).toBeGreaterThan(0);
