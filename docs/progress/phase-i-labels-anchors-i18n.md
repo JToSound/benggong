@@ -3,8 +3,8 @@
 **日期**: 2026-09-15
 **作者**: JToSound (benggong project)
 **狀態**: ✅ 全部品質閘門通過；⚠️ **未推送**（本機環境冇 GitHub 憑證）
-**Commit**: `473ea05`（第一輪）、`f309711`（push 阻滯記錄）；第二輪修正待 commit
-**領先 origin/main**: 2 個 commit
+**Commit**: `473ea05`（第一輪）、`f309711`（push 阻滯記錄）、`1898f38`（第二輪）
+**領先 origin/main**: 3 個 commit
 
 ---
 
@@ -290,9 +290,15 @@ Nominatim 回傳嘅香港邊界經簡化（單一 outer ring、1,314 點），�
 
 ## 下一步建議
 
-1. **推送 + 部署**（BLOCKER）—— 本機 commit `473ea05` 已完成，但環境內冇
-   GitHub 憑證（`credential.helper = helper-selector` 無儲存憑證、`gh` 未登入、
-   冇 `GH_TOKEN`），所以 `git push` 失敗：
+1. **推送 + 部署**（BLOCKER）—— 本機已有 3 個 commit（`473ea05`、`f309711`、
+   `1898f38`）未推送。經完整診斷，環境內確實冇任何 GitHub 憑證：
+   - remote：`https://github.com/JToSound/benggong.git`（HTTPS）
+   - `credential.helper = helper-selector`（Git Credential Manager 選擇器，
+     但 credential store 內冇對應憑證）
+   - `gh auth status` → `You are not logged into any GitHub hosts`
+   - `GH_TOKEN` 環境變數 → 未設定
+
+   失敗訊息（`GIT_TERMINAL_PROMPT=0 git push origin main`）：
    ```
    fatal: could not read Username for 'https://github.com': terminal prompts disabled
    ```
@@ -305,6 +311,7 @@ Nominatim 回傳嘅香港邊界經簡化（單一 outer ring、1,314 點），�
    ```bash
    gh run list --workflow=pages.yml --limit 3
    ```
+   **GitHub Pages 部署狀態目前無法驗證**（依賴 push）。
 2. **修路線幾何（資料層）**（HIGH）—— 前端已過濾至只畫 real–real 線段
    （最長單段 41.4 km → 3,376 m，見 §6.2），但 543 個 fictional location 嘅
    任意座標仍在，路線圖仍然唔完整。建議優先處理 `derive_character_routes.py`
