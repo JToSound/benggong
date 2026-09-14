@@ -2,7 +2,8 @@
 
 **日期**: 2026-09-15
 **作者**: JToSound (benggong project)
-**狀態**: ✅ 全部品質閘門通過（未部署 — 待 commit + push）
+**狀態**: ✅ 全部品質閘門通過；⚠️ **未推送**（本機環境冇 GitHub 憑證）
+**Commit**: `473ea05`（本機 main，領先 origin/main 1 個 commit）
 
 ---
 
@@ -195,11 +196,26 @@ Nominatim 回傳嘅香港邊界經簡化（單一 outer ring、1,314 點），�
 
 ## 下一步建議
 
-1. **修路線幾何**（HIGH）—— 影響地圖可信度最大，建議優先。
-2. **標籤改 vector 圖層**（MEDIUM）—— 解決高 zoom 字體放大問題。
-3. **重新評估 flyToChapter 縮放策略** —— 例如限制最大 bbox、或改為聚焦
+1. **推送 + 部署**（BLOCKER）—— 本機 commit `473ea05` 已完成，但環境內冇
+   GitHub 憑證（`credential.helper = helper-selector` 無儲存憑證、`gh` 未登入、
+   冇 `GH_TOKEN`），所以 `git push` 失敗：
+   ```
+   fatal: could not read Username for 'https://github.com': terminal prompts disabled
+   ```
+   請喺有憑證嘅環境執行：
+   ```bash
+   git push origin main
+   ```
+   推送後 GitHub Actions（`.github/workflows/pages.yml`）會自動部署，可用以下
+   指令確認：
+   ```bash
+   gh run list --workflow=pages.yml --limit 3
+   ```
+2. **修路線幾何**（HIGH）—— 影響地圖可信度最大，建議優先。
+3. **標籤改 vector 圖層**（MEDIUM）—— 解決高 zoom 字體放大問題。
+4. **重新評估 flyToChapter 縮放策略** —— 例如限制最大 bbox、或改為聚焦
    「本章新增 location」而唔係所有 ±2 章 location。
-4. 將 `gen_fallback_anchors.py` 加入 CI（`--check` 模式），確保 anchor pool
+5. 將 `gen_fallback_anchors.py` 加入 CI（`--check` 模式），確保 anchor pool
    唔會再被污染。
 
 ---
