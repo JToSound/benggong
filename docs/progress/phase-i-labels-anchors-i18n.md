@@ -43,17 +43,19 @@ commit 嘅 Pass 5c（燒入底圖）。Phase I 嘅**前端功能全部未實作*
 | `scripts/gen_fallback_anchors.py` | **新增** — anchor pool 生成器 | +372 行 |
 | `src/data/fallbackAnchors.ts` | 剔除 69 個深圳 POI，補足至 503 | 45,718 → 47,528 bytes |
 | `scripts/render_hk_basemap.py` | Pass 5c 由底圖拆出成獨立圖層 | +90, -28 |
-| `public/assets/hk-basemap-labels.png` | **新增** — 透明街道標籤圖層 | 262,862 bytes |
+| `public/assets/hk-basemap-labels.png` | **新增** — 透明街道標籤圖層（declutter 後 291 個） | 262,862 → **84,763 bytes** |
 | `public/assets/hk-basemap.png` | 底圖（移除 Pass 5c 後 byte-identical） | 74,361 bytes（不變） |
 | `public/assets/hk-basemap-coords.json` | 加 `layers` metadata | +8 行 |
 | `src/styles/main.css` | 圖例語言按鈕 + 標籤圖層樣式 | +32 |
 | `tests/test_fallback_anchors.py` | **新增** — 9 個 anchor pool 回歸測試 | +186 |
-| `tests/test_hk_basemap.py` | 加 6 個標籤圖層測試 | +88 |
+| `tests/test_hk_basemap.py` | 加標籤圖層測試 + declutter 單元測試 | +88 → +290（15 → 26 個測試） |
 | `tests/phase-i.e2e.test.ts` | **新增** — 5 個 Playwright 互動驗證 | +172 → +240 |
 | `src/data/loadAllData.ts` | **第二輪** — `routesByChapter` 改按 `chapters` 陣列索引 | +14, -6 |
 | `src/types/dataset.ts` | **第二輪** — `RouteProperties.chapters?: number[]` | +3 |
 | `data/schemas/route.schema.json` | **第二輪** — 補聲明 `chapters` 屬性 | +11 |
 | `src/components/SvgMap.ts` | **第二輪** — route honesty filter + `routeVertex()` + legend 文案 | 見 §6.2 |
+| `scripts/render_hk_basemap.py` | **第三輪** — `plan_labels()` declutter + `_short_label()` | 見 §7 |
+| `src/components/SvgMap.ts` | **第三輪** — 英文圖例補「real places only」披露 | +1 |
 
 ---
 
@@ -101,7 +103,8 @@ Overpass 查詢 bbox 北緣（`lat_max = 22.55`）掠過深圳市區。
 
 **做法**：拆成兩個圖層 ——
 - `hk-basemap.png`：Pass 1–5b（水／海岸／公園／道路／建築 + 主要標籤）
-- `hk-basemap-labels.png`：透明 RGBA，只含 Pass 5c 嘅 16,887 個街道名
+- `hk-basemap-labels.png`：透明 RGBA，只含 Pass 5c 嘅街道名
+  （首次生成係 16,887 個；經 §7 declutter 修正後為 291 個）
 
 前端 `<g id="label-detail-layer">` 包住標籤 `<image>`，透明度由
 `viewScale` 線性插值：`≤0.8 → 0`、`0.8–1.2` 線性、`≥1.2 → 1`。
@@ -139,8 +142,8 @@ viewBox 都彈返全港視圖。
 | `npm run lint` | ✅ 0 errors |
 | `npm run test`（vitest） | ✅ **39/39**（6 個檔，含 **5** 個 Playwright e2e） |
 | `tests/phase-i.test.ts` | ✅ 16/16 |
-| `npm run build` | ✅ 788ms，`index-BMFDSGsY.js` 76.28 kB（gzip 24.34 kB）+ `hk-basemap` 74.36 kB + `hk-basemap-labels` 262.86 kB |
-| `pytest tests/` | ✅ **115/115**（原 100 + 15 新） |
+| `npm run build` | ✅ 756ms，`index-XpyY6bln.js` 76.30 kB（gzip 24.35 kB）+ `hk-basemap` 74.36 kB + `hk-basemap-labels` **84.76 kB** |
+| `pytest tests/` | ✅ **127/127**（原 100 + 15 anchor/basemap + 12 declutter） |
 | `validate_public_data.py` | ✅ 714 locations / 1,796 events / 42 routes / 342 characters / 195 chapter_summaries |
 | `audit_release.py --strict` | ✅ 掃描 14 個文字檔、4,690 筆記錄（needs_review 0），無私隱洩漏、無 secrets、無 remote map URL |
 
@@ -240,6 +243,73 @@ fictional 座標就變成跨區假線段。
 
 ---
 
+## 第二輪修正（續）：街道標籤 declutter
+
+瀏覽器截圖驗收時發現第三個真問題：**同一路名大量重複堆疊**。
+
+### 7.1 根因：一段 way 一個標籤
+
+`render_label_overlay()` 原本對每個合資格 way 段都畫一個標籤，冇任何去重或
+避碰。而 OSM 會將一條道路切成好多段 way，所以重複極嚴重。實測：
+
+| 指標 | 數值 |
+|---|---|
+| 合資格 way 段（secondary / tertiary 且有 name） | **16,887** |
+| 唯一路名 | **1,515** |
+| 平均每名段數 | **11.1** |
+| 重複最嚴重 | 英皇道 King's Road **130 次** |
+
+2048 px 畫布上平均每 15.8 px 就有一個標籤 → 必然互相覆蓋。截圖可見
+「西貢公路 Hiram」疊 3 層、「清水灣道 Clear…」疊 4 層。
+
+次要問題：原本用 `name[:10]` 硬切字元數，混合名會斷喺英文詞中間
+（「大涌橋路 Tai C」、「清水灣道 Clear」）。
+
+### 7.2 修正：三層 declutter
+
+新增純函式 `plan_labels()`（抽離繪圖，方便單元測試），流程：
+
+1. **按路名分組** —— 同一路名嘅所有 way 段合併成候選點集合。
+2. **同名最小間距 + 上限** —— 同名標籤至少隔 `0.09 × size`（2048 → 184 px），
+   每個路名最多 3 個（長道路仍然可以出現幾次）；`secondary` 優先於
+   `tertiary`。
+3. **全域碰撞檢測** —— 空間網格（cell = 1.2 × 字高 ≈ 17 px）檢查文字
+   bbox，同已畫標籤重疊即跳過。
+
+排序固定為 `(等級, 路名)`，令輸出 deterministic。
+
+同時新增 `_short_label()` 取代 `name[:10]`：
+- 名內有中文 → 只取中文部分（本專案 UI 以粵文為主），最多 7 字。
+- 純英文 → 最多 18 字元，並退到最後一個**完整詞**（唔會切斷詞語）。
+
+### 7.3 修正後結果
+
+| 指標 | 修正前 | 修正後 |
+|---|---|---|
+| 街道標籤數 | 16,887 | **291** |
+| PNG 大小 | 262,862 B | **84,763 B**（−67.7%） |
+| 透明像素比例 | 81.2% | **98.4%** |
+| 同名堆疊 | 最多 130 層 | **0**（同名最小間距保證） |
+| 中文標籤截斷 | 斷喺英文詞中間 | 只取中文，無斷詞 |
+
+**底圖 PNG 保持 byte-identical**（sha256 `c4ba62a1…`），證明改動只影響標籤層。
+標籤圖層新 sha256：`80bfbb8fe406a834135ec5e4ebb2c7cd43dc02850f27cfecf9e98c9c4d4e4972`。
+
+### 7.4 回歸測試
+
+`tests/test_hk_basemap.py` 新增 11 個測試（總數 15 → 26）：
+- `_short_label` 中英混合／純英文／超長中文／空字串（parametrize 6 例）
+- 同名重複 60 段 → 標籤數 ≤ 3
+- 同名標籤之間距離 ≥ 最小間距
+- 兩個唔同路名放同一點 → 只畫一個
+- 非 secondary/tertiary、冇名、非 way 一律唔產生標籤
+- `plan_labels()` deterministic（同輸入兩次結果完全相同）
+
+同時將 `test_label_overlay_is_mostly_transparent` 門檻由 0.7 收緊到 **0.95**
+（透明率 81% → 98.4%），令標籤重新爆炸時會 fail。
+
+---
+
 ## 已知限制（未修復，需另開 phase）
 
 ### 1. 路線幾何不可信（HIGH — 資料層；前端已緩解，根因未修）
@@ -265,8 +335,13 @@ fictional 座標就變成跨區假線段。
 放大 6 級時字體等效放大 6 倍，變得過大且邊緣模糊。目前可讀區間約
 zoom 2–4 級。
 
+**注意**：§7 嘅 declutter 已解決「同一路名堆疊 130 次」嘅問題
+（16,887 → 291 個標籤），但**唔會**解決字體放大 —— 呢個係 raster
+圖層嘅固有限制。
+
 **建議**：改為 runtime SVG `<text>` 圖層 —— 需要新增一個 road-label 資料
-asset（街道名 + 中點座標 + 等級，約 16,887 筆），前端按 zoom 篩選等級並
+asset（街道名 + 中點座標 + 等級，declutter 後約 291–1,515 筆，視乎要唔要
+保留全部路名），前端按 zoom 篩選等級並
 用固定螢幕字級渲染。屬 Phase J 級別改動。
 
 ### 3. 章節 bbox 過大，flyToChapter zoom 效果有限
