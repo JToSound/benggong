@@ -387,6 +387,40 @@ def _load_label_fonts(size: int):
         return None, None
 
 
+def _short_label(name: str, max_cjk: int = 7, max_latin: int = 18) -> str:
+    """把道路名縮短到適合 14 px 標籤嘅長度。
+
+    為何唔可以簡單 `name[:10]`
+    --------------------------
+    OSM 香港道路名通常係「中文 English」混合（例如
+    「大涌橋路 Tai Chung Kiu Road」）。按字元數硬切會變成
+    「大涌橋路 Tai C」—— 英文斷喺半個字中間，中文亦可能被切斷。
+
+    策略：
+    - 名內有中文 → 只取中文部分（本專案 UI 以粵文為主），最多 `max_cjk` 字。
+    - 純英文 → 最多 `max_latin` 個字元，並且退到最後一個完整詞。
+    """
+    cjk = "".join(ch for ch in name if _is_cjk(ch))
+    if len(cjk) >= 2:
+        return cjk[:max_cjk]
+    if len(name) <= max_latin:
+        return name
+    cut = name[:max_latin]
+    if " " in cut:
+        cut = cut.rsplit(" ", 1)[0]
+    return cut or name[:max_latin]
+
+
+def _is_cjk(ch: str) -> bool:
+    """粗略判斷 CJK 漢字（涵蓋常用區同擴展 A 區）。"""
+    cp = ord(ch)
+    return (
+        0x3400 <= cp <= 0x4DBF      # 擴展 A
+        or 0x4E00 <= cp <= 0x9FFF   # 基本區
+        or 0xF900 <= cp <= 0xFAFF   # 相容表意
+    )
+
+
 def render_label_overlay(data: dict[str, Any], size: int) -> Image.Image:
     """Phase I：獨立嘅透明標籤圖層（secondary / tertiary 道路名）。
 
@@ -400,6 +434,24 @@ def render_label_overlay(data: dict[str, Any], size: int) -> Image.Image:
 
     輸出係 RGBA 透明圖，座標系同底圖完全一致（同一 bbox、同一 size），
     所以前端可以將兩個 <image> 用相同 x/y/width/height 疊埋一齊。
+
+    為何要 declutter（2026-09-15 修正）
+    ----------------------------------
+    OSM 會將一條道路切成好多段 way，所以「一段一個標籤」會嚴重重複。
+    實測：16,887 段合資格 way 只對應 **1,515 個唯一路名**（平均 11.1 次），
+    最誇張係「英皇道 King's Road」重複 **130 次**。喺 2048 px 畫布上等於
+    平均每 15.8 px 就有一個標籤，必然互相堆疊，地圖上會出現同一路名
+    連續疊六、七層嘅情況。
+
+    修正策略（三層）：
+    1. **按路名分組** —— 同一路名嘅所有 way 段先合併成候選點集合。
+    2. **同名最小間距** —— 同名標籤之間至少隔 `MIN_SAME_NAME_PX`，
+       每個路名最多 `MAX_PER_NAME` 個（長道路仍然可以出現幾次）。
+    3. **全域碰撞檢測** —— 用空間網格（cell ≈ 1.2 × 字高）檢查文字
+       bbox，同已畫標籤重疊就跳過。
+
+    排序固定為 (等級, 路名)，令輸出 deterministic（同一輸入永遠同一 PNG）。
+    純邏輯抽喺 `plan_labels()`，方便單元測試。
     """
     overlay = Image.new("RGBA", (size, size), (0, 0, 0, 0))
     draw = ImageDraw.Draw(overlay, "RGBA")
@@ -409,14 +461,54 @@ def render_label_overlay(data: dict[str, Any], size: int) -> Image.Image:
         print("  (no font; empty label overlay)", file=sys.stderr)
         return overlay
 
-    elements = data.get("elements", [])
-    n = 0
-    secondary_roads = ("secondary", "tertiary")
+    placed, stats = plan_labels(
+        data.get("elements", []), size, label_font_small
+    )
+    for name, x, y in placed:
+        try:
+            draw.text(
+                (x, y), _short_label(name), fill=(180, 200, 170, 200),
+                font=label_font_small, anchor="mm", spacing=1,
+            )
+        except Exception:
+            pass
+
+    print(
+        f"  label overlay: {len(placed)} 個街道標籤"
+        f"（候選 {stats['candidates']}，合資格 way 段 {stats['ways']}，"
+        f"唯一路名 {stats['names']}）"
+    )
+    return overlay
+
+
+def plan_labels(
+    elements: list[dict[str, Any]],
+    size: int,
+    font: Any,
+    min_same_ratio: float = 0.09,
+    max_per_name: int = 3,
+    cell_ratio: float = 1.2,
+) -> tuple[list[tuple[str, int, int]], dict[str, int]]:
+    """計算最終應該畫嘅街道標籤（去重 + 避碰），唔會真正繪圖。
+
+    抽做獨立函式係為咗可以喺測試入面用合成資料驗證 declutter 行為，
+    唔需要 182 MB 嘅 OSM cache。
+
+    回傳 `(placed, stats)`：
+    - `placed`：`(name, x, y)` 清單，順序即繪圖順序（deterministic）。
+    - `stats`：`{"ways", "names", "candidates"}` 統計數字。
+    """
+    probe = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
+
+    # --- 1) 收集候選點，按路名分組 ---------------------------------------
+    by_name: dict[str, list[tuple[int, int, int]]] = {}
+    n_ways = 0
     for el in elements:
         if el.get("type") != "way":
             continue
         tags = el.get("tags", {}) or {}
-        if tags.get("highway") not in secondary_roads:
+        hw = tags.get("highway")
+        if hw not in ("secondary", "tertiary"):
             continue
         name = tags.get("name")
         if not name:
@@ -426,17 +518,49 @@ def render_label_overlay(data: dict[str, Any], size: int) -> Image.Image:
             continue
         mid = pts[len(pts) // 2]
         x, y = lonlat_to_px(mid[0], mid[1], size)
-        txt = name[:10] if len(name) > 10 else name
+        # rank: 0 = secondary（較重要，優先畫）, 1 = tertiary
+        by_name.setdefault(name, []).append((0 if hw == "secondary" else 1, x, y))
+        n_ways += 1
+
+    # --- 2) 同名內部篩選（最小間距 + 上限） ------------------------------
+    min_same_px = min_same_ratio * size
+    min_sq = min_same_px * min_same_px
+    candidates: list[tuple[int, str, int, int]] = []
+    for name, pts in by_name.items():
+        chosen: list[tuple[int, int]] = []
+        # secondary 優先；同名內部再按座標排序，確保 deterministic
+        for rank, x, y in sorted(pts, key=lambda p: (p[0], p[2], p[1])):
+            if len(chosen) >= max_per_name:
+                break
+            if any((x - cx) ** 2 + (y - cy) ** 2 < min_sq for cx, cy in chosen):
+                continue
+            chosen.append((x, y))
+        for x, y in chosen:
+            candidates.append((rank, name, x, y))
+
+    # --- 3) 全域碰撞檢測（空間網格） -------------------------------------
+    font_px = max(1, getattr(font, "size", size // 140))
+    cell = max(4, int(round(font_px * cell_ratio)))
+    occupied: set[tuple[int, int]] = set()
+    placed: list[tuple[str, int, int]] = []
+    for _rank, name, x, y in sorted(candidates, key=lambda c: (c[0], c[1])):
+        txt = _short_label(name)
         try:
-            draw.text(
-                (x, y), txt, fill=(180, 200, 170, 200),
-                font=label_font_small, anchor="mm", spacing=1,
-            )
-            n += 1
-        except Exception:
-            pass
-    print(f"  label overlay: {n} 個街道標籤")
-    return overlay
+            bbox = probe.textbbox((x, y), txt, font=font, anchor="mm")
+        except Exception:  # pragma: no cover - 退化字體
+            bbox = (x - cell, y - cell, x + cell, y + cell)
+        cells = {
+            (cx, cy)
+            for cx in range(bbox[0] // cell, bbox[2] // cell + 1)
+            for cy in range(bbox[1] // cell, bbox[3] // cell + 1)
+        }
+        if cells & occupied:
+            continue
+        occupied |= cells
+        placed.append((name, x, y))
+
+    stats = {"ways": n_ways, "names": len(by_name), "candidates": len(candidates)}
+    return placed, stats
 
 
 def main() -> int:

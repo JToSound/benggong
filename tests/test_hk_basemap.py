@@ -193,9 +193,10 @@ def test_label_overlay_is_mostly_transparent():
         transparent = sum(hist[:16])  # alpha < 16
         total = sum(hist)
     ratio = transparent / total
-    # 16,887 個街道標籤 + 抗鋸齒，實測透明像素約 81%。門檻設 0.7
-    # 足以分辨「稀疏疊加圖層」同「整張不透明圖」。
-    assert ratio > 0.7, f"透明像素比例只有 {ratio:.3f}，圖層可能唔透明"
+    # 291 個街道標籤（declutter 後）+ 抗鋸齒，實測透明像素約 98.4%。
+    # 門檻設 0.95：足以分辨「稀疏疊加圖層」同「整張不透明圖」，
+    # 同時一旦標籤重新爆炸（例如 16,887 個 → 透明度跌到 0.81）就會 fail。
+    assert ratio > 0.95, f"透明像素比例只有 {ratio:.3f}，標籤可能過密或圖層不透明"
 
 
 def test_label_overlay_has_visible_pixels():
@@ -219,3 +220,135 @@ def test_coords_metadata_declares_label_layer():
     assert layers, "coords 缺少 layers metadata"
     assert layers.get("base") == "hk-basemap.png"
     assert layers.get("label_detail") == "hk-basemap-labels.png"
+
+
+# ---------------------------------------------------------------------------
+# Phase I: 街道標籤 declutter（2026-09-15 修正）
+#
+# 原本「一段 way 一個標籤」會令同一路名大量重複：實測 16,887 段合資格 way
+# 只對應 1,515 個唯一路名（平均 11.1 次），「英皇道 King's Road」重複 130 次。
+# 以下測試鎖定 declutter 行為，防止回歸。
+# ---------------------------------------------------------------------------
+
+
+def _load_render_module():
+    """用 importlib 載入 render_hk_basemap.py（唔會執行 main）。"""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("render_hk_basemap", RENDER_SCRIPT)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _way(name: str, lon: float, lat: float, highway: str = "secondary") -> dict:
+    """合成一個最小 Overpass way（兩點，中點約等於畀定座標）。"""
+    return {
+        "type": "way",
+        "tags": {"highway": highway, "name": name},
+        "geometry": [
+            {"lon": lon - 0.0001, "lat": lat},
+            {"lon": lon + 0.0001, "lat": lat},
+        ],
+    }
+
+
+@pytest.mark.parametrize(
+    "name,expected",
+    [
+        ("大涌橋路 Tai Chung Kiu Road", "大涌橋路"),
+        ("英皇道 King's Road", "英皇道"),
+        ("清水灣道 Clear Water Bay Road", "清水灣道"),
+        ("Clear Water Bay Road", "Clear Water Bay"),
+        ("Queen's Road", "Queen's Road"),
+        ("", ""),
+    ],
+)
+def test_short_label_prefers_cjk_and_cuts_at_word_boundary(name, expected):
+    """中文名只取中文部分；純英文名退到最後一個完整詞，唔會切斷詞語。"""
+    module = _load_render_module()
+    assert module._short_label(name) == expected
+
+
+def test_short_label_caps_cjk_length():
+    module = _load_render_module()
+    long_cjk = "一二三四五六七八九十"
+    out = module._short_label(long_cjk)
+    assert out == "一二三四五六七", f"中文應截到 7 字，實得 {out!r}"
+    assert len(out) == 7
+
+
+def test_plan_labels_deduplicates_repeated_road_name():
+    """同一路名重複 60 段，最多只應該畫 max_per_name 個標籤。"""
+    module = _load_render_module()
+    # 沿一條橫線平均分佈 60 段同一路名
+    els = [
+        _way("測試大道 Test Avenue", 113.90 + i * 0.006, 22.30)
+        for i in range(60)
+    ]
+    placed, stats = module.plan_labels(els, 2048, module._load_label_fonts(2048)[1])
+    assert stats["ways"] == 60
+    assert stats["names"] == 1
+    same = [p for p in placed if p[0] == "測試大道 Test Avenue"]
+    assert 0 < len(same) <= 3, f"同名標籤數 {len(same)} 超出上限 3"
+    assert len(same) < 60, "應該有去重效果"
+
+
+def test_plan_labels_respects_min_spacing_for_same_name():
+    """同名標籤之間必須隔開（唔可以連續疊埋一齊）。"""
+    module = _load_render_module()
+    els = [
+        _way("測試大道 Test Avenue", 113.90 + i * 0.0004, 22.30)
+        for i in range(30)
+    ]
+    placed, _ = module.plan_labels(els, 2048, module._load_label_fonts(2048)[1])
+    same = [p for p in placed if p[0] == "測試大道 Test Avenue"]
+    min_px = 0.09 * 2048
+    for i in range(len(same)):
+        for j in range(i + 1, len(same)):
+            dist = ((same[i][1] - same[j][1]) ** 2 + (same[i][2] - same[j][2]) ** 2) ** 0.5
+            assert dist >= min_px * 0.99, f"同名標籤距離 {dist:.1f} < {min_px:.1f}"
+
+
+def test_plan_labels_avoids_collisions_between_different_names():
+    """兩個唔同路名放喺同一點 → 只可以畫其中一個（避免疊字）。"""
+    module = _load_render_module()
+    els = [
+        _way("第一街 First Street", 114.10, 22.32),
+        _way("第二街 Second Street", 114.10, 22.32),
+    ]
+    placed, _ = module.plan_labels(els, 2048, module._load_label_fonts(2048)[1])
+    assert len(placed) == 1, f"重疊位置應該只畫一個，實得 {len(placed)}"
+
+
+def test_plan_labels_ignores_irrelevant_ways():
+    """非 secondary/tertiary、或者冇名嘅 way 一律唔應該產生標籤。"""
+    module = _load_render_module()
+    els = [
+        _way("住宅小路", 114.10, 22.32, highway="residential"),
+        _way("主要高速", 114.11, 22.32, highway="motorway"),
+        {
+            "type": "way",
+            "tags": {"highway": "secondary"},  # 冇 name
+            "geometry": [{"lon": 114.12, "lat": 22.32}, {"lon": 114.121, "lat": 22.32}],
+        },
+        {"type": "node", "tags": {"highway": "secondary", "name": "唔係 way"}},
+    ]
+    placed, stats = module.plan_labels(els, 2048, module._load_label_fonts(2048)[1])
+    assert placed == []
+    assert stats["ways"] == 0
+
+
+def test_plan_labels_is_deterministic():
+    """同一輸入必須產生完全相同嘅輸出（可重跑、可驗 hash）。"""
+    module = _load_render_module()
+    els = [
+        _way(f"道路{i % 12}", 113.90 + (i % 30) * 0.008, 22.25 + (i // 30) * 0.01)
+        for i in range(90)
+    ]
+    font = module._load_label_fonts(2048)[1]
+    a, _ = module.plan_labels(els, 2048, font)
+    b, _ = module.plan_labels(els, 2048, font)
+    assert a == b
+
