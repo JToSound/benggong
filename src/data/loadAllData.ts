@@ -55,6 +55,14 @@ async function fetchJSON<T>(path: string): Promise<T> {
   return r.json();
 }
 
+/** chapters_span [start, end] → 展開成章節陣列（span 缺失時回空陣列）。 */
+function spanToChapters(span?: [number, number]): number[] {
+  if (!span || span.length < 2) return [];
+  const out: number[] = [];
+  for (let ch = span[0]; ch <= span[1]; ch++) out.push(ch);
+  return out;
+}
+
 export async function loadAllData(): Promise<AppData> {
   const base = "./data/public/";
 
@@ -95,9 +103,18 @@ export async function loadAllData(): Promise<AppData> {
   }
   const routesByChapter = new Map<number, RouteFeature[]>();
   for (const f of routes.features) {
-    const ch_start = f.properties.chapters_span?.[0] || 0;
-    if (!routesByChapter.has(ch_start)) routesByChapter.set(ch_start, []);
-    routesByChapter.get(ch_start)!.push(f);
+    // 按 route 實際出現嘅每一章做索引。
+    //
+    // 原本只按 chapters_span[0]（起始章）索引，結果全書 198 章之中只有
+    // 35 章（18%）會顯示到路線 —— 其餘章節 routesByChapter.get() 回空陣列。
+    // 改用 properties.chapters（角色實際出場章節）之後覆蓋 184/198 章。
+    const chs: number[] = f.properties.chapters?.length
+      ? f.properties.chapters
+      : spanToChapters(f.properties.chapters_span);
+    for (const ch of chs) {
+      if (!routesByChapter.has(ch)) routesByChapter.set(ch, []);
+      routesByChapter.get(ch)!.push(f);
+    }
   }
 
   return {

@@ -139,7 +139,7 @@ const LEGEND_ZH: Record<string, string> = {
   "legend.loc-real": "真實地點",
   "legend.loc-fictional": "虛構地點",
   "legend.selected": "選中",
-  "legend.route": "角色路線",
+  "legend.route": "角色路線（僅真實地點之間）",
 };
 
 const LEGEND_EN: Record<string, string> = {
@@ -233,7 +233,7 @@ export class SvgMap {
             <div class="legend-item"><span class="dot dot-loc-real"></span><span data-i18n="legend.loc-real">真實地點</span></div>
             <div class="legend-item"><span class="dot dot-loc-fictional"></span><span data-i18n="legend.loc-fictional">虛構地點</span></div>
             <div class="legend-item"><span class="dot dot-selected"></span><span data-i18n="legend.selected">選中</span></div>
-            <div class="legend-item"><span class="line route-legend"></span><span data-i18n="legend.route">角色路線</span></div>
+            <div class="legend-item"><span class="line route-legend"></span><span data-i18n="legend.route">角色路線（僅真實地點之間）</span></div>
           </div>
         </div>
         <div class="map-controls">
@@ -435,6 +435,29 @@ export class SvgMap {
     this.animFrameId = requestAnimationFrame(step);
   }
 
+  /**
+   * 取路線頂點嘅 SVG 座標。
+   *
+   * 用 `resolveCoord` 而唔係直接用 route geometry 嘅座標，係為咗同
+   * location marker 用同一套座標解析（marker 亦係行 resolveCoord），
+   * 否則線同點會對唔上。
+   */
+  private routeVertex(
+    locationId: string,
+    fallback: [number, number],
+  ): { x: number; y: number } {
+    const loc = this.data.locations.features.find(
+      (l) => l.properties.id === locationId,
+    );
+    if (!loc) return lonlatToViewbox(fallback[0], fallback[1]);
+    const { lon, lat } = resolveCoord(
+      loc.properties.name,
+      fallback[0],
+      fallback[1],
+    );
+    return lonlatToViewbox(lon, lat);
+  }
+
   /** 切換圖例語言（zh ↔ en），保留 dot／line 樣本 span。 */
   toggleLegendLanguage(): void {
     this.lang = this.lang === "zh" ? "en" : "zh";
@@ -487,11 +510,45 @@ export class SvgMap {
 
     const SVG_NS = "http://www.w3.org/2000/svg";
 
+    // location_id → {fictional, name}；路線誠實性規則同標記對齊都用得着
+    const fictionalById = new Map<string, boolean>();
+    for (const l of this.data.locations.features) {
+      fictionalById.set(l.properties.id, Boolean(l.properties.fictional));
+    }
+
     // Routes
+    //
+    // 誠實性規則（Phase I fix）：543/714 個 location 嘅 `location_precision`
+    // 係 `fictional`，即係話佢哋嘅座標係任意值（例如「醫療室」被放在屯門、
+    // 「主角的安全屋大廈」被放在西環，但故事設定喺將軍澳）。如果照樣將
+    // waypoint 連成直線，就等於宣稱一條唔存在嘅移動路徑 —— 實測 717 段
+    // 相鄰 waypoint 之中，459 段係「虛構-虛構」（中位數 16.1 km、最長
+    // 41.4 km），只有 39 段係「真實-真實」（中位數 999 m）。
+    //
+    // 所以只繪製「兩端都係真實 location」嘅線段；其餘留空（唔連線）。
+    // 呢個做法唔會捏造位置，亦保留咗有意義嘅短距離移動。
     for (const route of activeRoutes) {
       const coords = route.geometry.coordinates as [number, number][];
+      const wps = route.properties.waypoints || [];
       if (coords.length < 2) continue;
-      const d = coords.map((c, i) => `${i === 0 ? "M" : "L"} ${c[0]} ${c[1]}`).join(" ");
+
+      const segments: string[] = [];
+      for (let i = 0; i < coords.length - 1; i++) {
+        // waypoints 同 coordinates 係 1:1（見 scripts/derive_routes_geojson.py）
+        const a = wps[i]?.location_id;
+        const b = wps[i + 1]?.location_id;
+        if (!a || !b) continue;
+        if (fictionalById.get(a) !== false) continue;
+        if (fictionalById.get(b) !== false) continue;
+        const p = this.routeVertex(a, coords[i]);
+        const q = this.routeVertex(b, coords[i + 1]);
+        // 同一個 location 連續出現兩次 → 零長度線段，畫出嚟冇意思
+        if (Math.abs(p.x - q.x) < 1e-6 && Math.abs(p.y - q.y) < 1e-6) continue;
+        segments.push(`M ${p.x} ${p.y} L ${q.x} ${q.y}`);
+      }
+      if (segments.length === 0) continue;
+
+      const d = segments.join(" ");
       const span = route.properties.chapters_span;
       const opacity = cur >= span[0] && cur <= span[1] ? 0.7 : 0.2;
       const el = document.createElementNS(SVG_NS, "path");
@@ -533,7 +590,11 @@ export class SvgMap {
       el.setAttribute("data-loc-id", props.id);
       el.setAttribute("data-loc-name", props.name);
       const titleEl = document.createElementNS(SVG_NS, "title");
-      titleEl.textContent = `${props.name}（ch${props.first_appearance}）`;
+      // 虛構地點嘅座標係任意值（location_precision: fictional），
+      // tooltip 要講清楚，唔可以當成精確位置。
+      titleEl.textContent = props.fictional
+        ? `${props.name}（ch${props.first_appearance}・虛構座標，僅供參考）`
+        : `${props.name}（ch${props.first_appearance}）`;
       el.appendChild(titleEl);
       locLayer.appendChild(el);
     }
@@ -652,6 +713,8 @@ export class SvgMap {
       w: Math.abs(fx1 - fx0) * BASE_VIEW.w,
       h: Math.abs(fy1 - fy0) * BASE_VIEW.h,
     };
+    // 標記同路線唔跟 viewBox 縮放，所以要即刻重繪（章節已變）。
+    this.render();
     this.animateViewBox(target);
   }
 }

@@ -41,6 +41,12 @@
           "minItems": 2,
           "maxItems": 2
         },
+        "chapters": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 198 },
+          "minItems": 1,
+          "uniqueItems": true
+        },
         "precision": { "enum": ["reference", "approximate", "fictional"] },
         "waypoints": {
           "type": "array",

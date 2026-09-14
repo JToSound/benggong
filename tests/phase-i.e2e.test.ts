@@ -110,8 +110,7 @@ describe("Phase I 互動驗證（Playwright）", () => {
     }
   }, 90_000);
 
-  it("雙語圖例切換（zh ↔ en）", async () => {
-    const browser = await launch();
+  it("雙語圖例切換（zh ↔ en）", async () => {    const browser = await launch();
     if (!browser) return;
     try {
       const page = await browser.newPage();
@@ -141,4 +140,93 @@ describe("Phase I 互動驗證（Playwright）", () => {
       await browser.close();
     }
   }, 90_000);
+
+  // ------------------------------------------------------------------
+  // 路線誠實性
+  //
+  // 543/714 個 location 嘅 location_precision 係 fictional，座標為任意值。
+  // 如果照樣連線，會出現跨區「假路徑」（實測最長 41.4 km）。以下斷言
+  // 確保只會畫出短距離、可信嘅線段。
+  // ------------------------------------------------------------------
+  it("路線只畫短距離可信線段（唔會出現跨區假連線）", async () => {
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1600, height: 950 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(800);
+
+      // 1 viewBox 單位 ≈ 103 km（經度）／111 km（緯度）
+      const K = { lon: 103_000, lat: 111_000 };
+      const MAX_SEGMENT_M = 6_000; // 實測最長 3.4 km，留安全邊際
+
+      let maxM = 0;
+      let totalSegments = 0;
+
+      for (let ch = 1; ch <= 198; ch++) {
+        if (ch > 1) {
+          await page.keyboard.press("k");
+          await page.waitForTimeout(40);
+        }
+        const ds = await page.evaluate(() =>
+          Array.from(document.querySelectorAll(".route-line")).map(
+            (p) => p.getAttribute("d") || "",
+          ),
+        );
+        for (const d of ds) {
+          const nums = (d.match(/-?\d+(\.\d+)?/g) || []).map(Number);
+          for (let i = 0; i + 3 < nums.length; i += 4) {
+            totalSegments++;
+            maxM = Math.max(
+              maxM,
+              Math.hypot(
+                (nums[i + 2] - nums[i]) * K.lon,
+                (nums[i + 3] - nums[i + 1]) * K.lat,
+              ),
+            );
+          }
+        }
+      }
+
+      expect(totalSegments, "應該有路線線段先有意義").toBeGreaterThan(0);
+      expect(
+        Math.round(maxM),
+        `最長路線線段 ${Math.round(maxM)}m 超過 ${MAX_SEGMENT_M}m 上限`,
+      ).toBeLessThan(MAX_SEGMENT_M);
+    } finally {
+      await browser.close();
+    }
+  }, 120_000);
+
+  it("切換章節會重繪標記（flyToChapter 必須 render）", async () => {
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1600, height: 950 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(800);
+
+      const idsAt = async (): Promise<string> => {
+        return page.evaluate(() =>
+          Array.from(document.querySelectorAll(".location-marker"))
+            .map((m) => m.getAttribute("data-loc-id") || "")
+            .sort()
+            .join(","),
+        );
+      };
+
+      const ch1 = await idsAt();
+      for (let i = 0; i < 59; i++) {
+        await page.keyboard.press("k");
+        await page.waitForTimeout(30);
+      }
+      await page.waitForTimeout(900);
+      const ch60 = await idsAt();
+
+      expect(ch1.length, "ch1 應該有 location markers").toBeGreaterThan(0);
+      expect(ch60, "ch60 嘅 marker 集合應該同 ch1 唔同").not.toBe(ch1);
+    } finally {
+      await browser.close();
+    }
+  }, 120_000);
 });

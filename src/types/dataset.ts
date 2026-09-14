@@ -106,6 +106,8 @@ export interface RouteProperties {
   character_name: string;
   color: string;
   chapters_span: [number, number];
+  /** 角色實際出場嘅章節（最多 50 筆；由 derive_routes_geojson.py 產生）。 */
+  chapters?: number[];
   precision: "reference" | "approximate" | "fictional";
   waypoints: RouteWaypoint[];
   source: SourceId;

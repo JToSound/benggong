@@ -3,7 +3,8 @@
 **日期**: 2026-09-15
 **作者**: JToSound (benggong project)
 **狀態**: ✅ 全部品質閘門通過；⚠️ **未推送**（本機環境冇 GitHub 憑證）
-**Commit**: `473ea05`（本機 main，領先 origin/main 1 個 commit）
+**Commit**: `473ea05`（第一輪）、`f309711`（push 阻滯記錄）；第二輪修正待 commit
+**領先 origin/main**: 2 個 commit
 
 ---
 
@@ -48,7 +49,11 @@ commit 嘅 Pass 5c（燒入底圖）。Phase I 嘅**前端功能全部未實作*
 | `src/styles/main.css` | 圖例語言按鈕 + 標籤圖層樣式 | +32 |
 | `tests/test_fallback_anchors.py` | **新增** — 9 個 anchor pool 回歸測試 | +186 |
 | `tests/test_hk_basemap.py` | 加 6 個標籤圖層測試 | +88 |
-| `tests/phase-i.e2e.test.ts` | **新增** — 3 個 Playwright 互動驗證 | +172 |
+| `tests/phase-i.e2e.test.ts` | **新增** — 5 個 Playwright 互動驗證 | +172 → +240 |
+| `src/data/loadAllData.ts` | **第二輪** — `routesByChapter` 改按 `chapters` 陣列索引 | +14, -6 |
+| `src/types/dataset.ts` | **第二輪** — `RouteProperties.chapters?: number[]` | +3 |
+| `data/schemas/route.schema.json` | **第二輪** — 補聲明 `chapters` 屬性 | +11 |
+| `src/components/SvgMap.ts` | **第二輪** — route honesty filter + `routeVertex()` + legend 文案 | 見 §6.2 |
 
 ---
 
@@ -126,16 +131,18 @@ viewBox 都彈返全港視圖。
 
 ## 驗證結果
 
+> 下表為**第二輪（最終）**數字；第二輪新增嘅閘門同測試以 **粗體** 標示。
+
 | 閘門 | 結果 |
 |------|------|
 | `npm run typecheck` | ✅ 0 errors |
 | `npm run lint` | ✅ 0 errors |
-| `npm run test`（vitest） | ✅ **37/37**（6 個檔，含 3 個 Playwright e2e） |
+| `npm run test`（vitest） | ✅ **39/39**（6 個檔，含 **5** 個 Playwright e2e） |
 | `tests/phase-i.test.ts` | ✅ 16/16 |
-| `npm run build` | ✅ 755ms，`hk-basemap` 74.36 kB + `hk-basemap-labels` 262.86 kB |
+| `npm run build` | ✅ 788ms，`index-BMFDSGsY.js` 76.28 kB（gzip 24.34 kB）+ `hk-basemap` 74.36 kB + `hk-basemap-labels` 262.86 kB |
 | `pytest tests/` | ✅ **115/115**（原 100 + 15 新） |
-| `validate_public_data.py` | ✅ 714 locations / 1,796 events / 42 routes |
-| `audit_release.py --strict` | ✅ 無私隱洩漏、無 secrets、無 remote map URL |
+| `validate_public_data.py` | ✅ 714 locations / 1,796 events / 42 routes / 342 characters / 195 chapter_summaries |
+| `audit_release.py --strict` | ✅ 掃描 14 個文字檔、4,690 筆記錄（needs_review 0），無私隱洩漏、無 secrets、無 remote map URL |
 
 **瀏覽器實測**（Playwright，1600×950）：
 
@@ -152,18 +159,105 @@ viewBox 都彈返全港視圖。
 
 ---
 
+## 第二輪修正：路線可信度 + 章節索引
+
+第一輪驗收之後，逐章掃描 198 章嘅實際 DOM 輸出，發現兩個唔喺原清單上嘅
+真問題。兩者都已修好並補上回歸測試。
+
+### 6.1 章節索引錯漏（routesByChapter）
+
+`loadAllData.ts` 原本只用 `chapters_span[0]` 做索引，即係一條橫跨 ch3–ch12
+嘅路線**只會喺 ch3 出現**。量化結果：42 條路線入面只有 **35/198 章** 有機會
+見到路線。
+
+**修正**：改為按 `properties.chapters`（由 `derive_routes_geojson.py` 產生嘅
+實際出場章節陣列，最多 50 筆）展開索引，`chapters_span` 只作 fallback
+（新增 `spanToChapters()` helper）。覆蓋率由 35 章提升到 **184/198 章**。
+
+同步補上：
+- `src/types/dataset.ts` → `RouteProperties.chapters?: number[]`
+- `data/schemas/route.schema.json` → 新增 `chapters` 屬性聲明（資料本來已經有
+  呢個欄位，只係 schema 冇聲明，屬 schema 落後於資料）
+
+### 6.2 路線「星形假連線」—— 根因量化 + 前端過濾
+
+**根因**（數據化）：714 個 location 之中 **543 個（76%）係
+`location_precision: fictional`**，座標係任意指派。例如：
+
+| location | 被指派座標 | 實際位置 |
+|---|---|---|
+| 醫療室 | 114.1091, 22.3499 | 屯門 |
+| 主角的安全屋大廈 | 114.0765, 22.2474 | 西環 |
+
+`derive_routes_geojson.py` 會將 route 嘅 waypoints **1:1 連直線**，於是
+fictional 座標就變成跨區假線段。
+
+**量化證據**（全 198 章 probe）：
+- 717 對相鄰 waypoint —— **0 對**同屬一個章節（證明連線純粹跟 waypoint 順序）
+- 459 對 fictional–fictional，距離中位數 **16.1 km**
+- 39 對 real–real，距離中位數 **999 m**
+- 最長單段 **41.4 km**，個別路線總長 414／475／605 km（香港東西全長僅約 50 km）
+
+**修正**（前端過濾，非資料層）：`SvgMap.render()` 只繪製**兩端都係真實地點**
+嘅線段。實作要點：
+- 先建 `fictionalById: Map<id, boolean>`
+- 逐段檢查 `wps[i].location_id` 同 `wps[i+1].location_id` 都存在且
+  `fictional === false`，否則 `continue`
+- 用新增嘅 `routeVertex(locationId, fallback)` 由 location 反查真實座標
+  （經 `resolveCoord` 三層優先級），而唔係直接用 route geometry 嘅原始點
+- 零長度線段（起訖點重合）亦跳過
+
+**修正後量化結果**：
+
+| 指標 | 修正前 | 修正後 |
+|---|---|---|
+| 最長單段 | 41,400 m | **3,376 m @ ch2** |
+| 有非零線段嘅章節 | 35/198 | **137/198** |
+| route-line 元素總數 | — | 406 |
+| 線段總數（含零長度） | — | 839（其中 288 零長度） |
+| location marker 數量範圍 | — | 10–44 |
+
+**圖例同步更新**：`legend.route` 由「角色路線」改為
+**「角色路線（僅真實地點之間）」**／`"Character route (real places only)"`，
+令讀者知道呢條線係保守版本而唔係完整路徑。虛構座標 marker 嘅 tooltip 亦加註
+「虛構座標，僅供參考」。
+
+**回歸測試**：`tests/phase-i.e2e.test.ts` 新增兩個 Playwright 測試：
+1. `路線只畫短距離可信線段（唔會出現跨區假連線）` —— 遍歷 198 章，
+   斷言所有 `.route-line` 每一段都 < `MAX_SEGMENT_M = 6_000` 米
+2. `切換章節會重繪標記（flyToChapter 必須 render）` —— 斷言 ch1/ch6/ch56
+   嘅 marker 數量唔相同（防止 `flyToChapter` 只改 viewBox 唔重繪嘅回歸）
+
+### 6.3 順帶修復：flyToChapter 唔重繪
+
+重寫 `SvgMap.ts` 期間自己引入嘅回歸：`flyToChapter()` 只呼叫
+`animateViewBox()`，冇再呼叫 `render()`。由於標記同路線唔跟 viewBox 縮放，
+結果切換章節時 viewBox 會動但**標記永遠唔變**（probe 顯示 ch1/ch6/ch56 都係
+`markers = 20`，路線 `d` 值凍結）。
+
+**修正**：`flyToChapter()` 結尾改為先 `this.render()` 再 `this.animateViewBox(target)`。
+驗證：marker 數量回復 20 → 27 → 28。
+
+---
+
 ## 已知限制（未修復，需另開 phase）
 
-### 1. 路線幾何不可信（HIGH — 資料層，非 Phase I 範圍）
+### 1. 路線幾何不可信（HIGH — 資料層；前端已緩解，根因未修）
 
 42 條角色路線之中，**40 條有至少一段 > 5 km**，最長單段 **41.4 km**，
 單段距離中位數 33.8 km。個別路線總長 414 km／475 km／605 km —— 而香港
 東西全長只約 50 km。即係路線係「按章節順序將分散嘅 location 連直線」，
 唔係可行走路徑，所以地圖上會出現一個以將軍澳為中心嘅「星形」亂線網絡。
 
+**目前狀態**：前端已過濾至只畫 real–real 線段（見 §6.2），最長單段降至
+3,376 m。**但根因仍在資料層** —— fictional location 嘅任意座標冇被修正，
+所以地圖上仍然睇唔到 fictional 地點之間嘅移動（正確做法：唔畫）。
+
 **建議**：重新設計 `derive_character_routes.py`，加入地理連續性約束
 （例如同一章內相鄰 location 距離上限、跨區移動需經已知通道），或改為
-只顯示「本章相關 location 之間嘅連線」而唔做跨章聚合。
+只顯示「本章相關 location 之間嘅連線」而唔做跨章聚合。長遠應為
+543 個 fictional location 提供「真實原型對照」（若原著有暗示），
+否則應維持唔畫路線。
 
 ### 2. 標籤圖層係 raster，高 zoom 時字體會被放大
 
@@ -211,7 +305,10 @@ Nominatim 回傳嘅香港邊界經簡化（單一 outer ring、1,314 點），�
    ```bash
    gh run list --workflow=pages.yml --limit 3
    ```
-2. **修路線幾何**（HIGH）—— 影響地圖可信度最大，建議優先。
+2. **修路線幾何（資料層）**（HIGH）—— 前端已過濾至只畫 real–real 線段
+   （最長單段 41.4 km → 3,376 m，見 §6.2），但 543 個 fictional location 嘅
+   任意座標仍在，路線圖仍然唔完整。建議優先處理 `derive_character_routes.py`
+   嘅地理連續性約束。
 3. **標籤改 vector 圖層**（MEDIUM）—— 解決高 zoom 字體放大問題。
 4. **重新評估 flyToChapter 縮放策略** —— 例如限制最大 bbox、或改為聚焦
    「本章新增 location」而唔係所有 ±2 章 location。
