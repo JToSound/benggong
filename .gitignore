@@ -50,5 +50,9 @@ desktop.ini
 # ---- Hermes 本機狀態（不部署）----
 .hermes/
 
+# ---- AI agent 本機工作記憶（不部署、不公開）----
+.workbuddy-ai/
+.codebuddy/
+
 # ---- 大型生成資產暫存 ----
 *.log

@@ -7,5 +7,10 @@
     "lat_max": 22.55
   },
   "projection": "lonlat_to_xy_linear",
-  "note": "lon=x*scale+lon_min; lat=lat_max-y*scale (image y axis points down)"
+  "note": "lon=x*scale+lon_min; lat=lat_max-y*scale (image y axis points down)",
+  "layers": {
+    "base": "hk-basemap.png",
+    "label_detail": "hk-basemap-labels.png",
+    "label_detail_note": "透明 RGBA 圖層，只含 secondary/tertiary 街道名；前端 #label-detail-layer 按 viewScale 控制 opacity"
+  }
 }

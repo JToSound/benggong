@@ -143,3 +143,79 @@ def test_lonlat_projection_roundtrip():
     )
     assert abs(x - 114.15) < 1e-9
     assert abs(y - 22.365) < 1e-9
+
+
+# --------------------------------------------------------------------------
+# Phase I: 獨立標籤圖層（label detail overlay）
+#
+# 次要街道名（secondary / tertiary）唔再燒入底圖，而係輸出成獨立透明
+# RGBA PNG，前端 `#label-detail-layer` 按 viewScale 控制透明度。呢組
+# 測試鎖定兩個 PNG 嘅關係同透明度特性。
+# --------------------------------------------------------------------------
+LABELS_PNG_PATH = REPO / "public" / "assets" / "hk-basemap-labels.png"
+
+
+def test_label_overlay_png_exists():
+    if not LABELS_PNG_PATH.exists():
+        pytest.skip(
+            f"missing {LABELS_PNG_PATH} — run: python scripts/render_hk_basemap.py --skip-fetch"
+        )
+
+
+def test_label_overlay_dimensions_match_basemap():
+    """標籤圖層必須同底圖同尺寸，否則疊圖會錯位。"""
+    if not LABELS_PNG_PATH.exists() or not PNG_PATH.exists():
+        pytest.skip("basemap 或 label overlay 未生成")
+    from PIL import Image
+    with Image.open(PNG_PATH) as base, Image.open(LABELS_PNG_PATH) as lab:
+        assert lab.size == base.size, (
+            f"label overlay {lab.size} != basemap {base.size}"
+        )
+
+
+def test_label_overlay_has_alpha_channel():
+    """必須係 RGBA（帶 alpha），前端先可以用 opacity 淡入淡出。"""
+    if not LABELS_PNG_PATH.exists():
+        pytest.skip("label overlay 未生成")
+    from PIL import Image
+    with Image.open(LABELS_PNG_PATH) as lab:
+        assert lab.mode == "RGBA", f"label overlay mode = {lab.mode}，應為 RGBA"
+
+
+def test_label_overlay_is_mostly_transparent():
+    """圖層應該以透明為主（只喺有街道名嘅位置有像素）。"""
+    if not LABELS_PNG_PATH.exists():
+        pytest.skip("label overlay 未生成")
+    from PIL import Image
+    with Image.open(LABELS_PNG_PATH) as lab:
+        alpha = lab.getchannel("A")
+        hist = alpha.histogram()
+        transparent = sum(hist[:16])  # alpha < 16
+        total = sum(hist)
+    ratio = transparent / total
+    # 16,887 個街道標籤 + 抗鋸齒，實測透明像素約 81%。門檻設 0.7
+    # 足以分辨「稀疏疊加圖層」同「整張不透明圖」。
+    assert ratio > 0.7, f"透明像素比例只有 {ratio:.3f}，圖層可能唔透明"
+
+
+def test_label_overlay_has_visible_pixels():
+    """同時必須真係有內容（唔係全透明空圖層）。"""
+    if not LABELS_PNG_PATH.exists():
+        pytest.skip("label overlay 未生成")
+    from PIL import Image
+    with Image.open(LABELS_PNG_PATH) as lab:
+        alpha = lab.getchannel("A")
+        hist = alpha.histogram()
+        visible = sum(hist[64:])  # alpha >= 64
+    assert visible > 1000, f"可見像素只有 {visible}，圖層可能係空"
+
+
+def test_coords_metadata_declares_label_layer():
+    if not COORDS_PATH.exists():
+        pytest.skip("coords metadata missing")
+    with COORDS_PATH.open(encoding="utf-8") as f:
+        coords = json.load(f)
+    layers = coords.get("layers")
+    assert layers, "coords 缺少 layers metadata"
+    assert layers.get("base") == "hk-basemap.png"
+    assert layers.get("label_detail") == "hk-basemap-labels.png"

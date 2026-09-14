@@ -250,6 +250,37 @@ html, body {
   letter-spacing: 0.5px;
 }
 
+/* Phase I: 圖例語言切換 */
+.legend-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.legend-lang-btn {
+  background: transparent;
+  color: var(--accent-blue);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  padding: 2px 5px;
+  transition: var(--transition);
+}
+
+.legend-lang-btn:hover {
+  background: var(--accent-blue);
+  color: var(--bg-deep, #0a1218);
+}
+
+/* Phase I: 次要街道標籤圖層（透明度由 SvgMap 按 viewScale 控制） */
+.label-detail-layer {
+  pointer-events: none;
+}
+
 .legend-item {
   display: flex;
   align-items: center;

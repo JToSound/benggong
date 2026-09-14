@@ -36,6 +36,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 REPO = Path(__file__).resolve().parent.parent
 DEFAULT_OUTPUT_PNG = REPO / "public" / "assets" / "hk-basemap.png"
+DEFAULT_OUTPUT_LABELS_PNG = REPO / "public" / "assets" / "hk-basemap-labels.png"
 DEFAULT_OUTPUT_JSON = REPO / "public" / "assets" / "hk-basemap-coords.json"
 
 # Hong Kong bounding box: covers the full territory at the standard extent
@@ -276,27 +277,9 @@ def render_basemap(data: dict[str, Any], size: int) -> Image.Image:
     # paper colour as the rest of the bing-gang palette.
     n_label = 0
     n_skipped_small = 0
-    try:
-        # Try a CJK font if available; fall back to default bitmap font
-        font_path = None
-        for cand in (
-            "C:/Windows/Fonts/msgothic.ttc",
-            "C:/Windows/Fonts/msyh.ttc",
-            "C:/Windows/Fonts/NotoSansCJK-Regular.ttc",
-            "/System/Library/Fonts/PingFang.ttc",
-        ):
-            if Path(cand).exists():
-                font_path = cand
-                break
-        label_font = ImageFont.truetype(font_path, size=max(10, size // 100)) if font_path else ImageFont.load_default()
-        label_font_small = ImageFont.truetype(font_path, size=max(8, size // 140)) if font_path else ImageFont.load_default()
-    except Exception as e:
-        print(f"  (label font unavailable: {e}; skipping label pass)", file=sys.stderr)
-        label_font = None
-        label_font_small = None
+    label_font, label_font_small = _load_label_fonts(size)
 
     if label_font is not None:
-        import math
         # 5a) Road labels — only major highways with name, single midpoint
         major_roads = ("motorway", "trunk", "primary")
         for el in elements:
@@ -383,12 +366,87 @@ def render_basemap(data: dict[str, Any], size: int) -> Image.Image:
     return img
 
 
+def _load_label_fonts(size: int):
+    """載入 CJK 標籤字體（大／小兩級）。搵唔到就回 (None, None)。"""
+    font_path = None
+    for cand in (
+        "C:/Windows/Fonts/msgothic.ttc",
+        "C:/Windows/Fonts/msyh.ttc",
+        "C:/Windows/Fonts/NotoSansCJK-Regular.ttc",
+        "/System/Library/Fonts/PingFang.ttc",
+    ):
+        if Path(cand).exists():
+            font_path = cand
+            break
+    try:
+        big = ImageFont.truetype(font_path, size=max(10, size // 100)) if font_path else ImageFont.load_default()
+        small = ImageFont.truetype(font_path, size=max(8, size // 140)) if font_path else ImageFont.load_default()
+        return big, small
+    except Exception as e:  # pragma: no cover - 視乎系統字體
+        print(f"  (label font unavailable: {e}; skipping label pass)", file=sys.stderr)
+        return None, None
+
+
+def render_label_overlay(data: dict[str, Any], size: int) -> Image.Image:
+    """Phase I：獨立嘅透明標籤圖層（secondary / tertiary 道路名）。
+
+    為何要獨立圖層
+    --------------
+    原本 Pass 5c 將次要道路標籤直接燒入底圖 PNG，但燒入之後前端就
+    無法按 zoom 調整密度 —— 用戶 zoom out 時會見到密密麻麻嘅街道名。
+    將呢層拆做獨立透明 PNG 之後，前端可以喺 `#label-detail-layer`
+    上按 `viewScale` 線性插值透明度（zoom in 才顯示），做到真正嘅
+    zoom-dependent label decluttering。
+
+    輸出係 RGBA 透明圖，座標系同底圖完全一致（同一 bbox、同一 size），
+    所以前端可以將兩個 <image> 用相同 x/y/width/height 疊埋一齊。
+    """
+    overlay = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(overlay, "RGBA")
+
+    _, label_font_small = _load_label_fonts(size)
+    if label_font_small is None:
+        print("  (no font; empty label overlay)", file=sys.stderr)
+        return overlay
+
+    elements = data.get("elements", [])
+    n = 0
+    secondary_roads = ("secondary", "tertiary")
+    for el in elements:
+        if el.get("type") != "way":
+            continue
+        tags = el.get("tags", {}) or {}
+        if tags.get("highway") not in secondary_roads:
+            continue
+        name = tags.get("name")
+        if not name:
+            continue
+        pts = way_to_points(el)
+        if len(pts) < 2:
+            continue
+        mid = pts[len(pts) // 2]
+        x, y = lonlat_to_px(mid[0], mid[1], size)
+        txt = name[:10] if len(name) > 10 else name
+        try:
+            draw.text(
+                (x, y), txt, fill=(180, 200, 170, 200),
+                font=label_font_small, anchor="mm", spacing=1,
+            )
+            n += 1
+        except Exception:
+            pass
+    print(f"  label overlay: {n} 個街道標籤")
+    return overlay
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Render HK basemap from OSM")
     parser.add_argument("--size", type=int, default=2048,
                         help="Output image edge size in pixels (default 2048)")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUTPUT_PNG,
                         help="Output PNG path")
+    parser.add_argument("--labels-out", type=Path, default=DEFAULT_OUTPUT_LABELS_PNG,
+                        help="Output transparent label-overlay PNG path (Phase I)")
     parser.add_argument("--coords", type=Path, default=DEFAULT_OUTPUT_JSON,
                         help="Output coords JSON path")
     parser.add_argument("--skip-fetch", action="store_true",
@@ -415,12 +473,27 @@ def main() -> int:
     img.save(args.out, "PNG", optimize=True)
     print(f"  saved {args.out} ({args.out.stat().st_size:,} bytes)")
 
+    # Phase I: 獨立透明標籤圖層（次要街道名），前端按 zoom 控制透明度
+    print("Rendering label overlay…")
+    overlay = render_label_overlay(data, args.size)
+    args.labels_out.parent.mkdir(parents=True, exist_ok=True)
+    overlay.save(args.labels_out, "PNG", optimize=True)
+    print(f"  saved {args.labels_out} ({args.labels_out.stat().st_size:,} bytes)")
+
     # Coord metadata for front-end
     coords = {
         "size_px": args.size,
         "bbox": HK_BBOX,
         "projection": "lonlat_to_xy_linear",
         "note": "lon=x*scale+lon_min; lat=lat_max-y*scale (image y axis points down)",
+        "layers": {
+            "base": args.out.name,
+            "label_detail": args.labels_out.name,
+            "label_detail_note": (
+                "透明 RGBA 圖層，只含 secondary/tertiary 街道名；"
+                "前端 #label-detail-layer 按 viewScale 控制 opacity"
+            ),
+        },
     }
     args.coords.parent.mkdir(parents=True, exist_ok=True)
     with args.coords.open("w", encoding="utf-8") as f:
