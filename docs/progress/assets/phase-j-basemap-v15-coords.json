@@ -10,25 +10,41 @@
     "lat_min": 22.11,
     "lat_max": 22.61
   },
+  "lod": "overview",
+  "lod_layers": {
+    "roads": false,
+    "buildings": false,
+    "building_labels": false
+  },
   "projection": "equirectangular",
   "standard_parallel": 22.36,
   "projection_note": "x = (lon - lon_min) * px_per_deg_lon; y = (lat_max - lat) * px_per_deg_lon / cos(lat0); px_per_deg_lon = canvas.width / (lon_max - lon_min)",
   "style": "binggang_handdrawn_parchment",
   "crop_box": [
-    135,
-    106,
-    1951,
-    1481
+    0,
+    0,
+    2048,
+    1582
   ],
   "output_size": [
-    1816,
-    1375
+    2048,
+    1582
   ],
   "layers": {
-    "base": "bg-v10-2048.png"
+    "base": "hk-basemap.png",
+    "label_detail": "hk-basemap-labels.png"
   },
   "stats": {
-    "trees": 2032,
-    "labels": 25
+    "trees": 3337,
+    "labels": 25,
+    "roads": 0,
+    "buildings": 0,
+    "water_bodies": 74,
+    "water_px": 25945,
+    "urban_px": 255536,
+    "urban_share_of_land": 0.2909,
+    "land_px": 878361,
+    "land_share": 0.2711,
+    "bbox_span_deg": 0.7
   }
 }
