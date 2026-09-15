@@ -154,13 +154,42 @@ def test_variant_inheritance_covers_all_spellings(records):
         assert abs(r["inferred_lonlat"][0] - 114.25332) < 1e-5
 
 
-def test_no_duplicate_inference_per_subject(records):
+def test_no_duplicate_inference_per_location(records):
+    """一個地點只可以有一條推斷。
+
+    呢個不變式只適用於 location：地點推斷係「呢個模糊名對應邊個真實
+    座標」，一個地點有兩個答案就係矛盾。
+
+    角色唔適用 —— 一個角色可以同時係多個合併候選（形成鏈，例如
+    「不破尚~聽不破尚」同「不破尚~陸軒」），需要人手判斷邊條成立。
+    """
     seen: dict[str, int] = {}
     for r in records:
+        if r["entity_kind"] != "location":
+            continue
         for sid in r["subject_ids"]:
             seen[sid] = seen.get(sid, 0) + 1
     dup = {k: v for k, v in seen.items() if v > 1}
-    assert not dup, f"同一 id 出現多條推斷：{dup}"
+    assert not dup, f"同一地點出現多條推斷：{dup}"
+
+
+def test_character_merges_never_auto_applied(records):
+    """角色合併係破壞性操作，唔可以自動套用。
+
+    地點推斷只改座標（可回復）；角色合併會把兩個實體合成一個（難回復）。
+    所以 apply_place_inferences.py 只處理 location，角色一律留待人手。
+    """
+    apply_src = (REPO / "scripts" / "apply_place_inferences.py").read_text(
+        encoding="utf-8"
+    )
+    assert 'entity_kind' not in apply_src or 'character' not in apply_src, (
+        "apply 管線唔應該處理角色合併"
+    )
+    chars = [r for r in records if r["entity_kind"] == "character"]
+    for r in chars:
+        assert r["review_status"] == "pending", (
+            f"角色推斷 {r['inference_id']} 唔應該被自動批核"
+        )
 
 
 def test_no_generic_place_false_positives(records):
@@ -273,3 +302,169 @@ def test_script_runs_and_passes_schema():
     )
     assert proc.returncode == 0, proc.stderr[-2000:]
     assert "推斷候選" in proc.stdout
+
+
+# ---------------------------------------------------------------------------
+# 推廣至其他實體類型
+# ---------------------------------------------------------------------------
+def test_contrast_pairs_are_not_duplicates(mod):
+    """單字替換如果係反義詞，**唔係**同一人。
+
+    實測陷阱：「主角的母親」vs「主角的父親」、「公仔之母」vs「公仔之父」、
+    「戴紅色冷帽竊屍賊」vs「戴綠色冷帽竊屍賊」—— 全部只差一個字，
+    但係完全唔同嘅角色。單純用編輯距離會產生大量假陽性。
+    """
+    assert mod._is_contrast("母", "父")
+    assert mod._is_contrast("紅", "綠")
+    assert mod._is_contrast("男", "女")
+    assert not mod._is_contrast("嘅", "的")
+
+
+def test_single_edit_classifies_correctly(mod):
+    assert mod._single_edit("abc", "abc") is None
+    assert mod._single_edit("abc", "abd") == ("sub", "c", "d")
+    assert mod._single_edit("abc", "abbc")[0] == "ins"
+    assert mod._single_edit("abbc", "abc")[0] == "del"
+    assert mod._single_edit("abc", "xyz") is None
+    assert mod._single_edit("abc", "abcde") is None
+
+
+def test_particles_treated_as_same_person(mod):
+    """助詞差異（嘅／的／之）唔改變所指。"""
+    assert "嘅" in mod.PARTICLES
+    assert "的" in mod.PARTICLES
+    assert "之" in mod.PARTICLES
+
+
+def test_character_inference_has_no_contrast_false_positives(records):
+    """角色推斷唔可以出現反義詞配對。"""
+    bad = []
+    for r in records:
+        if r["entity_kind"] != "character" or r["pattern"] != "C-TYPO":
+            continue
+        names = r["subject_names"]
+        if len(names) != 2:
+            continue
+        a, b = names
+        if len(a) != len(b):
+            continue
+        for x, y in zip(a, b):
+            if x != y and mod_is_contrast(x, y):
+                bad.append((a, b))
+    assert not bad, f"角色推斷出現反義詞假陽性：{bad}"
+
+
+def mod_is_contrast(x: str, y: str) -> bool:
+    return frozenset((x, y)) in _CONTRAST
+
+
+def _load_contrast() -> set:
+    mod = _load_module()
+    return mod.CONTRAST_PAIRS
+
+
+_CONTRAST = _load_contrast()
+
+
+def test_character_inference_shape(records):
+    """角色推斷要合 schema 同有證據鏈。"""
+    chars = [r for r in records if r["entity_kind"] == "character"]
+    if not chars:
+        pytest.skip("今次冇角色推斷")
+    for r in chars:
+        assert len(r["subject_ids"]) >= 2, "角色合併至少要兩個 subject"
+        assert r["evidence"], "缺證據鏈"
+        assert r["proposed_changes"].get("merge_into")
+        assert r["inferred_lonlat"] is None, "角色推斷唔應該有座標"
+        assert r["review_status"] in ("pending", "approved", "rejected", "needs_info")
+
+
+def test_entity_kind_variety(records):
+    """引擎應該同時輸出多種 entity_kind（即「應用喺所有其它地方」）。"""
+    kinds = {r["entity_kind"] for r in records}
+    assert "location" in kinds
+    # 角色推斷係今次新增嘅推廣；冇嘅話代表規則冇觸發
+    assert "character" in kinds, f"應該有角色推斷，實際只有 {kinds}"
+
+
+# ---------------------------------------------------------------------------
+# 推廣至其他實體類型
+# ---------------------------------------------------------------------------
+def test_contrast_pairs_are_not_duplicates(mod):
+    """單字替換如果係反義詞，**唔係**同一人。
+
+    實測陷阱：「主角的母親」vs「主角的父親」、「公仔之母」vs「公仔之父」、
+    「戴紅色冷帽竊屍賊」vs「戴綠色冷帽竊屍賊」—— 全部只差一個字，
+    但係完全唔同嘅角色。單純用編輯距離會產生大量假陽性。
+    """
+    assert mod._is_contrast("母", "父")
+    assert mod._is_contrast("紅", "綠")
+    assert mod._is_contrast("男", "女")
+    assert not mod._is_contrast("嘅", "的")
+
+
+def test_single_edit_classifies_correctly(mod):
+    assert mod._single_edit("abc", "abc") is None
+    assert mod._single_edit("abc", "abd") == ("sub", "c", "d")
+    assert mod._single_edit("abc", "abbc")[0] == "ins"
+    assert mod._single_edit("abbc", "abc")[0] == "del"
+    assert mod._single_edit("abc", "xyz") is None
+    assert mod._single_edit("abc", "abcde") is None
+
+
+def test_particles_treated_as_same_person(mod):
+    """助詞差異（嘅／的／之）唔改變所指。"""
+    assert "嘅" in mod.PARTICLES
+    assert "的" in mod.PARTICLES
+    assert "之" in mod.PARTICLES
+
+
+def test_character_inference_has_no_contrast_false_positives(records):
+    """角色推斷唔可以出現反義詞配對。"""
+    bad = []
+    for r in records:
+        if r["entity_kind"] != "character" or r["pattern"] != "C-TYPO":
+            continue
+        names = r["subject_names"]
+        if len(names) != 2:
+            continue
+        a, b = names
+        if len(a) != len(b):
+            continue
+        for x, y in zip(a, b):
+            if x != y and mod_is_contrast(x, y):
+                bad.append((a, b))
+    assert not bad, f"角色推斷出現反義詞假陽性：{bad}"
+
+
+def mod_is_contrast(x: str, y: str) -> bool:
+    return frozenset((x, y)) in _CONTRAST
+
+
+def _load_contrast() -> set:
+    mod = _load_module()
+    return mod.CONTRAST_PAIRS
+
+
+_CONTRAST = _load_contrast()
+
+
+def test_character_inference_shape(records):
+    """角色推斷要合 schema 同有證據鏈。"""
+    chars = [r for r in records if r["entity_kind"] == "character"]
+    if not chars:
+        pytest.skip("今次冇角色推斷")
+    for r in chars:
+        assert len(r["subject_ids"]) >= 2, "角色合併至少要兩個 subject"
+        assert r["evidence"], "缺證據鏈"
+        assert r["proposed_changes"].get("merge_into")
+        assert r["inferred_lonlat"] is None, "角色推斷唔應該有座標"
+        assert r["review_status"] in ("pending", "approved", "rejected", "needs_info")
+
+
+def test_entity_kind_variety(records):
+    """引擎應該同時輸出多種 entity_kind（即「應用喺所有其它地方」）。"""
+    kinds = {r["entity_kind"] for r in records}
+    assert "location" in kinds
+    # 角色推斷係今次新增嘅推廣；冇嘅話代表規則冇觸發
+    assert "character" in kinds, f"應該有角色推斷，實際只有 {kinds}"

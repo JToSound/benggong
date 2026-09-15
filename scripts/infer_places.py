@@ -38,6 +38,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -107,6 +108,11 @@ RULES: dict[str, str] = {
     "R-CONTAIN-RESOLVED": "第二遍：父項已解決 → 子項繼承父項座標（先解父、再解子）",
     "R-DISTRICT": "只可以確定到區域層級（同章出現區域名）",
     "R-NO-EVIDENCE": "證據不足，只列作待補",
+    # 其他實體類型（同一套結構，唔同 entity_kind）
+    "C-NORM": "角色名稱正規化後相同（去括號／全形／大小寫）",
+    "C-TYPO": "角色名只差一個字（拼寫手誤，例如 Chirs／Chris）",
+    "C-ALIAS-SHARE": "兩個角色共用同一個別名 → 可能係同一人",
+    "E-LOC-LINK": "事件寫住地名但冇 location_id，而資料集有同名地點",
 }
 
 # ---------------------------------------------------------------------------
@@ -807,6 +813,279 @@ def resolve_containment(
 
 
 # ---------------------------------------------------------------------------
+# 推廣至其他實體類型（「應用喺所有其它地方」）
+#
+# 地點推斷用嘅三樣嘢，其實同 entity_kind 完全無關：
+#   1. 正規化 → 分組（搵異體）
+#   2. 證據鏈（每條推斷都要可回溯）
+#   3. 審閱關卡（引擎唔可以自己批自己）
+# 所以同一套結構可以直接套用到角色、事件、路線。
+# ---------------------------------------------------------------------------
+def _norm_name(s: str) -> str:
+    """通用名稱正規化：去括號、統一全形、去空白、轉小寫。"""
+    s = re.sub(r"[（(].*?[)）]", "", s)
+    s = s.translate(str.maketrans("０１２３４５６７８９", "0123456789"))
+    s = re.sub(r"[\s·・,，.。!！?？]", "", s)
+    return s.lower()
+
+
+def _edit_distance_1(a: str, b: str) -> bool:
+    """兩個字串係唔係只差一個字（替換／插入／刪除）。
+
+    實測例子：角色「Chirs」同「Chris」—— 明顯係同一個人嘅拼寫手誤，
+    但因為唔係完全一樣，現有嘅 alias 合併捉唔到。
+    """
+    if a == b:
+        return False
+    la, lb = len(a), len(b)
+    if abs(la - lb) > 1:
+        return False
+    if la == lb:
+        diff = sum(1 for x, y in zip(a, b) if x != y)
+        return diff == 1
+    # 長度差 1：短的係唔係長嘅刪一個字
+    if la > lb:
+        a, b = b, a
+    i = j = 0
+    skipped = False
+    while i < len(a) and j < len(b):
+        if a[i] != b[j]:
+            if skipped:
+                return False
+            skipped = True
+            j += 1
+        else:
+            i += 1
+            j += 1
+    return True
+
+
+#: 反義／對立詞對。單字替換如果落喺呢啲對上，**唔係**同一個人。
+#:
+#: 實測陷阱：「主角的母親」vs「主角的父親」、「公仔之母」vs「公仔之父」、
+#: 「戴紅色冷帽竊屍賊」vs「戴綠色冷帽竊屍賊」—— 全部只差一個字，
+#: 但係**完全唔同**嘅角色。單純用編輯距離會產生大量假陽性，而假陽性
+#: 比冇推斷更差（會令審閱者對整個機制失去信心）。
+CONTRAST_PAIRS: set[frozenset[str]] = {
+    frozenset(p) for p in (
+        ("父", "母"), ("爸", "媽"), ("爹", "娘"), ("男", "女"), ("兄", "弟"),
+        ("姊", "妹"), ("姐", "妹"), ("哥", "弟"), ("紅", "綠"), ("紅", "藍"),
+        ("紅", "黑"), ("綠", "藍"), ("綠", "黑"), ("藍", "白"), ("黑", "白"),
+        ("黃", "藍"), ("大", "小"), ("上", "下"), ("左", "右"), ("前", "後"),
+        ("內", "外"), ("生", "死"), ("老", "少"), ("新", "舊"), ("高", "低"),
+        ("長", "短"), ("我", "你"), ("我", "他"), ("真", "假"), ("正", "反"),
+    )
+}
+
+#: 無語義嘅助詞／量詞：插入或刪除呢啲字唔改變所指。
+#:
+#: 實測正確例子：「我嘅母親」vs「我的母親」、「攻擊學嘅病者老師」vs
+#: 「攻擊學病者老師」、「貴華嘅母親」vs「貴華母親」—— 全部同一人。
+PARTICLES = set("嘅的之個")
+
+
+def _single_edit(a: str, b: str) -> tuple[str, str, str] | None:
+    """回傳 (類型, 差嘅字, 對應嘅字)；唔係單一編輯就 None。
+
+    類型：`sub`（替換）／`ins`（b 比 a 多一個字）／`del`（b 比 a 少一個字）
+    """
+    if a == b:
+        return None
+    la, lb = len(a), len(b)
+    if abs(la - lb) > 1:
+        return None
+    if la == lb:
+        diffs = [(x, y) for x, y in zip(a, b) if x != y]
+        if len(diffs) != 1:
+            return None
+        return ("sub", diffs[0][0], diffs[0][1])
+    short, long_ = (a, b) if la < lb else (b, a)
+    i = j = 0
+    while i < len(short) and j < len(long_):
+        if short[i] != long_[j]:
+            if short[i:] != long_[j + 1:]:
+                return None
+            return ("ins" if long_ is b else "del", long_[j], "")
+        i += 1
+        j += 1
+    if i == len(short):
+        return ("ins" if long_ is b else "del", long_[-1], "")
+    return None
+
+
+def _is_contrast(x: str, y: str) -> bool:
+    return frozenset((x, y)) in CONTRAST_PAIRS
+
+
+def infer_characters(characters: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """角色推斷：搵疑似同一人嘅變體（拼寫手誤、共享 alias）。
+
+    同地點推斷共用同一套結構：`subject_ids` 係角色 id、`evidence` 係
+    可回溯證據鏈、`review_status` 一律 pending。
+    """
+    out: list[dict[str, Any]] = []
+
+    def mk(ids: list[str], names: list[str], pattern: str, prototype: str,
+           evidence: list[dict[str, Any]], confidence: float) -> dict[str, Any]:
+        return {
+            "entity_kind": "character",
+            "subject_ids": ids,
+            "subject_names": names,
+            "pattern": pattern,
+            "inferred_prototype": prototype,
+            "inferred_lonlat": None,
+            "coordinate_source": None,
+            "evidence": evidence,
+            "confidence": round(confidence, 2),
+            "proposed_changes": {"merge_into": prototype, "location_precision": None},
+            "review_status": "pending",
+            "review_notes": None,
+        }
+
+    # --- 1. 正規化後同名（去括號、全形、大小寫）---
+    by_norm: dict[str, list[dict[str, Any]]] = {}
+    for c in characters:
+        by_norm.setdefault(_norm_name(c["name"]), []).append(c)
+    for key, group in by_norm.items():
+        names = {c["name"] for c in group}
+        if len(names) < 2:
+            continue
+        canonical = sorted(names, key=len)[0]
+        out.append(mk(
+            [c["id"] for c in group], sorted(names), "C-NORM",
+            canonical,
+            [{
+                "kind": "name_variant",
+                "chapter": None,
+                "detail": f"正規化後同名（key={key}）：{'／'.join(sorted(names))}",
+                "refs": [c["id"] for c in group],
+            }],
+            0.80,
+        ))
+
+    # --- 2. 拼寫只差一個字 ---
+    #
+    # ⚠️ 一定要分辨「助詞」同「反義詞」：
+    #   助詞差異（嘅／的／之）  → 同一人，強證據
+    #   反義詞替換（父↔母、紅↔綠）→ **唔同人**，直接跳過
+    #   其他替換              → 弱證據，需要人手判斷
+    items = sorted(characters, key=lambda c: c["name"])
+    for i, a in enumerate(items):
+        for b in items[i + 1:]:
+            na, nb = _norm_name(a["name"]), _norm_name(b["name"])
+            if len(na) < 3 or len(nb) < 3:
+                continue
+            ed = _single_edit(na, nb)
+            if ed is None:
+                continue
+            kind, x, y = ed
+
+            if kind == "sub" and _is_contrast(x, y):
+                continue  # 反義詞 → 明確唔同人，唔應該出推斷
+            if kind == "sub" and x in PARTICLES or kind == "sub" and y in PARTICLES:
+                conf = 0.80  # 助詞替換，幾乎肯定同一人
+            elif kind in ("ins", "del") and (x in PARTICLES):
+                conf = 0.80  # 插入／刪除助詞
+            elif kind in ("ins", "del"):
+                conf = 0.60  # 插入／刪除實義字
+            else:
+                conf = 0.50  # 其他單字替換，最弱
+
+            shared = set(a.get("chapter_refs") or []) & set(b.get("chapter_refs") or [])
+            if not shared:
+                conf = min(conf, 0.45)  # 冇共同章節 → 唔可以當證據
+
+            out.append(mk(
+                [a["id"], b["id"]], sorted([a["name"], b["name"]]),
+                "C-TYPO",
+                sorted([a["name"], b["name"]], key=len)[0],
+                [{
+                    "kind": "name_variant",
+                    "chapter": None,
+                    "detail": (
+                        f"「{a['name']}」同「{b['name']}」"
+                        + (
+                            f"只差助詞「{x or y}」"
+                            if kind == "sub" and (x in PARTICLES or y in PARTICLES)
+                            else f"只差一個字（{kind}）"
+                        )
+                        + (f"；共同章節 {sorted(shared)[:5]}" if shared else "；冇共同章節")
+                    ),
+                    "refs": [a["id"], b["id"]],
+                }],
+                conf,
+            ))
+
+    # --- 3. 共享 alias（兩個角色用同一個別名 → 可能係同一人）---
+    alias_owner: dict[str, list[dict[str, Any]]] = {}
+    for c in characters:
+        for al in c.get("aliases") or []:
+            alias_owner.setdefault(_norm_name(al), []).append(c)
+    for al, owners in alias_owner.items():
+        uniq = {c["id"]: c for c in owners}
+        if len(uniq) < 2:
+            continue
+        group = list(uniq.values())
+        names = sorted(c["name"] for c in group)
+        out.append(mk(
+            [c["id"] for c in group], names, "C-ALIAS-SHARE",
+            names[0],
+            [{
+                "kind": "name_variant",
+                "chapter": None,
+                "detail": f"共用別名「{al}」：{'／'.join(names)}",
+                "refs": [c["id"] for c in group],
+            }],
+            0.60,
+        ))
+    return out
+
+
+def infer_event_location_gaps(
+    events: list[dict[str, Any]], locations: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """事件推斷：有 `location_name` 但冇 `location_id`（或指向唔到）嘅事件。
+
+    事件嘅座標係由地點投影出嚟。如果事件只寫住地名而連唔到 location，
+    佢就會停留在「投影至故事中心」嘅佔位座標 —— 即係地圖上一個假位置。
+    """
+    by_name = {l["properties"]["name"]: l["properties"] for l in locations}
+    out: list[dict[str, Any]] = []
+    for ev in events:
+        p = ev["properties"]
+        lid = p.get("location_id")
+        lname = p.get("location_name")
+        if lid or not lname:
+            continue
+        target = by_name.get(lname)
+        if target is None:
+            continue
+        out.append({
+            "entity_kind": "event",
+            "subject_ids": [p["id"]],
+            "subject_names": [p.get("title") or p["id"]],
+            "pattern": "E-LOC-LINK",
+            "inferred_prototype": lname,
+            "inferred_lonlat": None,
+            "coordinate_source": None,
+            "evidence": [{
+                "kind": "chapter_cooccurrence",
+                "chapter": p.get("chapter"),
+                "detail": (
+                    f"事件寫住地點「{lname}」但冇 location_id；"
+                    f"資料集有同名地點 {target['id']}"
+                ),
+                "refs": [target["id"]],
+            }],
+            "confidence": 0.85,
+            "proposed_changes": {"merge_into": target["id"], "location_precision": None},
+            "review_status": "pending",
+            "review_notes": None,
+        })
+    return out
+
+
+# ---------------------------------------------------------------------------
 # 主流程
 # ---------------------------------------------------------------------------
 def main() -> int:
@@ -873,6 +1152,22 @@ def main() -> int:
             )
         )
 
+    # ---- 推廣至其他實體類型（同一套結構）----
+    chars_path = REPO / "data" / "public" / "characters.json"
+    events_path = REPO / "data" / "public" / "events.geojson"
+    other: list[dict[str, Any]] = []
+    if chars_path.exists():
+        chars = json.loads(chars_path.read_text(encoding="utf-8"))
+        other += infer_characters(chars)
+        print(f"\n角色推斷：{len([r for r in other if r['entity_kind'] == 'character'])} 條"
+              f"（{len(chars)} 個角色）")
+    if events_path.exists():
+        evs = json.loads(events_path.read_text(encoding="utf-8"))["features"]
+        ev_inf = infer_event_location_gaps(evs, feats)
+        other += ev_inf
+        print(f"事件推斷：{len(ev_inf)} 條（{len(evs)} 個事件）")
+    results += other
+
     # 最終去重：每個 subject id 只保留最強嘅一條推斷。
     # 各 pass 嘅 supersede 只清「弱過 0.70」嘅，兩個 ≥0.70 嘅規則同時命中
     # （例如 R-ANCHOR-MEMBER 0.72 同 R-CONTAIN-RESOLVED 0.75）就會漏。
@@ -894,7 +1189,12 @@ def main() -> int:
     # （倖存區）」，令已套用嘅審閱決定靜默地指向錯誤對象。
     # 呢個令審計軌跡完全失效，比推斷錯更危險。
     for r in results:
-        r["inference_id"] = f"inf_{r['subject_ids'][0]}"
+        ids = sorted(r["subject_ids"])
+        if len(ids) == 1:
+            r["inference_id"] = f"inf_{ids[0]}"
+        else:
+            sig = hashlib.sha1("|".join(ids).encode("utf-8")).hexdigest()[:10]
+            r["inference_id"] = f"inf_{sig}"
 
     print("\n=== 推斷結果（按規則）===")
     for rule, n in Counter(r["pattern"] for r in results).most_common():
