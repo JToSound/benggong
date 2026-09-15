@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/place-inference.schema.json",
+  "title": "《病港》地點推斷候選（私有，需人手審閱）",
+  "description": "由上文下理推斷「模糊地點」（例如『A大樓』）嘅真實原型。此檔永不公開：evidence_excerpt 屬私有 material。推斷結果必須經人手審閱，才可以升級 location_precision 或改座標。",
+  "type": "object",
+  "required": [
+    "inference_id",
+    "entity_kind",
+    "subject_ids",
+    "subject_names",
+    "pattern",
+    "inferred_prototype",
+    "inferred_lonlat",
+    "evidence",
+    "confidence",
+    "proposed_changes",
+    "review_status"
+  ],
+  "properties": {
+    "inference_id": { "type": "string", "pattern": "^inf_[0-9]{4}$" },
+    "entity_kind": {
+      "description": "推斷對象類型。設計成通用：同一套證據鏈格式適用於地點／角色／事件／路線。",
+      "enum": ["location", "character", "event", "route", "time_reference"]
+    },
+    "subject_ids": {
+      "description": "被推斷嘅公開記錄 id（可多個 = 同一實體嘅變體）。",
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "subject_names": {
+      "description": "對應 subject_ids 嘅名稱，方便人手審閱。",
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "pattern": {
+      "description": "觸發呢個推斷嘅規則 id，對應 infer_places.py 嘅 RULES。",
+      "type": "string"
+    },
+    "inferred_prototype": {
+      "description": "推斷出嘅真實原型名稱。唔確定必須用 null，不得捏造。",
+      "type": ["string", "null"],
+      "maxLength": 120
+    },
+    "inferred_lonlat": {
+      "description": "[lon, lat]；必須係真實座標（來自 OSM 或已核實來源）。唔確定用 null。",
+      "type": ["array", "null"],
+      "items": { "type": "number" },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "coordinate_source": {
+      "description": "座標來源，令審閱者可以回溯。",
+      "type": ["string", "null"],
+      "enum": [
+        "osm_way",
+        "osm_relation",
+        "hk-districts.json",
+        "parent_containment",
+        "external_verified",
+        null
+      ]
+    },
+    "evidence": {
+      "description": "支援推斷嘅證據鏈。每條都要可回溯，唔可以只寫結論。",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["kind", "detail"],
+        "properties": {
+          "kind": {
+            "enum": [
+              "description_claim",
+              "chapter_cooccurrence",
+              "name_containment",
+              "name_variant",
+              "osm_place_match",
+              "explicit_statement"
+            ]
+          },
+          "chapter": { "type": ["integer", "null"], "minimum": 1, "maximum": 198 },
+          "detail": { "type": "string", "maxLength": 300 },
+          "refs": {
+            "description": "相關嘅公開記錄 id（例如同章出現嘅地點）。",
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "proposed_changes": {
+      "description": "建議改動。builder 只可以在 review_status=approved 之後套用。",
+      "type": "object",
+      "properties": {
+        "location_precision": {
+          "enum": ["fictional", "approximate", "district", "exact", null]
+        },
+        "merge_into": { "type": ["string", "null"] },
+        "set_lonlat": {
+          "type": ["array", "null"],
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "rename_to": { "type": ["string", "null"] }
+      }
+    },
+    "review_status": {
+      "description": "pending=待審；approved=可套用；rejected=否決；needs_info=證據不足。",
+      "enum": ["pending", "approved", "rejected", "needs_info"],
+      "default": "pending"
+    },
+    "review_notes": { "type": ["string", "null"], "maxLength": 400 }
+  }
+}
