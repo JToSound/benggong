@@ -1,0 +1,34 @@
+{
+  "canvas": {
+    "width": 2048,
+    "height": 1582,
+    "aspect": 1.294564
+  },
+  "bbox": {
+    "lon_min": 113.79,
+    "lon_max": 114.49,
+    "lat_min": 22.11,
+    "lat_max": 22.61
+  },
+  "projection": "equirectangular",
+  "standard_parallel": 22.36,
+  "projection_note": "x = (lon - lon_min) * px_per_deg_lon; y = (lat_max - lat) * px_per_deg_lon / cos(lat0); px_per_deg_lon = canvas.width / (lon_max - lon_min)",
+  "style": "binggang_handdrawn_parchment",
+  "crop_box": [
+    135,
+    106,
+    1951,
+    1481
+  ],
+  "output_size": [
+    1816,
+    1375
+  ],
+  "layers": {
+    "base": "bg-v10-2048.png"
+  },
+  "stats": {
+    "trees": 2032,
+    "labels": 25
+  }
+}
