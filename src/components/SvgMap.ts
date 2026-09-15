@@ -24,10 +24,92 @@ import { FULL_HK_ANCHORS } from "../data/fallbackAnchors";
 import basemapPngUrl from "../../public/assets/hk-basemap.png?url";
 import labelDetailPngUrl from "../../public/assets/hk-basemap-labels.png?url";
 import basemapCoords from "../../public/assets/hk-basemap-coords.json";
+import lodManifest from "../../public/assets/map-lod/manifest.json";
 
-/** 預設視圖：覆蓋全港。亦係所有座標換算嘅基準。 */
-const BASE_VIEW = { x: 113.85, y: 22.18, w: 0.6, h: 0.37 };
+/**
+ * 投影：等距圓柱 + 標準緯線校正。
+ *
+ * 為何要乘 1/cos(φ₀)
+ * ------------------
+ * SVG user unit 直接用「度」會令 1° 經度同 1° 緯度一樣長。但喺北緯 22.36°，
+ * 1° 緯度（110.6 km）比 1° 經度（103.0 km）長 1.081 倍。所以垂直方向要乘
+ * 1/cos(22.36°) ≈ 1.081，圖上長度才同真實距離成比例。
+ *
+ * 舊版嘅嚴重錯誤
+ * --------------
+ * 舊底圖係 2048×2048 正方形，但覆蓋 0.6°×0.37°（長寬比 1.622），
+ * 再配合 `preserveAspectRatio="xMidYMid slice"` 放入 0.6×0.37 嘅框。
+ * slice 會把正方形圖等比放大到覆蓋，再垂直裁走 38% —— 結果底圖相對
+ * 標記座標被**垂直拉伸 1.622 倍**（以中心為軸），邊緣位置偏差達
+ * ±0.115°（約 12.8 km）。即係「標記唔喺真實位置」嘅主因之一。
+ *
+ * 現在底圖由 `render_binggang_map.py` 以同一投影產生（畫布長寬比 =
+ * 校正後 bbox 長寬比），前端用 `preserveAspectRatio="none"` 精確貼合
+ * 對應經緯矩形，兩者像素級對齊。
+ */
+const PROJ_COS = lodManifest.projection_cos;
+
+/** 底圖覆蓋嘅經緯範圍（由 render script 生成）。 */
+const BASEMAP_BBOX = (
+  basemapCoords as {
+    bbox: { lon_min: number; lon_max: number; lat_min: number; lat_max: number };
+  }
+).bbox;
+
+/**
+ * 預設視圖：覆蓋全港。亦係所有座標換算嘅基準。
+ *
+ * user unit 定義：x 數值 = 經度偏移；y 由 lat_max 向下遞增，
+ * 垂直尺度已乘 1/cos(φ₀)（見上面說明）。
+ */
+const BASE_VIEW = {
+  x: BASEMAP_BBOX.lon_min,
+  y: BASEMAP_BBOX.lat_min,
+  w: BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min,
+  h: (BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min) / PROJ_COS,
+};
 const VIEWBOX = `${BASE_VIEW.x} ${BASE_VIEW.y} ${BASE_VIEW.w} ${BASE_VIEW.h}`;
+
+/** 縮放層級圖磚（由 `scripts/build_map_lods.py` 產生）。 */
+interface LodTier {
+  id: string;
+  label: string;
+  note: string;
+  image: string;
+  bbox: { lon_min: number; lon_max: number; lat_min: number; lat_max: number };
+  output_size: number[];
+  lod: string;
+  label_layer?: string;
+}
+
+const LOD_TIERS: LodTier[] = (lodManifest as unknown as { tiers: LodTier[] })
+  .tiers;
+
+/** 層級圖磚嘅經度跨度，用嚟揀「最窄但仍然覆蓋視窗」嘅層級。 */
+function tierSpan(t: LodTier): number {
+  return t.bbox.lon_max - t.bbox.lon_min;
+}
+
+/**
+ * 層級圖磚 → SVG user unit 矩形。
+ *
+ * 每個圖磚覆蓋一個經緯 bbox，換算方式同 `lonlatToViewbox` 完全一致，
+ * 所以圖磚上任何一點嘅地理位置都同標記座標系對得上。
+ */
+function tierRect(t: LodTier): { x: number; y: number; w: number; h: number } {
+  const a = lonlatToViewbox(t.bbox.lon_min, t.bbox.lat_max);
+  const b = lonlatToViewbox(t.bbox.lon_max, t.bbox.lat_min);
+  return { x: a.x, y: a.y, w: b.x - a.x, h: b.y - a.y };
+}
+
+/**
+ * manifest 入面嘅路徑係相對 `public/`（例如 `assets/map-lod/tko-street.png`）。
+ * 要加 `BASE_URL` 前綴才喺 GitHub Pages 之類嘅子路徑部署下正確解析。
+ */
+function assetUrl(p: string): string {
+  const base = import.meta.env.BASE_URL || "/";
+  return `${base.replace(/\/+$/, "")}/${p.replace(/^\/+/, "")}`;
+}
 
 /** 縮放上下限（相對基準視圖）。 */
 const MIN_SCALE = 0.5;
@@ -39,14 +121,9 @@ const LABEL_FADE_FULL = 1.2;
 
 const ANIM_DURATION_MS = 500;
 
-// Basemap PNG 同 bbox metadata（由 render script 生成）。
+// Basemap PNG（由 render script 生成；bbox 同投影常數見上方）。
 const BASEMAP_PNG = basemapPngUrl;
 const LABEL_DETAIL_PNG = labelDetailPngUrl;
-const BASEMAP_BBOX = (
-  basemapCoords as {
-    bbox: { lon_min: number; lon_max: number; lat_min: number; lat_max: number };
-  }
-).bbox;
 
 /**
  * 虛構／離網故事地點嘅人工錨點。
@@ -177,6 +254,8 @@ export class SvgMap {
   private panStartX = 0;
   private panStartY = 0;
   private panStartView: ViewBox = { ...BASE_VIEW };
+  /** 目前生效嘅 LOD 圖磚 id（避免重複設定同一張圖）。 */
+  private currentTierId: string = "";
 
   constructor(root: HTMLElement, app: App) {
     this.root = root;
@@ -188,6 +267,22 @@ export class SvgMap {
   /** 相對基準視圖嘅縮放倍率（1 = 全港）。 */
   get viewScale(): number {
     return BASE_VIEW.w / this.view.w;
+  }
+
+  /**
+   * 標記半徑補償：user unit 半徑 ÷ 縮放倍率 → 屏幕尺寸大致恆定。
+   *
+   * 為何需要
+   * --------
+   * 標記半徑寫死喺 user unit（例如 0.008）。全港視圖寬 0.70°，睇落啱；
+   * 但街道級視圖寬只有 0.058°，同一個 0.008 就佔咗畫面 27% —— 實測
+   * 放大到將軍澳市中心時，幾個標記會完全蓋住地圖。
+   *
+   * 上限 10 倍：再放大時容許標記略微變大，避免縮到睇唔到。
+   */
+  private markerR(base: number): number {
+    const s = Math.min(Math.max(this.viewScale, 0.5), 10);
+    return base / s;
   }
 
   private init(): void {
@@ -210,11 +305,11 @@ export class SvgMap {
           <g id="map-content">
             <image id="basemap-group" class="basemap-layer" href="${BASEMAP_PNG}"
                    x="${BASE_VIEW.x}" y="${BASE_VIEW.y}" width="${BASE_VIEW.w}" height="${BASE_VIEW.h}"
-                   preserveAspectRatio="xMidYMid slice" />
+                   preserveAspectRatio="none" />
             <g id="label-detail-layer" class="label-detail-layer" pointer-events="none" opacity="0">
-              <image class="label-detail-image" href="${LABEL_DETAIL_PNG}"
+              <image id="label-detail-image" class="label-detail-image" href="${LABEL_DETAIL_PNG}"
                      x="${BASE_VIEW.x}" y="${BASE_VIEW.y}" width="${BASE_VIEW.w}" height="${BASE_VIEW.h}"
-                     preserveAspectRatio="xMidYMid slice" />
+                     preserveAspectRatio="none" />
             </g>
             <g id="routes-layer" class="routes-layer"></g>
             <g id="locations-layer" class="locations-layer"></g>
@@ -299,13 +394,11 @@ export class SvgMap {
       if (!this.isPanning) return;
       const rect = this.svg.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
-      // 畫面像素 → SVG user unit（viewBox 每 px 幾多 user unit）
-      const ux = this.view.w / rect.width;
-      const uy = this.view.h / rect.height;
+      const u = this.pxToUserUnits(rect.width, rect.height);
       this.view = {
         ...this.panStartView,
-        x: this.panStartView.x - (e.clientX - this.panStartX) * ux,
-        y: this.panStartView.y - (e.clientY - this.panStartY) * uy,
+        x: this.panStartView.x - (e.clientX - this.panStartX) * u,
+        y: this.panStartView.y - (e.clientY - this.panStartY) * u,
       };
       this.applyViewBox();
     });
@@ -345,12 +438,11 @@ export class SvgMap {
       if (e.touches.length === 1 && this.isPanning) {
         const rect = this.svg.getBoundingClientRect();
         if (rect.width === 0 || rect.height === 0) return;
-        const ux = this.view.w / rect.width;
-        const uy = this.view.h / rect.height;
+        const u = this.pxToUserUnits(rect.width, rect.height);
         this.view = {
           ...this.panStartView,
-          x: this.panStartView.x - (e.touches[0].clientX - this.panStartX) * ux,
-          y: this.panStartView.y - (e.touches[0].clientY - this.panStartY) * uy,
+          x: this.panStartView.x - (e.touches[0].clientX - this.panStartX) * u,
+          y: this.panStartView.y - (e.touches[0].clientY - this.panStartY) * u,
         };
         this.applyViewBox();
       } else if (e.touches.length === 2 && pinchStartDist > 0) {
@@ -383,17 +475,120 @@ export class SvgMap {
     this.render();
   }
 
+  /**
+   * 畫面像素 → SVG user unit（兩個方向同一個比例）。
+   *
+   * 為何唔可以寫 `view.w / rect.width`
+   * ----------------------------------
+   * `<svg>` 用 `preserveAspectRatio="xMidYMid meet"`：內容等比縮放至
+   * **完全放得入**，所以實際比例係 `min(rectW / view.w, rectH / view.h)`，
+   * 而且短邊會留黑邊。舊寫法假設兩軸比例獨立，當元素長寬比同 viewBox
+   * 長寬比唔同時（例如 1280×800 視窗 vs 1.295 嘅 viewBox），平移速度
+   * 會偏離約 1.24 倍，拖曳同手指唔同步。
+   */
+  private pxToUserUnits(rectW: number, rectH: number): number {
+    const scale = Math.min(rectW / this.view.w, rectH / this.view.h);
+    return scale > 0 ? 1 / scale : 0;
+  }
+
   /** 將 this.view 套用到 <svg>，並按 viewScale 更新標籤圖層透明度。 */
   private applyViewBox(): void {
     const { x, y, w, h } = this.view;
     this.svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
+    this.updateBasemapTier();
     this.updateLabelLayerOpacity();
+  }
+
+  /** 目前視窗覆蓋嘅經緯範圍。 */
+  private currentGeoBbox(): {
+    lon_min: number;
+    lon_max: number;
+    lat_min: number;
+    lat_max: number;
+  } {
+    const fx0 = (this.view.x - BASE_VIEW.x) / BASE_VIEW.w;
+    const fx1 = (this.view.x + this.view.w - BASE_VIEW.x) / BASE_VIEW.w;
+    const fy0 = (this.view.y - BASE_VIEW.y) / BASE_VIEW.h;
+    const fy1 = (this.view.y + this.view.h - BASE_VIEW.y) / BASE_VIEW.h;
+    const lonSpan = BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min;
+    const latSpan = BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min;
+    return {
+      lon_min: BASEMAP_BBOX.lon_min + fx0 * lonSpan,
+      lon_max: BASEMAP_BBOX.lon_min + fx1 * lonSpan,
+      lat_max: BASEMAP_BBOX.lat_max - fy0 * latSpan,
+      lat_min: BASEMAP_BBOX.lat_max - fy1 * latSpan,
+    };
+  }
+
+  /**
+   * 按目前視窗揀 LOD 圖磚：**最窄但仍然完全覆蓋視窗**嘅層級。
+   *
+   * 為何要「完全覆蓋」而唔係「最接近」
+   * --------------------------------
+   * 圖磚只有 bbox 內嘅內容。如果揀咗一個唔完全覆蓋視窗嘅圖磚，視窗邊緣
+   * 就會出現空白（露出底色）。所以先篩「覆蓋得住」，再喺入面揀最窄嘅
+   * （最窄 = 每像素覆蓋地理範圍最小 = 最清晰）。
+   *
+   * 若果連最闊嘅層級都覆蓋唔到（例如視窗拉到超出香港），就退回最闊層級，
+   * 超出部分自然留白。
+   */
+  private pickTier(): LodTier {
+    if (LOD_TIERS.length === 0) {
+      throw new Error("LOD manifest 冇任何層級");
+    }
+    const v = this.currentGeoBbox();
+    const covers = LOD_TIERS.filter(
+      (t) =>
+        t.bbox.lon_min <= v.lon_min &&
+        t.bbox.lon_max >= v.lon_max &&
+        t.bbox.lat_min <= v.lat_min &&
+        t.bbox.lat_max >= v.lat_max,
+    );
+    const pool = covers.length > 0 ? covers : LOD_TIERS;
+    return pool.reduce((best, t) => (tierSpan(t) < tierSpan(best) ? t : best));
+  }
+
+  /** 切換底圖圖磚（只有層級改變時才改 DOM）。 */
+  private updateBasemapTier(): void {
+    const tier = this.pickTier();
+    if (tier.id === this.currentTierId) return;
+    this.currentTierId = tier.id;
+
+    const rect = tierRect(tier);
+    const img = this.root.querySelector<SVGImageElement>("#basemap-group");
+    if (img) {
+      img.setAttribute("href", assetUrl(tier.image));
+      img.setAttribute("x", String(rect.x));
+      img.setAttribute("y", String(rect.y));
+      img.setAttribute("width", String(rect.w));
+      img.setAttribute("height", String(rect.h));
+    }
+
+    // 標籤圖層只跟總覽層配套（其餘層級嘅標籤已經烙入圖磚，
+    // 而且比例唔同，疊上去會變成兩套唔同大小嘅字）。
+    const labelImg = this.root.querySelector<SVGImageElement>("#label-detail-image");
+    const hasLabelLayer = Boolean(tier.label_layer);
+    if (labelImg && hasLabelLayer) {
+      labelImg.setAttribute("href", assetUrl(tier.label_layer!));
+    }
+    const labelGroup = this.root.querySelector("#label-detail-layer");
+    if (labelGroup) {
+      labelGroup.setAttribute("data-tier-label-layer", hasLabelLayer ? "1" : "0");
+    }
+    this.root.dispatchEvent(
+      new CustomEvent("map-lod-change", {
+        detail: { tier: tier.id, label: tier.label, lod: tier.lod },
+      }),
+    );
   }
 
   /**
    * Phase I label decluttering：
    * viewScale ≤ 0.8 → 完全隱藏次要街道標籤；
    * 0.8–1.2 之間線性插值；≥ 1.2 完全顯示。
+   *
+   * 另外：只有總覽層有獨立標籤圖層；分區／街道層嘅標籤已烙入圖磚，
+   * 所以該兩層強制歸零，避免兩套唔同比例嘅字疊埋。
    */
   private updateLabelLayerOpacity(): void {
     const layer = this.root.querySelector("#label-detail-layer");
@@ -401,7 +596,9 @@ export class SvgMap {
     const labelOpacity = this.viewScale <= 0.8 ? 0.0 : (
       Math.min(1, (this.viewScale - LABEL_FADE_IN) / (LABEL_FADE_FULL - LABEL_FADE_IN))
     );
-    layer.setAttribute("opacity", labelOpacity.toFixed(3));
+    const tierHasLayer =
+      layer.getAttribute("data-tier-label-layer") !== "0" ? 1 : 0;
+    layer.setAttribute("opacity", (labelOpacity * tierHasLayer).toFixed(3));
   }
 
   /**
@@ -555,7 +752,7 @@ export class SvgMap {
       el.setAttribute("d", d);
       el.setAttribute("class", "route-line");
       el.setAttribute("stroke", route.properties.color || "#F39C12");
-      el.setAttribute("stroke-width", "0.0015");
+      el.setAttribute("stroke-width", String(this.markerR(0.0015)));
       el.setAttribute("fill", "none");
       el.setAttribute("opacity", String(opacity));
       el.setAttribute("data-route-id", route.properties.id);
@@ -576,7 +773,7 @@ export class SvgMap {
         props.chapters.includes(cur) ||
         (props.first_appearance <= cur && cur < props.first_appearance + 5);
       const isSelected = this.app.selectedLocationId === props.id;
-      const r = active ? 0.005 : 0.002;
+      const r = this.markerR(active ? 0.005 : 0.002);
       const fill = isSelected ? "#ffeb3b" : props.fictional ? "#9b59b6" : "#e67e22";
       const el = document.createElementNS(SVG_NS, "circle");
       el.setAttribute("cx", String(x));
@@ -585,7 +782,7 @@ export class SvgMap {
       el.setAttribute("class", "location-marker");
       el.setAttribute("fill", fill);
       el.setAttribute("stroke", "#fff");
-      el.setAttribute("stroke-width", "0.0008");
+      el.setAttribute("stroke-width", String(this.markerR(0.0008)));
       el.setAttribute("opacity", String(active ? 0.9 : 0.45));
       el.setAttribute("data-loc-id", props.id);
       el.setAttribute("data-loc-name", props.name);
@@ -619,7 +816,7 @@ export class SvgMap {
       const { x, y } = lonlatToViewbox(lon, lat);
       const isCurrent = props.chapter === cur;
       const isSelected = this.app.selectedEventId === props.id;
-      const r = isCurrent ? 0.008 : 0.005;
+      const r = this.markerR(isCurrent ? 0.008 : 0.005);
       const fill = isSelected ? "#ff5252" : isCurrent ? "#e74c3c" : "#f39c12";
       const el = document.createElementNS(SVG_NS, "circle");
       el.setAttribute("cx", String(x));
@@ -628,7 +825,7 @@ export class SvgMap {
       el.setAttribute("class", "event-marker");
       el.setAttribute("fill", fill);
       el.setAttribute("stroke", "#fff");
-      el.setAttribute("stroke-width", "0.001");
+      el.setAttribute("stroke-width", String(this.markerR(0.001)));
       el.setAttribute("opacity", String(isCurrent ? 1.0 : 0.6));
       el.setAttribute("data-event-id", props.id);
       el.setAttribute("data-event-title", props.title);

@@ -189,12 +189,24 @@ export interface BingGangDataset {
 export interface MapConfig {
   map: {
     renderer: "svg" | "leaflet";
+    /**
+     * 舊欄位：指向 `assets/tseung-kwan-o-basemap.svg`，但該檔案從來冇存在過，
+     * 而且前端一直硬編碼用 `assets/hk-basemap.png`。保留只為兼容舊資料。
+     */
     svg_basemap?: string;
+    /** 實際底圖資產（由 `scripts/build_map_lods.py` 產生）。 */
+    basemap_png?: string;
+    basemap_labels_png?: string;
+    basemap_coords?: string;
+    /** LOD 圖磚清單；前端據此按縮放切換底圖。 */
+    lod_manifest?: string;
     tiles_local_only: boolean;
     default_base_layer: string;
     base_layers: BaseLayer[];
     initial_view: { center_lonlat?: [number, number]; center_story_position?: [number, number]; zoom: number };
     coordinate_system: string;
+    projection?: string;
+    standard_parallel?: number;
     show_scale_bar: boolean;
   };
   scale_profile: {

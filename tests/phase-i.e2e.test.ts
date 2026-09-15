@@ -10,8 +10,13 @@
 
 import { chromium, type Browser, type Page } from "@playwright/test";
 import { describe, expect, it } from "vitest";
+import basemapCoords from "../public/assets/hk-basemap-coords.json";
 
 const BASE_URL = "http://localhost:5174";
+
+/** 全港視圖嘅經度跨度（由 render script 產生，唔應該喺測試寫死）。 */
+const BASE_LON_SPAN =
+  basemapCoords.bbox.lon_max - basemapCoords.bbox.lon_min;
 
 /** 讀 `#label-detail-layer` 嘅 opacity attribute（number）。 */
 async function labelOpacity(page: Page): Promise<number> {
@@ -67,7 +72,7 @@ describe("Phase I 互動驗證（Playwright）", () => {
       for (let i = 0; i < 3; i++) {
         await page.click("#map-zoom-in");
       }
-      expect(await viewBoxWidth(page)).toBeLessThan(0.6);
+      expect(await viewBoxWidth(page)).toBeLessThan(BASE_LON_SPAN * 0.5);
       await expect
         .poll(() => labelOpacity(page), { timeout: 5_000 })
         .toBeCloseTo(1.0, 2);
@@ -76,7 +81,7 @@ describe("Phase I 互動驗證（Playwright）", () => {
       await page.click("#map-reset");
       await expect
         .poll(() => viewBoxWidth(page), { timeout: 5_000 })
-        .toBeCloseTo(0.6, 2);
+        .toBeCloseTo(BASE_LON_SPAN, 2);
       await expect
         .poll(() => labelOpacity(page), { timeout: 5_000 })
         .toBeCloseTo(0.5, 2);

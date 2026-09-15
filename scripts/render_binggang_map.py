@@ -63,6 +63,51 @@ HK_BBOX = {
     "lat_max": 22.61,
 }
 
+# 目前生效嘅 bbox（可由 --bbox 覆寫，用嚟做分區 / 街道級 LOD 渲染）
+ACTIVE_BBOX: dict[str, float] = dict(HK_BBOX)
+
+# 縮放層級：bbox 經度跨度 → 要開邊啲細節圖層
+#
+# 為何用「跨度」而唔係 zoom 數字
+# ----------------------------
+# 渲染器嘅輸出尺寸固定（例如 2048 px），所以 bbox 越窄 = 每像素覆蓋越少
+# 真實距離 = 實際放大。用跨度判斷最直接：
+#   0.70°  全港總覽   → 建築係亞像素（20 m ≈ 0.36 px），畫咗都係污點
+#   0.20°  區域（將軍澳 / 西貢）
+#   0.08°  分區       → 建築開始可見（20 m ≈ 3 px）
+#   0.03°  街道       → 建築清晰（20 m ≈ 8 px）
+LOD_TIERS = [
+    # (最大經度跨度, 名稱, 畫道路, 畫建築, 畫樓宇標籤)
+    #
+    # 門檻要同 `build_map_lods.py` 嘅層級 bbox 對齊：
+    #   overview 0.70° / region 0.20° / district 0.11° / street 0.06°
+    # 每級留約 8–15% 餘裕，避免 bbox 微調就跌落下一級。
+    #
+    # 各級解析度（1536–2048 px 畫布）：
+    #   overview  47 m/px → 建築 0.4 px、道路 <1 px：兩者都唔畫
+    #   region    13 m/px → 主要道路約 2 px：畫路；建築 1.5 px：唔畫
+    #   district   7 m/px → 道路 3 px、建築 3 px：兩者都畫
+    #   street     4 m/px → 道路 6 px、建築 5 px：加樓宇標籤
+    (0.900, "overview", False, False, False),
+    (0.260, "region", True, False, False),
+    (0.120, "district", True, True, False),
+    (0.070, "street", True, True, True),
+]
+
+
+def pick_lod(lon_span: float) -> tuple[str, bool, bool, bool]:
+    """按 bbox 經度跨度揀 LOD 層級。
+
+    必須用**升序**掃：搵第一個「容納得落呢個跨度」嘅最窄層級。
+    如果照 LOD_TIERS 原本嘅闊→窄次序掃，`lon_span <= 0.900` 會即刻命中
+    overview，令所有分區圖都永遠唔開道路／建築圖層。
+    """
+    for max_span, name, roads, buildings, b_labels in sorted(LOD_TIERS):
+        if lon_span <= max_span:
+            return name, roads, buildings, b_labels
+    return "street", True, True, True
+
+
 # ---------------------------------------------------------------------------
 # 投影（等距圓柱 / equirectangular，標準緯線 = 香港中位緯度）
 #
@@ -78,17 +123,33 @@ HK_BBOX = {
 # 本渲染器改為按真實比例計高度，杜絕變形。
 # ---------------------------------------------------------------------------
 LAT0 = (HK_BBOX["lat_min"] + HK_BBOX["lat_max"]) / 2.0
+_LAT0 = LAT0
 _COS_LAT0 = float(np.cos(np.radians(LAT0)))
 
 CANVAS_W = 2048
 CANVAS_H = 2048
 
 
-def configure_canvas(width: int) -> tuple[int, int]:
-    """按 bbox 真實長寬比計出畫布高度。"""
-    global CANVAS_W, CANVAS_H
-    lon_span = HK_BBOX["lon_max"] - HK_BBOX["lon_min"]
-    lat_span = HK_BBOX["lat_max"] - HK_BBOX["lat_min"]
+def configure_canvas(
+    width: int, bbox: dict[str, float] | None = None
+) -> tuple[int, int]:
+    """按 bbox 真實長寬比計出畫布高度，並更新投影常數。
+
+    `bbox` 傳入時會切換 ACTIVE_BBOX —— 呢個係 LOD 縮放嘅基礎：
+    輸出尺寸固定，改細 bbox 就等於放大，細節圖層隨之開啟。
+    """
+    global CANVAS_W, CANVAS_H, ACTIVE_BBOX, _LAT0, _COS_LAT0
+    if bbox is not None:
+        for k in ("lon_min", "lon_max", "lat_min", "lat_max"):
+            if k not in bbox:
+                raise ValueError(f"bbox 缺少 {k}")
+        if bbox["lon_max"] <= bbox["lon_min"] or bbox["lat_max"] <= bbox["lat_min"]:
+            raise ValueError("bbox 無效：max 必須大於 min")
+        ACTIVE_BBOX = dict(bbox)
+    _LAT0 = (ACTIVE_BBOX["lat_min"] + ACTIVE_BBOX["lat_max"]) / 2.0
+    _COS_LAT0 = float(np.cos(np.radians(_LAT0)))
+    lon_span = ACTIVE_BBOX["lon_max"] - ACTIVE_BBOX["lon_min"]
+    lat_span = ACTIVE_BBOX["lat_max"] - ACTIVE_BBOX["lat_min"]
     px_per_deg_lon = width / lon_span
     px_per_deg_lat = px_per_deg_lon / _COS_LAT0
     CANVAS_W = int(round(width))
@@ -116,6 +177,11 @@ PALETTE = {
     # 市區（建成區淡染 + 細網線）
     "urban_tint": (198, 190, 126),
     "urban_line": (146, 140, 90),
+    # 道路 / 建築（LOD 分區級以上）
+    "road":       (226, 218, 178),   # 路面：比陸地略淺，似手繪留白
+    "building_lg": (196, 166, 130),  # 大型建築（商廈 / 工業）：暖褐
+    "building_sm": (211, 185, 146),  # 小型建築（村屋 / 住宅）：暖米
+    "building_ink": (96, 78, 52),    # 建築墨邊
     # 線 / 墨
     "coast_line": (66, 58, 40),
     "shore_ink":  (110, 100, 66),    # 岸內側沙線
@@ -183,7 +249,7 @@ REGION_LABELS: list[tuple[str, float, float, int]] = [
 # ---------------------------------------------------------------------------
 def lonlat_to_px(lon: float, lat: float) -> tuple[float, float]:
     """經緯度 → 像素（等距圓柱投影，已做長寬比校正）。"""
-    b = HK_BBOX
+    b = ACTIVE_BBOX
     px_per_deg_lon = CANVAS_W / (b["lon_max"] - b["lon_min"])
     px_per_deg_lat = px_per_deg_lon / _COS_LAT0
     return (lon - b["lon_min"]) * px_per_deg_lon, (b["lat_max"] - lat) * px_per_deg_lat
@@ -334,6 +400,26 @@ def domain_warp(
     )
 
 
+def poly_area_px(pts: list[tuple[float, float]]) -> float:
+    """鞋帶公式算多邊形實際面積（px²）。
+
+    為何唔用包圍盒面積
+    ----------------
+    包圍盒會嚴重高估斜向薄條：實測將軍澳分區有 2,525 個「水體」通過
+    包圍盒過濾，但總面積只有 1,500 px —— 即平均每個 0.6 px，全部都係
+    斜向明渠嘅外框。用真實面積過濾才可以濾走呢啲雜訊。
+    """
+    n = len(pts)
+    if n < 3:
+        return 0.0
+    s = 0.0
+    for i in range(n):
+        x1, y1 = pts[i]
+        x2, y2 = pts[(i + 1) % n]
+        s += x1 * y2 - x2 * y1
+    return abs(s) * 0.5
+
+
 def collect_polys(
     elements: list[dict[str, Any]],
     want: Any,
@@ -341,8 +427,8 @@ def collect_polys(
 ) -> list[list[tuple[float, float]]]:
     """收集符合 `want(tags)` 嘅 way / relation 多邊形（已投影為像素）。
 
-    relation 會展開為每條 outer member 一個 ring；面積太細嘅會濾走
-    （水體 / 建成區有大量幾 px 嘅碎件，畫出嚟只會變污點）。
+    relation 會展開為每條 outer member 一個 ring；**實際面積**太細嘅會
+    濾走（水體 / 建成區有大量幾 px 嘅碎件，畫出嚟只會變污點）。
     """
     out: list[list[tuple[float, float]]] = []
     for el in elements:
@@ -351,6 +437,12 @@ def collect_polys(
             continue
         rings: list[list[tuple[float, float]]] = []
         if el.get("type") == "way":
+            geom = el.get("geometry") or []
+            if geom:
+                lons = [g["lon"] for g in geom]
+                lats = [g["lat"] for g in geom]
+                if not _bbox_hits(lons, lats):
+                    continue
             pts = to_px_poly(way_points(el))
             if len(pts) >= 3:
                 rings.append(pts)
@@ -359,9 +451,7 @@ def collect_polys(
         for pts in rings:
             if len(pts) < 3:
                 continue
-            xs = [p[0] for p in pts]
-            ys = [p[1] for p in pts]
-            if (max(xs) - min(xs)) * (max(ys) - min(ys)) < min_px_area:
+            if poly_area_px(pts) < min_px_area:
                 continue
             out.append(pts)
     return out
@@ -385,15 +475,199 @@ def polys_to_mask(
 # ---------------------------------------------------------------------------
 # 陸地遮罩
 # ---------------------------------------------------------------------------
-def build_land_mask(elements: list[dict[str, Any]], verbose: bool = True) -> np.ndarray:
-    """由海岸線 + 行政邊界砌出陸地遮罩（bool），尺寸 = CANVAS_W × CANVAS_H。
+# ---------------------------------------------------------------------------
+# 海岸線拓樸修復
+# ---------------------------------------------------------------------------
+def coastline_bridges(
+    elements: list[dict[str, Any]], max_gap_m: float = 6000.0, verbose: bool = True
+) -> tuple[list[tuple[tuple[float, float], tuple[float, float]]], int]:
+    """用節點圖搵出海岸線嘅自由端，就近配對補線封口。
 
-    原理
-    ----
-    1. 把 1,603 條 `natural=coastline` way 畫成粗線屏障。
-    2. 把香港行政邊界畫成屏障（防止向北漏入深圳陸地）。
-    3. 由維多利亞港中心做連通分量 flood fill → 得到「海」。
-    4. 陸地 = 行政邊界內 ∧ 非海 ∧ 非屏障。
+    為何一定要補線（而唔係加粗屏障）
+    --------------------------------
+    本 OSM 抽取嘅 1,603 條 `natural=coastline` way 會斷成 **876 個連通
+    分量**。斷口係真實資料缺口，唔係渲染誤差 —— 例如大嶼山主體
+    （分量 8,514 節點）嘅西岸有 **3,504 m** 缺口，大澳（分量 504）同
+    主體之間亦斷開。
+
+    後果：舊做法「由維港 flood fill 搵海」會令海水由缺口灌入島嶼內部，
+    實測大嶼山陸地只剩 **3.1%**（應該約 60%）。
+
+    為何唔可以靠「加粗屏障」了事
+    ----------------------------
+    把屏障由 2 px 加粗到 6 px，大嶼山陸地會「恢復」到 78%，但呢個係
+    **假修復**：真正發生嘅係維港入口被加粗嘅線封死，海水被困死喺細範圍，
+    於是全港陸地由 184,727 px 暴漲到 475,330 px（2.6 倍）。所以必須由
+    **拓樸層面**把開放鏈駁成閉環。
+
+    做法：degree-1 嘅節點就係鏈嘅自由端；把所有自由端按距離貪心配對
+    （每個端只用一次，超過 `max_gap_m` 唔配），再畫直線補上。
+
+    回傳 (補線段清單, 自由端總數)。
+    """
+    coast = [
+        e
+        for e in elements
+        if e.get("type") == "way" and (e.get("tags") or {}).get("natural") == "coastline"
+    ]
+    parent: dict[int, int] = {}
+
+    def find(x: int) -> int:
+        r = x
+        while parent[r] != r:
+            r = parent[r]
+        while parent[x] != r:
+            parent[x], x = r, parent[x]
+        return r
+
+    def union(a: int, b: int) -> None:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[ra] = rb
+
+    adj: dict[int, set[int]] = {}
+    coord: dict[int, tuple[float, float]] = {}
+    for e in coast:
+        nd = e.get("nodes") or []
+        for n in nd:
+            parent.setdefault(n, n)
+            adj.setdefault(n, set())
+        for n, g in zip(nd, e.get("geometry") or []):
+            coord[n] = (g["lon"], g["lat"])
+        for a, b in zip(nd, nd[1:]):
+            if a == b:
+                continue
+            adj[a].add(b)
+            adj[b].add(a)
+            union(a, b)
+
+    ends = [n for n, nb in adj.items() if len(nb) == 1]
+    if not ends:
+        return [], 0
+
+    pts = np.array([coord[n] for n in ends], dtype=np.float64)
+    # 度數 → 米（經度要乘 cos(lat)）
+    m_per_deg_lon = 111320.0 * _COS_LAT0
+    m_per_deg_lat = 110570.0
+    xy = np.column_stack([pts[:, 0] * m_per_deg_lon, pts[:, 1] * m_per_deg_lat])
+
+    from scipy.spatial import cKDTree
+
+    tree = cKDTree(xy)
+    pairs = sorted(tree.query_pairs(max_gap_m), key=lambda p: float(np.hypot(*(xy[p[0]] - xy[p[1]]))))
+
+    used: set[int] = set()
+    bridges: list[tuple[tuple[float, float], tuple[float, float]]] = []
+    for i, j in pairs:
+        if i in used or j in used:
+            continue
+        used.add(i)
+        used.add(j)
+        bridges.append((tuple(pts[i]), tuple(pts[j])))  # type: ignore[arg-type]
+
+    if verbose:
+        print(
+            f"  coastline topology: {len(coast)} ways, {len(ends)} free ends, "
+            f"bridged {len(bridges)} gaps (<= {max_gap_m/1000:.0f} km)"
+        )
+    return bridges, len(ends)
+
+
+# ---------------------------------------------------------------------------
+# 海域種子
+#
+# 為何唔可以只用一個維港種子
+# --------------------------
+# LOD 縮放時畫布可能完全唔包含維多利亞港（例如渲染沙田 / 上水）。原本
+# 「由維港 flood fill」嘅做法會直接越界失敗。
+#
+# 為何又唔可以手揀一堆海點
+# ------------------------
+# **手揀海點極危險**：實測吐露港（114.230, 22.440）同后海灣
+# （113.980, 22.460）兩個「海點」其實落喺陸地。種子一旦落喺陸地，
+# flood fill 就會由陸地蔓延，把整個新界變成「海」—— 實測全港陸地由
+# 26.3% 暴跌到 7.1%。
+#
+# 所以最終做法：全港視窗只用唯一可信種子（維港）；LOD 視窗則由
+# `_global_sea_points()` 提供**驗證過係海**嘅點。
+#
+# 內陸視窗（例如沙田）冇任何海點命中 → sea 為空 → 全部非屏障像素當
+# 陸地，呢個對內陸分區圖係正確結果。
+# ---------------------------------------------------------------------------
+SEA_SEEDS: list[tuple[str, float, float]] = [
+    ("維多利亞港", 114.165, 22.293),
+]
+
+# 郊野判定：離最近「已開發」像素幾多米就當係山野。
+#
+# 調校紀錄（分區尺度 0.07° 視窗實測樹木數）
+# ------------------------------------------
+#   16 m（原本嘅像素門檻，街道級等效）→ 9,875 棵 —— 市區內都長樹，明顯錯誤
+#   600 m → 624 棵 —— 清水灣郊野公園變禿，太疏
+#   400 m → 757 棵
+#   250 m → 1,504 棵 —— 樹集中成叢，似手繪地圖嘅森林符號，採用
+WILD_DIST_M = 250.0
+
+# 全港尺度陸地遮罩快取（用嚟驗證 LOD 視窗嘅海域種子）
+_GLOBAL_LAND: np.ndarray | None = None
+_GLOBAL_BBOX: dict[str, float] = dict(HK_BBOX)
+_GLOBAL_SIZE = 1024
+
+
+def px_to_lonlat(x: float, y: float) -> tuple[float, float]:
+    """像素 → 經緯度（`lonlat_to_px` 嘅反函數）。"""
+    b = ACTIVE_BBOX
+    px_per_deg_lon = CANVAS_W / (b["lon_max"] - b["lon_min"])
+    px_per_deg_lat = px_per_deg_lon / _COS_LAT0
+    return b["lon_min"] + x / px_per_deg_lon, b["lat_max"] - y / px_per_deg_lat
+
+
+def _global_sea_on_view(elements: list[dict[str, Any]]) -> np.ndarray:
+    """把全港海陸圖重取樣到目前視窗嘅像素格（nearest neighbour）。
+
+    回傳 bool 遮罩：True = 全港圖話呢個像素係海。
+    """
+    gmask, gbbox = _global_land_mask(elements)
+    gh, gw = gmask.shape
+    W, H = CANVAS_W, CANVAS_H
+    b = ACTIVE_BBOX
+    lon_span = b["lon_max"] - b["lon_min"]
+    lat_span = b["lat_max"] - b["lat_min"]
+    xs = b["lon_min"] + (np.arange(W) + 0.5) / W * lon_span
+    ys = b["lat_max"] - (np.arange(H) + 0.5) / H * lat_span
+    gx = ((xs - gbbox["lon_min"]) / (gbbox["lon_max"] - gbbox["lon_min"]) * gw).astype(np.int32)
+    gy = ((gbbox["lat_max"] - ys) / (gbbox["lat_max"] - gbbox["lat_min"]) * gh).astype(np.int32)
+    np.clip(gx, 0, gw - 1, out=gx)
+    np.clip(gy, 0, gh - 1, out=gy)
+    return ~gmask[np.ix_(gy, gx)]
+
+
+def _compute_mask(
+    elements: list[dict[str, Any]],
+    seed_points: list[tuple[float, float]],
+    verbose: bool = False,
+    sea_ref: np.ndarray | None = None,
+) -> np.ndarray:
+    """按**目前畫布**光柵化海岸線 + 行政界，再判定海陸。
+
+    海陸判定有兩條路
+    ----------------
+    A. `sea_ref is None` → 由 `seed_points` 做連通分量 flood fill。
+       適用於全港視窗（維港種子可信）。
+    B. `sea_ref` 提供 → **連通分量多數表決**（見下）。
+
+    為何 LOD 視窗唔可以用 flood fill
+    ------------------------------
+    flood fill 要求視窗內嘅海岸線**完整分隔**海陸。但高縮放時視窗可能
+    完全冇海岸線 way —— 實測將軍澳市中心（114.248–114.276 / 22.300–22.322）
+    bbox 內零條海岸線，於是海水種子嘅連通分量覆蓋全畫布，`land = 0.0%`。
+
+    多數表決做法：先做連通分量，再逐個分量問「全港海陸圖話呢個分量
+    有幾多比例係海」。> 50% 就當海。
+      - 海岸線完整時，每個分量本身純粹 → 結果係**高解析度**邊界。
+      - 海岸線缺失時，分量混合 → 退化成全港圖嘅粗邊界（~70 m），
+        但唔會出現「整幅圖變陸地」嘅災難性錯誤。
+    即係話：精度按資料可用性自動降級，而唔係直接失效。
     """
     W, H = CANVAS_W, CANVAS_H
     barrier = Image.new("L", (W, H), 0)
@@ -411,55 +685,168 @@ def build_land_mask(elements: list[dict[str, Any]], verbose: bool = True) -> np.
             bd.line(pts, fill=255, width=coast_w, joint="curve")
             n_coast += 1
 
-    # 行政邊界屏障
+    bridges, n_ends = coastline_bridges(elements, verbose=False)
+    for a, b in bridges:
+        bd.line([lonlat_to_px(*a), lonlat_to_px(*b)], fill=255, width=coast_w)
+
     rings = boundary_rings()
+    ring_px: list[list[tuple[float, float]]] = []
     for ring in rings:
         pts = to_px_poly(ring)
         if len(pts) >= 3:
+            ring_px.append(pts)
             bd.line(pts + [pts[0]], fill=255, width=coast_w)
 
     bmask = np.asarray(barrier) > 127
 
-    # 行政邊界「內部」
-    inside = Image.new("L", (W, H), 0)
-    idd = ImageDraw.Draw(inside)
-    for ring in rings:
-        pts = to_px_poly(ring)
-        if len(pts) >= 3:
+    # 行政界「內部」：邊界環同畫布相交才需要填色，否則視窗本身就喺境內
+    touches = False
+    for pts in ring_px:
+        xs = [p[0] for p in pts]
+        ys = [p[1] for p in pts]
+        if max(xs) >= 0 and min(xs) <= W and max(ys) >= 0 and min(ys) <= H:
+            touches = True
+            break
+    if touches:
+        inside = Image.new("L", (W, H), 0)
+        idd = ImageDraw.Draw(inside)
+        for pts in ring_px:
             idd.polygon(pts, fill=255)
-    inside_mask = np.asarray(inside) > 127
+        inside_mask = np.asarray(inside) > 127
+    else:
+        inside_mask = np.ones((H, W), dtype=bool)
 
-    # Flood fill：由維多利亞港中心（確定係海）做連通分量
     free = ~bmask
     labels, _ = ndimage.label(free)
-    seed_x, seed_y = lonlat_to_px(114.165, 22.293)
-    sx = min(max(int(round(seed_x)), 0), W - 1)
-    sy = min(max(int(round(seed_y)), 0), H - 1)
-    sea_label = labels[sy, sx]
-    if sea_label == 0:
-        # 種子啱好落喺屏障上，喺附近搵一個 free pixel
-        found = False
-        for r in range(1, 40):
-            for dy in range(-r, r + 1):
-                for dx in range(-r, r + 1):
-                    yy, xx = sy + dy, sx + dx
-                    if 0 <= yy < H and 0 <= xx < W and labels[yy, xx] != 0:
-                        sea_label = labels[yy, xx]
-                        found = True
-                        break
-                if found:
-                    break
-            if found:
-                break
-    sea = (labels == sea_label) & free
+    sea = np.zeros((H, W), dtype=bool)
+    n_used = 0
+
+    if sea_ref is not None:
+        flat = labels.ravel()
+        valid = flat > 0
+        n_lab = int(labels.max()) + 1
+        counts = np.bincount(flat[valid], minlength=n_lab)
+        sea_counts = np.bincount(
+            flat[valid & sea_ref.ravel()], minlength=n_lab
+        )
+        frac = sea_counts / np.maximum(counts, 1)
+        lut = frac > 0.5
+        lut[0] = False
+        sea = lut[labels] & free
+        n_used = int(lut.sum())
+    else:
+        used_labels: set[int] = set()
+        for lon, lat in seed_points:
+            sx_f, sy_f = lonlat_to_px(lon, lat)
+            sx, sy = int(round(sx_f)), int(round(sy_f))
+            if not (0 <= sx < W and 0 <= sy < H):
+                continue
+            lab = int(labels[sy, sx])
+            if lab == 0:
+                lab = _nearest_free_label(labels, sx, sy, W, H)
+            if lab != 0 and lab not in used_labels:
+                used_labels.add(lab)
+                sea |= labels == lab
+                n_used += 1
+        sea &= free
 
     land = inside_mask & (~sea) & (~bmask)
     if verbose:
+        mode = "majority-vote" if sea_ref is not None else "flood-fill"
         print(
-            f"  land mask: coast ways={n_coast}, "
-            f"land px={land.sum():,} ({land.mean() * 100:.1f}%)"
+            f"  land mask: coast ways={n_coast}, bridged ends={n_ends}, "
+            f"{mode} units={n_used}, land px={land.sum():,} ({land.mean() * 100:.1f}%)"
         )
     return land
+
+
+def _global_land_mask(
+    elements: list[dict[str, Any]],
+) -> tuple[np.ndarray, dict[str, float]]:
+    """全港尺度陸地遮罩（唯一可信種子：維多利亞港），帶 bbox 供查表。
+
+    為何唔可以靠「抽一批海點」做 LOD 種子
+    ----------------------------------
+    原本做法係由全港海陸圖抽約 6,000 個海點，再揀落喺視窗內嘅做種子。
+    但密度係每 95 px（全港尺度）一個點 —— 細視窗（例如將軍澳市中心
+    0.028°）嘅海可能一個點都冇，於是 `seeds used=0`，整幅圖被當成陸地
+    （實測 land = 99.9%，明顯錯誤）。
+
+    改為：視窗內用網格逐點查全港海陸圖，並要求 3×3 鄰域全部係海。
+    咁樣保證覆蓋，同時避免岸邊誤判。
+    """
+    global _GLOBAL_LAND, _GLOBAL_BBOX, _LAT0, _COS_LAT0
+    if _GLOBAL_LAND is not None:
+        return _GLOBAL_LAND, _GLOBAL_BBOX
+
+    saved_bbox = dict(ACTIVE_BBOX)
+    saved_w, saved_h = CANVAS_W, CANVAS_H
+    saved_lat0, saved_cos = _LAT0, _COS_LAT0
+    try:
+        configure_canvas(_GLOBAL_SIZE, HK_BBOX)
+        land = _compute_mask(elements, [(114.165, 22.293)])
+        _GLOBAL_LAND = land
+        _GLOBAL_BBOX = dict(ACTIVE_BBOX)
+    finally:
+        configure_canvas(saved_w, saved_bbox)
+        _LAT0, _COS_LAT0 = saved_lat0, saved_cos
+        globals()["CANVAS_H"] = saved_h
+    return _GLOBAL_LAND, _GLOBAL_BBOX
+
+
+
+def build_land_mask(elements: list[dict[str, Any]], verbose: bool = True) -> np.ndarray:
+    """由海岸線 + 行政邊界砌出陸地遮罩（bool），尺寸 = CANVAS_W × CANVAS_H。
+
+    原理
+    ----
+    1. 把 1,603 條 `natural=coastline` way 畫成粗線屏障。
+    2. **補上拓樸缺口**（見 `coastline_bridges`）—— 唔補的話海水會灌入島嶼。
+    3. 把香港行政邊界畫成屏障（防止向北漏入深圳陸地）。
+    4. 由維多利亞港（全港視窗）或多個驗證過嘅海點（LOD 視窗）flood fill。
+    5. 陸地 = 行政邊界內 ∧ 非海 ∧ 非屏障。
+
+    LOD 相容性
+    ----------
+    分區級 bbox 會令行政邊界完全落喺畫布外，此時「邊界內」應該係全畫布
+    （視窗本身就喺香港境內）。內陸分區（例如沙田）冇任何海點命中 →
+    sea 為空 → 全部非屏障像素當陸地，呢個對內陸圖係正確結果。
+    """
+    b = ACTIVE_BBOX
+    is_full = (
+        abs(b["lon_min"] - HK_BBOX["lon_min"]) < 1e-9
+        and abs(b["lon_max"] - HK_BBOX["lon_max"]) < 1e-9
+        and abs(b["lat_min"] - HK_BBOX["lat_min"]) < 1e-9
+        and abs(b["lat_max"] - HK_BBOX["lat_max"]) < 1e-9
+    )
+    if is_full:
+        # 全港視窗：維港種子可信，直接用高解析度 flood fill
+        return _compute_mask(
+            elements, [(lon, lat) for _, lon, lat in SEA_SEEDS], verbose=verbose
+        )
+    # LOD 視窗：用全港海陸圖做多數表決（見 `_compute_mask` docstring）
+    return _compute_mask(
+        elements, [], verbose=verbose, sea_ref=_global_sea_on_view(elements)
+    )
+
+
+
+def _nearest_free_label(
+    labels: np.ndarray, sx: int, sy: int, W: int, H: int, radius: int = 40
+) -> int:
+    """由 (sx, sy) 向外螺旋搵第一個非零 label。"""
+    for r in range(1, radius):
+        for dy in range(-r, r + 1):
+            for dx in (-r, r):
+                yy, xx = sy + dy, sx + dx
+                if 0 <= yy < H and 0 <= xx < W and labels[yy, xx] != 0:
+                    return int(labels[yy, xx])
+        for dx in range(-r + 1, r):
+            for dy in (-r, r):
+                yy, xx = sy + dy, sx + dx
+                if 0 <= yy < H and 0 <= xx < W and labels[yy, xx] != 0:
+                    return int(labels[yy, xx])
+    return 0
 
 
 # ---------------------------------------------------------------------------
@@ -470,6 +857,9 @@ def compose_style(
     water: np.ndarray | None = None,
     urban: np.ndarray | None = None,
     seed: int = 20260915,
+    vignette: float = 0.30,
+    sea_depth: float = 1.0,
+    terrain_amp: float = 1.0,
 ) -> Image.Image:
     """把陸地遮罩合成為《病港》風格底圖。
 
@@ -481,6 +871,19 @@ def compose_style(
     4. 建成區：淡染 + 細網線（做出參考圖 2 嘅市區密度感）
     5. 內陸水（水塘 / 湖）：實色 + 墨邊
     6. 紙：纖維條紋 + 顆粒 + 暗角
+
+    `vignette` 由 LOD 決定：暗角代表「陳年紙張嘅邊緣」，只對全港總覽
+    有意義。分區圖如果照用 0.30，位處畫面邊緣嘅海面會被壓到近乎黑色
+    （實測將軍澳圖嘅藍塘海峽就係咁）。
+
+    `sea_depth` 同理：水深漸變係**大尺度**特徵（香港水域幾十公里），
+    分區圖只覆蓋幾公里，照用會令整片海飽和成最深色。所以分區圖把
+    depth 壓向中間值（0.5），保留少許層次但唔會全黑。
+
+    `terrain_amp` 係陸地層嘅變化幅度。山勢同水彩斑駁都係大尺度特徵：
+    喺全港總覽睇得好靚，但喺街道級（2 km 視窗）同一組 noise 會變成
+    一團一團嘅「雲」。所以高縮放時把陸地層嘅變化壓向平均值 ——
+    紙紋（`paper` / `fibre`）喺之後才疊，唔受影響，仍然保留質感。
     """
     h, w = land.shape
     if water is None:
@@ -528,8 +931,13 @@ def compose_style(
     land_dist = ndimage.distance_transform_edt(land)
 
     # --- 海洋 ------------------------------------------------------------
-    depth = ndimage.gaussian_filter((~land).astype(np.float32), 26)
+    # 深度漸變嘅模糊半徑要**隨畫布闊度**縮放，否則分區圖嘅海水會喺離岸
+    # 幾十像素內就飽和成最深色（實測將軍澳圖整片海變黑）。
+    depth_blur = max(18.0, w * 0.013)
+    depth = ndimage.gaussian_filter((~land).astype(np.float32), depth_blur)
     depth = normalize(depth)  # 近岸低、遠岸高
+    if sea_depth != 1.0:
+        depth = np.clip(0.5 + (depth - 0.5) * sea_depth, 0.0, 1.0)
 
     sea_img = np.zeros((h, w, 3), np.float32)
     for i in range(3):
@@ -537,8 +945,9 @@ def compose_style(
             PALETTE["sea_shallow"][i] * (1 - depth) + PALETTE["sea_deep"][i] * depth
         )
 
-    # 大理石脈理：遠岸（深水）弱、近岸（淺水）強，做出參考圖嘅石紋
-    vein_gain = 26.0 + 88.0 * (1.0 - depth)
+    # 大理石脈理：遠岸（深水）弱、近岸（淺水）強，做出參考圖嘅石紋。
+    # 深水區嘅最低值唔可以太低，否則分區圖嘅外海會變成一塊平黑。
+    vein_gain = 34.0 + 70.0 * (1.0 - depth)
     sea_img += (veins * vein_gain)[..., None] * np.array([0.60, 0.86, 0.80], np.float32)
     sea_img += (fine * 20.0)[..., None] * np.array([0.52, 0.78, 0.72], np.float32)
     # 水流痕：極淡，只做質感
@@ -582,6 +991,12 @@ def compose_style(
     land_img += ((stain - 0.5) * 40.0)[..., None] * np.array([1.00, 0.95, 0.62], np.float32)
     land_img += ((land_blotch - 0.5) * 34.0)[..., None] * np.array([0.92, 0.90, 0.56], np.float32)
     land_img += ((land_fine - 0.5) * 16.0)[..., None] * np.array([0.90, 0.88, 0.60], np.float32)
+
+    # 高縮放時壓低陸地層變化幅度（見 docstring）：只保留局部質感，
+    # 去掉喺細視窗內唔合理嘅大尺度「雲團」
+    if terrain_amp < 1.0:
+        lmean = land_img.reshape(-1, 3).mean(axis=0)
+        land_img = lmean + (land_img - lmean) * terrain_amp
 
     # --- 建成區（市區淡染 + 細網線） ------------------------------------
     urban_soft = ndimage.gaussian_filter(urban.astype(np.float32), max(1.2, w / 900.0))
@@ -650,8 +1065,9 @@ def compose_style(
     # --- 紙質：纖維 + 顆粒 + 暗角 ---------------------------------------
     out += ((fibre - 0.5) * 11.0)[..., None]
     out += ((paper - 0.5) * 16.0)[..., None]
-    vig = _vignette(w, h)
-    out *= vig[..., None]
+    if vignette > 0:
+        vig = _vignette(w, h, strength=vignette)
+        out *= vig[..., None]
 
     return Image.fromarray(np.clip(out, 0, 255).astype(np.uint8), "RGB")
 
@@ -735,15 +1151,148 @@ def build_urban_mask(
     dot_np = (np.asarray(dots) > 127).astype(np.float32)
     sigma = max(2.5, W / 190.0)
     dens = ndimage.gaussian_filter(dot_np, sigma)
-    if dens.max() > 0:
-        dens = dens / dens.max()
-    # 門檻：取密度分佈上一個固定比例，令唔同解像度結果一致。
-    # 0.045 → 49% 陸地（過闊，全港建成區實際約 25%）；0.18 收窄到市區核心。
+    # 用 **98 百分位**而唔係 max 做正規化。
+    # 用 max 嘅話，只要有一個極密點（例如將軍澳某個大型屋苑），其餘地區
+    # 嘅相對密度就會被壓到好低 —— 實測分區尺度下市區只剩 3.7%，等於隱形。
+    # 百分位正規化令門檻跨尺度都穩定。
+    land_vals = dens[land]
+    ref = float(np.percentile(land_vals, 98)) if land_vals.size else 0.0
+    if ref > 0:
+        dens = np.clip(dens / ref, 0.0, 1.0)
+    # 門檻：0.045 → 49% 陸地（過闊，全港建成區實際約 25%）；0.18 收窄到市區核心。
     thr = 0.18
     urban = (dens > thr) & land & (~water)
     if n == 0:
         urban = np.zeros_like(land)
     return urban, thr
+
+
+# ---------------------------------------------------------------------------
+# 道路 / 建築圖層（LOD 分區級以上）
+#
+# 為何呢兩層要按 LOD 開關
+# ----------------------
+# 香港有 42,758 條道路同 133,361 個建築多邊形。喺全港尺度（0.70° 跨度），
+# 一幢 20 m 建築只佔 0.36 px —— 畫出嚟只會變成污點，反而破壞地圖。
+# 但同一批資料喺分區尺度（0.08° 跨度）就變成 3 px，街道尺度（0.03°）
+# 變成 8 px，自然呈現真實城市肌理。
+#
+# 所以「放大後顯示更加多細節」唔需要新資料來源 —— OSM cache 已經有齊，
+# 只需要按 bbox 跨度決定要唔要畫。
+# ---------------------------------------------------------------------------
+ROAD_CLASSES: dict[str, tuple[float, float]] = {
+    # 級別: (線寬倍數, 描邊倍數) —— 以 2048 畫布為基準
+    "motorway": (3.2, 4.6),
+    "trunk": (2.9, 4.2),
+    "primary": (2.5, 3.7),
+    "secondary": (2.1, 3.2),
+    "tertiary": (1.7, 2.6),
+    "unclassified": (1.3, 2.0),
+    "residential": (1.3, 2.0),
+    "service": (1.0, 1.6),
+    "living_street": (1.1, 1.7),
+    "pedestrian": (1.1, 1.7),
+}
+
+
+def _bbox_hits(lons: list[float], lats: list[float]) -> bool:
+    """要素嘅經緯 bbox 有冇同 ACTIVE_BBOX 相交（平價前置過濾）。"""
+    b = ACTIVE_BBOX
+    return not (
+        max(lons) < b["lon_min"]
+        or min(lons) > b["lon_max"]
+        or max(lats) < b["lat_min"]
+        or min(lats) > b["lat_max"]
+    )
+
+
+def draw_roads(
+    elements: list[dict[str, Any]], base: Image.Image, land: np.ndarray
+) -> tuple[Image.Image, int]:
+    """畫道路網：先描邊（casing）再填色，做出手繪地圖嘅雙線道路感。"""
+    W, H = CANVAS_W, CANVAS_H
+    scale = W / 2048.0
+    casing = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    fill = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    cd = ImageDraw.Draw(casing)
+    fd = ImageDraw.Draw(fill)
+
+    n = 0
+    # 一次過分桶（避免每個級別都掃 198,300 個要素）
+    buckets: dict[str, list[list[tuple[float, float]]]] = {k: [] for k in ROAD_CLASSES}
+    for el in elements:
+        if el.get("type") != "way":
+            continue
+        cls = (el.get("tags") or {}).get("highway")
+        if cls not in buckets:
+            continue
+        geom = el.get("geometry") or []
+        if len(geom) < 2:
+            continue
+        lons = [g["lon"] for g in geom]
+        lats = [g["lat"] for g in geom]
+        if not _bbox_hits(lons, lats):
+            continue
+        buckets[cls].append([(g["lon"], g["lat"]) for g in geom])
+
+    # 由細到大畫，令大路壓住細路
+    for cls in ("service", "living_street", "pedestrian", "residential",
+                "unclassified", "tertiary", "secondary", "primary",
+                "trunk", "motorway"):
+        w_fill, w_case = ROAD_CLASSES[cls]
+        wf = max(1, int(round(w_fill * scale)))
+        wc = max(2, int(round(w_case * scale)))
+        for lonlat in buckets[cls]:
+            pts = to_px_poly(lonlat)
+            cd.line(pts, fill=(*PALETTE["coast_line"], 150), width=wc, joint="curve")
+            fd.line(pts, fill=(*PALETTE["road"], 190), width=wf, joint="curve")
+            n += 1
+
+    out = Image.alpha_composite(base.convert("RGBA"), casing)
+    out = Image.alpha_composite(out, fill)
+    return out, n
+
+
+def draw_buildings(
+    elements: list[dict[str, Any]], base: Image.Image, land: np.ndarray
+) -> tuple[Image.Image, int]:
+    """畫建築物多邊形（分區級以上 LOD）。
+
+    風格：屋身用暖灰褐填色，加極細墨邊 —— 遠睇似手繪地圖嘅城市街廓，
+    近睇逐幢可辨。
+    """
+    W, H = CANVAS_W, CANVAS_H
+    layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    d = ImageDraw.Draw(layer)
+    scale = W / 2048.0
+    outline_w = 2 if scale >= 0.7 else 1
+
+    n = 0
+    for el in elements:
+        if el.get("type") != "way":
+            continue
+        tags = el.get("tags") or {}
+        if "building" not in tags:
+            continue
+        geom = el.get("geometry") or []
+        if len(geom) < 3:
+            continue
+        lons = [g["lon"] for g in geom]
+        lats = [g["lat"] for g in geom]
+        if not _bbox_hits(lons, lats):
+            continue
+        pts = to_px_poly([(g["lon"], g["lat"]) for g in geom])
+        if len(pts) < 3:
+            continue
+        # 用多邊形面積揀色調：大廈略深、屋仔略淺
+        xs = [p[0] for p in pts]
+        ys = [p[1] for p in pts]
+        area = (max(xs) - min(xs)) * (max(ys) - min(ys))
+        col = PALETTE["building_lg"] if area > 400 * scale * scale else PALETTE["building_sm"]
+        d.polygon(pts, fill=(*col, 235), outline=(*PALETTE["building_ink"], 150), width=outline_w)
+        n += 1
+
+    return Image.alpha_composite(base.convert("RGBA"), layer), n
 
 
 def build_green_mask(elements: list[dict[str, Any]], land: np.ndarray) -> np.ndarray:
@@ -761,6 +1310,14 @@ def build_green_mask(elements: list[dict[str, Any]], land: np.ndarray) -> np.nda
     結果亦更貼近參考圖（樹木集中山嶺、市區冇樹）。
 
     最終綠地 = 山野 ∪ OSM 綠地多邊形（公園 / 林地 / 花園）。
+
+    尺度陷阱
+    --------
+    距離門檻一定要用**固定地理距離**，唔可以用像素數。原本寫死
+    `max(6.0, W * 0.008)`，喺全港總覽（2048 px / 0.70°）等於 577 m，
+    效果良好；但喺街道級（1600 px / 0.02°）只等於 **16 m** —— 即係話
+    離馬路 16 m 就當係山野，結果成個將軍澳市中心都長滿樹。
+    改用 600 m 固定距離後，各尺度表現一致。
     """
     W, H = CANVAS_W, CANVAS_H
     dev = Image.new("L", (W, H), 0)
@@ -771,18 +1328,33 @@ def build_green_mask(elements: list[dict[str, Any]], land: np.ndarray) -> np.nda
             continue
         tags = el.get("tags") or {}
         pts: list[tuple[float, float]] | None = None
-        if tags.get("landuse") in developed_use:
+        if tags.get("landuse") in developed_use or "building" in tags:
+            geom = el.get("geometry") or []
+            if geom:
+                lons = [g["lon"] for g in geom]
+                lats = [g["lat"] for g in geom]
+                if not _bbox_hits(lons, lats):
+                    continue
             pts = to_px_poly(way_points(el))
-            if len(pts) >= 3:
+            if pts and len(pts) >= 3:
                 dd.polygon(pts, fill=255)
         elif tags.get("highway"):
+            geom = el.get("geometry") or []
+            if geom:
+                lons = [g["lon"] for g in geom]
+                lats = [g["lat"] for g in geom]
+                if not _bbox_hits(lons, lats):
+                    continue
             pts = to_px_poly(way_points(el))
-            if len(pts) >= 2:
+            if pts and len(pts) >= 2:
                 dd.line(pts, fill=255, width=max(2, W // 700))
 
     dev_np = np.asarray(dev) > 127
     dist = ndimage.distance_transform_edt(~dev_np)
-    wild = land & (dist > max(6.0, W * 0.008))
+    # 固定地理距離 → 換算成像素
+    m_per_px = (ACTIVE_BBOX["lon_max"] - ACTIVE_BBOX["lon_min"]) * 111320.0 * _COS_LAT0 / W
+    wild_px = WILD_DIST_M / max(m_per_px, 1e-6)
+    wild = land & (dist > wild_px)
 
     # OSM 綠地多邊形
     gm = Image.new("L", (W, H), 0)
@@ -878,14 +1450,16 @@ def _load_font(size: int):
     return ImageFont.load_default()
 
 
-def draw_labels(
-    base: Image.Image,
+def build_label_layer(
     crop: tuple[int, int, int, int] | None = None,
 ) -> tuple[Image.Image, int]:
-    """畫地區標籤（暗紅棕楷體 + 淡色描邊）。
+    """產生**獨立透明**標籤圖層（RGBA），同底圖共用同一 bbox。
 
-    等級 0（新界／九龍／香港島）用大字距、更大字級，做出參考圖
-    「北方領域」嗰種區域感；等級 1/2 用一般地名大小。
+    為何要拆層
+    ----------
+    前端 `#label-detail-layer` 會按縮放淡入／淡出街道名。要令呢個圖層
+    同底圖**像素級對齊**，兩者必須由同一次渲染、同一 bbox、同一畫布尺寸
+    產生 —— 舊版兩張圖由唔同設定產生，疊起上嚟必然走位。
     """
     W, H = CANVAS_W, CANVAS_H
     layer = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -910,7 +1484,6 @@ def draw_labels(
     # 等級 0 先畫（大區名優先霸位），然後 1、2
     for name, lon, lat, rank in sorted(REGION_LABELS, key=lambda t: t[3]):
         x, y = lonlat_to_px(lon, lat)
-        # 畫喺完整畫布，最後才裁剪；呢度只係判斷有冇落喺裁切窗內
         cx0, cy0, cx1, cy1 = crop if crop else (0, 0, W, H)
         if not (cx0 <= x <= cx1 and cy0 <= y <= cy1):
             continue
@@ -923,7 +1496,6 @@ def draw_labels(
             continue
         if bb[0] < 2 or bb[2] > W - 2 or bb[1] < 2 or bb[3] > H - 2:
             continue
-        # 碰撞檢測：同已畫標籤重疊就跳過（留 4px 呼吸位）
         pad = 4
         box = (bb[0] - pad, bb[1] - pad, bb[2] + pad, bb[3] + pad)
         if any(
@@ -936,6 +1508,15 @@ def draw_labels(
         d.text((x, y), txt, font=font, fill=(*ink, 255), anchor="mm")
         placed.append(box)
         n += 1
+    return layer, n
+
+
+def draw_labels(
+    base: Image.Image,
+    crop: tuple[int, int, int, int] | None = None,
+) -> tuple[Image.Image, int]:
+    """畫地區標籤（暗紅棕楷體 + 多層描邊光暈），合成到底圖上。"""
+    layer, n = build_label_layer(crop)
     return Image.alpha_composite(base.convert("RGBA"), layer), n
 
 
@@ -956,7 +1537,24 @@ def land_crop(land: np.ndarray, pad_ratio: float = 0.03) -> tuple[int, int, int,
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+def parse_bbox(text: str) -> dict[str, float] | None:
+    """解析 `--bbox lon_min,lon_max,lat_min,lat_max`。"""
+    if text.strip().lower() in ("", "none", "hk"):
+        return None
+    parts = [p.strip() for p in text.split(",")]
+    if len(parts) != 4:
+        raise ValueError("--bbox 需要 4 個數字：lon_min,lon_max,lat_min,lat_max")
+    lon_min, lon_max, lat_min, lat_max = (float(p) for p in parts)
+    return {
+        "lon_min": lon_min,
+        "lon_max": lon_max,
+        "lat_min": lat_min,
+        "lat_max": lat_max,
+    }
+
+
 def main() -> int:
+    global WILD_DIST_M
     ap = argparse.ArgumentParser(description="Render 《病港》-style HK map")
     ap.add_argument(
         "--width", type=int, default=2048, help="畫布闊度（px）；高度按真實長寬比自動計算"
@@ -965,29 +1563,90 @@ def main() -> int:
     ap.add_argument("--coords", type=Path, default=DEFAULT_COORDS)
     ap.add_argument("--seed", type=int, default=20260915)
     ap.add_argument(
+        "--bbox",
+        type=str,
+        default="hk",
+        help="經緯範圍 lon_min,lon_max,lat_min,lat_max；'hk' = 全港。"
+        "縮窄 bbox = 放大，會自動開啟更多細節圖層（道路 / 建築）。",
+    )
+    ap.add_argument(
+        "--lod",
+        choices=("auto", "overview", "region", "district", "street"),
+        default="auto",
+        help="細節層級；auto = 按 bbox 跨度自動判斷",
+    )
+    ap.add_argument(
+        "--labels",
+        choices=("base", "none", "only"),
+        default="base",
+        help="標籤處理：base = 合成到底圖；none = 唔畫；only = 只出透明標籤層",
+    )
+    ap.add_argument(
+        "--labels-out",
+        type=Path,
+        default=None,
+        help="額外輸出透明標籤層（同底圖同 bbox，保證像素對齊）",
+    )
+    ap.add_argument(
+        "--wild-dist",
+        type=float,
+        default=WILD_DIST_M,
+        help="郊野判定：離最近已開發像素幾多米當係山野（預設 300）",
+    )
+    ap.add_argument(
         "--crop",
-        choices=("none", "land"),
-        default="land",
-        help="裁切模式：land = 收緊到陸地範圍（去掉大片空白海面）",
+        choices=("auto", "none", "land"),
+        default="auto",
+        help="裁切模式：auto = 總覽裁到陸地範圍，分區級唔裁（保持座標對應）",
     )
     args = ap.parse_args()
+
+    WILD_DIST_M = args.wild_dist
 
     if not CACHE_PATH.exists():
         print(f"缺少 OSM cache：{CACHE_PATH}", file=sys.stderr)
         return 2
 
-    W, H = configure_canvas(args.width)
+    try:
+        bbox = parse_bbox(args.bbox)
+    except ValueError as exc:
+        print(f"參數錯誤：{exc}", file=sys.stderr)
+        return 2
+
+    W, H = configure_canvas(args.width, bbox)
     aspect = W / H
-    print(f"畫布：{W}×{H}（長寬比 {aspect:.3f}，已做等距圓柱校正）")
+    lon_span = ACTIVE_BBOX["lon_max"] - ACTIVE_BBOX["lon_min"]
+    lat_span = ACTIVE_BBOX["lat_max"] - ACTIVE_BBOX["lat_min"]
+
+    auto_lod, lod_roads, lod_buildings, lod_blabels = pick_lod(lon_span)
+    lod = auto_lod if args.lod == "auto" else args.lod
+    if args.lod != "auto":
+        # 手動指定時重算圖層開關
+        for max_span, name, roads, buildings, blabels in LOD_TIERS:
+            if name == lod:
+                lod_roads, lod_buildings, lod_blabels = roads, buildings, blabels
+                break
+
+    print(f"畫布：{W}×{H}（長寬比 {aspect:.3f}，等距圓柱校正）")
+    print(
+        f"bbox：{ACTIVE_BBOX['lon_min']:.4f}–{ACTIVE_BBOX['lon_max']:.4f}E / "
+        f"{ACTIVE_BBOX['lat_min']:.4f}–{ACTIVE_BBOX['lat_max']:.4f}N "
+        f"（跨度 {lon_span:.3f}°）"
+    )
+    print(
+        f"LOD：{lod}{'（自動）' if args.lod == 'auto' else '（指定）'}"
+        f"  道路={'開' if lod_roads else '關'} 建築={'開' if lod_buildings else '關'}"
+    )
+
     print(f"讀取 OSM cache：{CACHE_PATH}")
     data = json.loads(CACHE_PATH.read_text(encoding="utf-8"))
     elements = data.get("elements", [])
     print(f"  {len(elements):,} elements")
 
-    print("1/7 建立陸地遮罩…")
+    print("1/8 建立陸地遮罩…")
     land = build_land_mask(elements)
 
-    print("2/7 抽取內陸水體 / 市區密度…")
+    print("2/8 抽取內陸水體 / 市區密度…")
     min_water_px = max(20.0, (W * 0.0035) ** 2)
     water_polys = collect_polys(
         elements,
@@ -1003,32 +1662,83 @@ def main() -> int:
         f"{urban.sum() / max(1, land.sum()) * 100:.1f}%）"
     )
 
-    print("3/7 合成古地圖質感…")
-    img = compose_style(land, water, urban, seed=args.seed)
+    print("3/8 合成古地圖質感…")
+    # 暗角只對總覽有意義（代表陳年紙邊）；分區圖用弱暗角，避免邊緣海面變黑
+    vig_strength = 0.30 if lod == "overview" else 0.10
+    # 水深漸變係大尺度特徵，分區圖壓向中間值
+    sea_depth_c = 1.0 if lod == "overview" else 0.40
+    # 陸地地形／水彩同樣係大尺度；用冪律衰減，避免街道級出現「雲團」
+    span_ratio = lon_span / (HK_BBOX["lon_max"] - HK_BBOX["lon_min"])
+    terrain_amp = float(np.clip(span_ratio ** 0.42, 0.40, 1.0))
+    img = compose_style(
+        land, water, urban,
+        seed=args.seed, vignette=vig_strength, sea_depth=sea_depth_c,
+        terrain_amp=terrain_amp,
+    )
+    print(
+        f"  暗角：{vig_strength:.2f}　水深對比：{sea_depth_c:.2f}　"
+        f"地形幅度：{terrain_amp:.2f}（{lod}）"
+    )
 
-    print("4/7 散落手繪樹木…")
+    print("4/8 散落手繪樹木…")
     img, n_tree = scatter_icons(elements, img, land)
     print(f"  樹木圖示：{n_tree:,}")
 
-    crop = land_crop(land) if args.crop == "land" else (0, 0, W, H)
-    print(f"5/7 裁切窗：{crop}（{crop[2]-crop[0]}×{crop[3]-crop[1]}）")
+    n_road = 0
+    if lod_roads:
+        print("5/8 繪製道路網…")
+        img, n_road = draw_roads(elements, img, land)
+        print(f"  道路：{n_road:,} 段")
+    else:
+        print("5/8 道路網：本層級略過（亞像素）")
 
-    print("6/7 繪製地區標籤…")
-    img, n_label = draw_labels(img, crop)
+    n_bldg = 0
+    if lod_buildings:
+        print("6/8 繪製建築物…")
+        img, n_bldg = draw_buildings(elements, img, land)
+        print(f"  建築物：{n_bldg:,} 幢")
+    else:
+        print("6/8 建築物：本層級略過（亞像素）")
+
+    # 裁切：總覽裁到陸地範圍；分區級唔裁（保持 bbox 對應，前端要按 bbox 定位）
+    if args.crop == "auto":
+        do_crop = lod == "overview"
+    else:
+        do_crop = args.crop == "land"
+    crop = land_crop(land) if do_crop else (0, 0, W, H)
+    print(f"7/8 裁切窗：{crop}（{crop[2]-crop[0]}×{crop[3]-crop[1]}）")
+
+    print("8/8 處理標籤並儲存…")
+    label_layer, n_label = build_label_layer(crop)
     print(f"  標籤：{n_label:,}")
 
-    img = img.crop(crop)
-
-    print("7/7 儲存…")
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    img.convert("RGB").save(args.out, "PNG", optimize=True)
+
+    if args.labels == "only":
+        # 只出透明標籤層（前端 #label-detail-layer 用，按縮放淡入）
+        label_layer.crop(crop).save(args.out, "PNG", optimize=True)
+    else:
+        if args.labels == "base":
+            img = Image.alpha_composite(img.convert("RGBA"), label_layer)
+        img.crop(crop).convert("RGB").save(args.out, "PNG", optimize=True)
+        if args.labels_out:
+            args.labels_out.parent.mkdir(parents=True, exist_ok=True)
+            label_layer.crop(crop).save(args.labels_out, "PNG", optimize=True)
+            print(f"  {args.labels_out} ({args.labels_out.stat().st_size:,} bytes)")
+
     print(f"  {args.out} ({args.out.stat().st_size:,} bytes)")
 
     coords = {
         "canvas": {"width": W, "height": H, "aspect": round(aspect, 6)},
-        "bbox": HK_BBOX,
+        "bbox": dict(ACTIVE_BBOX),
+        "lod": lod,
+        "lod_layers": {
+            "roads": lod_roads,
+            "buildings": lod_buildings,
+            "building_labels": lod_blabels,
+        },
         "projection": "equirectangular",
-        "standard_parallel": round(LAT0, 6),
+        "standard_parallel": round(_LAT0, 6),
         "projection_note": (
             "x = (lon - lon_min) * px_per_deg_lon; "
             "y = (lat_max - lat) * px_per_deg_lon / cos(lat0); "
@@ -1037,16 +1747,25 @@ def main() -> int:
         "style": "binggang_handdrawn_parchment",
         "crop_box": list(crop),
         "output_size": [crop[2] - crop[0], crop[3] - crop[1]],
-        "layers": {"base": args.out.name},
-        "stats": {
-            "trees": n_tree,
+        "layers": {
+            "base": args.out.name,
+            **(
+                {"label_detail": args.labels_out.name}
+                if args.labels_out
+                else {}
+            ),
+        },
+        "stats": {            "trees": n_tree,
             "labels": n_label,
+            "roads": n_road,
+            "buildings": n_bldg,
             "water_bodies": len(water_polys),
             "water_px": int(water.sum()),
             "urban_px": int(urban.sum()),
             "urban_share_of_land": round(float(urban.sum()) / max(1, int(land.sum())), 4),
             "land_px": int(land.sum()),
             "land_share": round(float(land.mean()), 4),
+            "bbox_span_deg": round(lon_span, 6),
         },
     }
     args.coords.parent.mkdir(parents=True, exist_ok=True)

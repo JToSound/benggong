@@ -51,22 +51,49 @@ def test_basemap_coords_metadata_exists():
     assert 114.0 < bbox["lon_max"] < 115.0
     assert 22.0 < bbox["lat_min"] < 22.5
     assert 22.3 < bbox["lat_max"] < 23.0
-    # size_px must match the actual image
-    assert "size_px" in coords
-    assert coords["size_px"] in (1024, 2048, 4096)
+    # 畫布尺寸：`canvas.width` / `canvas.height`（2026-09-16 起改用非正方形，
+    # 見 test_basemap_png_dimensions 嘅說明）。
+    assert "canvas" in coords
+    assert coords["canvas"]["width"] in (1024, 1536, 2048, 4096)
 
 
 def test_basemap_png_dimensions():
-    """PNG should be a square at the declared size."""
+    """PNG 尺寸必須同 `canvas` metadata 一致，而且長寬比要正確。
+
+    為何唔再要求正方形
+    ------------------
+    舊底圖係 2048×2048 正方形，但覆蓋 0.6°×0.37°（長寬比 1.622）。
+    即係 1° 緯度佔 5535 px、1° 經度佔 3413 px —— 垂直被拉伸 1.62 倍。
+    前端再配 `preserveAspectRatio="slice"` 放入 1.622 比例嘅框，
+    結果底圖相對標記座標系被垂直拉伸 1.622 倍，邊緣位置偏差達
+    ±0.115°（約 12.8 km）。呢個係「標記唔喺真實位置」嘅主因之一。
+
+    正確做法：畫布高度 = 緯度跨度 × (闊度 / 經度跨度) ÷ cos(標準緯線)，
+    即長寬比 = 經度跨度 / (緯度跨度 / cos φ₀)。
+    """
     if not PNG_PATH.exists():
         pytest.skip("basemap.png not generated")
+    import math
+
     from PIL import Image
+
     with Image.open(PNG_PATH) as img:
         w, h = img.size
-    assert w == h, f"basemap should be square, got {w}x{h}"
     with COORDS_PATH.open(encoding="utf-8") as f:
         coords = json.load(f)
-    assert w == coords["size_px"], f"image size {w} != declared {coords['size_px']}"
+
+    assert w == coords["canvas"]["width"], "圖闊度同 metadata 唔一致"
+    assert h == coords["canvas"]["height"], "圖高度同 metadata 唔一致"
+
+    bbox = coords["bbox"]
+    lat0 = coords["standard_parallel"]
+    lon_span = bbox["lon_max"] - bbox["lon_min"]
+    lat_span = bbox["lat_max"] - bbox["lat_min"]
+    expected_h = lat_span * (w / lon_span) / math.cos(math.radians(lat0))
+    assert abs(h - expected_h) <= 2, (
+        f"畫布高度 {h} 唔符合等距圓柱校正（應該約 {expected_h:.0f}）"
+    )
+    assert w != h, "底圖唔應該係正方形：正方形代表垂直被拉伸"
 
 
 def test_basemap_png_file_size_reasonable():
