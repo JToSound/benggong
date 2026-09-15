@@ -99,17 +99,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.270469329366,
-          22.343124399176013
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0004",
         "name": "大本營",
-        "display_name": "大本營（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.457,
           "y": 0.811
@@ -143,7 +143,8 @@
         "description": "大本營是設於香港知專設計學院內的生還者據點，佔地極大有五幢大樓、七樓互通，中央有大營火，兩側有買賣武器食物等的倖存者攤位。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0004"
       }
     },
     {
@@ -151,17 +152,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10914213778896,
-          22.349922446021207
+          114.25311,
+          22.3059
         ]
       },
       "properties": {
         "id": "loc_0005",
         "name": "A大樓",
-        "display_name": "A大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "A大樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.515,
           "y": 0.571
@@ -174,7 +175,8 @@
         "description": "大舊帶M從大本營的A大樓沿樓梯行上去見首領。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0005"
       }
     },
     {
@@ -221,17 +223,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27521309224079,
-          22.278013160906383
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0007",
         "name": "圖書館",
-        "display_name": "圖書館（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "圖書館（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.792,
           "y": 0.366
@@ -250,7 +252,8 @@
         "description": "位於大本營七樓，採用落地大玻璃、可看到海景，是居民休息的地方，盡頭的房間為首領老賢的辦公室。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0007"
       }
     },
     {
@@ -258,17 +261,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20867704280155,
-          22.29439509422446
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0008",
         "name": "李惠利大樓",
-        "display_name": "李惠利大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "李惠利大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.681,
           "y": 0.413
@@ -284,7 +287,8 @@
         "description": "大本營其中一幢大樓，四樓為食物分配層，五樓儲放食物並有人看守。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0008"
       }
     },
     {
@@ -713,17 +717,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26527744716564,
-          22.325961814297703
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0022",
         "name": "大本營市場",
-        "display_name": "大本營市場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營市場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.312,
           "y": 0.331
@@ -736,7 +740,8 @@
         "description": "大本營內嘅市場採用以物易物方式交易，並非共享制。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0022"
       }
     },
     {
@@ -775,17 +780,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28192618448158,
-          22.327229457541772
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0024",
         "name": "大本營市集",
-        "display_name": "大本營市集（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營市集（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.778,
           "y": 0.366
@@ -800,7 +805,8 @@
         "description": "大本營內的市集，主角在此發現並換購了音樂盒。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0024"
       }
     },
     {
@@ -1255,17 +1261,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27001918822005,
-          22.34131086442359
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0038",
         "name": "大本營A樓七樓０４號活動室",
-        "display_name": "大本營A樓七樓０４號活動室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營A樓七樓０４號活動室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.445,
           "y": 0.761
@@ -1280,7 +1286,8 @@
         "description": "天明與老婆居住的私人宿舍，由活動室改裝而成，眾人一星期後在此聚餐。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0038"
       }
     },
     {
@@ -1319,17 +1326,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9266903181506,
-          22.33162642099641
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0040",
         "name": "A橦五樓",
-        "display_name": "A橦五樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "A橦五樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.211,
           "y": 0.519
@@ -1342,7 +1349,8 @@
         "description": "大本營內的一處建築，少佐約主角翌日到五樓見面，其角落房間成為商議機密之地。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0040"
       }
     },
     {
@@ -1350,17 +1358,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27838342107272,
-          22.327778400854505
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0041",
         "name": "大本營市集區",
-        "display_name": "大本營市集區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營市集區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.679,
           "y": 0.382
@@ -1373,7 +1381,8 @@
         "description": "大本營內的市集，攤販以「貢獻度」出售物品，包括槍械；沖涼等服務亦需以貢獻度支付。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0041"
       }
     },
     {
@@ -1381,17 +1390,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14969695582514,
-          22.283934882124054
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0042",
         "name": "露天泳池更衣室",
-        "display_name": "露天泳池更衣室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "露天泳池更衣室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.583,
           "y": 0.383
@@ -1404,7 +1413,8 @@
         "description": "大本營內原為露天泳池的更衣室，現改作付費淋浴用途，一粒貢獻度可沖一分鐘涼。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0042"
       }
     },
     {
@@ -1735,17 +1745,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09893293659876,
-          22.237252727550164
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0052",
         "name": "市集",
-        "display_name": "市集（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "市集（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.498,
           "y": 0.249
@@ -1765,7 +1775,8 @@
         "description": "大本營內的市集，物資可在此換取靚武器；阿登其後亦到市場替主角找武器。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0052"
       }
     },
     {
@@ -2343,17 +2354,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95972121766995,
-          22.273104562447546
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0070",
         "name": "醫療室大樓（D樓）",
-        "display_name": "醫療室大樓（D樓）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "醫療室大樓（D樓）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.266,
           "y": 0.352
@@ -2366,7 +2377,8 @@
         "description": "大本營內嘅醫療設施，成幢D樓嘅醫療研究室由Dr.D控制主導，最高最深處有面海房間。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0070"
       }
     },
     {
@@ -2374,17 +2386,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2752248035401,
-          22.33515156023499
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0071",
         "name": "大本營北門外街道",
-        "display_name": "大本營北門外街道（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營北門外街道（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.59,
           "y": 0.588
@@ -2397,7 +2409,8 @@
         "description": "有人喺大本營北門外嘅街道上放置咗數個裝住人頭嘅籃球袋。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0071"
       }
     },
     {
@@ -2470,17 +2483,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28148748760205,
-          22.33241752498665
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0074",
         "name": "圖書館（大本營內）",
-        "display_name": "圖書館（大本營內）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "圖書館（大本營內）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.766,
           "y": 0.512
@@ -2493,7 +2506,8 @@
         "description": "大本營內有圖書館，老賢日日坐喺圖書館自己間房。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0074"
       }
     },
     {
@@ -2501,17 +2515,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30030991073473,
-          22.259219920653084
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0075",
         "name": "D座大樓",
-        "display_name": "D座大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D座大樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.834,
           "y": 0.312
@@ -2524,7 +2538,8 @@
         "description": "大本營內的D座大樓（文中亦寫作D橦大樓），其六樓608號房為Dr.D約見M的地方。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0075"
       }
     },
     {
@@ -2732,17 +2747,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99686015106431,
-          22.221696993972685
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0082",
         "name": "李惠利大樓下小型垃圾站",
-        "display_name": "李惠利大樓下小型垃圾站（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "李惠利大樓下小型垃圾站（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.328,
           "y": 0.205
@@ -2755,7 +2770,8 @@
         "description": "該小型垃圾站被大本營當作垃圾場使用，臭氣熏天無人逗留，是黑商日落後進行交易的秘密地點。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0082"
       }
     },
     {
@@ -2986,17 +3002,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27309273670558,
-          22.33892740520333
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0090",
         "name": "大本營D橦隔離病房",
-        "display_name": "大本營D橦隔離病房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營D橦隔離病房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.531,
           "y": 0.694
@@ -3009,7 +3025,8 @@
         "description": "主角吞下D-1藥丸昏迷後醒來，發現自己身處大本營D橦的一間隔離病房。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0090"
       }
     },
     {
@@ -3050,17 +3067,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13697550926986,
-          22.332284390020597
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0092",
         "name": "D橦大樓",
-        "display_name": "D橦大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D橦大樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.562,
           "y": 0.521
@@ -3078,7 +3095,8 @@
         "description": "M養傷的隔離病房位於內部複雜的D橦大樓，他康復後跟隨馬姑娘從該大樓步出。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0092"
       }
     },
     {
@@ -3169,17 +3187,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14924834058137,
-          22.301408445868617
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0095",
         "name": "李惠利大樓小型垃圾場",
-        "display_name": "李惠利大樓小型垃圾場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "李惠利大樓小型垃圾場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.582,
           "y": 0.433
@@ -3194,7 +3212,8 @@
         "description": "黑商王達尼每到夜晚就會待在李惠利大樓的小型垃圾場中擺賣貨品。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0095"
       }
     },
     {
@@ -3202,17 +3221,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27277801937896,
-          22.33875307087816
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0096",
         "name": "大本營中央廣場",
-        "display_name": "大本營中央廣場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營中央廣場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.522,
           "y": 0.689
@@ -3225,7 +3244,8 @@
         "description": "大本營中央廣場是露天的地方，落雨時途人會被雨沾濕。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0096"
       }
     },
     {
@@ -3233,17 +3253,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04369558251315,
-          22.288065880827038
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0097",
         "name": "孤兒所",
-        "display_name": "孤兒所（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "孤兒所（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.406,
           "y": 0.394
@@ -3262,7 +3282,8 @@
         "description": "位於七樓圖書館其中一處玻璃房自修室，光線充足、空間足有幾個班房大，收容一群無家可歸的孩子。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0097"
       }
     },
     {
@@ -3301,17 +3322,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05624399176013,
-          22.433525635156784
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0099",
         "name": "孤兒所（七樓）",
-        "display_name": "孤兒所（七樓）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "孤兒所（七樓）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.427,
           "y": 0.81
@@ -3324,7 +3345,8 @@
         "description": "位於大本營七樓、由阿玲照顧一班小朋友的孤兒所，最終被議決改建為「董倫私人會所」。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0099"
       }
     },
     {
@@ -3394,17 +3416,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2689754711223,
-          22.33428294041352
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0102",
         "name": "大本營八樓",
-        "display_name": "大本營八樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營八樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.415,
           "y": 0.564
@@ -3422,7 +3444,8 @@
         "description": "大本營八樓是鋪有地毯、牆上裝燈架掛名畫的貴族樓層，入口設有一道鐵閘，由持伸縮棍的西裝看守把守，需邀請卡方可進入。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0102"
       }
     },
     {
@@ -3430,17 +3453,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2694492637522,
-          22.331112497138935
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0103",
         "name": "大本營九樓",
-        "display_name": "大本營九樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營九樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.429,
           "y": 0.475
@@ -3453,7 +3476,8 @@
         "description": "九樓與八樓同屬上層區域，平民需憑董倫製作的邀請卡方可進入。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0103"
       }
     },
     {
@@ -3640,17 +3664,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20674158846418,
-          22.34654287785153
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0109",
         "name": "董倫的大宅",
-        "display_name": "董倫的大宅（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "董倫的大宅（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.678,
           "y": 0.562
@@ -3665,7 +3689,8 @@
         "description": "董倫位於大本營上層的住所，佈置成歐洲古典格調，連第二層計約1500呎，主角在此救出被綁架的阿玲。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0109"
       }
     },
     {
@@ -3875,17 +3900,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0570579079881,
-          22.43465465018692
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0116",
         "name": "D大樓",
-        "display_name": "D大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D大樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.428,
           "y": 0.813
@@ -3898,7 +3923,8 @@
         "description": "大本營內嘅一座大樓，「我」步出時營中人都以猜疑不安嘅眼神望住佢。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0116"
       }
     },
     {
@@ -3906,17 +3932,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25465369649805,
-          22.402630998702982
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0117",
         "name": "拘留所",
-        "display_name": "拘留所（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "拘留所（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.758,
           "y": 0.722
@@ -3929,7 +3955,8 @@
         "description": "位於大本營A橦一樓，用嚟監禁喺營內犯法嘅人；「我」因攜帶病者身體入營嘅罪名被暫時收押，應該係第一人。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0117"
       }
     },
     {
@@ -3968,17 +3995,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22780086976425,
-          22.291624895094223
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0119",
         "name": "C座攝影大樓",
-        "display_name": "C座攝影大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C座攝影大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.713,
           "y": 0.405
@@ -3991,7 +4018,8 @@
         "description": "大本營內C座一樓嘅攝影大樓存放大量城市建築街道照片同病者照片，由賴三掌管，Dr.D指入面有人可以幫主角搜集情報。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0119"
       }
     },
     {
@@ -4431,17 +4459,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29536232547494,
-          22.378731021591516
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0133",
         "name": "D橦大樓醫療室",
-        "display_name": "D橦大樓醫療室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D橦大樓醫療室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.826,
           "y": 0.654
@@ -4454,7 +4482,8 @@
         "description": "主角原本猜測Dr.D工作室所在之處，但被老賢搖頭否定。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0133"
       }
     },
     {
@@ -4555,17 +4584,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2658515678645,
-          22.329638475623714
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0137",
         "name": "大本營南門",
-        "display_name": "大本營南門（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營南門（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.328,
           "y": 0.434
@@ -4578,7 +4607,8 @@
         "description": "學生出發的集合點，有職員看守，需以機關拉開沉厚鐵門並穿過充滿障礙物的滯留室才能步出營外。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0137"
       }
     },
     {
@@ -5251,17 +5281,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21530373083085,
-          22.391583848325322
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0158",
         "name": "工坊",
-        "display_name": "工坊（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "工坊（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.692,
           "y": 0.69
@@ -5280,7 +5310,8 @@
         "description": "大本營內的設施，分多層運作，包括頂層的病者陷阱設計室及木材加工部等部門。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0158"
       }
     },
     {
@@ -5352,17 +5383,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04884824902723,
-          22.22279236285954
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0161",
         "name": "紡織部",
-        "display_name": "紡織部（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "紡織部（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.415,
           "y": 0.208
@@ -5377,7 +5408,8 @@
         "description": "位於大本營一樓、被稱為女士聖地的部門，內設紡衣間，那位曾送饅頭給王達尼的女生在此工作。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0161"
       }
     },
     {
@@ -5416,17 +5448,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29117097734034,
-          22.38693694209201
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0163",
         "name": "C座大樓（C樓）",
-        "display_name": "C座大樓（C樓）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C座大樓（C樓）（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.819,
           "y": 0.677
@@ -5439,7 +5471,8 @@
         "description": "工坊所在的大樓，由工坊主管統一管理整幢C座，主角一行人今日在C樓耗了不少時間。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0163"
       }
     },
     {
@@ -5447,17 +5480,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06277454795148,
-          22.247365262836652
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0164",
         "name": "C橦",
-        "display_name": "C橦（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C橦（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.438,
           "y": 0.278
@@ -5474,7 +5507,8 @@
         "description": "大本營內的大工坊大樓，內有多間工坊房與休息室，氣氛熱鬧充滿活力。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0164"
       }
     },
     {
@@ -5546,17 +5580,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98650995651178,
-          22.401939383535513
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0167",
         "name": "D橦醫療大樓",
-        "display_name": "D橦醫療大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D橦醫療大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.311,
           "y": 0.72
@@ -5571,7 +5605,8 @@
         "description": "大本營內平靜、走廊冰冷冷的醫療大樓，與熱鬧的C橦形成對比。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0167"
       }
     },
     {
@@ -6199,17 +6234,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15512520027465,
-          22.224878423743036
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0187",
         "name": "會議室",
-        "display_name": "會議室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "會議室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.592,
           "y": 0.214
@@ -6224,7 +6259,8 @@
         "description": "大本營內有寬敞簡約的會議室，是今次商討抵禦不良人的會議場地。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0187"
       }
     },
     {
@@ -6263,17 +6299,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.96298970016022,
-          22.397228923476003
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0189",
         "name": "D部大樓",
-        "display_name": "D部大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D部大樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.272,
           "y": 0.706
@@ -6288,7 +6324,8 @@
         "description": "Dr.D隸屬D部大樓，據大樓的人說他這一個月來完全沒有走出過房間。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0189"
       }
     },
     {
@@ -6433,17 +6470,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01150423437858,
-          22.24491657129778
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0194",
         "name": "醫療大樓",
-        "display_name": "醫療大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "醫療大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.353,
           "y": 0.271
@@ -6460,7 +6497,8 @@
         "description": "醫療大樓係大本營內嘅醫護設施，少佐中毒後被送去治理；馬姑娘隸屬該處，平時甚少離開。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0194"
       }
     },
     {
@@ -6468,17 +6506,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25007782101167,
-          22.298070000762948
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0195",
         "name": "多媒體地下攝影棚",
-        "display_name": "多媒體地下攝影棚（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "多媒體地下攝影棚（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.75,
           "y": 0.423
@@ -6494,7 +6532,8 @@
         "description": "多媒體地下攝影棚係位於大本營外、掛住同名牌子嘅大型室內場地，與Dr.D同助手合照背面寫住嘅地方相符，內藏人類殘肢、血字同一名會說話嘅病者。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0195"
       }
     },
     {
@@ -6672,17 +6711,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02065598535134,
-          22.397318646524756
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0201",
         "name": "D橦大樓４０３號病房",
-        "display_name": "D橦大樓４０３號病房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D橦大樓４０３號病房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.368,
           "y": 0.707
@@ -6695,7 +6734,8 @@
         "description": "主角被送到D橦大樓403號病房，接受局部麻醉拔刀、包紮治理後被送上病床。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0201"
       }
     },
     {
@@ -6703,17 +6743,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92690180819409,
-          22.288256542305636
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0202",
         "name": "D橦大樓403號病房",
-        "display_name": "D橦大樓403號病房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D橦大樓403號病房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.212,
           "y": 0.395
@@ -6726,7 +6766,8 @@
         "description": "敘事者拔刀包紮後被送上病床，入住D橦大樓403號病房，並喺度以病人身份探望少佐。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0202"
       }
     },
     {
@@ -6949,17 +6990,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26050022888533,
-          22.344081521324483
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0209",
         "name": "大本營廣場",
-        "display_name": "大本營廣場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營廣場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.178,
           "y": 0.838
@@ -6977,7 +7018,8 @@
         "description": "大本營廣場係不良人貨車駛入後，與搜索隊爆發一百多人互相撕殺嘅戰場。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0209"
       }
     },
     {
@@ -7016,17 +7058,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05492378118562,
-          22.23310677500572
+          114.2506,
+          22.3077
         ]
       },
       "properties": {
         "id": "loc_0211",
         "name": "D橦三樓看護室",
-        "display_name": "D橦三樓看護室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D橦三樓看護室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.425,
           "y": 0.237
@@ -7039,7 +7081,8 @@
         "description": "M為避開克里絲娜追捕與馬姑娘，逃進大本營D橦三樓的看護室躲藏。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0211"
       }
     },
     {
@@ -7242,17 +7285,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.96847562371252,
-          22.23591062027924
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0218",
         "name": "D樓三樓（D橦大樓）",
-        "display_name": "D樓三樓（D橦大樓）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D樓三樓（D橦大樓）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.281,
           "y": 0.245
@@ -7265,7 +7308,8 @@
         "description": "D樓三樓的走廊及樓梯間被病變後的Dr.D一拳擦破摧毀，整座D橦大樓破裂了三份一。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0218"
       }
     },
     {
@@ -7273,17 +7317,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05984573128862,
-          22.416964255741206
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0219",
         "name": "李惠利飯堂",
-        "display_name": "李惠利飯堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "李惠利飯堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.433,
           "y": 0.763
@@ -7296,7 +7340,8 @@
         "description": "李惠利大樓內的飯堂，被不良人佔據為防線及指揮處，不破尚在此接見敘事者。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0219"
       }
     },
     {
@@ -7304,17 +7349,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25317326619363,
-          22.262861181048294
+          114.25355,
+          22.30613
         ]
       },
       "properties": {
         "id": "loc_0220",
         "name": "B橦大樓",
-        "display_name": "B橦大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "B橦大樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.755,
           "y": 0.322
@@ -7330,7 +7375,8 @@
         "description": "大本營四橦大樓之一，失去活動能力的Dr.D伏在地上不斷敲打其支柱結構及主力牆，企圖令大樓倒下。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0220"
       }
     },
     {
@@ -7383,17 +7429,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27941340505075,
-          22.32104039826047
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0222",
         "name": "大本營D橦大樓",
-        "display_name": "大本營D橦大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營D橦大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.708,
           "y": 0.193
@@ -7406,7 +7452,8 @@
         "description": "Dr.D失去活動能力後不斷敲打B橦及D橦大樓的支柱結構及主力牆企圖使大樓倒下；主角曾跑進D橦大樓躲避其攻擊。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0222"
       }
     },
     {
@@ -7414,17 +7461,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93129182879377,
-          22.3396005569543
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0223",
         "name": "D樓（D橦大樓）",
-        "display_name": "D樓（D橦大樓）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D樓（D橦大樓）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.219,
           "y": 0.542
@@ -7437,7 +7484,8 @@
         "description": "D樓三樓嘅走廊及樓梯間被一個肥大拳頭擦破，成座大樓破裂咗三份一，形成大缺口。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0223"
       }
     },
     {
@@ -7725,17 +7773,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26292030975814,
-          22.340108072022584
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0232",
         "name": "大本營（倖存區）",
-        "display_name": "大本營（倖存區）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營（倖存區）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.246,
           "y": 0.727
@@ -7748,7 +7796,8 @@
         "description": "大本營係故事中嘅倖存區基地，不良人抱怨呢個倖存區到處都係病者。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0232"
       }
     },
     {
@@ -8109,17 +8158,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02153398947127,
-          22.33534618905928
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0244",
         "name": "操場（斷頭台所在）",
-        "display_name": "操場（斷頭台所在）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "操場（斷頭台所在）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.369,
           "y": 0.53
@@ -8132,7 +8181,8 @@
         "description": "大本營內放置斷頭台的操場，是主角選擇放走一人之處。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0244"
       }
     },
     {
@@ -8551,17 +8601,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97990249485008,
-          22.285572327763788
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0257",
         "name": "操場",
-        "display_name": "操場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "操場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.3,
           "y": 0.387
@@ -8580,7 +8630,8 @@
         "description": "主角回到放置住斷頭台的操場，在此決定放走哪一名被俘者。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0257"
       }
     },
     {
@@ -15309,17 +15360,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27574475471123,
-          22.32503482871748
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0463",
         "name": "大本營七樓圖書館",
-        "display_name": "大本營七樓圖書館（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營七樓圖書館（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.605,
           "y": 0.305
@@ -15332,7 +15383,8 @@
         "description": "回憶場景中，大本營七樓嘅圖書館係老賢嘅房間，過去的滿天曾喺書房與老賢就Dr.D嘅問題對質。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0463"
       }
     },
     {
@@ -17717,17 +17769,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04917509727626,
-          22.38080586709392
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0537",
         "name": "C橦大樓",
-        "display_name": "C橦大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C橦大樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.415,
           "y": 0.659
@@ -17740,7 +17792,8 @@
         "description": "大本營內一座大樓，地下展覽中心用嚟教小朋友生活技能",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0537"
       }
     },
     {
@@ -17748,17 +17801,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26484142061494,
-          22.340701647974367
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0538",
         "name": "大本營圖書館",
-        "display_name": "大本營圖書館（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營圖書館（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.3,
           "y": 0.744
@@ -17773,7 +17826,8 @@
         "description": "位於七樓，阿玲喺度講哈利波特故事畀孤兒聽；少佐留低咗一份文件喺圖書館辦公室",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0538"
       }
     },
     {
@@ -17781,17 +17835,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27202841992829,
-          22.338682879377433
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0539",
         "name": "大本營活動室",
-        "display_name": "大本營活動室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營活動室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.501,
           "y": 0.687
@@ -17804,7 +17858,8 @@
         "description": "大舊喺度擔任導師教青年人防身術",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0539"
       }
     },
     {
@@ -17874,17 +17929,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.96181689173724,
-          22.309019951171127
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0542",
         "name": "C橦大廈",
-        "display_name": "C橦大廈（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C橦大廈（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.27,
           "y": 0.454
@@ -17897,7 +17952,8 @@
         "description": "大本營內的C橦大廈設有工坊，存放各種工具及材料。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0542"
       }
     },
     {
@@ -17905,17 +17961,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.218046692607,
-          22.35311882963302
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0543",
         "name": "領導人辦公室",
-        "display_name": "領導人辦公室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "領導人辦公室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.697,
           "y": 0.58
@@ -17928,7 +17984,8 @@
         "description": "大本營內設有領導人辦公室，由大舊暫時代理。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0543"
       }
     },
     {
@@ -19662,17 +19719,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2610808346685,
-          22.34296494239719
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0597",
         "name": "大本營C橦工坊",
-        "display_name": "大本營C橦工坊（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營C橦工坊（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.194,
           "y": 0.807
@@ -19687,7 +19744,8 @@
         "description": "瓦禮在大本營內交流及喝茶的工坊所在",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0597"
       }
     },
     {
@@ -20221,17 +20279,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26011722743573,
-          22.330093194476234
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0614",
         "name": "大本營圖書館禁書區",
-        "display_name": "大本營圖書館禁書區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營圖書館禁書區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.167,
           "y": 0.447
@@ -20244,7 +20302,8 @@
         "description": "圖書館設有禁書區，有欄杆和守衛阻隔一般人進入，只有修讀病學或醫學高級課程者方可進入，內藏Dr.D六樓實驗室及私人住宅的醫學、病學研究文章及論文",
         "confidence": 0.98,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0614"
       }
     },
     {
@@ -20252,17 +20311,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2824556725414,
-          22.34048382543679
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0615",
         "name": "大本營C橦攝影大樓",
-        "display_name": "大本營C橦攝影大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營C橦攝影大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.793,
           "y": 0.738
@@ -20275,7 +20334,8 @@
         "description": "大本營內有C橦攝影大樓，是賴三老師工作的主要地方，內有攝影器材租借室及儲片庫",
         "confidence": 0.97,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0615"
       }
     },
     {
@@ -20283,17 +20343,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02544975967041,
-          22.2077301060502
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0616",
         "name": "A005室攝影棚",
-        "display_name": "A005室攝影棚（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "A005室攝影棚（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.376,
           "y": 0.165
@@ -20308,7 +20368,8 @@
         "description": "位於A橦大樓內的攝影棚，僅一個入口位於大本營外圍，過去曾被Dr.D用來囚禁其第二任助手",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0616"
       }
     },
     {
@@ -22051,17 +22112,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26823693446251,
-          22.339434386205845
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0669",
         "name": "大本營天台",
-        "display_name": "大本營天台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營天台（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.395,
           "y": 0.708
@@ -22074,7 +22135,8 @@
         "description": "敘事者虛夢中出現嘅場景，係大本營嘅天台，敘事者生前經常喺嗰度睇風景。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0669"
       }
     },
     {
@@ -22433,17 +22495,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27188918135349,
-          22.319613679713132
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0681",
         "name": "大本營垃圾場",
-        "display_name": "大本營垃圾場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營垃圾場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.497,
           "y": 0.153
@@ -22458,7 +22520,8 @@
         "description": "大本營垃圾場有污渠口連接外面，王達尼從此返回大本營；旁邊平時有大本營街友瞓覺。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0681"
       }
     },
     {
@@ -22636,17 +22699,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2762280842298,
-          22.321125848783094
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0687",
         "name": "大本營九樓欄杆",
-        "display_name": "大本營九樓欄杆（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營九樓欄杆（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.618,
           "y": 0.196
@@ -22659,7 +22722,8 @@
         "description": "大本營內九樓欄杆，銘凱疑似現身觀望嘅位置",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0687"
       }
     },
     {
@@ -22765,17 +22829,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28235381857023,
-          22.319675097276264
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0691",
         "name": "大本營機關大閘",
-        "display_name": "大本營機關大閘（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營機關大閘（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.79,
           "y": 0.155
@@ -22788,7 +22852,8 @@
         "description": "大本營嘅機關大閘單憑小六一人之力冇可能及時打開，但余智海只需用手掌貼緊就令其扭曲變形破出大洞。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0691"
       }
     },
     {
@@ -23066,17 +23131,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26435618371863,
-          22.336308575570307
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0700",
         "name": "大本營C橦工坊大樓",
-        "display_name": "大本營C橦工坊大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營C橦工坊大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.286,
           "y": 0.621
@@ -23089,7 +23154,8 @@
         "description": "大本營內生產力最高的大樓，充滿鋸木及縫衣聲",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0700"
       }
     },
     {
@@ -23097,17 +23163,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28315835049973,
-          22.327069237811855
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0701",
         "name": "大本營D橦醫療大樓",
-        "display_name": "大本營D橦醫療大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營D橦醫療大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.812,
           "y": 0.362
@@ -23120,7 +23186,8 @@
         "description": "大本營內的醫療大樓，七樓設有圖書館及禁書區，收藏Dr.D生前研究筆記",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0701"
       }
     },
     {
@@ -23128,17 +23195,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27570241092546,
-          22.325866826886397
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0702",
         "name": "大本營展覽廳",
-        "display_name": "大本營展覽廳（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大本營展覽廳（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.604,
           "y": 0.328
@@ -23151,7 +23218,8 @@
         "description": "大本營內每星期對外開放一次的展覽廳，少佐會向遊客講解大本營歷史及黑色賢者事跡",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0702"
       }
     },
     {

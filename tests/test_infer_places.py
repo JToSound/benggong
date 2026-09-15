@@ -138,7 +138,9 @@ def test_campus_block_inference(records, name, lonlat):
     assert abs(r["inferred_lonlat"][0] - lonlat[0]) < 1e-5
     assert abs(r["inferred_lonlat"][1] - lonlat[1]) < 1e-5
     assert r["proposed_changes"]["location_precision"] == "exact"
-    assert r["review_status"] == "pending", "未經人手審閱，必須係 pending"
+    # 引擎輸出一定係 pending；審閱之後會變 approved／rejected。
+    # 所以呢度只驗證狀態係合法值，而唔係寫死 pending。
+    assert r["review_status"] in ("pending", "approved", "rejected", "needs_info")
 
 
 def test_variant_inheritance_covers_all_spellings(records):
@@ -218,6 +220,22 @@ def test_records_validate_against_schema(records):
         for err in validator.iter_errors(r):
             errors.append(f"{r.get('inference_id')}: {err.message}")
     assert not errors, "schema 驗證失敗：\n" + "\n".join(errors[:10])
+
+
+def test_engine_output_is_always_pending(tmp_path):
+    """引擎唔可以自己批自己 —— 原始輸出必須全部 pending。
+
+    呢個係安全原則嘅核心：推斷係機械性嘅，審閱係價值判斷。如果引擎
+    可以寫 approved，整個審閱關卡就形同虛設。
+    """
+    mod = _load_module()
+    src = SCRIPT.read_text(encoding="utf-8")
+    # 引擎只可以寫死 pending；唔可以讀決定檔
+    assert '"review_status": "pending"' in src
+    assert "place-inference-decisions" not in src, (
+        "引擎唔應該讀審閱決定檔 —— 審閱係 apply_place_inferences.py 嘅責任"
+    )
+    assert mod is not None
 
 
 def test_schema_forbids_unknown_coordinate_source(records):

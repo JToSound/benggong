@@ -18,7 +18,11 @@
     "review_status"
   ],
   "properties": {
-    "inference_id": { "type": "string", "pattern": "^inf_[0-9]{4}$" },
+    "inference_id": {
+      "description": "由 subject id 衍生嘅穩定 id（inf_<loc_id>），唔可以用序號 —— 公開資料嘅 inferred_from 會引用佢",
+      "type": "string",
+      "pattern": "^inf_[A-Za-z0-9_]+$"
+    },
     "entity_kind": {
       "description": "推斷對象類型。設計成通用：同一套證據鏈格式適用於地點／角色／事件／路線。",
       "enum": ["location", "character", "event", "route", "time_reference"]

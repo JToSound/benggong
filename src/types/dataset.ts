@@ -19,6 +19,8 @@ export type EventType =
   | "landmark";
 
 export type LocationPrecision =
+  /** 由 OSM 建築輪廓／已核實來源取得嘅精確座標（誤差 ~10 m） */
+  | "exact"
   | "district"
   | "approximate"
   | "fictional"

@@ -61,6 +61,11 @@ GENERIC_WORDS = [
     "體育館", "停車場", "車站", "地鐵站", "便利店", "超市", "餐廳", "工廠",
     "倉庫", "教堂", "廟", "橋", "隧道", "村", "邨", "苑", "閣", "樓", "座",
     "飯堂", "垃圾站", "垃圾場", "展覽中心", "病房", "隔離病房",
+    # 第二遍暴露嘅通用詞：呢啲做父項時會配對錯（例如「圖書館４號會議室」
+    # 配到「會議室」、「愛紗工坊」配到「工坊」）。加落嚟之後佢哋唔會再
+    # 被當成有識別性嘅父項。
+    "室", "廳", "堂", "房", "會議室", "辦公室", "工坊", "工作室",
+    "倉", "廠", "店", "鋪", "廊", "庭", "園", "間",
 ]
 
 # ---------------------------------------------------------------------------
@@ -99,6 +104,7 @@ RULES: dict[str, str] = {
     "R-CONTAIN": "名稱包含另一個**非模糊**地點名（例如「X 下小型垃圾站」→ X）",
     "R-ANCHOR-MEMBER": "描述指明係錨點嘅一部分（「大本營其中一幢大樓」）",
     "R-VARIANT-INHERIT": "同一實體嘅異體寫法繼承已推斷結果（跨 entity_kind 通用）",
+    "R-CONTAIN-RESOLVED": "第二遍：父項已解決 → 子項繼承父項座標（先解父、再解子）",
     "R-DISTRICT": "只可以確定到區域層級（同章出現區域名）",
     "R-NO-EVIDENCE": "證據不足，只列作待補",
 }
@@ -211,7 +217,7 @@ def is_vague(props: dict[str, Any]) -> bool:
 
 
 def is_candidate(props: dict[str, Any]) -> bool:
-    """推斷候選：名稱模糊，**或者**精度仍然係 fictional。
+    """推斷候選：名稱模糊，**或者**精度仍然係 fictional，**或者**已經係推斷產物。
 
     為何要包埋全部 fictional
     ------------------------
@@ -219,8 +225,24 @@ def is_candidate(props: dict[str, Any]) -> bool:
     係**組合式描述**，例如「李惠利大樓下小型垃圾站」—— 詞幹有 8 個字，
     唔算「模糊」，但佢係依附喺另一個地點之上，一樣可以推斷。
     fictional 精度（543 個）本身就係「座標任意指派」嘅標記。
+
+    ⚠️ 為何一定要包埋 `inferred_from`（管線冪等性）
+    ----------------------------------------------
+    `apply_place_inferences.py` 會把已批推斷寫入 `locations.geojson`，
+    令 `location_precision` 由 `fictional` 變成 `approximate`／`exact`。
+
+    如果候選集只睇 `fictional`，咁**重跑推斷就會失去已經套用嘅結果**
+    （實測：R-ANCHOR-MEMBER 由 45 條跌到 10 條、R-EXPLICIT 全消失），
+    因為嗰批地點已經唔再係 fictional。呢個係管線非冪等 —— 極危險，
+    因為重跑係日常操作。
+
+    加咗 `inferred_from` 之後，推斷 → 套用 → 再推斷會收斂到同一結果。
     """
-    return is_vague(props) or props.get("location_precision") == "fictional"
+    return (
+        is_vague(props)
+        or props.get("location_precision") == "fictional"
+        or bool(props.get("inferred_from"))
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -326,20 +348,33 @@ def infer(
     for anchor in ANCHORS:
         for nm in anchor["names"]:
             if "位於" in desc and nm in desc:
-                # 注意：呢條規則只證明「喺錨點範圍內」，證明唔到喺邊一幢
-                # 建築，所以唔應該出座標，信心亦唔可以太高（0.95 會令
-                # 審閱者以為已經精確定位）。
+                # 呢條規則只證明「喺錨點範圍內」，證明唔到喺邊一幢建築。
+                # 所以座標取**校園質心**（唔係任何單一建築），精度標
+                # `approximate` 而唔係 `exact`，信心亦唔可以太高。
+                blocks = anchor.get("campus_blocks") or {}
+                if blocks:
+                    xs = [p[0] for p in blocks.values()]
+                    ys = [p[1] for p in blocks.values()]
+                    pt = [round(sum(xs) / len(xs), 5), round(sum(ys) / len(ys), 5)]
+                else:
+                    pt = None
                 return _mk(
                     props, "R-EXPLICIT",
                     f"{anchor['prototype']} 範圍內（具體位置待考）",
-                    None, None, evidence + [{
+                    pt,
+                    "parent_containment" if pt else None,
+                    evidence + [{
                         "kind": "explicit_statement",
                         "chapter": props["chapters"][0] if props["chapters"] else None,
-                        "detail": f"描述明文：「{desc[:150]}」",
+                        "detail": (
+                            f"描述明文：「{desc[:150]}」"
+                            "；座標取校園 A/B/C/D 座質心（非任何單一建築）"
+                        ),
                         "refs": [],
                     }],
                     0.75,
-                    {"location_precision": "district", "merge_into": None},
+                    {"location_precision": "approximate", "merge_into": None,
+                     "set_lonlat": pt},
                 )
 
     # ---- R-CAMPUS-BLOCK：A/B/C/D 座 ----
@@ -409,25 +444,17 @@ def infer(
                 {"location_precision": "approximate", "merge_into": None,
                  "set_lonlat": [o["lon"], o["lat"]]},
             )
-        if parent_vague:
-            return _mk(
-                props, "R-CONTAIN", f"依附於「{parent}」（本身亦為模糊地點）",
-                None, None, evidence + [{
-                    "kind": "name_containment",
-                    "chapter": None,
-                    "detail": (
-                        f"名稱「{name}」包含有識別性嘅「{parent}」，但後者亦係模糊地點"
-                        " —— 必須先解決父項才可以定位子項"
-                    ),
-                    "refs": [],
-                }],
-                0.45,
-                {"location_precision": None, "merge_into": None},
-            )
 
     # ---- R-ANCHOR-MEMBER：描述或名稱指明係錨點一部分 ----
     for anchor in ANCHORS:
-        named_after_anchor = any(a in name for a in anchor["names"] if len(a) >= 2)
+        # 要求**前綴**匹配，唔可以只係「包含」。
+        # 實測假陽性：「不良人大本營」「康城大本營」—— 兩者都含「大本營」
+        # 但係**唔同**嘅據點（不良人係敵對組織；康城係另一個地區）。
+        # 要求 name 以錨點名開頭就唔會誤中。
+        named_after_anchor = any(
+            len(a) >= 2 and (name == a or name.startswith(a))
+            for a in anchor["names"]
+        )
         described_as_member = (
             "大本營其中一幢大樓" in desc
             or "大本營四橦大樓之一" in desc
@@ -697,6 +724,88 @@ def validate_against_schema(records: list[dict[str, Any]]) -> list[str]:
     return out
 
 
+def resolve_containment(
+    results: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+    all_names: list[str],
+) -> list[dict[str, Any]]:
+    """第二遍：父項已解決之後，重新處理依附關係。
+
+    為何需要第二遍
+    --------------
+    第一遍嘅 R-CONTAIN 對「D橦大樓醫療室」只能講「依附於『D橦大樓』，
+    但後者亦係模糊地點」—— 係一個**阻塞標記**，唔係真推斷。
+
+    但主 pass 已經解決咗「D橦大樓 = 校園 D 座」。既然父項有座標，子項
+    就可以繼承：醫療室喺 D 座入面。
+
+    呢個「先解父、再解子」嘅兩遍設計係必須嘅 —— 一遍做唔到，因為
+    處理子項嘅時候父項嘅答案仲未存在。實測有 16 條卡喺第一遍。
+
+    同名單一父項優先；多個父項候選時取最長（最具體）嗰個。
+    """
+    PRECISE_SOURCES = {"osm_way", "osm_relation", "external_verified"}
+    resolved: list[tuple[str, dict[str, Any]]] = []
+    for r in results:
+        if r["confidence"] < 0.80 or not r["inferred_lonlat"]:
+            continue
+        if r["coordinate_source"] not in PRECISE_SOURCES:
+            continue
+        for nm in r["subject_names"]:
+            resolved.append((nm, r))
+    # 長名優先，令「D橦大樓」贏過「大樓」
+    resolved.sort(key=lambda t: -len(t[0]))
+    if not resolved:
+        return []
+
+    covered = {i for r in results for i in r["subject_ids"]}
+    out: list[dict[str, Any]] = []
+    for props in candidates:
+        if props["id"] in covered:
+            continue
+        name = props["name"]
+        parent: tuple[str, dict[str, Any]] | None = None
+        for nm, r in resolved:
+            if nm != name and nm in name and _has_distinctive_stem(nm):
+                parent = (nm, r)
+                break
+        if parent is None:
+            continue
+        pname, pr = parent
+        out.append(
+            _mk(
+                props, "R-CONTAIN-RESOLVED",
+                f"{pr['inferred_prototype']} 內（依附於「{pname}」）",
+                list(pr["inferred_lonlat"]),
+                "parent_containment",
+                [
+                    {
+                        "kind": "name_containment",
+                        "chapter": None,
+                        "detail": (
+                            f"名稱「{name}」包含已解決嘅父項「{pname}」"
+                            f"（{pr['pattern']}，信心 {pr['confidence']}）"
+                        ),
+                        "refs": pr["subject_ids"][:3],
+                    },
+                    {
+                        "kind": "description_claim",
+                        "chapter": props["chapters"][0] if props["chapters"] else None,
+                        "detail": (props["description"] or "")[:200],
+                        "refs": [],
+                    },
+                ],
+                round(pr["confidence"] * 0.85, 2),
+                {
+                    "location_precision": "approximate",
+                    "merge_into": None,
+                    "set_lonlat": list(pr["inferred_lonlat"]),
+                },
+            )
+        )
+    return out
+
+
 # ---------------------------------------------------------------------------
 # 主流程
 # ---------------------------------------------------------------------------
@@ -741,6 +850,16 @@ def main() -> int:
     ]
     results.extend(inherited)
 
+    # 第二遍：父項已解決 → 重新處理依附關係（見 resolve_containment）
+    second = resolve_containment(results, vague, all_names)
+    if second:
+        superseded2 = {i for r in second for i in r["subject_ids"]}
+        results = [
+            r for r in results
+            if not (set(r["subject_ids"]) & superseded2 and r["confidence"] < 0.70)
+        ]
+        results.extend(second)
+
     # 補上 R-NO-EVIDENCE（證據不足但值得列出）
     covered = {i for r in results for i in r["subject_ids"]}
     for props in vague:
@@ -754,8 +873,28 @@ def main() -> int:
             )
         )
 
-    for i, r in enumerate(results, 1):
-        r["inference_id"] = f"inf_{i:04d}"
+    # 最終去重：每個 subject id 只保留最強嘅一條推斷。
+    # 各 pass 嘅 supersede 只清「弱過 0.70」嘅，兩個 ≥0.70 嘅規則同時命中
+    # （例如 R-ANCHOR-MEMBER 0.72 同 R-CONTAIN-RESOLVED 0.75）就會漏。
+    best_by_id: dict[str, dict[str, Any]] = {}
+    for r in results:
+        for sid in r["subject_ids"]:
+            prev = best_by_id.get(sid)
+            if prev is None or r["confidence"] > prev["confidence"]:
+                best_by_id[sid] = r
+    keep = {id(r) for r in best_by_id.values()}
+    results = [r for r in results if id(r) in keep]
+
+    # inference_id 必須**穩定**：由 subject id 衍生，唔可以用序號。
+    #
+    # 為何：`apply_place_inferences.py` 會把 inference_id 寫入公開資料嘅
+    # `inferred_from`。如果用 `inf_0001`、`inf_0002`… 呢類序號，每次重跑
+    # （規則改動、去重次序改變）都會令同一個 id 指向**唔同記錄** ——
+    # 實測：某次重跑之後 `inf_0042` 由「D橦三樓看護室」變成「大本營
+    # （倖存區）」，令已套用嘅審閱決定靜默地指向錯誤對象。
+    # 呢個令審計軌跡完全失效，比推斷錯更危險。
+    for r in results:
+        r["inference_id"] = f"inf_{r['subject_ids'][0]}"
 
     print("\n=== 推斷結果（按規則）===")
     for rule, n in Counter(r["pattern"] for r in results).most_common():

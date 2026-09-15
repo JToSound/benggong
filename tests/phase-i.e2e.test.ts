@@ -222,7 +222,9 @@ describe("Phase I 互動驗證（Playwright）", () => {
 
       const idsAt = async (): Promise<string> => {
         return page.evaluate(() =>
-          Array.from(document.querySelectorAll(".location-marker"))
+          // 用 [data-loc-id] 而唔係 .location-marker：聚合標記
+          // （.location-marker-cluster）都帶 data-loc-id
+          Array.from(document.querySelectorAll("[data-loc-id]"))
             .map((m) => m.getAttribute("data-loc-id") || "")
             .sort()
             .join(","),

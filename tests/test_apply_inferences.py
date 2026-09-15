@@ -1,0 +1,175 @@
+"""套用推斷管線嘅回歸測試（scripts/apply_place_inferences.py）。
+
+保護嘅關鍵行為：
+1. **冪等性** —— 推斷 → 套用 → 再推斷 → 再套用，結果必須完全相同。
+   呢個係最重要嘅一條：`apply` 會改 `locations.geojson`，如果候選集依賴
+   被改動嘅欄位（例如 `location_precision`），重跑就會失去已套用結果。
+   實測踩過：R-ANCHOR-MEMBER 由 45 條跌到 10 條。
+2. 只有 `approved` 會被套用，`pending`／`rejected` 一律唔動。
+3. 套用之後 `events.geojson` 嘅座標要同對應地點一致（傳播完整性）。
+4. 座標必須喺香港範圍內。
+"""
+
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+
+REPO = Path(__file__).resolve().parent.parent
+INFER = REPO / "scripts" / "infer_places.py"
+APPLY = REPO / "scripts" / "apply_place_inferences.py"
+LOCATIONS = REPO / "data" / "public" / "locations.geojson"
+EVENTS = REPO / "data" / "public" / "events.geojson"
+JSONL = REPO / "data" / "private" / "review" / "place-inference.jsonl"
+DECISIONS = REPO / "data" / "private" / "review" / "place-inference-decisions.json"
+
+
+def _run(script: Path) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(
+        [sys.executable, str(script)], cwd=str(REPO), capture_output=True, text=True
+    )
+
+
+@pytest.fixture(scope="module")
+def ready() -> None:
+    """跑完整管線（推斷 → 套用），令受測狀態一致。
+
+    ⚠️ 唔可以只跑 `infer`：`infer` 會重新編 inference_id，如果 `apply`
+    未跟住跑，`locations.geojson` 嘅 `inferred_from` 就會指向舊 id，
+    測試會見到「引用未批核推斷」嘅假失敗。
+    """
+    if not (REPO / "data" / "private" / "cache" / "osm-hk.json").exists():
+        pytest.skip("缺 OSM cache")
+    r = _run(INFER)
+    if r.returncode != 0:
+        pytest.skip(f"推斷引擎跑唔起：{r.stderr[-300:]}")
+    r2 = _run(APPLY)
+    if r2.returncode != 0:
+        pytest.skip(f"套用管線跑唔起：{r2.stderr[-300:]}")
+
+
+@pytest.fixture(scope="module")
+def locations(ready) -> dict:
+    return json.loads(LOCATIONS.read_text(encoding="utf-8"))
+
+
+def test_decisions_file_is_auditable():
+    """審閱決定必須有理由 —— 唔可以只寫 approve/reject。"""
+    d = json.loads(DECISIONS.read_text(encoding="utf-8"))
+    assert d["reviewed_by"]
+    assert d["rationale"], "每個規則層級決定都要有理由"
+    for rule, status in d["rule_decisions"].items():
+        if status in ("approved", "rejected"):
+            assert rule in d["rationale"], f"{rule} 缺理由"
+    for rid, ex in d.get("exceptions", {}).items():
+        assert ex.get("reason"), f"例外 {rid} 缺理由"
+
+
+def test_only_approved_are_applied(locations, ready):
+    """推斷出嚟嘅座標只可以嚟自已批核嘅條目。"""
+    records = {
+        r["inference_id"]: r
+        for r in (
+            json.loads(line)
+            for line in JSONL.read_text(encoding="utf-8").splitlines()
+            if line
+        )
+    }
+    for f in locations["features"]:
+        p = f["properties"]
+        src = p.get("inferred_from")
+        if not src:
+            continue
+        rec = records.get(src)
+        assert rec is not None, f"{p['id']} 引用咗唔存在嘅推斷 {src}"
+        assert rec["review_status"] == "approved", (
+            f"{p['id']} 引用咗未批核嘅推斷 {src}（{rec['review_status']}）"
+        )
+
+
+def test_applied_coordinates_match_inference(locations, ready):
+    records = {
+        r["inference_id"]: r
+        for r in (
+            json.loads(line)
+            for line in JSONL.read_text(encoding="utf-8").splitlines()
+            if line
+        )
+    }
+    for f in locations["features"]:
+        p = f["properties"]
+        src = p.get("inferred_from")
+        if not src:
+            continue
+        want = records[src]["inferred_lonlat"]
+        got = f["geometry"]["coordinates"]
+        assert abs(got[0] - want[0]) < 1e-6, f"{p['id']} lon 唔一致"
+        assert abs(got[1] - want[1]) < 1e-6, f"{p['id']} lat 唔一致"
+
+
+def test_event_coords_follow_location(locations, ready):
+    """事件座標必須同對應地點一致（否則驗證器會捉到）。"""
+    loc_by_id = {
+        f["properties"]["id"]: f["geometry"]["coordinates"]
+        for f in locations["features"]
+    }
+    ev = json.loads(EVENTS.read_text(encoding="utf-8"))
+    bad = []
+    for f in ev["features"]:
+        lid = f["properties"].get("location_id")
+        if not lid or lid not in loc_by_id:
+            continue
+        if f["geometry"]["coordinates"] != loc_by_id[lid]:
+            bad.append((f["properties"]["id"], lid))
+    assert not bad, f"{len(bad)} 條事件座標同地點唔一致：{bad[:5]}"
+
+
+def test_all_inferred_coordinates_in_hong_kong(locations, ready):
+    for f in locations["features"]:
+        if not f["properties"].get("inferred_from"):
+            continue
+        lon, lat = f["geometry"]["coordinates"]
+        assert 113.0 < lon < 115.0, f"{f['properties']['id']} lon 唔喺香港"
+        assert 22.0 < lat < 23.0, f"{f['properties']['id']} lat 唔喺香港"
+
+
+def test_pipeline_is_idempotent(ready):
+    """推斷 → 套用 → 再推斷 → 再套用，結果必須完全相同。
+
+    呢個測試保護一個實際踩過嘅嚴重缺陷：`apply` 會把
+    `location_precision` 由 `fictional` 改成 `approximate`，如果候選集
+    只睇 `fictional`，重跑就會令已套用嘅推斷消失（管線非冪等）。
+    """
+    before = LOCATIONS.read_text(encoding="utf-8")
+    r1 = _run(INFER)
+    assert r1.returncode == 0, r1.stderr[-500:]
+    r2 = _run(APPLY)
+    assert r2.returncode == 0, r2.stderr[-500:]
+    after = LOCATIONS.read_text(encoding="utf-8")
+    assert before == after, (
+        "管線唔冪等：重跑推斷＋套用之後 locations.geojson 改變咗。"
+        "通常係候選集依賴咗被 apply 改動嘅欄位。"
+    )
+
+
+def test_inference_count_stable_across_reruns(ready):
+    """推斷條數唔應該因為重跑而減少。"""
+    out1 = _run(INFER).stdout
+    out2 = _run(INFER).stdout
+
+    def substantive(text: str) -> int:
+        n = 0
+        for line in text.splitlines():
+            s = line.strip()
+            if s.startswith("R-") and "R-NO-EVIDENCE" not in s:
+                parts = s.split()
+                if len(parts) >= 2 and parts[1].isdigit():
+                    n += int(parts[1])
+        return n
+
+    assert substantive(out1) == substantive(out2), "重跑之後推斷條數改變"
+    assert substantive(out1) > 0, "應該有實質推斷"

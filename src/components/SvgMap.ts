@@ -366,6 +366,15 @@ export class SvgMap {
       if (t.classList.contains("event-marker")) {
         const id = t.getAttribute("data-event-id");
         if (id) this.app.setSelectedEvent(id);
+      } else if (
+        t.classList.contains("location-marker-cluster") ||
+        t.parentElement?.classList.contains("location-marker-cluster")
+      ) {
+        // 聚合標記：放大去拆開佢（而唔係選中單一地點）
+        const cluster =
+          t.closest(".location-marker-cluster") ?? t.parentElement!;
+        const cid = cluster.getAttribute("data-loc-id");
+        if (cid) this.zoomToLocation(cid);
       } else if (t.classList.contains("location-marker")) {
         const id = t.getAttribute("data-loc-id");
         if (id) this.app.setSelectedLocation(id);
@@ -473,6 +482,30 @@ export class SvgMap {
   private zoomBy(factor: number): void {
     this.view = this.scaledView(this.view, factor);
     this.render();
+  }
+
+  /**
+   * 放大並置中到指定地點 —— 聚合標記點擊時用。
+   *
+   * 為何要「放大」而唔係「選中」：聚合標記代表多個地點疊喺同一位置
+   * （例如 52 個「大本營內設施」共用校園質心座標）。放大係唯一可以
+   * 將佢哋拆開嘅方法；選中邊一個都係任意嘅。
+   */
+  private zoomToLocation(locId: string): void {
+    const loc = this.data.locations.features.find(
+      (l) => l.properties.id === locId,
+    );
+    if (!loc) return;
+    const raw = loc.geometry.coordinates as [number, number];
+    const { lon, lat } = resolveCoord(loc.properties.name, raw[0], raw[1]);
+    const { x, y } = lonlatToViewbox(lon, lat);
+    const target = this.scaledView(this.view, 2);
+    this.animateViewBox({
+      x: x - target.w / 2,
+      y: y - target.h / 2,
+      w: target.w,
+      h: target.h,
+    });
   }
 
   /**
@@ -764,36 +797,117 @@ export class SvgMap {
     }
 
     // Locations
+    //
+    // 標記聚合（marker aggregation）
+    // ----------------------------
+    // 地點推斷之後，52 個「大本營內設施」（市集、醫療室、圖書館、拘留所…）
+    // 共用同一個校園質心座標 —— 因為佢哋真係同一個校園。逐個畫會完全疊埋，
+    // 變成一大坨，比原本隨機散開更難睇。
+    //
+    // 做法：落喺同一個「畫面格」嘅標記合成一個，並顯示數量。格仔大細用
+    // 固定**畫面**尺寸定義（÷ viewScale），所以放大之後自然會分開顯示。
+    interface LocMarker {
+      x: number;
+      y: number;
+      active: boolean;
+      selected: boolean;
+      fictional: boolean;
+      id: string;
+      name: string;
+      first: number;
+    }
+    const markerBuf: LocMarker[] = [];
     for (const loc of locationsToShow) {
       const props = loc.properties;
       const raw = loc.geometry.coordinates as [number, number];
       const { lon, lat } = resolveCoord(props.name, raw[0], raw[1]);
       const { x, y } = lonlatToViewbox(lon, lat);
-      const active =
-        props.chapters.includes(cur) ||
-        (props.first_appearance <= cur && cur < props.first_appearance + 5);
-      const isSelected = this.app.selectedLocationId === props.id;
-      const r = this.markerR(active ? 0.005 : 0.002);
-      const fill = isSelected ? "#ffeb3b" : props.fictional ? "#9b59b6" : "#e67e22";
-      const el = document.createElementNS(SVG_NS, "circle");
-      el.setAttribute("cx", String(x));
-      el.setAttribute("cy", String(y));
-      el.setAttribute("r", String(r));
-      el.setAttribute("class", "location-marker");
-      el.setAttribute("fill", fill);
-      el.setAttribute("stroke", "#fff");
-      el.setAttribute("stroke-width", String(this.markerR(0.0008)));
-      el.setAttribute("opacity", String(active ? 0.9 : 0.45));
-      el.setAttribute("data-loc-id", props.id);
-      el.setAttribute("data-loc-name", props.name);
+      markerBuf.push({
+        x,
+        y,
+        active:
+          props.chapters.includes(cur) ||
+          (props.first_appearance <= cur && props.first_appearance + 5 > cur),
+        selected: this.app.selectedLocationId === props.id,
+        fictional: Boolean(props.fictional),
+        id: props.id,
+        name: props.name,
+        first: props.first_appearance,
+      });
+    }
+
+    const cell = this.markerR(0.008);
+    const groups = new Map<string, LocMarker[]>();
+    for (const m of markerBuf) {
+      const key = `${Math.round(m.x / cell)}:${Math.round(m.y / cell)}`;
+      const arr = groups.get(key);
+      if (arr) arr.push(m);
+      else groups.set(key, [m]);
+    }
+
+    for (const items of groups.values()) {
+      const head = items[0];
+      const anyActive = items.some((m) => m.active);
+      const anySelected = items.some((m) => m.selected);
+      const anyReal = items.some((m) => !m.fictional);
+      const r = this.markerR(anyActive ? 0.005 : 0.002);
+      const fill = anySelected ? "#ffeb3b" : anyReal ? "#e67e22" : "#9b59b6";
+
+      if (items.length === 1) {
+        const el = document.createElementNS(SVG_NS, "circle");
+        el.setAttribute("cx", String(head.x));
+        el.setAttribute("cy", String(head.y));
+        el.setAttribute("r", String(r));
+        el.setAttribute("class", "location-marker");
+        el.setAttribute("fill", fill);
+        el.setAttribute("stroke", "#fff");
+        el.setAttribute("stroke-width", String(this.markerR(0.0008)));
+        el.setAttribute("opacity", String(anyActive ? 0.9 : 0.45));
+        el.setAttribute("data-loc-id", head.id);
+        el.setAttribute("data-loc-name", head.name);
+        const titleEl = document.createElementNS(SVG_NS, "title");
+        // 虛構地點嘅座標係任意值（location_precision: fictional），
+        // tooltip 要講清楚，唔可以當成精確位置。
+        titleEl.textContent = head.fictional
+          ? `${head.name}（ch${head.first}・虛構座標，僅供參考）`
+          : `${head.name}（ch${head.first}）`;
+        el.appendChild(titleEl);
+        locLayer.appendChild(el);
+        continue;
+      }
+
+      // 聚合標記：一個圓 + 數量。tooltip 列出全部名稱，資訊唔會消失。
+      const g = document.createElementNS(SVG_NS, "g");
+      g.setAttribute("class", "location-marker-cluster");
+      g.setAttribute("data-loc-count", String(items.length));
+      // 保留 head 嘅 id，令現有查詢（[data-loc-id]）同點擊處理都搵得到
+      g.setAttribute("data-loc-id", head.id);
+      g.setAttribute("data-loc-name", head.name);
+      const c = document.createElementNS(SVG_NS, "circle");
+      c.setAttribute("cx", String(head.x));
+      c.setAttribute("cy", String(head.y));
+      c.setAttribute("r", String(r * 1.35));
+      c.setAttribute("fill", fill);
+      c.setAttribute("stroke", "#fff");
+      c.setAttribute("stroke-width", String(this.markerR(0.0008)));
+      c.setAttribute("opacity", String(anyActive ? 0.9 : 0.5));
+      g.appendChild(c);
+      const label = document.createElementNS(SVG_NS, "text");
+      label.setAttribute("x", String(head.x));
+      label.setAttribute("y", String(head.y));
+      label.setAttribute("text-anchor", "middle");
+      label.setAttribute("dominant-baseline", "central");
+      label.setAttribute("font-size", String(r * 1.5));
+      label.setAttribute("fill", "#fff");
+      label.setAttribute("pointer-events", "none");
+      label.textContent = String(items.length);
+      g.appendChild(label);
       const titleEl = document.createElementNS(SVG_NS, "title");
-      // 虛構地點嘅座標係任意值（location_precision: fictional），
-      // tooltip 要講清楚，唔可以當成精確位置。
-      titleEl.textContent = props.fictional
-        ? `${props.name}（ch${props.first_appearance}・虛構座標，僅供參考）`
-        : `${props.name}（ch${props.first_appearance}）`;
-      el.appendChild(titleEl);
-      locLayer.appendChild(el);
+      titleEl.textContent = `${items.length} 個地點喺同一位置：\n${items
+        .map((m) => `・${m.name}`)
+        .join("\n")}`;
+      g.appendChild(titleEl);
+      locLayer.appendChild(g);
     }
 
     // Events
