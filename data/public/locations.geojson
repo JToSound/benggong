@@ -1671,17 +1671,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2776396429389,
-          22.331155962462805
+          114.257059,
+          22.306854
         ]
       },
       "properties": {
         "id": "loc_0050",
         "name": "將軍澳中心",
-        "display_name": "將軍澳中心（參考位置）",
-        "location_type": "district",
+        "display_name": "將軍澳中心（推斷位置）",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.713,
           "y": 0.409
@@ -1699,7 +1699,8 @@
         "description": "故事中大本營指示的新人搜索地點，與大本營距離很近，該區商場的病者基本上已被殺絕。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0050"
       }
     },
     {
@@ -2449,17 +2450,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26471467154956,
-          22.31339597161822
+          114.262,
+          22.317
         ]
       },
       "properties": {
         "id": "loc_0073",
         "name": "尚德商場",
-        "display_name": "尚德商場（參考位置）",
+        "display_name": "尚德商場（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "district",
         "story_position": {
           "x": 0.691,
           "y": 0.361
@@ -2475,7 +2476,8 @@
         "description": "尚德商場係香港真實商場，故事中少佐所屬嘅不良人小隊喺嗰度同八隻舌女血戰，少佐重傷垂死時被老賢救起。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0073"
       }
     },
     {
@@ -6775,17 +6777,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265,
-          22.3165
+          114.251587,
+          22.305878
         ]
       },
       "properties": {
         "id": "loc_0203",
         "name": "彩明商場",
-        "display_name": "彩明商場（參考位置）",
-        "location_type": "district",
+        "display_name": "彩明商場（推斷位置）",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "district",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.692,
           "y": 0.369
@@ -6801,7 +6803,8 @@
         "description": "彩明商場（香港真實地名）附近居住了一隻對結婚有欲望的病腦，需要定期送女人給牠。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0203"
       }
     },
     {
@@ -7967,17 +7970,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262,
-          22.314
+          114.262869,
+          22.309186
         ]
       },
       "properties": {
         "id": "loc_0238",
         "name": "將軍澳廣場",
-        "display_name": "將軍澳廣場（參考位置）",
-        "location_type": "district",
+        "display_name": "將軍澳廣場（推斷位置）",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "district",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.687,
           "y": 0.362
@@ -7995,7 +7998,8 @@
         "description": "主角與公仔透過破掉的玻璃大門進入將軍澳廣場（將軍澳商場），其二樓據稱是唯一物資仍然齊備的地方，亦是病童盤踞之處。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0238"
       }
     },
     {
@@ -8408,17 +8412,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.00101304646373,
-          22.261287289234758
+          114.262278,
+          22.303734
         ]
       },
       "properties": {
         "id": "loc_0251",
         "name": "員工室（保安室）",
-        "display_name": "員工室（保安室）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "員工室（保安室）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.335,
           "y": 0.318
@@ -8431,7 +8435,8 @@
         "description": "位於走火通道附近的隱密員工室，內裡實為放滿監視器的保安室，靠公司後備電源運作。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0251"
       }
     },
     {
@@ -8964,17 +8969,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0666903181506,
-          22.254546845197222
+          114.262,
+          22.317
         ]
       },
       "properties": {
         "id": "loc_0268",
         "name": "停車場",
-        "display_name": "停車場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "停車場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.444,
           "y": 0.299
@@ -8987,7 +8992,8 @@
         "description": "王白蛋帶主角與白魂到尚德商場隔壁的停車場設置捕獸陷阱，並登上其四樓天台觀察城市動靜。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0268"
       }
     },
     {
@@ -9881,17 +9887,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89579995422294,
-          22.418713855191882
+          114.252813,
+          22.323648
         ]
       },
       "properties": {
         "id": "loc_0296",
         "name": "寶康路",
-        "display_name": "寶康路（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "寶康路（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.16,
           "y": 0.768
@@ -9906,7 +9912,8 @@
         "description": "寶康路是前往寶琳途中的道路，喪伯最終被病翼帶到寶康路方向並慘死於該處馬路上。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0296"
       }
     },
     {
@@ -9985,17 +9992,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03041657129778,
-          22.40616010528725
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0299",
         "name": "紫線區",
-        "display_name": "紫線區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "紫線區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.384,
           "y": 0.732
@@ -10008,7 +10015,8 @@
         "description": "據喪伯哀求時所述，寶琳的倖存區位處「紫線區」，是其中最好的超大型倖存區之一。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0299"
       }
     },
     {
@@ -10747,17 +10755,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97153261615931,
-          22.27189703974975
+          114.261922,
+          22.310688
         ]
       },
       "properties": {
         "id": "loc_0323",
         "name": "富康花園",
-        "display_name": "富康花園（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "富康花園（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.286,
           "y": 0.348
@@ -10770,7 +10778,8 @@
         "description": "富康花園是鄰近酒店天台可望到的屋苑，銘凱指該處似乎有很多病者。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0323"
       }
     },
     {
@@ -10976,17 +10985,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26009224078737,
-          22.31882227054246
+          114.253191,
+          22.307262
         ]
       },
       "properties": {
         "id": "loc_0330",
         "name": "彩明苑",
-        "display_name": "彩明苑（參考位置）",
-        "location_type": "district",
+        "display_name": "彩明苑（推斷位置）",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.683,
           "y": 0.375
@@ -10999,7 +11008,8 @@
         "description": "主角與銘凱前往彩明苑附近調查，該處有一間社區教會堂。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0330"
       }
     },
     {
@@ -11007,17 +11017,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26754177157244,
-          22.28014408331426
+          114.265,
+          22.3165
         ]
       },
       "properties": {
         "id": "loc_0331",
         "name": "社區教會堂",
-        "display_name": "社區教會堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "社區教會堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.779,
           "y": 0.372
@@ -11030,7 +11040,8 @@
         "description": "彩明苑附近有一間可容納數十人的社區教會堂，雪白牆身頂上有十字架，主角踢開其殘舊木門後發現內裡無人。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0331"
       }
     },
     {
@@ -11412,17 +11423,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19848065918974,
-          22.209214274814983
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0343",
         "name": "祭品存放室",
-        "display_name": "祭品存放室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "祭品存放室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.664,
           "y": 0.169
@@ -11435,7 +11446,8 @@
         "description": "擺放多個棺木的房間，被組織稱為祭品存放室，寶琳公主被囚於此處的棺木中。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0343"
       }
     },
     {
@@ -11729,17 +11741,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95410711833371,
-          22.258629243915465
+          114.256699,
+          22.308317
         ]
       },
       "properties": {
         "id": "loc_0353",
         "name": "唐明苑",
-        "display_name": "唐明苑（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "唐明苑（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.257,
           "y": 0.31
@@ -11752,7 +11764,8 @@
         "description": "追逐神秘男子的途中，眾人一直追到唐明苑一帶，再往前便是大本營。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0353"
       }
     },
     {
@@ -12033,17 +12046,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06606225680933,
-          22.360894827191576
+          114.256993,
+          22.320372
         ]
       },
       "properties": {
         "id": "loc_0362",
         "name": "運亨路",
-        "display_name": "運亨路（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "運亨路（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.443,
           "y": 0.603
@@ -12056,7 +12069,8 @@
         "description": "運亨路一帶被寶琳倖存區的人用金屬板圍封住，是該倖存區的邊境地方。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0362"
       }
     },
     {
@@ -12361,17 +12375,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9011641107805,
-          22.30211875333791
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0372",
         "name": "皇宮",
-        "display_name": "皇宮（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "皇宮（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.169,
           "y": 0.435
@@ -12394,7 +12408,8 @@
         "description": "皇宮位於寶琳地鐵站對上相連的商場之上，規模很大，國王平日居於宮內。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0372"
       }
     },
     {
@@ -12564,17 +12579,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23983197528038,
-          22.327806477454796
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0378",
         "name": "寶琳地鐵站",
-        "display_name": "寶琳地鐵站（參考位置）",
+        "display_name": "寶琳地鐵站（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "district",
         "story_position": {
           "x": 0.65,
           "y": 0.399
@@ -12587,7 +12602,8 @@
         "description": "皇室儀仗隊的隆重歡響樂從寶琳地鐵站那邊奏起，該處亦為國王出遊隊伍的方向。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0378"
       }
     },
     {
@@ -12628,17 +12644,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26346985580224,
-          22.31863094529641
+          114.257701,
+          22.318657
         ]
       },
       "properties": {
         "id": "loc_0380",
         "name": "寶康公園",
-        "display_name": "寶康公園（參考位置）",
-        "location_type": "district",
+        "display_name": "寶康公園（推斷位置）",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.689,
           "y": 0.375
@@ -12664,7 +12680,8 @@
         "description": "「白鯨」率隊失蹤後，有人在寶康公園發現幾乎全隊病獵公會成員的殘骸。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0380"
       }
     },
     {
@@ -12944,17 +12961,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93407324330511,
-          22.245058632791636
+          114.253231,
+          22.322133
         ]
       },
       "properties": {
         "id": "loc_0389",
         "name": "陶樂路",
-        "display_name": "陶樂路（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "陶樂路（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.223,
           "y": 0.272
@@ -12967,7 +12984,8 @@
         "description": "主角與王達尼從地下渠道走出寶琳倖存區外的出口位置大約在陶樂路一帶。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0389"
       }
     },
     {
@@ -13006,17 +13024,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92770290684366,
-          22.430093728541998
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0391",
         "name": "木球會",
-        "display_name": "木球會（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "木球會（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.213,
           "y": 0.8
@@ -13029,7 +13047,8 @@
         "description": "寶琳倖存區內設有木球會，玩一次需要百幾艾幣。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0391"
       }
     },
     {
@@ -13099,17 +13118,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08798672465095,
-          22.299954184786753
+          114.248681,
+          22.324338
         ]
       },
       "properties": {
         "id": "loc_0394",
         "name": "康林樓",
-        "display_name": "康林樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "康林樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.48,
           "y": 0.428
@@ -13126,7 +13145,8 @@
         "description": "主角到達康林樓，只見一群孔武有力的村民正站守在大堂外；此前三把怪聲亦曾提及康林樓的供應確認。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0394"
       }
     },
     {
@@ -13196,17 +13216,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08439780270085,
-          22.316007133592734
+          114.2729,
+          22.3166
         ]
       },
       "properties": {
         "id": "loc_0397",
         "name": "希望塔",
-        "display_name": "希望塔（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "希望塔（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.474,
           "y": 0.474
@@ -13225,7 +13245,8 @@
         "description": "位於坑口、白鯨所在的塔；北賢稱到該處可以更接近所有真相，但敘事者從未聽過這地方。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0397"
       }
     },
     {
@@ -13268,17 +13289,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26193724727246,
-          22.31970370794232
+          114.2729,
+          22.3166
         ]
       },
       "properties": {
         "id": "loc_0399",
         "name": "病獵公會",
-        "display_name": "病獵公會（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "病獵公會（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.218,
           "y": 0.156
@@ -13311,7 +13332,8 @@
         "description": "主角翌日前往病獵公會，把有關坑口希望塔及白鯨未死的情報告知他們。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0399"
       }
     },
     {
@@ -13397,17 +13419,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19343053330282,
-          22.411278057526513
+          114.2729,
+          22.3166
         ]
       },
       "properties": {
         "id": "loc_0402",
         "name": "「希望塔」",
-        "display_name": "「希望塔」（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "「希望塔」（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.656,
           "y": 0.747
@@ -13422,7 +13444,8 @@
         "description": "位於坑口的建築，區內被抓走的孩童都被帶到那裡。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0402"
       }
     },
     {
@@ -13461,17 +13484,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25987537193866,
-          22.3304605554284
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0404",
         "name": "小型倖存區",
-        "display_name": "小型倖存區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "小型倖存區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.161,
           "y": 0.457
@@ -13486,7 +13509,8 @@
         "description": "故事場景之一是一個鄰近寶琳、四周被樹林包圍的小型倖存區，居民專注於木材加工工作。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0404"
       }
     },
     {
@@ -13683,17 +13707,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03644083314259,
-          22.213079842832073
+          114.257841,
+          22.315475
         ]
       },
       "properties": {
         "id": "loc_0411",
         "name": "靈康路",
-        "display_name": "靈康路（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "靈康路（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.394,
           "y": 0.18
@@ -13706,7 +13730,8 @@
         "description": "通往靈實協會禮拜堂的彎路，途中草叢藏有斷腳舌女，三人亦在此遇上病者襲擊。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0411"
       }
     },
     {
@@ -13714,17 +13739,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25963593499657,
-          22.315934676127263
+          114.253033,
+          22.325113
         ]
       },
       "properties": {
         "id": "loc_0412",
         "name": "寶翠公園",
-        "display_name": "寶翠公園（參考位置）",
-        "location_type": "district",
+        "display_name": "寶翠公園（推斷位置）",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.683,
           "y": 0.367
@@ -13737,7 +13762,8 @@
         "description": "奎斯提醒可能途經之處，該處特別多病童出沒。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0412"
       }
     },
     {
@@ -14299,17 +14325,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16312977798123,
-          22.3603415350576
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0430",
         "name": "邱子文學院",
-        "display_name": "邱子文學院（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "邱子文學院（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.605,
           "y": 0.601
@@ -14322,7 +14348,8 @@
         "description": "主角等人沿通往邱子文學院的大直路逃跑，寶琳倖存區守衛追兵因不敢靠近附近的寶康公園而停下，眾人得以甩掉追兵。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0430"
       }
     },
     {
@@ -15139,17 +15166,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91653879606316,
-          22.27707854581521
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0456",
         "name": "疊翠軒會所",
-        "display_name": "疊翠軒會所（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "疊翠軒會所（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.194,
           "y": 0.363
@@ -15164,7 +15191,8 @@
         "description": "疊翠軒嘅會所係艾寶琳倖存區嘅醫院同知識寶庫，內有大量醫療設備以及發電、淨水、食物安檢等專業設施，兵防密佈。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0456"
       }
     },
     {
@@ -15423,17 +15451,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9987763790341,
-          22.21930811779965
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0465",
         "name": "迎賓廳",
-        "display_name": "迎賓廳（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "迎賓廳（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.331,
           "y": 0.198
@@ -15446,7 +15474,8 @@
         "description": "國王設宴的迎賓廳內飯桌坐滿賓客，對面一列是掌控艾寶琳倖存區行政、財富、外交、文化、軍隊大權的達官貴人。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0465"
       }
     },
     {
@@ -16063,17 +16092,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16284779125658,
-          22.40226089112688
+          114.262278,
+          22.303734
         ]
       },
       "properties": {
         "id": "loc_0484",
         "name": "會所保安室",
-        "display_name": "會所保安室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "會所保安室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.605,
           "y": 0.721
@@ -16086,7 +16115,8 @@
         "description": "牆邊貼滿寫著「試著拯救她」紙張的保安室，其監控畫面實時顯示Sona被困的房間。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0484"
       }
     },
     {
@@ -16239,17 +16269,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08452597848478,
-          22.430366636148623
+          114.262278,
+          22.303734
         ]
       },
       "properties": {
         "id": "loc_0489",
         "name": "保安室",
-        "display_name": "保安室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "保安室（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.474,
           "y": 0.801
@@ -16266,7 +16296,8 @@
         "description": "位於倖存區出入口左近，面積約一間課室大，存放閉路電視畫面硬碟。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0489"
       }
     },
     {
@@ -16761,17 +16792,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29118379491874,
-          22.438565079728388
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0505",
         "name": "張沛松中學",
-        "display_name": "張沛松中學（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "張沛松中學（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.819,
           "y": 0.824
@@ -16784,7 +16815,8 @@
         "description": "敘事者前往寶琳路線中提及嘅中學。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0505"
       }
     },
     {
@@ -16823,17 +16855,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23868352025636,
-          22.327698809796292
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0507",
         "name": "寶琳村",
-        "display_name": "寶琳村（參考位置）",
+        "display_name": "寶琳村（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "district",
         "story_position": {
           "x": 0.648,
           "y": 0.399
@@ -16848,7 +16880,8 @@
         "description": "寶琳倖存區嘅範圍終點。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0507"
       }
     },
     {
@@ -16918,17 +16951,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1955518425269,
-          22.351870183871213
+          114.255844,
+          22.325773
         ]
       },
       "properties": {
         "id": "loc_0510",
         "name": "寶林邨",
-        "display_name": "寶林邨（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "寶林邨（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.659,
           "y": 0.577
@@ -16941,7 +16974,8 @@
         "description": "寶琳倖存區偏西的平民區，主角首次踏入，街道車水馬龍，民宅亮著火光。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0510"
       }
     },
     {
@@ -16980,17 +17014,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27363653009841,
-          22.311281719691767
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0512",
         "name": "下水道通道",
-        "display_name": "下水道通道（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "下水道通道（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.789,
           "y": 0.461
@@ -17003,7 +17037,8 @@
         "description": "王達尼耗時三個月研究渠務處地圖所發現，可自由往返大本營與寶琳倖存區的地下通道。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0512"
       }
     },
     {
@@ -17042,17 +17077,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20651728084229,
-          22.233802128633553
+          114.24885,
+          22.322493
         ]
       },
       "properties": {
         "id": "loc_0514",
         "name": "翠林新城",
-        "display_name": "翠林新城（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "翠林新城（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.678,
           "y": 0.239
@@ -17069,7 +17104,8 @@
         "description": "翠林邨嘅食市中心位置，地鋪有燒海鮮店、狗肉店同高級西餐廳",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0514"
       }
     },
     {
@@ -17454,17 +17490,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08976195925841,
-          22.236931219958798
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0527",
         "name": "哈姆雷特雜貨店",
-        "display_name": "哈姆雷特雜貨店（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "哈姆雷特雜貨店（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.483,
           "y": 0.248
@@ -17479,7 +17515,8 @@
         "description": "艾寶琳倖存區內一間名為哈姆雷特的雜貨店，肌肉惡漢從中步出",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0527"
       }
     },
     {
@@ -17614,17 +17651,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29778484779125,
-          22.283534866865033
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0532",
         "name": "地下渠道／下水道",
-        "display_name": "地下渠道／下水道（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "地下渠道／下水道（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.83,
           "y": 0.382
@@ -17637,7 +17674,8 @@
         "description": "主角一行人從地下渠道返回艾寶琳倖存區的路徑。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0532"
       }
     },
     {
@@ -17645,17 +17683,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94757656214236,
-          22.37092511635004
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0533",
         "name": "倖存邊境",
-        "display_name": "倖存邊境（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "倖存邊境（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.246,
           "y": 0.631
@@ -17668,7 +17706,8 @@
         "description": "艾寶琳倖存區的邊境地帶，圍牆曾被病者突破。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0533"
       }
     },
     {
@@ -17676,17 +17715,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18297138933394,
-          22.25608335240711
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0534",
         "name": "「哈姆雷特」雜貨店",
-        "display_name": "「哈姆雷特」雜貨店（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "「哈姆雷特」雜貨店（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.638,
           "y": 0.303
@@ -17699,7 +17738,8 @@
         "description": "艾寶琳倖存區內的雜貨店，商品齊全，曾遭舞者破壞，王達尼從中取得天拿水水槍。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0534"
       }
     },
     {
@@ -18179,17 +18219,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2435985351339,
-          22.34582883192187
+          114.274015,
+          22.281868
         ]
       },
       "properties": {
         "id": "loc_0550",
         "name": "仁興工業大廈",
-        "display_name": "仁興工業大廈（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "仁興工業大廈（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.739,
           "y": 0.56
@@ -18202,7 +18242,8 @@
         "description": "位於將軍澳工業邨，被改裝成監獄，專門容納罪犯，稱為「不法者之獄」。",
         "confidence": 0.97,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0550"
       }
     },
     {
@@ -20410,17 +20451,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27585397116044,
-          22.342389448386356
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0618",
         "name": "翠林村",
-        "display_name": "翠林村（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "翠林村（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.793,
           "y": 0.55
@@ -20439,7 +20480,8 @@
         "description": "艾寶琳倖存區的附屬領地，三腦被殺後由艾寶琳士兵佔據。",
         "confidence": 0.97,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0618"
       }
     },
     {
@@ -20447,17 +20489,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26561355001145,
-          22.31058924238956
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0619",
         "name": "新都城商場",
-        "display_name": "新都城商場（參考位置）",
+        "display_name": "新都城商場（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "district",
         "story_position": {
           "x": 0.693,
           "y": 0.353
@@ -20472,7 +20514,8 @@
         "description": "艾寶琳倖存區內的商場，設有敘事者等人熟悉的烤串店。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0619"
       }
     },
     {
@@ -21079,17 +21122,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91683360036622,
-          22.35559742885481
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0637",
         "name": "哈姆雷特雜房店",
-        "display_name": "哈姆雷特雜房店（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "哈姆雷特雜房店（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.195,
           "y": 0.587
@@ -21102,7 +21145,8 @@
         "description": "我喺離開艾寶琳前一晚到訪哈姆雷特雜房店",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0637"
       }
     },
     {
@@ -21209,17 +21253,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19500709544518,
-          22.354849736781873
+          114.266163,
+          22.323163
         ]
       },
       "properties": {
         "id": "loc_0641",
         "name": "影業路",
-        "display_name": "影業路（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "影業路（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.658,
           "y": 0.585
@@ -21232,7 +21276,8 @@
         "description": "坑口區內一條街道，路牌有寫該路名，作為角色們導航地點。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0641"
       }
     },
     {
@@ -21540,17 +21585,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27802401007096,
-          22.320983154039826
+          114.268266,
+          22.317326
         ]
       },
       "properties": {
         "id": "loc_0651",
         "name": "坑口體育館",
-        "display_name": "坑口體育館（參考位置）",
-        "location_type": "district",
+        "display_name": "坑口體育館（推斷位置）",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.713,
           "y": 0.381
@@ -21565,7 +21610,8 @@
         "description": "奎斯同賴桑將北賢引到大樓外嘅坑口體育館內嘅籃球場拖延佢",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0651"
       }
     },
     {
@@ -21573,17 +21619,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26206225680933,
-          22.362285534447242
+          114.266074,
+          22.376917
         ]
       },
       "properties": {
         "id": "loc_0652",
         "name": "室內體育館",
-        "display_name": "室內體育館（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "室內體育館（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.77,
           "y": 0.607
@@ -21596,7 +21642,8 @@
         "description": "巨型閃電光柱衝破咗室內體育館嘅天花板阻隔，直貫到九霄雲層。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0652"
       }
     },
     {
@@ -21796,17 +21843,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14080796520943,
-          22.207864690623328
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0659",
         "name": "生命之牆",
-        "display_name": "生命之牆（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "生命之牆（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.568,
           "y": 0.165
@@ -21821,7 +21868,8 @@
         "description": "用嚟出入邊境嘅設施，艾寶琳公民需持有相關身份證",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0659"
       }
     },
     {
@@ -21955,17 +22003,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26989308766309,
-          22.31556498054475
+          114.2729,
+          22.3166
         ]
       },
       "properties": {
         "id": "loc_0664",
         "name": "坑口村",
-        "display_name": "坑口村（參考位置）",
+        "display_name": "坑口村（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "district",
         "story_position": {
           "x": 0.7,
           "y": 0.366
@@ -21978,7 +22026,8 @@
         "description": "Nosyag發現配鎖店嘅地方，並繪製咗坑口政府大樓嘅地圖",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0664"
       }
     },
     {
@@ -22430,17 +22479,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27405621423668,
-          22.31965685511559
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0679",
         "name": "政府大樓",
-        "display_name": "政府大樓（參考位置）",
+        "display_name": "政府大樓（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "district",
         "story_position": {
           "x": 0.707,
           "y": 0.377
@@ -22456,7 +22505,8 @@
         "description": "艾寶琳內有政府大樓，最頂層盡頭設有一間改裝過的實驗室，余智海曾於該處進行研究",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0679"
       }
     },
     {
@@ -22892,17 +22942,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.96307942320897,
-          22.296716678110933
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0693",
         "name": "翠林",
-        "display_name": "翠林（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "翠林（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.272,
           "y": 0.419
@@ -22933,7 +22983,8 @@
         "description": "翠林村係艾寶琳嘅附屬區域，出產鮮甜蘋果同水產",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0693"
       }
     },
     {
@@ -23227,17 +23278,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04567589837491,
-          22.424923437857633
+          114.194284,
+          22.468961
         ]
       },
       "properties": {
         "id": "loc_0703",
         "name": "七樓圖書館禁書區",
-        "display_name": "七樓圖書館禁書區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "七樓圖書館禁書區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.409,
           "y": 0.785
@@ -23250,7 +23301,8 @@
         "description": "大本營D橦醫療大樓七樓圖書館內的核心禁區，需有病學高級證明書或特許人員方可進入，收藏Dr.D生前文件",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0703"
       }
     },
     {
@@ -23293,17 +23345,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07541908903639,
-          22.419121347371632
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0705",
         "name": "力霸健身",
-        "display_name": "力霸健身（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "力霸健身（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.459,
           "y": 0.769
@@ -23321,7 +23373,8 @@
         "description": "力霸健身係艾寶琳一帶嘅一間合辦健身室，設有樓上健身場地，提供會員制、健身奶粉同埋私人教練服務。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0705"
       }
     },
     {
@@ -23329,17 +23382,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09959945067521,
-          22.320672732127868
+          114.2415,
+          22.3229
         ]
       },
       "properties": {
         "id": "loc_0706",
         "name": "力學健身室",
-        "display_name": "力學健身室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "力學健身室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.499,
           "y": 0.488
@@ -23355,7 +23408,8 @@
         "description": "力學健身室係艾寶琳一帶另一間健身學院，由胡師傅開辦，曾經係當地唯一嘅健身學院。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0706"
       }
     },
     {

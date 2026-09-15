@@ -1,0 +1,238 @@
+"""公開資料一致性測試（正規化 + 引用完整性）。
+
+保護嘅關鍵行為，全部係實際踩過嘅缺陷：
+
+1. **時間線排序** —— `date_label` 寫住「按章節先後」，但實測有 41 個
+   逆序對（index 15 係 ch3、index 16 係 ch1）。前端照陣列次序顯示，
+   用戶會見到時間倒流。
+2. **路線座標同 waypoint 一致** —— 地點推斷改咗座標之後，路線幾何
+   冇跟住更新，出現「真-真」線段長 37.5 km 嘅荒謬結果（「皇宮」同
+   「新都城商場」明明喺同一個座標，路線畫成相距 37 km）。
+3. **路線精度值合法** —— route.schema.json 只允許
+   `reference`／`approximate`／`fictional`，唔可以自己發明新值。
+4. **角色合併之後冇斷鏈** —— 被合併嘅名要入 canonical 嘅 aliases，
+   而且唔可以再有引用指向唔存在嘅角色。
+"""
+
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+
+REPO = Path(__file__).resolve().parent.parent
+PUBLIC = REPO / "data" / "public"
+NORMALIZE = REPO / "scripts" / "normalize_public_data.py"
+MERGE = REPO / "scripts" / "merge_characters.py"
+
+
+def _load(name: str):
+    return json.loads((PUBLIC / name).read_text(encoding="utf-8"))
+
+
+@pytest.fixture(scope="module")
+def timeline() -> list[dict]:
+    return _load("timeline.json")
+
+
+@pytest.fixture(scope="module")
+def events() -> list[dict]:
+    return _load("events.geojson")["features"]
+
+
+@pytest.fixture(scope="module")
+def locations() -> list[dict]:
+    return _load("locations.geojson")["features"]
+
+
+@pytest.fixture(scope="module")
+def routes() -> list[dict]:
+    return _load("routes.geojson")["features"]
+
+
+@pytest.fixture(scope="module")
+def characters() -> list[dict]:
+    return _load("characters.json")
+
+
+# ---------------------------------------------------------------------------
+# 1. 時間線
+# ---------------------------------------------------------------------------
+def test_timeline_is_chronological(timeline):
+    """時間線必須按章節遞增 —— 唔可以有逆序對。
+
+    `date_label` 明寫「按章節先後」，所以呢個係資料自己嘅承諾。
+    """
+    seq = [
+        int(t["date_sort"][2:])
+        for t in timeline
+        if isinstance(t.get("date_sort"), str) and t["date_sort"].startswith("ch")
+    ]
+    inversions = [(i, seq[i], seq[i + 1]) for i in range(len(seq) - 1) if seq[i] > seq[i + 1]]
+    assert not inversions, (
+        f"時間線有 {len(inversions)} 個逆序對（index, 前, 後）：{inversions[:5]}"
+    )
+
+
+def test_timeline_ids_unique(timeline):
+    ids = [t["id"] for t in timeline]
+    assert len(ids) == len(set(ids)), "時間線有重複 id"
+
+
+def test_timeline_event_refs_resolve(timeline, events):
+    ev_ids = {e["properties"]["id"] for e in events}
+    missing = [t["id"] for t in timeline if t.get("event_id") not in ev_ids]
+    assert not missing, f"{len(missing)} 條時間線指向唔存在嘅事件：{missing[:3]}"
+
+
+def test_timeline_chapter_matches_event(timeline, events):
+    by_id = {e["properties"]["id"]: e["properties"] for e in events}
+    bad = [
+        t["id"]
+        for t in timeline
+        if t.get("event_id") in by_id
+        and t.get("chapter") != by_id[t["event_id"]].get("chapter")
+    ]
+    assert not bad, f"{len(bad)} 條時間線嘅章節同事件唔一致：{bad[:3]}"
+
+
+# ---------------------------------------------------------------------------
+# 2. 路線座標 ↔ waypoint 一致（引用完整性）
+# ---------------------------------------------------------------------------
+def test_route_coords_match_waypoint_locations(routes, locations):
+    """路線幾何每個點必須等於對應 waypoint 嘅地點座標。
+
+    呢個測試保護一個實際踩過嘅缺陷：地點推斷改咗座標之後，路線幾何
+    冇跟住更新。因為驗證器只檢查 events 同 location 一致，所以呢個
+    缺陷**唔會報錯** —— 但前端會照樣畫出假線（實測出現 37.5 km 嘅
+    「真-真」線段）。
+    """
+    loc_coords = {
+        f["properties"]["id"]: f["geometry"]["coordinates"] for f in locations
+    }
+    bad: list[tuple[str, int]] = []
+    for f in routes:
+        wps = f["properties"].get("waypoints") or []
+        coords = f["geometry"]["coordinates"]
+        for i, w in enumerate(wps):
+            if i >= len(coords):
+                break
+            lid = w.get("location_id")
+            if not lid or lid not in loc_coords:
+                continue
+            if coords[i] != loc_coords[lid]:
+                bad.append((f["properties"]["id"], i))
+    assert not bad, (
+        f"{len(bad)} 個路線點同地點座標唔一致（路線幾何係舊嘅）：{bad[:5]}"
+    )
+
+
+def test_route_segments_are_plausible(routes, locations):
+    """真-真線段唔應該長過 8 km。
+
+    角色係喺將軍澳活動嘅人，唔會一步跨 37 km。呢個檢查會捉到
+    「座標更新唔完整」造成嘅假線段。
+    """
+    import math
+
+    prec = {
+        f["properties"]["id"]: f["properties"]["location_precision"]
+        for f in locations
+    }
+
+    def dist(a, b):
+        return math.hypot(
+            (b[0] - a[0]) * 111320 * 0.9247, (b[1] - a[1]) * 110570
+        )
+
+    bad: list[tuple[str, float]] = []
+    for f in routes:
+        wps = f["properties"].get("waypoints") or []
+        coords = f["geometry"]["coordinates"]
+        for i in range(min(len(coords), len(wps)) - 1):
+            a = prec.get(wps[i].get("location_id"), "fictional")
+            b = prec.get(wps[i + 1].get("location_id"), "fictional")
+            if a == "fictional" or b == "fictional":
+                continue
+            d = dist(coords[i], coords[i + 1])
+            if d > 8000:
+                bad.append((f["properties"]["id"], d))
+    assert not bad, f"{len(bad)} 段真-真線段過長：{[(i, f'{d:.0f}m') for i, d in bad[:5]]}"
+
+
+def test_route_precision_in_schema_enum(routes):
+    allowed = {"reference", "approximate", "fictional"}
+    bad = [f["properties"]["id"] for f in routes if f["properties"].get("precision") not in allowed]
+    assert not bad, f"路線精度值唔合法：{bad[:5]}"
+
+
+def test_route_real_fraction_present(routes):
+    """每條有 waypoint 嘅路線都要有 real_waypoint_fraction（正規化產物）。"""
+    missing = [
+        f["properties"]["id"]
+        for f in routes
+        if (f["properties"].get("waypoints") or [])
+        and "real_waypoint_fraction" not in f["properties"]
+    ]
+    assert not missing, f"{len(missing)} 條路線缺 real_waypoint_fraction：{missing[:3]}"
+
+
+# ---------------------------------------------------------------------------
+# 3. 角色合併完整性
+# ---------------------------------------------------------------------------
+def test_no_duplicate_character_names(characters):
+    names = [c["name"] for c in characters]
+    dup = {n for n in names if names.count(n) > 1}
+    assert not dup, f"角色名重複：{dup}"
+
+
+def test_character_ids_unique(characters):
+    ids = [c["id"] for c in characters]
+    assert len(ids) == len(set(ids)), "角色 id 重複"
+
+
+def test_merged_names_preserved_as_aliases(characters):
+    """被合併嘅名要保留喺 canonical 嘅 aliases（可追溯）。
+
+    合併係破壞性操作 —— 一個實體會消失。保留舊名做 alias 係唯一可以
+    事後回溯「本來有邊幾條記錄」嘅方法。
+    """
+    applied = REPO / "data" / "private" / "review" / "character-merge-applied.json"
+    if not applied.exists():
+        pytest.skip("未跑過 merge_characters.py")
+    log = json.loads(applied.read_text(encoding="utf-8"))
+    by_id = {c["id"]: c for c in characters}
+    missing = []
+    for m in log.get("merges", []):
+        canon = by_id.get(m["into_id"])
+        if canon is None:
+            continue  # canonical 自己後來又被合併
+        if m["from_name"] not in (canon.get("aliases") or []):
+            missing.append((m["from_name"], canon["name"]))
+    assert not missing, f"被合併嘅名冇保留做 alias：{missing[:5]}"
+
+
+def test_merge_script_is_idempotent():
+    """重跑合併腳本唔應該再改任何嘢。"""
+    before = (PUBLIC / "characters.json").read_text(encoding="utf-8")
+    r = subprocess.run(
+        [sys.executable, str(MERGE)], cwd=str(REPO), capture_output=True, text=True
+    )
+    assert r.returncode == 0, r.stderr[-500:]
+    after = (PUBLIC / "characters.json").read_text(encoding="utf-8")
+    assert before == after, "merge_characters.py 唔冪等"
+
+
+def test_normalize_script_is_idempotent():
+    """重跑正規化唔應該再改任何嘢。"""
+    before_tl = (PUBLIC / "timeline.json").read_text(encoding="utf-8")
+    before_rt = (PUBLIC / "routes.geojson").read_text(encoding="utf-8")
+    r = subprocess.run(
+        [sys.executable, str(NORMALIZE)], cwd=str(REPO), capture_output=True, text=True
+    )
+    assert r.returncode == 0, r.stderr[-500:]
+    assert (PUBLIC / "timeline.json").read_text(encoding="utf-8") == before_tl
+    assert (PUBLIC / "routes.geojson").read_text(encoding="utf-8") == before_rt

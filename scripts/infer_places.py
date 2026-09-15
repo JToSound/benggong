@@ -107,6 +107,8 @@ RULES: dict[str, str] = {
     "R-VARIANT-INHERIT": "同一實體嘅異體寫法繼承已推斷結果（跨 entity_kind 通用）",
     "R-CONTAIN-RESOLVED": "第二遍：父項已解決 → 子項繼承父項座標（先解父、再解子）",
     "R-DISTRICT": "只可以確定到區域層級（同章出現區域名）",
+    "R-NAME-PLACE": "名稱本身就係一個真實香港地點（OSM 有記錄）",
+    "R-DESC-PLACE": "描述直接提及真實地區名（比同章共現強）",
     "R-NO-EVIDENCE": "證據不足，只列作待補",
     # 其他實體類型（同一套結構，唔同 entity_kind）
     "C-NORM": "角色名稱正規化後相同（去括號／全形／大小寫）",
@@ -161,15 +163,38 @@ def _is_road_like(name: str) -> bool:
 # 載入
 # ---------------------------------------------------------------------------
 def load_osm_places() -> dict[str, dict[str, Any]]:
-    """由 OSM cache 抽有名字嘅設施 → {name: {lon, lat, kind, osm_id}}。"""
+    """由 OSM cache 抽有名字嘅設施 → {name: {lon, lat, kind, osm_id}}。
+
+    ⚠️ 一定要索引 `name:zh`
+    ----------------------
+    OSM 嘅 `name` 通常係**中英雙語**（例如
+    `"將軍澳中心 Park Central"`），而 `name:zh` 才係純中文
+    （`"將軍澳中心"`）。原本只索引 `name`，令中文名精確匹配大量失敗 ——
+    實測「將軍澳中心」「將軍澳廣場」「彩明商場」「新都城中心一期」
+    全部配對唔到，明明 OSM 有記錄。
+
+    所以每個設施會同時用三個 key 索引：
+      1. `name`（可能係雙語）
+      2. `name:zh`（純中文）
+      3. `name` 嘅中文前綴（去掉英文部分）
+    """
     if not OSM_CACHE.exists():
         return {}
     els = json.loads(OSM_CACHE.read_text(encoding="utf-8")).get("elements", [])
     out: dict[str, dict[str, Any]] = {}
+
+    def put(key: str, rec: dict[str, Any]) -> None:
+        if not key or len(key) < 2:
+            return
+        prev = out.get(key)
+        # 同名多個 → 保留點數最多（通常係最完整嘅輪廓）
+        if prev is None or rec["pts"] > prev["pts"]:
+            out[key] = rec
+
     for e in els:
         t = e.get("tags") or {}
-        nm = t.get("name") or t.get("name:zh")
-        if not nm:
+        raw = t.get("name") or t.get("name:zh")
+        if not raw:
             continue
         geom = e.get("geometry") or []
         if not geom:
@@ -180,17 +205,23 @@ def load_osm_places() -> dict[str, dict[str, Any]]:
             t.get("amenity") or t.get("building") or t.get("landuse")
             or t.get("leisure") or t.get("shop") or t.get("highway") or ""
         )
-        prev = out.get(nm)
-        # 同名多個 → 保留點數最多（通常係最完整嘅輪廓）
-        if prev is None or len(geom) > prev["pts"]:
-            out[nm] = {
-                "lon": round(sum(lons) / len(lons), 6),
-                "lat": round(sum(lats) / len(lats), 6),
-                "kind": kind,
-                "osm_id": e.get("id"),
-                "osm_type": e.get("type"),
-                "pts": len(geom),
-            }
+        rec = {
+            "lon": round(sum(lons) / len(lons), 6),
+            "lat": round(sum(lats) / len(lats), 6),
+            "kind": kind,
+            "osm_id": e.get("id"),
+            "osm_type": e.get("type"),
+            "pts": len(geom),
+            "osm_name": raw,
+        }
+        put(raw, rec)
+        zh = t.get("name:zh")
+        if zh:
+            put(zh, rec)
+        # `name` 嘅中文前綴（第一個 ASCII 字之前）
+        m = re.match(r"^([^\x00-\x7F\s]+)", raw)
+        if m:
+            put(m.group(1), rec)
     return out
 
 
@@ -383,6 +414,40 @@ def infer(
                      "set_lonlat": pt},
                 )
 
+    # ---- R-NAME-PLACE：名稱本身就係一個真實香港地點 ----
+    #
+    # 最強嘅一類：唔需要任何上文下理推斷 —— 名稱直接對應 OSM 記錄。
+    # 例如「將軍澳中心」「將軍澳廣場」「彩明商場」「新都城商場」。
+    # 呢批之前配對唔到，係因為 OSM 用雙語 `name`（見 load_osm_places）。
+    o = osm.get(name)
+    if o is not None:
+        # 雙重過濾，兩者缺一不可：
+        #   1. 名稱要有識別性詞幹 —— 排除「學校」「飯堂」「宿舍」呢類
+        #      通用詞（佢哋喺 OSM 有記錄，但同故事無關）
+        #   2. OSM 配對要落喺故事設定區域 —— 排除同名但明顯唔相關嘅
+        #      設施（實測「禮堂」配到屯門、「停車場」配到元朗）
+        if not _has_distinctive_stem(name):
+            o = None
+        elif not _in_story_region(o["lon"], o["lat"]):
+            o = None
+    if o is not None:
+        return _mk(
+            props, "R-NAME-PLACE", name, [o["lon"], o["lat"]],
+            "osm_way", evidence + [{
+                "kind": "osm_place_match",
+                "chapter": None,
+                "detail": (
+                    f"名稱直接對應 OSM 記錄「{o['osm_name']}」"
+                    f"（{o['osm_type']} {o['osm_id']}，{o['pts']} 點，{o['kind']}）；"
+                    f"座標落喺故事設定區域內"
+                ),
+                "refs": [],
+            }],
+            0.90,
+            {"location_precision": "exact", "merge_into": None,
+             "set_lonlat": [o["lon"], o["lat"]]},
+        )
+
     # ---- R-CAMPUS-BLOCK：A/B/C/D 座 ----
     m = re.fullmatch(r"([A-Da-d])\s*[座部幢橦]?\s*大樓", name)
     if m:
@@ -494,6 +559,40 @@ def infer(
                     {"location_precision": "approximate", "merge_into": None,
                      "set_lonlat": pt},
                 )
+
+    # ---- R-DESC-PLACE：描述直接提及真實地區名 ----
+    #
+    # 比 R-DISTRICT（同章共現）強得多：描述係**直接證據**，唔係統計相關。
+    # 例如描述寫「…位於寶琳嘅…」→ 該地點喺寶琳。
+    #
+    # 只准真正嘅地區名（`_is_area_name`），排除「商場」「醫院」「公園」
+    # 呢類通用詞 —— 佢哋雖然喺 hk-districts.json 有座標，但唔係區域。
+    desc_hits: list[tuple[int, str]] = []
+    for dname in districts:
+        if not _is_area_name(dname):
+            continue
+        idx = desc.find(dname)
+        if idx >= 0:
+            desc_hits.append((idx, dname))
+    if desc_hits:
+        # 取最早出現嘅（通常係句子主語）
+        idx, dname = min(desc_hits)
+        pt = districts[dname]
+        return _mk(
+            props, "R-DESC-PLACE", dname, list(pt), "hk-districts.json",
+            evidence + [{
+                "kind": "description_claim",
+                "chapter": props["chapters"][0] if props["chapters"] else None,
+                "detail": (
+                    f"描述直接提及地區「{dname}」"
+                    f"（位置 {idx}）：「…{desc[max(0, idx - 20):idx + 30]}…」"
+                ),
+                "refs": [],
+            }],
+            0.65,
+            {"location_precision": "district", "merge_into": None,
+             "set_lonlat": list(pt)},
+        )
 
     # ---- R-DISTRICT：只可以確定區域 ----
     #
@@ -810,6 +909,35 @@ def resolve_containment(
             )
         )
     return out
+
+
+#: 故事設定區域。用嚟過濾「同名但明顯唔相關」嘅 OSM 配對。
+#:
+#: 為何需要
+#: --------
+#: OSM 全港都有同名設施。實測 R-NAME-PLACE 一開始命中：
+#:   「學校」  → 上水 (114.2226, 22.5461)
+#:   「飯堂」  → 粉嶺 (114.1639, 22.5217)
+#:   「禮堂」  → 屯門 (113.9621, 22.3748)
+#:   「停車場」→ 元朗 (114.0420, 22.3621)
+#: 呢啲配對完全冇意義 —— 故事嘅「學校」唔會係上水嗰間。
+#: 加區域限制之後，配對只會落喺故事發生地一帶。
+#:
+#: 範圍比將軍澳稍闊（包埋坑口、寶琳、調景嶺、西貢南），因為角色會行出
+#: 將軍澳。呢個係**故事設定**，唔係推斷結果。
+STORY_REGION = {
+    "lon_min": 114.19,
+    "lon_max": 114.36,
+    "lat_min": 22.25,
+    "lat_max": 22.40,
+}
+
+
+def _in_story_region(lon: float, lat: float) -> bool:
+    return (
+        STORY_REGION["lon_min"] <= lon <= STORY_REGION["lon_max"]
+        and STORY_REGION["lat_min"] <= lat <= STORY_REGION["lat_max"]
+    )
 
 
 # ---------------------------------------------------------------------------

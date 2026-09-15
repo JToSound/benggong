@@ -76,25 +76,30 @@ def propagate_to_dependents(moved: dict[str, list[float]]) -> dict[str, int]:
 
     為何需要
     --------
-    `events.geojson` 有 1,780 條事件帶 `location_id`，佢哋嘅座標係由
-    對應地點投影出嚟。地點一改而事件唔改，就會出現「事件喺 A 點、
-    地點喺 B 點」嘅不一致 —— `validate_public_data.py` 會即刻捉到。
+    三個資料集都以唔同方式引用地點座標：
 
-    呢個傳播唔限於事件：任何以 location_id 引用地點嘅資料集都應該跟。
+    - `events.geojson`：`location_id` + 自身 `coordinates`
+    - `routes.geojson`：`waypoints[].location_id`，而
+      `geometry.coordinates` 同 waypoints **逐個對應**
+    - `timeline.json`：`location_id`（冇自身座標）
+
+    ⚠️ 實測踩過：第一版只傳播 events，漏咗 routes。結果路線幾何仍然係
+    舊嘅虛構座標，而地點已經移到真實位置 —— 出現「真-真」線段但長
+    37.5 km 嘅荒謬結果（「皇宮」同「新都城商場」明明喺同一個座標，
+    路線卻畫成相距 37 km）。前端會照樣繪製呢條假線。
+
+    呢個唔會令驗證器報錯（因為驗證器只檢查 events 同 location 一致），
+    所以極易漏。
     """
     out: dict[str, int] = {}
-    for fname, key in (
-        ("events.geojson", "location_id"),
-        ("routes.geojson", None),
-    ):
-        path = REPO / "data" / "public" / fname
-        if not path.exists():
-            continue
+
+    # --- events：location_id 對應嘅自身座標 ---
+    path = REPO / "data" / "public" / "events.geojson"
+    if path.exists():
         fc = json.loads(path.read_text(encoding="utf-8"))
         n = 0
         for feat in fc.get("features", []):
-            props = feat.get("properties", {})
-            lid = props.get(key) if key else None
+            lid = feat.get("properties", {}).get("location_id")
             if not lid:
                 continue
             new = moved.get(lid)
@@ -107,7 +112,38 @@ def propagate_to_dependents(moved: dict[str, list[float]]) -> dict[str, int]:
             path.write_text(
                 json.dumps(fc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
             )
-        out[fname] = n
+        out["events.geojson"] = n
+
+    # --- routes：waypoints[].location_id → geometry.coordinates（逐個對應）---
+    path = REPO / "data" / "public" / "routes.geojson"
+    if path.exists():
+        fc = json.loads(path.read_text(encoding="utf-8"))
+        n = 0
+        for feat in fc.get("features", []):
+            wps = feat.get("properties", {}).get("waypoints") or []
+            coords = feat.get("geometry", {}).get("coordinates") or []
+            changed = False
+            for i, w in enumerate(wps):
+                if i >= len(coords):
+                    break
+                lid = w.get("location_id")
+                if not lid:
+                    continue
+                new = moved.get(lid)
+                if new is None:
+                    continue
+                if coords[i] != new:
+                    coords[i] = list(new)
+                    changed = True
+            if changed:
+                feat["geometry"]["coordinates"] = coords
+                n += 1
+        if n:
+            path.write_text(
+                json.dumps(fc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            )
+        out["routes.geojson"] = n
+
     return out
 
 
@@ -230,8 +266,16 @@ def main() -> int:
     # 「應用喺所有其它地方」嘅具體體現：地點一改座標，所有指向佢嘅
     # 記錄都要跟。否則就會出現「事件喺 A 點、地點喺 B 點」嘅不一致，
     # validate_public_data.py 亦會即刻捉到。
-    moved = {c["id"]: c["new"]["coordinates"] for c in changes}
-    propagated = propagate_to_dependents(moved)
+    # 用**全部**地點做對賬，唔止今次改動嘅。
+    #
+    # 為何唔可以只傳播「今次改動」：第一次套用時漏咗 routes，之後即使
+    # 修正咗傳播邏輯，`moved` 已經係空（地點冇再改），routes 永遠唔會
+    # 被修正。用完整對賬就每次都會收斂，而且可重複執行。
+    all_coords = {
+        f["properties"]["id"]: list(f["geometry"]["coordinates"])
+        for f in fc["features"]
+    }
+    propagated = propagate_to_dependents(all_coords)
     print(f"\n=== 傳播 ===")
     for name, n in propagated.items():
         print(f"  {name}：{n} 條更新")

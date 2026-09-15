@@ -296,7 +296,9 @@
   {
     "id": "ent_0436f94834",
     "name": "貴華母親",
-    "aliases": [],
+    "aliases": [
+      "貴華嘅母親"
+    ],
     "role": "supporting",
     "color": "#F39C12",
     "first_appearance": 197,
@@ -626,23 +628,6 @@
     "first_appearance": 101,
     "chapter_refs": [
       101
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.9,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_10c34bfc61",
-    "name": "貴華嘅父親",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#1ABC9C",
-    "first_appearance": 197,
-    "chapter_refs": [
-      197
     ],
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
@@ -1331,7 +1316,9 @@
   {
     "id": "ent_2ff8b77e54",
     "name": "貴華父親",
-    "aliases": [],
+    "aliases": [
+      "貴華嘅父親"
+    ],
     "role": "supporting",
     "color": "#9B59B6",
     "first_appearance": 197,
@@ -1348,7 +1335,9 @@
   {
     "id": "ent_31117c1763",
     "name": "攻擊學病者老師",
-    "aliases": [],
+    "aliases": [
+      "攻擊學嘅病者老師"
+    ],
     "role": "supporting",
     "color": "#1ABC9C",
     "first_appearance": 68,
@@ -1491,24 +1480,6 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_3636ba3df5",
-    "name": "敘述者",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#F39C12",
-    "first_appearance": 94,
-    "chapter_refs": [
-      94,
-      115
-    ],
-    "spoiler_level": 1,
-    "description": "全書 2 章出現；詳情待人手審閱。",
-    "confidence": 0.94,
     "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
@@ -1682,23 +1653,6 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.8,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_3a60918310",
-    "name": "聽不破尚",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#9B59B6",
-    "first_appearance": 75,
-    "chapter_refs": [
-      75
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.88,
     "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
@@ -1953,50 +1907,6 @@
     "source": "bing_gang"
   },
   {
-    "id": "ent_4436097895",
-    "name": "敘事者",
-    "aliases": [
-      "「我」（敘事者）",
-      "「敘述者」",
-      "「第一人稱」",
-      "「老師」（敘述者）",
-      "夢境大師",
-      "我（敘事者・老師）",
-      "我（敘事者（鳥嘴兄））",
-      "我（敘事者（鳥嘴））",
-      "我（敘事者）",
-      "我（敘事者／鳥嘴兄）"
-    ],
-    "role": "supporting",
-    "color": "#E67E22",
-    "first_appearance": 73,
-    "chapter_refs": [
-      73,
-      109,
-      120,
-      148,
-      158,
-      162,
-      163,
-      169,
-      170,
-      171,
-      172,
-      178,
-      185,
-      186,
-      188,
-      193,
-      194
-    ],
-    "spoiler_level": 1,
-    "description": "全書 17 章出現；詳情待人手審閱。",
-    "confidence": 0.92,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
     "id": "ent_448c9a5170",
     "name": "漢木",
     "aliases": [
@@ -2038,13 +1948,15 @@
     "id": "ent_45614b45ad",
     "name": "德蘭女教主",
     "aliases": [
-      "上帝的先知"
+      "上帝的先知",
+      "德蘭教主"
     ],
     "role": "supporting",
     "color": "#E67E22",
     "first_appearance": 127,
     "chapter_refs": [
       127,
+      130,
       131
     ],
     "spoiler_level": 1,
@@ -3184,7 +3096,8 @@
     "aliases": [
       "偷屍賊",
       "病盜",
-      "盜屍賊（病者）"
+      "盜屍賊（病者）",
+      "竊屍賊"
     ],
     "role": "supporting",
     "color": "#1ABC9C",
@@ -3192,7 +3105,9 @@
     "chapter_refs": [
       82,
       83,
-      84
+      84,
+      93,
+      94
     ],
     "spoiler_level": 1,
     "description": "全書 3 章出現；詳情待人手審閱。",
@@ -3870,24 +3785,6 @@
     "source": "bing_gang"
   },
   {
-    "id": "ent_891f2f4340",
-    "name": "竊屍賊",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#F39C12",
-    "first_appearance": 93,
-    "chapter_refs": [
-      93,
-      94
-    ],
-    "spoiler_level": 1,
-    "description": "全書 2 章出現；詳情待人手審閱。",
-    "confidence": 0.93,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
     "id": "ent_8921c909f4",
     "name": "少佐",
     "aliases": [
@@ -4286,12 +4183,16 @@
   {
     "id": "ent_956aaa7d3b",
     "name": "我的母親",
-    "aliases": [],
+    "aliases": [
+      "我嘅母親",
+      "我母親"
+    ],
     "role": "supporting",
     "color": "#1ABC9C",
     "first_appearance": 76,
     "chapter_refs": [
-      76
+      76,
+      77
     ],
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
@@ -5087,23 +4988,6 @@
     "source": "bing_gang"
   },
   {
-    "id": "ent_b50ee1658e",
-    "name": "我嘅母親",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#E67E22",
-    "first_appearance": 76,
-    "chapter_refs": [
-      76
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.88,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
     "id": "ent_b53e491de1",
     "name": "賣羊肉老太婆",
     "aliases": [
@@ -5152,7 +5036,8 @@
       "江千林",
       "江子千",
       "江子林",
-      "隊長"
+      "隊長",
+      "聽不破尚"
     ],
     "role": "supporting",
     "color": "#E67E22",
@@ -5284,23 +5169,6 @@
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
     "confidence": 0.9,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_b97339d418",
-    "name": "我母親",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#9B59B6",
-    "first_appearance": 77,
-    "chapter_refs": [
-      77
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.85,
     "review_status": "reviewed",
     "portrait_asset_id": null,
     "source": "bing_gang"
@@ -5805,23 +5673,6 @@
     "source": "bing_gang"
   },
   {
-    "id": "ent_cb2ce86c57",
-    "name": "攻擊學嘅病者老師",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#E67E22",
-    "first_appearance": 68,
-    "chapter_refs": [
-      68
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.88,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
     "id": "ent_cc0172a5f5",
     "name": "師傅",
     "aliases": [
@@ -5902,23 +5753,6 @@
     "first_appearance": 70,
     "chapter_refs": [
       70
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.9,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_cf406a77de",
-    "name": "德蘭教主",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#9B59B6",
-    "first_appearance": 130,
-    "chapter_refs": [
-      130
     ],
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
@@ -6332,56 +6166,6 @@
     "source": "bing_gang"
   },
   {
-    "id": "ent_d79c59bfef",
-    "name": "鳥嘴",
-    "aliases": [
-      "M（鳥嘴兄）",
-      "「鳥嘴」",
-      "化名「老師」,綽號「鳥嘴」",
-      "我（鳥嘴兄）",
-      "我（鳥嘴）",
-      "鳥嘴/老師",
-      "鳥嘴兄",
-      "鳥嘴先生",
-      "鳥嘴弟兄",
-      "鳥嘴老兄"
-    ],
-    "role": "supporting",
-    "color": "#9B59B6",
-    "first_appearance": 58,
-    "chapter_refs": [
-      58,
-      81,
-      84,
-      85,
-      91,
-      92,
-      93,
-      96,
-      97,
-      99,
-      100,
-      101,
-      102,
-      105,
-      107,
-      110,
-      111,
-      116,
-      142,
-      152,
-      153,
-      187,
-      189
-    ],
-    "spoiler_level": 1,
-    "description": "全書 23 章出現；詳情待人手審閱。",
-    "confidence": 0.91,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
     "id": "ent_d808ae5c94",
     "name": "燒海鮮店大嬸",
     "aliases": [],
@@ -6647,7 +6431,30 @@
       "M（病者老師）",
       "M（面具人）",
       "「M」",
-      "「M」（主角）"
+      "「M」（主角）",
+      "敘述者",
+      "鳥嘴",
+      "M（鳥嘴兄）",
+      "「鳥嘴」",
+      "化名「老師」,綽號「鳥嘴」",
+      "我（鳥嘴兄）",
+      "我（鳥嘴）",
+      "鳥嘴/老師",
+      "鳥嘴兄",
+      "鳥嘴先生",
+      "鳥嘴弟兄",
+      "鳥嘴老兄",
+      "敘事者",
+      "「我」（敘事者）",
+      "「敘述者」",
+      "「第一人稱」",
+      "「老師」（敘述者）",
+      "夢境大師",
+      "我（敘事者・老師）",
+      "我（敘事者（鳥嘴兄））",
+      "我（敘事者（鳥嘴））",
+      "我（敘事者）",
+      "我（敘事者／鳥嘴兄）"
     ],
     "role": "supporting",
     "color": "#E67E22",
@@ -6702,7 +6509,49 @@
       55,
       56,
       57,
-      60
+      58,
+      60,
+      73,
+      81,
+      84,
+      85,
+      91,
+      92,
+      93,
+      94,
+      96,
+      97,
+      99,
+      100,
+      101,
+      102,
+      105,
+      107,
+      109,
+      110,
+      111,
+      115,
+      116,
+      120,
+      142,
+      148,
+      152,
+      153,
+      158,
+      162,
+      163,
+      169,
+      170,
+      171,
+      172,
+      178,
+      185,
+      186,
+      187,
+      188,
+      189,
+      193,
+      194
     ],
     "spoiler_level": 1,
     "description": "全書 122 章出現；詳情待人手審閱。",
@@ -7311,23 +7160,6 @@
     "first_appearance": 155,
     "chapter_refs": [
       155
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.9,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
-    "id": "ent_fc522b4ac1",
-    "name": "貴華嘅母親",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#1ABC9C",
-    "first_appearance": 197,
-    "chapter_refs": [
-      197
     ],
     "spoiler_level": 1,
     "description": "全書 1 章出現；詳情待人手審閱。",
