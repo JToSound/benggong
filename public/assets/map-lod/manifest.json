@@ -127,6 +127,64 @@
         "aspect": 1.109827
       },
       "bytes": 1665980
+    },
+    {
+      "id": "tko-campus",
+      "label": "調景嶺校園（大本營）",
+      "note": "180 個地點集中喺呢度 —— 大本營（VTC 校園）同周邊設施",
+      "image": "assets/map-lod/tko-campus.png",
+      "coords": "assets/map-lod/tko-campus-coords.json",
+      "bbox": {
+        "lon_min": 114.234,
+        "lon_max": 114.27,
+        "lat_min": 22.292,
+        "lat_max": 22.322
+      },
+      "lod": "street",
+      "lod_layers": {
+        "roads": true,
+        "buildings": true,
+        "building_labels": true
+      },
+      "output_size": [
+        1536,
+        1384
+      ],
+      "canvas": {
+        "width": 1536,
+        "height": 1384,
+        "aspect": 1.109827
+      },
+      "bytes": 1677138
+    },
+    {
+      "id": "tko-north",
+      "label": "坑口／寶琳／將軍澳北",
+      "note": "41 個地點；坑口、寶琳、將軍澳北一帶",
+      "image": "assets/map-lod/tko-north.png",
+      "coords": "assets/map-lod/tko-north-coords.json",
+      "bbox": {
+        "lon_min": 114.222,
+        "lon_max": 114.29,
+        "lat_min": 22.304,
+        "lat_max": 22.354
+      },
+      "lod": "street",
+      "lod_layers": {
+        "roads": true,
+        "buildings": true,
+        "building_labels": true
+      },
+      "output_size": [
+        1536,
+        1221
+      ],
+      "canvas": {
+        "width": 1536,
+        "height": 1221,
+        "aspect": 1.257985
+      },
+      "bytes": 1525455
     }
   ]
 }

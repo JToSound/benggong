@@ -111,9 +111,22 @@ function assetUrl(p: string): string {
   return `${base.replace(/\/+$/, "")}/${p.replace(/^\/+/, "")}`;
 }
 
-/** 縮放上下限（相對基準視圖）。 */
+/**
+ * 縮放上下限（相對基準視圖）。
+ *
+ * ⚠️ MAX_SCALE 必須同 LOD 圖磚嘅跨度匹配
+ * ------------------------------------
+ * 視窗最窄寬度 = BASE_VIEW.w / MAX_SCALE。如果圖磚跨度細過呢個值，
+ * 佢就**永遠唔會被揀到**（因為揀層要求「完全覆蓋視窗」）。
+ *
+ * 實測踩過：MAX_SCALE = 12 → 最窄視窗 0.0583°；而 tko-campus 圖磚
+ * 跨度只有 0.036°、tko-north 只有 0.068°，結果兩者幾乎永遠用唔到，
+ * 白白多咗 3.2 MiB 資產。
+ *
+ * 現時：0.70 / 30 ≈ 0.0233°，足夠覆蓋最窄嘅圖磚（tko-campus 0.036°）。
+ */
 const MIN_SCALE = 0.5;
-const MAX_SCALE = 12;
+const MAX_SCALE = 30;
 
 /** 標籤圖層淡入區間：viewScale ≤ 0.8 完全隱藏，≥ 1.2 完全顯示。 */
 const LABEL_FADE_IN = 0.8;

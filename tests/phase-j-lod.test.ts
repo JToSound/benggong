@@ -82,11 +82,25 @@ describe("Phase J: LOD 圖磚 manifest", () => {
     }
   });
 
-  it("層級按跨度遞減（overview 最闊）", () => {
-    const spans = tiers.map((t) => t.bbox.lon_max - t.bbox.lon_min);
-    for (let i = 1; i < spans.length; i++) {
-      expect(spans[i], `${tiers[i].id} 應該比 ${tiers[i - 1].id} 窄`).toBeLessThan(spans[i - 1]);
+  it("總覽層最闊，其餘層都比佢窄", () => {
+    // 注意：層級之間**唔一定**嚴格遞減。同一個 zoom 級別可以有多個
+    // 「兄弟層」覆蓋唔同地區（例如 tko-campus 同 tko-north 都係街道級，
+    // 但針對唔同叢集）。所以只可以要求「總覽層最闊」。
+    const ov = tiers.find((t) => t.id === "overview")!;
+    const ovSpan = ov.bbox.lon_max - ov.bbox.lon_min;
+    for (const t of tiers) {
+      if (t.id === "overview") continue;
+      const span = t.bbox.lon_max - t.bbox.lon_min;
+      expect(span, `${t.id} 應該比 overview 窄`).toBeLessThan(ovSpan);
     }
+    expect(ovSpan).toBe(Math.max(...tiers.map((t) => t.bbox.lon_max - t.bbox.lon_min)));
+  });
+
+  it("冇兩個圖磚有完全相同嘅 bbox", () => {
+    const keys = tiers.map(
+      (t) => `${t.bbox.lon_min},${t.bbox.lon_max},${t.bbox.lat_min},${t.bbox.lat_max}`,
+    );
+    expect(new Set(keys).size).toBe(keys.length);
   });
 
   it("所有層級 bbox 都喺全港底圖 bbox 之內", () => {
@@ -117,6 +131,39 @@ describe("Phase J: LOD 圖磚 manifest", () => {
       expect(t.lod, `${t.id} 開建築圖層應該係 district 或 street`).toMatch(
         /district|street/,
       );
+    }
+  });
+
+  it("最窄圖磚跨度 ≥ 視窗最窄可能寬度（否則永遠揀唔到）", () => {
+    // 揀層規則係「最窄但仍然完全覆蓋視窗」。如果某個圖磚跨度細過
+    // 視窗最窄可能寬度（= BASE_VIEW.w / MAX_SCALE），佢就**永遠**
+    // 覆蓋唔到視窗，即係永遠唔會被揀到 —— 白白多咗資產。
+    //
+    // 實測踩過：MAX_SCALE = 12 → 最窄視窗 0.0583°；而 tko-campus
+    // 跨度只有 0.036°、tko-north 只有 0.068°，兩者幾乎永遠用唔到。
+    const maxScaleMatch = SRC.match(/const MAX_SCALE = (\d+(?:\.\d+)?)/);
+    expect(maxScaleMatch, "找不到 MAX_SCALE").toBeTruthy();
+    const maxScale = Number(maxScaleMatch![1]);
+    const minViewSpan = LON_SPAN / maxScale;
+
+    const narrowest = Math.min(...tiers.map((t) => t.bbox.lon_max - t.bbox.lon_min));
+    expect(
+      narrowest,
+      `最窄圖磚跨度 ${narrowest.toFixed(4)}° 細過視窗最窄寬度 ` +
+        `${minViewSpan.toFixed(4)}°（MAX_SCALE=${maxScale}）→ 永遠揀唔到`,
+    ).toBeGreaterThanOrEqual(minViewSpan * 0.95);
+  });
+
+  it("每個圖磚都至少喺某個縮放級別可達", () => {
+    const maxScaleMatch = SRC.match(/const MAX_SCALE = (\d+(?:\.\d+)?)/);
+    const maxScale = Number(maxScaleMatch![1]);
+    const minViewSpan = LON_SPAN / maxScale;
+    for (const t of tiers) {
+      const span = t.bbox.lon_max - t.bbox.lon_min;
+      expect(
+        span,
+        `${t.id}（跨度 ${span.toFixed(4)}°）永遠唔會覆蓋到最窄視窗`,
+      ).toBeGreaterThanOrEqual(minViewSpan * 0.95);
     }
   });
 

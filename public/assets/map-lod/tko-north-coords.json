@@ -1,0 +1,49 @@
+{
+  "canvas": {
+    "width": 1536,
+    "height": 1221,
+    "aspect": 1.257985
+  },
+  "bbox": {
+    "lon_min": 114.222,
+    "lon_max": 114.29,
+    "lat_min": 22.304,
+    "lat_max": 22.354
+  },
+  "lod": "street",
+  "lod_layers": {
+    "roads": true,
+    "buildings": true,
+    "building_labels": true
+  },
+  "projection": "equirectangular",
+  "standard_parallel": 22.329,
+  "projection_note": "x = (lon - lon_min) * px_per_deg_lon; y = (lat_max - lat) * px_per_deg_lon / cos(lat0); px_per_deg_lon = canvas.width / (lon_max - lon_min)",
+  "style": "binggang_handdrawn_parchment",
+  "crop_box": [
+    0,
+    0,
+    1536,
+    1221
+  ],
+  "output_size": [
+    1536,
+    1221
+  ],
+  "layers": {
+    "base": "tko-north.png"
+  },
+  "stats": {
+    "trees": 2839,
+    "labels": 4,
+    "roads": 2386,
+    "buildings": 6807,
+    "water_bodies": 206,
+    "water_px": 1328,
+    "urban_px": 228751,
+    "urban_share_of_land": 0.1543,
+    "land_px": 1482312,
+    "land_share": 0.7904,
+    "bbox_span_deg": 0.068
+  }
+}

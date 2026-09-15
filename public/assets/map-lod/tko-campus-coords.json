@@ -1,0 +1,49 @@
+{
+  "canvas": {
+    "width": 1536,
+    "height": 1384,
+    "aspect": 1.109827
+  },
+  "bbox": {
+    "lon_min": 114.234,
+    "lon_max": 114.27,
+    "lat_min": 22.292,
+    "lat_max": 22.322
+  },
+  "lod": "street",
+  "lod_layers": {
+    "roads": true,
+    "buildings": true,
+    "building_labels": true
+  },
+  "projection": "equirectangular",
+  "standard_parallel": 22.307,
+  "projection_note": "x = (lon - lon_min) * px_per_deg_lon; y = (lat_max - lat) * px_per_deg_lon / cos(lat0); px_per_deg_lon = canvas.width / (lon_max - lon_min)",
+  "style": "binggang_handdrawn_parchment",
+  "crop_box": [
+    0,
+    0,
+    1536,
+    1384
+  ],
+  "output_size": [
+    1536,
+    1384
+  ],
+  "layers": {
+    "base": "tko-campus.png"
+  },
+  "stats": {
+    "trees": 1951,
+    "labels": 3,
+    "roads": 1215,
+    "buildings": 1808,
+    "water_bodies": 229,
+    "water_px": 1919,
+    "urban_px": 418820,
+    "urban_share_of_land": 0.2232,
+    "land_px": 1876393,
+    "land_share": 0.8827,
+    "bbox_span_deg": 0.036
+  }
+}
