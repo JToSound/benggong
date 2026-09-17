@@ -332,8 +332,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            114.03278782330052,
-            22.423824330510413
+            114.252509,
+            22.305844
           ],
           [
             114.25343,
@@ -428,8 +428,8 @@
             22.318
           ],
           [
-            114.26926310368506,
-            22.323460860608836
+            114.25359,
+            22.30577
           ],
           [
             114.25343,
@@ -560,12 +560,12 @@
             22.30581
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.28306527046617,
@@ -1144,7 +1144,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.676
+        "real_waypoint_fraction": 0.73
       }
     },
     {
@@ -1185,8 +1185,8 @@
             22.30581
           ],
           [
-            114.0504504463264,
-            22.417439040207523
+            114.252509,
+            22.305844
           ],
           [
             114.25343,
@@ -1448,7 +1448,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.64
+        "real_waypoint_fraction": 0.68
       }
     },
     {
@@ -1473,8 +1473,8 @@
             22.24345857175555
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.10332936598763,
@@ -1609,7 +1609,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.5
+        "real_waypoint_fraction": 0.583
       }
     },
     {
@@ -1754,8 +1754,8 @@
             22.319103891050585
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.23559924467841,
@@ -1865,7 +1865,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.889
+        "real_waypoint_fraction": 1.0
       }
     },
     {
@@ -3009,8 +3009,8 @@
             22.30581
           ],
           [
-            114.24551476310369,
-            22.370663424124512
+            114.267544,
+            22.31839
           ],
           [
             113.97622384985122,
@@ -3166,7 +3166,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.667
+        "real_waypoint_fraction": 0.733
       }
     },
     {
@@ -3291,8 +3291,8 @@
             22.30581
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.25343,
@@ -3550,7 +3550,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.781
+        "real_waypoint_fraction": 0.812
       }
     },
     {
@@ -3680,12 +3680,12 @@
             22.336107919432365
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             113.94484000915541,
@@ -3787,7 +3787,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.125
+        "real_waypoint_fraction": 0.375
       }
     },
     {
@@ -3836,8 +3836,8 @@
             22.302
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.24353826962692,
@@ -3876,16 +3876,16 @@
             22.30581
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.25740151064316,
             22.316948409246965
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.245,
@@ -4201,7 +4201,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.714
+        "real_waypoint_fraction": 0.8
       }
     },
     {
@@ -4358,8 +4358,8 @@
             22.30581
           ],
           [
-            114.257059,
-            22.306854
+            114.253431,
+            22.30581
           ],
           [
             114.25343,
@@ -4402,8 +4402,8 @@
             22.328691989013503
           ],
           [
-            114.0504504463264,
-            22.417439040207523
+            114.252509,
+            22.305844
           ]
         ]
       },
@@ -4435,7 +4435,7 @@
           181,
           184
         ],
-        "precision": "fictional",
+        "precision": "approximate",
         "waypoints": [
           {
             "location_id": "loc_0054",
@@ -4545,7 +4545,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.588
+        "real_waypoint_fraction": 0.647
       }
     },
     {
@@ -4705,8 +4705,8 @@
             22.3166
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ],
           [
             114.10332936598763,
@@ -5076,7 +5076,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.676
+        "real_waypoint_fraction": 0.703
       }
     },
     {
@@ -5113,8 +5113,8 @@
             22.215464980544745
           ],
           [
-            114.26407465476464,
-            22.32506420233463
+            114.253375,
+            22.30564
           ]
         ]
       },
@@ -5193,7 +5193,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.375
+        "real_waypoint_fraction": 0.5
       }
     },
     {
@@ -5266,8 +5266,8 @@
             22.30581
           ],
           [
-            114.0504504463264,
-            22.417439040207523
+            114.252509,
+            22.305844
           ],
           [
             114.25343,
@@ -5530,7 +5530,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.643
+        "real_waypoint_fraction": 0.679
       }
     },
     {
@@ -5563,8 +5563,8 @@
             22.331930380712596
           ],
           [
-            113.92020462348363,
-            22.357799382009613
+            114.253375,
+            22.30564
           ],
           [
             114.23660798809796,
@@ -5658,7 +5658,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.333
+        "real_waypoint_fraction": 0.444
       }
     },
     {
@@ -5764,8 +5764,8 @@
             22.30581
           ],
           [
-            114.0504504463264,
-            22.417439040207523
+            114.252509,
+            22.305844
           ],
           [
             113.9106106660563,
@@ -5802,7 +5802,7 @@
           103,
           171
         ],
-        "precision": "fictional",
+        "precision": "approximate",
         "waypoints": [
           {
             "location_id": "loc_0048",
@@ -5870,7 +5870,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.5
+        "real_waypoint_fraction": 0.6
       }
     },
     {
@@ -6186,12 +6186,12 @@
             22.318
           ],
           [
-            113.92020462348363,
-            22.357799382009613
+            114.253375,
+            22.30564
           ],
           [
-            113.92020462348363,
-            22.357799382009613
+            114.253375,
+            22.30564
           ],
           [
             114.15187594415198,
@@ -6452,7 +6452,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.467
+        "real_waypoint_fraction": 0.533
       }
     },
     {
@@ -6569,8 +6569,8 @@
             22.39756912336919
           ],
           [
-            114.01428564888991,
-            22.438587510490578
+            114.27336,
+            22.316839
           ]
         ]
       },
@@ -6789,7 +6789,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.607
+        "real_waypoint_fraction": 0.643
       }
     },
     {
@@ -7869,8 +7869,8 @@
             22.32170950637064
           ],
           [
-            114.28466605630578,
-            22.427039406424047
+            114.253429,
+            22.30581
           ],
           [
             114.00353810940719,
@@ -8181,7 +8181,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.639
+        "real_waypoint_fraction": 0.667
       }
     },
     {

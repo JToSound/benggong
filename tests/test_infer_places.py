@@ -203,12 +203,22 @@ def test_no_generic_place_false_positives(records):
 
 
 def test_no_duplicate_coordinates_within_same_prototype(records):
-    """同一原型嘅多個推斷要指到同一個座標（唔可以各自亂放）。"""
+    """同一**具名**原型嘅多個推斷要指到同一個座標（唔可以各自亂放）。
+
+    ⚠️ 只檢查「具名原型」（例如「校園 A 座」）。**描述式原型**（例如
+    「同章已解析地點聚類中心（2 個錨點，跨距 391 m）」）本來就係逐個
+    計算嘅，唔同地點有唔同座標係正常 —— 佢哋嘅原型字串只係解釋方法，
+    唔係一個具體地點名。
+    """
+    DESCRIPTIVE = ("聚類中心", "附近", "範圍內", "校園範圍", "依附於", "待考")
     by_proto: dict[str, set[tuple[float, float]]] = {}
     for r in records:
         if not r["inferred_lonlat"] or r["pattern"] == "R-DISTRICT":
             continue
-        by_proto.setdefault(str(r["inferred_prototype"]), set()).add(
+        proto = str(r["inferred_prototype"])
+        if any(k in proto for k in DESCRIPTIVE):
+            continue
+        by_proto.setdefault(proto, set()).add(
             (r["inferred_lonlat"][0], r["inferred_lonlat"][1])
         )
     for proto, pts in by_proto.items():
@@ -468,3 +478,66 @@ def test_entity_kind_variety(records):
     assert "location" in kinds
     # 角色推斷係今次新增嘅推廣；冇嘅話代表規則冇觸發
     assert "character" in kinds, f"應該有角色推斷，實際只有 {kinds}"
+
+
+# ---------------------------------------------------------------------------
+# 同章聚類推斷
+# ---------------------------------------------------------------------------
+def test_cluster_spread_threshold_is_documented(mod):
+    """門檻必須有實測依據，唔可以隨意訂。"""
+    assert hasattr(mod, "CLUSTER_MAX_SPREAD_M")
+    assert mod.CLUSTER_MAX_SPREAD_M == 500.0, (
+        "門檻改動要有實測依據：374 條之中有同章已解析地點嘅 159 條，"
+        "跨距中位數 1,590 m。≤500 m 只有 38 條（真正同一場景）。"
+    )
+
+
+def test_chapter_cluster_inferences_are_tight(records):
+    """R-CHAPTER-CLUSTER 嘅每個推斷，其跨距都必須 ≤ 門檻。"""
+    import re as _re
+
+    cluster = [r for r in records if r["pattern"] == "R-CHAPTER-CLUSTER"]
+    if not cluster:
+        pytest.skip("今次冇同章聚類推斷")
+    for r in cluster:
+        # 證據格式：「…全部喺 X m 之內…」；原型格式：「…跨距 X m…」
+        m = _re.search(r"喺 (\d+) m 之內", r["evidence"][0]["detail"])
+        assert m, f"{r['inference_id']} 證據缺跨距：{r['evidence'][0]['detail'][:60]}"
+        assert int(m.group(1)) <= 500, (
+            f"{r['inference_id']} 跨距 {m.group(1)} m 超過門檻"
+        )
+
+
+def test_chapter_cluster_requires_two_anchors(records):
+    """≥2 個錨點 —— 單一錨點嘅「跨距 = 0」係假象。"""
+    import re as _re
+
+    for r in records:
+        if r["pattern"] != "R-CHAPTER-CLUSTER":
+            continue
+        m = _re.search(r"(\d+) 個錨點", r["inferred_prototype"])
+        assert m, f"{r['inference_id']} 原型缺錨點數"
+        assert int(m.group(1)) >= 2, f"{r['inference_id']} 只有一個錨點"
+
+
+def test_chapter_cluster_confidence_decreases_with_spread(records):
+    """跨距越大，信心越低。"""
+    import re as _re
+
+    pairs = []
+    for r in records:
+        if r["pattern"] != "R-CHAPTER-CLUSTER":
+            continue
+        m = _re.search(r"喺 (\d+) m 之內", r["evidence"][0]["detail"])
+        if m:
+            pairs.append((int(m.group(1)), r["confidence"]))
+    if len(pairs) < 2:
+        pytest.skip("樣本不足")
+    pairs.sort()
+    lo_spread, lo_conf = pairs[0]
+    hi_spread, hi_conf = pairs[-1]
+    assert lo_spread < hi_spread
+    assert lo_conf >= hi_conf, (
+        f"跨距細嘅（{lo_spread} m, conf {lo_conf}）應該唔低過"
+        f"跨距大嘅（{hi_spread} m, conf {hi_conf}）"
+    )

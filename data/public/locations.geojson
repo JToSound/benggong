@@ -2199,8 +2199,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257059,
-          22.306854
+          114.253431,
+          22.30581
         ]
       },
       "properties": {
@@ -2251,17 +2251,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21227237354086,
-          22.330837605859465
+          114.253431,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0068",
         "name": "中國銀行",
-        "display_name": "中國銀行（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "中國銀行（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.687,
           "y": 0.517
@@ -2274,7 +2274,8 @@
         "description": "廣場內有一間中銀，大閘一直長開，因防彈玻璃同大閘被選為困住病爪嘅地點，三名不良人其後被落閘困於入面。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0068"
       }
     },
     {
@@ -2282,17 +2283,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91036713206684,
-          22.336706988632027
+          114.253431,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0069",
         "name": "玩具店",
-        "display_name": "玩具店（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "玩具店（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.184,
           "y": 0.533
@@ -2305,7 +2306,8 @@
         "description": "廣場內一間未被大規模搜索掠奪過、出奇地整齊嘅玩具店，M同犬京喺度搵遙控車同鬧鐘，並發現會播「救我」聲嘅錄音人偶。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0069"
       }
     },
     {
@@ -5207,17 +5209,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26926310368506,
-          22.323460860608836
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
         "id": "loc_0159",
         "name": "病者陷阱設計室",
-        "display_name": "病者陷阱設計室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "病者陷阱設計室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.423,
           "y": 0.261
@@ -5232,7 +5234,8 @@
         "description": "位於工坊六樓的工作室，由白領衣著的設計成員研發對付病者的陷阱模板，部分成員來自八樓以上。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0159"
       }
     },
     {
@@ -5240,17 +5243,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15585580224307,
-          22.246524109254594
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
         "id": "loc_0160",
         "name": "木材加工部（木工部）",
-        "display_name": "木材加工部（木工部）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "木材加工部（木工部）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.593,
           "y": 0.276
@@ -5263,7 +5266,8 @@
         "description": "工坊內的部門，由一位老主管管理，傑夫丸在此以刨木、削木等工作麻醉自己。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0160"
       }
     },
     {
@@ -5405,17 +5409,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05810894941634,
-          22.34059124895094
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
         "id": "loc_0165",
         "name": "武器製造室",
-        "display_name": "武器製造室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "武器製造室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.43,
           "y": 0.545
@@ -5430,7 +5434,8 @@
         "description": "位於工坊四樓的最大房間，內設多張武作檯，有匠人燒鐵磨鑽製作武器。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0165"
       }
     },
     {
@@ -5438,17 +5443,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21809155413138,
-          22.224893377584497
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
         "id": "loc_0166",
         "name": "C樓休息室",
-        "display_name": "C樓休息室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C樓休息室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.697,
           "y": 0.214
@@ -5461,7 +5466,8 @@
         "description": "地板、天花、牆身均以木板鋪設的休息室，眾人在此玩撲克牌、比腕力等，每晚更舉行社交派對。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0166"
       }
     },
     {
@@ -5537,17 +5543,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95007598992905,
-          22.204156137941556
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
         "id": "loc_0169",
         "name": "成衣室（C008室）",
-        "display_name": "成衣室（C008室）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "成衣室（C008室）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.25,
           "y": 0.155
@@ -5560,7 +5566,8 @@
         "description": "C橦內的房間，傑夫丸發癲時在此與包括愛紗在內的幾位少女對峙。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0169"
       }
     },
     {
@@ -5568,17 +5575,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25678141451132,
-          22.43395181963836
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
         "id": "loc_0170",
         "name": "紡織室",
-        "display_name": "紡織室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "紡織室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.761,
           "y": 0.811
@@ -5591,7 +5598,8 @@
         "description": "C橦內的房間，王達尼被持菜刀的傑夫丸追逐至此，雙方在棉布布料間糾纏。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0170"
       }
     },
     {
@@ -6291,17 +6299,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25388464179446,
-          22.30770027466239
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0193",
         "name": "七樓",
-        "display_name": "七樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "七樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.756,
           "y": 0.451
@@ -6325,7 +6333,8 @@
         "description": "七樓曾傳出大騷動，敘述者追問之下先知少佐光明正大殺入咗八樓。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0193"
       }
     },
     {
@@ -6675,8 +6684,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25343,
-          22.30581
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
@@ -6707,17 +6716,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03278782330052,
-          22.423824330510413
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
         "id": "loc_0205",
         "name": "安全屋",
-        "display_name": "安全屋（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "安全屋（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.388,
           "y": 0.782
@@ -6732,7 +6741,8 @@
         "description": "M當卧底期間住在一間放滿罐頭食品的安全屋，每天觀察他人。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0205"
       }
     },
     {
@@ -6740,17 +6750,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21606637674525,
-          22.32431773098344
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
         "id": "loc_0206",
         "name": "醫療大樓六樓",
-        "display_name": "醫療大樓六樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "醫療大樓六樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.693,
           "y": 0.498
@@ -6763,7 +6773,8 @@
         "description": "醫療大樓六樓只有Dr.D一人居住，M被送到最深處擺放住病爪頭部魚缸嘅房間休息。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0206"
       }
     },
     {
@@ -6815,17 +6826,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0504504463264,
-          22.417439040207523
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
         "id": "loc_0208",
         "name": "六樓",
-        "display_name": "六樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "六樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.417,
           "y": 0.764
@@ -6850,7 +6861,8 @@
         "description": "醫療大樓六樓只有Dr.D一人居住，馬姑娘將動彈不得嘅M送到嗰度最深處擺放魚缸嘅房間。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0208"
       }
     },
     {
@@ -6992,17 +7004,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1478704509041,
-          22.35980693522545
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0213",
         "name": "手術室",
-        "display_name": "手術室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "手術室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.58,
           "y": 0.599
@@ -7018,7 +7030,8 @@
         "description": "主角躲進一間明顯被改裝過、儀器不算先進的手術室，並藏身抽櫃之中避開馬姑娘。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0213"
       }
     },
     {
@@ -7060,17 +7073,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22898649576562,
-          22.267104333562216
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0215",
         "name": "茶水間",
-        "display_name": "茶水間（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "茶水間（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.715,
           "y": 0.335
@@ -7083,7 +7096,8 @@
         "description": "主角踢開茶水間的門，發現天花板有通風口，並與不良人由此爬入通風管道逃生。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0215"
       }
     },
     {
@@ -7091,17 +7105,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16377706569008,
-          22.311573319600214
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0216",
         "name": "發電房",
-        "display_name": "發電房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "發電房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.606,
           "y": 0.462
@@ -7116,7 +7130,8 @@
         "description": "兩人最終退入一間放置數部簡陋小型發電機、無窗只有一道大門的房間背水一戰。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0216"
       }
     },
     {
@@ -7124,17 +7139,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24291920347905,
-          22.274061608300908
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0217",
         "name": "前面廣場",
-        "display_name": "前面廣場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "前面廣場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.738,
           "y": 0.354
@@ -7147,7 +7162,8 @@
         "description": "Dr.D位於廣場一帶，不良人稱主角有辦法對付前面廣場的大病者。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0217"
       }
     },
     {
@@ -7363,17 +7379,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26407465476464,
-          22.32506420233463
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0224",
         "name": "倖存區",
-        "display_name": "倖存區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "倖存區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.278,
           "y": 0.306
@@ -7407,7 +7423,8 @@
         "description": "故事場景設喺一個「倖存區」之內，區內突然出現大量病者，令不良人絕望大叫。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0224"
       }
     },
     {
@@ -7612,17 +7629,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91788464179446,
-          22.353133783474476
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0231",
         "name": "通風管道",
-        "display_name": "通風管道（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "通風管道（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.196,
           "y": 0.58
@@ -7635,7 +7652,8 @@
         "description": "主角同不良人喺狹窄、又靜又暗嘅通風管道中向前爬行逃生。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0231"
       }
     },
     {
@@ -7737,17 +7755,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24551476310369,
-          22.370663424124512
+          114.267544,
+          22.31839
         ]
       },
       "properties": {
         "id": "loc_0235",
         "name": "操場斷頭台",
-        "display_name": "操場斷頭台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "操場斷頭台（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.743,
           "y": 0.63
@@ -7765,7 +7783,8 @@
         "source": "bing_gang",
         "aliases": [
           "操場的斷頭台"
-        ]
+        ],
+        "inferred_from": "inf_loc_0235"
       }
     },
     {
@@ -7773,17 +7792,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16004715037766,
-          22.378364652475774
+          114.267544,
+          22.31839
         ]
       },
       "properties": {
         "id": "loc_0236",
         "name": "禮堂",
-        "display_name": "禮堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "禮堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.6,
           "y": 0.652
@@ -7801,7 +7820,8 @@
         "description": "主角在禮堂向一名正準備用餐的不破尚飛虎部隊成員查詢關於病童的事。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0236"
       }
     },
     {
@@ -7809,17 +7829,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06767086289769,
-          22.423656099794
+          114.267544,
+          22.31839
         ]
       },
       "properties": {
         "id": "loc_0237",
         "name": "遊戲室酒吧",
-        "display_name": "遊戲室酒吧（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "遊戲室酒吧（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.446,
           "y": 0.782
@@ -7832,7 +7852,8 @@
         "description": "主角進入遊戲室酒吧，看見裡面的醉漢疏於看管自己的武器，趁機下手盜竊。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0237"
       }
     },
     {
@@ -12407,17 +12428,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27212378881514,
-          22.339607576104374
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0379",
         "name": "病獵公會聖堂",
-        "display_name": "病獵公會聖堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "病獵公會聖堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.503,
           "y": 0.713
@@ -12432,7 +12453,8 @@
         "description": "病獵公會是一座坐落山邊的聖堂，位於倖存區範圍外、只隔一條馬路，自「白鯨」失蹤後已沒落，只剩兩、三名當日沒去調查的成員留守。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0379"
       }
     },
     {
@@ -12718,17 +12740,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92020462348363,
-          22.357799382009613
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0388",
         "name": "翠林邨",
-        "display_name": "翠林邨（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "翠林邨（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.2,
           "y": 0.594
@@ -12751,7 +12773,8 @@
         "description": "瓦安委託主角送信的目的地，位於倖存區外西北方向，需行一段數十分鐘的上坡山路才能到達。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0388"
       }
     },
     {
@@ -12952,17 +12975,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14667841611353,
-          22.25069623102159
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0395",
         "name": "人類村莊",
-        "display_name": "人類村莊（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "人類村莊（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.578,
           "y": 0.288
@@ -12975,7 +12998,8 @@
         "description": "主角知道三隻病腦躲藏在人類村莊之中，認為這是一件很不合常理的事。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0395"
       }
     },
     {
@@ -12983,17 +13007,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10693110551614,
-          22.2903463416495
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0396",
         "name": "胡子老闆的酒館",
-        "display_name": "胡子老闆的酒館（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "胡子老闆的酒館（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.512,
           "y": 0.401
@@ -13347,17 +13371,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92370382238498,
-          22.365197795071335
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0406",
         "name": "村長的家",
-        "display_name": "村長的家（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "村長的家（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.206,
           "y": 0.615
@@ -16720,17 +16744,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.00658869306477,
-          22.39149412527657
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0509",
         "name": "和風",
-        "display_name": "和風（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "和風（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.344,
           "y": 0.69
@@ -16743,7 +16767,8 @@
         "description": "位於倖存區上層的拉麵專門店，使用日本拉麵條，主角排隊二十分鐘入內用餐。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0509"
       }
     },
     {
@@ -16914,17 +16939,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93757885099565,
-          22.223798008697642
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0515",
         "name": "翠林邨酒館",
-        "display_name": "翠林邨酒館（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "翠林邨酒館（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.229,
           "y": 0.211
@@ -16940,7 +16965,8 @@
         "description": "翠林邨一間幽暗嘅店子，胡子老闆經營，售賣調酒",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0515"
       }
     },
     {
@@ -16948,17 +16974,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20467795834287,
-          22.324138284885937
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0516",
         "name": "社區會堂",
-        "display_name": "社區會堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "社區會堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.674,
           "y": 0.498
@@ -16973,7 +16999,8 @@
         "description": "翠林邨最北面、偏僻嘅辦公地點，村長等重要人物商議事務嘅場所，閒雜人唔好入",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0516"
       }
     },
     {
@@ -16981,17 +17008,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25093659876401,
-          22.37541126878767
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0517",
         "name": "大牛湖",
-        "display_name": "大牛湖（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大牛湖（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.752,
           "y": 0.644
@@ -17004,7 +17031,8 @@
         "description": "從翠林邨行衛奕信徑３段約30分鐘到達，有乾淨湖水俾村民燒嚟飲",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0517"
       }
     },
     {
@@ -17012,17 +17040,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9794859235523,
-          22.33952204928664
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0518",
         "name": "井欄樹村",
-        "display_name": "井欄樹村（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "井欄樹村（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.299,
           "y": 0.541
@@ -17035,7 +17063,8 @@
         "description": "從大牛湖再行一個鐘可到嘅郊外村屋地之一，有大規模泥田種植",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0518"
       }
     },
     {
@@ -17043,14 +17072,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26210840009156,
-          22.325833096818492
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0519",
         "name": "炭山村",
-        "display_name": "炭山村（參考位置）",
+        "display_name": "炭山村（推斷位置）",
         "location_type": "district",
         "fictional": false,
         "location_precision": "approximate",
@@ -17066,7 +17095,8 @@
         "description": "從大牛湖再行一個鐘可到嘅郊外村屋地之一",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0519"
       }
     },
     {
@@ -17074,17 +17104,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25119295033188,
-          22.44422510872053
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0520",
         "name": "龍窩村",
-        "display_name": "龍窩村（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "龍窩村（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.752,
           "y": 0.841
@@ -17097,7 +17127,8 @@
         "description": "從大牛湖再行一個鐘可到嘅郊外村屋地之一",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0520"
       }
     },
     {
@@ -17105,17 +17136,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.17970290684367,
-          22.378192683298998
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0521",
         "name": "白石窩村",
-        "display_name": "白石窩村（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "白石窩村（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.633,
           "y": 0.652
@@ -17128,7 +17159,8 @@
         "description": "從大牛湖再行一個鐘可到嘅郊外村屋地之一",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0521"
       }
     },
     {
@@ -17136,17 +17168,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12802883955138,
-          22.386230373083084
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
         "id": "loc_0522",
         "name": "衛奕信徑３段",
-        "display_name": "衛奕信徑３段（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "衛奕信徑３段（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.547,
           "y": 0.675
@@ -17159,7 +17191,8 @@
         "description": "翠林邨對外嘅山路，可以經此行到大牛湖",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0522"
       }
     },
     {
@@ -17709,17 +17742,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30915403982604,
-          22.415906271458
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
         "id": "loc_0540",
         "name": "愛紗宿舍",
-        "display_name": "愛紗宿舍（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "愛紗宿舍（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.849,
           "y": 0.76
@@ -17732,7 +17765,8 @@
         "description": "王達尼、敘事者同瓦禮一齊食晚飯嘅地方",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0540"
       }
     },
     {
@@ -17836,17 +17870,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01647104600595,
-          22.431334897383078
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
         "id": "loc_0544",
         "name": "A橦大樓",
-        "display_name": "A橦大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "A橦大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.361,
           "y": 0.804
@@ -17859,7 +17893,8 @@
         "description": "第五搜索隊被派往A橦大樓搜索。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0544"
       }
     },
     {
@@ -18595,17 +18630,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.3078979171435,
-          22.373063515678645
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0568",
         "name": "明哥書房",
-        "display_name": "明哥書房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "明哥書房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.846,
           "y": 0.637
@@ -18618,7 +18653,8 @@
         "description": "明哥位於倖存區的書房，明哥在此殺死助手並向董倫下令。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0568"
       }
     },
     {
@@ -19435,17 +19471,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.96109910734721,
-          22.27596074616617
+          114.253429,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0593",
         "name": "精神科診所",
-        "display_name": "精神科診所（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "精神科診所（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.268,
           "y": 0.36
@@ -19460,7 +19496,8 @@
         "description": "位於康城倖存區嘅精神科診所，Sona覆診嘅地點。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0593"
       }
     },
     {
@@ -19468,17 +19505,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28466605630578,
-          22.427039406424047
+          114.253429,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0594",
         "name": "KTV館",
-        "display_name": "KTV館（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "KTV館（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.808,
           "y": 0.792
@@ -19493,7 +19530,8 @@
         "description": "兩年前明雲父親做嘅事件發生地點（Sona當年對門外求救）。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0594"
       }
     },
     {
@@ -20065,17 +20103,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9128793774319,
-          22.34708495460441
+          114.25349,
+          22.30597
         ]
       },
       "properties": {
         "id": "loc_0613",
         "name": "新市區",
-        "display_name": "新市區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "新市區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.188,
           "y": 0.563
@@ -20088,7 +20126,8 @@
         "description": "余智海博士一家曾經搬入嘅新市區大屋",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0613"
       }
     },
     {
@@ -20299,17 +20338,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93001007095445,
-          22.408612535286487
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
         "id": "loc_0620",
         "name": "賭場",
-        "display_name": "賭場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "賭場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.217,
           "y": 0.739
@@ -20326,7 +20365,8 @@
         "description": "倖存區附近嘅賭場，白魂喺度玩德州撲克，敘事者同王達尼喺旁觀戰。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0620"
       }
     },
     {
@@ -20396,17 +20436,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19966628519111,
-          22.309599412527657
+          114.242925,
+          22.326301
         ]
       },
       "properties": {
         "id": "loc_0623",
         "name": "國王房間",
-        "display_name": "國王房間（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "國王房間（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.666,
           "y": 0.456
@@ -20421,7 +20461,8 @@
         "description": "房間裝飾溫暖寬闊，有奢侈嘅暖爐，門外有禁軍重重把守。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0623"
       }
     },
     {
@@ -20429,17 +20470,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04541313801785,
-          22.446329861905852
+          114.242925,
+          22.326301
         ]
       },
       "properties": {
         "id": "loc_0624",
         "name": "烤串店",
-        "display_name": "烤串店（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "烤串店（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.409,
           "y": 0.847
@@ -20454,7 +20495,8 @@
         "description": "白魂等人離開皇宮後聚集嘅地方。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0624"
       }
     },
     {
@@ -21715,17 +21757,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95892011902036,
-          22.38054417486839
+          114.27336,
+          22.316839
         ]
       },
       "properties": {
         "id": "loc_0662",
         "name": "病翼巢穴",
-        "display_name": "病翼巢穴（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "病翼巢穴（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.265,
           "y": 0.659
@@ -21740,7 +21782,8 @@
         "description": "位於九樓邊沿一條向外彎曲伸出嘅鋼鐵上，由人體殘肢同鐵線組合而成，擺放住病翼從人類身上掠奪嘅戰利品",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0662"
       }
     },
     {
@@ -21748,17 +21791,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2568326848249,
-          22.244228694590674
+          114.27336,
+          22.316839
         ]
       },
       "properties": {
         "id": "loc_0663",
         "name": "九樓大鐵門",
-        "display_name": "九樓大鐵門（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "九樓大鐵門（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.761,
           "y": 0.269
@@ -21771,7 +21814,8 @@
         "description": "通往「病者之都」政府大樓最高層（十樓）嘅鎖上鐵門，寬565公分、長650公分，由後來建造，風格與大樓格格不入",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0663"
       }
     },
     {
@@ -21873,17 +21917,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98223529411764,
-          22.252333676661326
+          114.27336,
+          22.316839
         ]
       },
       "properties": {
         "id": "loc_0667",
         "name": "聖堂後堂",
-        "display_name": "聖堂後堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "聖堂後堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.304,
           "y": 0.292
@@ -21896,7 +21940,8 @@
         "description": "聖堂後堂係白鯨房間外面，敘事者同白魂曾跑到該處",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0667"
       }
     },
     {
@@ -21904,17 +21949,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01428564888991,
-          22.438587510490578
+          114.27336,
+          22.316839
         ]
       },
       "properties": {
         "id": "loc_0668",
         "name": "白鯨房間",
-        "display_name": "白鯨房間（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "白鯨房間（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.357,
           "y": 0.825
@@ -21929,7 +21974,8 @@
         "description": "白鯨嘅房間位於聖堂後堂後面，由背負鯨牙大劍嘅男人坐守",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0668"
       }
     },
     {

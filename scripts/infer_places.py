@@ -109,6 +109,7 @@ RULES: dict[str, str] = {
     "R-DISTRICT": "只可以確定到區域層級（同章出現區域名）",
     "R-NAME-PLACE": "名稱本身就係一個真實香港地點（OSM 有記錄）",
     "R-DESC-PLACE": "描述直接提及真實地區名（比同章共現強）",
+    "R-CHAPTER-CLUSTER": "同章已解析地點高度集中（≤500 m）→ 未定位地點喺同一帶",
     "R-DESC-RESOLVED": "描述提及已解析地點名 → 子項喺該地點附近",
     "R-CHARACTER-BASE": "名稱含角色名，而該角色只關聯一個已解析地點",
     "R-ANAGRAM-MERGE": "同一組字符、次序唔同（荒廢商場／廢荒商場）",
@@ -999,6 +1000,131 @@ def infer_from_resolved_context(
     return out
 
 
+#: 同章聚類推斷嘅最大容許跨距（米）。
+#:
+#: 實測分佈（374 條未解析個案之中有同章已解析地點嘅 159 條）：
+#:   中位數 1,590 m、平均 2,118 m
+#:   ≤300 m: 30 條　≤500 m: 38 條　≤1000 m: 48 條
+#: 中位數 1.6 km 代表「同一章」通常跨越多個地點 —— 強行推斷會出錯。
+#: 所以只喺**跨距細**（同一場景）嗰陣才用。
+CLUSTER_MAX_SPREAD_M = 500.0
+
+
+def infer_from_chapter_cluster(
+    candidates: list[dict[str, Any]],
+    covered: set[str],
+    feats: list[dict[str, Any]],
+    results_so_far: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """R-CHAPTER-CLUSTER：同章已解析地點高度集中 → 未定位地點喺同一區。
+
+    原理
+    ----
+    同一章嘅事件通常發生喺相鄰地點。如果某章嘅**已解析**地點全部集中喺
+    500 m 之內，而某個未定位地點只喺嗰章出現，咁佢好可能都喺嗰一帶。
+
+    為何錨點只准用 `exact`／`approximate`
+    ------------------------------------
+    `district` 精度嘅座標係「區中心」，誤差可以係公里級。用佢做錨點會
+    令「跨距」嘅計算失真（明明只知喺個區，卻當成精確點）。
+
+    為何要 ≥2 個錨點
+    ----------------
+    只有一個錨點嘅話，「跨距 = 0」係假象（一點冇跨距可言），
+    推斷會變成「喺嗰個點」而唔係「喺嗰一帶」。
+    """
+    import math
+
+    ANCHOR_PRECISION = {"exact", "approximate"}
+
+    # ⚠️ 錨點唔可以包括「由本規則自己解析出嚟」嘅地點 —— 否則會形成
+    # **反饋循環**：套用 → 錨點變多 → 下一輪推斷唔同 → 套用 → …
+    # 實測：管線因此唔冪等（重跑會改 locations.geojson）。
+    #
+    # 判斷方法：睇 `inferred_from` 指向嘅推斷係唔係 R-CHAPTER-CLUSTER。
+    # 人工設定／其他規則解析嘅地點都可以做錨點（佢哋唔受本規則影響）。
+    self_resolved: set[str] = set()
+    for r in results_so_far:
+        if r["pattern"] == "R-CHAPTER-CLUSTER":
+            self_resolved.update(r["subject_ids"])
+
+    by_ch: dict[int, list[tuple[str, list[float]]]] = {}
+    for f in feats:
+        pr = f["properties"]
+        if pr["location_precision"] not in ANCHOR_PRECISION:
+            continue
+        if pr["id"] in self_resolved:
+            continue
+        rec = (pr["id"], list(f["geometry"]["coordinates"]))
+        for c in pr["chapters"]:
+            by_ch.setdefault(c, []).append(rec)
+
+    def dist(a: list[float], b: list[float]) -> float:
+        return math.hypot(
+            (b[0] - a[0]) * 111320 * 0.9247, (b[1] - a[1]) * 110570
+        )
+
+    out: list[dict[str, Any]] = []
+    for props in candidates:
+        if props["id"] in covered:
+            continue
+        pts: list[list[float]] = []
+        refs: list[str] = []
+        for c in props["chapters"]:
+            for pid, xy in by_ch.get(c, []):
+                if pid == props["id"]:
+                    continue
+                pts.append(xy)
+                refs.append(pid)
+        # 去重（同一地點可能喺多章出現）
+        uniq: dict[tuple[float, float], str] = {}
+        for xy, rid in zip(pts, refs):
+            uniq[(xy[0], xy[1])] = rid
+        if len(uniq) < 2:
+            continue
+        coords = [list(k) for k in uniq]
+        spread = max(
+            dist(a, b) for i, a in enumerate(coords) for b in coords[i + 1:]
+        )
+        if spread > CLUSTER_MAX_SPREAD_M:
+            continue
+        cx = sum(c[0] for c in coords) / len(coords)
+        cy = sum(c[1] for c in coords) / len(coords)
+        # 跨距越細越有信心；0 m → 0.72，500 m → 0.55
+        conf = 0.72 - 0.17 * (spread / CLUSTER_MAX_SPREAD_M)
+        out.append({
+            "inference_id": f"inf_{props['id']}",
+            "entity_kind": "location",
+            "subject_ids": [props["id"]],
+            "subject_names": [props["name"]],
+            "pattern": "R-CHAPTER-CLUSTER",
+            "inferred_prototype": (
+                f"同章已解析地點聚類中心（{len(coords)} 個錨點，"
+                f"跨距 {spread:.0f} m）"
+            ),
+            "inferred_lonlat": [round(cx, 6), round(cy, 6)],
+            "coordinate_source": "parent_containment",
+            "evidence": [{
+                "kind": "chapter_cooccurrence",
+                "chapter": props["chapters"][0] if props["chapters"] else None,
+                "detail": (
+                    f"同章（{props['chapters'][:4]}）嘅 {len(coords)} 個已解析"
+                    f"地點全部喺 {spread:.0f} m 之內，所以本項好可能喺同一帶"
+                ),
+                "refs": sorted(set(uniq.values()))[:10],
+            }],
+            "confidence": round(conf, 2),
+            "proposed_changes": {
+                "location_precision": "approximate",
+                "merge_into": None,
+                "set_lonlat": [round(cx, 6), round(cy, 6)],
+            },
+            "review_status": "pending",
+            "review_notes": None,
+        })
+    return out
+
+
 def infer_location_variants(
     candidates: list[dict[str, Any]],
     covered: set[str],
@@ -1586,6 +1712,12 @@ def main() -> int:
         if chars_path.exists()
         else []
     )
+    cluster = infer_from_chapter_cluster(vague, covered_now, feats, results)
+    results += cluster
+    if cluster:
+        print(f"\n同章聚類推斷：{len(cluster)} 條")
+
+    covered_now = {i for r in results for i in r["subject_ids"]}
     ctx = infer_from_resolved_context(vague, covered_now, resolved, char_list)
     results += ctx
     if ctx:
