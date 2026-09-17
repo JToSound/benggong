@@ -57,6 +57,7 @@ from extraction_core import (  # noqa: E402
 INFERENCE = REPO / "data" / "private" / "review" / "place-inference.jsonl"
 CLEANED = REPO / "data" / "private" / "cleaned" / "bing-gang.clean.jsonl"
 OSM = REPO / "data" / "private" / "cache" / "osm-hk.json"
+HK_DISTRICTS = REPO / "data" / "private" / "review" / "hk-districts.json"
 LOCATIONS = REPO / "data" / "public" / "locations.geojson"
 OUT = REPO / "data" / "private" / "review" / "place-inference-llm.jsonl"
 
@@ -153,6 +154,12 @@ CURATED_VERIFIED: dict[str, dict] = {
 }
 
 
+#: 人手整理嘅本地座標表（載入一次）。
+_HK_DISTRICTS: dict[str, list[float]] = (
+    json.loads(HK_DISTRICTS.read_text(encoding="utf-8")) if HK_DISTRICTS.exists() else {}
+)
+
+
 def osm_prefix_cluster(osm: dict[str, dict], name: str) -> list[float] | None:
     """用 OSM 名嘅**共同前綴叢集**推導座標。
 
@@ -175,11 +182,38 @@ def osm_prefix_cluster(osm: dict[str, dict], name: str) -> list[float] | None:
     if len(uniq) < 2:
         return None
     coords = [list(p) for p in uniq]
+
+    # ⚠️ **緊密度**要求（關鍵）
+    #
+    # 實測嚴重錯誤：「康城站」嘅前綴「康城」喺全港都搵到同名設施，質心
+    # 計出嚟係 (114.198, 22.356) —— 即係**西貢**，而真正嘅康城站喺
+    # (114.270, 22.295)，相差 6 km。
+    #
+    # 前綴匹配只可以喺**同一小區**之內用。要求所有匹配點互相相距
+    # ≤ MAX_CLUSTER_SPREAD_M —— 超過就代表個前綴喺多個地區出現，
+    # 唔可以用。
+    MAX_CLUSTER_SPREAD_M = 1000.0
+    spread = max(
+        haversine_m(a, b) for i, a in enumerate(coords) for b in coords[i + 1 :]
+    )
+    if spread > MAX_CLUSTER_SPREAD_M:
+        return None
+
     cx = sum(p[0] for p in coords) / len(coords)
     cy = sum(p[1] for p in coords) / len(coords)
     if not in_story_region(cx, cy):
         return None
     return [round(cx, 6), round(cy, 6)]
+
+
+def haversine_m(a: list[float], b: list[float]) -> float:
+    """兩點距離（米）。"""
+    import math
+
+    return math.hypot(
+        (b[0] - a[0]) * 111320 * math.cos(math.radians(22.36)),
+        (b[1] - a[1]) * 110570,
+    )
 
 
 def in_story_region(lon: float, lat: float) -> bool:
@@ -327,10 +361,25 @@ def main() -> int:
             if cluster is not None:
                 lon, lat = cluster
                 coord_src = "osm_relation"
+        # 3. 已核實錨點（OSM 有建築但冇名，座標由官方地址 + OSM 建築推導）
+        #
+        # ⚠️ 次序：`CURATED_VERIFIED` 一定要排喺 `hk-districts.json` **之前**。
+        # 實測「靈實醫院」兩個來源相差 1.5 km：
+        #   hk-districts.json (114.245, 22.302) ← 人手填，冇記錄來源
+        #   CURATED_VERIFIED  (114.2566, 22.3138) ← 官方地址（靈實路8號）
+        #                                            + OSM 醫院建築質心
+        # 後者有完整依據（而且同毗鄰嘅靈實護養院／禮拜堂一致，
+        # 官方資料亦話「步行 2 分鐘」），所以優先。
         if lon is None and proto in CURATED_VERIFIED:
             v = CURATED_VERIFIED[proto]
             lon, lat = v["lonlat"]
             coord_src = "external_verified"
+        # 4. 本地人手座標表（最後手段；冇記錄來源，所以排最後）
+        if lon is None:
+            hk = _HK_DISTRICTS.get(proto)
+            if hk and in_story_region(hk[0], hk[1]):
+                lon, lat = round(hk[0], 6), round(hk[1], 6)
+                coord_src = "hk-districts.json"
         if lon is None:
             stats["no_coord"] += 1
             print(f"  [{i}/{len(todo)}] {p['name']} → 「{proto}」但 OSM 查唔到（唔出座標）")
