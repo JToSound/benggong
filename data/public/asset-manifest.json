@@ -3,7 +3,7 @@
   "generated_at": "2026-09-05T01:40:30+00:00",
   "generator": "scripts/build_public_dataset.py",
   "counts": {
-    "location": 707,
+    "location": 704,
     "event": 1796,
     "route": 42,
     "timeline": 1796,

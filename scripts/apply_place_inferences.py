@@ -127,7 +127,7 @@ def apply_location_merges(
     return fc, merges, id_map
 
 
-def repair_orphan_refs() -> dict[str, int]:
+def repair_orphan_refs(fc: dict[str, Any] | None = None) -> dict[str, int]:
     """修復所有指向唔存在地點嘅 `location_id`（參照完整性對賬）。
 
     為何需要獨立一步
@@ -145,7 +145,16 @@ def repair_orphan_refs() -> dict[str, int]:
 
     呢一步係**自癒**嘅 —— 每次跑都會掃一次，確保冇孤兒。
     """
-    locs = json.loads((REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8"))
+    # ⚠️ 一定要用**記憶體版本**，唔可以由磁碟重讀。
+    #
+    # 實測踩過：合併之後 `fc` 已經冇咗被合併嘅記錄，但仲未寫入磁碟。
+    # 如果由磁碟重讀，就會用舊資料建 `by_name`，令「董倫大宅」（已併入
+    # 「董倫的大宅」）搵唔返 → route waypoint 嘅孤兒修唔到。
+    if fc is None:
+        fc = json.loads(
+            (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
+        )
+    locs = fc
     valid = {f["properties"]["id"] for f in locs["features"]}
     by_name: dict[str, str] = {}
     for f in locs["features"]:
@@ -458,6 +467,48 @@ def main() -> int:
     # 為何唔可以只傳播「今次改動」：第一次套用時漏咗 routes，之後即使
     # 修正咗傳播邏輯，`moved` 已經係空（地點冇再改），routes 永遠唔會
     # 被修正。用完整對賬就每次都會收斂，而且可重複執行。
+    # 清走「已經冇已批核推斷支持」嘅 inferred_from。
+    #
+    # 為何需要：`inferred_from` 係 provenance —— 聲明「呢個座標嚟自推斷 X」。
+    # 但規則改動之後，X 可能由 approved 變成 pending（實測：馬德梵的家
+    # 原本由 R-CHARACTER-BASE 命中，角色關聯改變之後唔再命中）。
+    # 如果唔清，就會出現「引用一個未批核嘅推斷」嘅不一致。
+    #
+    # 維持嘅不變式：**`inferred_from` 存在 ⟺ 有已批核推斷支持**。
+    # 座標保留（佢仍然係最後一個已批核嘅值），只係唔再聲明來源。
+    cleared = 0
+    for f in fc["features"]:
+        src = f["properties"].get("inferred_from")
+        if not src:
+            continue
+        rec = next((r for r in records if r["inference_id"] == src), None)
+        if rec is None or rec["review_status"] != "approved":
+            del f["properties"]["inferred_from"]
+            cleared += 1
+    if cleared:
+        print(f"清除已失效嘅 inferred_from：{cleared} 條")
+
+    # 清走「已經冇已批核推斷支持」嘅 inferred_from。
+    #
+    # 為何需要：`inferred_from` 係 provenance —— 聲明「呢個座標嚟自推斷 X」。
+    # 但規則改動之後，X 可能由 approved 變成 pending（實測：馬德梵的家
+    # 原本由 R-CHARACTER-BASE 命中，角色關聯改變之後唔再命中）。
+    # 如果唔清，就會出現「引用一個未批核嘅推斷」嘅不一致。
+    #
+    # 維持嘅不變式：**`inferred_from` 存在 ⟺ 有已批核推斷支持**。
+    # 座標保留（佢仍然係最後一個已批核嘅值），只係唔再聲明來源。
+    cleared = 0
+    for f in fc["features"]:
+        src = f["properties"].get("inferred_from")
+        if not src:
+            continue
+        rec = next((r for r in records if r["inference_id"] == src), None)
+        if rec is None or rec["review_status"] != "approved":
+            del f["properties"]["inferred_from"]
+            cleared += 1
+    if cleared:
+        print(f"清除已失效嘅 inferred_from：{cleared} 條")
+
     # 先套用合併（會令記錄消失），再建對賬表
     fc, merges, merge_id_map = apply_location_merges(fc, approved)
     if merges:
@@ -483,7 +534,7 @@ def main() -> int:
         if new_id in all_coords:
             all_coords[old_id] = all_coords[new_id]
     propagated = propagate_to_dependents(all_coords)
-    repaired = repair_orphan_refs()
+    repaired = repair_orphan_refs(fc)
     for k, v in repaired.items():
         if v:
             print(f"  孤兒引用修復（{k}）：{v}")

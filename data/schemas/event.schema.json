@@ -4,17 +4,30 @@
   "title": "《病港》公開事件資料",
   "description": "GeoJSON Feature。description 最多 200 字，不可轉載長段正文。",
   "type": "object",
-  "required": ["type", "geometry", "properties"],
+  "required": [
+    "type",
+    "geometry",
+    "properties"
+  ],
   "properties": {
-    "type": { "const": "Feature" },
+    "type": {
+      "const": "Feature"
+    },
     "geometry": {
       "type": "object",
-      "required": ["type", "coordinates"],
+      "required": [
+        "type",
+        "coordinates"
+      ],
       "properties": {
-        "type": { "const": "Point" },
+        "type": {
+          "const": "Point"
+        },
         "coordinates": {
           "type": "array",
-          "items": { "type": "number" },
+          "items": {
+            "type": "number"
+          },
           "minItems": 2,
           "maxItems": 2
         }
@@ -23,30 +36,113 @@
     "properties": {
       "type": "object",
       "required": [
-        "id", "title", "description", "chapter", "chapter_name", "chapter_refs",
-        "characters", "event_type", "spoiler_level", "location_id",
-        "confidence", "review_status", "source"
+        "id",
+        "title",
+        "description",
+        "chapter",
+        "chapter_name",
+        "chapter_refs",
+        "characters",
+        "event_type",
+        "spoiler_level",
+        "location_id",
+        "confidence",
+        "review_status",
+        "source"
       ],
       "properties": {
-        "id": { "type": "string", "pattern": "^bg_event_[0-9]{3,6}$" },
-        "title": { "type": "string", "maxLength": 60 },
-        "description": { "type": "string", "maxLength": 200 },
-        "chapter": { "type": "integer", "minimum": 1, "maximum": 198 },
-        "chapter_name": { "type": "string", "maxLength": 40 },
-        "chapter_refs": { "type": "array", "items": { "type": "integer", "minimum": 1, "maximum": 198 }, "minItems": 1 },
-        "characters": { "type": "array", "items": { "type": "string" } },
-        "event_type": {
-          "enum": ["major", "minor", "battle", "discovery", "death", "reunion", "travel", "landmark"]
+        "id": {
+          "type": "string",
+          "pattern": "^bg_event_[0-9]{3,6}$"
         },
-        "spoiler_level": { "type": "integer", "minimum": 0, "maximum": 3 },
+        "title": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "chapter": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 198
+        },
+        "chapter_name": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "chapter_refs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 198
+          },
+          "minItems": 1
+        },
+        "characters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "event_type": {
+          "enum": [
+            "major",
+            "minor",
+            "battle",
+            "discovery",
+            "death",
+            "reunion",
+            "travel",
+            "landmark"
+          ]
+        },
+        "spoiler_level": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 3
+        },
         "location_id": {
           "description": "對應 locations.geojson id；null = 未指派（待人手審閱或後續 pipeline）。",
-          "type": ["string", "null"]
+          "type": [
+            "string",
+            "null"
+          ]
         },
-        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
-        "review_status": { "enum": ["needs_review", "reviewed", "verified"] },
-        "source": { "enum": ["bing_gang", "bing_gang_2"] },
-        "provisional_note": { "type": "string", "maxLength": 160 }
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "review_status": {
+          "enum": [
+            "needs_review",
+            "reviewed",
+            "verified"
+          ]
+        },
+        "source": {
+          "enum": [
+            "bing_gang",
+            "bing_gang_2"
+          ]
+        },
+        "provisional_note": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "character_roles": {
+          "description": "角色喺事件中嘅身份：character_id → role。subject = 出現喺事件標題（事件主體）；mentioned = 只出現喺描述（被提及）。唔會推斷 witness（目擊者）—— 需要語意分析，唔可靠。",
+          "type": "object",
+          "additionalProperties": {
+            "enum": [
+              "subject",
+              "mentioned"
+            ]
+          }
+        }
       }
     }
   }

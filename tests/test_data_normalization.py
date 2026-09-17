@@ -344,3 +344,82 @@ def test_no_orphan_location_refs(locations, events, routes, timeline):
             if lid and lid not in valid:
                 bad.append(f"route {f['properties']['id']} → {lid}")
     assert not bad, f"{len(bad)} 個孤兒 location_id：{bad[:5]}"
+
+
+# ---------------------------------------------------------------------------
+# 角色身份（subject / mentioned）
+# ---------------------------------------------------------------------------
+def test_character_roles_present(events):
+    """每個有角色連結嘅事件都要有 character_roles。"""
+    missing = [
+        e["properties"]["id"]
+        for e in events
+        if e["properties"].get("characters")
+        and not e["properties"].get("character_roles")
+    ]
+    assert not missing, f"{len(missing)} 條事件有角色但冇身份：{missing[:3]}"
+
+
+def test_character_roles_keys_match_characters(events):
+    """character_roles 嘅 key 必須同 characters 一致。"""
+    bad = [
+        e["properties"]["id"]
+        for e in events
+        if set((e["properties"].get("character_roles") or {}).keys())
+        != set(e["properties"].get("characters") or [])
+    ]
+    assert not bad, f"{len(bad)} 條事件嘅身份 key 同角色清單唔一致：{bad[:3]}"
+
+
+def test_character_roles_enum(events):
+    allowed = {"subject", "mentioned"}
+    bad: list[tuple[str, str]] = []
+    for e in events:
+        for cid, role in (e["properties"].get("character_roles") or {}).items():
+            if role not in allowed:
+                bad.append((e["properties"]["id"], role))
+    assert not bad, f"角色身份值唔合法：{bad[:5]}"
+
+
+def test_subject_role_implies_title_mention(events, characters):
+    """被標為 subject 嘅角色，必須真係出現喺事件標題。
+
+    呢個係規則嘅定義 —— 如果唔成立，代表規則實作有 bug。
+    """
+    by_id = {c["id"]: c for c in characters}
+    names: dict[str, list[str]] = {}
+    for c in characters:
+        names[c["id"]] = [
+            n for n in [c["name"], *(c.get("aliases") or [])] if n
+        ]
+    bad: list[tuple[str, str]] = []
+    for e in events:
+        title = e["properties"].get("title") or ""
+        for cid, role in (e["properties"].get("character_roles") or {}).items():
+            if role != "subject":
+                continue
+            if cid not in by_id:
+                continue
+            if not any(n in title for n in names[cid]):
+                bad.append((e["properties"]["id"], by_id[cid]["name"]))
+    assert not bad, f"{len(bad)} 個 subject 冇出現喺標題：{bad[:5]}"
+
+
+def test_single_latin_letters_allowed_as_names():
+    """單個拉丁字母（例如主角別名「M」）應該可以用嚟比對。
+
+    實測缺口：用 `len(n) < 2` 過濾會令「M」被排除，導致
+    「M擊殺便利店大眼店員」呢類事件捕捉唔到主角。
+    但單個**中文**字（代名詞）就唔可以。
+    """
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("link", LINK)
+    mod = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(mod)
+    assert mod.is_usable_name("M")
+    assert mod.is_usable_name("A")
+    assert not mod.is_usable_name("我")
+    assert not mod.is_usable_name("你")
+    assert mod.is_usable_name("夏晴")

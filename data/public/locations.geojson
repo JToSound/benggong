@@ -1290,14 +1290,18 @@
         },
         "first_appearance": 10,
         "chapters": [
-          10
+          10,
+          18
         ],
         "characters": [],
         "description": "首領老賢在大本營的房間，開門傳來糖果味，桌上放有一罐果汁糖。",
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0039"
+        "inferred_from": "inf_loc_0039",
+        "aliases": [
+          "老賢房間"
+        ]
       }
     },
     {
@@ -1768,17 +1772,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30407827878233,
-          22.41232108796826
+          114.257059,
+          22.306854
         ]
       },
       "properties": {
         "id": "loc_0053",
         "name": "超市",
-        "display_name": "超市（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "超市（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.84,
           "y": 0.749
@@ -1797,7 +1801,8 @@
         "description": "大直路隔離有路通向將軍澳中心嘅超市，被少佐標記為安全物資搜索區，三人為避開病者而穿過，貨架早已空空如也。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0053"
       }
     },
     {
@@ -2129,37 +2134,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11162874799724,
-          22.247297970550086
-        ]
-      },
-      "properties": {
-        "id": "loc_0064",
-        "name": "老賢房間",
-        "display_name": "老賢房間（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.519,
-          "y": 0.278
-        },
-        "first_appearance": 18,
-        "chapters": [
-          18
-        ],
-        "characters": [],
-        "description": "老賢的房間是一間平靜、沉實的小小書房，敘事者站在其中感到人性的希望面。",
-        "confidence": 0.8,
-        "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.2812437628748,
           22.341869802395664
         ]
@@ -2225,14 +2199,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26185397116045,
-          22.31758461890593
+          114.257059,
+          22.306854
         ]
       },
       "properties": {
         "id": "loc_0067",
         "name": "廣場",
-        "display_name": "廣場（參考位置）",
+        "display_name": "廣場（推斷位置）",
         "location_type": "district",
         "fictional": false,
         "location_precision": "approximate",
@@ -2268,7 +2242,8 @@
         "description": "本章主要場景，內有銀行、玩具店、衣店等鋪頭，與將軍澳中心相隔一條街距離。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0067"
       }
     },
     {
@@ -2533,17 +2508,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07715587090867,
-          22.378278667887386
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0076",
         "name": "608號房",
-        "display_name": "608號房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "608號房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.462,
           "y": 0.652
@@ -2559,7 +2534,8 @@
         "description": "位於D橦大樓六樓的608號房，房內播著英文歌、煎牛排，佈置成白色格調的西餐空間，Dr.D在此宴請M。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0076"
       }
     },
     {
@@ -3563,40 +3539,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99168184939344,
-          22.40730033569848
-        ]
-      },
-      "properties": {
-        "id": "loc_0107",
-        "name": "董倫大宅",
-        "display_name": "董倫大宅（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.319,
-          "y": 0.735
-        },
-        "first_appearance": 29,
-        "chapters": [
-          29
-        ],
-        "characters": [
-          "王達尼",
-          "我（主角）"
-        ],
-        "description": "位於八樓最右手面一排的房間，以鐵欄杆圍住並掛LED燈飾及雕像，只有兩條走廊橋通往，盡頭有兩道鐵閘；窗內放有望遠鏡。",
-        "confidence": 0.95,
-        "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.0721826504921,
           22.2583712901503
         ]
@@ -3645,6 +3587,7 @@
         },
         "first_appearance": 30,
         "chapters": [
+          29,
           30
         ],
         "characters": [
@@ -3654,7 +3597,10 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0109"
+        "inferred_from": "inf_loc_0109",
+        "aliases": [
+          "董倫大宅"
+        ]
       }
     },
     {
@@ -4108,14 +4054,18 @@
         },
         "first_appearance": 38,
         "chapters": [
-          38
+          38,
+          65
         ],
         "characters": [],
         "description": "老賢喺大本營入面嘅辦公室，「我」食完T骨排後去到該處同老賢傾馬德梵嘅事情。",
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0123"
+        "inferred_from": "inf_loc_0123",
+        "aliases": [
+          "老賢的辦公室"
+        ]
       }
     },
     {
@@ -6276,37 +6226,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2666701762417,
-          22.40078046082246
-        ]
-      },
-      "properties": {
-        "id": "loc_0190",
-        "name": "老賢的辦公室",
-        "display_name": "老賢的辦公室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.778,
-          "y": 0.717
-        },
-        "first_appearance": 65,
-        "chapters": [
-          65
-        ],
-        "characters": [],
-        "description": "少佐與主角在此分析推論不良人入侵計劃的走向，並商定提早推行剷除間諜的暗殺計劃。",
-        "confidence": 0.85,
-        "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.25343,
           22.30581
         ]
@@ -6341,17 +6260,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25014831769283,
-          22.32362237735561
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0192",
         "name": "馬德梵的家",
-        "display_name": "馬德梵的家（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "馬德梵的家（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.75,
           "y": 0.496
@@ -6756,17 +6675,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15438178072785,
-          22.37777023727779
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0204",
         "name": "Dr.D的工作室",
-        "display_name": "Dr.D的工作室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "Dr.D的工作室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.591,
           "y": 0.651
@@ -6779,7 +6698,8 @@
         "description": "Dr.D位於醫療大樓內的工作室十分雜亂，調藥桌上擺滿研究報告，是他為M注射三枝藥劑的地方。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0204"
       }
     },
     {
@@ -8945,17 +8865,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97708903639277,
-          22.26979976348516
+          114.26432716868848,
+          22.30954456397345
         ]
       },
       "properties": {
         "id": "loc_0270",
         "name": "宣基中學",
-        "display_name": "宣基中學（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "宣基中學（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.295,
           "y": 0.342
@@ -8970,7 +8890,8 @@
         "description": "神秘黑衣男拖著屍體由宣基中學一路拉到附近的長者公園。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0270"
       }
     },
     {
@@ -8985,7 +8906,7 @@
       "properties": {
         "id": "loc_0271",
         "name": "長者公園",
-        "display_name": "長者公園（參考位置）",
+        "display_name": "長者公園（推斷位置）",
         "location_type": "district",
         "fictional": false,
         "location_precision": "approximate",
@@ -9003,7 +8924,8 @@
         "description": "位於宣基中學附近的長者公園，是神秘黑衣男拖屍的目的地。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0271"
       }
     },
     {
@@ -10527,17 +10449,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23429938200961,
-          22.21565938048371
+          114.2703413138018,
+          22.329623346303503
         ]
       },
       "properties": {
         "id": "loc_0319",
         "name": "皇冠假日酒店",
-        "display_name": "皇冠假日酒店（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "皇冠假日酒店（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.724,
           "y": 0.188
@@ -10554,7 +10476,8 @@
         "source": "bing_gang",
         "aliases": [
           "假日皇冠酒店"
-        ]
+        ],
+        "inferred_from": "inf_loc_0319"
       }
     },
     {
@@ -12384,17 +12307,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18543236438543,
-          22.291419279774164
+          114.26297422751202,
+          22.317177843900204
         ]
       },
       "properties": {
         "id": "loc_0376",
         "name": "梁潔華小學",
-        "display_name": "梁潔華小學（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "梁潔華小學（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.642,
           "y": 0.404
@@ -12412,7 +12335,8 @@
         "description": "據瓦安所說位於新都城中心三期左邊、只隔一條馬路的小學，內裡藏有病者平權組織的餘黨信徒。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0376"
       }
     },
     {
@@ -12658,17 +12582,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90292011902037,
-          22.38875383382925
+          114.25683515678645,
+          22.32159661249714
         ]
       },
       "properties": {
         "id": "loc_0384",
         "name": "「哈姆雷特」雜貨鋪",
-        "display_name": "「哈姆雷特」雜貨鋪（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "「哈姆雷特」雜貨鋪（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.172,
           "y": 0.682
@@ -12683,7 +12607,8 @@
         "description": "位於新都城一期、掛著「哈姆雷特」霓虹燈招牌的雜貨鋪，乜都有得買，老闆是瓦安。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0384"
       }
     },
     {
@@ -12761,17 +12686,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93038178072786,
-          22.304982413977264
+          114.25683515678645,
+          22.32159661249714
         ]
       },
       "properties": {
         "id": "loc_0387",
         "name": "哈姆雷特（雜貨鋪）",
-        "display_name": "哈姆雷特（雜貨鋪）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "哈姆雷特（雜貨鋪）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.217,
           "y": 0.443
@@ -12784,7 +12709,8 @@
         "description": "位於新都城一期、招牌掛著「哈姆雷特」霓虹燈的雜貨鋪，由瓦安經營，暗中收藏幾十本違禁書籍。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0387"
       }
     },
     {
@@ -16762,17 +16688,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25980636301213,
-          22.424056115053023
+          114.26297422751202,
+          22.317177843900204
         ]
       },
       "properties": {
         "id": "loc_0508",
         "name": "詭區406號室",
-        "display_name": "詭區406號室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "詭區406號室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.766,
           "y": 0.783
@@ -16785,7 +16711,8 @@
         "description": "位於梁潔華小學內的課室，內部如貨倉，存放大型貨物，為黑鼠商團首領約見主角之地。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0508"
       }
     },
     {
@@ -16856,17 +16783,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26016525520714,
-          22.280611390859846
+          114.255844,
+          22.325773
         ]
       },
       "properties": {
         "id": "loc_0511",
         "name": "YAG酒吧",
-        "display_name": "YAG酒吧（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "YAG酒吧（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.767,
           "y": 0.373
@@ -16879,7 +16806,8 @@
         "description": "位於寶林邨地鋪的小酒吧，招牌被王達尼轉為正面的「GAY」，僅坐六、七人，提供炸麥皮蟲及黑啤。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0511"
       }
     },
     {
@@ -17620,17 +17548,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93736095216296,
-          22.342449263752194
+          114.245,
+          22.302
         ]
       },
       "properties": {
         "id": "loc_0535",
         "name": "疊翠軒停車場",
-        "display_name": "疊翠軒停車場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "疊翠軒停車場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.229,
           "y": 0.55
@@ -17643,7 +17571,8 @@
         "description": "病獵公會曾在此挖掘深洞陷阱對付病者，鄰近靈實醫院。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0535"
       }
     },
     {
@@ -19839,17 +19768,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.00790249485007,
-          22.229921606775005
+          114.2560612497139,
+          22.33470798809796
         ]
       },
       "properties": {
         "id": "loc_0603",
         "name": "林中古宅",
-        "display_name": "林中古宅（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "林中古宅（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.347,
           "y": 0.228
@@ -19866,7 +19795,8 @@
         "description": "位於魔鬼山，內有地下密室，余智海博士與不破尚、銘凱戰鬥之地",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0603"
       }
     },
     {

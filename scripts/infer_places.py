@@ -109,6 +109,8 @@ RULES: dict[str, str] = {
     "R-DISTRICT": "只可以確定到區域層級（同章出現區域名）",
     "R-NAME-PLACE": "名稱本身就係一個真實香港地點（OSM 有記錄）",
     "R-DESC-PLACE": "描述直接提及真實地區名（比同章共現強）",
+    "R-DESC-RESOLVED": "描述提及已解析地點名 → 子項喺該地點附近",
+    "R-CHARACTER-BASE": "名稱含角色名，而該角色只關聯一個已解析地點",
     "R-ANAGRAM-MERGE": "同一組字符、次序唔同（荒廢商場／廢荒商場）",
     "R-PARTICLE-VARIANT": "只差助詞嘅／的／之（天明宿舍／天明的宿舍）",
     "R-NO-EVIDENCE": "證據不足，只列作待補",
@@ -837,6 +839,166 @@ def validate_against_schema(records: list[dict[str, Any]]) -> list[str]:
     return out
 
 
+def infer_from_resolved_context(
+    candidates: list[dict[str, Any]],
+    covered: set[str],
+    resolved: dict[str, dict[str, Any]],
+    characters: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """由「已解析地點」同「角色」推斷剩餘個案。
+
+    兩條規則：
+
+    **R-DESC-RESOLVED**：描述提及一個已解析地點名 → 子項喺該地點附近。
+      實測例子：「超市」描述寫「大直路隔離有路通向**將軍澳中心**嘅超市」
+      —— 直接講明喺將軍澳中心隔離。原本 R-DESC-PLACE 只查**地區名**
+      （AREA_NAMES），查唔到具體地點名。
+
+    **R-CHARACTER-BASE**：名稱含角色名，而該角色只關聯到**一個**已解析
+      地點 → 子項喺該地點。實測例子：「少佐辦公室」「大舊宿舍」。
+      ⚠️ 只喺關聯唯一嗰陣才用 —— 多過一個就係歧義，唔應該猜。
+    """
+    out: list[dict[str, Any]] = []
+    pool = [c for c in candidates if c["id"] not in covered]
+    if not pool:
+        return out
+
+    # 已解析地點名（要有識別性詞幹、長度 ≥3，避免配到通用詞）
+    #
+    # ⚠️ 仲要排除「組織／群體」名。
+    #
+    # 實測嚴重假陽性：「不良人」喺 locations 資料集入面（作為一個「據點」
+    # 實體），但佢係**組織**唔係地點。結果 16+ 個地點（「茶水間」「通風
+    # 管道」「遊戲室」「一樓」「七樓以下」…）全部被映射到「不良人」——
+    # 因為佢哋嘅描述都提及「不良人」呢個**行動者**。
+    #
+    # 提及一個組織唔等於喺嗰個組織嘅位置。
+    ORG_SUFFIX = ("人", "幫", "會", "團", "隊", "軍", "黨", "社", "派")
+    res_items = [
+        (nm, p)
+        for nm, p in resolved.items()
+        if len(nm) >= 3
+        and _has_distinctive_stem(nm)
+        and not nm.endswith(ORG_SUFFIX)
+    ]
+    res_items.sort(key=lambda t: -len(t[0]))
+
+    #: 空間關係詞。描述必須**喺配對名附近**出現呢啲詞，才算「喺該地點附近」。
+    #:
+    #: 冇呢個限制嘅話，「X 嘅描述提及 Y」就會被當成「X 喺 Y 附近」——
+    #: 但提及往往只係敍事上嘅關聯（例如「主角同不良人喺通風管道爬行」）。
+    SPATIAL = (
+        "隔離", "附近", "鄰近", "旁邊", "對面", "隔籬", "隔鄰", "毗鄰",
+        "相隔", "通向", "位於", "之內", "裡面", "入面", "樓上", "樓下",
+        "左面", "右面", "前面", "後面", "對正", "幾條街", "街口",
+    )
+
+    def spatial_near(text: str, idx: int, name_len: int) -> bool:
+        """配對名嘅前後 18 字之內有冇空間關係詞。"""
+        lo = max(0, idx - 18)
+        hi = min(len(text), idx + name_len + 18)
+        window = text[lo:hi]
+        return any(w in window for w in SPATIAL)
+
+    # 角色 → 已解析地點（由已解析地點嘅名同描述提取角色名）
+    char_to_loc: dict[str, set[str]] = {}
+    for nm, p in resolved.items():
+        text = nm + " " + (p.get("description") or "")
+        for c in characters:
+            cn = c["name"]
+            if len(cn) >= 2 and cn in text:
+                char_to_loc.setdefault(cn, set()).add(p["id"])
+    by_id = {p["id"]: p for p in resolved.values()}
+
+    for props in pool:
+        name = props["name"]
+        desc = props["description"] or ""
+
+        # --- R-DESC-RESOLVED ---
+        hit = None
+        for nm, p in res_items:
+            if nm == name or nm in name:
+                continue  # 自己／包含關係（由 R-CONTAIN 處理）
+            idx = desc.find(nm)
+            if idx < 0:
+                continue
+            if not spatial_near(desc, idx, len(nm)):
+                continue  # 只係提及，唔係空間關係
+            hit = (nm, p)
+            break
+        if hit is not None:
+            nm, p = hit
+            out.append({
+                "inference_id": f"inf_{props['id']}",
+                "entity_kind": "location",
+                "subject_ids": [props["id"]],
+                "subject_names": [name],
+                "pattern": "R-DESC-RESOLVED",
+                "inferred_prototype": f"{nm} 附近",
+                "inferred_lonlat": list(p["_coords"]) if "_coords" in p else None,
+                "coordinate_source": "parent_containment",
+                "evidence": [{
+                    "kind": "description_claim",
+                    "chapter": props["chapters"][0] if props["chapters"] else None,
+                    "detail": (
+                        f"描述提及已解析地點「{nm}」："
+                        f"「…{desc[max(0, desc.find(nm) - 18):desc.find(nm) + 26]}…」"
+                    ),
+                    "refs": [p["id"]],
+                }],
+                "confidence": 0.62,
+                "proposed_changes": {
+                    "location_precision": "approximate",
+                    "merge_into": None,
+                    "set_lonlat": list(p["_coords"]) if "_coords" in p else None,
+                },
+                "review_status": "pending",
+                "review_notes": None,
+            })
+            continue
+
+        # --- R-CHARACTER-BASE ---
+        cname = next(
+            (c["name"] for c in sorted(characters, key=lambda x: -len(x["name"]))
+             if len(c["name"]) >= 2 and c["name"] != name and c["name"] in name),
+            None,
+        )
+        if cname is None:
+            continue
+        locs = char_to_loc.get(cname) or set()
+        if len(locs) != 1:  # 冇關聯或者多過一個 → 唔猜
+            continue
+        p = by_id[next(iter(locs))]
+        out.append({
+            "inference_id": f"inf_{props['id']}",
+            "entity_kind": "location",
+            "subject_ids": [props["id"]],
+            "subject_names": [name],
+            "pattern": "R-CHARACTER-BASE",
+            "inferred_prototype": f"角色「{cname}」關聯地點：{p['name']}",
+            "inferred_lonlat": list(p["_coords"]) if "_coords" in p else None,
+            "coordinate_source": "parent_containment",
+            "evidence": [{
+                "kind": "chapter_cooccurrence",
+                "chapter": props["chapters"][0] if props["chapters"] else None,
+                "detail": (
+                    f"名稱含角色「{cname}」；該角色只關聯到一個已解析地點"
+                    f"「{p['name']}」（由該地點嘅名／描述提取）"
+                ),
+                "refs": [p["id"]],
+            }],
+            "confidence": 0.55,
+            "proposed_changes": {
+                "location_precision": "approximate",
+                "merge_into": None,
+                "set_lonlat": list(p["_coords"]) if "_coords" in p else None,
+            },
+            "review_status": "pending",
+            "review_notes": None,
+        })
+    return out
+
+
 def infer_location_variants(
     candidates: list[dict[str, Any]],
     covered: set[str],
@@ -862,14 +1024,35 @@ def infer_location_variants(
     import hashlib as _hashlib
 
     out: list[dict[str, Any]] = []
+    # ⚠️ 唔可以只比對「未有推斷」嘅候選。
+    #
+    # 實測漏洞：「老賢房間」配對唔到已解析嘅「老賢的房間」—— 因為後者
+    # 已經有推斷（喺 `covered` 入面），被排除出比對池，令前者單獨一組
+    # 冇對手。但兩者明顯係同一地點。
+    #
+    # 所以要比對**全部地點名**：已解析嘅可以係合併目標（canonical）。
+    resolved_names: dict[str, dict[str, Any]] = {}
+    for c in candidates:
+        if c["id"] in covered and c["name"]:
+            resolved_names[c["name"]] = c
     pool = [p for p in candidates if p["id"] not in covered]
+    # 合併目標候選：未解析嘅 + 已解析嘅
+    all_pool = pool + list(resolved_names.values())
 
     def mk(group: list[dict[str, Any]], pattern: str, reason: str) -> dict[str, Any]:
         # canonical 取章節最多嘅（資訊最豐富），同分就取名最短
+        # canonical 優先取**已解析**嘅（有座標，可以連座標一齊繼承）
         canon = sorted(
-            group, key=lambda c: (-len(c.get("chapters") or []), len(c["name"]))
+            group,
+            key=lambda c: (
+                0 if c["id"] in covered else 1,
+                -len(c.get("chapters") or []),
+                len(c["name"]),
+            ),
         )[0]
-        others = [c for c in group if c["id"] != canon["id"]]
+        others = [c for c in group if c["id"] != canon["id"] and c["id"] not in covered]
+        if not others:
+            return None  # 全部都已解析 → 冇嘢要合併
         ids = sorted([canon["id"], *[c["id"] for c in others]])
         sig = _hashlib.sha1("|".join(ids).encode()).hexdigest()[:10]
         return {
@@ -907,7 +1090,7 @@ def infer_location_variants(
         return bool(re.search(r"[（(]", n))
 
     buckets: dict[str, list[dict[str, Any]]] = {}
-    for c in pool:
+    for c in all_pool:
         n = c["name"]
         if len(n) < 2 or has_paren(n):
             continue
@@ -917,17 +1100,19 @@ def infer_location_variants(
         if len(group) < 2:
             continue
         anagram_ids |= {c["id"] for c in group}
-        out.append(mk(
+        r = mk(
             group, "R-ANAGRAM-MERGE",
             "同一組字符、次序唔同：" + "／".join(c["name"] for c in group),
-        ))
+        )
+        if r is not None:
+            out.append(r)
 
     # --- 助詞差異 ---
     def strip_particles(n: str) -> str:
         return re.sub(r"[嘅的之]", "", n)
 
     pbuckets: dict[str, list[dict[str, Any]]] = {}
-    for c in pool:
+    for c in all_pool:
         if c["id"] in anagram_ids or has_paren(c["name"]):
             continue
         pbuckets.setdefault(strip_particles(c["name"]), []).append(c)
@@ -937,10 +1122,12 @@ def infer_location_variants(
         names = {c["name"] for c in group}
         if len(names) < 2:
             continue
-        out.append(mk(
+        r = mk(
             group, "R-PARTICLE-VARIANT",
             "只差助詞（嘅／的／之）：" + "／".join(sorted(names)),
-        ))
+        )
+        if r is not None:
+            out.append(r)
     return out
 
 
@@ -1382,12 +1569,36 @@ def main() -> int:
         ]
         results.extend(second)
 
+    # ---- 由已解析地點／角色推斷剩餘個案 ----
+    covered_now = {i for r in results for i in r["subject_ids"]}
+    # 已解析地點：有真實座標嘅（連座標一齊傳落子項）
+    resolved: dict[str, dict[str, Any]] = {}
+    for f in feats:
+        pr = f["properties"]
+        if pr["location_precision"] == "fictional":
+            continue
+        rec = dict(pr)
+        rec["_coords"] = f["geometry"]["coordinates"]
+        resolved[pr["name"]] = rec
+    chars_path = REPO / "data" / "public" / "characters.json"
+    char_list = (
+        json.loads(chars_path.read_text(encoding="utf-8"))
+        if chars_path.exists()
+        else []
+    )
+    ctx = infer_from_resolved_context(vague, covered_now, resolved, char_list)
+    results += ctx
+    if ctx:
+        from collections import Counter as _C
+
+        print(f"\n由已解析情境推斷：{len(ctx)} 條 {dict(_C(r['pattern'] for r in ctx))}")
+
     # 地點異體合併（字序調換／助詞差異）
     covered_now = {i for r in results for i in r["subject_ids"]}
     variants_loc = infer_location_variants(vague, covered_now)
     results += variants_loc
     if variants_loc:
-        print(f"\n地點異體合併：{len(variants_loc)} 組")
+        print(f"地點異體合併：{len(variants_loc)} 組")
 
     # 補上 R-NO-EVIDENCE（證據不足但值得列出）
     covered = {i for r in results for i in r["subject_ids"]}
