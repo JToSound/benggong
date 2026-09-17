@@ -236,3 +236,111 @@ def test_normalize_script_is_idempotent():
     assert r.returncode == 0, r.stderr[-500:]
     assert (PUBLIC / "timeline.json").read_text(encoding="utf-8") == before_tl
     assert (PUBLIC / "routes.geojson").read_text(encoding="utf-8") == before_rt
+
+
+# ---------------------------------------------------------------------------
+# 事件／時間線角色連結
+# ---------------------------------------------------------------------------
+LINK = REPO / "scripts" / "link_event_characters.py"
+
+
+def test_events_have_character_links(events):
+    """實測原本 1,796 條事件嘅 characters 全部係空陣列。"""
+    linked = sum(1 for e in events if e["properties"].get("characters"))
+    assert linked > 1000, f"應該有大量事件連到角色，實際只有 {linked}"
+
+
+def test_character_ids_resolve(characters, events):
+    """事件引用嘅角色 id 必須存在。"""
+    valid = {c["id"] for c in characters}
+    bad: list[str] = []
+    for e in events:
+        for cid in e["properties"].get("characters") or []:
+            if cid not in valid:
+                bad.append(cid)
+    assert not bad, f"{len(bad)} 個角色 id 唔存在：{set(bad)}"
+
+
+def test_timeline_characters_match_events(timeline, events):
+    """timeline 同 events 嘅角色連結必須一致。"""
+    by_id = {e["properties"]["id"]: e["properties"] for e in events}
+    bad = [
+        t["id"]
+        for t in timeline
+        if t.get("event_id") in by_id
+        and set(t.get("characters") or [])
+        != set(by_id[t["event_id"]].get("characters") or [])
+    ]
+    assert not bad, f"{len(bad)} 條 timeline 同 events 角色唔一致：{bad[:3]}"
+
+
+def test_no_pronoun_aliases_used_as_links(characters):
+    """代名詞唔應該出現喺角色名／別名（會令每條事件都「命中」）。"""
+    bad = [
+        (c["name"], a)
+        for c in characters
+        for a in (c.get("aliases") or [])
+        if a.strip() in {"我", "你", "他", "她", "佢", "它"}
+    ]
+    assert not bad, f"角色別名含代名詞：{bad[:5]}"
+
+
+def test_link_script_is_idempotent():
+    before_ev = (PUBLIC / "events.geojson").read_text(encoding="utf-8")
+    before_tl = (PUBLIC / "timeline.json").read_text(encoding="utf-8")
+    r = subprocess.run(
+        [sys.executable, str(LINK)], cwd=str(REPO), capture_output=True, text=True
+    )
+    assert r.returncode == 0, r.stderr[-500:]
+    assert (PUBLIC / "events.geojson").read_text(encoding="utf-8") == before_ev
+    assert (PUBLIC / "timeline.json").read_text(encoding="utf-8") == before_tl
+
+
+# ---------------------------------------------------------------------------
+# 地點合併 / 孤兒引用
+# ---------------------------------------------------------------------------
+def test_location_ids_unique(locations):
+    ids = [f["properties"]["id"] for f in locations]
+    assert len(ids) == len(set(ids)), "地點 id 重複"
+
+
+def test_merged_location_names_preserved(locations):
+    """被合併嘅地點名要保留做 canonical 嘅 aliases。"""
+    applied = REPO / "data" / "private" / "review" / "place-inference-applied.json"
+    if not applied.exists():
+        pytest.skip("未跑過 apply_place_inferences.py")
+    log = json.loads(applied.read_text(encoding="utf-8"))
+    by_id = {f["properties"]["id"]: f["properties"] for f in locations}
+    missing = []
+    for m in log.get("merged", []):
+        canon = by_id.get(m["into_id"])
+        if canon is None:
+            continue
+        if m["from_name"] not in (canon.get("aliases") or []):
+            missing.append((m["from_name"], canon["name"]))
+    assert not missing, f"合併後冇保留舊名做 alias：{missing[:5]}"
+
+
+def test_no_orphan_location_refs(locations, events, routes, timeline):
+    """所有 location_id 引用必須指向存在嘅地點。
+
+    呢個測試保護一個實際踩過嘅缺陷：地點合併之後，**上一次**合併走嘅
+    id 唔會出現喺今次嘅映射表，令引用變成孤兒。驗證器會捉到，但呢個
+    測試喺單元層面更快定位。
+    """
+    valid = {f["properties"]["id"] for f in locations}
+    bad: list[str] = []
+    for e in events:
+        lid = e["properties"].get("location_id")
+        if lid and lid not in valid:
+            bad.append(f"event {e['properties']['id']} → {lid}")
+    for t in timeline:
+        lid = t.get("location_id")
+        if lid and lid not in valid:
+            bad.append(f"timeline {t['id']} → {lid}")
+    for f in routes:
+        for w in f["properties"].get("waypoints") or []:
+            lid = w.get("location_id")
+            if lid and lid not in valid:
+                bad.append(f"route {f['properties']['id']} → {lid}")
+    assert not bad, f"{len(bad)} 個孤兒 location_id：{bad[:5]}"
