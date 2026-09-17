@@ -139,6 +139,20 @@ def load_osm_names() -> dict[str, dict]:
 #: 每一條都要有 `source`（點核實）同 `osm_evidence`（座標點嚟）。
 #: 唔可以就咁填一個「聽講係」嘅數字。
 CURATED_VERIFIED: dict[str, dict] = {
+    "香港道教聯合會圓玄學院第三中學": {
+        "lonlat": [114.25720, 22.30930],
+        "source": (
+            "學校官方網站：地址「將軍澳唐明街2號尚德」"
+            "（https://hktayy3.edu.hk/CP/pG/35/40/169）"
+        ),
+        "osm_evidence": (
+            "OSM 喺唐明街一帶有 3 幢 tagged `amenity=school` 但**無名**嘅"
+            "建築物，質心 (114.2570–114.2572, 22.3091–22.3095)，同"
+            "「唐明街」道路質心 (114.2577, 22.3094) 一致。"
+            "⚠️ 呢個係**街道級近似**（唔肯定邊一幢係圓玄三中），"
+            "精度標 approximate。"
+        ),
+    },
     "靈實醫院": {
         "lonlat": [114.2566, 22.3138],
         "source": (
@@ -189,18 +203,23 @@ def osm_prefix_cluster(osm: dict[str, dict], name: str) -> list[float] | None:
     # 計出嚟係 (114.198, 22.356) —— 即係**西貢**，而真正嘅康城站喺
     # (114.270, 22.295)，相差 6 km。
     #
-    # 前綴匹配只可以喺**同一小區**之內用。要求所有匹配點互相相距
-    # ≤ MAX_CLUSTER_SPREAD_M —— 超過就代表個前綴喺多個地區出現，
-    # 唔可以用。
+    # 但唔可以因為「有一兩個遠方同名」就放棄整組 —— 實測「翠林邨」嘅
+    # 前綴「翠林」同時匹配到大埔嘅「翠林閣」、元朗嘅「翠林花園」，
+    # 令整組被棄，但將軍澳嘅「翠林社區會堂／翠林新城／翠林體育館／
+    # 翠林抽水站」其實係一個緊密叢集（跨距約 290 m）。
+    #
+    # 所以改為：搵**最大嘅緊密子叢集**（所有成員互相相距 ≤ 門檻）。
     MAX_CLUSTER_SPREAD_M = 1000.0
-    spread = max(
-        haversine_m(a, b) for i, a in enumerate(coords) for b in coords[i + 1 :]
-    )
-    if spread > MAX_CLUSTER_SPREAD_M:
+    best: list[list[float]] = []
+    for a in coords:
+        group = [b for b in coords if haversine_m(a, b) <= MAX_CLUSTER_SPREAD_M]
+        if len(group) > len(best):
+            best = group
+    if len(best) < 2:
         return None
 
-    cx = sum(p[0] for p in coords) / len(coords)
-    cy = sum(p[1] for p in coords) / len(coords)
+    cx = sum(p[0] for p in best) / len(best)
+    cy = sum(p[1] for p in best) / len(best)
     if not in_story_region(cx, cy):
         return None
     return [round(cx, 6), round(cy, 6)]
