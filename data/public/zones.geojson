@@ -6,52 +6,27 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.267056,
-          22.322256
-        ]
-      },
-      "properties": {
-        "id": "zone_8886bfdaf0",
-        "name": "商場（病腦嘅病窩",
-        "kind": "nest",
-        "radius_m": 200.0,
-        "radius_source": "default",
-        "member_location_ids": [
-          "loc_0021"
-        ],
-        "chapters": [
-          5
-        ],
-        "first_appearance": 5,
-        "description": "一座商場係病腦嘅病窩，大本營以運送屍體做貢品，換取搜索隊入內尋找食物同水。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.267817,
-          22.311037
+          114.267436,
+          22.316646
         ]
       },
       "properties": {
         "id": "zone_0ea1df95d6",
         "name": "商場（病窩",
         "kind": "nest",
-        "radius_m": 200.0,
-        "radius_source": "default",
+        "radius_m": 714.7,
+        "radius_source": "members",
         "member_location_ids": [
+          "loc_0021",
           "loc_0033"
         ],
         "chapters": [
+          5,
           9
         ],
         "first_appearance": 9,
         "description": "故事主場景係一座多層商場（即病窩），設有電梯、自動灑水系統、後樓梯及各類店舖，眾人需喺天黑前搜刮物資離開。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
+        "evidence": "由 2 個同地區相鄰區域合併（商場（病腦嘅病窩／商場（病窩）；半徑由 2 個成員地點分佈推導",
         "source": "bing_gang"
       }
     },
@@ -411,14 +386,18 @@
         "radius_m": 300.0,
         "radius_source": "default",
         "member_location_ids": [
-          "loc_0460"
+          "loc_0460",
+          "loc_0531",
+          "loc_0585"
         ],
         "chapters": [
-          139
+          139,
+          144,
+          163
         ],
         "first_appearance": 139,
         "description": "翠林倖存區以真實屋邨翠林邨為藍本，老鄧曾任其幹部，三腦更被秘密安排成為該邨領導人，大部份村民並不知情。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
+        "evidence": "由 3 個同地區相鄰區域合併；半徑係估算",
         "source": "bing_gang"
       }
     },
@@ -454,89 +433,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.260272,
-          22.33193
-        ]
-      },
-      "properties": {
-        "id": "zone_2850732c4c",
-        "name": "翠林邨倖存區",
-        "kind": "survivor",
-        "radius_m": 300.0,
-        "radius_source": "default",
-        "member_location_ids": [
-          "loc_0531"
-        ],
-        "chapters": [
-          144
-        ],
-        "first_appearance": 144,
-        "description": "曾被三腦秘密控制的倖存區。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.262563,
           22.32171
-        ]
-      },
-      "properties": {
-        "id": "zone_6ab3fe0c22",
-        "name": "康城一期倖存區",
-        "kind": "survivor",
-        "radius_m": 300.0,
-        "radius_source": "default",
-        "member_location_ids": [
-          "loc_0479"
-        ],
-        "chapters": [
-          155
-        ],
-        "first_appearance": 155,
-        "description": "故事中倖存者聚居的倖存區，五爺與大眾皆居於此；Sona曾誤導主角攻擊此地。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.263651,
-          22.320256
-        ]
-      },
-      "properties": {
-        "id": "zone_f5a068924b",
-        "name": "康城二期倖存區",
-        "kind": "survivor",
-        "radius_m": 300.0,
-        "radius_source": "default",
-        "member_location_ids": [
-          "loc_0480"
-        ],
-        "chapters": [
-          155
-        ],
-        "first_appearance": 155,
-        "description": "Sona單位所在及五爺生前常推輪椅散步之處，主角在其會所發現被囚的Sona與失蹤者。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.283065,
-          22.336108
         ]
       },
       "properties": {
@@ -546,18 +444,21 @@
         "radius_m": 300.0,
         "radius_source": "default",
         "member_location_ids": [
+          "loc_0479",
+          "loc_0480",
           "loc_0486",
           "loc_0574",
           "loc_0591"
         ],
         "chapters": [
+          155,
           156,
           161,
           164
         ],
         "first_appearance": 156,
         "description": "康城內嘅倖存區，生活質素遠高於外面，設有閉路電視、保安室、資訊室等設施。",
-        "evidence": "只有 3 個成員點，用按類型嘅預設半徑（估算）",
+        "evidence": "由 3 個同地區相鄰區域合併；半徑係估算",
         "source": "bing_gang"
       }
     },
@@ -584,33 +485,6 @@
         ],
         "first_appearance": 160,
         "description": "老賢所領導的倖存區，與康城倖存區進行技術交流。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.283323,
-          22.322361
-        ]
-      },
-      "properties": {
-        "id": "zone_b57fc9ef6f",
-        "name": "翠林村倖存區",
-        "kind": "survivor",
-        "radius_m": 300.0,
-        "radius_source": "default",
-        "member_location_ids": [
-          "loc_0585"
-        ],
-        "chapters": [
-          163
-        ],
-        "first_appearance": 163,
-        "description": "翠林村係一個自給自足嘅倖存區，對外有山路通往田地、水源、樹林、石礦等資源重地。",
         "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
         "source": "bing_gang"
       }

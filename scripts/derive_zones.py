@@ -55,7 +55,10 @@ ZONE_WORDS: list[tuple[str, str]] = [
     ("根據地", "nest"),
 ]
 
-#: 按類型嘅預設半徑（米）。**只喺冇成員分佈可用時才用**。
+#: 按類型嘅預設半徑（米）。**最後手段**（冇任何分佈證據時）。
+#:
+#: 訂值依據：香港嘅屋邨／校園級聚居地通常 200–600 m 闊，所以半徑 300 m
+#: 大約對應「一個屋邨」嘅尺度；病窩係單幢建築群，200 m 較合適。
 DEFAULT_RADIUS_M = {
     "survivor": 300.0,
     "nest": 200.0,
@@ -180,6 +183,8 @@ def main() -> int:
         ]
         all_pts = [m["geometry"]["coordinates"] for m in members]
         kind, detail = zone_kind(core) or ("nest", "nest")
+        # 章節聯集（要喺半徑計算之前，因為 chapter_cluster 要用）
+        chapters = sorted({c for m in members for c in m["properties"]["chapters"]})
 
         if len(pts) >= 2:
             # 由成員分佈推導（證據）
@@ -190,7 +195,7 @@ def main() -> int:
             radius *= 1.15
             source = "members"
         elif all_pts:
-            # 只有一個點 → 用預設半徑（估算）
+            # 只有一個成員點 → 冇「分佈」可言，用按類型嘅預設半徑（估算）
             cx, cy = all_pts[0]
             radius = DEFAULT_RADIUS_M.get(detail, 200.0)
             source = "default"
@@ -199,8 +204,6 @@ def main() -> int:
 
         radius = max(MIN_RADIUS_M, min(MAX_RADIUS_M, radius))
 
-        # 章節聯集
-        chapters = sorted({c for m in members for c in m["properties"]["chapters"]})
         # 描述取本體（名最短嘅成員）嘅
         body = min(members, key=lambda m: len(m["properties"]["name"]))
         sig = hashlib.sha1(core.encode("utf-8")).hexdigest()[:10]
@@ -228,6 +231,92 @@ def main() -> int:
                 "source": "bing_gang",
             },
         })
+
+    # ---- 1b. 合併同一地區嘅相鄰區域 ----
+    #
+    # 為何需要
+    # --------
+    # 實測「康城一期倖存區」「康城二期倖存區」「康城倖存區」被當成**三個**
+    # 區域，但佢哋明顯係同一個倖存區嘅唔同部分（名稱共享「康城」前綴，
+    # 中心相距 2.2 km）。
+    #
+    # 合併條件（兩者都要符合，缺一不可）：
+    #   1. 名稱共享 ≥2 字嘅**識別性前綴**（唔可以係「倖存區」呢類通用詞）
+    #   2. 中心相距 ≤ MERGE_MAX_DIST_M
+    #
+    # 合併之後，成員聯集 → 半徑就可以由真實分佈推導（由估算升級為證據）。
+    MERGE_MAX_DIST_M = 3000.0
+    merged: list[dict[str, Any]] = []
+    used: set[int] = set()
+    for i, a in enumerate(zones):
+        if i in used:
+            continue
+        group = [a]
+        for j in range(i + 1, len(zones)):
+            if j in used:
+                continue
+            b = zones[j]
+            # 共享識別性前綴
+            an, bn = a["properties"]["name"], b["properties"]["name"]
+            pre = 0
+            for x, y in zip(an, bn):
+                if x != y:
+                    break
+                pre += 1
+            if pre < 2 or any(w in an[:pre] for w, _ in ZONE_WORDS):
+                continue
+            if (
+                haversine_m(a["geometry"]["coordinates"], b["geometry"]["coordinates"])
+                <= MERGE_MAX_DIST_M
+            ):
+                group.append(b)
+                used.add(j)
+        if len(group) == 1:
+            merged.append(a)
+            continue
+        # 合併：成員聯集，名取最短（最通用嘅寫法）
+        all_members = [m for z in group for m in z["properties"]["member_location_ids"]]
+        pts = [
+            by_id[m]["geometry"]["coordinates"]
+            for m in all_members
+            if m in by_id
+            and by_id[m]["properties"]["location_precision"] != "fictional"
+        ]
+        all_pts = [by_id[m]["geometry"]["coordinates"] for m in all_members if m in by_id]
+        if not all_pts:
+            merged.extend(group)
+            continue
+        if len(pts) >= 2:
+            cx = sum(p[0] for p in pts) / len(pts)
+            cy = sum(p[1] for p in pts) / len(pts)
+            radius = max(haversine_m([cx, cy], p) for p in pts) * 1.15
+            source = "members"
+        else:
+            cx, cy = all_pts[0]
+            radius = DEFAULT_RADIUS_M.get(group[0]["properties"].get("kind_detail", ""), 300.0)
+            source = "default"
+        base = min(group, key=lambda z: len(z["properties"]["name"]))
+        bp = dict(base["properties"])
+        bp["name"] = base["properties"]["name"]
+        bp["radius_m"] = round(max(MIN_RADIUS_M, min(MAX_RADIUS_M, radius)), 1)
+        bp["radius_source"] = source
+        bp["member_location_ids"] = all_members
+        bp["chapters"] = sorted({c for z in group for c in z["properties"]["chapters"]})[:50]
+        bp["evidence"] = (
+            f"由 {len(group)} 個同地區相鄰區域合併（"
+            + "／".join(z["properties"]["name"] for z in group)
+            + f"）；半徑由 {len(pts)} 個成員地點分佈推導"
+            if source == "members"
+            else f"由 {len(group)} 個同地區相鄰區域合併；半徑係估算"
+        )
+        merged.append({
+            "type": "Feature",
+            "geometry": {"type": "Point", "coordinates": [round(cx, 6), round(cy, 6)]},
+            "properties": bp,
+        })
+    if len(merged) != len(zones):
+        print(f"\n合併同地區相鄰區域：{len(zones)} → {len(merged)}")
+    zones = merged
 
     # ---- 2. 策展區域 ----
     for c in CURATED_ZONES:
@@ -274,6 +363,34 @@ def main() -> int:
     if args.dry_run:
         print("\n（--dry-run：冇寫入）")
         return 0
+
+    # ---- 3. 反向連結：地點 → 所屬區域 ----
+    #
+    # 為何要有反向連結
+    # ----------------
+    # 正向（區域 → 成員）已經有，但前端要答「呢個地點屬於邊個區域？」
+    # 就要掃描全部區域。加反向連結之後可以直接查。
+    #
+    # ⚠️ 呢個係**冗餘資料**（可以由正向推導），所以要加測試確保兩邊一致。
+    zone_ids_by_loc: dict[str, list[str]] = defaultdict(list)
+    for z in zones:
+        zid = z["properties"]["id"]
+        for lid in z["properties"]["member_location_ids"]:
+            zone_ids_by_loc[lid].append(zid)
+
+    loc_fc = json.loads(LOCATIONS.read_text(encoding="utf-8"))
+    n_linked = 0
+    for f in loc_fc["features"]:
+        zids = sorted(zone_ids_by_loc.get(f["properties"]["id"], []))
+        if zids:
+            f["properties"]["zone_ids"] = zids
+            n_linked += 1
+        else:
+            f["properties"].pop("zone_ids", None)
+    LOCATIONS.write_text(
+        json.dumps(loc_fc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    print(f"\n反向連結：{n_linked} 個地點標明所屬區域 → {LOCATIONS}")
 
     OUT.write_text(
         json.dumps({"type": "FeatureCollection", "features": zones}, ensure_ascii=False, indent=2)

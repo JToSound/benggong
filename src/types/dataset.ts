@@ -72,6 +72,8 @@ export interface LocationProperties {
   inferred_from?: string;
   /** 同一地點嘅其他寫法（合併之後保留，可追溯）。 */
   aliases?: string[];
+  /** 所屬區域 id（倖存區／病窩）；由 derive_zones.py 反向填入。 */
+  zone_ids?: string[];
 }
 
 export type LocationFeature = FeatureBase<LocationProperties>;

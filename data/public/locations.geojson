@@ -685,7 +685,10 @@
         "description": "一座商場係病腦嘅病窩，大本營以運送屍體做貢品，換取搜索隊入內尋找食物同水。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_0ea1df95d6"
+        ]
       }
     },
     {
@@ -1091,7 +1094,10 @@
         "description": "故事主場景係一座多層商場（即病窩），設有電梯、自動灑水系統、後樓梯及各類店舖，眾人需喺天黑前搜刮物資離開。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_0ea1df95d6"
+        ]
       }
     },
     {
@@ -6126,7 +6132,10 @@
         "description": "不良人鎖定並進攻的人類聚居區，公仔聲稱從未見過有任何一個倖存區可以抵禦不良人入侵。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_cd7871ef1c"
+        ]
       }
     },
     {
@@ -7685,7 +7694,10 @@
         "confidence": 0.88,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0232"
+        "inferred_from": "inf_loc_0232",
+        "zone_ids": [
+          "zone_3223760e27"
+        ]
       }
     },
     {
@@ -7716,7 +7728,10 @@
         "description": "不良人的據點設在一座商場之內，主角在據點內四處尋找耳塞並向不良人打聽病童情報。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_3aedd43d53"
+        ]
       }
     },
     {
@@ -7921,7 +7936,10 @@
         "description": "公仔餵完娃娃後走到小學的大閘前，經過看守大閘的不良人正式步出據點，暗示不良人據點設於一所小學。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_1f112cb706"
+        ]
       }
     },
     {
@@ -8127,6 +8145,9 @@
         "source": "bing_gang",
         "aliases": [
           "不良人的據點"
+        ],
+        "zone_ids": [
+          "zone_3aedd43d53"
         ]
       }
     },
@@ -8462,7 +8483,10 @@
         "description": "主角與公仔所屬組織「不良人」的據點，二人戰鬥結束後返回該處，主角亦計劃將來離開此組織。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_33f49f01d2"
+        ]
       }
     },
     {
@@ -8878,7 +8902,10 @@
         "description": "聽聞寶琳倖存區一帶有識飛的病者出沒，且前往寶琳的必經之路長期有大量病者徘徊，十個人去約七個會死。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_8746838b32"
+        ]
       }
     },
     {
@@ -9618,7 +9645,10 @@
         "description": "不良人的據點設於一所小學內，最高層有一尊佛陀像，首領不破尚坐在佛陀像的石腿上。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_3aedd43d53"
+        ]
       }
     },
     {
@@ -9913,7 +9943,10 @@
         "description": "不良人約七十多名成員全數擠住的據點，內有遊戲室酒吧、前身為教員室的走廊等設施。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_3aedd43d53"
+        ]
       }
     },
     {
@@ -10462,6 +10495,9 @@
         "source": "bing_gang",
         "aliases": [
           "不良人據點小學"
+        ],
+        "zone_ids": [
+          "zone_9eaa4bd1b1"
         ]
       }
     },
@@ -10560,7 +10596,10 @@
         "description": "正式不良人的會議場地，設有玻璃長桌與高椅，數十名正式不良人各有專屬座位。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_3aedd43d53"
+        ]
       }
     },
     {
@@ -11478,7 +11517,10 @@
         "description": "病者平權組織六、七十名白衣成員包圍不良人盤踞的小學，雙方在校門外對峙並爆發大戰。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_fbc0313bf5"
+        ]
       }
     },
     {
@@ -13332,7 +13374,10 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0404"
+        "inferred_from": "inf_loc_0404",
+        "zone_ids": [
+          "zone_20fd1651fa"
+        ]
       }
     },
     {
@@ -13678,7 +13723,10 @@
         "description": "位於基督教靈實協會教堂附近的寧養院建築群，現為病者平權組織餘黨活動的根據地。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_16e69575c5"
+        ]
       }
     },
     {
@@ -13839,7 +13887,10 @@
         "description": "松木村倖存區曾贈送軟木耳塞給主角二人，讓他們能抵擋病童的歌聲。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_224ba8debd"
+        ]
       }
     },
     {
@@ -14346,7 +14397,10 @@
         "description": "故事舞台艾寶琳倖存區由艾氏皇室統領，將病者與人類如怪物般隔絕，其和平正面臨「病者和平協會」策劃的謀殺與騷擾威脅。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_66d5fbd6c1"
+        ]
       }
     },
     {
@@ -15139,7 +15193,10 @@
         "description": "翠林倖存區以真實屋邨翠林邨為藍本，老鄧曾任其幹部，三腦更被秘密安排成為該邨領導人，大部份村民並不知情。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_11f09f0b09"
+        ]
       }
     },
     {
@@ -15203,7 +15260,10 @@
         "description": "寶盈花園喺故事中被描繪為一個中立嘅小型倖存區，不良人間諜曾喺入面洗底；區內四十八名倖存者後來被滿天以催眠瓦斯彈及手術刀全數殺害。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_c9d65eda4e"
+        ]
       }
     },
     {
@@ -15777,7 +15837,10 @@
         "description": "故事中倖存者聚居的倖存區，五爺與大眾皆居於此；Sona曾誤導主角攻擊此地。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_ece9f6df6c"
+        ]
       }
     },
     {
@@ -15810,7 +15873,10 @@
         "description": "Sona單位所在及五爺生前常推輪椅散步之處，主角在其會所發現被囚的Sona與失蹤者。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_ece9f6df6c"
+        ]
       }
     },
     {
@@ -16013,7 +16079,10 @@
         "description": "康城內嘅倖存區，生活質素遠高於外面，設有閉路電視、保安室、資訊室等設施。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_ece9f6df6c"
+        ]
       }
     },
     {
@@ -17254,7 +17323,10 @@
         "description": "艾寶琳倖存區以鐵板、支架、木塊、鐵桶、磚頭、硬盒等堆砌的邊境圍牆",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_66d5fbd6c1"
+        ]
       }
     },
     {
@@ -17285,7 +17357,10 @@
         "description": "艾寶琳倖存區內地鐵站對出的大馬路主街道，兩旁擺滿攤檔",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_66d5fbd6c1"
+        ]
       }
     },
     {
@@ -17316,7 +17391,10 @@
         "description": "位於艾寶琳倖存區主街道的地鐵站，皇室區在其上蓋",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_8746838b32"
+        ]
       }
     },
     {
@@ -17477,7 +17555,10 @@
         "description": "曾被三腦秘密控制的倖存區。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_11f09f0b09"
+        ]
       }
     },
     {
@@ -18751,7 +18832,10 @@
         "description": "老賢所領導的倖存區，與康城倖存區進行技術交流。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_2a6972c1af"
+        ]
       }
     },
     {
@@ -18846,7 +18930,10 @@
         "description": "金鷹頭選舉宴會同元老會議室嘅所在，有宴客廳同二樓私人會議室",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_ece9f6df6c"
+        ]
       }
     },
     {
@@ -19220,7 +19307,10 @@
         "description": "翠林村係一個自給自足嘅倖存區，對外有山路通往田地、水源、樹林、石礦等資源重地。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_11f09f0b09"
+        ]
       }
     },
     {
@@ -19410,7 +19500,10 @@
         "description": "花園位於康城倖存區面海嘅東面，係一個寧靜人稀嘅地方，角色喺度賞花。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_ece9f6df6c"
+        ]
       }
     },
     {
@@ -21718,7 +21811,10 @@
         "description": "由人體殘肢搭建、模仿鳥巢模樣的病翼聚集地，內有約七隻病翼。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_7103de1f8e"
+        ]
       }
     },
     {
@@ -21783,7 +21879,10 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0662"
+        "inferred_from": "inf_loc_0662",
+        "zone_ids": [
+          "zone_8bb2f3148f"
+        ]
       }
     },
     {
@@ -22868,7 +22967,10 @@
         "description": "一星期後敘事者於艾寶琳倖存區嘅病獵學院擔任新老師",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "zone_ids": [
+          "zone_66d5fbd6c1"
+        ]
       }
     },
     {

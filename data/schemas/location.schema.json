@@ -163,6 +163,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "zone_ids": {
+          "description": "所屬區域 id（由 scripts/derive_zones.py 反向填入；同 zones.geojson 嘅 member_location_ids 必須一致）",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
