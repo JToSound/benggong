@@ -423,3 +423,69 @@ def test_single_latin_letters_allowed_as_names():
     assert not mod.is_usable_name("我")
     assert not mod.is_usable_name("你")
     assert mod.is_usable_name("夏晴")
+
+
+# ---------------------------------------------------------------------------
+# 前端資料同步（最危險嘅一類缺陷：驗證綠燈但成品係舊嘅）
+# ---------------------------------------------------------------------------
+SYNC = REPO / "scripts" / "sync_public_data.py"
+SERVE_DIR = REPO / "public" / "data" / "public"
+
+
+def test_served_data_matches_source():
+    """前端讀取嘅 `public/data/public/` 必須同 `data/public/` 一致。
+
+    ⚠️ 為何呢個測試最重要
+    --------------------
+    `data/public/` 係資料來源（builder 寫入、驗證器檢查、audit 掃描），
+    但前端係由 `public/data/public/` 讀取（Vite `publicDir` 複製）。
+
+    實測踩過：`public/data/public/` 停留喺 **12 日前**，而 `data/public/`
+    已經改咗好多（fictional 543→327、事件角色連結 0→1,501、時間線排序、
+    路線座標修正……）—— **全部冇喺地圖上出現過**。
+
+    而**所有閘門都通過**：`validate_public_data.py` 同 `audit_release.py`
+    都只檢查 `data/public/`，唔會發現前端讀到舊資料。
+
+    即係「驗證綠燈但成品係舊嘅」—— 最危險嘅一類缺陷。
+    """
+    import hashlib
+
+    def sha(p: Path) -> str:
+        return hashlib.sha256(p.read_bytes()).hexdigest()
+
+    src = {p.name: p for p in REPO.joinpath("data", "public").glob("*.json")}
+    src.update({p.name: p for p in REPO.joinpath("data", "public").glob("*.geojson")})
+
+    missing, stale = [], []
+    for name, sp in src.items():
+        dp = SERVE_DIR / name
+        if not dp.exists():
+            missing.append(name)
+        elif sha(sp) != sha(dp):
+            stale.append(name)
+    assert not missing, f"前端缺少呢啲檔：{missing}"
+    assert not stale, (
+        f"前端讀到舊資料（{len(stale)} 個檔唔一致）：{stale}\n"
+        "請跑 python scripts/sync_public_data.py"
+    )
+
+
+def test_sync_script_check_mode():
+    """`--check` 模式喺一致時應該 exit 0。"""
+    r = subprocess.run(
+        [sys.executable, str(SYNC), "--check"],
+        cwd=str(REPO), capture_output=True, text=True,
+    )
+    assert r.returncode == 0, f"同步檢查失敗：{r.stdout[-400:]}"
+
+
+def test_prebuild_hooks_sync():
+    """`npm run build` 必須自動同步 —— 否則人手跑漏就會再次靜默落後。"""
+    pkg = json.loads((REPO / "package.json").read_text(encoding="utf-8"))
+    scripts = pkg.get("scripts", {})
+    assert "sync-data" in scripts, "缺 sync-data script"
+    assert "prebuild" in scripts, (
+        "缺 prebuild —— build 之前一定要同步，否則前端會讀到舊資料"
+    )
+    assert "sync" in scripts["prebuild"], "prebuild 必須呼叫 sync-data"

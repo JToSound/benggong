@@ -68,6 +68,10 @@ export interface LocationProperties {
   confidence: number;
   review_status: ReviewStatus;
   source: SourceId;
+  /** 若座標由 scripts/infer_places.py 推斷得出，記錄推斷 id（可稽核）。 */
+  inferred_from?: string;
+  /** 同一地點嘅其他寫法（合併之後保留，可追溯）。 */
+  aliases?: string[];
 }
 
 export type LocationFeature = FeatureBase<LocationProperties>;

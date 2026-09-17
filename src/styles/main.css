@@ -180,6 +180,29 @@ html, body {
   position: relative;
   background: var(--bg-dark);
   min-width: 0;
+  /*
+   * 為何要 min-height: 0
+   * -------------------
+   * flex item 嘅 `min-height` 預設係 `auto`，即係「唔可以縮到細過內容嘅
+   * 最小高度」。當內容（SVG）有內在長寬比，就會撐爆容器。
+   *
+   * 為何要 display: flex
+   * -------------------
+   * 令 `#svg-map-mount` 可以有明確高度（見下面）。之前 `.pane-map` 係
+   * block，`#svg-map-mount` 冇 CSS 規則 → `height: auto` → 子層
+   * `.svg-map-wrap { height: 100% }` 對 auto 父層會退回 `auto` →
+   * SVG 用**內在長寬比**定高。實測 1920×1080 時 SVG 高 1190 px，
+   * 超出容器（926 px）264 px，內容被切。
+   */
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+#svg-map-mount {
+  /* 撐滿 .pane-map 嘅剩餘高度，為 .svg-map-wrap 提供明確嘅 100% 基準 */
+  flex: 1;
+  min-height: 0;
+  position: relative;
 }
 .pane-story {
   width: 380px;

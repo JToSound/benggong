@@ -170,9 +170,18 @@ describe("Phase I 互動驗證（Playwright）", () => {
       await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
       await page.waitForTimeout(800);
 
-      // 1 viewBox 單位 ≈ 103 km（經度）／111 km（緯度）
-      const K = { lon: 103_000, lat: 111_000 };
-      const MAX_SEGMENT_M = 6_000; // 實測最長 3.4 km，留安全邊際
+      /*
+       * viewBox 單位 → 米。
+       *
+       * x 軸 = 經度：1° ≈ 111,320 m × cos(22.36°) ≈ 102,940 m
+       *
+       * ⚠️ y 軸**唔係**緯度。`lonlatToViewbox()` 做咗 1/cos(φ₀) 校正：
+       *     y = 22.11 + (22.61 − lat) × 1.0814
+       * 所以 1 個 y 單位 ≈ 111,320 / 1.0814 ≈ 102,940 m，唔係 111,000 m。
+       * 用 111,000 會高估緯度方向嘅距離最多 8.6%。
+       */
+      const K = { lon: 102_940, lat: 102_940 };
+      const MAX_SEGMENT_M = 6_000; // 實測最長 3.99 km，留安全邊際
 
       let maxM = 0;
       let totalSegments = 0;

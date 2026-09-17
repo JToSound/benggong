@@ -1,21 +1,37 @@
 {
   "map": {
     "renderer": "svg",
-    "svg_basemap": "assets/tseung-kwan-o-basemap.svg",
+    "basemap_png": "assets/hk-basemap.png",
+    "basemap_labels_png": "assets/hk-basemap-labels.png",
+    "basemap_coords": "assets/hk-basemap-coords.json",
+    "lod_manifest": "assets/map-lod/manifest.json",
     "tiles_local_only": true,
     "default_base_layer": "story-cartography",
     "base_layers": [
-      { "id": "story-cartography", "label": "故事地圖（將軍澳）", "status": "available", "svg": "assets/tseung-kwan-o-basemap.svg" },
-      { "id": "ai-aerial-concept", "label": "AI 空拍概念圖", "status": "unavailable", "disclaimer": "AI 生成概念空拍圖，僅供小說世界觀瀏覽，唔代表真實衛星影像。" },
+      {
+        "id": "story-cartography",
+        "label": "故事地圖（全港總覽 → 將軍澳分區／街道）",
+        "status": "available",
+        "lod_manifest": "assets/map-lod/manifest.json",
+        "note": "多層級縮放：圖磚隨視窗自動切換，放大後顯示道路同樓宇。"
+      },
+      {
+        "id": "ai-aerial-concept",
+        "label": "AI 空拍概念圖",
+        "status": "unavailable",
+        "disclaimer": "AI 生成概念空拍圖，僅供小說世界觀瀏覽，唔代表真實衛星影像。"
+      },
       { "id": "debug-grid", "label": "除錯格線", "dev_only": true }
     ],
-    "initial_view": { "center_lonlat": [114.255, 22.318], "zoom": 1.0 },
+    "initial_view": { "center_lonlat": [114.14, 22.36], "zoom": 1.0 },
     "coordinate_system": "EPSG:4326",
+    "projection": "equirectangular",
+    "standard_parallel": 22.36,
     "show_scale_bar": true
   },
   "scale_profile": {
     "status": "approximate",
-    "note": "將軍澳 district 為主嘅 SVG 簡化地圖；距離比例為近似。",
+    "note": "全港總覽約 47 m/px；將軍澳分區約 7 m/px；街道級約 4 m/px。距離比例為近似。",
     "meters_per_map_unit": null
   },
   "spoiler": { "levels": 0, "1": null, "2": null, "3": null, "default_max_level": 1 },

@@ -11,7 +11,7 @@
  * - 拖曳平移、滾輪／按鈕縮放
  *
  * Phase I 新增：
- * - `resolveCoord()` 三層座標 fallback（FALLBACK_ANCHORS → FULL_HK_ANCHORS → 原始座標）
+ * - `resolveCoord()` 四層座標解析（有證據支持嘅資料集座標 → FALLBACK_ANCHORS → FULL_HK_ANCHORS → 原始座標）
  * - `animateViewBox()` 用 requestAnimationFrame + ease-in-out cubic 做平滑轉場
  * - `#label-detail-layer`：獨立透明標籤圖層，按 `viewScale` 線性插值透明度
  *   （zoom out 時隱藏次要街道名，做到 zoom-dependent label decluttering）
@@ -187,17 +187,38 @@ const FALLBACK_ANCHORS: Record<string, { lon: number; lat: number }> = {
 export type CoordSource = "fallback" | "full-hk" | "raw";
 
 /**
- * 三層座標解析。
+ * 座標解析（四層）。
  *
- * 1. `FALLBACK_ANCHORS` — 人手核對過嘅虛構地點錨點（最高優先）
- * 2. `FULL_HK_ANCHORS` — Phase I 由 OSM 抽出嘅 503 個真實香港 landmark
- * 3. 原始 lon/lat — 資料集自帶座標
+ * 0. **資料集自帶座標（有證據支持）** — 最高優先
+ * 1. `FALLBACK_ANCHORS` — Phase I 人手估算嘅錨點
+ * 2. `FULL_HK_ANCHORS` — Phase I 由 OSM 抽出嘅 503 個 landmark
+ * 3. 原始 lon/lat
+ *
+ * ⚠️ 為何「有證據支持」要排第一
+ * ----------------------------
+ * `FALLBACK_ANCHORS` 係 **Phase I 嘅人手估算**，喺當時冇真實資料嘅情況下
+ * 用嚟頂住。Phase J 之後，好多地點已經有**經 OSM／推斷核實**嘅座標
+ * （`inferred_from` 有值）。
+ *
+ * 但原本嘅優先級令硬編碼估算**蓋過**已核實座標 —— 實測 12 個最重要嘅
+ * 地點中招，包括：
+ *   「香港知專設計學院」硬編碼 (114.262, 22.314)，實際 OSM (114.2525, 22.3060)
+ *     → 偏差約 900 m
+ *   「大本營」「將軍澳中心」「寶琳倖存區」「將軍澳地鐵站」…
+ * 即係話：**推斷做嘅嘢喺地圖上完全睇唔到**。
+ *
+ * 所以有 `inferred_from`（可稽核嘅證據來源）嘅座標優先。冇嘅話，
+ * 仍然用返硬編碼錨點（嗰啲地點未有更好嘅資料）。
  */
 export function resolveCoord(
   name: string,
   lon: number,
   lat: number,
+  opts?: { evidenceBacked?: boolean },
 ): { lon: number; lat: number; source: CoordSource } {
+  if (opts?.evidenceBacked) {
+    return { lon, lat, source: "raw" };
+  }
   const curated = FALLBACK_ANCHORS[name];
   if (curated) {
     return { lon: curated.lon, lat: curated.lat, source: "fallback" };
@@ -510,7 +531,9 @@ export class SvgMap {
     );
     if (!loc) return;
     const raw = loc.geometry.coordinates as [number, number];
-    const { lon, lat } = resolveCoord(loc.properties.name, raw[0], raw[1]);
+    const { lon, lat } = resolveCoord(loc.properties.name, raw[0], raw[1], {
+      evidenceBacked: Boolean(loc.properties.inferred_from),
+    });
     const { x, y } = lonlatToViewbox(lon, lat);
     const target = this.scaledView(this.view, 2);
     this.animateViewBox({
@@ -697,6 +720,7 @@ export class SvgMap {
       loc.properties.name,
       fallback[0],
       fallback[1],
+      { evidenceBacked: Boolean(loc.properties.inferred_from) },
     );
     return lonlatToViewbox(lon, lat);
   }
@@ -833,7 +857,9 @@ export class SvgMap {
     for (const loc of locationsToShow) {
       const props = loc.properties;
       const raw = loc.geometry.coordinates as [number, number];
-      const { lon, lat } = resolveCoord(props.name, raw[0], raw[1]);
+      const { lon, lat } = resolveCoord(props.name, raw[0], raw[1], {
+        evidenceBacked: Boolean(props.inferred_from),
+      });
       const { x, y } = lonlatToViewbox(lon, lat);
       markerBuf.push({
         x,
@@ -934,11 +960,9 @@ export class SvgMap {
           )
         : undefined;
       const { lon, lat } = loc
-        ? resolveCoord(
-            loc.properties.name,
-            raw[0],
-            raw[1],
-          )
+        ? resolveCoord(loc.properties.name, raw[0], raw[1], {
+            evidenceBacked: Boolean(loc.properties.inferred_from),
+          })
         : resolveCoord(props.title, raw[0], raw[1]);
       const { x, y } = lonlatToViewbox(lon, lat);
       const isCurrent = props.chapter === cur;
@@ -985,7 +1009,9 @@ export class SvgMap {
       const chs = loc.properties.chapters || [fp];
       if (!chs.some((c: number) => contextChs.has(c))) continue;
       const [rawLon, rawLat] = loc.geometry.coordinates as [number, number];
-      const { lon, lat } = resolveCoord(loc.properties.name, rawLon, rawLat);
+      const { lon, lat } = resolveCoord(loc.properties.name, rawLon, rawLat, {
+        evidenceBacked: Boolean(loc.properties.inferred_from),
+      });
       if (lon < BASEMAP_BBOX.lon_min || lon > BASEMAP_BBOX.lon_max) continue;
       if (lat < BASEMAP_BBOX.lat_min || lat > BASEMAP_BBOX.lat_max) continue;
       lonMin = Math.min(lonMin, lon);
