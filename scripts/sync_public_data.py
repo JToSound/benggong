@@ -40,6 +40,9 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 SRC = REPO / "data" / "public"
 DST = REPO / "public" / "data" / "public"
+#: Vite 嘅建置產物。`vite build` 會將 `public/` 複製過去，但實測**唔一定
+#: 每次都更新** —— 用戶就係因此讀到舊資料（見下面 check_dist）。
+DIST = REPO / "dist" / "data" / "public"
 
 #: 需要同步嘅檔（副檔名過濾，避免複製到暫存檔）
 PATTERNS = ("*.json", "*.geojson")
@@ -73,6 +76,28 @@ def diff() -> tuple[list[str], list[str], list[str]]:
     return sorted(to_copy), sorted(extra), sorted(same)
 
 
+def check_dist() -> tuple[list[str], list[str]]:
+    """檢查 `dist/data/public/` 同來源一唔一致（如果 dist 存在）。
+
+    ⚠️ 為何一定要檢查 dist
+    ----------------------
+    用戶喺 `localhost:5174`（測試用 preview server，serve `dist/`）見到
+    「載入 locations.geojson 時收到 HTML 而唔係 JSON」。
+
+    根因：`dist/data/public/` 停留喺舊版本，而 `public/data/public/` 已經
+    更新。`vite build` 理論上會複製 `public/` → `dist/`，但實測**唔一定
+    每次都更新**（`dist/index.html` 係新嘅，但 `dist/data/public/*` 係舊嘅）。
+
+    所以同步檢查要覆蓋**兩層**：來源 → `public/` → `dist/`。
+    """
+    if not DIST.exists():
+        return [], []
+    src, dst = collect(SRC), collect(DIST)
+    stale = [n for n, p in src.items() if n not in dst or sha256(p) != sha256(dst[n])]
+    missing = [n for n in src if n not in dst]
+    return sorted(stale), sorted(missing)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="同步 data/public → public/data/public")
     ap.add_argument("--check", action="store_true", help="只檢查，唔一致就 exit 1")
@@ -94,14 +119,27 @@ def main() -> int:
             print(f"    多出 {n}（唔會刪，請人手確認）")
 
     if args.check:
+        bad = bool(to_copy)
         if to_copy:
             print(
-                "\n❌ 唔一致 —— 前端會讀到舊資料。"
+                "\n❌ public/data/public 唔一致 —— 前端會讀到舊資料。"
                 "請跑 python scripts/sync_public_data.py",
                 file=sys.stderr,
             )
+        dist_stale, dist_missing = check_dist()
+        if dist_stale or dist_missing:
+            bad = True
+            print(
+                f"\n❌ dist/data/public 唔一致（{len(dist_stale)} 個唔同、"
+                f"{len(dist_missing)} 個缺失）—— preview server 會讀到舊資料。"
+                "請跑 npm run build",
+                file=sys.stderr,
+            )
+            for n in dist_stale[:8]:
+                print(f"    {n}", file=sys.stderr)
+        if bad:
             return 1
-        print("\n✅ 一致")
+        print("\n✅ 兩層都一致")
         return 0
 
     DST.mkdir(parents=True, exist_ok=True)
@@ -114,6 +152,14 @@ def main() -> int:
     if to_copy2:
         print(f"❌ 同步之後仍然唔一致：{to_copy2}", file=sys.stderr)
         return 1
+
+    dist_stale, dist_missing = check_dist()
+    if dist_stale or dist_missing:
+        print(
+            f"\n⚠️ dist/data/public 有 {len(dist_stale)} 個檔同來源唔一致。"
+            "Vite 應該會喺 build 時複製過去 —— 如果 build 之後仍然唔一致，"
+            "請跑 npm run clean 再 build。"
+        )
     print("✅ 覆核通過")
     return 0
 

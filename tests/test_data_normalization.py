@@ -699,3 +699,39 @@ def test_derive_zones_is_idempotent():
     )
     assert r.returncode == 0, r.stderr[-400:]
     assert ZONES.read_text(encoding="utf-8") == before, "derive_zones.py 唔冪等"
+
+
+def test_dist_data_matches_source():
+    """`dist/data/public/` 必須同來源一致（如果 dist 存在）。
+
+    ⚠️ 為何要檢查 dist
+    -----------------
+    用戶喺 `localhost:5174`（測試用 preview server，serve `dist/`）見到
+    「載入 locations.geojson 時收到 HTML 而唔係 JSON」。
+
+    根因：`dist/data/public/` 停留喺舊版本，而 `public/data/public/` 已經
+    更新。`vite build` 理論上會複製 `public/` → `dist/`，但實測**唔一定
+    每次都更新**（`dist/index.html` 係新嘅，但 `dist/data/public/*` 係舊嘅）。
+
+    所以一致性檢查要覆蓋**兩層**：來源 → `public/` → `dist/`。
+    """
+    import hashlib
+
+    dist = REPO / "dist" / "data" / "public"
+    if not dist.exists():
+        pytest.skip("dist/ 未建置（正常，CI 可能冇）")
+
+    def sha(p: Path) -> str:
+        return hashlib.sha256(p.read_bytes()).hexdigest()
+
+    src_dir = REPO / "data" / "public"
+    src = {p.name: p for p in src_dir.glob("*.json")}
+    src.update({p.name: p for p in src_dir.glob("*.geojson")})
+
+    stale = [n for n, sp in src.items() if (dist / n).exists() and sha(sp) != sha(dist / n)]
+    missing = [n for n in src if not (dist / n).exists()]
+    assert not missing, f"dist 缺少呢啲檔：{missing}（請跑 npm run build）"
+    assert not stale, (
+        f"dist 讀到舊資料（{len(stale)} 個唔一致）：{stale}\n"
+        "請跑 npm run build（或者 npm run clean && npm run build）"
+    )
