@@ -4,6 +4,7 @@
  */
 
 import type {
+  ZonesFeatureCollection,
   LocationsFeatureCollection,
   EventsFeatureCollection,
   RoutesFeatureCollection,
@@ -38,6 +39,7 @@ export interface AppData {
   routes: RoutesFeatureCollection;
   timeline: TimelineRecord[];
   characters: CharactersData;
+  zones: ZonesFeatureCollection;
   chapterAppearances: ChapterAppearances;
   chapterSummaries: ChapterSummaries;
   // Indices
@@ -50,9 +52,30 @@ export interface AppData {
 async function fetchJSON<T>(path: string): Promise<T> {
   const r = await fetch(path);
   if (!r.ok) {
-    throw new Error(`Failed to load ${path}: ${r.status}`);
+    throw new Error(`載入 ${path} 失敗：HTTP ${r.status}`);
   }
-  return r.json();
+  /*
+   * 為何要檢查 content-type
+   * ----------------------
+   * 當檔案唔存在時，SPA 會回退去 `index.html`，於是 `r.json()` 收到 HTML
+   * 而拋出 `SyntaxError: Unexpected token '<'` —— 呢個訊息完全幫唔到手，
+   * 用戶唔會知係咩事。
+   *
+   * 實測踩過：建置期間 `dist/data/public/` 被寫入中，瀏覽器請求到
+   * 404 → index.html → 就係呢個錯誤。
+   */
+  const ct = r.headers.get("content-type") || "";
+  if (ct.includes("text/html")) {
+    throw new Error(
+      `載入 ${path} 時收到 HTML 而唔係 JSON —— 通常代表檔案唔存在` +
+        `（伺服器回退到 index.html）。請確認已跑 npm run build（會自動同步資料）。`,
+    );
+  }
+  try {
+    return (await r.json()) as T;
+  } catch (e) {
+    throw new Error(`解析 ${path} 失敗：${(e as Error).message}`);
+  }
 }
 
 /** chapters_span [start, end] → 展開成章節陣列（span 缺失時回空陣列）。 */
@@ -73,6 +96,7 @@ export async function loadAllData(): Promise<AppData> {
     routes,
     timeline,
     characters,
+    zones,
     chapterAppearances,
     chapterSummaries,
   ] = await Promise.all([
@@ -82,6 +106,7 @@ export async function loadAllData(): Promise<AppData> {
     fetchJSON<RoutesFeatureCollection>(base + "routes.geojson"),
     fetchJSON<TimelineRecord[]>(base + "timeline.json"),
     fetchJSON<CharactersData>(base + "characters.json"),
+    fetchJSON<ZonesFeatureCollection>(base + "zones.geojson"),
     fetchJSON<ChapterAppearances>(base + "chapter-appearances.json"),
     fetchJSON<ChapterSummaries>(base + "chapter-summaries.json"),
   ]);
@@ -124,6 +149,7 @@ export async function loadAllData(): Promise<AppData> {
     routes,
     timeline,
     characters,
+    zones,
     chapterAppearances,
     chapterSummaries,
     locationsById,

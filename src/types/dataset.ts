@@ -278,3 +278,31 @@ export const CHARACTER_COLORS: Record<string, string> = {
 
 /** 其他角色 deterministic palette。 */
 export const FALLBACK_PALETTE = ["#F39C12", "#9B59B6", "#1ABC9C", "#E67E22"];
+
+// ---- Zones（倖存區／病窩）----
+
+export type ZoneKind = "survivor" | "nest";
+
+/** 半徑來源：members = 由成員地點分佈推導；default = 按類型預設；curated = 文中明文。 */
+export type ZoneRadiusSource = "members" | "default" | "curated";
+
+export interface ZoneProperties {
+  id: string;
+  name: string;
+  kind: ZoneKind;
+  radius_m: number;
+  radius_source: ZoneRadiusSource;
+  member_location_ids: string[];
+  chapters: number[];
+  first_appearance: number | null;
+  description: string;
+  evidence: string;
+  source: SourceId;
+}
+
+export type ZoneFeature = FeatureBase<ZoneProperties>;
+
+export interface ZonesFeatureCollection {
+  type: "FeatureCollection";
+  features: ZoneFeature[];
+}

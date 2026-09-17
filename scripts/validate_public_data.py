@@ -57,6 +57,7 @@ SCHEMA_FILES = {
     "routes.geojson": "route.schema.json",
     "timeline.json": "timeline.schema.json",
     "characters.json": "character.schema.json",
+    "zones.geojson": "zone.schema.json",
     "chapter-summaries.json": "chapter-summaries.schema.json",
 }
 
@@ -162,7 +163,8 @@ def main() -> int:
 
         # 收集統計同 id
         key_map = {"locations.geojson": "location", "events.geojson": "event", "routes.geojson": "route",
-                   "timeline.json": "timeline", "characters.json": "character", "chapter-summaries.json": "chapter_summary"}
+                   "timeline.json": "timeline", "characters.json": "character",
+                   "chapter-summaries.json": "chapter_summary", "zones.geojson": "zone"}
         if fname in key_map:
             stats[key_map[fname]] = len(items) if isinstance(items, list) else sum(
                 1 for _ in items

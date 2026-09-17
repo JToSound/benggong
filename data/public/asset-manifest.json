@@ -8,7 +8,8 @@
     "route": 42,
     "timeline": 1796,
     "character": 330,
-    "chapter_summary": 195
+    "chapter_summary": 195,
+    "zone": 25
   },
   "review_summary": {
     "verified": 0,
@@ -21,5 +22,8 @@
     "routes 為空：等位置-事件關聯經人手確認後先建立，避免捏造路線。",
     "本 dataset 由 LLM candidates 經 deterministic rules 生成；無全文、無 evidence excerpt 入公開檔案。",
     "2026-09-16：角色合併（11 個異體併入 canonical），342 → 331。詳見 data/private/review/character-merge-applied.json。"
-  ]
+  ],
+  "files": {
+    "zones.geojson": "zones.geojson"
+  }
 }

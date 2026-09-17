@@ -251,6 +251,9 @@ const LEGEND_ZH: Record<string, string> = {
   "legend.loc-fictional": "虛構地點",
   "legend.selected": "選中",
   "legend.route": "角色路線（僅真實地點之間）",
+  "legend.zone-survivor": "倖存區（安全）",
+  "legend.zone-nest": "病窩（危險）",
+  "legend.zone-estimated": "虛線＝範圍係估算",
 };
 
 const LEGEND_EN: Record<string, string> = {
@@ -345,6 +348,7 @@ export class SvgMap {
                      x="${BASE_VIEW.x}" y="${BASE_VIEW.y}" width="${BASE_VIEW.w}" height="${BASE_VIEW.h}"
                      preserveAspectRatio="none" />
             </g>
+            <g id="zones-layer" class="zones-layer"></g>
             <g id="routes-layer" class="routes-layer"></g>
             <g id="locations-layer" class="locations-layer"></g>
             <g id="events-layer" class="events-layer"></g>
@@ -362,6 +366,9 @@ export class SvgMap {
             <div class="legend-item"><span class="dot dot-loc-real"></span><span data-i18n="legend.loc-real">真實地點</span></div>
             <div class="legend-item"><span class="dot dot-loc-fictional"></span><span data-i18n="legend.loc-fictional">虛構地點</span></div>
             <div class="legend-item"><span class="dot dot-selected"></span><span data-i18n="legend.selected">選中</span></div>
+            <div class="legend-item"><span class="area area-survivor"></span><span data-i18n="legend.zone-survivor">倖存區（安全）</span></div>
+            <div class="legend-item"><span class="area area-nest"></span><span data-i18n="legend.zone-nest">病窩（危險）</span></div>
+            <div class="legend-item"><span class="area area-estimated"></span><span data-i18n="legend.zone-estimated">虛線＝範圍係估算</span></div>
             <div class="legend-item"><span class="line route-legend"></span><span data-i18n="legend.route">角色路線（僅真實地點之間）</span></div>
           </div>
         </div>
@@ -768,9 +775,11 @@ export class SvgMap {
     }
 
     // 只重建標記圖層，底圖 <image> 保持不動（避免每次 render 重新載入 PNG）
+    const zonesLayer = content.querySelector("#zones-layer")!;
     const routesLayer = content.querySelector("#routes-layer")!;
     const locLayer = content.querySelector("#locations-layer")!;
     const evLayer = content.querySelector("#events-layer")!;
+    zonesLayer.replaceChildren();
     routesLayer.replaceChildren();
     locLayer.replaceChildren();
     evLayer.replaceChildren();
@@ -781,6 +790,68 @@ export class SvgMap {
     const fictionalById = new Map<string, boolean>();
     for (const l of this.data.locations.features) {
       fictionalById.set(l.properties.id, Boolean(l.properties.fictional));
+    }
+
+    // Zones（倖存區／病窩）
+    //
+    // 為何要獨立一層、而且喺標記之下
+    // ----------------------------
+    // 區域係「面」，用嚟一眼睇到「呢一帶安全／危險」。畫喺標記之下
+    // 就唔會遮住地名同事件點。
+    //
+    // 顏色語意（同圖例一致）：
+    //   survivor（倖存區／安全區）→ 青綠色，代表安全
+    //   nest（病窩／巢穴／據點）  → 橙紅色，代表危險
+    //
+    // 實線 vs 虛線：
+    //   實線 = 範圍有證據（由成員地點分佈推導，或文中明文描述）
+    //   虛線 = 範圍係估算（只有一個成員點，用按類型嘅預設半徑）
+    //   呢個區分好重要 —— 唔可以令估算睇落同證據一樣確定。
+    const ZONE_STYLE: Record<string, { fill: string; stroke: string }> = {
+      survivor: { fill: "#1abc9c", stroke: "#16a085" },
+      nest: { fill: "#e74c3c", stroke: "#c0392b" },
+    };
+    for (const z of this.data.zones.features) {
+      const zp = z.properties;
+      const chs = zp.chapters || [];
+      const active = chs.length === 0 || chs.some((c) => c <= cur && cur <= c + 12);
+      if (!active) continue;
+      const style = ZONE_STYLE[zp.kind] ?? ZONE_STYLE.nest;
+      // 米 → user unit（x 軸 = 經度）
+      const r = zp.radius_m / 102940;
+      const { x, y } = lonlatToViewbox(
+        z.geometry.coordinates[0],
+        z.geometry.coordinates[1],
+      );
+      const circle = document.createElementNS(SVG_NS, "circle");
+      circle.setAttribute("cx", String(x));
+      circle.setAttribute("cy", String(y));
+      circle.setAttribute("r", String(r));
+      circle.setAttribute("class", "zone-area");
+      circle.setAttribute("fill", style.fill);
+      circle.setAttribute("fill-opacity", "0.12");
+      circle.setAttribute("stroke", style.stroke);
+      circle.setAttribute("stroke-width", String(this.markerR(0.0009)));
+      circle.setAttribute("stroke-opacity", "0.7");
+      if (zp.radius_source === "default") {
+        // 估算範圍：虛線，令佢睇落唔同實證範圍一樣確定
+        circle.setAttribute("stroke-dasharray", String(this.markerR(0.004)));
+      }
+      circle.setAttribute("data-zone-id", zp.id);
+      circle.setAttribute("data-zone-name", zp.name);
+      const title = document.createElementNS(SVG_NS, "title");
+      const srcLabel =
+        zp.radius_source === "members"
+          ? "範圍由成員地點分佈推導"
+          : zp.radius_source === "curated"
+            ? "範圍由文中描述推導"
+            : "範圍係估算（示意）";
+      title.textContent =
+        `${zp.name}（${zp.kind === "survivor" ? "倖存區／安全" : "病窩／危險"}）\n` +
+        `半徑約 ${Math.round(zp.radius_m)} m — ${srcLabel}\n` +
+        `${zp.evidence}`;
+      circle.appendChild(title);
+      zonesLayer.appendChild(circle);
     }
 
     // Routes

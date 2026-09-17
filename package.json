@@ -14,7 +14,9 @@
     "test:watch": "vitest",
     "sync-data": "python scripts/sync_public_data.py || python3 scripts/sync_public_data.py",
     "prebuild": "npm run sync-data",
-    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
+    "verify:visual": "vitest run tests/visual-smoke.e2e.test.ts",
+    "zones": "python scripts/derive_zones.py || python3 scripts/derive_zones.py"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",

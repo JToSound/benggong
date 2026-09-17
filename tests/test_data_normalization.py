@@ -489,3 +489,213 @@ def test_prebuild_hooks_sync():
         "缺 prebuild —— build 之前一定要同步，否則前端會讀到舊資料"
     )
     assert "sync" in scripts["prebuild"], "prebuild 必須呼叫 sync-data"
+
+
+# ---------------------------------------------------------------------------
+# 區域（倖存區／病窩）
+# ---------------------------------------------------------------------------
+ZONES = REPO / "data" / "public" / "zones.geojson"
+ZONE_SCHEMA = REPO / "data" / "schemas" / "zone.schema.json"
+
+
+@pytest.fixture(scope="module")
+def zones() -> list[dict]:
+    if not ZONES.exists():
+        pytest.skip("未跑過 derive_zones.py")
+    return json.loads(ZONES.read_text(encoding="utf-8"))["features"]
+
+
+def test_zones_validate_against_schema(zones):
+    jsonschema = pytest.importorskip("jsonschema")
+    schema = json.loads(ZONE_SCHEMA.read_text(encoding="utf-8"))
+    v = jsonschema.Draft202012Validator(schema)
+    errs = [f"{z['properties']['id']}: {e.message}" for z in zones for e in v.iter_errors(z)]
+    assert not errs, "區域 schema 驗證失敗：\n" + "\n".join(errs[:5])
+
+
+def test_zone_radius_within_bounds(zones):
+    """半徑必須喺 schema 嘅上下限之內（太細睇唔到，太大蓋過其他區域）。"""
+    for z in zones:
+        r = z["properties"]["radius_m"]
+        assert 80 <= r <= 2000, f"{z['properties']['name']} 半徑 {r} m 超出範圍"
+
+
+def test_zone_radius_source_is_auditable(zones):
+    """每個區域都要講清楚半徑係點嚟 —— 唔可以只寫結論。"""
+    allowed = {"members", "default", "curated"}
+    for z in zones:
+        p = z["properties"]
+        assert p["radius_source"] in allowed, f"{p['name']} radius_source 唔合法"
+        assert p["evidence"], f"{p['name']} 缺 evidence"
+
+
+def test_member_derived_zones_use_member_spread(zones):
+    """`radius_source=members` 嘅區域，半徑必須真係由成員分佈推導。
+
+    呢個係防止「標咗 members 但其實用預設值」嘅假證據。
+    """
+    import math
+
+    by_id = {
+        f["properties"]["id"]: f["geometry"]["coordinates"]
+        for f in json.loads(
+            (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
+        )["features"]
+    }
+
+    def dist(a, b):
+        return math.hypot(
+            (b[0] - a[0]) * 111320 * 0.9247, (b[1] - a[1]) * 110570
+        )
+
+    checked = 0
+    for z in zones:
+        p = z["properties"]
+        if p["radius_source"] != "members":
+            continue
+        pts = [by_id[i] for i in p["member_location_ids"] if i in by_id]
+        assert len(pts) >= 2, f"{p['name']} 標咗 members 但成員少過 2 個"
+        c = z["geometry"]["coordinates"]
+        # 半徑應該 ≥ 最遠成員嘅距離（加咗 15% 餘裕）
+        assert p["radius_m"] >= max(dist(c, q) for q in pts) - 1, (
+            f"{p['name']} 半徑 {p['radius_m']} 細過最遠成員距離"
+        )
+        checked += 1
+    assert checked > 0, "應該至少有一個區域係由成員分佈推導"
+
+
+def test_curated_zones_have_chapter_evidence(zones):
+    """策展區域（例如坑口大病窩）必須附章節引用。"""
+    curated = [z for z in zones if z["properties"]["radius_source"] == "curated"]
+    assert curated, "應該有策展區域（坑口大病窩）"
+    for z in curated:
+        p = z["properties"]
+        assert p["chapters"], f"{p['name']} 缺章節引用"
+        assert "ch" in p["evidence"], f"{p['name']} evidence 應該引用章節"
+
+
+def test_zone_kinds_are_safe_and_danger(zones):
+    """區域要有安全同危險兩類（用戶要求用顏色區分）。"""
+    kinds = {z["properties"]["kind"] for z in zones}
+    assert "survivor" in kinds, "應該有倖存區（安全）"
+    assert "nest" in kinds, "應該有病窩（危險）"
+
+
+def test_zone_ids_unique(zones):
+    ids = [z["properties"]["id"] for z in zones]
+    assert len(ids) == len(set(ids)), "區域 id 重複"
+
+
+def test_derive_zones_is_idempotent():
+    before = ZONES.read_text(encoding="utf-8")
+    r = subprocess.run(
+        [sys.executable, str(REPO / "scripts" / "derive_zones.py")],
+        cwd=str(REPO), capture_output=True, text=True,
+    )
+    assert r.returncode == 0, r.stderr[-400:]
+    assert ZONES.read_text(encoding="utf-8") == before, "derive_zones.py 唔冪等"
+
+
+# ---------------------------------------------------------------------------
+# 區域（倖存區／病窩）
+# ---------------------------------------------------------------------------
+ZONES = REPO / "data" / "public" / "zones.geojson"
+ZONE_SCHEMA = REPO / "data" / "schemas" / "zone.schema.json"
+
+
+@pytest.fixture(scope="module")
+def zones() -> list[dict]:
+    if not ZONES.exists():
+        pytest.skip("未跑過 derive_zones.py")
+    return json.loads(ZONES.read_text(encoding="utf-8"))["features"]
+
+
+def test_zones_validate_against_schema(zones):
+    jsonschema = pytest.importorskip("jsonschema")
+    schema = json.loads(ZONE_SCHEMA.read_text(encoding="utf-8"))
+    v = jsonschema.Draft202012Validator(schema)
+    errs = [f"{z['properties']['id']}: {e.message}" for z in zones for e in v.iter_errors(z)]
+    assert not errs, "區域 schema 驗證失敗：\n" + "\n".join(errs[:5])
+
+
+def test_zone_radius_within_bounds(zones):
+    """半徑必須喺 schema 嘅上下限之內（太細睇唔到，太大蓋過其他區域）。"""
+    for z in zones:
+        r = z["properties"]["radius_m"]
+        assert 80 <= r <= 2000, f"{z['properties']['name']} 半徑 {r} m 超出範圍"
+
+
+def test_zone_radius_source_is_auditable(zones):
+    """每個區域都要講清楚半徑係點嚟 —— 唔可以只寫結論。"""
+    allowed = {"members", "default", "curated"}
+    for z in zones:
+        p = z["properties"]
+        assert p["radius_source"] in allowed, f"{p['name']} radius_source 唔合法"
+        assert p["evidence"], f"{p['name']} 缺 evidence"
+
+
+def test_member_derived_zones_use_member_spread(zones):
+    """`radius_source=members` 嘅區域，半徑必須真係由成員分佈推導。
+
+    呢個係防止「標咗 members 但其實用預設值」嘅假證據。
+    """
+    import math
+
+    by_id = {
+        f["properties"]["id"]: f["geometry"]["coordinates"]
+        for f in json.loads(
+            (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
+        )["features"]
+    }
+
+    def dist(a, b):
+        return math.hypot(
+            (b[0] - a[0]) * 111320 * 0.9247, (b[1] - a[1]) * 110570
+        )
+
+    checked = 0
+    for z in zones:
+        p = z["properties"]
+        if p["radius_source"] != "members":
+            continue
+        pts = [by_id[i] for i in p["member_location_ids"] if i in by_id]
+        assert len(pts) >= 2, f"{p['name']} 標咗 members 但成員少過 2 個"
+        c = z["geometry"]["coordinates"]
+        # 半徑應該 ≥ 最遠成員嘅距離（加咗 15% 餘裕）
+        assert p["radius_m"] >= max(dist(c, q) for q in pts) - 1, (
+            f"{p['name']} 半徑 {p['radius_m']} 細過最遠成員距離"
+        )
+        checked += 1
+    assert checked > 0, "應該至少有一個區域係由成員分佈推導"
+
+
+def test_curated_zones_have_chapter_evidence(zones):
+    """策展區域（例如坑口大病窩）必須附章節引用。"""
+    curated = [z for z in zones if z["properties"]["radius_source"] == "curated"]
+    assert curated, "應該有策展區域（坑口大病窩）"
+    for z in curated:
+        p = z["properties"]
+        assert p["chapters"], f"{p['name']} 缺章節引用"
+        assert "ch" in p["evidence"], f"{p['name']} evidence 應該引用章節"
+
+
+def test_zone_kinds_are_safe_and_danger(zones):
+    """區域要有安全同危險兩類（用戶要求用顏色區分）。"""
+    kinds = {z["properties"]["kind"] for z in zones}
+    assert "survivor" in kinds, "應該有倖存區（安全）"
+    assert "nest" in kinds, "應該有病窩（危險）"
+
+
+def test_zone_ids_unique(zones):
+    ids = [z["properties"]["id"] for z in zones]
+    assert len(ids) == len(set(ids)), "區域 id 重複"
+
+
+def test_derive_zones_is_idempotent():
+    before = ZONES.read_text(encoding="utf-8")
+    r = subprocess.run(
+        [sys.executable, str(REPO / "scripts" / "derive_zones.py")],
+        cwd=str(REPO), capture_output=True, text=True,
+    )
+    assert r.returncode == 0, r.stderr[-400:]
+    assert ZONES.read_text(encoding="utf-8") == before, "derive_zones.py 唔冪等"

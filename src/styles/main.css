@@ -334,6 +334,22 @@ html, body {
 .dot-selected      { background: #ffeb3b; }
 .route-legend      { background: #F39C12; border-radius: 2px; }
 
+/* 區域圖例樣本：半透明填色 + 邊框，同地圖上嘅區域圓形一致。
+   實線 = 有證據嘅範圍；虛線 = 估算範圍。 */
+.legend-item .area {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+.area-survivor  { background: rgba(26, 188, 156, 0.18); border-color: #16a085; }
+.area-nest      { background: rgba(231, 76, 60, 0.18);  border-color: #c0392b; }
+.area-estimated { background: transparent; border-color: #16a085; border-style: dashed; }
+
+/* 地圖上嘅區域圓形：唔應該攔截滑鼠（標記要照樣點得到） */
+.zone-area { pointer-events: none; }
+
 .map-controls {
   position: absolute;
   bottom: 12px;

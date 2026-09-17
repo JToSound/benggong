@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/zone.schema.json",
+  "title": "《病港》區域（倖存區／病窩）",
+  "description": "區域係「面」—— 用嚟表達「呢一帶係安全區」或「呢度係病窩」。由 scripts/derive_zones.py 產生。範圍半徑嘅來源必須可稽核（radius_source）。",
+  "type": "object",
+  "required": ["type", "geometry", "properties"],
+  "properties": {
+    "type": { "const": "Feature" },
+    "geometry": {
+      "description": "區域中心點。範圍由 properties.radius_m 表示（不確定圓）。",
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "const": "Point" },
+        "coordinates": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "id", "name", "kind", "radius_m", "radius_source",
+        "chapters", "description", "evidence", "source"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^zone_[0-9a-f]{10}$" },
+        "name": { "type": "string", "maxLength": 40 },
+        "kind": {
+          "description": "survivor = 人類聚居（安全）；nest = 病者巢穴（危險）。",
+          "enum": ["survivor", "nest"]
+        },
+        "radius_m": {
+          "description": "區域半徑（米）。",
+          "type": "number",
+          "minimum": 80,
+          "maximum": 2000
+        },
+        "radius_source": {
+          "description": "半徑來源。members = 由成員地點實際分佈推導（證據）；default = 按類型預設（估算）；curated = 文中明文描述（附章節引用）。",
+          "enum": ["members", "default", "curated"]
+        },
+        "member_location_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "chapters": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 210 }
+        },
+        "first_appearance": { "type": ["integer", "null"] },
+        "description": { "type": "string", "maxLength": 120 },
+        "evidence": {
+          "description": "半徑／存在嘅依據。必須可回溯，唔可以只寫結論。",
+          "type": "string",
+          "maxLength": 400
+        },
+        "source": { "const": "bing_gang" }
+      }
+    }
+  }
+}
