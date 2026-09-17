@@ -457,11 +457,28 @@ def main() -> int:
     print(f"  有原型+座標：{stats['ok']}　模型答唔確定：{stats['null']}")
     print(f"  有原型但 OSM 查唔到：{stats['no_coord']}　錯誤：{stats['error']}")
 
+    # 同現有結果**合併**，唔覆蓋。
+    #
+    # 為何要合併：免費層限流嚴重（全量 332 條約 100 分鐘），所以要分批跑。
+    # 如果每次都覆蓋，第二批就會沖走第一批嘅結果。合併之後可以累積。
+    existing: dict[str, dict] = {}
+    if OUT.exists():
+        for line in OUT.read_text(encoding="utf-8").splitlines():
+            if line:
+                r = json.loads(line)
+                existing[r["subject_ids"][0]] = r
+    before = len(existing)
+    for r in results:
+        existing[r["subject_ids"][0]] = r
+    merged = sorted(existing.values(), key=lambda r: r["inference_id"])
     OUT.write_text(
-        "\n".join(json.dumps(r, ensure_ascii=False) for r in results) + "\n",
+        "\n".join(json.dumps(r, ensure_ascii=False) for r in merged) + "\n",
         encoding="utf-8",
     )
-    print(f"\n寫入 {OUT}（{len(results)} 條，全部 pending）")
+    print(
+        f"\n寫入 {OUT}（本次 {len(results)} 條，累計 {len(merged)} 條"
+        f"{f'，新增 {len(merged) - before}' if before else ''}，全部 pending）"
+    )
     return 0
 
 
