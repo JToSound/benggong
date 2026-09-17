@@ -23,13 +23,17 @@
         },
         "first_appearance": 2,
         "chapters": [
-          2
+          2,
+          4
         ],
         "characters": [],
         "description": "主角與夏晴躲藏於一所暗淡無光、只靠窗外陽光照明的荒廢商場，每個角落都佈滿蜘蛛絲網與塵埃。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "aliases": [
+          "廢荒商場"
+        ]
       }
     },
     {
@@ -184,17 +188,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91846143282216,
-          22.43594441901274
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0006",
         "name": "醫療室",
-        "display_name": "醫療室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "醫療室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.197,
           "y": 0.817
@@ -215,7 +219,8 @@
         "description": "大舌吩咐站崗的人扶受驚的夏晴到大本營的醫療室。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0006"
       }
     },
     {
@@ -391,17 +396,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04982879377431,
-          22.29609983215076
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0012",
         "name": "中央廣場",
-        "display_name": "中央廣場（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "中央廣場（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.416,
           "y": 0.417
@@ -414,7 +419,8 @@
         "description": "大本營中央設有大營火的地方，翌日居民在廣場上議論爆窗偷食物的事件。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0012"
       }
     },
     {
@@ -593,17 +599,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13816113527123,
-          22.410107919432363
+          114.25355,
+          22.30613
         ]
       },
       "properties": {
         "id": "loc_0018",
         "name": "B樓醫療室",
-        "display_name": "B樓醫療室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "B樓醫療室（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.564,
           "y": 0.743
@@ -616,38 +622,8 @@
         "description": "大本營B樓差唔多成幢用作醫療用途，內部雜亂，醫療人員忙於照顧病人，亦有葬屍隊待命，當地死亡率異常地高。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.2654186770428,
-          22.32079043259327
-        ]
-      },
-      "properties": {
-        "id": "loc_0019",
-        "name": "廢荒商場",
-        "display_name": "廢荒商場（參考位置）",
-        "location_type": "district",
-        "fictional": false,
-        "location_precision": "approximate",
-        "story_position": {
-          "x": 0.692,
-          "y": 0.381
-        },
-        "first_appearance": 4,
-        "chapters": [
-          4
-        ],
-        "characters": [],
-        "description": "送葬隊嘅目的地係一橦廢棄商場，亦即主角昨日遇上怪物（病腦）嘅「病窩」地頭；數十個載屍黑袋其後被擺放到商場中央。",
-        "confidence": 0.9,
-        "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0018"
       }
     },
     {
@@ -749,17 +725,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12360677500573,
-          22.26784828717479
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0023",
         "name": "三樓儲物室",
-        "display_name": "三樓儲物室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "三樓儲物室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.539,
           "y": 0.337
@@ -772,7 +748,8 @@
         "description": "大本營三樓有一間堆放建築廢料嘅細築廢料嘅細儲物室，夠靜，主角喺度獨自進食。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0023"
       }
     },
     {
@@ -1218,17 +1195,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265,
-          22.327
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0037",
         "name": "學校",
-        "display_name": "學校（參考位置）",
+        "display_name": "學校（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "district",
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.692,
           "y": 0.397
@@ -1253,7 +1230,8 @@
         "description": "大本營一支四人小隊曾喺學校遇到大鼻，攻擊無效後全數嚴重昏迷，其中兩人嚴重中毒。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0037"
       }
     },
     {
@@ -1295,17 +1273,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22269947356374,
-          22.30501232166018
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0039",
         "name": "老賢的房間",
-        "display_name": "老賢的房間（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "老賢的房間（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.704,
           "y": 0.443
@@ -1318,7 +1296,8 @@
         "description": "首領老賢在大本營的房間，開門傳來糖果味，桌上放有一罐果汁糖。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0039"
       }
     },
     {
@@ -1326,17 +1305,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25343,
-          22.30581
+          114.25311,
+          22.3059
         ]
       },
       "properties": {
         "id": "loc_0040",
         "name": "A橦五樓",
         "display_name": "A橦五樓（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.211,
           "y": 0.519
@@ -1503,17 +1482,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19585946440833,
-          22.315689364461736
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0045",
         "name": "佛教志蓮小學",
-        "display_name": "佛教志蓮小學（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "佛教志蓮小學（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.66,
           "y": 0.473
@@ -1528,7 +1507,8 @@
         "description": "佛教志蓮小學係一間與大本營相隔幾條街嘅小學，被自稱「不良人」嘅倖存者團隊佔領。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0045"
       }
     },
     {
@@ -1536,17 +1516,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11367315175097,
-          22.363657549401083
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0046",
         "name": "安區",
-        "display_name": "安區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "安區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.523,
           "y": 0.61
@@ -1564,7 +1544,8 @@
         "description": "大本營係一個名為「安區」嘅秘密組織基地。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0046"
       }
     },
     {
@@ -1638,17 +1619,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20732478828107,
-          22.401692645151446
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0049",
         "name": "飯堂",
-        "display_name": "飯堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "飯堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.679,
           "y": 0.719
@@ -1663,7 +1644,8 @@
         "description": "志願軍學生下課後會一起到大本營的飯堂進食；該日職員因材料不足且要留給其他人，每人只奉上一碗菜湯。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0049"
       }
     },
     {
@@ -1708,17 +1690,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91746166170748,
-          22.366315594720376
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0051",
         "name": "天台",
-        "display_name": "天台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "天台（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.196,
           "y": 0.618
@@ -1738,7 +1720,8 @@
         "description": "大本營的天台，主角喜歡在雨天到此觀望天空，並曾與少佐在此長談。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0051"
       }
     },
     {
@@ -2419,17 +2402,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14060288395514,
-          22.429794651712825
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0072",
         "name": "少佐宿舍",
-        "display_name": "少佐宿舍（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "少佐宿舍（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.568,
           "y": 0.799
@@ -2442,7 +2425,8 @@
         "description": "少佐叫敘述者上佢嘅宿舍一齊飲酒並講述大本營收到人頭一事。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0072"
       }
     },
     {
@@ -2583,17 +2567,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22195605401693,
-          22.40197676813916
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0077",
         "name": "醫護大樓",
-        "display_name": "醫護大樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "醫護大樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.703,
           "y": 0.72
@@ -2609,7 +2593,8 @@
         "description": "大本營的醫護大樓整座由Dr.D掌控，夏晴曾在其醫療室被當死人運出。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0077"
       }
     },
     {
@@ -2617,17 +2602,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9859011215381,
-          22.415539902342257
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0078",
         "name": "宿舍",
-        "display_name": "宿舍（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "宿舍（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.31,
           "y": 0.759
@@ -2648,7 +2633,8 @@
         "description": "少佐在大本營的宿舍內醉酒睡在地板上，M離開時替他關上門。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0078"
       }
     },
     {
@@ -2835,7 +2821,10 @@
         "description": "M敲門探訪天明宿舍，實際上是想向天明夫婦打探關於Dr.D的情報。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "aliases": [
+          "天明的宿舍"
+        ]
       }
     },
     {
@@ -2843,17 +2832,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22194323643855,
-          22.439970740825512
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0085",
         "name": "C橦與A橦",
-        "display_name": "C橦與A橦（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C橦與A橦（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.703,
           "y": 0.828
@@ -2866,7 +2855,8 @@
         "description": "M隔天被跟蹤時，由C橦一路走到A橦，對方一直緊跟，最後他在樓梯間轉角位埋伏。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0085"
       }
     },
     {
@@ -2909,37 +2899,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08790981918058,
-          22.352150568398564
-        ]
-      },
-      "properties": {
-        "id": "loc_0087",
-        "name": "天明的宿舍",
-        "display_name": "天明的宿舍（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.48,
-          "y": 0.578
-        },
-        "first_appearance": 22,
-        "chapters": [
-          22
-        ],
-        "characters": [],
-        "description": "主角暫且借用天明的宿舍，在內把電池裝入鬧鐘，做出至少十個會響的成品。",
-        "confidence": 0.9,
-        "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.01424078736552,
           22.399445830472267
         ]
@@ -2971,17 +2930,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30780819409476,
-          22.344109140154114
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0089",
         "name": "行人隧道",
-        "display_name": "行人隧道（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "行人隧道（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.846,
           "y": 0.555
@@ -2996,7 +2955,8 @@
         "description": "主角與瑜小六步出大本營後不久要穿過的一條行人隧道，二人於此遇上大耳並將其擊殺。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0089"
       }
     },
     {
@@ -3539,17 +3499,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19846784161135,
-          22.42982455939574
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0105",
         "name": "補給分配站",
-        "display_name": "補給分配站（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "補給分配站（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.664,
           "y": 0.799
@@ -3562,7 +3522,8 @@
         "description": "大本營設有補給分配站，由職員向倖存者分配食糧與食水，需排隊領取。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0105"
       }
     },
     {
@@ -3570,17 +3531,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01341405355916,
-          22.371512054627296
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0106",
         "name": "玻璃房酒吧",
-        "display_name": "玻璃房酒吧（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "玻璃房酒吧（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.356,
           "y": 0.633
@@ -3593,7 +3554,8 @@
         "description": "大本營附近有一間由玻璃房改造成的酒吧，內有女人跳舞、其他人喝酒消閒，主角與王達尼曾在此打探情報。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0106"
       }
     },
     {
@@ -3997,17 +3959,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25343,
-          22.30581
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0119",
         "name": "C座攝影大樓",
         "display_name": "C座攝影大樓（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.713,
           "y": 0.405
@@ -4097,17 +4059,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27512336919203,
-          22.34606435492485
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0122",
         "name": "四樓活動室",
-        "display_name": "四樓活動室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "四樓活動室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.792,
           "y": 0.56
@@ -4120,7 +4082,8 @@
         "description": "公仔一家喺大本營四樓租咗一間活動室，窗戶面向遠方大海，用嚟設宴招待主角晚餐。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0122"
       }
     },
     {
@@ -4128,17 +4091,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29042755779355,
-          22.266842641336687
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0123",
         "name": "老賢嘅辦公室",
-        "display_name": "老賢嘅辦公室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "老賢嘅辦公室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.817,
           "y": 0.334
@@ -4151,7 +4114,8 @@
         "description": "老賢喺大本營入面嘅辦公室，「我」食完T骨排後去到該處同老賢傾馬德梵嘅事情。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0123"
       }
     },
     {
@@ -4299,17 +4263,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0933701075761,
-          22.38246574349584
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0128",
         "name": "C橦００４活動室",
-        "display_name": "C橦００４活動室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C橦００４活動室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.489,
           "y": 0.664
@@ -4322,7 +4286,8 @@
         "description": "瑜小六約定眾人翌日準時十點在C橦００４活動室集合練習武器操作。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0128"
       }
     },
     {
@@ -4469,9 +4434,9 @@
         "id": "loc_0133",
         "name": "D橦大樓醫療室",
         "display_name": "D橦大樓醫療室（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.826,
           "y": 0.654
@@ -4572,13 +4537,17 @@
         },
         "first_appearance": 43,
         "chapters": [
-          43
+          43,
+          44
         ],
         "characters": [],
         "description": "地圖上標示為「危險區域」的學校，是舌女主要出沒的地盤，上空有烏鴉盤旋。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "aliases": [
+          "玄圓第三中學"
+        ]
       }
     },
     {
@@ -4611,39 +4580,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "inferred_from": "inf_loc_0137"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.00096818493934,
-          22.366689440756847
-        ]
-      },
-      "properties": {
-        "id": "loc_0138",
-        "name": "玄圓第三中學",
-        "display_name": "玄圓第三中學（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.335,
-          "y": 0.619
-        },
-        "first_appearance": 44,
-        "chapters": [
-          44
-        ],
-        "characters": [
-          "舌女"
-        ],
-        "description": "眾人途經烏鴉滿天飛的玄圓第三中學，校內約有七、八隻舌女在活動。",
-        "confidence": 0.95,
-        "review_status": "reviewed",
-        "source": "bing_gang"
       }
     },
     {
@@ -5419,17 +5355,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07457312886244,
-          22.24873353933013
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0162",
         "name": "董倫嘅會所",
-        "display_name": "董倫嘅會所（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "董倫嘅會所（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.458,
           "y": 0.282
@@ -5442,7 +5378,8 @@
         "description": "董倫在大本營七樓新開張的會所，木工部老主管曾帶傑夫丸去玩但提不起勁。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0162"
       }
     },
     {
@@ -5482,17 +5419,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25343,
-          22.30581
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0164",
         "name": "C橦",
         "display_name": "C橦（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.438,
           "y": 0.278
@@ -5582,17 +5519,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25343,
-          22.30581
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0167",
         "name": "D橦醫療大樓",
         "display_name": "D橦醫療大樓（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.311,
           "y": 0.72
@@ -5616,17 +5553,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24129137102311,
-          22.24162672617685
+          114.25311,
+          22.3059
         ]
       },
       "properties": {
         "id": "loc_0168",
         "name": "A樓拘留室",
-        "display_name": "A樓拘留室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "A樓拘留室（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.735,
           "y": 0.262
@@ -5641,7 +5578,8 @@
         "description": "大本營A樓的拘留室，傑夫丸發癲傷人後被守衛關押於此。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0168"
       }
     },
     {
@@ -5742,17 +5680,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1467296864271,
-          22.316089379720758
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0172",
         "name": "C橦工坊",
-        "display_name": "C橦工坊（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C橦工坊（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.578,
           "y": 0.475
@@ -5767,7 +5705,8 @@
         "description": "愛紗在大本營的C橦工坊擔任「生活王」，負責一切物料的進出、使用、分配至製作。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0172"
       }
     },
     {
@@ -5883,17 +5822,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99313023575189,
-          22.21806694895857
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0176",
         "name": "七樓B區",
-        "display_name": "七樓B區（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "七樓B區（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.322,
           "y": 0.194
@@ -5908,7 +5847,8 @@
         "description": "瑜小六住喺大本營七樓B區，嗰度多數係平民住嘅地方，大部分人只係「打地鋪」瞓地上。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0176"
       }
     },
     {
@@ -6270,17 +6210,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94981963836118,
-          22.341163233386737
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0188",
         "name": "愛紗工坊",
-        "display_name": "愛紗工坊（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "愛紗工坊（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.25,
           "y": 0.546
@@ -6293,7 +6233,8 @@
         "description": "愛紗工坊正與大本營新武器製造商之一的漢森及其他主管研究加強大本營防禦的基建。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0188"
       }
     },
     {
@@ -6366,17 +6307,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9853563744564,
-          22.302395399404897
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0191",
         "name": "工坊四樓珠寶室",
-        "display_name": "工坊四樓珠寶室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "工坊四樓珠寶室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.309,
           "y": 0.435
@@ -6391,7 +6332,8 @@
         "description": "大本營工坊四樓的珠寶室，面積只有半個班課，是營火會當晚主角埋伏刺殺娃娃養母的地點。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0191"
       }
     },
     {
@@ -6605,17 +6547,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22361593041886,
-          22.21887819485771
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0198",
         "name": "C橦三樓木材加工室",
-        "display_name": "C橦三樓木材加工室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C橦三樓木材加工室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.706,
           "y": 0.197
@@ -6630,7 +6572,8 @@
         "description": "C橦三樓設有木材加工室，傑夫丸在此工作；敘述者到訪時加工室空無一人。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0198"
       }
     },
     {
@@ -6669,17 +6612,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03799176012818,
-          22.31806702525368
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0200",
         "name": "攝影棚",
-        "display_name": "攝影棚（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "攝影棚（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.397,
           "y": 0.48
@@ -6705,7 +6648,8 @@
         "description": "主角被困的攝影棚是大本營的一部分，棚內放滿器材箱，他在該處遭乾屍狀男子持刀襲擊。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0200"
       }
     },
     {
@@ -6907,17 +6851,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99131654840924,
-          22.383751773861295
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0207",
         "name": "病房",
-        "display_name": "病房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "病房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.319,
           "y": 0.668
@@ -6942,7 +6886,8 @@
         "description": "M受傷後喺大本營醫療大樓嘅病房連續留醫四日，期間同少佐同房休息。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0207"
       }
     },
     {
@@ -7061,17 +7006,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2506,
-          22.3077
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0211",
         "name": "D橦三樓看護室",
         "display_name": "D橦三樓看護室（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "district",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.425,
           "y": 0.237
@@ -7093,17 +7038,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2437587548638,
-          22.36296967269398
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0212",
         "name": "加護病房",
-        "display_name": "加護病房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "加護病房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.74,
           "y": 0.608
@@ -7118,7 +7063,8 @@
         "description": "主角跑進加護病房，該處是大本營僅餘仍受供電的地方之一，光管燈閃爍不定。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0212"
       }
     },
     {
@@ -7160,17 +7106,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15613778896773,
-          22.349339246204316
+          114.25332,
+          22.30547
         ]
       },
       "properties": {
         "id": "loc_0214",
         "name": "D樓三樓",
-        "display_name": "D樓三樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D樓三樓（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.594,
           "y": 0.57
@@ -7185,7 +7131,8 @@
         "description": "D樓三樓的走廊及樓梯間被巨大病者的拳頭擦破摧毀，形成大缺口，事後主角要從後方梯間返回地面。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0214"
       }
     },
     {
@@ -7296,9 +7243,9 @@
         "id": "loc_0218",
         "name": "D樓三樓（D橦大樓）",
         "display_name": "D樓三樓（D橦大樓）（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.281,
           "y": 0.245
@@ -7472,9 +7419,9 @@
         "id": "loc_0223",
         "name": "D樓（D橦大樓）",
         "display_name": "D樓（D橦大樓）（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.219,
           "y": 0.542
@@ -7895,7 +7842,10 @@
         "description": "主角在雷雨中撐傘走到操場的斷頭台，坐在娃娃身旁用雨傘為她擋雨。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "aliases": [
+          "操場的斷頭台"
+        ]
       }
     },
     {
@@ -8000,37 +7950,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "inferred_from": "inf_loc_0238"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.25466651407645,
-          22.436284618905926
-        ]
-      },
-      "properties": {
-        "id": "loc_0239",
-        "name": "不良人的據點",
-        "display_name": "不良人的據點（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.758,
-          "y": 0.818
-        },
-        "first_appearance": 75,
-        "chapters": [
-          75
-        ],
-        "characters": [],
-        "description": "不良人的據點設有金屬板圍牆和大閘，圍牆外倒吊死人屍體，大閘上更掛滿女性頭部，公仔與娃娃曾在此過著無身份地位的生活。",
-        "confidence": 0.9,
-        "review_status": "reviewed",
-        "source": "bing_gang"
       }
     },
     {
@@ -8242,7 +8161,8 @@
         },
         "first_appearance": 74,
         "chapters": [
-          74
+          74,
+          75
         ],
         "characters": [
           "公仔",
@@ -8263,7 +8183,10 @@
         "description": "不良人據點內設有遊戲室酒吧、禮堂、操場與斷頭台等設施，二樓為病童盤踞、無人能活着回來的禁地。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "aliases": [
+          "不良人的據點"
+        ]
       }
     },
     {
@@ -8740,37 +8663,6 @@
         "characters": [],
         "description": "主角預計走到將軍澳廣場二樓吉野家門外時，便會知曉病童用什麼方法殺人的答案。",
         "confidence": 0.8,
-        "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          113.89560128175783,
-          22.300993476768138
-        ]
-      },
-      "properties": {
-        "id": "loc_0261",
-        "name": "操場的斷頭台",
-        "display_name": "操場的斷頭台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.159,
-          "y": 0.431
-        },
-        "first_appearance": 74,
-        "chapters": [
-          74
-        ],
-        "characters": [],
-        "description": "雷雨之夜，主角撐傘走到操場的斷頭台上，坐在娃娃身旁用雨傘為她擋雨。",
-        "confidence": 0.93,
         "review_status": "reviewed",
         "source": "bing_gang"
       }
@@ -10617,13 +10509,17 @@
         },
         "first_appearance": 91,
         "chapters": [
-          91
+          91,
+          104
         ],
         "characters": [],
         "description": "不良人以一間小學作為據點，操場用於集結俘虜，四樓課室被改裝成監獄，一樓設有紋身室，不破尚常待在最高層。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "aliases": [
+          "不良人據點小學"
+        ]
       }
     },
     {
@@ -10648,13 +10544,17 @@
         },
         "first_appearance": 92,
         "chapters": [
-          92
+          92,
+          171
         ],
         "characters": [],
         "description": "位於將軍澳地鐵站一旁、全區最高的建築物，亂世初期曾有多方勢力爭奪，九樓走廊堆滿近乎化成白骨的屍骸。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "aliases": [
+          "假日皇冠酒店"
+        ]
       }
     },
     {
@@ -11049,17 +10949,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01142732890821,
-          22.298148508430607
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0332",
         "name": "教堂",
-        "display_name": "教堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "教堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.352,
           "y": 0.423
@@ -11082,7 +10982,8 @@
         "description": "主角與銘凱進入一間已被搜掠一空的教堂，內有長椅與牧師檯，並在該處遇上兩名大本營倖存者。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0332"
       }
     },
     {
@@ -11679,37 +11580,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20729274433509,
-          22.24994853894865
-        ]
-      },
-      "properties": {
-        "id": "loc_0351",
-        "name": "不良人據點小學",
-        "display_name": "不良人據點小學（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.679,
-          "y": 0.286
-        },
-        "first_appearance": 104,
-        "chapters": [
-          104
-        ],
-        "characters": [],
-        "description": "戰後不良人所在的據點小學屍橫遍地，銘凱在校內操場拷問被捕的教主。",
-        "confidence": 0.9,
-        "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.2703413138018,
           22.329623346303503
         ]
@@ -11804,17 +11674,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30764156557565,
-          22.303872091248948
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0355",
         "name": "二樓武器庫",
-        "display_name": "二樓武器庫（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "二樓武器庫（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.846,
           "y": 0.44
@@ -11829,7 +11699,8 @@
         "description": "大本營二樓設有武器庫，入面仲有少量瓦斯，但眾人到達時發現門鎖嘅多重鐵鏈已被人硬生生砍斷。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0355"
       }
     },
     {
@@ -11837,14 +11708,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25991059739071,
-          22.331921675440604
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0356",
         "name": "學校（未命名）",
-        "display_name": "學校（未命名）（參考位置）",
+        "display_name": "學校（未命名）（推斷位置）",
         "location_type": "district",
         "fictional": false,
         "location_precision": "approximate",
@@ -11860,7 +11731,8 @@
         "description": "本章主要戰鬥發生在一所設有操場、二樓走廊與武器庫的學校內，不破尚曾環視全校尋找病者的主腦。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0356"
       }
     },
     {
@@ -14163,14 +14035,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25980952162966,
-          22.322066239414056
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0425",
         "name": "學校（幻覺場景）",
-        "display_name": "學校（幻覺場景）（參考位置）",
+        "display_name": "學校（幻覺場景）（推斷位置）",
         "location_type": "district",
         "fictional": false,
         "location_precision": "approximate",
@@ -14186,7 +14058,8 @@
         "description": "男病童引發的幻覺將四周變成主角最討厭的學校，重現他小學至中學被欺凌、在天台逃避痛苦的回憶。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0425"
       }
     },
     {
@@ -17014,8 +16887,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2415,
-          22.3229
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
@@ -17024,7 +16897,7 @@
         "display_name": "下水道通道（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "district",
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.789,
           "y": 0.461
@@ -17938,17 +17811,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06913206683451,
-          22.38472751201648
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0541",
         "name": "少佐的安區行動基地",
-        "display_name": "少佐的安區行動基地（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "少佐的安區行動基地（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.449,
           "y": 0.671
@@ -17961,7 +17834,8 @@
         "description": "少佐以前的安區行動基地是諜報中心，現已荒廢佈滿灰塵，牆上列有大本營可疑倖存者名單。",
         "confidence": 0.96,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0541"
       }
     },
     {
@@ -17969,17 +17843,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25343,
-          22.30581
+          114.25375,
+          22.30573
         ]
       },
       "properties": {
         "id": "loc_0542",
         "name": "C橦大廈",
         "display_name": "C橦大廈（推斷位置）",
-        "location_type": "district",
+        "location_type": "landmark",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "exact",
         "story_position": {
           "x": 0.27,
           "y": 0.454
@@ -19389,17 +19263,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27123647669185,
-          22.329685015640496
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0586",
         "name": "老賢統治嘅大本營",
-        "display_name": "老賢統治嘅大本營（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "老賢統治嘅大本營（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.479,
           "y": 0.435
@@ -19412,7 +19286,8 @@
         "description": "老賢統治嘅大本營入面有唔少元老成員，包括少佐、Dr.D、董倫、大舊老師等。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0586"
       }
     },
     {
@@ -19578,17 +19453,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01747081712062,
-          22.22027264057374
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0592",
         "name": "不良人",
-        "display_name": "不良人（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.362,
           "y": 0.201
@@ -19622,7 +19497,8 @@
         "description": "被提及嘅另一倖存區/組織（少佐曾由不良人轉到大本營）。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0592"
       }
     },
     {
@@ -19729,17 +19605,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98096635385672,
-          22.442019417105364
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0596",
         "name": "暗門",
-        "display_name": "暗門（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "暗門（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.302,
           "y": 0.834
@@ -19752,7 +19628,8 @@
         "description": "大本營設有暗門供身份敏感者秘密進入。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0596"
       }
     },
     {
@@ -20124,39 +20001,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22923643854429,
-          22.32930483710994
-        ]
-      },
-      "properties": {
-        "id": "loc_0608",
-        "name": "假日皇冠酒店",
-        "display_name": "假日皇冠酒店（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
-        "story_position": {
-          "x": 0.715,
-          "y": 0.512
-        },
-        "first_appearance": 171,
-        "chapters": [
-          171
-        ],
-        "characters": [
-          "銘凱"
-        ],
-        "description": "敘事者曾與銘凱到假日皇冠酒店，遇到過竊屍賊群體合作的情況",
-        "confidence": 0.9,
-        "review_status": "reviewed",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.24996250858321,
           22.303681391622796
         ]
@@ -20224,17 +20068,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2587425040055,
-          22.24554089417868
+          114.25355,
+          22.30613
         ]
       },
       "properties": {
         "id": "loc_0611",
         "name": "B橦影院室",
-        "display_name": "B橦影院室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "B橦影院室（推斷位置）",
+        "location_type": "landmark",
+        "fictional": false,
+        "location_precision": "exact",
         "story_position": {
           "x": 0.765,
           "y": 0.273
@@ -20247,7 +20091,8 @@
         "description": "大本營B橦嘅影院，被少佐以領導職權停止原播嘅電影以播放光碟",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0611"
       }
     },
     {
@@ -20255,17 +20100,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98556145571068,
-          22.375904745555808
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0612",
         "name": "領導房",
-        "display_name": "領導房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "領導房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.309,
           "y": 0.645
@@ -20281,7 +20126,8 @@
         "description": "大本營領導嘅書房，大舊提議將合照放於此處",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": "inf_loc_0612"
       }
     },
     {
@@ -23278,8 +23124,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.194284,
-          22.468961
+          114.25343,
+          22.30581
         ]
       },
       "properties": {

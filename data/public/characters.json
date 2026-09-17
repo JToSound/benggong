@@ -5439,23 +5439,6 @@
     "source": "bing_gang"
   },
   {
-    "id": "ent_c315d56cf2",
-    "name": "阿達尼",
-    "aliases": [],
-    "role": "supporting",
-    "color": "#9B59B6",
-    "first_appearance": 188,
-    "chapter_refs": [
-      188
-    ],
-    "spoiler_level": 1,
-    "description": "全書 1 章出現；詳情待人手審閱。",
-    "confidence": 0.85,
-    "review_status": "reviewed",
-    "portrait_asset_id": null,
-    "source": "bing_gang"
-  },
-  {
     "id": "ent_c362c93b8f",
     "name": "製毒廠男人",
     "aliases": [],
@@ -6025,7 +6008,8 @@
       "達尼Sir",
       "阿尼",
       "黑商",
-      "黑心商人"
+      "黑心商人",
+      "阿達尼"
     ],
     "role": "supporting",
     "color": "#1ABC9C",
@@ -6080,7 +6064,8 @@
       181,
       182,
       183,
-      184
+      184,
+      188
     ],
     "spoiler_level": 1,
     "description": "全書 59 章出現；詳情待人手審閱。",

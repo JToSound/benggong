@@ -71,7 +71,158 @@ def decide_status(rec: dict[str, Any], decisions: dict[str, Any]) -> tuple[str, 
     return rule_status, reason
 
 
-def propagate_to_dependents(moved: dict[str, list[float]]) -> dict[str, int]:
+def apply_location_merges(
+    fc: dict[str, Any], approved: list[dict[str, Any]]
+) -> tuple[dict[str, Any], list[dict[str, Any]], dict[str, str]]:
+    """套用已批核嘅地點合併（`merge_into`，冇座標）。
+
+    為何要同座標推斷分開處理
+    ------------------------
+    座標推斷只改一個點嘅位置（可回復）；合併會令記錄**消失**（破壞性）。
+    所以合併要額外做三件事：
+      1. 被合併嘅名加入 canonical 嘅 `aliases`（可追溯）
+      2. 章節範圍取聯集（合併後 canonical 應該覆蓋兩者）
+      3. 更新所有引用被合併 id 嘅資料集（否則會斷鏈）
+
+    回傳 (更新後嘅 fc, 合併記錄, {舊 id: 新 id})。
+    """
+    by_name = {f["properties"]["name"]: f for f in fc["features"]}
+    by_id = {f["properties"]["id"]: f for f in fc["features"]}
+    merges: list[dict[str, Any]] = []
+    id_map: dict[str, str] = {}
+
+    for r in approved:
+        target = r["proposed_changes"].get("merge_into")
+        if not target or r.get("inferred_lonlat"):
+            continue
+        canon = by_name.get(target)
+        if canon is None:
+            print(f"  ⚠️ 合併目標「{target}」唔存在，跳過 {r['inference_id']}")
+            continue
+        for sid in r["subject_ids"]:
+            if sid == canon["properties"]["id"]:
+                continue
+            src = by_id.get(sid)
+            if src is None:
+                continue
+            sp = src["properties"]
+            cp = canon["properties"]
+            cp.setdefault("aliases", [])
+            for nm in [sp["name"], *(sp.get("aliases") or [])]:
+                if nm and nm != cp["name"] and nm not in cp["aliases"]:
+                    cp["aliases"].append(nm)
+            cp["chapters"] = sorted(set(cp.get("chapters") or []) | set(sp.get("chapters") or []))
+            id_map[sid] = cp["id"]
+            merges.append({
+                "inference_id": r["inference_id"],
+                "pattern": r["pattern"],
+                "from_id": sid,
+                "from_name": sp["name"],
+                "into_id": cp["id"],
+                "into_name": cp["name"],
+            })
+
+    if id_map:
+        fc["features"] = [f for f in fc["features"] if f["properties"]["id"] not in id_map]
+    return fc, merges, id_map
+
+
+def repair_orphan_refs() -> dict[str, int]:
+    """修復所有指向唔存在地點嘅 `location_id`（參照完整性對賬）。
+
+    為何需要獨立一步
+    ----------------
+    合併會令記錄消失，但引用可能散落喺多個資料集。實測踩過：
+      - timeline.json 有 loc_0261／loc_0239
+      - events.geojson 有 loc_0261／loc_0239
+      - routes.geojson 有 loc_0608
+    而且**上一次**合併走嘅 id 唔會出現喺今次嘅 `merge_id_map`，
+    所以只靠「今次改動」永遠修唔到。
+
+    策略：
+      1. 用 `location_name` 對返現存地點（名 + aliases）
+      2. 對唔到就設為 null（唔保留一個假 id）
+
+    呢一步係**自癒**嘅 —— 每次跑都會掃一次，確保冇孤兒。
+    """
+    locs = json.loads((REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8"))
+    valid = {f["properties"]["id"] for f in locs["features"]}
+    by_name: dict[str, str] = {}
+    for f in locs["features"]:
+        p = f["properties"]
+        by_name.setdefault(p["name"], p["id"])
+        for a in p.get("aliases") or []:
+            by_name.setdefault(a, p["id"])
+
+    out: dict[str, int] = {}
+
+    def fix(node: dict[str, Any], name_key: str) -> int:
+        # ⚠️ `location_id` 係 required（但允許 null）。
+        # 之前嘅版本用 `node.pop("location_id")` 刪走個 key，令 "required"
+        # 驗證失敗 —— 而且之後嘅修復會因為「冇呢個 key」而跳過，永遠
+        # 修唔返。所以呢度一定要處理「key 唔存在」嘅情況。
+        if "location_id" not in node:
+            node["location_id"] = None
+            return 1
+        lid = node.get("location_id")
+        if lid in valid:
+            return 0
+        tgt = by_name.get(node.get(name_key) or "")
+        if tgt:
+            node["location_id"] = tgt
+        else:
+            # events／timeline 嘅 `location_id` 係 required 但允許 null
+            # （schema: type ["string","null"]），所以設 null 而唔係刪 key
+            # —— 刪咗會令 "required" 驗證失敗。
+            node["location_id"] = None
+        return 1
+
+    # events
+    ev_path = REPO / "data" / "public" / "events.geojson"
+    ev = json.loads(ev_path.read_text(encoding="utf-8"))
+    n = sum(fix(f["properties"], "location_name") for f in ev["features"])
+    if n:
+        ev_path.write_text(json.dumps(ev, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    out["events.geojson"] = n
+
+    # timeline
+    tl_path = REPO / "data" / "public" / "timeline.json"
+    tl = json.loads(tl_path.read_text(encoding="utf-8"))
+    n2 = sum(fix(t, "location_name") for t in tl)
+    if n2:
+        tl_path.write_text(json.dumps(tl, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    out["timeline.json"] = n2
+
+    # routes（waypoints 逐個）
+    #
+    # ⚠️ waypoint 冇 `location_name`，佢用 `note` 存地點名。
+    # 而且 schema 要求 `location_id` 係**字串** —— 唔可以設 None，
+    # 所以對唔到就刪走個 key（唔係設 null）。
+    rt_path = REPO / "data" / "public" / "routes.geojson"
+    rt = json.loads(rt_path.read_text(encoding="utf-8"))
+    n3 = 0
+    for f in rt["features"]:
+        for w in f["properties"].get("waypoints") or []:
+            lid = w.get("location_id")
+            # ⚠️ `lid is None` 都要處理 —— 之前寫 `if lid and ...`，
+            # 令 null 被當成「冇問題」而跳過（None 係 falsy）。
+            if "location_id" in w and lid not in valid:
+                tgt = by_name.get(w.get("location_name") or "") or by_name.get(
+                    w.get("note") or ""
+                )
+                if tgt:
+                    w["location_id"] = tgt
+                else:
+                    w.pop("location_id", None)
+                n3 += 1
+    if n3:
+        rt_path.write_text(json.dumps(rt, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    out["routes.geojson"] = n3
+
+    return out
+
+
+def propagate_to_dependents(moved: dict[str, dict[str, Any]]) -> dict[str, int]:
     """地點座標一改，所有指向佢嘅記錄都要跟。
 
     為何需要
@@ -105,14 +256,50 @@ def propagate_to_dependents(moved: dict[str, list[float]]) -> dict[str, int]:
             new = moved.get(lid)
             if new is None:
                 continue
-            if feat["geometry"]["coordinates"] != new:
-                feat["geometry"]["coordinates"] = list(new)
+            if feat["geometry"]["coordinates"] != new["coords"]:
+                feat["geometry"]["coordinates"] = list(new["coords"])
                 n += 1
         if n:
             path.write_text(
                 json.dumps(fc, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
             )
         out["events.geojson"] = n
+
+    # --- timeline：只有 location_id 同 location_name（冇自身座標）---
+    #
+    # ⚠️ 實測踩過：合併地點之後漏咗 timeline，令佢指向已經唔存在嘅
+    # location_id（驗證器即刻捉到）。
+    path_tl = REPO / "data" / "public" / "timeline.json"
+    if path_tl.exists():
+        tl = json.loads(path_tl.read_text(encoding="utf-8"))
+        # 名稱／別名 → id 回退表。
+        #
+        # 為何需要：如果上一次已經合併走某個地點，今次 `merge_id_map` 就
+        # 唔會再有嗰個 id（來源記錄已經唔存在）。但引用可能仍然指住佢
+        # —— 實測 timeline 有 loc_0261／loc_0239 兩個孤兒 id。
+        # 靠 `location_name`（合併時已加入 canonical 嘅 aliases）可以救返。
+        by_name: dict[str, dict[str, Any]] = {}
+        for v in moved.values():
+            by_name.setdefault(v["name"], v)
+        n = 0
+        for t in tl:
+            lid = t.get("location_id")
+            if lid and lid in moved:
+                t["location_id"] = moved[lid]["id"]
+                t["location_name"] = moved[lid]["name"]
+                n += 1
+            elif lid and lid not in moved:
+                # 孤兒 id → 用名搵返
+                tgt = by_name.get(t.get("location_name") or "")
+                if tgt is not None:
+                    t["location_id"] = tgt["id"]
+                    t["location_name"] = tgt["name"]
+                    n += 1
+        if n:
+            path_tl.write_text(
+                json.dumps(tl, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            )
+        out["timeline.json"] = n
 
     # --- routes：waypoints[].location_id → geometry.coordinates（逐個對應）---
     path = REPO / "data" / "public" / "routes.geojson"
@@ -132,8 +319,8 @@ def propagate_to_dependents(moved: dict[str, list[float]]) -> dict[str, int]:
                 new = moved.get(lid)
                 if new is None:
                     continue
-                if coords[i] != new:
-                    coords[i] = list(new)
+                if coords[i] != new["coords"]:
+                    coords[i] = list(new["coords"])
                     changed = True
             if changed:
                 feat["geometry"]["coordinates"] = coords
@@ -271,11 +458,35 @@ def main() -> int:
     # 為何唔可以只傳播「今次改動」：第一次套用時漏咗 routes，之後即使
     # 修正咗傳播邏輯，`moved` 已經係空（地點冇再改），routes 永遠唔會
     # 被修正。用完整對賬就每次都會收斂，而且可重複執行。
-    all_coords = {
-        f["properties"]["id"]: list(f["geometry"]["coordinates"])
-        for f in fc["features"]
-    }
+    # 先套用合併（會令記錄消失），再建對賬表
+    fc, merges, merge_id_map = apply_location_merges(fc, approved)
+    if merges:
+        print(f"\n=== 地點合併（{len(merges)} 個）===")
+        for m in merges:
+            print(f"  {m['from_name']:20s} → {m['into_name']}")
+        # 合併走嘅 id 要指向 canonical，否則引用會斷鏈
+        for old_id, new_id in merge_id_map.items():
+            for f in fc["features"]:
+                pass  # 由 propagate 嘅 id_map 處理
+
+    all_coords: dict[str, dict[str, Any]] = {}
+    for f in fc["features"]:
+        pr = f["properties"]
+        all_coords[pr["id"]] = {
+            "id": pr["id"],
+            "name": pr["name"],
+            "coords": list(f["geometry"]["coordinates"]),
+        }
+    # 被合併嘅 id 要映射到 canonical（id、名、座標三樣都要），
+    # 否則引用會指向已經唔存在嘅記錄
+    for old_id, new_id in merge_id_map.items():
+        if new_id in all_coords:
+            all_coords[old_id] = all_coords[new_id]
     propagated = propagate_to_dependents(all_coords)
+    repaired = repair_orphan_refs()
+    for k, v in repaired.items():
+        if v:
+            print(f"  孤兒引用修復（{k}）：{v}")
     print(f"\n=== 傳播 ===")
     for name, n in propagated.items():
         print(f"  {name}：{n} 條更新")
@@ -296,6 +507,7 @@ def main() -> int:
                 "total_inferences": len(records),
                 "status_counts": dict(status_counts),
                 "applied_count": len(changes),
+                "merged": merges,
                 "propagated": propagated,
                 "changes": changes,
             },

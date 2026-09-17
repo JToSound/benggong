@@ -156,6 +156,13 @@
             "string",
             "null"
           ]
+        },
+        "aliases": {
+          "description": "同一地點嘅其他寫法（合併之後保留，可追溯）",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

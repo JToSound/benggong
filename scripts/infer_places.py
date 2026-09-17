@@ -109,6 +109,8 @@ RULES: dict[str, str] = {
     "R-DISTRICT": "只可以確定到區域層級（同章出現區域名）",
     "R-NAME-PLACE": "名稱本身就係一個真實香港地點（OSM 有記錄）",
     "R-DESC-PLACE": "描述直接提及真實地區名（比同章共現強）",
+    "R-ANAGRAM-MERGE": "同一組字符、次序唔同（荒廢商場／廢荒商場）",
+    "R-PARTICLE-VARIANT": "只差助詞嘅／的／之（天明宿舍／天明的宿舍）",
     "R-NO-EVIDENCE": "證據不足，只列作待補",
     # 其他實體類型（同一套結構，唔同 entity_kind）
     "C-NORM": "角色名稱正規化後相同（去括號／全形／大小寫）",
@@ -449,7 +451,10 @@ def infer(
         )
 
     # ---- R-CAMPUS-BLOCK：A/B/C/D 座 ----
-    m = re.fullmatch(r"([A-Da-d])\s*[座部幢橦]?\s*大樓", name)
+    # 座數寫法實測有四種：A大樓／A座／A橦／A樓。
+    # 原本只接受前三種，令「A樓地下活動房」「B樓醫療室」「C樓休息室」
+    # 等 11 條配對唔到。
+    m = re.match(r"^([A-Da-d])\s*(?:[座部幢橦樓]|大樓)", name)
     if m:
         letter = m.group(1).upper()
         for anchor in ANCHORS:
@@ -526,11 +531,14 @@ def infer(
             len(a) >= 2 and (name == a or name.startswith(a))
             for a in anchor["names"]
         )
-        described_as_member = (
-            "大本營其中一幢大樓" in desc
-            or "大本營四橦大樓之一" in desc
-            or "大本營內" in desc
-        )
+        # 描述只要**提及錨點名**就算證據。
+        #
+        # 原本只認三個固定片語（「大本營其中一幢大樓」「大本營四橦大樓
+        # 之一」「大本營內」），太窄 —— 實測漏掉 35 條，例如：
+        #   「大本營的醫療室」「大本營的天台」「大本營三樓有一間儲物室」
+        #   「大本營中央設有大營火的地方」
+        # 呢啲全部都明確指出喺大本營內，只係句式唔同。
+        described_as_member = any(a in desc for a in anchor["names"])
         if named_after_anchor or described_as_member:
             hits = [n for n in cooccur if any(a in n for a in anchor["names"])]
             if hits or "大本營" in desc or named_after_anchor:
@@ -826,6 +834,113 @@ def validate_against_schema(records: list[dict[str, Any]]) -> list[str]:
                 lon, lat = ll
                 if not (113.0 < lon < 115.0 and 22.0 < lat < 23.0):
                     out.append(f"{rid}: 座標 {ll} 唔喺香港範圍")
+    return out
+
+
+def infer_location_variants(
+    candidates: list[dict[str, Any]],
+    covered: set[str],
+) -> list[dict[str, Any]]:
+    """地點異體合併：字序調換／助詞差異。
+
+    兩類實測例子（全部係同一地點嘅唔同寫法）：
+
+    字序調換（同一組字符，次序唔同）：
+      「荒廢商場」／「廢荒商場」
+      「圓玄第三中學」／「玄圓第三中學」
+      「皇冠假日酒店」／「假日皇冠酒店」
+      「不良人小學據點」／「不良人據點小學」
+
+    助詞差異（嘅／的／之）：
+      「天明宿舍」／「天明的宿舍」
+
+    呢兩類唔會產生座標（唔知道喺邊），只提議 `merge_into` ——
+    但合併本身有價值：減少重複實體，令之後嘅推斷唔會分散。
+
+    只處理未有任何推斷嘅候選（`covered` 之外），避免同其他規則衝突。
+    """
+    import hashlib as _hashlib
+
+    out: list[dict[str, Any]] = []
+    pool = [p for p in candidates if p["id"] not in covered]
+
+    def mk(group: list[dict[str, Any]], pattern: str, reason: str) -> dict[str, Any]:
+        # canonical 取章節最多嘅（資訊最豐富），同分就取名最短
+        canon = sorted(
+            group, key=lambda c: (-len(c.get("chapters") or []), len(c["name"]))
+        )[0]
+        others = [c for c in group if c["id"] != canon["id"]]
+        ids = sorted([canon["id"], *[c["id"] for c in others]])
+        sig = _hashlib.sha1("|".join(ids).encode()).hexdigest()[:10]
+        return {
+            "inference_id": f"inf_{sig}",
+            "entity_kind": "location",
+            "subject_ids": ids,
+            "subject_names": [canon["name"], *[c["name"] for c in others]],
+            "pattern": pattern,
+            "inferred_prototype": canon["name"],
+            "inferred_lonlat": None,
+            "coordinate_source": None,
+            "evidence": [{
+                "kind": "name_variant",
+                "chapter": None,
+                "detail": reason + f"；canonical 取「{canon['name']}」",
+                "refs": ids,
+            }],
+            "confidence": 0.75,
+            "proposed_changes": {
+                "merge_into": canon["name"],
+                "location_precision": None,
+            },
+            "review_status": "pending",
+            "review_notes": None,
+        }
+
+    # --- 字序調換 ---
+    # ⚠️ 含括號嘅名唔可以參與字序調換比對。
+    #
+    # 括號內容通常係**區分詞**：實測「不良人據點（商場）」「不良人據點
+    # （小學）」「不良人據點（兩間小學）」係**三個唔同**嘅據點。
+    # 而「小學（不良人據點）」同「不良人據點（小學）」嘅字符集相同，
+    # 純粹按字符排序會誤判成同一地點。
+    def has_paren(n: str) -> bool:
+        return bool(re.search(r"[（(]", n))
+
+    buckets: dict[str, list[dict[str, Any]]] = {}
+    for c in pool:
+        n = c["name"]
+        if len(n) < 2 or has_paren(n):
+            continue
+        buckets.setdefault("".join(sorted(n)), []).append(c)
+    anagram_ids: set[str] = set()
+    for key, group in buckets.items():
+        if len(group) < 2:
+            continue
+        anagram_ids |= {c["id"] for c in group}
+        out.append(mk(
+            group, "R-ANAGRAM-MERGE",
+            "同一組字符、次序唔同：" + "／".join(c["name"] for c in group),
+        ))
+
+    # --- 助詞差異 ---
+    def strip_particles(n: str) -> str:
+        return re.sub(r"[嘅的之]", "", n)
+
+    pbuckets: dict[str, list[dict[str, Any]]] = {}
+    for c in pool:
+        if c["id"] in anagram_ids or has_paren(c["name"]):
+            continue
+        pbuckets.setdefault(strip_particles(c["name"]), []).append(c)
+    for key, group in pbuckets.items():
+        if len(group) < 2 or len(key) < 2:
+            continue
+        names = {c["name"] for c in group}
+        if len(names) < 2:
+            continue
+        out.append(mk(
+            group, "R-PARTICLE-VARIANT",
+            "只差助詞（嘅／的／之）：" + "／".join(sorted(names)),
+        ))
     return out
 
 
@@ -1266,6 +1381,13 @@ def main() -> int:
             if not (set(r["subject_ids"]) & superseded2 and r["confidence"] < 0.70)
         ]
         results.extend(second)
+
+    # 地點異體合併（字序調換／助詞差異）
+    covered_now = {i for r in results for i in r["subject_ids"]}
+    variants_loc = infer_location_variants(vague, covered_now)
+    results += variants_loc
+    if variants_loc:
+        print(f"\n地點異體合併：{len(variants_loc)} 組")
 
     # 補上 R-NO-EVIDENCE（證據不足但值得列出）
     covered = {i for r in results for i in r["subject_ids"]}
