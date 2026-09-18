@@ -155,6 +155,24 @@ TIERS: list[dict[str, object]] = [
         "note": "寶琳一帶：83 個地點",
     },
     {
+        # 康城／百勝角：41 個地點。tko-district（0.110°）覆蓋到，但
+        # 解像度只有 18,618 px/°。呢層 0.030° → 68,267 px/°。
+        "id": "tko-lohas",
+        "label": "康城／日出康城",
+        "width": 2048,
+        "bbox": [114.2620, 114.2920, 22.2840, 22.3040],
+        "note": "康城、日出康城、百勝角一帶：41 個地點",
+    },
+    {
+        # 康城／百勝角：41 個地點。tko-district（0.110°）覆蓋到，但
+        # 解像度只有 18,618 px/°。呢層 0.030° → 68,267 px/°。
+        "id": "tko-lohas",
+        "label": "康城／日出康城",
+        "width": 2048,
+        "bbox": [114.2620, 114.2920, 22.2840, 22.3040],
+        "note": "康城、日出康城、百勝角一帶：41 個地點",
+    },
+    {
         "id": "tko-north",
         "label": "坑口／寶琳／將軍澳北",
         "width": 2048,
@@ -251,6 +269,18 @@ def main() -> int:
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     entries: list[dict[str, object]] = []
+    # ⚠️ 合併現有 manifest 時要按 id 去重。
+    #
+    # 實測踩過：連續跑兩次 `--only tko-lohas` 之後，manifest 入面出現
+    # **兩個** tko-lohas（同一個 id、同一個 bbox）。前端 `pickTier()`
+    # 唔會出事，但 `phase-j-lod` 測試（檢查「冇兩個圖磚有完全相同 bbox」）
+    # 會捉到 —— 而且重複項會令 manifest 隨時間膨脹。
+    # ⚠️ 合併現有 manifest 時要按 id 去重。
+    #
+    # 實測踩過：連續跑兩次 `--only tko-lohas` 之後，manifest 入面出現
+    # **兩個** tko-lohas（同一個 id、同一個 bbox）。前端 `pickTier()`
+    # 唔會出事，但 `phase-j-lod` 測試（檢查「冇兩個圖磚有完全相同 bbox」）
+    # 會捉到 —— 而且重複項會令 manifest 隨時間膨脹。
     if MANIFEST.exists() and wanted:
         # 局部重建時保留其他層級嘅條目
         old = json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -284,6 +314,18 @@ def main() -> int:
         ),
         "tiers": entries,
     }
+    # 按 id 去重（保留最後一次建置嘅結果）
+    _by_id: dict[str, dict[str, object]] = {}
+    for e in entries:
+        _by_id[str(e["id"])] = e
+    entries = list(_by_id.values())
+
+    # 按 id 去重（保留最後一次建置嘅結果）
+    _by_id: dict[str, dict[str, object]] = {}
+    for e in entries:
+        _by_id[str(e["id"])] = e
+    entries = list(_by_id.values())
+
     MANIFEST.write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
 
     total = sum(

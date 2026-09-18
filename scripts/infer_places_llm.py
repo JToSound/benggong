@@ -351,6 +351,9 @@ def main() -> int:
 
     results: list[dict] = []
     stats = {"ok": 0, "null": 0, "no_coord": 0, "error": 0}
+    #: 模型判「不確定」嘅個案同理由。呢啲唔係失敗 —— 係**正確嘅保守判斷**，
+    #: 而且理由本身有價值（UI 可以解釋「為何冇座標」）。
+    uncertain: list[dict[str, str]] = []
 
     for i, r in enumerate(todo, 1):
         sid = r["subject_ids"][0]
@@ -382,6 +385,13 @@ def main() -> int:
         conf = float(raw.get("confidence") or 0)
         if not proto:
             stats["null"] += 1
+            # 保留理由 —— 呢個係有價值嘅元資料：UI 可以解釋「為何呢個
+            # 地點冇座標」，而唔係靜靜咁當佢冇。
+            uncertain.append({
+                "id": sid,
+                "name": p["name"],
+                "reason": (raw.get("reasoning") or "")[:220],
+            })
             print(f"  [{i}/{len(todo)}] {p['name']}：模型答唔確定")
             continue
 
@@ -503,6 +513,26 @@ def main() -> int:
         f"\n寫入 {OUT}（本次 {len(results)} 條，累計 {len(merged)} 條"
         f"{f'，新增 {len(merged) - before}' if before else ''}，全部 pending）"
     )
+
+    # 不確定理由：合併累積（同主結果一樣，分批跑唔應該沖走之前嘅）
+    unc_out = OUT.parent / "place-uncertain-reasons.json"
+    prev_unc: dict[str, dict] = {}
+    if unc_out.exists():
+        try:
+            for u in json.loads(unc_out.read_text(encoding="utf-8")):
+                prev_unc[u["id"]] = u
+        except (json.JSONDecodeError, KeyError, TypeError):
+            pass
+    for u in uncertain:
+        prev_unc[u["id"]] = u
+    unc_out.write_text(
+        json.dumps(
+            sorted(prev_unc.values(), key=lambda u: u["id"]), ensure_ascii=False, indent=2
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    print(f"不確定理由：累計 {len(prev_unc)} 條 → {unc_out}")
     return 0
 
 

@@ -3754,8 +3754,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.255993,
-          22.303721
+          114.255983,
+          22.303751
         ]
       },
       "properties": {
@@ -3789,7 +3789,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[32]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3797,8 +3797,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253572,
-          22.308383
+          114.253562,
+          22.308413
         ]
       },
       "properties": {
@@ -3823,7 +3823,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[32]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3831,17 +3831,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.250509,
-          22.306256
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0115",
         "name": "D橦醫療室",
-        "display_name": "D橦醫療室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D橦醫療室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.571,
           "y": 0.223
@@ -3855,7 +3855,8 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
+        "inferred_from": "inf_loc_0115"
       }
     },
     {
@@ -4294,8 +4295,7 @@
         "description": "瑜小六約定眾人翌日準時十點在C橦００４活動室集合練習武器操作。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang",
-        "inferred_from": "inf_loc_0128"
+        "source": "bing_gang"
       }
     },
     {
@@ -4337,8 +4337,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254977,
-          22.307862
+          114.254967,
+          22.307892
         ]
       },
       "properties": {
@@ -4361,7 +4361,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[42]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4369,8 +4369,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.250737,
-          22.305431
+          114.250727,
+          22.305461
         ]
       },
       "properties": {
@@ -4395,7 +4395,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[42]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4403,17 +4403,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253857,
-          22.304072
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0132",
         "name": "地下層多媒體攝影棚",
-        "display_name": "地下層多媒體攝影棚（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "地下層多媒體攝影棚（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.803,
           "y": 0.532
@@ -4430,7 +4430,8 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
+        "inferred_from": "inf_loc_0132"
       }
     },
     {
@@ -6056,8 +6057,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.269474,
-          22.330444
+          114.263143,
+          22.318576
         ]
       },
       "properties": {
@@ -6080,7 +6081,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[61]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[61]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -6088,17 +6089,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26492,
-          22.331599
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0183",
         "name": "D樓醫療室",
-        "display_name": "D樓醫療室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D樓醫療室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.167,
           "y": 0.308
@@ -6112,7 +6113,8 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[61]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[61]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0183"
       }
     },
     {
@@ -6389,8 +6391,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.253429,
+          22.30581
         ]
       },
       "properties": {
@@ -6592,8 +6594,7 @@
         "description": "C橦三樓設有木材加工室，傑夫丸在此工作；敘述者到訪時加工室空無一人。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang",
-        "inferred_from": "inf_loc_0198"
+        "source": "bing_gang"
       }
     },
     {
@@ -6678,8 +6679,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25332,
-          22.30547
+          114.253429,
+          22.30581
         ]
       },
       "properties": {
@@ -6710,8 +6711,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25332,
-          22.30547
+          114.253429,
+          22.30581
         ]
       },
       "properties": {
@@ -7887,8 +7888,7 @@
         "source": "bing_gang",
         "aliases": [
           "操場的斷頭台"
-        ],
-        "inferred_from": "inf_loc_0235"
+        ]
       }
     },
     {
@@ -7924,8 +7924,7 @@
         "description": "主角在禮堂向一名正準備用餐的不破尚飛虎部隊成員查詢關於病童的事。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang",
-        "inferred_from": "inf_loc_0236"
+        "source": "bing_gang"
       }
     },
     {
@@ -7956,8 +7955,7 @@
         "description": "主角進入遊戲室酒吧，看見裡面的醉漢疏於看管自己的武器，趁機下手盜竊。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang",
-        "inferred_from": "inf_loc_0237"
+        "source": "bing_gang"
       }
     },
     {
@@ -8002,17 +8000,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265267,
-          22.310085
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0240",
         "name": "小學（不良人據點）",
-        "display_name": "小學（不良人據點）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "小學（不良人據點）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.642,
           "y": 0.21
@@ -8194,17 +8192,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262779,
-          22.314915
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0246",
         "name": "不良人據點",
-        "display_name": "不良人據點（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人據點（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.294,
           "y": 0.785
@@ -8416,8 +8414,7 @@
         "description": "位於走火通道附近的隱密員工室，內裡實為放滿監視器的保安室，靠公司後備電源運作。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang",
-        "inferred_from": "inf_loc_0251"
+        "source": "bing_gang"
       }
     },
     {
@@ -8556,17 +8553,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.255838,
-          22.306316
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0256",
         "name": "「不良人」據點",
-        "display_name": "「不良人」據點（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "「不良人」據點（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.748,
           "y": 0.833
@@ -8898,17 +8895,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256211,
-          22.309961
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0267",
         "name": "不良人大本營",
-        "display_name": "不良人大本營（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人大本營（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.826,
           "y": 0.623
@@ -8922,7 +8919,8 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[80]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[80]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0267"
       }
     },
     {
@@ -9148,8 +9146,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256334,
-          22.304293
+          114.256324,
+          22.304323
         ]
       },
       "properties": {
@@ -9172,7 +9170,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[81]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9180,8 +9178,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251023,
-          22.305764
+          114.251013,
+          22.305794
         ]
       },
       "properties": {
@@ -9206,7 +9204,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[81]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9214,8 +9212,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.255682,
-          22.307595
+          114.255672,
+          22.307625
         ]
       },
       "properties": {
@@ -9238,7 +9236,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[81]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9339,17 +9337,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259405,
-          22.315542
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0280",
         "name": "四樓天台活動平台",
-        "display_name": "四樓天台活動平台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "四樓天台活動平台（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.432,
           "y": 0.472
@@ -9695,8 +9693,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.250093,
-          22.30432
+          114.250083,
+          22.30435
         ]
       },
       "properties": {
@@ -9730,7 +9728,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[84]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9738,17 +9736,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.250051,
-          22.304946
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0292",
         "name": "不良人據點（小學）",
-        "display_name": "不良人據點（小學）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人據點（小學）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.423,
           "y": 0.616
@@ -10043,17 +10041,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251875,
-          22.307227
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0301",
         "name": "不良人據點（兩間小學）",
-        "display_name": "不良人據點（兩間小學）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人據點（兩間小學）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.801,
           "y": 0.648
@@ -10078,8 +10076,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25162,
-          22.308321
+          114.25161,
+          22.308351
         ]
       },
       "properties": {
@@ -10102,7 +10100,7 @@
         "confidence": 0.88,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[81]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10606,17 +10604,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259694,
-          22.318226
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0318",
         "name": "不良人小學據點",
-        "display_name": "不良人小學據點（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人小學據點（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.407,
           "y": 0.652
@@ -10712,17 +10710,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264912,
-          22.319925
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0321",
         "name": "不良人據點六樓課室",
-        "display_name": "不良人據點六樓課室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人據點六樓課室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.269,
           "y": 0.483
@@ -10747,17 +10745,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.268477,
-          22.320504
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0322",
         "name": "不良人武器庫",
-        "display_name": "不良人武器庫（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人武器庫（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.548,
           "y": 0.675
@@ -11185,8 +11183,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26954,
-          22.320187
+          114.263979,
+          22.31268
         ]
       },
       "properties": {
@@ -11215,7 +11213,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[97]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[97]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11651,17 +11649,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254662,
-          22.302548
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0349",
         "name": "小學（不良人根據地）",
-        "display_name": "小學（不良人根據地）（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "小學（不良人根據地）（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.694,
           "y": 0.551
@@ -11686,8 +11684,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252342,
-          22.303684
+          114.252332,
+          22.303714
         ]
       },
       "properties": {
@@ -11717,7 +11715,7 @@
         "confidence": 0.88,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[103]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11788,8 +11786,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264326,
-          22.322592
+          114.260962,
+          22.318205
         ]
       },
       "properties": {
@@ -11812,7 +11810,7 @@
         "confidence": 0.7,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[104]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[104]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14965,8 +14963,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248412,
-          22.322682
+          114.248401,
+          22.322699
         ]
       },
       "properties": {
@@ -14998,8 +14996,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248412,
-          22.322682
+          114.248401,
+          22.322699
         ]
       },
       "properties": {
@@ -15062,8 +15060,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.272645,
-          22.323857
+          114.267083,
+          22.31635
         ]
       },
       "properties": {
@@ -15088,7 +15086,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[97]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[97]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15385,8 +15383,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248424,
-          22.322665
+          114.248401,
+          22.322699
         ]
       },
       "properties": {
@@ -15412,7 +15410,8 @@
         "zone_ids": [
           "zone_11f09f0b09"
         ],
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
+        "inferred_from": "inf_loc_0460"
       }
     },
     {
@@ -16039,8 +16038,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264654,
-          22.304041
+          114.26023,
+          22.305079
         ]
       },
       "properties": {
@@ -16068,7 +16067,7 @@
         "zone_ids": [
           "zone_ece9f6df6c"
         ],
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16076,8 +16075,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.261455,
-          22.301061
+          114.257031,
+          22.302099
         ]
       },
       "properties": {
@@ -16105,7 +16104,7 @@
         "zone_ids": [
           "zone_ece9f6df6c"
         ],
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16113,8 +16112,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262945,
-          22.305803
+          114.258521,
+          22.306841
         ]
       },
       "properties": {
@@ -16139,7 +16138,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16147,8 +16146,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264714,
-          22.305135
+          114.26029,
+          22.306173
         ]
       },
       "properties": {
@@ -16173,7 +16172,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16181,8 +16180,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264892,
-          22.30505
+          114.260468,
+          22.306088
         ]
       },
       "properties": {
@@ -16205,7 +16204,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16245,8 +16244,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259116,
-          22.305069
+          114.254692,
+          22.306107
         ]
       },
       "properties": {
@@ -16269,7 +16268,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16708,17 +16707,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254334,
-          22.325346
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0498",
         "name": "不良人糧庫",
-        "display_name": "不良人糧庫（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不良人糧庫（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.831,
           "y": 0.416
@@ -16835,8 +16834,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256961,
-          22.323948
+          114.256611,
+          22.321717
         ]
       },
       "properties": {
@@ -16859,7 +16858,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[109]）嘅 8 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[109]）嘅 9 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18453,8 +18452,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259517,
-          22.301927
+          114.255093,
+          22.302965
         ]
       },
       "properties": {
@@ -18483,7 +18482,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18491,17 +18490,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.261585,
-          22.30725
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0553",
         "name": "康城二期大樓天台",
-        "display_name": "康城二期大樓天台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "康城二期大樓天台（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.695,
           "y": 0.431
@@ -18523,8 +18522,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262288,
-          22.301885
+          114.257864,
+          22.302923
         ]
       },
       "properties": {
@@ -18547,7 +18546,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18587,8 +18586,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256756,
-          22.305953
+          114.256746,
+          22.305983
         ]
       },
       "properties": {
@@ -18611,7 +18610,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[158]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18619,8 +18618,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252664,
-          22.308593
+          114.252654,
+          22.308623
         ]
       },
       "properties": {
@@ -18643,7 +18642,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[158]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18651,8 +18650,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253949,
-          22.3075
+          114.253939,
+          22.30753
         ]
       },
       "properties": {
@@ -18678,7 +18677,7 @@
         "confidence": 0.8,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[158]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18686,17 +18685,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253961,
-          22.303331
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0559",
         "name": "康城大本營",
-        "display_name": "康城大本營（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "康城大本營（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.821,
           "y": 0.468
@@ -18712,7 +18711,8 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
+        "inferred_from": "inf_loc_0559"
       }
     },
     {
@@ -18720,8 +18720,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251445,
-          22.30292
+          114.251435,
+          22.30295
         ]
       },
       "properties": {
@@ -18744,7 +18744,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "同章（[158]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22433,17 +22433,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253519,
-          22.302266
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "loc_0670",
         "name": "聖堂天台",
-        "display_name": "聖堂天台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "聖堂天台（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.38,
           "y": 0.291

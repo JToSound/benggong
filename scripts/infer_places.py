@@ -349,6 +349,11 @@ def collect_evidence(
 # ---------------------------------------------------------------------------
 # 推斷規則
 # ---------------------------------------------------------------------------
+#: 組織／群體後綴。呢啲名唔可以當「父項地點」——
+#: 「X 據點」係「X 呢個組織嘅據點」，唔係「X 呢個地方入面嘅據點」。
+ORG_SUFFIX = ("人", "幫", "會", "團", "隊", "軍", "黨", "社", "派")
+
+
 def _has_distinctive_stem(name: str, min_len: int = 2) -> bool:
     """名稱有冇「識別性詞幹」。
 
@@ -1277,14 +1282,47 @@ def resolve_containment(
 
     同名單一父項優先；多個父項候選時取最長（最具體）嗰個。
     """
-    PRECISE_SOURCES = {"osm_way", "osm_relation", "external_verified"}
+    #: 可接受嘅父項精度。**唔包括 `district`** —— 區級座標誤差公里級，
+    #: 用佢做父項等於把子項隨便掉喺個區入面。
+    OK_PRECISION = {"exact", "approximate"}
+
+    #: 父項最低信心。
+    MIN_PARENT_CONF = 0.70
+
+    # ⚠️ 原本只接受 `coordinate_source ∈ {osm_way, osm_relation,
+    # external_verified}`（即「精確來源」）。實測呢個太嚴：
+    #
+    #   「圖書館」由 R-EXPLICIT 解析（source = parent_containment），
+    #   「醫療室」由 R-ANCHOR-MEMBER 解析 —— 兩者都被排除。
+    #   結果「七樓圖書館」「D橦醫療室」「地下層多媒體攝影棚」等
+    #   **76 條**有名稱線索嘅個案全部捕捉唔到。
+    #
+    # 放寬嘅理由：子項嘅聲明係「喺 X 之內」，呢個聲明同 X 本身定位
+    # 幾準**無關** —— 只要 X 嘅座標係最佳已知值，子項就應該用同一個
+    # 座標，而且**繼承 X 嘅精度**（唔可以升級）。
+    #
+    # 仍然排除 `district`：區中心誤差公里級，做父項會產生假精確。
     resolved: list[tuple[str, dict[str, Any]]] = []
     for r in results:
-        if r["confidence"] < 0.80 or not r["inferred_lonlat"]:
+        if r["confidence"] < MIN_PARENT_CONF or not r["inferred_lonlat"]:
             continue
-        if r["coordinate_source"] not in PRECISE_SOURCES:
+        # 用 subject 嘅實際精度（如果推斷本身有提）
+        prec = (r.get("proposed_changes") or {}).get("location_precision")
+        if prec is not None and prec not in OK_PRECISION:
             continue
         for nm in r["subject_names"]:
+            # ⚠️ 排除「組織／群體」名做父項。
+            #
+            # 實測嚴重假推斷：「不良人」被解析到將軍澳中心（R-DESC-RESOLVED），
+            # 之後「不良人據點」「不良人武器庫」「不良人糧庫」「不良人小學
+            # 據點」等 **12 條**全部被錨定到嗰度 —— 但「不良人」係**組織**，
+            # 佢嘅據點實際喺田家炳小學／志蓮小學（唐俊街一帶），
+            # 同將軍澳中心相差約 400 m。
+            #
+            # 「X 據點」嘅意思係「X 呢個組織嘅據點」，唔係「X 呢個地方
+            # 入面嘅據點」。
+            if nm.endswith(ORG_SUFFIX):
+                continue
             resolved.append((nm, r))
     # 長名優先，令「D橦大樓」贏過「大樓」
     resolved.sort(key=lambda t: -len(t[0]))
@@ -1297,11 +1335,35 @@ def resolve_containment(
         if props["id"] in covered:
             continue
         name = props["name"]
+        # ⚠️ 父項必須係子項名嘅**後綴**，唔可以只係「包含」。
+        #
+        # 中文結構：修飾語 + 中心詞（「七樓」+「圖書館」=「七樓圖書館」）。
+        # 所以父項（中心詞）一定喺尾。
+        #
+        # 實測踩過：只用「包含」嘅話，「聖堂天台」「康城二期大樓天台」
+        # 會配到某個叫「天台」嘅已解析地點，然後被錨定到**校園** ——
+        # 但佢哋明顯喺聖堂／康城。「天台」係通用詞，做中心詞冇識別性。
+        # ⚠️ 父項要 ≥3 字。
+        #
+        # 實測踩過：某個叫「天台」嘅已解析地點（2 字）通過咗
+        # `_has_distinctive_stem`（「天台」唔喺通用後綴表入面），
+        # 令「聖堂天台」「康城二期大樓天台」被錨定到嗰個「天台」嘅
+        # 位置 —— 但佢哋明顯喺聖堂／康城。
+        #
+        # 結構理由：呢個資料集入面 2 字嘅地點名幾乎都係通用詞
+        # （天台、大樓、廣場、走廊…），冇識別性。3 字以上才有
+        # 足夠資訊（圖書館、醫療室、大本營、保安室）。
+        MIN_PARENT_LEN = 3
         parent: tuple[str, dict[str, Any]] | None = None
         for nm, r in resolved:
-            if nm != name and nm in name and _has_distinctive_stem(nm):
-                parent = (nm, r)
-                break
+            if nm == name or len(nm) < MIN_PARENT_LEN:
+                continue
+            if not _has_distinctive_stem(nm):
+                continue
+            if not name.endswith(nm):
+                continue  # 中心詞一定要喺尾
+            parent = (nm, r)
+            break
         if parent is None:
             continue
         pname, pr = parent

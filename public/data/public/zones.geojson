@@ -89,16 +89,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.266961,
-          22.317786
+          114.255685,
+          22.307806
         ]
       },
       "properties": {
         "id": "zone_3aedd43d53",
         "name": "不良人據點",
         "kind": "nest",
-        "radius_m": 300.0,
-        "radius_source": "default",
+        "radius_m": 1841.9,
+        "radius_source": "members",
         "member_location_ids": [
           "loc_0233",
           "loc_0246",
@@ -118,7 +118,7 @@
         ],
         "first_appearance": 74,
         "description": "不良人據點內設有遊戲室酒吧、禮堂、操場與斷頭台等設施，二樓為病童盤踞、無人能活着回來的禁地。",
-        "evidence": "由 2 個同地區相鄰區域合併；半徑係估算",
+        "evidence": "由 2 個同地區相鄰區域合併（不良人據點／不良人小學據點）；半徑由 6 個成員地點分佈推導",
         "source": "bing_gang"
       }
     },
@@ -127,16 +127,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265267,
-          22.310085
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
         "id": "zone_1f112cb706",
         "name": "小學（不良人據點",
         "kind": "nest",
-        "radius_m": 300.0,
-        "radius_source": "default",
+        "radius_m": 80.0,
+        "radius_source": "members",
         "member_location_ids": [
           "loc_0240",
           "loc_0349"
@@ -147,7 +147,7 @@
         ],
         "first_appearance": 75,
         "description": "公仔餵完娃娃後走到小學的大閘前，經過看守大閘的不良人正式步出據點，暗示不良人據點設於一所小學。",
-        "evidence": "由 2 個同地區相鄰區域合併；半徑係估算",
+        "evidence": "由 2 個同地區相鄰區域合併（小學（不良人據點／小學（不良人根據地）；半徑由 2 個成員地點分佈推導",
         "source": "bing_gang"
       }
     },
@@ -156,8 +156,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.255838,
-          22.306316
+          114.25343,
+          22.30581
         ]
       },
       "properties": {
@@ -325,8 +325,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248424,
-          22.322665
+          114.248416,
+          22.322676
         ]
       },
       "properties": {
@@ -383,8 +383,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264654,
-          22.304041
+          114.26023,
+          22.305079
         ]
       },
       "properties": {

@@ -245,6 +245,35 @@
       "bytes": 1914639
     },
     {
+      "id": "tko-lohas",
+      "label": "康城／日出康城",
+      "note": "康城、日出康城、百勝角一帶：41 個地點",
+      "image": "assets/map-lod/tko-lohas.png",
+      "coords": "assets/map-lod/tko-lohas-coords.json",
+      "bbox": {
+        "lon_min": 114.262,
+        "lon_max": 114.292,
+        "lat_min": 22.284,
+        "lat_max": 22.304
+      },
+      "lod": "street",
+      "lod_layers": {
+        "roads": true,
+        "buildings": true,
+        "building_labels": true
+      },
+      "output_size": [
+        2048,
+        1476
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1476,
+        "aspect": 1.387534
+      },
+      "bytes": 1787198
+    },
+    {
       "id": "tko-north",
       "label": "坑口／寶琳／將軍澳北",
       "note": "41 個地點；坑口、寶琳、將軍澳北一帶",

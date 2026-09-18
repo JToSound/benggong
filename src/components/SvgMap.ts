@@ -694,6 +694,50 @@ export class SvgMap {
     return pool.reduce((best, t) => (tierSpan(t) < tierSpan(best) ? t : best));
   }
 
+  /** 已預載嘅層級 id（避免重複下載）。 */
+  private preloadedTiers = new Set<string>();
+
+  /**
+   * 預載「下一個更細」嘅圖磚。
+   *
+   * 為何需要
+   * --------
+   * 圖磚係按需載入（19.85 MB 唔可能一次過下載），但用戶由 overview
+   * 放大到 street 層時要等 2 MB 下載完，畫面會有空白／模糊。
+   *
+   * 做法：喺**瀏覽器空閒時**預載「下一個更細而且覆蓋目前視圖」嘅一層。
+   * 只預載一層 —— 全部預載等於冇按需載入。
+   *
+   * 用 `requestIdleCallback` 而唔係即刻載：唔應該同目前畫面爭頻寬。
+   * 唔支援嘅瀏覽器（Safari 舊版）就唔預載，功能唔受影響。
+   */
+  private preloadFinerTier(): void {
+    const cur = LOD_TIERS.find((t) => t.id === this.currentTierId);
+    if (!cur) return;
+    const v = this.currentGeoBbox();
+    const next = LOD_TIERS.filter(
+      (t) =>
+        tierSpan(t) < tierSpan(cur) &&
+        t.bbox.lon_min <= v.lon_min &&
+        t.bbox.lon_max >= v.lon_max &&
+        t.bbox.lat_min <= v.lat_min &&
+        t.bbox.lat_max >= v.lat_max,
+    ).sort((a, b) => tierSpan(b) - tierSpan(a))[0];
+    if (!next || this.preloadedTiers.has(next.id)) return;
+    this.preloadedTiers.add(next.id);
+    const run = () => {
+      const img = new Image();
+      img.src = assetUrl(next.image);
+    };
+    const ric = (
+      window as unknown as {
+        requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
+      }
+    ).requestIdleCallback;
+    if (ric) ric(run, { timeout: 3000 });
+    else setTimeout(run, 1200);
+  }
+
   /** 切換底圖圖磚（只有層級改變時才改 DOM）。 */
   private updateBasemapTier(): void {
     const tier = this.pickTier();
@@ -709,6 +753,12 @@ export class SvgMap {
       img.setAttribute("width", String(rect.w));
       img.setAttribute("height", String(rect.h));
     }
+
+    // 換完圖磚之後，趁空閒預載下一層（見 preloadFinerTier）
+    this.preloadFinerTier();
+
+    // 換完圖磚之後，趁空閒預載下一層（見 preloadFinerTier）
+    this.preloadFinerTier();
 
     // 標籤圖層只跟總覽層配套（其餘層級嘅標籤已經烙入圖磚，
     // 而且比例唔同，疊上去會變成兩套唔同大小嘅字）。
