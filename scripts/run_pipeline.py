@@ -13,7 +13,8 @@ Phase J 期間我一直手動逐支跑，結果出過幾次次序錯誤（例如
     3. apply_place_inferences.py  套用已批核 + 傳播 + 修孤兒
     3. anchor_fictional_locations 虛構地點錨定到同章已解析地點
     4. apply_location_corrections 人手核實修正（要喺錨定之後，否則會被覆蓋）
-    5. derive_zones.py            區域（讀最終座標）+ 反向填 zone_ids
+    5. propagate_location_coords  將最終座標傳播到 events／timeline／routes
+    6. derive_zones.py            區域（讀最終座標）+ 反向填 zone_ids
     6. link_event_characters.py   事件角色連結 + 身份
     7. normalize_public_data.py   時間線排序 + 路線精度
     8. update_manifest.py         重算 asset-manifest counts
@@ -49,6 +50,8 @@ STEPS: list[tuple[str, str]] = [
     ("apply_place_inferences.py", "套用已批核推斷 + 傳播 + 修孤兒引用"),
     ("anchor_fictional_locations.py", "虛構地點錨定到同章已解析地點"),
     ("apply_location_corrections.py", "人手核實修正"),
+    ("propagate_location_coords.py", "將最終座標傳播到 events／timeline／routes"),
+    ("propagate_location_coords.py", "將最終座標傳播到 events／timeline／routes"),
     ("derive_zones.py", "區域（讀最終座標）+ 反向填 zone_ids"),
     ("link_event_characters.py", "事件角色連結 + 身份"),
     ("normalize_public_data.py", "時間線排序 + 路線精度"),

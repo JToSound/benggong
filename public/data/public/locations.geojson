@@ -1017,8 +1017,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264663,
-          22.314057
+          114.265405,
+          22.31696
         ]
       },
       "properties": {
@@ -1026,8 +1026,8 @@
         "name": "寵物店",
         "display_name": "寵物店（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.193,
           "y": 0.726
@@ -1044,7 +1044,7 @@
         "confidence": 0.93,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[7]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「商場」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -1117,8 +1117,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.261186,
-          22.310366
+          114.262573,
+          22.313039
         ]
       },
       "properties": {
@@ -1141,7 +1141,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[9]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[9]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1149,8 +1149,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.258685,
-          22.307034
+          114.260072,
+          22.309707
         ]
       },
       "properties": {
@@ -1176,7 +1176,7 @@
         "confidence": 0.88,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[9]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[9]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1184,8 +1184,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259612,
-          22.305822
+          114.264783,
+          22.316443
         ]
       },
       "properties": {
@@ -1193,8 +1193,8 @@
         "name": "電器鋪",
         "display_name": "電器鋪（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.522,
           "y": 0.82
@@ -1208,7 +1208,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[9]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「商場」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -1899,17 +1899,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251472,
-          22.308206
+          114.252917,
+          22.306053
         ]
       },
       "properties": {
         "id": "loc_0056",
         "name": "少佐辦公室",
-        "display_name": "少佐辦公室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "少佐辦公室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.832,
           "y": 0.32
@@ -1926,7 +1926,8 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[17]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[17]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0056"
       }
     },
     {
@@ -1968,17 +1969,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252234,
-          22.308255
+          114.252918,
+          22.306054
         ]
       },
       "properties": {
         "id": "loc_0058",
         "name": "大舊宿舍",
-        "display_name": "大舊宿舍（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大舊宿舍（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.598,
           "y": 0.176
@@ -1992,7 +1993,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[17]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「宿舍」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -2034,8 +2035,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.255902,
-          22.310704
+          114.253852,
+          22.308466
         ]
       },
       "properties": {
@@ -2058,7 +2059,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[18]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2066,8 +2067,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.258125,
-          22.31269
+          114.256075,
+          22.310452
         ]
       },
       "properties": {
@@ -2092,7 +2093,7 @@
         "confidence": 0.92,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[18]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2100,8 +2101,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259646,
-          22.308988
+          114.253843,
+          22.305596
         ]
       },
       "properties": {
@@ -2109,8 +2110,8 @@
         "name": "UNIQLO大型衣店",
         "display_name": "UNIQLO大型衣店（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.658,
           "y": 0.677
@@ -2124,7 +2125,7 @@
         "confidence": 0.93,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「廣場」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -2132,8 +2133,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.255134,
-          22.311827
+          114.253084,
+          22.309589
         ]
       },
       "properties": {
@@ -2158,7 +2159,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[18]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2166,8 +2167,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256521,
-          22.312287
+          114.254471,
+          22.310049
         ]
       },
       "properties": {
@@ -2193,7 +2194,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[18]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2201,8 +2202,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257582,
-          22.308171
+          114.253401,
+          22.305421
         ]
       },
       "properties": {
@@ -2210,8 +2211,8 @@
         "name": "廣場中心處",
         "display_name": "廣場中心處（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.72,
           "y": 0.805
@@ -2225,7 +2226,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「廣場」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -4637,8 +4638,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254683,
-          22.310641
+          114.277251,
+          22.296782
         ]
       },
       "properties": {
@@ -4646,8 +4647,8 @@
         "name": "醫療大堂入口旁辦公室",
         "display_name": "醫療大堂入口旁辦公室（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.158,
           "y": 0.799
@@ -4661,7 +4662,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[45]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「辦公室」（由名配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -4669,8 +4670,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27195,
-          22.3156
+          114.271989,
+          22.317486
         ]
       },
       "properties": {
@@ -4678,8 +4679,8 @@
         "name": "G層",
         "display_name": "G層（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.295,
           "y": 0.217
@@ -4695,7 +4696,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[46]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「醫院」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -4703,8 +4704,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.271993,
-          22.316015
+          114.27772,
+          22.296885
         ]
       },
       "properties": {
@@ -4712,8 +4713,8 @@
         "name": "大堂辦公室",
         "display_name": "大堂辦公室（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.749,
           "y": 0.18
@@ -4729,7 +4730,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[46]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「辦公室」（由名配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -5188,8 +5189,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254624,
-          22.309319
+          114.277976,
+          22.298068
         ]
       },
       "properties": {
@@ -5197,8 +5198,8 @@
         "name": "一樓大堂旁的辦公室",
         "display_name": "一樓大堂旁的辦公室（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.749,
           "y": 0.686
@@ -5212,7 +5213,7 @@
         "confidence": 0.92,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "依附於「辦公室」（由名配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -5220,8 +5221,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253281,
-          22.308193
+          114.271966,
+          22.318517
         ]
       },
       "properties": {
@@ -5229,8 +5230,8 @@
         "name": "四樓直通落去的秘密通道",
         "display_name": "四樓直通落去的秘密通道（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.541,
           "y": 0.596
@@ -5244,7 +5245,7 @@
         "confidence": 0.93,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "依附於「醫院」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -5688,8 +5689,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253312,
-          22.303651
+          114.253336,
+          22.305364
         ]
       },
       "properties": {
@@ -5697,8 +5698,8 @@
         "name": "工坊休息室",
         "display_name": "工坊休息室（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.746,
           "y": 0.669
@@ -5712,7 +5713,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「工坊」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -5754,17 +5755,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253195,
-          22.302859
+          114.253543,
+          22.305547
         ]
       },
       "properties": {
         "id": "loc_0173",
         "name": "拘留室",
-        "display_name": "拘留室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "拘留室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.205,
           "y": 0.81
@@ -5780,7 +5781,8 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0173"
       }
     },
     {
@@ -5788,17 +5790,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256367,
-          22.303512
+          114.253543,
+          22.305547
         ]
       },
       "properties": {
         "id": "loc_0174",
         "name": "史丹佛大學",
-        "display_name": "史丹佛大學（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "史丹佛大學（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.486,
           "y": 0.683
@@ -5814,7 +5816,8 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0174"
       }
     },
     {
@@ -8297,8 +8300,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264348,
-          22.303565
+          114.265444,
+          22.316964
         ]
       },
       "properties": {
@@ -8306,8 +8309,8 @@
         "name": "永旺百貨公司",
         "display_name": "永旺百貨公司（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.46,
           "y": 0.222
@@ -8321,7 +8324,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[76]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「商場」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -8329,8 +8332,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262548,
-          22.300608
+          114.265058,
+          22.31633
         ]
       },
       "properties": {
@@ -8338,8 +8341,8 @@
         "name": "傢俱店",
         "display_name": "傢俱店（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.724,
           "y": 0.318
@@ -8356,7 +8359,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[76]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「商場」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -8364,8 +8367,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265699,
-          22.303281
+          114.267681,
+          22.311889
         ]
       },
       "properties": {
@@ -8388,7 +8391,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[76]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[76]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8427,8 +8430,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.269305,
-          22.314773
+          114.26884,
+          22.314993
         ]
       },
       "properties": {
@@ -8453,7 +8456,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[77]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[77]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8461,8 +8464,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.267112,
-          22.31373
+          114.265044,
+          22.316578
         ]
       },
       "properties": {
@@ -8470,8 +8473,8 @@
         "name": "電梯間",
         "display_name": "電梯間（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.661,
           "y": 0.449
@@ -8485,7 +8488,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[77]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「商場」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -8493,8 +8496,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265216,
-          22.314165
+          114.264751,
+          22.314385
         ]
       },
       "properties": {
@@ -8519,7 +8522,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[77]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[77]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9375,8 +9378,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.258082,
-          22.308046
+          114.253206,
+          22.306536
         ]
       },
       "properties": {
@@ -9384,8 +9387,8 @@
         "name": "小學隱蔽地下室",
         "display_name": "小學隱蔽地下室（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.182,
           "y": 0.531
@@ -9401,7 +9404,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[82]）嘅 9 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「小學」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -9473,8 +9476,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.260211,
-          22.304281
+          114.259463,
+          22.304271
         ]
       },
       "properties": {
@@ -9497,7 +9500,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[82]）嘅 9 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[82]）嘅 10 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9601,8 +9604,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.263027,
-          22.307709
+          114.262278,
+          22.3077
         ]
       },
       "properties": {
@@ -9625,7 +9628,7 @@
         "confidence": 0.92,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[82]）嘅 9 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[82]）嘅 10 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10815,8 +10818,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.260438,
-          22.308226
+          114.278038,
+          22.296475
         ]
       },
       "properties": {
@@ -10824,8 +10827,8 @@
         "name": "酒店",
         "display_name": "酒店（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.394,
           "y": 0.278
@@ -10843,7 +10846,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[93]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「升降機大堂」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -10851,8 +10854,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257872,
-          22.310457
+          114.26593,
+          22.303351
         ]
       },
       "properties": {
@@ -10879,7 +10882,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[93]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[93]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10919,8 +10922,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.260398,
-          22.31478
+          114.266818,
+          22.309821
         ]
       },
       "properties": {
@@ -10943,7 +10946,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[94]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[94]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10951,8 +10954,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262055,
-          22.310446
+          114.278356,
+          22.297003
         ]
       },
       "properties": {
@@ -10960,8 +10963,8 @@
         "name": "升降機大堂",
         "display_name": "升降機大堂（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.538,
           "y": 0.253
@@ -10975,7 +10978,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[94]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「大堂」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -10983,8 +10986,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259808,
-          22.314732
+          114.266228,
+          22.309773
         ]
       },
       "properties": {
@@ -11011,7 +11014,7 @@
         "confidence": 0.92,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[94]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[94]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12167,8 +12170,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257067,
-          22.319862
+          114.258772,
+          22.319407
         ]
       },
       "properties": {
@@ -12201,7 +12204,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[111]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[111]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12244,8 +12247,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25508,
-          22.324112
+          114.265055,
+          22.317773
         ]
       },
       "properties": {
@@ -12253,8 +12256,8 @@
         "name": "Beauty美容中心",
         "display_name": "Beauty美容中心（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.693,
           "y": 0.343
@@ -12270,7 +12273,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[111]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「商場」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -12278,8 +12281,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25807,
-          22.319499
+          114.259776,
+          22.319044
         ]
       },
       "properties": {
@@ -12304,7 +12307,7 @@
         "confidence": 0.8,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[111]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[111]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12788,8 +12791,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262614,
-          22.317318
+          114.254276,
+          22.305441
         ]
       },
       "properties": {
@@ -12797,8 +12800,8 @@
         "name": "「詭區」貨品倉庫",
         "display_name": "「詭區」貨品倉庫（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.471,
           "y": 0.376
@@ -12814,7 +12817,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[118]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「詭區」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -13960,8 +13963,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254758,
-          22.303792
+          114.253713,
+          22.305384
         ]
       },
       "properties": {
@@ -13969,8 +13972,8 @@
         "name": "靈實教堂",
         "display_name": "靈實教堂（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.479,
           "y": 0.169
@@ -13984,7 +13987,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
+        "position_source": "依附於「教堂」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -15199,8 +15202,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251751,
-          22.325512
+          114.249255,
+          22.325542
         ]
       },
       "properties": {
@@ -15225,7 +15228,7 @@
         "confidence": 0.88,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[134]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[134]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15233,8 +15236,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.255064,
-          22.325928
+          114.241691,
+          22.323461
         ]
       },
       "properties": {
@@ -15242,8 +15245,8 @@
         "name": "皇宮內會議房",
         "display_name": "皇宮內會議房（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.588,
           "y": 0.793
@@ -15257,7 +15260,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[134]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「皇宮」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -15531,8 +15534,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.245302,
-          22.319234
+          114.241573,
+          22.32214
         ]
       },
       "properties": {
@@ -15540,8 +15543,8 @@
         "name": "迎賓室",
         "display_name": "迎賓室（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "district",
         "story_position": {
           "x": 0.53,
           "y": 0.395
@@ -15555,7 +15558,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[144]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「皇宮」（由描述配對）；精度繼承自父項（district）"
       }
     },
     {
@@ -16123,17 +16126,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257793,
-          22.306936
+          114.276863,
+          22.297131
         ]
       },
       "properties": {
         "id": "loc_0481",
         "name": "讀書會",
-        "display_name": "讀書會（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "讀書會（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.595,
           "y": 0.777
@@ -16149,7 +16152,8 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0481"
       }
     },
     {
@@ -16157,8 +16161,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259562,
-          22.306268
+          114.262852,
+          22.304978
         ]
       },
       "properties": {
@@ -16183,7 +16187,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16255,8 +16259,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253964,
-          22.306202
+          114.257254,
+          22.304913
         ]
       },
       "properties": {
@@ -16279,7 +16283,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16334,8 +16338,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25639,
-          22.30047
+          114.276863,
+          22.297131
         ]
       },
       "properties": {
@@ -16343,8 +16347,8 @@
         "name": "康城一期",
         "display_name": "康城一期（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.495,
           "y": 0.155
@@ -16365,7 +16369,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[156]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「康城」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -16443,8 +16447,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.261903,
-          22.305055
+          114.264917,
+          22.304117
         ]
       },
       "properties": {
@@ -16469,7 +16473,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[156]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[156]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16543,8 +16547,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.261014,
-          22.305283
+          114.264028,
+          22.304345
         ]
       },
       "properties": {
@@ -16575,7 +16579,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[156]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[156]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16583,8 +16587,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264554,
-          22.29849
+          114.27725,
+          22.296932
         ]
       },
       "properties": {
@@ -16592,8 +16596,8 @@
         "name": "康城一期會所",
         "display_name": "康城一期會所（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.519,
           "y": 0.304
@@ -16607,7 +16611,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[157]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「康城一期」（由名配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -18337,8 +18341,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265334,
-          22.310915
+          114.276625,
+          22.296548
         ]
       },
       "properties": {
@@ -18346,8 +18350,8 @@
         "name": "康城一期行人橋",
         "display_name": "康城一期行人橋（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.423,
           "y": 0.285
@@ -18361,7 +18365,7 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[152]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「康城一期」（由名配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -18465,8 +18469,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254364,
-          22.30306
+          114.257654,
+          22.30177
         ]
       },
       "properties": {
@@ -18495,7 +18499,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18535,8 +18539,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257136,
-          22.303017
+          114.260426,
+          22.301728
         ]
       },
       "properties": {
@@ -18559,7 +18563,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[155]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[155]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18567,8 +18571,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.258084,
-          22.299715
+          114.261098,
+          22.298777
         ]
       },
       "properties": {
@@ -18591,7 +18595,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[156]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[156]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -19277,8 +19281,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2754,
-          22.279271
+          114.278082,
+          22.29757
         ]
       },
       "properties": {
@@ -19286,8 +19290,8 @@
         "name": "康城電腦室",
         "display_name": "康城電腦室（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.819,
           "y": 0.702
@@ -19303,7 +19307,7 @@
         "confidence": 0.92,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「康城」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -19311,17 +19315,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.271325,
-          22.281574
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
         "id": "loc_0577",
         "name": "金門建築有限公司",
-        "display_name": "金門建築有限公司（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "金門建築有限公司（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.49,
           "y": 0.818
@@ -19338,7 +19342,8 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0577"
       }
     },
     {
@@ -19346,8 +19351,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.272045,
-          22.276845
+          114.277363,
+          22.29705
         ]
       },
       "properties": {
@@ -19355,8 +19360,8 @@
         "name": "康城駿宏街",
         "display_name": "康城駿宏街（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.75,
           "y": 0.786
@@ -19370,7 +19375,7 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「康城」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {
@@ -19378,17 +19383,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.271435,
-          22.276993
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
         "id": "loc_0579",
         "name": "辦公室",
-        "display_name": "辦公室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "辦公室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.506,
           "y": 0.756
@@ -19415,7 +19420,8 @@
         "confidence": 0.7,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[162]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0579"
       }
     },
     {
@@ -19423,17 +19429,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.273649,
-          22.281372
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
         "id": "loc_0580",
         "name": "鐵門內嘅房間",
-        "display_name": "鐵門內嘅房間（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "鐵門內嘅房間（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.546,
           "y": 0.259
@@ -19447,7 +19453,8 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[162]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0580"
       }
     },
     {
@@ -19455,17 +19462,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.272046,
-          22.277299
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
         "id": "loc_0581",
         "name": "大堂",
-        "display_name": "大堂（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大堂（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.301,
           "y": 0.847
@@ -19482,7 +19489,8 @@
         "confidence": 0.7,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[162]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0581"
       }
     },
     {
@@ -19490,8 +19498,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2721,
-          22.279513
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -19517,7 +19525,7 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
-        "inferred_from": "inf_llm_loc_0582"
+        "inferred_from": "inf_loc_0582"
       }
     },
     {
@@ -19525,17 +19533,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.273264,
-          22.276486
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
         "id": "loc_0583",
         "name": "D-16號影廠",
-        "display_name": "D-16號影廠（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "D-16號影廠（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.23,
           "y": 0.563
@@ -19549,7 +19557,8 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[162]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[162]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0583"
       }
     },
     {
@@ -19659,17 +19668,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.260484,
-          22.300303
+          114.253089,
+          22.305287
         ]
       },
       "properties": {
         "id": "loc_0587",
         "name": "電視台",
-        "display_name": "電視台（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "電視台（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.16,
           "y": 0.818
@@ -19686,7 +19695,8 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[164]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[164]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0587"
       }
     },
     {
@@ -19694,8 +19704,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.271805,
-          22.300904
+          114.253089,
+          22.305287
         ]
       },
       "properties": {
@@ -19719,7 +19729,7 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
-        "inferred_from": "inf_llm_loc_0588"
+        "inferred_from": "inf_loc_0588"
       }
     },
     {
@@ -19727,17 +19737,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264528,
-          22.303751
+          114.253089,
+          22.305287
         ]
       },
       "properties": {
         "id": "loc_0589",
         "name": "單層式辦公室",
-        "display_name": "單層式辦公室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "單層式辦公室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.83,
           "y": 0.567
@@ -19751,7 +19761,8 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[164]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「鐵籠」（由描述配對）；精度繼承自父項（approximate）",
+        "inferred_from": "inf_loc_0589"
       }
     },
     {
@@ -19759,17 +19770,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259751,
-          22.301285
+          114.253089,
+          22.305287
         ]
       },
       "properties": {
         "id": "loc_0590",
         "name": "不法者基地",
-        "display_name": "不法者基地（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "不法者基地（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.205,
           "y": 0.758
@@ -19783,7 +19794,8 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[164]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[164]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "inferred_from": "inf_loc_0590"
       }
     },
     {
@@ -21937,8 +21949,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256652,
-          22.309494
+          114.261683,
+          22.30556
         ]
       },
       "properties": {
@@ -21965,7 +21977,7 @@
         "confidence": 0.8,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[185]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[185]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22004,8 +22016,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259022,
-          22.315755
+          114.264053,
+          22.31182
         ]
       },
       "properties": {
@@ -22028,7 +22040,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[185]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[185]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22036,8 +22048,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253946,
-          22.311241
+          114.258977,
+          22.307307
         ]
       },
       "properties": {
@@ -22060,7 +22072,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[185]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "同章（[185]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22068,8 +22080,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256245,
-          22.310495
+          114.277483,
+          22.29686
         ]
       },
       "properties": {
@@ -22077,8 +22089,8 @@
         "name": "大樓大堂",
         "display_name": "大樓大堂（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.826,
           "y": 0.589
@@ -22092,7 +22104,7 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[185]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "依附於「大堂」（由描述配對）；精度繼承自父項（approximate）"
       }
     },
     {

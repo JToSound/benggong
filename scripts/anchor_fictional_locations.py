@@ -74,6 +74,9 @@ M_PER_DEG_LAT = 110570
 #: 組織／群體後綴 —— 唔可以當父項（同 infer_places.py 一致）
 ORG_SUFFIX = ("人", "幫", "會", "團", "隊", "軍", "黨", "社", "派")
 
+#: 方位／包含詞。2 字父項必須喺呢啲詞前後 6 字之內才算「容器」。
+CONTAIN_WORDS = ("內", "中", "裡", "入面", "裡面", "之下", "上面", "旁邊")
+
 
 def offset_for(loc_id: str, ring: float = RING_RADIUS_M) -> tuple[float, float]:
     """由 id 決定一個 deterministic 嘅環形偏移（米）。
@@ -108,11 +111,16 @@ def main() -> int:
         for ch in p["chapters"]:
             by_ch[ch].append(f["geometry"]["coordinates"])
         nm = p["name"]
-        # 只收 ≥3 字、有識別性詞幹、唔係組織名嘅（同 R-CONTAIN-RESOLVED 一致）
-        if len(nm) >= 3 and not nm.endswith(ORG_SUFFIX):
+        if len(nm) >= 2 and not nm.endswith(ORG_SUFFIX):
             parent_xy.setdefault(nm, f["geometry"]["coordinates"])
             parent_props.setdefault(nm, p)
-    parent_names = sorted(parent_xy.keys(), key=len, reverse=True)
+    # 兩份名單：
+    #   `parent_names`      —— 名路徑用，要 ≥3 字（2 字名做前綴會誤配）
+    #   `parent_names_desc` —— 描述路徑用，包括 2 字（配合方位詞約束）
+    parent_names = sorted(
+        (n for n in parent_xy if len(n) >= 3), key=len, reverse=True
+    )
+    parent_names_desc = sorted(parent_xy.keys(), key=len, reverse=True)
 
     moved = 0
     no_anchor = 0
@@ -139,7 +147,27 @@ def main() -> int:
         )
         via = "名"
         if parent is None:
-            parent = next((x for x in parent_names if x in desc), None)
+            # 描述路徑：**≥3 字父項**直接可用；**2 字父項**必須喺方位詞附近。
+            #
+            # 為何要分開對待：
+            #   2 字地點名（商場、廣場、宿舍、醫院）雖然有識別性，
+            #   但佢哋喺描述入面出現嘅頻率極高，而且唔一定係「容器」。
+            #   實測錯配：「幼稚園」嘅描述提到「天台」（另一個已解析地點）
+            #   → 被錨定到嗰個天台；「大型活動室」配到「八樓」。
+            #
+            #   但「商場**內**一間寵物店」「廣場**中的**UNIQLO」就係
+            #   明確嘅包含關係。所以要求 2 字父項必須喺方位詞附近。
+            for x in parent_names_desc:
+                idx = desc.find(x)
+                if idx < 0:
+                    continue
+                if len(x) >= 3:
+                    parent = x
+                    break
+                window = desc[max(0, idx - 6) : idx + len(x) + 6]
+                if any(w in window for w in CONTAIN_WORDS):
+                    parent = x
+                    break
             via = "描述"
 
         if parent is not None:
