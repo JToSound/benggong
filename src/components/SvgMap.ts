@@ -763,6 +763,10 @@ export class SvgMap {
 
     // Active locations（本章 ± 3 章，避免大 cluster）
     const locationsToShow = this.data.locations.features.filter((l) => {
+      // `map_hidden`：由人手核實排除嘅條目（例如「旺角」喺文中係比喻、
+      // 「香港」係整體舞台設定）。資料仍然保留喺面板度，只係唔喺地圖
+      // 標一個誤導性嘅點。
+      if (l.properties.map_hidden) return false;
       const fp = l.properties.first_appearance;
       const chs = l.properties.chapters || [fp];
       return chs.some((c: number) => Math.abs(c - cur) <= 3) || fp === cur;

@@ -35,8 +35,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264937,
-          22.329887
+          114.251459,
+          22.305237
         ]
       },
       "properties": {
@@ -97,25 +97,28 @@
         "id": "zone_3aedd43d53",
         "name": "不良人據點",
         "kind": "nest",
-        "radius_m": 200.0,
+        "radius_m": 300.0,
         "radius_source": "default",
         "member_location_ids": [
           "loc_0233",
           "loc_0246",
           "loc_0292",
           "loc_0301",
-          "loc_0321"
+          "loc_0321",
+          "loc_0318"
         ],
         "chapters": [
           74,
           75,
           81,
           84,
-          92
+          91,
+          92,
+          104
         ],
         "first_appearance": 74,
         "description": "不良人據點內設有遊戲室酒吧、禮堂、操場與斷頭台等設施，二樓為病童盤踞、無人能活着回來的禁地。",
-        "evidence": "只有 5 個成員點，用按類型嘅預設半徑（估算）",
+        "evidence": "由 2 個同地區相鄰區域合併；半徑係估算",
         "source": "bing_gang"
       }
     },
@@ -124,25 +127,27 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.185253,
-          22.223491
+          114.265456,
+          22.310538
         ]
       },
       "properties": {
         "id": "zone_1f112cb706",
         "name": "小學（不良人據點",
         "kind": "nest",
-        "radius_m": 200.0,
+        "radius_m": 300.0,
         "radius_source": "default",
         "member_location_ids": [
-          "loc_0240"
+          "loc_0240",
+          "loc_0349"
         ],
         "chapters": [
-          75
+          75,
+          103
         ],
         "first_appearance": 75,
         "description": "公仔餵完娃娃後走到小學的大閘前，經過看守大閘的不良人正式步出據點，暗示不良人據點設於一所小學。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
+        "evidence": "由 2 個同地區相鄰區域合併；半徑係估算",
         "source": "bing_gang"
       }
     },
@@ -151,8 +156,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248533,
-          22.441507
+          114.255838,
+          22.306316
         ]
       },
       "properties": {
@@ -207,61 +212,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.044003,
-          22.37817
-        ]
-      },
-      "properties": {
-        "id": "zone_9eaa4bd1b1",
-        "name": "不良人小學據點",
-        "kind": "nest",
-        "radius_m": 200.0,
-        "radius_source": "default",
-        "member_location_ids": [
-          "loc_0318"
-        ],
-        "chapters": [
-          91,
-          104
-        ],
-        "first_appearance": 91,
-        "description": "不良人以一間小學作為據點，操場用於集結俘虜，四樓課室被改裝成監獄，一樓設有紋身室，不破尚常待在最高層。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          114.216271,
-          22.342733
-        ]
-      },
-      "properties": {
-        "id": "zone_fbc0313bf5",
-        "name": "小學（不良人根據地",
-        "kind": "nest",
-        "radius_m": 200.0,
-        "radius_source": "default",
-        "member_location_ids": [
-          "loc_0349"
-        ],
-        "chapters": [
-          103
-        ],
-        "first_appearance": 103,
-        "description": "病者平權組織六、七十名白衣成員包圍不良人盤踞的小學，雙方在校門外對峙並爆發大戰。",
-        "evidence": "只有 1 個成員點，用按類型嘅預設半徑（估算）",
-        "source": "bing_gang"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           114.2415,
           22.3229
         ]
@@ -289,8 +239,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262969,
-          22.330345
+          114.256309,
+          22.322126
         ]
       },
       "properties": {
@@ -316,8 +266,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.280301,
-          22.326573
+          114.275464,
+          22.310169
         ]
       },
       "properties": {
@@ -375,8 +325,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28226,
-          22.333175
+          114.25242,
+          22.30377
         ]
       },
       "properties": {
@@ -406,8 +356,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.269051,
-          22.328745
+          114.256831,
+          22.304878
         ]
       },
       "properties": {
@@ -433,8 +383,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262563,
-          22.32171
+          114.264654,
+          22.304041
         ]
       },
       "properties": {
@@ -467,8 +417,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.274775,
-          22.328019
+          114.252873,
+          22.307839
         ]
       },
       "properties": {
@@ -494,8 +444,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.941386,
-          22.385457
+          114.249628,
+          22.313504
         ]
       },
       "properties": {

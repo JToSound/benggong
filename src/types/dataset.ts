@@ -74,6 +74,10 @@ export interface LocationProperties {
   aliases?: string[];
   /** 所屬區域 id（倖存區／病窩）；由 derive_zones.py 反向填入。 */
   zone_ids?: string[];
+  /** 由地圖標記排除（比喻、整體設定等）。資料仍然保留。 */
+  map_hidden?: boolean;
+  /** 座標來源說明（人手修正／同章錨定），可稽核。 */
+  position_source?: string;
 }
 
 export type LocationFeature = FeatureBase<LocationProperties>;

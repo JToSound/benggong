@@ -301,8 +301,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18264454108491,
-          22.31442576485847
+          114.249417,
+          22.306256
         ]
       },
       "properties": {
@@ -326,7 +326,8 @@
         "description": "位於B樓、長期被窗簾遮擋陽光的休息房間，M在此遇到玲玲和阿登。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -334,8 +335,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12032547493705,
-          22.437581864652476
+          114.253006,
+          22.307535
         ]
       },
       "properties": {
@@ -357,7 +358,8 @@
         "description": "A樓地下層的活動室，一群年輕人在此學習與怪物對戰的技巧，導師是大舊。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -365,8 +367,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18652185854886,
-          22.407423704890515
+          114.251943,
+          22.30375
         ]
       },
       "properties": {
@@ -388,7 +390,8 @@
         "description": "M利用此處的裁衣機在小鐵片上鑽洞穿繩，製成攀爬用的抓勾。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -428,8 +431,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20982421606774,
-          22.223790531776913
+          114.253304,
+          22.308495
         ]
       },
       "properties": {
@@ -463,7 +466,8 @@
         "description": "病腦憑高智力會佔據荒廢建築物作為自己的巢穴，簡稱「病窩」，入面可能擺放詭異裝飾品。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -498,7 +502,9 @@
         "description": "故事舞台位於香港，病毒爆發後第一個星期過去，整個香港就好像停止了運作一樣。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "map_hidden": true,
+        "position_source": "由地圖排除：「香港」係整個故事嘅**舞台設定**，唔係一個具體地點。喺地圖上標一個點冇意義。"
       }
     },
     {
@@ -506,8 +512,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0765214007782,
-          22.247417601281757
+          114.268291,
+          22.32326
         ]
       },
       "properties": {
@@ -529,7 +535,8 @@
         "description": "主角所住的單位位於大廈十二樓，他離開時不乘沾滿乾涸血跡的升降機，改為沿樓梯落到地下，沿途滿是血臭味。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[1]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）；已排除 1 個區域外錨點"
       }
     },
     {
@@ -537,8 +544,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95662577248798,
-          22.415266994735635
+          114.271501,
+          22.320326
         ]
       },
       "properties": {
@@ -560,7 +567,8 @@
         "description": "主角逃出大廈後躲進鄰近一間似被搶購一空的便利店，並藏身於裝有只能由內望外之特製玻璃門的員工休息室，目擊夏晴一行人進店。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[1]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）；已排除 1 個區域外錨點"
       }
     },
     {
@@ -825,8 +833,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07793133440146,
-          22.26094708934157
+          114.256409,
+          22.316716
         ]
       },
       "properties": {
@@ -848,7 +856,8 @@
         "description": "位於一樓、觀眾席約容納百多人的演講廳，講台上擺放鋼琴，當日有女性彈奏演出。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[6]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -856,8 +865,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11837079423209,
-          22.334546158541237
+          114.256796,
+          22.315734
         ]
       },
       "properties": {
@@ -879,7 +888,8 @@
         "description": "M自行從雜物房找來一條索帶備用。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[6]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -887,8 +897,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97539070725566,
-          22.383202220187684
+          114.257616,
+          22.31222
         ]
       },
       "properties": {
@@ -915,7 +925,8 @@
         "description": "M睡覺休息之處，大舉推門進來在此找到他。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[6]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1006,8 +1017,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91587228198672,
-          22.404051613641563
+          114.264663,
+          22.314057
         ]
       },
       "properties": {
@@ -1032,7 +1043,8 @@
         "description": "商場內一間寵物店，四人逃入其中以狗鏈及防咬圈設陷阱對付舌女，店內散發死去倉鼠腐爛的屍臭。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[7]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1105,8 +1117,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27523872739756,
-          22.352270199130235
+          114.261186,
+          22.310366
         ]
       },
       "properties": {
@@ -1128,7 +1140,8 @@
         "description": "商場三樓盡頭有一間面積很大嘅玩具反斗城商店，地圖板顯示佢有兩個出入口，其中一個有樓梯可以落到二樓下面。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[9]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1136,8 +1149,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92488944838635,
-          22.34667746242466
+          114.258685,
+          22.307034
         ]
       },
       "properties": {
@@ -1162,7 +1175,8 @@
         "description": "商場左面設有後樓梯，係眾人二樓上嚟時行過嘅路徑；病腦實際藏身喺左面後樓梯間窺視眾人。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[9]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1170,8 +1184,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11333348592355,
-          22.43705100328069
+          114.259612,
+          22.305822
         ]
       },
       "properties": {
@@ -1193,7 +1207,8 @@
         "description": "商場內一間電器鋪嘅電視仍未關掉，重複播放美劇男女主角結婚嘅畫面，與四周婚禮佈置呼應。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[9]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1563,8 +1578,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01737468528268,
-          22.248561570153353
+          114.264544,
+          22.315108
         ]
       },
       "properties": {
@@ -1588,7 +1603,8 @@
         "description": "大本營七樓圖書館係核心成員上堂學習對付病者嘅地方。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[12]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1596,8 +1612,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22136003662165,
-          22.267915579461356
+          114.264547,
+          22.311265
         ]
       },
       "properties": {
@@ -1621,7 +1637,8 @@
         "description": "搜尋隊喺距離幾條街之外嘅一個巴士站發現咗新型病者「病爪」。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[12]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -1816,8 +1833,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04817532616158,
-          22.326949607080184
+          114.254636,
+          22.308925
         ]
       },
       "properties": {
@@ -1841,7 +1858,8 @@
         "description": "犬京與其狗Ricky停留的位置，位於某建築物的二樓欄杆旁。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -1849,8 +1867,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91187319752804,
-          22.31941287098497
+          114.250062,
+          22.306363
         ]
       },
       "properties": {
@@ -1872,7 +1890,8 @@
         "description": "犬京警告M等人不要再返回的區域，由被稱為「王」的新型病者盤踞。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -1880,8 +1899,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2990281528954,
-          22.26187048905165
+          114.251995,
+          22.307933
         ]
       },
       "properties": {
@@ -1906,7 +1925,8 @@
         "description": "位於五樓的少佐私人辦公室，門外有看守把守，亦是少佐拷問及處決間諜的地方。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -1914,8 +1934,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23656809338522,
-          22.276517776760507
+          114.251047,
+          22.306915
         ]
       },
       "properties": {
@@ -1939,7 +1959,8 @@
         "description": "老賢在圖書館設有私人房間，因大舊失蹤事件召見主角與少佐到此相見。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -1947,8 +1968,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15901533531701,
-          22.21144239719234
+          114.252757,
+          22.307982
         ]
       },
       "properties": {
@@ -1970,7 +1991,8 @@
         "description": "大舊的宿舍內可用物資在其失蹤時全被帶走，包括打火機、消防斧、鬧鐘和食物。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -2012,8 +2034,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28892790112154,
-          22.264894903486685
+          114.255902,
+          22.310704
         ]
       },
       "properties": {
@@ -2035,7 +2057,8 @@
         "description": "少佐約定M五分鐘後在安全區樓下的北門集合出發。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2043,8 +2066,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19850629434653,
-          22.28134039063096
+          114.258125,
+          22.31269
         ]
       },
       "properties": {
@@ -2068,7 +2091,8 @@
         "description": "M強行闖入廣播室使用廣播系統呼叫瑜小六，其後被一名地中海大叔拉出去。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2076,8 +2100,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19470588235293,
-          22.38680983443961
+          114.259646,
+          22.308988
         ]
       },
       "properties": {
@@ -2099,7 +2123,8 @@
         "description": "四人躲入廣場中的UNIQLO大型衣店暫時喘息，並在店內撕衣服包紮傷口。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2107,8 +2132,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9297152666514,
-          22.25987788967727
+          114.255134,
+          22.311827
         ]
       },
       "properties": {
@@ -2132,7 +2157,8 @@
         "description": "據犬京所說，隔一條街之外的志蓮小學是「不良人」的根據地。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2140,8 +2166,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2812437628748,
-          22.341869802395664
+          114.256521,
+          22.312287
         ]
       },
       "properties": {
@@ -2166,7 +2192,8 @@
         "description": "Bomi所屬嘅倖存團體有一個安全區，犬京曾答應大霧散去後送佢返去。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2174,8 +2201,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23175509269855,
-          22.431847066453038
+          114.257582,
+          22.308171
         ]
       },
       "properties": {
@@ -2197,7 +2224,8 @@
         "description": "Bomi亂跑嘅雙腳最後喺廣場中心處停低，並喺嗰度由哭泣轉為怪笑、開始異變。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[18]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2626,8 +2654,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10802059967956,
-          22.42415705348287
+          114.258232,
+          22.311043
         ]
       },
       "properties": {
@@ -2649,7 +2677,8 @@
         "description": "M在連日細雨下感到疲倦，到公眾休息室睡了一覺，並在該處收到無名卡片。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[21]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2751,8 +2780,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89937605859464,
-          22.43618368047608
+          114.255773,
+          22.313054
         ]
       },
       "properties": {
@@ -2774,7 +2803,8 @@
         "description": "Dr.D的房間設有密碼門鎖，密碼為8520，M其後憑密碼自行開門入內。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[22]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2782,8 +2812,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16643671320668,
-          22.43218352788586
+          114.254282,
+          22.312106
         ]
       },
       "properties": {
@@ -2808,7 +2838,8 @@
         "source": "bing_gang",
         "aliases": [
           "天明的宿舍"
-        ]
+        ],
+        "position_source": "同章（[22]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2848,8 +2879,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19020691233692,
-          22.280906729228654
+          114.25976,
+          22.30921
         ]
       },
       "properties": {
@@ -2875,7 +2906,8 @@
         "description": "主角在垃圾場與王達尼完成香煙換電池的交易後離開。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[22]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2883,8 +2915,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01424078736552,
-          22.399445830472267
+          114.253262,
+          22.310181
         ]
       },
       "properties": {
@@ -2906,7 +2938,8 @@
         "description": "主角從天台觀看四周風景時，望見附近一間幼稚園的暗角窗口有一隻舌女凝視著他。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[22]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -2980,8 +3013,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24223987182421,
-          22.30494876783398
+          114.245824,
+          22.315473
         ]
       },
       "properties": {
@@ -3005,7 +3038,8 @@
         "description": "M在大本營醫療部的密封隔離病房內養傷，病房完全沒有窗戶觀望外面世界。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[25]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3102,8 +3136,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11505104142825,
-          22.29240249485008
+          114.24501,
+          22.314648
         ]
       },
       "properties": {
@@ -3125,7 +3159,8 @@
         "description": "Dr.D稱那套瘟疫醫生套裝是他之前在歐洲一個拍賣會以幾百萬歐羅買回來收藏的寶物。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[25]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3237,8 +3272,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89877363241015,
-          22.38654814221408
+          114.255822,
+          22.304719
         ]
       },
       "properties": {
@@ -3260,7 +3295,8 @@
         "description": "主角步出小型垃圾場後，在露天停車場發現獨坐雨中的阿寶。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[26]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3300,8 +3336,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30047013046463,
-          22.226934576943616
+          114.255792,
+          22.306334
         ]
       },
       "properties": {
@@ -3323,7 +3359,8 @@
         "description": "老賢約M於三日後夜晚十一點到此發言，大本營高層會議在此舉行。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[27]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3331,8 +3368,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2644078736553,
-          22.25661047531853
+          114.254023,
+          22.303046
         ]
       },
       "properties": {
@@ -3354,7 +3391,8 @@
         "description": "會議決定將六樓的６０１室至６０６室改建為學堂，並派出兩名老師教育十六歲以下孩童。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[27]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3547,8 +3585,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0721826504921,
-          22.2583712901503
+          114.254575,
+          22.307634
         ]
       },
       "properties": {
@@ -3570,7 +3608,8 @@
         "description": "董倫慶祝會開始時，八樓大多數人都去了某間大型活動室慶祝。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[29]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3616,8 +3655,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07265049210345,
-          22.261825627527273
+          114.253035,
+          22.308531
         ]
       },
       "properties": {
@@ -3639,7 +3678,8 @@
         "description": "董倫舉行慶祝會及「地獄轉盤遊戲」的活動室，設有用木板搭建的高台，四方是高達五米的木板牆。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[30]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3647,8 +3687,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1601625085832,
-          22.279224422064544
+          114.254441,
+          22.304024
         ]
       },
       "properties": {
@@ -3673,7 +3713,8 @@
         "description": "董倫剛開張的私人會所，他原打算迫阿玲在開張時招待客人。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[30]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3681,8 +3722,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9571641107805,
-          22.38742294193942
+          114.250165,
+          22.303762
         ]
       },
       "properties": {
@@ -3704,7 +3745,8 @@
         "description": "眾人被困喺一個設有大轉盤、可拉開嘅大木板同未知閘門通道嘅圓形空間入面進行遊戲。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -3712,8 +3754,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.941827878233,
-          22.34932429236286
+          114.255993,
+          22.303721
         ]
       },
       "properties": {
@@ -3746,7 +3788,8 @@
         "description": "董倫舉行轉盤遊戲嘅樓層，主角同王達尼最後一齊逃出八樓。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -3754,8 +3797,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2839098191806,
-          22.326104715037765
+          114.253572,
+          22.308383
         ]
       },
       "properties": {
@@ -3779,7 +3822,8 @@
         "description": "老賢喺圖書館辦公室接見阿玲同主角並作出指示。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -3787,8 +3831,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14250629434653,
-          22.22794022278172
+          114.250509,
+          22.306256
         ]
       },
       "properties": {
@@ -3810,7 +3854,8 @@
         "description": "主角將病爪頭交俾Dr.D嘅醫療室。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -3882,8 +3927,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12436942092012,
-          22.226078469520104
+          114.256775,
+          22.305384
         ]
       },
       "properties": {
@@ -3905,7 +3950,8 @@
         "description": "Dr.D喺608號房間接見主角M，並向佢提出搜集新型病者嘅任務。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[34]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -3978,8 +4024,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91730785076676,
-          22.25855447470817
+          114.267973,
+          22.331817
         ]
       },
       "properties": {
@@ -4005,7 +4051,8 @@
         "description": "夏晴和阿玲任教的班上，學生都是來自孤兒院的孩子。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[35]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4081,8 +4128,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98750972762646,
-          22.3838676661326
+          114.250993,
+          22.306868
         ]
       },
       "properties": {
@@ -4104,7 +4151,8 @@
         "description": "安全區嘅東面出口，「我」出發去將軍澳華人墳場時先從東門出去，再一直向北走到海旁附近。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[38]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4155,8 +4203,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24575188830396,
-          22.284293774319064
+          114.250792,
+          22.306105
         ]
       },
       "properties": {
@@ -4182,7 +4230,8 @@
         "description": "瑜小六在近北門位置的地方被找到，該處有一個小型垃圾場。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4190,8 +4239,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10954589150835,
-          22.276140192263675
+          114.253829,
+          22.307853
         ]
       },
       "properties": {
@@ -4213,7 +4262,8 @@
         "description": "王達尼的店子位於北門附近的小型垃圾場內，設有鐵捲門。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4253,8 +4303,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26037033646143,
-          22.43586217288472
+          114.254427,
+          22.30279
         ]
       },
       "properties": {
@@ -4278,7 +4328,8 @@
         "description": "主角與王達尼在小型垃圾場進行短劍和圓盾的交易。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[41]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4286,8 +4337,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.20375509269856,
-          22.35853212024109
+          114.254977,
+          22.307862
         ]
       },
       "properties": {
@@ -4309,7 +4360,8 @@
         "description": "Dr.D嘅宿舍由數間房子連貫而成，其中一間特別陰涼幽暗、面積約一個普通課室大小嘅私人房間，放住工作桌、手札、英文書籍，以及被大黑布包住、透出藍光嘅長方形玻璃箱（魚缸）。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4317,8 +4369,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93247745479515,
-          22.359451781490804
+          114.250737,
+          22.305431
         ]
       },
       "properties": {
@@ -4342,7 +4394,8 @@
         "description": "六樓６１４室係Dr.D照片背面寫住嘅地點，與Dick Grayson嘅名字及日期一同出現。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4350,8 +4403,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2818141451133,
-          22.336157434958416
+          114.253857,
+          22.304072
         ]
       },
       "properties": {
@@ -4376,7 +4429,8 @@
         "description": "地下層多媒體攝影棚係Dr.D照片背面寫住嘅地點，與Jason Todd嘅名字及日期一同出現。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4478,8 +4532,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93252872510872,
-          22.224287747005416
+          114.249914,
+          22.315915
         ]
       },
       "properties": {
@@ -4505,7 +4559,8 @@
         "source": "bing_gang",
         "aliases": [
           "玄圓第三中學"
-        ]
+        ],
+        "position_source": "同章（[43, 44]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4545,8 +4600,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03619729915312,
-          22.365261348897533
+          114.254744,
+          22.302533
         ]
       },
       "properties": {
@@ -4568,7 +4623,8 @@
         "description": "靈實醫院G樓之下的地下層是停屍間，內有多間停屍房，是本章怪聲及新型病者的來源。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4576,8 +4632,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89462073701075,
-          22.42968997482261
+          114.251244,
+          22.303317
         ]
       },
       "properties": {
@@ -4599,7 +4655,8 @@
         "description": "眾人轉移到醫療大堂入口一旁的辦公室暫避，裡面沒有死屍或病者，約半間課室大。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4607,8 +4664,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97705058365759,
-          22.226078469520104
+          114.27195,
+          22.3156
         ]
       },
       "properties": {
@@ -4632,7 +4689,8 @@
         "description": "G層是故事中醫院的其中一層，敘事者與公仔上到G層後返回瑜小六等四人所在的辦公室。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[46]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4640,8 +4698,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24935362783245,
-          22.212855535210192
+          114.271993,
+          22.316015
         ]
       },
       "properties": {
@@ -4665,7 +4723,8 @@
         "description": "大堂辦公室位於G層，是瑜小六等四人原先躲藏之處；敘事者趕到時四人已不見蹤影。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[46]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4756,8 +4815,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04998260471504,
-          22.39029781795987
+          114.245372,
+          22.300289
         ]
       },
       "properties": {
@@ -4779,7 +4838,8 @@
         "description": "主角同公仔再次行去停屍間走廊條路，想重遇娃娃但連鬼影都見唔到。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[47]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4787,8 +4847,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93776470588234,
-          22.26926516365301
+          114.253685,
+          22.303716
         ]
       },
       "properties": {
@@ -4810,7 +4870,8 @@
         "description": "醫院二樓天花板上掛有寫著「牙科及口腔外科復健」的牌子，敘事者推測該層特別多病牙、病嘴與病人生前所患疾病有關。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4818,8 +4879,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06046738384069,
-          22.40956210421912
+          114.251739,
+          22.30424
         ]
       },
       "properties": {
@@ -4841,7 +4902,8 @@
         "description": "「我」帶領學生在火警紅光閃爍、滿布病者的第三層病房樓層潛行躲避。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4849,8 +4911,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11785168230716,
-          22.233645113298238
+          114.257129,
+          22.305834
         ]
       },
       "properties": {
@@ -4872,7 +4934,8 @@
         "description": "眾人被病者追趕下撤上第四層，該層比下面兩層整潔，其後以重物堵住樓梯間阻止病者上來。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4911,8 +4974,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09736919203479,
-          22.43152929732204
+          114.271136,
+          22.310895
         ]
       },
       "properties": {
@@ -4934,7 +4997,8 @@
         "description": "四樓走廊盡頭有一間附玻璃強化門嘅藥劑試驗房，內有實驗檯、排氣櫃等專業設施，娃娃曾被囚禁喺入面。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[50]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -4942,8 +5006,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2984641794461,
-          22.22172316319524
+          114.255366,
+          22.30333
         ]
       },
       "properties": {
@@ -4970,7 +5034,8 @@
         "description": "本段戰鬥與療傷均發生在一間實驗室內，滿天從其抽屜取出醫療用品，病腦亦走到實驗室中間要求停戰。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -4978,8 +5043,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2127530327306,
-          22.404227321278704
+          114.250924,
+          22.30716
         ]
       },
       "properties": {
@@ -5006,7 +5071,8 @@
         "description": "娃娃憶述當時地下層有一隻病者行到樓梯口附近，因此她不敢大叫求救。",
         "confidence": 0.78,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -5014,8 +5080,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16450125886931,
-          22.31620901045243
+          114.251834,
+          22.307126
         ]
       },
       "properties": {
@@ -5042,7 +5108,8 @@
         "description": "敘事者提及自己在建築一樓見過死屍，滿天解釋那些通常由病嘴、病牙等病者所殺，死者多為不良人或惡意倖存者。",
         "confidence": 0.72,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -5081,8 +5148,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23175509269855,
-          22.260281643396656
+          114.272761,
+          22.323227
         ]
       },
       "properties": {
@@ -5107,7 +5174,8 @@
         "description": "滿天話一陣會喺秘密通道帶眾人落去離開。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[53]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -5115,8 +5183,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24911650263218,
-          22.390144541084915
+          114.254624,
+          22.309319
         ]
       },
       "properties": {
@@ -5138,7 +5206,8 @@
         "description": "滿天帶主角到位於一樓大堂旁的辦公室，主角在抽屜收藏的相簿中尋找南愚的照片。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -5146,8 +5215,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12463218127718,
-          22.35868913557641
+          114.253281,
+          22.308193
         ]
       },
       "properties": {
@@ -5169,7 +5238,8 @@
         "description": "滿天透過醫院內四樓直通落去的秘密通道迴避二、三樓大量病者，並稱通道門鎖密碼只有大BOSS與他自己知道。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -5613,8 +5683,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24745021744106,
-          22.38421908140688
+          114.253312,
+          22.303651
         ]
       },
       "properties": {
@@ -5636,7 +5706,8 @@
         "description": "工坊的休息室內亮著舊式圓燈泡，泛黃光線映在木板上，具懷舊風格，夜裡舉行社區聯誼派對。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -5678,8 +5749,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92287067978943,
-          22.433559281300067
+          114.253195,
+          22.302859
         ]
       },
       "properties": {
@@ -5703,7 +5774,8 @@
         "description": "敘事者等人問完傑夫丸之後離開了拘留室。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -5711,8 +5783,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09188326848249,
-          22.38913515678645
+          114.256367,
+          22.303512
         ]
       },
       "properties": {
@@ -5736,7 +5808,8 @@
         "description": "愛紗曾在外國修讀史丹佛大學商科，是一名畢業生。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -5820,8 +5893,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02986541542687,
-          22.24345857175555
+          114.25817,
+          22.321926
         ]
       },
       "properties": {
@@ -5846,7 +5919,8 @@
         "description": "主角打算趁出外實習順路去墳場，將照片交俾南愚換取情報。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[59]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -5885,8 +5959,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1728326848249,
-          22.384121881437398
+          114.26726,
+          22.33565
         ]
       },
       "properties": {
@@ -5910,7 +5984,8 @@
         "description": "海旁附近私樓會所內藏有多隻舌女、大眼等病者，牠們其後找到方法走出並圍攻主角。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[60]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -5918,8 +5993,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09875989929046,
-          22.343720340276185
+          114.268732,
+          22.338596
         ]
       },
       "properties": {
@@ -5941,7 +6016,8 @@
         "description": "主角在上次通往墳場的路段再次遇見南愚。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[60]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -5980,8 +6056,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16491142137788,
-          22.285239604791332
+          114.269474,
+          22.330444
         ]
       },
       "properties": {
@@ -6003,7 +6079,8 @@
         "description": "老師把公仔和娃娃押到A橦的盤問室，裡面四面冰冷牆壁，只有一張桌子和椅子，是一間封閉密室。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[61]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -6011,8 +6088,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90028610666056,
-          22.25768715190356
+          114.26492,
+          22.331599
         ]
       },
       "properties": {
@@ -6034,7 +6111,8 @@
         "description": "瑜小六提議老師殺了那麼多病者後應到D樓醫療室檢查，但老師表示不用。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[61]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -6042,8 +6120,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02076493476768,
-          22.407576981765466
+          114.25111,
+          22.303894
         ]
       },
       "properties": {
@@ -6065,7 +6143,8 @@
         "description": "主角盤問公仔與娃娃的房間，離開後他以誤會一場為由暫時釋放了二人。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -6073,8 +6152,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26706111238269,
-          22.41361085679408
+          114.249852,
+          22.305275
         ]
       },
       "properties": {
@@ -6099,7 +6178,8 @@
         "description": "七樓以下是地位較低者的區域，不良人對此處知識分工瞭如指掌，曾有一名負責該處諜報工作的間諜被少佐用棒球棍毆死。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -6107,8 +6187,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2649367895018,
-          22.329886816205082
+          114.251459,
+          22.305237
         ]
       },
       "properties": {
@@ -6135,7 +6215,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_cd7871ef1c"
-        ]
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -6422,8 +6503,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02337972075989,
-          22.263048104066527
+          114.256026,
+          22.305162
         ]
       },
       "properties": {
@@ -6445,7 +6526,8 @@
         "description": "老賢平日足不出戶，在書房內接見來訪者，門外可聽到房內的爭論聲。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[55]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -6453,8 +6535,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22253925383383,
-          22.404589951934078
+          114.256845,
+          22.305191
         ]
       },
       "properties": {
@@ -6476,7 +6558,8 @@
         "description": "全女搜索隊「克里絲娜」小隊的駐地位於B橦二樓，江子千著瑜小六有空去找她。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[55]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -6518,8 +6601,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12114579995422,
-          22.28724715800717
+          114.257401,
+          22.306927
         ]
       },
       "properties": {
@@ -6541,7 +6624,8 @@
         "description": "董倫在C樓經營高級妓院，其位於七樓的私人會所據聞已改裝完成。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[55]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -7279,8 +7363,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15781689173724,
-          22.252501907377734
+          114.253554,
+          22.309494
         ]
       },
       "properties": {
@@ -7316,7 +7400,8 @@
         "description": "一名已失蹤幾日的病者老師所屬的學院名稱。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[68]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -7441,8 +7526,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03805584802014,
-          22.254965552758065
+          114.266165,
+          22.33769
         ]
       },
       "properties": {
@@ -7467,7 +7552,8 @@
         "description": "田家炳小學與志蓮小學打通，其操場被用作放置斷頭台的刑場。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[72]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -7506,8 +7592,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99152162966354,
-          22.272117608911266
+          114.252074,
+          22.314314
         ]
       },
       "properties": {
@@ -7529,7 +7615,8 @@
         "description": "操場上放置住斷頭台，被用嚟囚禁俘虜並讓人選擇放走一人。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[73]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -7537,8 +7624,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93807232776379,
-          22.355148813611045
+          114.248472,
+          22.311569
         ]
       },
       "properties": {
@@ -7560,7 +7647,8 @@
         "description": "小學二樓禮堂被改裝成不良人共享嘅食飯同休息空間。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[73]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -7568,8 +7656,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.96589929045548,
-          22.341454833295185
+          114.248013,
+          22.311484
         ]
       },
       "properties": {
@@ -7596,7 +7684,8 @@
         "description": "遊戲室位於小學右邊三樓至四樓，係不良人獨有嘅娛樂場所，內設酒吧同射擊遊戲。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[73]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -7913,8 +8002,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18525291828793,
-          22.223491454947737
+          114.265456,
+          22.310538
         ]
       },
       "properties": {
@@ -7939,7 +8028,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_1f112cb706"
-        ]
+        ],
+        "position_source": "同章（[75]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8072,8 +8162,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14789608606088,
-          22.281998359655145
+          114.247748,
+          22.312826
         ]
       },
       "properties": {
@@ -8095,7 +8185,8 @@
         "description": "射擊樂是不良人遊戲室兩個熱門地點之一，參加者以自己的武器或零件作賭注，通關可贏取展示的十字弓。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[73]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8103,8 +8194,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97622384985122,
-          22.42473277637903
+          114.263043,
+          22.315457
         ]
       },
       "properties": {
@@ -8148,7 +8239,8 @@
         ],
         "zone_ids": [
           "zone_3aedd43d53"
-        ]
+        ],
+        "position_source": "同章（[74, 75]）嘅 10 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8156,8 +8248,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13690501258868,
-          22.34772423132677
+          114.251695,
+          22.314601
         ]
       },
       "properties": {
@@ -8193,7 +8285,8 @@
         "description": "不良人據點所在的小學，操場上放置住斷頭台，二樓禮堂被改裝成食飯、休息的好地方。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[73]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8201,8 +8294,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07570107576105,
-          22.227528992141604
+          114.264348,
+          22.303565
         ]
       },
       "properties": {
@@ -8224,7 +8317,8 @@
         "description": "商場內的百貨公司為永旺百貨公司，主角拾到寫有「永旺百貨公司員工出入證」的智能卡。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[76]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8232,8 +8326,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23429297322042,
-          22.261156443121994
+          114.262548,
+          22.300608
         ]
       },
       "properties": {
@@ -8258,7 +8352,8 @@
         "description": "商場內的傢俱店，公仔在此差點被繩圈吊頸，主角跑入店內抱起他解困，其後亦把公仔放到店內的床上。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[76]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8266,8 +8361,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15813733119707,
-          22.442785801480124
+          114.265699,
+          22.303281
         ]
       },
       "properties": {
@@ -8289,7 +8384,8 @@
         "description": "百貨公司的電器部，主角與公仔到此尋找可以蓋過病童聲音的音響器材及電池。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[76]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8329,8 +8425,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13363012130922,
-          22.3025112916762
+          114.269305,
+          22.314773
         ]
       },
       "properties": {
@@ -8354,7 +8450,8 @@
         "description": "主角在百貨公司內遭不明人追殺、被病童的幻覺逼退至百貨公司外面，其後又返回二樓營救公仔並與神秘人纏鬥。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[77]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8362,8 +8459,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19660929274433,
-          22.307023613336384
+          114.267112,
+          22.31373
         ]
       },
       "properties": {
@@ -8385,7 +8482,8 @@
         "description": "主角逃過追殺後藏身於百貨公司外面的電梯間，其間從電梯滾落商場一樓之下。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[77]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8393,8 +8491,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14944701304645,
-          22.23333482108797
+          114.265216,
+          22.314165
         ]
       },
       "properties": {
@@ -8418,7 +8516,8 @@
         "description": "公仔被困於員工室內，神秘人以鐵鎚敲打其門，門被打爛一半，主角最後趕到營救。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[77]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8457,8 +8556,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24853330281529,
-          22.4415072480354
+          114.255838,
+          22.306316
         ]
       },
       "properties": {
@@ -8486,7 +8585,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_33f49f01d2"
-        ]
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -8532,8 +8632,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95463263904783,
-          22.320672732127868
+          114.250693,
+          22.31498
         ]
       },
       "properties": {
@@ -8567,7 +8667,8 @@
         "description": "進入遊戲室首先看到的是酒吧，有大漢在那裡喝啤酒、玩撲克牌和拗手瓜。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[73]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8606,8 +8707,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11279514763103,
-          22.27563550011444
+          114.261582,
+          22.311011
         ]
       },
       "properties": {
@@ -8629,7 +8730,8 @@
         "description": "主角預計走到將軍澳廣場二樓吉野家門外時，便會知曉病童用什麼方法殺人的答案。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[75]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8668,8 +8770,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99457862211032,
-          22.235652666514074
+          114.264583,
+          22.329676
         ]
       },
       "properties": {
@@ -8694,7 +8796,8 @@
         "description": "不破尚派F小隊前往病童所在地搜索物資，以查證病童是否已被消滅。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[79]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8795,8 +8898,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28363557640955,
-          22.336382963302054
+          114.256211,
+          22.309961
         ]
       },
       "properties": {
@@ -8818,7 +8921,8 @@
         "description": "一個被不良人攻進並並搶走物資、擄走俘虜的基地，其俘虜夜間被不良人捉到操場上任意殘害。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[80]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -8981,8 +9085,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22528862439917,
-          22.32499065384909
+          114.260662,
+          22.329133
         ]
       },
       "properties": {
@@ -9004,7 +9108,8 @@
         "description": "主角安頓公仔和娃娃的小房間，前身是學校的社工室。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[79]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9043,8 +9148,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24796292057678,
-          22.391882925154498
+          114.256334,
+          22.304293
         ]
       },
       "properties": {
@@ -9066,7 +9171,8 @@
         "description": "白魂為追救王白蛋而衝回的梯間，位於停車場樓下，入口設有王白蛋先前放置的捕獸夾陷阱。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9074,8 +9180,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12794552529182,
-          22.332119897764553
+          114.251023,
+          22.305764
         ]
       },
       "properties": {
@@ -9099,7 +9205,8 @@
         "description": "王白蛋被擄走的高處平台，除上來的樓梯口外，最左和最右各有一個樓梯間出入口，邊緣設有花圃。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9107,8 +9214,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14385214007781,
-          22.27367280842298
+          114.255682,
+          22.307595
         ]
       },
       "properties": {
@@ -9130,7 +9237,8 @@
         "description": "位於隔離小學偏僻的地下室，大小適合一個人居住，班尼在此獨居並存放其病者身體部位收藏。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9231,8 +9339,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05891004806591,
-          22.31536411841001
+          114.259405,
+          22.315542
         ]
       },
       "properties": {
@@ -9254,7 +9362,8 @@
         "description": "停車場四樓天台是連接屋苑公屋的活動平台，設有小公園、涼亭、社工福利中心等設施。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[80]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9262,8 +9371,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90900846875715,
-          22.33581723506523
+          114.258082,
+          22.308046
         ]
       },
       "properties": {
@@ -9287,7 +9396,8 @@
         "description": "班尼居住喺一所小學入面牆身地板都係木製嘅隱蔽地下室，收藏病者手工藝品、畫作同酒，離開時要攀爬圍牆蔓藤避開大閘。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[82]）嘅 9 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9359,8 +9469,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26917601281758,
-          22.416810978866252
+          114.260211,
+          22.304281
         ]
       },
       "properties": {
@@ -9382,7 +9492,8 @@
         "description": "海旁石壆下面嘅下水道幽黑腥臭、不見天日、冇方向感，活像複雜大迷宮，水深只到腳膝，係盜屍賊嘅地盤。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[82]）嘅 9 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9390,8 +9501,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22763424124513,
-          22.210077859159227
+          114.251695,
+          22.302885
         ]
       },
       "properties": {
@@ -9415,7 +9526,8 @@
         "description": "下水道中央聚水處係一個樓底有幾層高嘅六角型空間，洪水過多時水會聚集於此；據班尼所講，呢度係最大嘅人類屍體收集站，堆滿數以百計甚至千計嘅屍體。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9485,8 +9597,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30257862211032,
-          22.240090218966962
+          114.263027,
+          22.307709
         ]
       },
       "properties": {
@@ -9508,7 +9620,8 @@
         "description": "海濱長廊底下有一個幽黑腥臭、不見天日、好似迷宮嘅下水道，入口渠口闊到一型貨車都駛得入，水深只及膝，據講係盜屍賊嘅地盤。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[82]）嘅 9 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9516,8 +9629,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.3060009155413,
-          22.40166647592889
+          114.256073,
+          22.307128
         ]
       },
       "properties": {
@@ -9541,7 +9654,8 @@
         "description": "位於下水道入面、班尼所認識最大嘅人類屍體收集站，入面堆疊住數以百計甚至千計嘅人類屍體。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9549,8 +9663,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05418677042802,
-          22.406945181963835
+          114.252146,
+          22.308055
         ]
       },
       "properties": {
@@ -9572,7 +9686,8 @@
         "description": "敘事者同班尼行經嘅空曠污水渠道，水深蓋過雙膝，盡頭斷口通往下水道中央聚水處。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9580,8 +9695,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26275440604257,
-          22.215464980544745
+          114.250093,
+          22.30432
         ]
       },
       "properties": {
@@ -9614,7 +9729,8 @@
         "description": "主角與班尼在一條有多條大渠道如瀑布般放水的下水道內對峙打鬥，污水水位一度淹至大腿位置。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9622,8 +9738,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05350102998398,
-          22.36565762569619
+          114.250051,
+          22.304946
         ]
       },
       "properties": {
@@ -9648,7 +9764,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_3aedd43d53"
-        ]
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9656,8 +9773,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.96557885099566,
-          22.314302395666438
+          114.251523,
+          22.306494
         ]
       },
       "properties": {
@@ -9682,7 +9799,8 @@
         "description": "董倫一班高級人每日夜晚八點至十點在此舉行聯誼派對的場地。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9690,8 +9808,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2874859235523,
-          22.36705954833295
+          114.253509,
+          22.308078
         ]
       },
       "properties": {
@@ -9713,7 +9831,8 @@
         "description": "主角暫住的細小宿舍房間，他在此向公仔和娃娃交代送走他們的安排。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9786,8 +9905,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.17962742046234,
-          22.304214602883953
+          114.25864,
+          22.31607
         ]
       },
       "properties": {
@@ -9811,7 +9930,9 @@
         "description": "第二條短行人隧道後的大直路旁有一個露天九龍巴士車廠，停放多部雙層巴士，兩隻舌女由此步出襲擊喪伯。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": null,
+        "position_source": "人手核實修正 → 九巴將軍澳車廠；原本配到 OSM「九龍巴士車廠」但座標落喺荔枝角一帶 (114.180, 22.304)，同故事場景（將軍澳）不符。"
       }
     },
     {
@@ -9819,8 +9940,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9590418860151,
-          22.296511062790874
+          114.255414,
+          22.324967
         ]
       },
       "properties": {
@@ -9849,7 +9970,8 @@
         "description": "行人隧道旁的殘舊木牌警告穿越隧道後為「死亡之路」，實力不足者請三思而行，署名為病獵賴桑。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[86]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9889,8 +10011,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26739436942091,
-          22.420085870145723
+          114.257664,
+          22.32403
         ]
       },
       "properties": {
@@ -9912,7 +10034,8 @@
         "description": "主角再到喪伯前一天仍在的工作室，發現已人去樓空，工具和日常用品全部消失。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[86]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -9920,8 +10043,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28082719157702,
-          22.376921606775003
+          114.251875,
+          22.307227
         ]
       },
       "properties": {
@@ -9946,7 +10069,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_3aedd43d53"
-        ]
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -9954,8 +10078,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.00574273289082,
-          22.37031200885023
+          114.25162,
+          22.308321
         ]
       },
       "properties": {
@@ -9977,7 +10101,8 @@
         "description": "敘述者在據點內常坐之處，他在此一邊喝苦澀啤酒一邊繪寫《病者圖鑑》，亦在此初遇班尼。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10047,8 +10172,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0093701075761,
-          22.334067635614556
+          114.255673,
+          22.308611
         ]
       },
       "properties": {
@@ -10080,7 +10205,8 @@
         "description": "主角一行人搜索嘅呢間街市內有燒味店、麵包店、肉檔等舖頭，並被病腦佔據作「飼養圈」。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10088,8 +10214,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06446005951018,
-          22.439525864042114
+          114.255336,
+          22.308862
         ]
       },
       "properties": {
@@ -10113,7 +10239,8 @@
         "description": "主角與不良人起初喺雜貨店內討論，其後主角走出雜貨店繼續行動。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10121,8 +10248,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89640238040741,
-          22.368371747920957
+          114.252049,
+          22.30259
         ]
       },
       "properties": {
@@ -10144,7 +10271,8 @@
         "description": "街市內一檔前身為燒味店嘅舖頭，其大烤爐入面躺坐一件全身燒得焦黑嘅人類屍體。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10152,8 +10280,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03997848477913,
-          22.337185511558708
+          114.255695,
+          22.304499
         ]
       },
       "properties": {
@@ -10175,7 +10303,8 @@
         "description": "娃娃兄妹開咗一間吊放住人類屍體嘅密室，入面屍氣沖天，屍體全部俾人用鐵勾扣住下巴。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10183,8 +10312,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.17041016250857,
-          22.23619848172732
+          114.253459,
+          22.307836
         ]
       },
       "properties": {
@@ -10206,7 +10335,8 @@
         "description": "街市內有一間收藏活人嘅店子，前身應該為賣雞地方，改建咗十多個只有洗衣機大細嘅鐵籠困住人類。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10214,8 +10344,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97603799496451,
-          22.223282101167314
+          114.251922,
+          22.307253
         ]
       },
       "properties": {
@@ -10237,7 +10367,8 @@
         "description": "病腦喺街市右上角嘅肉檔肢解一名清醒嘅男人致其失血而死，之後將王白蛋送上砧板。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10245,8 +10376,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12661249713894,
-          22.306395551995116
+          114.252545,
+          22.303515
         ]
       },
       "properties": {
@@ -10268,7 +10399,8 @@
         "description": "病腦將鐵籠推到一處前身似大魚檔嘅闊大空間，滿地血液同人類殘肢，中間放住底下燒柴火嘅大烹鍋。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10276,8 +10408,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13871229114214,
-          22.349025215533683
+          114.250584,
+          22.308366
         ]
       },
       "properties": {
@@ -10301,7 +10433,8 @@
         "description": "經過一間麵包店時，公仔見到雪櫃入面放住一枝水，主角認為十居其九係陷阱。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10309,8 +10442,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24156054016937,
-          22.437267833981842
+          114.250812,
+          22.305921
         ]
       },
       "properties": {
@@ -10332,7 +10465,8 @@
         "description": "街市內一間前身為賣雞地方的店子，籠子被改建成困住人類，共有十多個只有洗衣機大小的鐵籠，活人被迫長期彎腳跪著。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10340,8 +10474,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02775692378118,
-          22.265036964980542
+          114.256188,
+          22.304874
         ]
       },
       "properties": {
@@ -10363,7 +10497,8 @@
         "description": "病腦在街市右上角的肉檔肢解人類，王白蛋亦被送上豬肉檔砧板。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10371,8 +10506,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98343373769741,
-          22.36830445563439
+          114.251636,
+          22.303868
         ]
       },
       "properties": {
@@ -10396,7 +10531,8 @@
         "description": "公仔和娃娃獨自前往嘅目的地，即滿天身處之處。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10404,8 +10540,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24652094300755,
-          22.292686617837795
+          114.254552,
+          22.304148
         ]
       },
       "properties": {
@@ -10429,7 +10565,8 @@
         "description": "病腦「大廚」在魚檔內以大鍋烹煮人肉，主角三人逃至魚檔出口時遭白衣人以鐵撬伏擊。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10437,8 +10574,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06958068207828,
-          22.387355649652857
+          114.250111,
+          22.306117
         ]
       },
       "properties": {
@@ -10460,7 +10597,8 @@
         "description": "夏當以「病窩天國」稱呼這個由病腦「大廚」坐鎮的街市巢穴，歡迎被擒的主角進入。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10468,8 +10606,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0440032043946,
-          22.378170252536812
+          114.259694,
+          22.318226
         ]
       },
       "properties": {
@@ -10497,8 +10635,9 @@
           "不良人據點小學"
         ],
         "zone_ids": [
-          "zone_9eaa4bd1b1"
-        ]
+          "zone_3aedd43d53"
+        ],
+        "position_source": "同章（[91, 104]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10573,8 +10712,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9611439688716,
-          22.318986686503393
+          114.264912,
+          22.319925
         ]
       },
       "properties": {
@@ -10599,7 +10738,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_3aedd43d53"
-        ]
+        ],
+        "position_source": "同章（[92]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10607,8 +10747,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12906706340124,
-          22.386350003814755
+          114.268477,
+          22.320504
         ]
       },
       "properties": {
@@ -10630,7 +10770,8 @@
         "description": "不良人存放大量槍械的武器庫，但庫內幾乎所有槍械都沒有子彈。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[92]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10670,8 +10811,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03633829251545,
-          22.247402647440296
+          114.260438,
+          22.308226
         ]
       },
       "properties": {
@@ -10697,7 +10838,8 @@
         "description": "主角與銘凱暫住的未命名酒店，多層走廊中央被人堆疊屍體，六樓是住客升降機大堂並設有一間西餐廳。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[93]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10705,8 +10847,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9106106660563,
-          22.241798695353626
+          114.257872,
+          22.310457
         ]
       },
       "properties": {
@@ -10732,7 +10874,8 @@
         "description": "酒店六樓的西餐廳樓底極高、掛有華麗吊燈，中央堆有幾乎碰到吊燈的巨型屍山，病爪藏於其中。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[93]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10740,8 +10883,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10834744792858,
-          22.40946864271
+          114.254508,
+          22.307244
         ]
       },
       "properties": {
@@ -10763,7 +10906,8 @@
         "description": "娃娃兄妹開咗間吊放住人類屍體嘅密室，入面屍氣沖天，屍體全部俾人用鐵勾扣住下巴並有切割痕跡。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -10771,8 +10915,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98106889448385,
-          22.324624284733346
+          114.260398,
+          22.31478
         ]
       },
       "properties": {
@@ -10794,7 +10938,8 @@
         "description": "酒店樓上的餐廳是主角被拖走時遺下雨傘、以及病爪其後遊走徘徊的地方。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[94]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10802,8 +10947,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12302357518882,
-          22.238460250247957
+          114.262055,
+          22.310446
         ]
       },
       "properties": {
@@ -10825,7 +10970,8 @@
         "description": "酒店的升降機大堂內有沙發，病爪在此四處探摸，並因碰到沙發而發狂將其撕裂。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[94]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10833,8 +10979,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13020141908903,
-          22.295983939879452
+          114.259808,
+          22.314732
         ]
       },
       "properties": {
@@ -10860,7 +11006,8 @@
         "description": "一隻竊屍賊站在樓梯間前關上門阻擋主角與銘凱逃走，二人後來合力把門踢開。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[94]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -10974,8 +11121,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97652506294347,
-          22.427876821545738
+          114.253399,
+          22.303967
         ]
       },
       "properties": {
@@ -10997,7 +11144,8 @@
         "description": "不良人嘅糧食庫平日被鐵鏈封鎖，只有受信任、持有鎖匙嘅人可以先出入，入面存糧多得夠不良人無節制咁食一、兩年。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11005,8 +11153,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91010437170976,
-          22.307023613336384
+          114.250821,
+          22.307762
         ]
       },
       "properties": {
@@ -11028,7 +11176,8 @@
         "description": "據銘凱所講，不良人成員會喺醒來後精力太充沛時去囚禁室搞女人。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11036,8 +11185,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06173632410162,
-          22.354318875410083
+          114.26954,
+          22.320187
         ]
       },
       "properties": {
@@ -11065,7 +11214,8 @@
         "description": "主角同白魂喺一間酒館入面飲住威士忌傾談合作事宜。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[97]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11104,8 +11254,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27755870908675,
-          22.21198447394522
+          114.268378,
+          22.314769
         ]
       },
       "properties": {
@@ -11132,7 +11282,8 @@
         "description": "位於坑口的聖安得肋堂是病者平權組織的據點，內部潔白寧靜，成員全身白衣。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[99]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11211,8 +11362,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99957106889448,
-          22.36160887312123
+          114.254104,
+          22.308933
         ]
       },
       "properties": {
@@ -11237,7 +11388,8 @@
         "description": "聖堂內有一間活動室闢作祭品室，入面放住二、三十個木製棺木，棺中綁住組織喺外面捉返嚟嘅活人倖存者，作為供奉之用。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11245,8 +11397,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13563607232776,
-          22.2899014648661
+          114.251563,
+          22.30644
         ]
       },
       "properties": {
@@ -11268,7 +11420,8 @@
         "description": "初級成員每日朝早八點至兩點要去大會堂學習病語。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11276,8 +11429,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94993499656671,
-          22.31655294880598
+          114.241617,
+          22.326032
         ]
       },
       "properties": {
@@ -11299,7 +11452,8 @@
         "description": "聖安得肋堂內的主教堂，設有播音機電源及牧師檯，深夜有四名跳芭蕾舞的舞者病者在內。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[101]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11339,8 +11493,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23138979171435,
-          22.35863305867094
+          114.243652,
+          22.322393
         ]
       },
       "properties": {
@@ -11362,7 +11516,8 @@
         "description": "位於二樓、擺放維修工具的房間，主角從中取得電圓鋸、電鑽及消防長斧。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[101]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11370,8 +11525,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98302998397803,
-          22.3962232776379
+          114.239168,
+          22.321808
         ]
       },
       "properties": {
@@ -11393,7 +11548,8 @@
         "description": "位於一樓的用餐地方，所有成員在此食用白飯配醬油。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[101]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11432,8 +11588,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10436118104829,
-          22.326370145723658
+          114.266297,
+          22.328463
         ]
       },
       "properties": {
@@ -11455,7 +11611,8 @@
         "description": "主角被困及逃離的建築被稱為「精神病院」，內有一樓起舞的病者與病者平權組織成員。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[102]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11494,8 +11651,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21627145799954,
-          22.34273338673991
+          114.254662,
+          22.302548
         ]
       },
       "properties": {
@@ -11519,8 +11676,9 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_fbc0313bf5"
-        ]
+          "zone_1f112cb706"
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11528,8 +11686,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21053559166857,
-          22.443025062943462
+          114.252342,
+          22.303684
         ]
       },
       "properties": {
@@ -11558,7 +11716,8 @@
         "description": "不破尚命部下打開重頓頓嘅渠蓋，將病爪倒轉拖落地面之下嘅渠道。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11629,8 +11788,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1323611810483,
-          22.40759567406729
+          114.264326,
+          22.322592
         ]
       },
       "properties": {
@@ -11652,7 +11811,8 @@
         "description": "被發現的神秘男子突然起身，朝假日酒店的方向逃跑。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[104]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11726,8 +11886,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94526939803158,
-          22.42700949874113
+          114.252081,
+          22.304647
         ]
       },
       "properties": {
@@ -11752,7 +11912,8 @@
         "description": "武器庫內藏有軍刀等武器，董倫的六人小隊在此趕工製造粗糙版火焰噴射器。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[106]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11760,8 +11921,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95975326161593,
-          22.299038261997403
+          114.251294,
+          22.303283
         ]
       },
       "properties": {
@@ -11783,7 +11944,8 @@
         "description": "銘凱在二樓走廊欄牆紮好尼龍遊繩，讓主角助跑踏牆跳下突襲Dr.D。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[106]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -11791,8 +11953,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01174135957885,
-          22.396346646829937
+          114.254308,
+          22.307781
         ]
       },
       "properties": {
@@ -11816,7 +11978,8 @@
         "description": "戰鬥場地之一，敘事者在此灑上天拿水，最終引燃成火海將Dr.D燒至半死。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11824,8 +11987,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1331046005951,
-          22.445754139009686
+          114.256648,
+          22.306205
         ]
       },
       "properties": {
@@ -11865,7 +12028,8 @@
         "description": "銘凱所在的樓層，他從此處拋下鐵鏈、燃燒彈、天拿水與腎上腺素針；Dr.D亦跑牆而上到此捏住銘凱。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -11998,8 +12162,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26051132982376,
-          22.30539364461738
+          114.257067,
+          22.319862
         ]
       },
       "properties": {
@@ -12031,7 +12195,8 @@
         "description": "「哈姆雷特」是商業區內一間貨品眾多、通道狹窄、守衛很少會去的店舖，白魂帶艾匡到該處等候主角。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[111]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12074,8 +12239,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2156049439231,
-          22.269915655756463
+          114.25508,
+          22.324112
         ]
       },
       "properties": {
@@ -12099,7 +12264,8 @@
         "description": "商場內有一間名為「Beauty美容中心」的美容店，其一名接近三十歲的男店員多次向戴面具的主角推銷療程。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[111]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12107,8 +12273,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1365140764477,
-          22.375033684290834
+          114.25807,
+          22.319499
         ]
       },
       "properties": {
@@ -12132,7 +12298,8 @@
         "description": "小吃店老闆指苬怡花園旁一排居屋可以任意租住，大約預10艾幣一晚。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[111]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12140,8 +12307,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09606179903868,
-          22.244617494468603
+          114.250135,
+          22.329023
         ]
       },
       "properties": {
@@ -12163,7 +12330,8 @@
         "description": "哈姆雷特百貨公司位於新都城中心一期，與三期商場只隔一條馬路，店內空間狹小、陳列混亂，貨品種類繁多。",
         "confidence": 0.96,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[112]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12337,8 +12505,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18992492561226,
-          22.362494888227662
+          114.258498,
+          22.315534
         ]
       },
       "properties": {
@@ -12362,7 +12530,8 @@
         "description": "區內小有名氣、賣高檔食品嘅食店，老闆收留主角一行人，主角喺度花三十艾幣買半條魚同清酒答謝。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[113]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12407,8 +12576,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92879880979629,
-          22.235738651102462
+          114.251594,
+          22.303134
         ]
       },
       "properties": {
@@ -12430,7 +12599,8 @@
         "description": "梁潔華小學內的課室，宣傳單張聲稱有興趣者可免費進入，實為病教招募及洗腦信徒的地方。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -12613,8 +12783,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08282764934768,
-          22.281680590524147
+          114.262614,
+          22.317318
         ]
       },
       "properties": {
@@ -12638,7 +12808,8 @@
         "description": "王達尼在「詭區」的倉庫中有專人負責規劃走私路線及風險，並在此把小老鼠寶拉介紹給敘事者。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[118]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12713,8 +12884,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05436621652552,
-          22.278667391470204
+          114.254636,
+          22.319672
         ]
       },
       "properties": {
@@ -12742,7 +12913,8 @@
         "description": "王達尼在「詭區」設有貨品倉庫，倉庫中有專門規劃走私路線的專家寶拉，亦有通往倖存區外的地下渠道。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[119]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -12919,8 +13091,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.095062027924,
-          22.312380827038986
+          114.254985,
+          22.316912
         ]
       },
       "properties": {
@@ -12942,7 +13114,8 @@
         "description": "倖存區入口是以木材搭建的大木閘，設有小哨塔觀察來訪者，守閘者確認身份後才開閘。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[119]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13205,8 +13378,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1406541542687,
-          22.298944800488286
+          114.262341,
+          22.323217
         ]
       },
       "properties": {
@@ -13239,7 +13412,8 @@
         "description": "病獵公會的聖堂神聖莊靜，主角在此向聖女Nina報告情報，並遇上病獵賴桑。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[123]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13247,8 +13421,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19683360036622,
-          22.257937628747996
+          114.262382,
+          22.322834
         ]
       },
       "properties": {
@@ -13275,7 +13449,8 @@
         "description": "「詭區」終日陰森恐寒，是王達尼的根據地，內設其倉庫，主角中午到訪找他。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[123]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13385,8 +13560,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12545250629434,
-          22.415551117723354
+          114.247358,
+          22.320327
         ]
       },
       "properties": {
@@ -13408,7 +13583,8 @@
         "description": "木匠漢木老伯的家是一幢三層高村屋，外牆佈滿植披，第三層門口被木板封住，內藏木製火車模型收藏。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[124]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13447,8 +13623,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26191359578851,
-          22.33341699092088
+          114.257072,
+          22.307098
         ]
       },
       "properties": {
@@ -13470,7 +13646,8 @@
         "description": "六隻大耳病者從南面爬入倖存區，村民在南門一帶集合迎擊。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -13478,8 +13655,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08498100251774,
-          22.415005302510107
+          114.251494,
+          22.305704
         ]
       },
       "properties": {
@@ -13501,7 +13678,8 @@
         "description": "被大耳追趕的男童逃入一個轉角的死巷，最終在巷內遇害。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -13509,8 +13687,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89413366903182,
-          22.298888723582817
+          114.254827,
+          22.323923
         ]
       },
       "properties": {
@@ -13535,7 +13713,8 @@
         "description": "主角一行人停留的倖存區，入口維修牌上刻有「松木村」三字。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[126]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13543,8 +13722,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26218402380407,
-          22.425024376287478
+          114.256569,
+          22.318242
         ]
       },
       "properties": {
@@ -13566,7 +13745,8 @@
         "description": "主角三人此行的目的地，村長曾到此接受「恩賜」，其對門被鐵鏈鎖上。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[126]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13638,8 +13818,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10882169832914,
-          22.259485351338977
+          114.253578,
+          22.318922
         ]
       },
       "properties": {
@@ -13661,7 +13841,8 @@
         "description": "主角在松木村住宿的旅館，他在該處整理長髮後出發。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[126]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13669,8 +13850,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10497642481117,
-          22.408347104600594
+          114.252697,
+          22.322732
         ]
       },
       "properties": {
@@ -13692,7 +13873,8 @@
         "description": "漢木老伯的住所，其三樓密封，被用作收藏被綁的村長。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[126]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13700,8 +13882,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26296875715268,
-          22.330344586861983
+          114.256309,
+          22.322126
         ]
       },
       "properties": {
@@ -13726,7 +13908,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_16e69575c5"
-        ]
+        ],
+        "position_source": "同章（[126]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13734,8 +13917,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16610345616846,
-          22.283351682307163
+          114.252659,
+          22.318177
         ]
       },
       "properties": {
@@ -13763,7 +13946,8 @@
         "description": "王達尼一行人埋伏觀察的目標建築，內有病者平權組織的白衣教徒活動，設有可潛入的後門。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[126]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13771,8 +13955,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08716639963379,
-          22.209072213321125
+          114.254758,
+          22.303792
         ]
       },
       "properties": {
@@ -13794,7 +13978,8 @@
         "description": "主角與奎斯戰敗後被五花大綁帶到靈實教堂之內，德蘭教主其後在此單獨會見二人。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -13802,8 +13987,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0935751888304,
-          22.362225719081405
+          114.276823,
+          22.314336
         ]
       },
       "properties": {
@@ -13825,7 +14010,8 @@
         "description": "教堂下方有一道以十字架鎖匙開啟的隱密地下室，內裡如樂園般放滿玩具，數十名病童在內遊玩。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[128]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13864,8 +14050,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28030148012513,
-          22.326573319600215
+          114.275464,
+          22.310169
         ]
       },
       "properties": {
@@ -13890,7 +14076,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_224ba8debd"
-        ]
+        ],
+        "position_source": "同章（[128]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -13898,8 +14085,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2318704509041,
-          22.236804112306398
+          114.251605,
+          22.306112
         ]
       },
       "properties": {
@@ -13923,7 +14110,8 @@
         "description": "寧養院頂層的遊樂園式佈置與主角一行剛經過的教堂地下室幾乎一樣，只是面積比較大。",
         "confidence": 0.82,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -13931,8 +14119,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90329182879377,
-          22.357059166857404
+          114.255211,
+          22.303316
         ]
       },
       "properties": {
@@ -13957,7 +14145,8 @@
         "description": "主角誤入一道貼住寶箱圖案的門，房內看似堆滿金銀珠寶，實為幻覺；真相揭穿後珠寶變成一塊塊石頭，房間死氣沉沉。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -13965,8 +14154,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.95927901121537,
-          22.376906652933545
+          114.251973,
+          22.308484
         ]
       },
       "properties": {
@@ -13988,7 +14177,8 @@
         "description": "犬京到教堂後台拿喇叭，前來救援被困幻覺中的敘事者等人。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -13996,8 +14186,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08814053559166,
-          22.31363694972152
+          114.254034,
+          22.30786
         ]
       },
       "properties": {
@@ -14028,7 +14218,8 @@
         "description": "犬京出到走廊時遇上奎斯；王達尼亦曾在走廊殺死幾隻想殺他的「大眼」。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -14068,8 +14259,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22548088807507,
-          22.412859426260773
+          114.260144,
+          22.30637
         ]
       },
       "properties": {
@@ -14091,7 +14282,8 @@
         "description": "位於寧養院內、前身疑為大型休息房的空間，存放大量貢品，眾人到達時男病童已不在，王達尼在此尋回寶石袋。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[131]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14099,8 +14291,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15187594415198,
-          22.219618410009918
+          114.263589,
+          22.311935
         ]
       },
       "properties": {
@@ -14129,7 +14321,8 @@
         "description": "滿天進入研究室，走到用精密儀器研究男病童腦部嘅大BOSS身邊。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[131]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14262,8 +14455,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05076447699702,
-          22.372809300373845
+          114.252698,
+          22.323487
         ]
       },
       "properties": {
@@ -14285,7 +14478,8 @@
         "description": "艾匡的家被稱為「皇宮」，她一直被父親保護留在此處，除最貼身的皇室人員外無人見過她的真樣；她也是在此處被病者平權組織綁架走。",
         "confidence": 0.78,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[110]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14293,8 +14487,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07628427557793,
-          22.270528763256273
+          114.245171,
+          22.32129
         ]
       },
       "properties": {
@@ -14318,7 +14512,8 @@
         "description": "位於慧安園一帶、前身為餐廳的地鋪實為製毒工場，內放有造酒箱作掩飾及白粉製作檯。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[132]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14326,8 +14521,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97947310597391,
-          22.2038234149691
+          114.265459,
+          22.310786
         ]
       },
       "properties": {
@@ -14349,7 +14544,8 @@
         "description": "主角與男人在區內街道上交手，平民紛紛站在遠處圍觀，令情況比想像中麻煩。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[133]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14408,8 +14604,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25641611352712,
-          22.432448958571754
+          114.234031,
+          22.325864
         ]
       },
       "properties": {
@@ -14431,7 +14627,8 @@
         "description": "宴會結束後，阿禮在皇宮上蓋空地外與等候交易回報的貴華碰面相認。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[135]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14439,8 +14636,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.3026170748455,
-          22.313621995880062
+          114.236801,
+          22.330179
         ]
       },
       "properties": {
@@ -14468,7 +14665,8 @@
         "description": "貴華提議帶阿禮去皇室區一間好好食的甜品鋪，其後正式帶她離開皇室區出到外頭龍蛇混雜的世界。",
         "confidence": 0.87,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[135]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14476,8 +14674,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14996612497139,
-          22.42664312962539
+          114.239599,
+          22.328025
         ]
       },
       "properties": {
@@ -14499,7 +14697,8 @@
         "description": "貴華提議帶阿禮去貧民街，指那裡夜晚有很多亡命表演可看。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[135]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14507,8 +14706,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.91940993362326,
-          22.435772449835962
+          114.234402,
+          22.32387
         ]
       },
       "properties": {
@@ -14530,7 +14729,8 @@
         "description": "白魂與賴桑因同為箭傷被安排睡在同一間醫療病房，初步移除箭枝後滿天與艾匡公主入內探望。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[135]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14538,8 +14738,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15213870450904,
-          22.294421263447013
+          114.25233,
+          22.302482
         ]
       },
       "properties": {
@@ -14561,7 +14761,8 @@
         "description": "賴桑以「順德聯誼總會梁潔華小學」作地標，指出「詭區」距離該校約五、六分鐘路程。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -14569,8 +14770,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18089494163424,
-          22.26802399481193
+          114.254549,
+          22.308056
         ]
       },
       "properties": {
@@ -14592,7 +14793,8 @@
         "description": "位於「詭區」倉庫樓上一層的人皮工房，掛滿被加工成皮製物品的人類皮膚，並散發血腥味，其老闆將小老鼠久未領取的人皮手袋交給滿天。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -14600,8 +14802,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.01704142824444,
-          22.273022316319523
+          114.254284,
+          22.307391
         ]
       },
       "properties": {
@@ -14623,7 +14825,8 @@
         "description": "「詭區」二樓唯一的倉庫放滿包好的貨物、一片死寂，是小老鼠匿藏及進行非法買賣之地。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -14665,8 +14868,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09615793087663,
-          22.346359693293657
+          114.244882,
+          22.326251
         ]
       },
       "properties": {
@@ -14688,7 +14891,8 @@
         "description": "瓦安家中唯一上鎖的房間是書房，兩邊放滿經濟書籍，中央是瓦安的辦公桌，牆上掛有他與妻子的結婚照。",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[138]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14729,8 +14933,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12181231403066,
-          22.350756122682533
+          114.248543,
+          22.322935
         ]
       },
       "properties": {
@@ -14752,7 +14956,8 @@
         "description": "滿天離開新都城二期後前往病房，向養傷的賴桑交代有關病者和平協會的全部情報。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[138]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14760,8 +14965,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04531059739071,
-          22.41765960936904
+          114.253873,
+          22.302632
         ]
       },
       "properties": {
@@ -14783,7 +14988,8 @@
         "description": "老鄧首次遇見三腦，是在心朗村摘果實的時候。",
         "confidence": 0.72,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -14791,8 +14997,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2441432822156,
-          22.297722323949035
+          114.251455,
+          22.305401
         ]
       },
       "properties": {
@@ -14814,7 +15020,8 @@
         "description": "翠林邨內某大廈的頂樓是該倖存區的「血酒」工廠，以人血經水管輸送到頂樓的大浴缸。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -14853,8 +15060,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08566674296178,
-          22.24138746471351
+          114.272645,
+          22.323857
         ]
       },
       "properties": {
@@ -14878,7 +15085,8 @@
         "description": "「真實之房」是不良人位於五樓的拷問房間，據稱入到去的人都會供出所有真相。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[97]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14886,8 +15094,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21020233463035,
-          22.41225753414206
+          114.270382,
+          22.32465
         ]
       },
       "properties": {
@@ -14909,7 +15117,8 @@
         "description": "班尼的地下室位於田家炳小學隔壁，存放著大量與病者有關的手工精品。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[97]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14948,8 +15157,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26358754863813,
-          22.262767719539177
+          114.264161,
+          22.310922
         ]
       },
       "properties": {
@@ -14971,7 +15180,8 @@
         "description": "皇室區的主要餐廳，貴族早、午、晚三餐基本上都在此用餐，主角在此打聽賴桑的下落。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[133]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -14979,8 +15189,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27174593728542,
-          22.44443446250095
+          114.251751,
+          22.325512
         ]
       },
       "properties": {
@@ -15004,7 +15214,8 @@
         "description": "主角以紙飛機約阿禮到皇宮外的露天花園見面，環境清幽浪漫，種滿花朵。",
         "confidence": 0.88,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[134]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15012,8 +15223,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15302311741817,
-          22.42758522163729
+          114.255064,
+          22.325928
         ]
       },
       "properties": {
@@ -15035,7 +15246,8 @@
         "description": "瓦安在皇宮內的會議房，門外有兩名皇家守衛把守，瓦安與董倫曾在此密談。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[134]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15170,8 +15382,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28226035706112,
-          22.333174753948274
+          114.25242,
+          22.30377
         ]
       },
       "properties": {
@@ -15196,7 +15408,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_11f09f0b09"
-        ]
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -15204,8 +15417,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16529114213779,
-          22.317503616388187
+          114.251708,
+          22.306559
         ]
       },
       "properties": {
@@ -15213,8 +15426,8 @@
         "name": "香港中文大學專業進修學院",
         "display_name": "香港中文大學專業進修學院（參考位置）",
         "location_type": "district",
-        "fictional": false,
-        "location_precision": "approximate",
+        "fictional": true,
+        "location_precision": "fictional",
         "story_position": {
           "x": 0.525,
           "y": 0.372
@@ -15227,7 +15440,9 @@
         "description": "主角追趕三腦時，見到三腦往香港中文大學專業進修學院方向移動，最終喺學校前停下與主角對峙。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "inferred_from": null,
+        "position_source": "重分類為虛構：故事場景（ch156 康城）話三腦逃向「香港中文大學專業進修學院」，但 OSM 冇呢間學院（只有 HKU SPACE）。原本嘅座標 (114.165, 22.318) 落喺旺角／何文田，同故事場景（將軍澳康城）相差 10 km，明顯唔對。既然無法核實將軍澳有分校，寧願標為 fictional，由錨定腳本放到康城一帶 —— 誠實表達「位置唔確定」。"
       }
     },
     {
@@ -15235,8 +15450,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26905138475624,
-          22.328745059891663
+          114.256831,
+          22.304878
         ]
       },
       "properties": {
@@ -15263,7 +15478,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_c9d65eda4e"
-        ]
+        ],
+        "position_source": "同章（[143]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15303,8 +15519,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.117781185626,
-          22.288316357671473
+          114.24184,
+          22.319352
         ]
       },
       "properties": {
@@ -15326,7 +15542,8 @@
         "description": "皇宮內的迎賓室，裡面有寬長的桌子和一排排椅子，是國王宴請眾人的地方。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[144]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15366,8 +15583,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27336095216296,
-          22.223289578088043
+          114.240129,
+          22.325836
         ]
       },
       "properties": {
@@ -15389,7 +15606,8 @@
         "description": "主角一行五人獲邀留宿的皇宮套房，面積如標準課室，放有五張豪華單人床，牙刷、毛巾、酒品等用品齊備。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[145]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15459,8 +15677,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26080922407874,
-          22.334337109941252
+          114.253663,
+          22.302657
         ]
       },
       "properties": {
@@ -15493,7 +15711,8 @@
         "description": "奎斯應承消滅病者平權組織之後，會同主角一齊去病者之都。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -15501,8 +15720,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90385580224307,
-          22.355014229037916
+          114.251291,
+          22.308861
         ]
       },
       "properties": {
@@ -15526,7 +15745,8 @@
         "description": "眾人接了瓦禮後，由王達尼帶路經臭氣沖天的地下水道貫穿城市之間，他熟識渠下環境，這是他不受「死亡之路」影響的原因。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -15650,8 +15870,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04825223163195,
-          22.421050392919813
+          114.273131,
+          22.297995
         ]
       },
       "properties": {
@@ -15675,7 +15895,8 @@
         "description": "Sona話康城地鐵站嗰度有糧食，主角經屋苑接駁位入內搜索，漆黑中喺阿信屋發現可可脆片並遇襲。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[151]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15683,8 +15904,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.17995284962234,
-          22.254587968261234
+          114.277087,
+          22.293824
         ]
       },
       "properties": {
@@ -15706,7 +15927,8 @@
         "description": "主角喺康城地鐵站內嘅阿信屋發現一包安放喺度嘅可可脆片。",
         "confidence": 0.78,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[151]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15745,8 +15967,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0944980544747,
-          22.3653286411841
+          114.275231,
+          22.316556
         ]
       },
       "properties": {
@@ -15768,7 +15990,8 @@
         "description": "康城倖存區喺康城外面起咗一橦監獄大樓囚禁罪犯，不法者被關喺入面，相信已經餓死。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[152]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15776,8 +15999,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27411078049897,
-          22.4073302433814
+          114.275264,
+          22.279293
         ]
       },
       "properties": {
@@ -15804,7 +16027,8 @@
         "description": "明雲盯住監房的門，與門外嗰個人對話。",
         "confidence": 0.75,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[153]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15812,8 +16036,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26256286717022,
-          22.32170950637064
+          114.264654,
+          22.304041
         ]
       },
       "properties": {
@@ -15840,7 +16064,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_ece9f6df6c"
-        ]
+        ],
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15848,8 +16073,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26365083543145,
-          22.320255703059434
+          114.261455,
+          22.301061
         ]
       },
       "properties": {
@@ -15876,7 +16101,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_ece9f6df6c"
-        ]
+        ],
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15884,8 +16110,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.15707347219043,
-          22.421996223392078
+          114.262945,
+          22.305803
         ]
       },
       "properties": {
@@ -15909,7 +16135,8 @@
         "description": "位於康城一期某大廈一樓106室、放滿書本的小單位，五爺孫兒阿偉常在此看書。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15917,8 +16144,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13699473563744,
-          22.23019825284199
+          114.264714,
+          22.305135
         ]
       },
       "properties": {
@@ -15942,7 +16169,8 @@
         "description": "五爺生前居住的單位，主角在此發現其屍體。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -15950,8 +16178,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19736552986953,
-          22.381504959182116
+          114.264892,
+          22.30505
         ]
       },
       "properties": {
@@ -15973,7 +16201,8 @@
         "description": "康城二期內的會所，滿地凌亂雜物，設有保安室及下層KTV房間。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16013,8 +16242,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2004737926299,
-          22.310029335469594
+          114.259116,
+          22.305069
         ]
       },
       "properties": {
@@ -16036,7 +16265,8 @@
         "description": "會所下層的KTV房間，Sona被鎖於其中，洗手間內藏有被綁的夏晴。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16044,8 +16274,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28306527046617,
-          22.336107919432365
+          114.25941,
+          22.30158
         ]
       },
       "properties": {
@@ -16082,7 +16312,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_ece9f6df6c"
-        ]
+        ],
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16090,8 +16321,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09683085374228,
-          22.204163614862285
+          114.259889,
+          22.301447
         ]
       },
       "properties": {
@@ -16120,7 +16351,8 @@
         "description": "康城中目前有人聚居嘅部分；明雲之父曾被稱為康城一期領導有方嘅領導人。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16128,8 +16360,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.00353810940719,
-          22.278682345311665
+          114.260274,
+          22.306779
         ]
       },
       "properties": {
@@ -16153,7 +16385,8 @@
         "description": "康城二期內嘅KTV館，曾發生由明雲之父下令、董倫執行嘅慘劇。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16197,8 +16430,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.19239230945296,
-          22.37051014724956
+          114.265402,
+          22.306031
         ]
       },
       "properties": {
@@ -16222,7 +16455,8 @@
         "description": "佔用康城某大樓一至三樓，三樓擺放發電機供電，可以播放閉路電視影片。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16230,8 +16464,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06133897917144,
-          22.339136987869075
+          114.261283,
+          22.3056
         ]
       },
       "properties": {
@@ -16255,7 +16489,8 @@
         "description": "倖存區廣場嘅活動燒烤區，有哨兵駐守，主角喺度打探少佐下落。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16263,8 +16498,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26342690928512,
-          22.336397077897306
+          114.262687,
+          22.300287
         ]
       },
       "properties": {
@@ -16286,7 +16521,8 @@
         "description": "倖存區出入口，角落設有閉路電視，可以追溯返睇出入紀錄。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16294,8 +16530,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07488715953308,
-          22.26917170214389
+          114.264513,
+          22.306259
         ]
       },
       "properties": {
@@ -16325,7 +16561,8 @@
         "description": "明雲與董倫喺囚房對話；監獄內一班「不法者」亦與少佐一同失蹤。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16333,8 +16570,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11126344701304,
-          22.256229152361332
+          114.255244,
+          22.304849
         ]
       },
       "properties": {
@@ -16356,7 +16593,8 @@
         "description": "康城一期嘅會所，明哥喺呢度舉行競逐「金鷹頭」嘅夜宴，亦係陸軒發動襲擊嘅現場。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -16364,8 +16602,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.185124742504,
-          22.314111734187836
+          114.250698,
+          22.304606
         ]
       },
       "properties": {
@@ -16393,7 +16631,8 @@
         "description": "康城嘅另一期區域，曾發生森威克元老被殺及KTV館慘殺案，明哥揚言坐上「金鷹頭」後會安排董倫入住監視二期元老。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -16401,8 +16640,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93398352025635,
-          22.25066258487831
+          114.256558,
+          22.306413
         ]
       },
       "properties": {
@@ -16426,7 +16665,8 @@
         "description": "康城二期內發生慘殺案嘅場所，該手法出自明哥手下，陸軒原本奉元老命令要在宴會上照樣無差別殺人。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -16465,8 +16705,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29830395971618,
-          22.295692339971005
+          114.254334,
+          22.325346
         ]
       },
       "properties": {
@@ -16488,7 +16728,8 @@
         "description": "不良人據點內嘅糧食倉庫，存放大量物資，需要用斧頭破開沉重嘅鎖。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[109]）嘅 8 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16591,8 +16832,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18570794232089,
-          22.41642591744869
+          114.256961,
+          22.323948
         ]
       },
       "properties": {
@@ -16614,7 +16855,8 @@
         "description": "敘事者計劃路線中要經過嘅巴士廠。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[109]）嘅 8 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -16941,8 +17183,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26612542915998,
-          22.393243724727242
+          114.257983,
+          22.31477
         ]
       },
       "properties": {
@@ -16964,7 +17206,8 @@
         "description": "王達尼曾前往取得下水道城市圖則的政府部門。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[115]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -17498,8 +17741,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29877821011672,
-          22.258423628595406
+          114.270029,
+          22.32282
         ]
       },
       "properties": {
@@ -17521,7 +17764,8 @@
         "description": "倖存區內嘅知識寶庫，三腦曾花一個月喺入面學習，但敘事者批評佢嘅書唔update",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[140]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -17529,8 +17773,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26027172503242,
-          22.331930380712596
+          114.237899,
+          22.323419
         ]
       },
       "properties": {
@@ -17558,7 +17802,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_11f09f0b09"
-        ]
+        ],
+        "position_source": "同章（[144]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18014,8 +18259,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1964939345388,
-          22.32622060730907
+          114.256027,
+          22.296834
         ]
       },
       "properties": {
@@ -18037,7 +18282,8 @@
         "description": "通往康城嘅一條大約2KM嘅直路",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[150]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18076,8 +18322,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05403936827649,
-          22.24967563134203
+          114.271598,
+          22.315043
         ]
       },
       "properties": {
@@ -18099,7 +18345,8 @@
         "description": "主角觀察康城嘅行人橋，橋上有神秘男人凝視佢",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[152]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18107,8 +18354,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.11428198672465,
-          22.439694094758526
+          114.273936,
+          22.284353
         ]
       },
       "properties": {
@@ -18130,7 +18377,8 @@
         "description": "倖存者居住嘅私人屋苑，敘事者同明雲從呢度出發前往監獄。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[153]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18170,8 +18418,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.03360173952849,
-          22.254214122224763
+          114.251211,
+          22.304843
         ]
       },
       "properties": {
@@ -18193,7 +18441,8 @@
         "description": "康城二期倖存區內一間由董倫經營的私人酒吧，是二期領導人森威克經常光顧的場所。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18201,8 +18450,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94484000915541,
-          22.435364957656212
+          114.259517,
+          22.301927
         ]
       },
       "properties": {
@@ -18230,7 +18479,8 @@
         "description": "關押明雲同董倫嘅監獄，月黑風高之夜二人仍有對話。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18238,8 +18488,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21722636758983,
-          22.300959830624855
+          114.261585,
+          22.30725
         ]
       },
       "properties": {
@@ -18261,7 +18511,8 @@
         "description": "董倫與陸軒對話嘅場景，望月飲酒之地。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18269,8 +18520,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14424307621881,
-          22.419857824063477
+          114.262288,
+          22.301885
         ]
       },
       "properties": {
@@ -18292,7 +18543,8 @@
         "description": "明霧望月而坐、向董倫下達暗殺命令嘅場所。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18300,8 +18552,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21121492332341,
-          22.426631914244297
+          114.261583,
+          22.300691
         ]
       },
       "properties": {
@@ -18323,7 +18575,8 @@
         "description": "不法者監獄二樓有一條陰深嘅走廊，明雲就被囚禁於此處",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[156]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18331,8 +18584,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90919432364385,
-          22.26170225833524
+          114.256756,
+          22.305953
         ]
       },
       "properties": {
@@ -18354,7 +18607,8 @@
         "description": "兩年前康城兩派撕殺時，有殺手闖入二期會所K館殺盡裡面所有人，官方統計零生還者。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18362,8 +18616,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27712722209507,
-          22.33029613946746
+          114.252664,
+          22.308593
         ]
       },
       "properties": {
@@ -18385,7 +18639,8 @@
         "description": "敘事者在前往病房前，於倖存區中央的燒烤場烤方包充饑。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18393,8 +18648,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94175738155184,
-          22.356584382391087
+          114.253949,
+          22.3075
         ]
       },
       "properties": {
@@ -18419,7 +18674,8 @@
         "description": "M歷險故事中嘅場景，老賢喺度被推落去",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18427,8 +18683,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28347840848402,
-          22.330852330815596
+          114.253961,
+          22.303331
         ]
       },
       "properties": {
@@ -18452,7 +18708,8 @@
         "description": "康城倖存區嘅首領據點，首領被引出後導致兩幫開戰",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18460,8 +18717,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13511696040284,
-          22.23401522087434
+          114.251445,
+          22.30292
         ]
       },
       "properties": {
@@ -18483,7 +18740,8 @@
         "description": "Sona主人格大多數時間身處嘅房間，亦係設置密室逃脫陷阱嘅地方",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18491,8 +18749,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27260902571146,
-          22.329535095750362
+          114.256848,
+          22.307849
         ]
       },
       "properties": {
@@ -18514,7 +18772,8 @@
         "description": "Sona悲劇發生嘅地方，內有K館",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18522,8 +18781,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26612546730755,
-          22.337870336461435
+          114.256883,
+          22.304575
         ]
       },
       "properties": {
@@ -18545,7 +18804,8 @@
         "description": "Sona記憶中發生大屠殺嘅房間",
         "confidence": 0.97,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18553,8 +18813,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.21092652780956,
-          22.286514419775692
+          114.250913,
+          22.307706
         ]
       },
       "properties": {
@@ -18576,7 +18836,8 @@
         "description": "Sona記憶中雙親被殺、佢自己遭到侵犯嘅地方",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18584,8 +18845,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12083817807279,
-          22.324459792477302
+          114.253392,
+          22.309472
         ]
       },
       "properties": {
@@ -18607,7 +18868,8 @@
         "description": "醫生催眠Sona時描述嘅場景，一片草地、藍天白雲",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18615,8 +18877,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06919615472648,
-          22.28991641870756
+          114.252153,
+          22.307347
         ]
       },
       "properties": {
@@ -18638,7 +18900,8 @@
         "description": "催眠夢境中通往地鐵站嘅門",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18646,8 +18909,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.264952620737,
-          22.42034756237125
+          114.255559,
+          22.303901
         ]
       },
       "properties": {
@@ -18672,7 +18935,8 @@
         "description": "催眠夢境中經過嘅場景，亦係巴力所在嘅地方",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18680,8 +18944,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16958983749142,
-          22.41309494926375
+          114.255728,
+          22.307075
         ]
       },
       "properties": {
@@ -18703,7 +18967,8 @@
         "description": "催眠夢境中嘅燒烤場景，有人歡樂燒烤",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18743,8 +19008,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.925562371252,
-          22.286271419851985
+          114.255102,
+          22.30406
         ]
       },
       "properties": {
@@ -18768,7 +19033,8 @@
         "description": "陸軒在康城一期與二期交界開設的小酒吧，是董倫與陸軒交流、結下友誼的地方。",
         "confidence": 0.97,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[160]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18776,8 +19042,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27565529869536,
-          22.39853364614328
+          114.254682,
+          22.308261
         ]
       },
       "properties": {
@@ -18799,7 +19065,8 @@
         "description": "康城一期用於酷刑囚禁犯人的地方，不見天日，董倫與陸軒雙雙被囚於此一星期。",
         "confidence": 0.96,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[160]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18807,8 +19074,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27477466239415,
-          22.328019493400475
+          114.252873,
+          22.307839
         ]
       },
       "properties": {
@@ -18835,7 +19102,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_2a6972c1af"
-        ]
+        ],
+        "position_source": "同章（[160]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18843,8 +19111,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23741405355916,
-          22.379478713664454
+          114.252365,
+          22.30762
         ]
       },
       "properties": {
@@ -18866,7 +19134,8 @@
         "description": "Dr.D同老賢搭建嘅鴨綠色露天醫療帳篷，設於康城某一個區域",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[160]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -18874,8 +19143,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06046738384069,
-          22.39151281757839
+          114.255826,
+          22.306096
         ]
       },
       "properties": {
@@ -18899,7 +19168,8 @@
         "description": "一間已荒廢嘅酒吧，係董倫同陸軒嘅誓言場所",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18907,8 +19177,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26946948195621,
-          22.34419138628214
+          114.253451,
+          22.302957
         ]
       },
       "properties": {
@@ -18933,7 +19203,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_ece9f6df6c"
-        ]
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18941,8 +19212,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02171343556877,
-          22.415345502403294
+          114.252069,
+          22.307887
         ]
       },
       "properties": {
@@ -18972,7 +19243,8 @@
         "description": "十二元老曾囚禁董倫嘅地方",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -18980,8 +19252,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29114534218357,
-          22.39568867780575
+          114.25674,
+          22.305538
         ]
       },
       "properties": {
@@ -19005,7 +19277,8 @@
         "description": "康城內播放錄影帶嘅設施，由一位熱心好青年負責操作",
         "confidence": 0.92,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19013,8 +19286,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.093953307393,
-          22.436467803463795
+          114.252665,
+          22.307841
         ]
       },
       "properties": {
@@ -19039,7 +19312,8 @@
         "description": "董倫於錄影帶中指定敘事者前往嘅地點，位於康城駿宏街一帶",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19047,8 +19321,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2498214694438,
-          22.425173914702068
+          114.253385,
+          22.303112
         ]
       },
       "properties": {
@@ -19070,7 +19344,8 @@
         "description": "金門建築有限公司所在嘅街道，位於康城區之內",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19078,8 +19353,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.10332936598763,
-          22.41442584115358
+          114.252775,
+          22.30326
         ]
       },
       "properties": {
@@ -19114,7 +19389,8 @@
         "description": "敘事者找到一本字典查英文字母的房間/辦公室，鐵門密碼輸入後打開通往藏有保險箱的房間。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19122,8 +19398,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12745845731288,
-          22.240482757305255
+          114.254989,
+          22.307639
         ]
       },
       "properties": {
@@ -19145,7 +19421,8 @@
         "description": "鐵門後的房間，內有播放大堂門口畫面的錄影鏡頭、未開封乾糧、放有SD卡和寫上「Loser」麻布袋的保險箱。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19153,8 +19430,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98074204623484,
-          22.44631490806439
+          114.253386,
+          22.303566
         ]
       },
       "properties": {
@@ -19179,7 +19456,8 @@
         "description": "公司建築物入口大堂，敘事者從錄影機取得SD卡後返回此地。",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19187,8 +19465,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18622705424582,
-          22.283673189898526
+          114.250948,
+          22.303928
         ]
       },
       "properties": {
@@ -19212,7 +19490,8 @@
         "description": "敘事者判斷董倫要他前往的下一個地點，內部充滿錄影機，並有廣播系統和D-16號影廠。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19220,8 +19499,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93806591897459,
-          22.34690177004654
+          114.254604,
+          22.302753
         ]
       },
       "properties": {
@@ -19243,7 +19522,8 @@
         "description": "電視台內的錄影廠房，董倫廣播指示敘事者進入該影廠。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19251,8 +19531,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2526605630579,
-          22.378323529411762
+          114.25622,
+          22.307914
         ]
       },
       "properties": {
@@ -19274,7 +19554,8 @@
         "description": "D－１６錄影廠位於康城東北方向，要行過多條走廊先到達，內裡漆黑一片。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[163]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -19282,8 +19563,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28332276646067,
-          22.32236106660563
+          114.251672,
+          22.306918
         ]
       },
       "properties": {
@@ -19310,7 +19591,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_11f09f0b09"
-        ]
+        ],
+        "position_source": "同章（[163]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -19350,8 +19632,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89597940032044,
-          22.436236018921186
+          114.251478,
+          22.302988
         ]
       },
       "properties": {
@@ -19376,7 +19658,8 @@
         "description": "董倫喺電視台大堂中為M留下最後線索（地圖）。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19384,8 +19667,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25103913939117,
-          22.268771686884868
+          114.250829,
+          22.304832
         ]
       },
       "properties": {
@@ -19407,7 +19690,8 @@
         "description": "M逆住風雨前往董倫最終場所嘅街道。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19415,8 +19699,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29792584115359,
-          22.3483036926833
+          114.255521,
+          22.306436
         ]
       },
       "properties": {
@@ -19438,7 +19722,8 @@
         "description": "董倫嘅最終場所，內有大鐵籠鎖住少佐，係最後俄羅斯輪盤遊戲嘅發生地。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19446,8 +19731,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92281940947585,
-          22.41518474860761
+          114.250744,
+          22.30397
         ]
       },
       "properties": {
@@ -19469,7 +19754,8 @@
         "description": "不法者嘅根據地，少佐潛入救人嘅地方。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19477,8 +19763,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27205397878997,
-          22.324332532234685
+          114.2521,
+          22.30413
         ]
       },
       "properties": {
@@ -19503,7 +19789,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_ece9f6df6c"
-        ]
+        ],
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19731,8 +20018,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12776607919432,
-          22.3483036926833
+          114.254786,
+          22.306991
         ]
       },
       "properties": {
@@ -19756,7 +20043,8 @@
         "description": "飛虎隊攻堅嘅目標地點，歐式風格，附近嘅樹都枯死，內有隱形密室",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19764,8 +20052,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99456580453193,
-          22.26676413366903
+          114.251276,
+          22.307866
         ]
       },
       "properties": {
@@ -19787,7 +20075,8 @@
         "description": "別墅地毯下嘅隱形密室通道，內有地下研究室，藏有試管、肉體樣本、解剖檯等",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19795,8 +20084,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2500457770657,
-          22.217289349202716
+          114.256755,
+          22.307724
         ]
       },
       "properties": {
@@ -19820,7 +20109,8 @@
         "description": "余智海博士曾經做研究嘅地方",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19828,8 +20118,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.07118287937743,
-          22.24997096971084
+          114.250312,
+          22.308189
         ]
       },
       "properties": {
@@ -19853,7 +20143,8 @@
         "description": "余智海博士曾經做研究嘅地方",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19861,8 +20152,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90029892423895,
-          22.24443057145037
+          114.251346,
+          22.304073
         ]
       },
       "properties": {
@@ -19891,7 +20182,8 @@
         "description": "博士同飛虎隊交戰嘅封閉空間，內有機器可作掩護。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -19935,8 +20227,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.22974273289081,
-          22.225880331120774
+          114.256602,
+          22.33188
         ]
       },
       "properties": {
@@ -19961,7 +20253,8 @@
         "description": "林中古宅內部空間，不破尚最後丟入手榴彈",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[170]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -19969,8 +20262,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0347168688487,
-          22.37757209887846
+          114.256516,
+          22.336735
         ]
       },
       "properties": {
@@ -19992,7 +20285,8 @@
         "description": "B橦大樓一樓的病者學堂，由大舊授課",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[170]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -20031,8 +20325,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0475985351339,
-          22.43076291294728
+          114.264392,
+          22.314686
         ]
       },
       "properties": {
@@ -20054,7 +20348,8 @@
         "description": "古宅大廳之下有密室秘門通往的地下密室，內有辦公桌及實驗資料",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[171]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -20096,8 +20391,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.1769919890135,
-          22.441694171053634
+          114.254269,
+          22.309125
         ]
       },
       "properties": {
@@ -20121,7 +20416,8 @@
         "description": "翠林村嗰間酒吧係南愚同敘事者上次見面並打到地暗天昏嘅地方",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -20326,8 +20622,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0714200045777,
-          22.438288433661402
+          114.254457,
+          22.30219
         ]
       },
       "properties": {
@@ -20351,7 +20647,8 @@
         "description": "Dr.D曾於此進行醫學、病學研究，現相關文章及論文已被收藏到圖書館禁書區",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[174]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -20597,8 +20894,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29815655756465,
-          22.419584916456852
+          114.249103,
+          22.323908
         ]
       },
       "properties": {
@@ -20622,7 +20919,8 @@
         "description": "犬京喺「病者平權組織」間靈實禮拜堂搵到一封信件。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[178]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -20695,8 +20993,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.98584344243534,
-          22.254113183794917
+          114.248126,
+          22.325148
         ]
       },
       "properties": {
@@ -20720,7 +21018,8 @@
         "description": "滿天的研究室是敘事者暫時寄宿的地方，娃娃、公仔亦居於此。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[178]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -20728,8 +21027,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12906706340124,
-          22.323865377279315
+          114.24959,
+          22.306986
         ]
       },
       "properties": {
@@ -20751,7 +21050,8 @@
         "description": "寶康公園內原本嘅兒童遊樂場，被竊屍賊改建成病窩一部分，入面有車胎疊成嘅樓梯、空酒瓶、滑梯、鞦韆、玩具小屋同巨型繩網。",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -20759,8 +21059,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16492423895627,
-          22.217921149004347
+          114.251645,
+          22.303679
         ]
       },
       "properties": {
@@ -20782,7 +21082,8 @@
         "description": "病窩最深處一間收藏病者屍體嘅房間，內有爛果實、死老鼠、人類衣物同疑似祭品嘅擺設。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -20896,8 +21197,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.28348565651942,
-          22.337559433890288
+          114.265927,
+          22.310353
         ]
       },
       "properties": {
@@ -20940,7 +21241,8 @@
         "description": "超大型宗教團體，曾被趕出倖存區，計劃寶康公園血祭",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[180]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21131,8 +21433,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.23452368963149,
-          22.28433115892271
+          114.255973,
+          22.324284
         ]
       },
       "properties": {
@@ -21156,7 +21458,8 @@
         "description": "敘述者曾經拯救嘅地區",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[181]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21289,8 +21592,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94906340123597,
-          22.265859426260775
+          114.271048,
+          22.320302
         ]
       },
       "properties": {
@@ -21312,7 +21615,8 @@
         "description": "病窩中的詭異場所，存放數十具屍體，為病爪沉睡之地。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[182]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21320,8 +21624,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.89716502632182,
-          22.34644193942168
+          114.25132,
+          22.304303
         ]
       },
       "properties": {
@@ -21352,7 +21656,8 @@
         "description": "敘事者上次用散彈槍近距離射傷南愚嘅地點",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -21360,8 +21665,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.99833417257953,
-          22.359952735179675
+          114.254145,
+          22.304062
         ]
       },
       "properties": {
@@ -21386,7 +21691,8 @@
         "description": "賴桑原本滑行要到達嘅建築，佢差啲撞上嘅外牆",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -21394,8 +21700,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.04504142824445,
-          22.234740482185092
+          114.253605,
+          22.308446
         ]
       },
       "properties": {
@@ -21417,7 +21723,8 @@
         "description": "南北二人原本計劃跟蹤主角等人直到大樓最高層去搵出白鯨。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -21425,17 +21732,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.05559029526206,
-          22.39756912336919
+          114.268268,
+          22.317328
         ]
       },
       "properties": {
         "id": "loc_0649",
         "name": "九樓",
-        "display_name": "九樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "九樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.426,
           "y": 0.707
@@ -21455,7 +21762,8 @@
         "description": "大樓九樓係敘事者、白魂被南愚火牆困住嘅地方",
         "confidence": 0.97,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[184]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21463,17 +21771,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.97971023117418,
-          22.239450942244602
+          114.268268,
+          22.317328
         ]
       },
       "properties": {
         "id": "loc_0650",
         "name": "十樓",
-        "display_name": "十樓（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "十樓（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.3,
           "y": 0.256
@@ -21488,7 +21796,8 @@
         "description": "白鯨背叛博士後坐守喺大樓十樓嘅盡頭，永遠看守背後嗰一道門",
         "confidence": 0.98,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[184]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21554,7 +21863,8 @@
         "confidence": 1.0,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0652"
+        "inferred_from": "inf_loc_0652",
+        "position_source": "人手核實修正 → 坑口體育館；原本 R-NAME-PLACE 配到 OSM 一間位於西貢北嘅「室內體育館」，座標 (114.266, 22.377) 明顯錯。"
       }
     },
     {
@@ -21562,17 +21872,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.14031448844129,
-          22.25185889219501
+          114.268268,
+          22.317328
         ]
       },
       "properties": {
         "id": "loc_0653",
         "name": "防火小道",
-        "display_name": "防火小道（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "防火小道（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.567,
           "y": 0.291
@@ -21587,7 +21897,8 @@
         "description": "舞者由防火小道走出嚟，加入戰場。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[184]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21595,8 +21906,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.27968001831083,
-          22.356965705348287
+          114.24862,
+          22.30701
         ]
       },
       "properties": {
@@ -21622,7 +21933,8 @@
         "description": "故事發生嘅城市遭受近乎八級風暴同大雨侵襲",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[185]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21661,8 +21973,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93088166628519,
-          22.324598115510796
+          114.25099,
+          22.31327
         ]
       },
       "properties": {
@@ -21684,7 +21996,8 @@
         "description": "犬京喺三樓搵返Ricky，面對南愚追擊",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[185]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21692,8 +22005,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26206866559853,
-          22.341256694895854
+          114.245914,
+          22.308756
         ]
       },
       "properties": {
@@ -21715,7 +22028,8 @@
         "description": "王達尼叫犬京喺地下層門口等，做誘餌引南愚過嚟以便從高空灑防火沙",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[185]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21723,8 +22037,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.29574044403753,
-          22.355997444113832
+          114.248213,
+          22.30801
         ]
       },
       "properties": {
@@ -21746,7 +22060,8 @@
         "description": "南愚自爆後，血液內臟橫飛到大堂嘅牆壁同地板",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[185]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -21788,8 +22103,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.94138567177843,
-          22.38545651178759
+          114.249628,
+          22.313504
         ]
       },
       "properties": {
@@ -21814,7 +22129,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_7103de1f8e"
-        ]
+        ],
+        "position_source": "同章（[185]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22114,8 +22430,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.02825680933852,
-          22.251754215304796
+          114.253519,
+          22.302266
         ]
       },
       "properties": {
@@ -22137,7 +22453,8 @@
         "description": "在白鯨的記憶中，曾在聖堂天台觀看日落",
         "confidence": 0.85,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）"
       }
     },
     {
@@ -22178,8 +22495,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.30875028610666,
-          22.336856527046614
+          114.27543,
+          22.329584
         ]
       },
       "properties": {
@@ -22201,7 +22518,8 @@
         "description": "十樓盡頭有一間類似研究室嘅房間，入面有專業醫療、研究器材同工具，係改裝而成",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[189]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22209,8 +22527,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.9514731059739,
-          22.31361078049897
+          114.279686,
+          22.328373
         ]
       },
       "properties": {
@@ -22232,7 +22550,8 @@
         "description": "白鯨將Spanish Sahara描述為亡魂最終會到達嘅淨土，傳說中戰士亡魂最終會去到嘅淨土係一片沙漠，亦有返去懷念家鄉嘅意思",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[189]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22240,8 +22559,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2152140077821,
-          22.435379911497673
+          114.275431,
+          22.331656
         ]
       },
       "properties": {
@@ -22263,7 +22582,8 @@
         "description": "我喺白鯨入侵意識後，身處自己潛意識中嘅世界，環境一片混亂",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[189]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22271,8 +22591,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.90155504692149,
-          22.285093804837107
+          114.279547,
+          22.32847
         ]
       },
       "properties": {
@@ -22297,7 +22617,8 @@
         "description": "奎斯同賴桑被指喺外面體育館，王達尼表示一陣離開嗰陣會搵埋佢哋。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[189]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22500,8 +22821,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.09834973678187,
-          22.221704470893414
+          114.261593,
+          22.315889
         ]
       },
       "properties": {
@@ -22528,7 +22849,8 @@
         "description": "攝影大樓係賴三老師嘅專屬樓層，位於C橦後，平時上鎖並清靜。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[191]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22536,8 +22858,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.08466056305791,
-          22.302728122377353
+          114.256479,
+          22.314046
         ]
       },
       "properties": {
@@ -22559,7 +22881,8 @@
         "description": "器材租用室位於攝影大樓內，存放攝影器材同配件，並有論文寫住瑜小六嘅名字。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[191]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22567,8 +22890,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.12547173266194,
-          22.294697909514
+          114.261573,
+          22.315837
         ]
       },
       "properties": {
@@ -22593,7 +22916,8 @@
         "description": "暗房位於攝影大樓內，與器材租用室相連只一門之隔，王達尼匿藏於此避開賴三老師。",
         "confidence": 0.93,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[191]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22634,8 +22958,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.18545159075303,
-          22.446942969405658
+          114.25054,
+          22.304343
         ]
       },
       "properties": {
@@ -22662,7 +22986,8 @@
         "description": "余三村生前最後與家人居住嘅地方",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[192]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22702,8 +23027,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.06471000228885,
-          22.260958304722667
+          114.248832,
+          22.308597
         ]
       },
       "properties": {
@@ -22730,7 +23055,8 @@
         "description": "戰鬥區域之一，余智海跌入該處沙地並形成凹陷，鐵柱自吊機墜落刺穿其身。",
         "confidence": 0.8,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[193]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -22936,7 +23262,9 @@
         "description": "旺角被用嚟比喻艾寶琳嘅多元文化",
         "confidence": 0.7,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "map_hidden": true,
+        "position_source": "由地圖排除：「旺角」喺文中係**比喻**，唔係角色去過嘅地方。喺地圖上標記會誤導。"
       }
     },
     {
@@ -22978,8 +23306,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.92626733806362,
-          22.415689440756847
+          114.254035,
+          22.321538
         ]
       },
       "properties": {
@@ -23003,7 +23331,8 @@
         "description": "王達尼新開咗一間樓上健身室，向新會員提供折扣",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[195]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）；已排除 1 個區域外錨點"
       }
     },
     {
@@ -23011,8 +23340,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.13206637674524,
-          22.300234569314107
+          114.253833,
+          22.320893
         ]
       },
       "properties": {
@@ -23034,7 +23363,8 @@
         "description": "病者學院其中一個區域位於東華三院呂潤財紀念中學",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[195]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）；已排除 1 個區域外錨點"
       }
     },
     {
@@ -23234,8 +23564,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93987319752803,
-          22.353698290989545
+          114.258562,
+          22.308939
         ]
       },
       "properties": {
@@ -23261,7 +23591,8 @@
         "description": "Dr.D進行研究、儲存營養的中轉站，原本封閉了四十多具活人作為營養供應體",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[196]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -23372,8 +23703,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.16805813687343,
-          22.332497482261385
+          114.251079,
+          22.31969
         ]
       },
       "properties": {
@@ -23395,7 +23726,8 @@
         "description": "力霸健身室內設有VIP私人健身房，貴華曾喺入面努力訓練。",
         "confidence": 0.9,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[197]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -23434,8 +23766,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.17921583886472,
-          22.36248367284657
+          114.252075,
+          22.317503
         ]
       },
       "properties": {
@@ -23459,7 +23791,8 @@
         "description": "貴華所屬嘅健身室，與「力學健身室」進行比鬥。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[197]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -23467,8 +23800,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          113.93154177157244,
-          22.34504001678492
+          114.25352,
+          22.318771
         ]
       },
       "properties": {
@@ -23490,7 +23823,8 @@
         "description": "王達尼指示黑鼠商團將生事嘅蒙面人帶去「鼠窩」教訓。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[197]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -23531,8 +23865,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.0585511558709,
-          22.267732394903486
+          114.268877,
+          22.316423
         ]
       },
       "properties": {
@@ -23554,7 +23888,8 @@
         "description": "港島區係香港三大地域之一。",
         "confidence": 1.0,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[198]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     },
     {
@@ -23562,8 +23897,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.2824041733425,
-          22.32958583199817
+          114.268349,
+          22.31562
         ]
       },
       "properties": {
@@ -23585,7 +23920,8 @@
         "description": "病腦指嘅「嘎嘎戈咕圭」位於西面，係一座有人為城牆同鐵門嘅領地，入面有十六米高嘅特殊病獸。",
         "confidence": 0.95,
         "review_status": "reviewed",
-        "source": "bing_gang"
+        "source": "bing_gang",
+        "position_source": "同章（[198]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
       }
     }
   ]

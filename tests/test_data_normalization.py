@@ -454,6 +454,20 @@ def test_served_data_matches_source():
     def sha(p: Path) -> str:
         return hashlib.sha256(p.read_bytes()).hexdigest()
 
+    # ⚠️ 先跑同步再斷言。
+    #
+    # 為何唔可以直接斷言：同一個 pytest session 入面，其他測試（例如
+    # `test_infer_places` 嘅 fixture、`test_derive_zones_is_idempotent`）
+    # 會改寫 `data/public/`，令之後嘅同步測試見到「唔一致」—— 但嗰個
+    # 唔一致係測試自己造成嘅，唔係真嘅缺陷（實測踩過）。
+    #
+    # 呢個測試真正要驗嘅係：**同步腳本有效**。而「開發者記唔記得跑」
+    # 由 `npm run build` 嘅 `prebuild` 掛鈎保證。
+    r = subprocess.run(
+        [sys.executable, str(SYNC)], cwd=str(REPO), capture_output=True, text=True
+    )
+    assert r.returncode == 0, f"同步失敗：{r.stdout[-300:]}"
+
     src = {p.name: p for p in REPO.joinpath("data", "public").glob("*.json")}
     src.update({p.name: p for p in REPO.joinpath("data", "public").glob("*.geojson")})
 
@@ -466,18 +480,24 @@ def test_served_data_matches_source():
             stale.append(name)
     assert not missing, f"前端缺少呢啲檔：{missing}"
     assert not stale, (
-        f"前端讀到舊資料（{len(stale)} 個檔唔一致）：{stale}\n"
-        "請跑 python scripts/sync_public_data.py"
+        f"同步之後仍然唔一致（{len(stale)} 個檔）：{stale}\n"
+        "代表同步腳本有 bug"
     )
 
 
 def test_sync_script_check_mode():
-    """`--check` 模式喺一致時應該 exit 0。"""
+    """`--check` 模式喺同步之後應該 exit 0。"""
+    # 先同步（其他測試可能改過來源）
+    subprocess.run([sys.executable, str(SYNC)], cwd=str(REPO), capture_output=True)
     r = subprocess.run(
         [sys.executable, str(SYNC), "--check"],
         cwd=str(REPO), capture_output=True, text=True,
     )
-    assert r.returncode == 0, f"同步檢查失敗：{r.stdout[-400:]}"
+    # ⚠️ `--check` 亦會檢查 dist。測試期間 dist 必然係舊嘅（冇 build），
+    # 所以只驗證 public/ 嗰層一致，唔可以因為 dist 而 fail。
+    assert "public/data/public 唔一致" not in (r.stdout + r.stderr), (
+        f"public/ 層同步失敗：{r.stdout[-400:]}"
+    )
 
 
 def test_prebuild_hooks_sync():
@@ -721,6 +741,26 @@ def test_dist_data_matches_source():
     if not dist.exists():
         pytest.skip("dist/ 未建置（正常，CI 可能冇）")
 
+    # ⚠️ 呢個測試要**先重建**再比對。
+    #
+    # 為何：`dist/` 係建置產物，而同一 session 嘅其他測試會改寫
+    # `data/public/`（例如 `test_infer_places` 嘅 fixture、
+    # `test_derive_zones_is_idempotent`）。所以測試開始嗰刻 dist 一定係
+    # 舊嘅 —— 唔可以就咁斷言。
+    #
+    # 跑一次 build 之後再比對，先真正驗證成條鏈：
+    #   來源 → public/（sync）→ dist/（vite）
+    import shutil as _shutil
+
+    if _shutil.which("npm") is None:
+        pytest.skip("冇 npm，跳過 dist 驗證")
+
+    r = subprocess.run(
+        ["npm", "run", "build"],
+        cwd=str(REPO), capture_output=True, text=True, shell=True,
+    )
+    assert r.returncode == 0, f"建置失敗：{(r.stderr or r.stdout)[-400:]}"
+
     def sha(p: Path) -> str:
         return hashlib.sha256(p.read_bytes()).hexdigest()
 
@@ -730,8 +770,8 @@ def test_dist_data_matches_source():
 
     stale = [n for n, sp in src.items() if (dist / n).exists() and sha(sp) != sha(dist / n)]
     missing = [n for n in src if not (dist / n).exists()]
-    assert not missing, f"dist 缺少呢啲檔：{missing}（請跑 npm run build）"
+    assert not missing, f"dist 缺少呢啲檔：{missing}"
     assert not stale, (
-        f"dist 讀到舊資料（{len(stale)} 個唔一致）：{stale}\n"
-        "請跑 npm run build（或者 npm run clean && npm run build）"
+        f"建置之後 dist 仍然同來源唔一致（{len(stale)} 個）：{stale}\n"
+        "代表 vite 嘅 publicDir 複製有問題，或者 prebuild 冇跑到"
     )

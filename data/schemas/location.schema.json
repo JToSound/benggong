@@ -170,6 +170,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "map_hidden": {
+          "description": "由地圖標記排除（例如「旺角」係比喻、「香港」係整體設定）。資料仍然保留。",
+          "type": "boolean"
+        },
+        "position_source": {
+          "description": "座標嘅來源說明（人手修正／同章錨定等），可稽核。",
+          "type": "string"
         }
       }
     }
