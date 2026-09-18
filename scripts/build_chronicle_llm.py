@@ -115,6 +115,34 @@ SYSTEM_PROMPT = """你係《病港》小說嘅編年史編輯。呢本小說以�
 `index` 對應輸入嘅編號，必須全部答齊。"""
 
 
+def _flush(results: list[dict]) -> int:
+    """將結果合併入輸出檔（可重複呼叫）。
+
+    為何獨立成函式：批次處理期間每批都要寫一次（見 `main` 嘅註解）。
+    """
+    prev: dict[str, dict] = {}
+    if OUT.exists():
+        for line in OUT.read_text(encoding="utf-8").splitlines():
+            if line:
+                try:
+                    r = json.loads(line)
+                    prev[r["entry_id"]] = r
+                except (json.JSONDecodeError, KeyError):
+                    continue
+    for r in results:
+        prev[r["entry_id"]] = r
+    OUT.parent.mkdir(parents=True, exist_ok=True)
+    OUT.write_text(
+        "\n".join(
+            json.dumps(r, ensure_ascii=False)
+            for r in sorted(prev.values(), key=lambda x: x["entry_id"])
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    return len(prev)
+
+
 def period_label(pid: str) -> str:
     return dict(PERIODS).get(pid, "未知")
 
@@ -281,23 +309,16 @@ def main() -> int:
             stats["ok"] += 1
         print(f"  [{bi}/{len(batches)}] ✅ {len(batch)} 條")
 
-    print(f"\n=== 統計 === 成功 {stats['ok']}／格式錯 {stats['invalid']}／錯誤 {stats['error']}")
+        # ⚠️ **每批都寫入**，唔係等到最後。
+        #
+        # 為何：全量 132 批要 25 分鐘以上。實測遇過 HTTP 402、網絡中斷、
+        # session 中止 —— 如果只在最後寫入，一次中斷就損失全部進度。
+        # 每批寫入嘅成本（幾 KB 磁碟 I/O）遠低於重跑嘅成本。
+        _flush(results)
 
-    # 合併累積
-    prev: dict[str, dict] = {}
-    if OUT.exists():
-        for line in OUT.read_text(encoding="utf-8").splitlines():
-            if line:
-                r = json.loads(line)
-                prev[r["entry_id"]] = r
-    for r in results:
-        prev[r["entry_id"]] = r
-    OUT.write_text(
-        "\n".join(json.dumps(r, ensure_ascii=False) for r in sorted(prev.values(), key=lambda x: x["entry_id"]))
-        + "\n",
-        encoding="utf-8",
-    )
-    print(f"寫入 {OUT}（累計 {len(prev)} 條）")
+    print(f"\n=== 統計 === 成功 {stats['ok']}／格式錯 {stats['invalid']}／錯誤 {stats['error']}")
+    total = _flush(results)
+    print(f"寫入 {OUT}（累計 {total} 條）")
     return 0
 
 
