@@ -1,8 +1,8 @@
 {
   "canvas": {
-    "width": 1536,
-    "height": 1411,
-    "aspect": 1.08859
+    "width": 2048,
+    "height": 1882,
+    "aspect": 1.088204
   },
   "bbox": {
     "lon_min": 114.16,
@@ -23,27 +23,27 @@
   "crop_box": [
     0,
     0,
-    1536,
-    1411
+    2048,
+    1882
   ],
   "output_size": [
-    1536,
-    1411
+    2048,
+    1882
   ],
   "layers": {
     "base": "tko-region.png"
   },
   "stats": {
-    "trees": 5966,
+    "trees": 6060,
     "labels": 14,
     "roads": 16374,
     "buildings": 0,
     "water_bodies": 170,
-    "water_px": 30402,
-    "urban_px": 332671,
-    "urban_share_of_land": 0.2531,
-    "land_px": 1314135,
-    "land_share": 0.6063,
+    "water_px": 53277,
+    "urban_px": 562365,
+    "urban_share_of_land": 0.2399,
+    "land_px": 2344459,
+    "land_share": 0.6083,
     "bbox_span_deg": 0.2
   }
 }

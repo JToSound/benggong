@@ -118,15 +118,15 @@
         "building_labels": true
       },
       "output_size": [
-        1536,
-        1384
+        2048,
+        1845
       ],
       "canvas": {
-        "width": 1536,
-        "height": 1384,
-        "aspect": 1.109827
+        "width": 2048,
+        "height": 1845,
+        "aspect": 1.110027
       },
-      "bytes": 1665980
+      "bytes": 2520163
     },
     {
       "id": "tko-campus",
@@ -158,6 +158,35 @@
       "bytes": 1677138
     },
     {
+      "id": "tko-campus-core",
+      "label": "大本營校園核心",
+      "note": "校園核心：逐幢建築物同內部通道可見",
+      "image": "assets/map-lod/tko-campus-core.png",
+      "coords": "assets/map-lod/tko-campus-core-coords.json",
+      "bbox": {
+        "lon_min": 114.2404,
+        "lon_max": 114.2664,
+        "lat_min": 22.2955,
+        "lat_max": 22.3161
+      },
+      "lod": "street",
+      "lod_layers": {
+        "roads": true,
+        "buildings": true,
+        "building_labels": true
+      },
+      "output_size": [
+        2048,
+        1754
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1754,
+        "aspect": 1.167617
+      },
+      "bytes": 2126116
+    },
+    {
       "id": "tko-north",
       "label": "坑口／寶琳／將軍澳北",
       "note": "41 個地點；坑口、寶琳、將軍澳北一帶",
@@ -176,15 +205,15 @@
         "building_labels": true
       },
       "output_size": [
-        1536,
-        1221
+        2048,
+        1628
       ],
       "canvas": {
-        "width": 1536,
-        "height": 1221,
+        "width": 2048,
+        "height": 1628,
         "aspect": 1.257985
       },
-      "bytes": 1525455
+      "bytes": 2314631
     }
   ]
 }

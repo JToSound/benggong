@@ -1,14 +1,14 @@
 {
   "canvas": {
     "width": 2048,
-    "height": 1845,
-    "aspect": 1.110027
+    "height": 1754,
+    "aspect": 1.167617
   },
   "bbox": {
-    "lon_min": 114.234,
-    "lon_max": 114.27,
-    "lat_min": 22.292,
-    "lat_max": 22.322
+    "lon_min": 114.2404,
+    "lon_max": 114.2664,
+    "lat_min": 22.2955,
+    "lat_max": 22.3161
   },
   "lod": "street",
   "lod_layers": {
@@ -17,33 +17,33 @@
     "building_labels": true
   },
   "projection": "equirectangular",
-  "standard_parallel": 22.307,
+  "standard_parallel": 22.3058,
   "projection_note": "x = (lon - lon_min) * px_per_deg_lon; y = (lat_max - lat) * px_per_deg_lon / cos(lat0); px_per_deg_lon = canvas.width / (lon_max - lon_min)",
   "style": "binggang_handdrawn_parchment",
   "crop_box": [
     0,
     0,
     2048,
-    1845
+    1754
   ],
   "output_size": [
     2048,
-    1845
+    1754
   ],
   "layers": {
-    "base": "tko-campus.png"
+    "base": "tko-campus-core.png"
   },
   "stats": {
-    "trees": 1972,
-    "labels": 3,
-    "roads": 1215,
-    "buildings": 1808,
-    "water_bodies": 229,
-    "water_px": 3290,
-    "urban_px": 744187,
-    "urban_share_of_land": 0.223,
-    "land_px": 3337051,
-    "land_share": 0.8832,
-    "bbox_span_deg": 0.036
+    "trees": 2428,
+    "labels": 2,
+    "roads": 442,
+    "buildings": 639,
+    "water_bodies": 235,
+    "water_px": 5133,
+    "urban_px": 508080,
+    "urban_share_of_land": 0.1659,
+    "land_px": 3062574,
+    "land_share": 0.8526,
+    "bbox_span_deg": 0.026
   }
 }

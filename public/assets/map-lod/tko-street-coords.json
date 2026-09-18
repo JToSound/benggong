@@ -1,8 +1,8 @@
 {
   "canvas": {
-    "width": 1536,
-    "height": 1384,
-    "aspect": 1.109827
+    "width": 2048,
+    "height": 1845,
+    "aspect": 1.110027
   },
   "bbox": {
     "lon_min": 114.232,
@@ -23,27 +23,27 @@
   "crop_box": [
     0,
     0,
-    1536,
-    1384
+    2048,
+    1845
   ],
   "output_size": [
-    1536,
-    1384
+    2048,
+    1845
   ],
   "layers": {
     "base": "tko-street.png"
   },
   "stats": {
-    "trees": 3030,
+    "trees": 2993,
     "labels": 5,
     "roads": 1852,
     "buildings": 5552,
     "water_bodies": 211,
-    "water_px": 831,
-    "urban_px": 229974,
-    "urban_share_of_land": 0.1387,
-    "land_px": 1658306,
-    "land_share": 0.7801,
+    "water_px": 1392,
+    "urban_px": 408156,
+    "urban_share_of_land": 0.1384,
+    "land_px": 2950007,
+    "land_share": 0.7807,
     "bbox_span_deg": 0.06
   }
 }
