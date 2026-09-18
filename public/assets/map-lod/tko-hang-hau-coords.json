@@ -1,0 +1,49 @@
+{
+  "canvas": {
+    "width": 2048,
+    "height": 1476,
+    "aspect": 1.387534
+  },
+  "bbox": {
+    "lon_min": 114.248,
+    "lon_max": 114.278,
+    "lat_min": 22.306,
+    "lat_max": 22.326
+  },
+  "lod": "street",
+  "lod_layers": {
+    "roads": true,
+    "buildings": true,
+    "building_labels": true
+  },
+  "projection": "equirectangular",
+  "standard_parallel": 22.316,
+  "projection_note": "x = (lon - lon_min) * px_per_deg_lon; y = (lat_max - lat) * px_per_deg_lon / cos(lat0); px_per_deg_lon = canvas.width / (lon_max - lon_min)",
+  "style": "binggang_handdrawn_parchment",
+  "crop_box": [
+    0,
+    0,
+    2048,
+    1476
+  ],
+  "output_size": [
+    2048,
+    1476
+  ],
+  "layers": {
+    "base": "tko-hang-hau.png"
+  },
+  "stats": {
+    "trees": 1312,
+    "labels": 3,
+    "roads": 715,
+    "buildings": 1623,
+    "water_bodies": 231,
+    "water_px": 3495,
+    "urban_px": 438469,
+    "urban_share_of_land": 0.152,
+    "land_px": 2884488,
+    "land_share": 0.9542,
+    "bbox_span_deg": 0.03
+  }
+}

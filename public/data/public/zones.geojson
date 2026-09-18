@@ -127,8 +127,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.265456,
-          22.310538
+          114.265267,
+          22.310085
         ]
       },
       "properties": {
@@ -325,16 +325,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25242,
-          22.30377
+          114.248424,
+          22.322665
         ]
       },
       "properties": {
         "id": "zone_11f09f0b09",
         "name": "翠林倖存區",
         "kind": "survivor",
-        "radius_m": 300.0,
-        "radius_source": "default",
+        "radius_m": 80.0,
+        "radius_source": "members",
         "member_location_ids": [
           "loc_0460",
           "loc_0531",
@@ -347,7 +347,7 @@
         ],
         "first_appearance": 139,
         "description": "翠林倖存區以真實屋邨翠林邨為藍本，老鄧曾任其幹部，三腦更被秘密安排成為該邨領導人，大部份村民並不知情。",
-        "evidence": "由 3 個同地區相鄰區域合併；半徑係估算",
+        "evidence": "由 3 個同地區相鄰區域合併（翠林倖存區／翠林邨倖存區／翠林村倖存區）；半徑由 3 個成員地點分佈推導",
         "source": "bing_gang"
       }
     },
@@ -356,8 +356,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256831,
-          22.304878
+          114.262095,
+          22.306796
         ]
       },
       "properties": {

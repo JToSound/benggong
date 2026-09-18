@@ -9,7 +9,8 @@ Phase J 期間我一直手動逐支跑，結果出過幾次次序錯誤（例如
 **依賴關係**：
 
     1. infer_places.py            產生推斷候選
-    2. apply_place_inferences.py  套用已批核 + 傳播 + 修孤兒
+    2. merge_llm_inferences.py    合併 LLM 推斷（規則推斷優先）
+    3. apply_place_inferences.py  套用已批核 + 傳播 + 修孤兒
     3. anchor_fictional_locations 虛構地點錨定到同章已解析地點
     4. apply_location_corrections 人手核實修正（要喺錨定之後，否則會被覆蓋）
     5. derive_zones.py            區域（讀最終座標）+ 反向填 zone_ids
@@ -44,6 +45,7 @@ REPO = Path(__file__).resolve().parent.parent
 
 STEPS: list[tuple[str, str]] = [
     ("infer_places.py", "產生推斷候選"),
+    ("merge_llm_inferences.py", "合併 LLM 推斷（規則推斷優先）"),
     ("apply_place_inferences.py", "套用已批核推斷 + 傳播 + 修孤兒引用"),
     ("anchor_fictional_locations.py", "虛構地點錨定到同章已解析地點"),
     ("apply_location_corrections.py", "人手核實修正"),

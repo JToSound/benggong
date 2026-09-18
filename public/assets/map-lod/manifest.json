@@ -187,6 +187,64 @@
       "bytes": 2126116
     },
     {
+      "id": "tko-hang-hau",
+      "label": "坑口",
+      "note": "坑口一帶：111 個地點",
+      "image": "assets/map-lod/tko-hang-hau.png",
+      "coords": "assets/map-lod/tko-hang-hau-coords.json",
+      "bbox": {
+        "lon_min": 114.248,
+        "lon_max": 114.278,
+        "lat_min": 22.306,
+        "lat_max": 22.326
+      },
+      "lod": "street",
+      "lod_layers": {
+        "roads": true,
+        "buildings": true,
+        "building_labels": true
+      },
+      "output_size": [
+        2048,
+        1476
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1476,
+        "aspect": 1.387534
+      },
+      "bytes": 1961368
+    },
+    {
+      "id": "tko-po-lam",
+      "label": "寶琳",
+      "note": "寶琳一帶：83 個地點",
+      "image": "assets/map-lod/tko-po-lam.png",
+      "coords": "assets/map-lod/tko-po-lam-coords.json",
+      "bbox": {
+        "lon_min": 114.228,
+        "lon_max": 114.258,
+        "lat_min": 22.31,
+        "lat_max": 22.33
+      },
+      "lod": "street",
+      "lod_layers": {
+        "roads": true,
+        "buildings": true,
+        "building_labels": true
+      },
+      "output_size": [
+        2048,
+        1476
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1476,
+        "aspect": 1.387534
+      },
+      "bytes": 1914639
+    },
+    {
       "id": "tko-north",
       "label": "坑口／寶琳／將軍澳北",
       "note": "41 個地點；坑口、寶琳、將軍澳北一帶",

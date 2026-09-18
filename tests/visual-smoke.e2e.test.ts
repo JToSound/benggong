@@ -449,6 +449,116 @@ describe("視覺煙霧測試", () => {
     }
   }, 90_000);
 
+  it("深層連結：#ch=150 直接開到第 150 章", async () => {
+    /*
+     * 為何：分享連結係基本功能，但 hash 解析要正確處理
+     *   - 章節範圍驗證（唔可以畀 #ch=9999 過）
+     *   - `&loc=` 參數
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+
+      await page.goto(`${BASE_URL}/#ch=150`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(1500);
+      const ch = await page.evaluate(() =>
+        document.querySelector("#strip-ch-num")?.textContent?.trim(),
+      );
+      expect(ch, "#ch=150 應該開到第 150 章").toBe("150");
+
+      // 超出範圍應該退回第 1 章
+      await page.goto(`${BASE_URL}/#ch=9999`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(1500);
+      const ch2 = await page.evaluate(() =>
+        document.querySelector("#strip-ch-num")?.textContent?.trim(),
+      );
+      expect(ch2, "超出範圍應該退回第 1 章").toBe("1");
+
+      // 切章節時 hash 應該更新
+      await page.keyboard.press("k");
+      await page.waitForTimeout(600);
+      const hash = await page.evaluate(() => window.location.hash);
+      expect(hash, "切章節應該更新 hash").toContain("ch=2");
+    } finally {
+      await browser.close();
+    }
+  }, 90_000);
+
+  it("PWA：production 有註冊 service worker、有 manifest", async () => {
+    /*
+     * ⚠️ 只喺 production build 才註冊 SW —— dev 期間註冊會令改動睇唔到
+     * （SW 快取舊版），呢個係好常見嘅陷阱。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(2000);
+
+      const hasSW = await page.evaluate(() =>
+        navigator.serviceWorker
+          .getRegistrations()
+          .then((rs) => rs.length > 0)
+          .catch(() => false),
+      );
+      expect(hasSW, "production 應該註冊 service worker").toBe(true);
+
+      const manifest = await page.evaluate(async () => {
+        const link = document.querySelector<HTMLLinkElement>('link[rel="manifest"]');
+        if (!link) return null;
+        const r = await fetch(link.href);
+        return r.ok ? await r.json() : null;
+      });
+      expect(manifest, "應該有有效嘅 manifest.webmanifest").not.toBeNull();
+      expect(manifest.name, "manifest 應該有 app 名").toContain("病港");
+
+      // SW 要控制頁面（clients.claim 之後）
+      const controlled = await page.evaluate(() => Boolean(navigator.serviceWorker.controller));
+      expect(controlled, "SW 應該已接管頁面").toBe(true);
+    } finally {
+      await browser.close();
+    }
+  }, 90_000);
+
+  it("PWA：production 有註冊 service worker、有 manifest", async () => {
+    /*
+     * ⚠️ 只喺 production build 才註冊 SW —— dev 期間註冊會令改動睇唔到
+     * （SW 快取舊版），呢個係好常見嘅陷阱。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(2000);
+
+      const hasSW = await page.evaluate(() =>
+        navigator.serviceWorker
+          .getRegistrations()
+          .then((rs) => rs.length > 0)
+          .catch(() => false),
+      );
+      expect(hasSW, "production 應該註冊 service worker").toBe(true);
+
+      const manifest = await page.evaluate(async () => {
+        const link = document.querySelector<HTMLLinkElement>('link[rel="manifest"]');
+        if (!link) return null;
+        const r = await fetch(link.href);
+        return r.ok ? await r.json() : null;
+      });
+      expect(manifest, "應該有有效嘅 manifest.webmanifest").not.toBeNull();
+      expect(manifest.name, "manifest 應該有 app 名").toContain("病港");
+
+      // SW 要控制頁面（clients.claim 之後）
+      const controlled = await page.evaluate(() => Boolean(navigator.serviceWorker.controller));
+      expect(controlled, "SW 應該已接管頁面").toBe(true);
+    } finally {
+      await browser.close();
+    }
+  }, 90_000);
+
   it("地圖有真正渲染：標記、區域、事件", async () => {
     const browser = await launch();
     if (!browser) return;

@@ -70,6 +70,24 @@ async function boot(): Promise<void> {
   }
 }
 
+/**
+ * 註冊 service worker（只喺 production）。
+ *
+ * ⚠️ 為何 dev 唔註冊：開發期間 SW 會快取 `dist/` 嘅舊版，令改動
+ * 睇唔到 —— 呢個係好常見嘅陷阱（「明明改咗但畫面冇變」）。
+ * `import.meta.env.PROD` 由 Vite 喺 build 時靜態替換，dev 直接跳過。
+ */
+function registerServiceWorker(): void {
+  if (!import.meta.env.PROD) return;
+  if (!("serviceWorker" in navigator)) return;
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register(`${import.meta.env.BASE_URL}sw.js`)
+      .catch((e) => console.warn("[病港地圖] SW 註冊失敗", e));
+  });
+}
+
 if (root) {
   void boot();
+  registerServiceWorker();
 }

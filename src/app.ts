@@ -80,6 +80,7 @@ export class App {
         </div>
         <nav aria-label="主要導覽">
           <button id="btn-search" type="button" class="nav-btn">🔍 搜尋</button>
+          <button id="btn-share" type="button" class="nav-btn" title="複製呢一章嘅連結">🔗</button>
           <button id="btn-export" type="button" class="nav-btn" title="匯出目前地圖為 PNG">⬇</button>
           <button id="btn-theme" type="button" class="nav-btn" title="切換深色／淺色主題">🌙</button>
           <button id="btn-help" type="button" class="nav-btn" title="鍵盤快捷鍵（?）">?</button>
@@ -119,6 +120,11 @@ export class App {
     // Bind nav buttons
     this.root.querySelector("#btn-about")!.addEventListener("click", () => this.aboutModal.show());
     this.root.querySelector("#btn-search")!.addEventListener("click", () => this.searchBox.show());
+    // 分享連結
+    this.root
+      .querySelector("#btn-share")!
+      .addEventListener("click", () => void this.copyShareLink());
+
     // 匯出 PNG
     this.root.querySelector("#btn-export")!.addEventListener("click", () => {
       void this.exportCurrentMap();
@@ -143,6 +149,46 @@ export class App {
     this.root
       .querySelector("#btn-help")!
       .addEventListener("click", () => this.aboutModal.show());
+  }
+
+  /**
+   * 複製目前狀態嘅可分享連結。
+   *
+   * 用 `navigator.clipboard`，唔支援就退回 `execCommand`（舊瀏覽器／
+   * 非 HTTPS 環境）。兩者都失敗就彈出 prompt 讓用戶自己複製 ——
+   * 唔可以靜靜咁失敗。
+   */
+  private async copyShareLink(): Promise<void> {
+    const url = window.location.href;
+    const btn = this.root.querySelector("#btn-share") as HTMLButtonElement | null;
+    const prev = btn?.textContent ?? "🔗";
+    const flash = (txt: string) => {
+      if (!btn) return;
+      btn.textContent = txt;
+      setTimeout(() => {
+        btn.textContent = prev;
+      }, 1400);
+    };
+    try {
+      await navigator.clipboard.writeText(url);
+      flash("✓");
+    } catch {
+      // 退回：建立暫存 textarea 再 execCommand
+      try {
+        const ta = document.createElement("textarea");
+        ta.value = url;
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand("copy");
+        ta.remove();
+        if (!ok) throw new Error("execCommand 失敗");
+        flash("✓");
+      } catch {
+        window.prompt("複製呢條連結：", url);
+      }
+    }
   }
 
   /**
@@ -232,10 +278,7 @@ export class App {
     this.chapterStrip.updateSelection();
     this.svgMap.flyToChapter(ch);
     this.storyPanel.updateForChapter(ch);
-    // Update hash
-    if (window.location.hash !== `#ch=${ch}`) {
-      history.replaceState(null, "", `#ch=${ch}`);
-    }
+    this.syncHash();
   }
 
   setSelectedLocation(locId: string | null): void {
@@ -243,6 +286,23 @@ export class App {
     this.selectedEventId = null;
     this.svgMap.render();
     this.storyPanel.updateForLocation(locId);
+    this.syncHash();
+  }
+
+  /**
+   * 將目前狀態寫入 URL hash（可分享）。
+   *
+   * 用 `replaceState` 而唔係 `pushState`：章節係「狀態」唔係「導航
+   * 歷史」—— 用 `pushState` 嘅話快速按 `k` 會塞爆瀏覽器歷史，
+   * 用戶想返回上一頁就要按幾十次。
+   */
+  private syncHash(): void {
+    const parts = [`ch=${this.currentChapter}`];
+    if (this.selectedLocationId) parts.push(`loc=${this.selectedLocationId}`);
+    const want = `#${parts.join("&")}`;
+    if (window.location.hash !== want) {
+      history.replaceState(null, "", want);
+    }
   }
 
   setSelectedEvent(eventId: string | null): void {
@@ -250,6 +310,16 @@ export class App {
     this.selectedLocationId = null;
     this.svgMap.render();
     this.storyPanel.updateForEvent(eventId);
+  }
+
+  /** 全書章節總數（router 驗證 hash 用）。 */
+  getChapterTotal(): number {
+    return this.data.config.chapters?.total || 198;
+  }
+
+  /** 目前選中嘅地點 id（router 比對 hash 用）。 */
+  getSelectedLocationId(): string | null {
+    return this.selectedLocationId;
   }
 
   getCurrentChapter(): number {

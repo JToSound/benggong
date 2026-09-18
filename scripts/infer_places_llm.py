@@ -153,6 +153,30 @@ CURATED_VERIFIED: dict[str, dict] = {
             "精度標 approximate。"
         ),
     },
+    "仁愛堂田家炳小學": {
+        "lonlat": [114.26116, 22.30632],
+        "source": (
+            "學校官方網站：地址「新界將軍澳唐俊街3號」"
+            "（https://www.yottkpps.edu.hk/CP/pG/61/163/）"
+        ),
+        "osm_evidence": (
+            "OSM 有「唐俊街 Tong Chun Street」（98 個座標點），質心 "
+            "(114.26116, 22.30632)。⚠️ 街道級近似（校舍喺呢條街），"
+            "精度標 approximate。"
+        ),
+    },
+    "順德聯誼總會梁潔華小學": {
+        "lonlat": [114.25692, 22.32213],
+        "source": (
+            "學校官方網站：地址「新界將軍澳貿泰路2號」"
+            "（https://www.lkw.edu.hk/）；維基百科補充「位於將軍澳寶琳"
+            "中心地帶，旁邊為新都城中心三期」"
+        ),
+        "osm_evidence": (
+            "OSM 有「貿泰路 Mau Tai Road」（66 個座標點），質心 "
+            "(114.25692, 22.32213)。⚠️ 街道級近似，精度標 approximate。"
+        ),
+    },
     "靈實醫院": {
         "lonlat": [114.2566, 22.3138],
         "source": (
