@@ -79,9 +79,32 @@ OUT = REPO / "data" / "private" / "review" / "chronicle-llm.jsonl"
 #: nemotron 比 deepseek 免費版快 **12 倍**，所以揀佢。
 #: 可用 `--model` 覆寫。
 MODEL = "nvidia/nemotron-3-super-120b-a12b:free"
+
+#: **自動 fallback 鏈**。
+#:
+#: ⚠️ 為何需要（實測血淚）
+#: ----------------------
+#: 免費模型池係**共享額度**，會**輪流**限流：
+#:   - 一開始 nemotron 18.4s 好快
+#:   - 連續用 ~40 分鐘之後變成 HTTP 429
+#:   - 同時 deepseek 由 220s 回復到 1.0s
+#:
+#: 所以「揀一個最好嘅模型」係錯嘅方向 —— 應該係**一個鏈，逐個試**。
+#: 呢個令長跑任務可以喺免費池嘅波動中完成，唔需要人手介入。
+#:
+#: 排序：實測速度 + JSON 可靠性。全部係免費模型。
+FALLBACK_CHAIN = [
+    "nvidia/nemotron-3-super-120b-a12b:free",
+    "deepseek/deepseek-v4-flash-0731:free",
+    "qwen/qwen3.8-27b:free",
+    "z-ai/glm-5.2:free",
+]
 SCHEMA_VERSION = "chronicle-llm-v1"
 TEMPERATURE = 0.0
 BATCH = 20
+
+#: 每批最多重試幾次（指數退避：5s → 10s → 20s → 40s → 60s）。
+MAX_BATCH_RETRY = 5
 
 #: 免費模型嘅 context 較細，批次要縮。
 FREE_BATCH = 8
@@ -171,44 +194,69 @@ def build_prompt(items: list[dict]) -> str:
     )
 
 
-def call_llm(client, user: str, cache, ledger) -> dict | None:
-    key = hashlib.sha256(
-        json.dumps(
-            {"model": MODEL, "system": SYSTEM_PROMPT, "user": user, "temp": TEMPERATURE},
-            ensure_ascii=False,
-            sort_keys=True,
-        ).encode("utf-8")
-    ).hexdigest()
-    hit = cache.get(key)
-    if hit is not None:
-        return hit
-    content = client.chat(
-        MODEL,
-        [
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": user},
-        ],
-        temperature=TEMPERATURE,
-        # ⚠️ `deepseek-v4.1-flash` 係 **reasoning 模型** —— 佢會先燒一批
-        # tokens 做推理，才出答案。實測 max_tokens=4000 會出現
-        # `finish_reason=length`、content 變 null。
-        max_tokens=16000,
-    )
-    try:
-        parsed = json.loads(content)
-    except json.JSONDecodeError:
-        return None
-    cache.put(key, parsed)
-    ledger.append({
-        "run_id": "chronicle-llm",
-        "chapter": 0,
-        "segment_index": 0,
-        "model": MODEL,
-        "prompt_hash": key[:16],
-        "schema_version": SCHEMA_VERSION,
-        "status": "ok",
-    })
-    return parsed
+#: 每條結果大約需要幾多 completion tokens（period + flashback 兩個欄位）。
+#:
+#: ⚠️ 為何要**自適應**而唔係固定 16,000
+#: ------------------------------------
+#: 實測同一批 12 條：
+#:   max_tokens=16,000 → **220s**（模型生成過多）
+#:   max_tokens= 4,000 → **7.4s**，而且 12/12 完整
+#:   max_tokens= 2,000 → 2.8s 但只出 1/12（被截斷）
+#:
+#: 即係「加大預算」反而慢 30 倍。正確做法係按批次大小計需要幾多。
+#: 每條約 40 tokens（JSON 兩個欄位 + 索引），加 800 做緩衝。
+TOKENS_PER_ENTRY = 40
+TOKEN_BUFFER = 800
+
+
+def call_llm(client, user: str, cache, ledger, n_entries: int = 12) -> dict | None:
+    """逐個試 fallback 鏈上嘅模型，回傳第一個成功嘅結果。
+
+    ⚠️ 快取 key **包括模型名** —— 唔同模型嘅輸出可能唔同，唔可以撈埋。
+    """
+    msgs = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {"role": "user", "content": user},
+    ]
+    last_err: Exception | None = None
+    for model in FALLBACK_CHAIN:
+        key = hashlib.sha256(
+            json.dumps(
+                {"model": model, "system": SYSTEM_PROMPT, "user": user,
+                 "temp": TEMPERATURE},
+                ensure_ascii=False,
+                sort_keys=True,
+            ).encode("utf-8")
+        ).hexdigest()
+        hit = cache.get(key)
+        if hit is not None:
+            return hit
+        try:
+            content = client.chat(
+                model,
+                msgs,
+                temperature=TEMPERATURE,
+                max_tokens=TOKENS_PER_ENTRY * n_entries + TOKEN_BUFFER,
+            )
+            parsed = json.loads(content)
+            cache.put(key, parsed)
+            ledger.append({
+                "run_id": "chronicle-llm", "chapter": 0, "segment_index": 0,
+                "model": model, "prompt_hash": key[:16],
+                "schema_version": SCHEMA_VERSION, "status": "ok",
+            })
+            return parsed
+        except Exception as e:  # noqa: BLE001
+            last_err = e
+            msg = str(e)
+            # 429／5xx／超時 → 試下一個模型；其他錯誤（例如 JSON 格式）
+            # 亦試下一個 —— 反正呢個模型今次出唔到答案。
+            if "429" in msg or "402" in msg or "5" in msg[:6] or "timeout" in msg.lower():
+                continue
+            continue
+    if last_err:
+        raise last_err
+    return None
 
 
 def main() -> int:
@@ -267,10 +315,15 @@ def main() -> int:
     # 回應時間同 token 消耗。實測 ultra 會令 20 條嘅批次燒爆 token 預算。
     import os
 
-    os.environ["OPENROUTER_EFFORT"] = args.effort
-
     env = load_env(REPO)
     api_key, base_url = require_api_key()
+
+    # ⚠️ 一定要喺 `load_env()` **之後**才設定。
+    #
+    # 實測踩過：`load_env()` 會將 `.env` 讀入 `os.environ`，而 `.env`
+    # 有 `OPENROUTER_EFFORT=ultra` —— 如果之前設定，就會被覆蓋。
+    # 後果係 reasoning 燒到爆，12 條批次要 220s（正常 7.4s）。
+    os.environ["OPENROUTER_EFFORT"] = args.effort
     client = OpenRouterClient(api_key, base_url, timeout_s=180)
     cache = ExtractionCache(run_id="chronicle-llm")
     ledger = RunLedger()
@@ -281,22 +334,29 @@ def main() -> int:
 
     for bi, batch in enumerate(batches, 1):
         user = build_prompt(batch)
+        # ⚠️ **指數退避重試**，唔可以跳過批次。
+        #
+        # 實測：免費池會出現**帳戶級**限流（全部模型同時 429）。如果直接
+        # 跳過，嗰批事件就會永遠冇時期判斷（靜默缺失）。
+        # 所以必須退避重試，直到成功或者超出重試上限。
         raw = None
-        for attempt in range(3):
+        for attempt in range(MAX_BATCH_RETRY):
             try:
-                raw = call_llm(client, user, cache, ledger)
+                raw = call_llm(client, user, cache, ledger, len(batch))
                 break
             except Exception as e:  # noqa: BLE001
                 msg = str(e)
-                if ("429" in msg or "timeout" in msg.lower()) and attempt < 2:
-                    wait = 5 * (attempt + 1)
-                    print(f"  [{bi}/{len(batches)}] 重試（等 {wait}s）")
+                if attempt < MAX_BATCH_RETRY - 1:
+                    wait = min(60, 5 * (2**attempt))
+                    print(f"  [{bi}/{len(batches)}] ⏳ 限流，等 {wait}s 重試"
+                          f"（{attempt + 1}/{MAX_BATCH_RETRY}）")
                     time.sleep(wait)
                     continue
-                print(f"  [{bi}/{len(batches)}] 錯誤 {msg[:70]}")
+                print(f"  [{bi}/{len(batches)}] ❌ 重試耗盡：{msg[:60]}")
                 stats["error"] += 1
-                break
         if not raw:
+            continue
+        if not raw.get("results"):
             stats["invalid"] += 1
             continue
 
