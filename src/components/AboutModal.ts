@@ -29,6 +29,12 @@ export class AboutModal {
     modal.classList.add("open");
   }
 
+  /** 目前有冇開住（Esc 處理要用）。 */
+  isOpen(): boolean {
+    const modal = this.root.querySelector("#about-modal");
+    return Boolean(modal?.classList.contains("open"));
+  }
+
   hide(): void {
     const modal = this.root.querySelector("#about-modal");
     if (modal) modal.classList.remove("open");

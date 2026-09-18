@@ -217,6 +217,113 @@ describe("視覺煙霧測試", () => {
     }
   }, 120_000);
 
+  it("區域有常駐標籤（唔止 tooltip）", async () => {
+    /*
+     * 為何：只有 tooltip 唔夠 —— 用戶要 hover 才知係咩區域，一眼睇唔到
+     * 「邊度安全、邊度危險」。所以區域要喺畫面上夠大時顯示常駐標籤。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(1000);
+      for (let i = 0; i < 197; i++) await page.keyboard.press("k");
+      await page.waitForTimeout(1500);
+      for (let i = 0; i < 3; i++) await page.click("#map-zoom-in");
+      await page.waitForTimeout(900);
+
+      const labels = await page.evaluate(() =>
+        Array.from(document.querySelectorAll(".zone-label")).map(
+          (t) => t.textContent || "",
+        ),
+      );
+      expect(labels.length, "放大之後應該有區域標籤").toBeGreaterThan(0);
+      expect(labels.join(""), "標籤應該係區域名").toMatch(/倖存區|病窩|巢穴|據點/);
+    } finally {
+      await browser.close();
+    }
+  }, 120_000);
+
+  it("窄螢幕：故事面板變抽屜，唔會霸住地圖", async () => {
+    /*
+     * 為何：原本完全冇 media query —— 1280px 以下嘅螢幕，380px 面板
+     * 佔咗成個畫面三分之一，地圖剩返好窄。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      // 闊螢幕：面板內嵌，冇切換鈕
+      const wide = await browser.newPage({ viewport: { width: 1600, height: 950 } });
+      await wide.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await wide.waitForTimeout(900);
+      const w = await wide.evaluate(() => ({
+        pane: document.querySelector("#story-pane")!.getBoundingClientRect().width,
+        toggle: getComputedStyle(document.querySelector("#btn-toggle-panel")!).display,
+        mapW: document.querySelector("#svg-map")!.getBoundingClientRect().width,
+      }));
+      expect(w.pane, "闊螢幕面板應該內嵌").toBeGreaterThan(300);
+      expect(w.toggle, "闊螢幕唔需要切換鈕").toBe("none");
+      await wide.close();
+
+      // 窄螢幕：面板收起，地圖用盡闊度
+      const narrow = await browser.newPage({ viewport: { width: 900, height: 700 } });
+      await narrow.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await narrow.waitForTimeout(900);
+      const n = await narrow.evaluate(() => ({
+        collapsed: document
+          .querySelector("#story-pane")!
+          .classList.contains("is-collapsed"),
+        toggle: getComputedStyle(document.querySelector("#btn-toggle-panel")!).display,
+        mapW: document.querySelector("#svg-map")!.getBoundingClientRect().width,
+        vw: innerWidth,
+      }));
+      expect(n.toggle, "窄螢幕應該有切換鈕").not.toBe("none");
+      expect(n.collapsed, "窄螢幕預設應該收起面板").toBe(true);
+      expect(
+        n.mapW / n.vw,
+        `窄螢幕地圖應該用盡闊度（實際 ${Math.round((n.mapW / n.vw) * 100)}%）`,
+      ).toBeGreaterThan(0.9);
+      await narrow.close();
+    } finally {
+      await browser.close();
+    }
+  }, 120_000);
+
+  it("`?` 開快捷鍵提示，`Esc` 關", async () => {
+    /*
+     * 為何要驗 Esc：實測踩過 —— Esc 原本只清地圖選擇，唔會關浮層，
+     * 令開咗嘅提示按 Esc 冇反應。優先次序應該係「先關浮層，再清選擇」。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(900);
+
+      await page.keyboard.press("?");
+      await page.waitForTimeout(500);
+      let st = await page.evaluate(() =>
+        document.querySelector("#about-modal")?.classList.contains("open"),
+      );
+      expect(st, "按 ? 應該開提示").toBe(true);
+      const kbd = await page.evaluate(
+        () => document.querySelectorAll("#about-modal kbd").length,
+      );
+      expect(kbd, "提示應該列出快捷鍵").toBeGreaterThan(3);
+
+      await page.keyboard.press("Escape");
+      await page.waitForTimeout(400);
+      st = await page.evaluate(() =>
+        document.querySelector("#about-modal")?.classList.contains("open"),
+      );
+      expect(st, "按 Esc 應該關提示").toBe(false);
+    } finally {
+      await browser.close();
+    }
+  }, 90_000);
+
   it("地圖有真正渲染：標記、區域、事件", async () => {
     const browser = await launch();
     if (!browser) return;

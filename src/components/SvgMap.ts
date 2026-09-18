@@ -312,6 +312,12 @@ export class SvgMap {
     this.init();
   }
 
+  /**
+   * 需要隨縮放調整嘅 SVG 元素快取（render 時填，動畫每幀更新）。
+   * 見 `setScaled`。
+   */
+  private scaledEls: Array<{ el: Element; attr: string; base: number }> = [];
+
   /** 相對基準視圖嘅縮放倍率（1 = 全港）。 */
   get viewScale(): number {
     return BASE_VIEW.w / this.view.w;
@@ -331,6 +337,29 @@ export class SvgMap {
   private markerR(base: number): number {
     const s = Math.min(Math.max(this.viewScale, 0.5), 10);
     return base / s;
+  }
+
+  /**
+   * 設定一個「隨縮放調整」嘅 SVG 屬性，同時記錄落快取。
+   *
+   * 為何要快取
+   * ----------
+   * 標記半徑係 `base / viewScale`。動畫期間 viewScale 每幀都變，
+   * 但**唔可以每幀重建 DOM**（50 個標記 × 60fps = 太重）。
+   *
+   * 所以：render 時記低 (元素, 屬性, 基準值)，動畫每幀只更新屬性值。
+   * 呢個係 O(n) 屬性寫入，冇 DOM 重建。
+   */
+  private setScaled(el: Element, attr: string, base: number): void {
+    this.scaledEls.push({ el, attr, base });
+    el.setAttribute(attr, String(this.markerR(base)));
+  }
+
+  /** 動畫每幀呼叫：按目前 viewScale 更新所有快取元素。 */
+  private applyLiveScale(): void {
+    for (const { el, attr, base } of this.scaledEls) {
+      el.setAttribute(attr, String(this.markerR(base)));
+    }
   }
 
   private init(): void {
@@ -710,6 +739,7 @@ export class SvgMap {
         h: start.h + (target.h - start.h) * eased,
       };
       this.applyViewBox();
+      this.applyLiveScale();
       if (t < 1) {
         this.animFrameId = requestAnimationFrame(step);
       } else {
@@ -807,6 +837,9 @@ export class SvgMap {
     }
 
     // 只重建標記圖層，底圖 <image> 保持不動（避免每次 render 重新載入 PNG）
+    // 每次重建圖層之前清空縮放快取（舊元素已經唔存在）
+    this.scaledEls = [];
+
     const zonesLayer = content.querySelector("#zones-layer")!;
     const routesLayer = content.querySelector("#routes-layer")!;
     const locLayer = content.querySelector("#locations-layer")!;
@@ -850,6 +883,8 @@ export class SvgMap {
       if (!active) continue;
       const style = ZONE_STYLE[zp.kind] ?? ZONE_STYLE.nest;
       // 米 → user unit（x 軸 = 經度）
+      // ⚠️ 區域半徑係**真實地理尺寸**，唔應該隨縮放改變 ——
+      // 所以呢個 r 唔入 scaledEls（同標記唔同）。
       const r = zp.radius_m / 102940;
       const { x, y } = lonlatToViewbox(
         z.geometry.coordinates[0],
@@ -863,11 +898,11 @@ export class SvgMap {
       circle.setAttribute("fill", style.fill);
       circle.setAttribute("fill-opacity", "0.12");
       circle.setAttribute("stroke", style.stroke);
-      circle.setAttribute("stroke-width", String(this.markerR(0.0009)));
+      this.setScaled(circle, "stroke-width", 0.0009);
       circle.setAttribute("stroke-opacity", "0.7");
       if (zp.radius_source === "default") {
         // 估算範圍：虛線，令佢睇落唔同實證範圍一樣確定
-        circle.setAttribute("stroke-dasharray", String(this.markerR(0.004)));
+        this.setScaled(circle, "stroke-dasharray", 0.004);
       }
       circle.setAttribute("data-zone-id", zp.id);
       circle.setAttribute("data-zone-name", zp.name);
@@ -884,6 +919,38 @@ export class SvgMap {
         `${zp.evidence}`;
       circle.appendChild(title);
       zonesLayer.appendChild(circle);
+
+      /*
+       * 區域常駐標籤
+       * ------------
+       * 只有 tooltip 唔夠 —— 用戶要 hover 才知係咩區域，一眼睇唔到
+       * 「邊度安全、邊度危險」。
+       *
+       * 顯示條件：區域圓形喺畫面上夠大（直徑 ≥ 畫面寬度 6%）才顯示，
+       * 否則細區域嘅字會疊埋一齊，反而更亂。
+       */
+      const onScreenPct = (r * 2) / this.view.w;
+      if (onScreenPct >= 0.06) {
+        const label = document.createElementNS(SVG_NS, "text");
+        label.setAttribute("x", String(x));
+        // 放喺圓形上方少許，避免遮住中心
+        label.setAttribute("y", String(y - r * 0.82));
+        label.setAttribute("text-anchor", "middle");
+        label.setAttribute("class", "zone-label");
+        label.setAttribute("fill", style.stroke);
+        label.setAttribute("font-size", String(this.markerR(0.0042)));
+        label.setAttribute("font-weight", "650");
+        label.setAttribute("paint-order", "stroke");
+        label.setAttribute("stroke", "rgba(11, 15, 22, 0.85)");
+        label.setAttribute("stroke-width", String(this.markerR(0.0012)));
+        label.setAttribute("stroke-linejoin", "round");
+        label.setAttribute("pointer-events", "none");
+        label.textContent = zp.name;
+        // 標籤字級亦要隨縮放調整
+        this.scaledEls.push({ el: label, attr: "font-size", base: 0.0042 });
+        this.scaledEls.push({ el: label, attr: "stroke-width", base: 0.0012 });
+        zonesLayer.appendChild(label);
+      }
     }
 
     // Routes
@@ -925,7 +992,7 @@ export class SvgMap {
       el.setAttribute("d", d);
       el.setAttribute("class", "route-line");
       el.setAttribute("stroke", route.properties.color || "#F39C12");
-      el.setAttribute("stroke-width", String(this.markerR(0.0015)));
+      this.setScaled(el, "stroke-width", 0.0015);
       el.setAttribute("fill", "none");
       el.setAttribute("opacity", String(opacity));
       el.setAttribute("data-route-id", route.properties.id);
@@ -992,18 +1059,20 @@ export class SvgMap {
       const anyActive = items.some((m) => m.active);
       const anySelected = items.some((m) => m.selected);
       const anyReal = items.some((m) => !m.fictional);
-      const r = this.markerR(anyActive ? 0.005 : 0.002);
+      // 標記半徑基準值（會隨縮放調整，見 setScaled）
+      const rBase = anyActive ? 0.005 : 0.002;
+      const r = this.markerR(rBase);
       const fill = anySelected ? "#ffeb3b" : anyReal ? "#e67e22" : "#9b59b6";
 
       if (items.length === 1) {
         const el = document.createElementNS(SVG_NS, "circle");
         el.setAttribute("cx", String(head.x));
         el.setAttribute("cy", String(head.y));
-        el.setAttribute("r", String(r));
+        this.setScaled(el, "r", rBase);
         el.setAttribute("class", "location-marker");
         el.setAttribute("fill", fill);
         el.setAttribute("stroke", "#fff");
-        el.setAttribute("stroke-width", String(this.markerR(0.0008)));
+        this.setScaled(el, "stroke-width", 0.0008);
         el.setAttribute("opacity", String(anyActive ? 0.9 : 0.45));
         el.setAttribute("data-loc-id", head.id);
         el.setAttribute("data-loc-name", head.name);
@@ -1028,10 +1097,10 @@ export class SvgMap {
       const c = document.createElementNS(SVG_NS, "circle");
       c.setAttribute("cx", String(head.x));
       c.setAttribute("cy", String(head.y));
-      c.setAttribute("r", String(r * 1.35));
+      this.setScaled(c, "r", rBase * 1.35);
       c.setAttribute("fill", fill);
       c.setAttribute("stroke", "#fff");
-      c.setAttribute("stroke-width", String(this.markerR(0.0008)));
+      this.setScaled(c, "stroke-width", 0.0008);
       c.setAttribute("opacity", String(anyActive ? 0.9 : 0.5));
       g.appendChild(c);
       const label = document.createElementNS(SVG_NS, "text");
@@ -1070,16 +1139,16 @@ export class SvgMap {
       const { x, y } = lonlatToViewbox(lon, lat);
       const isCurrent = props.chapter === cur;
       const isSelected = this.app.selectedEventId === props.id;
-      const r = this.markerR(isCurrent ? 0.008 : 0.005);
+      const rBase = isCurrent ? 0.008 : 0.005;
       const fill = isSelected ? "#ff5252" : isCurrent ? "#e74c3c" : "#f39c12";
       const el = document.createElementNS(SVG_NS, "circle");
       el.setAttribute("cx", String(x));
       el.setAttribute("cy", String(y));
-      el.setAttribute("r", String(r));
+      this.setScaled(el, "r", rBase);
       el.setAttribute("class", "event-marker");
       el.setAttribute("fill", fill);
       el.setAttribute("stroke", "#fff");
-      el.setAttribute("stroke-width", String(this.markerR(0.001)));
+      this.setScaled(el, "stroke-width", 0.001);
       el.setAttribute("opacity", String(isCurrent ? 1.0 : 0.6));
       el.setAttribute("data-event-id", props.id);
       el.setAttribute("data-event-title", props.title);

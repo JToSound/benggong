@@ -982,3 +982,80 @@ html, body {
   background-clip: content-box;
 }
 *::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); background-clip: content-box; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 區域標籤
+ * ══════════════════════════════════════════════════════════════════════════
+ * 由 SvgMap 動態建立，只喺區域喺畫面上夠大時顯示。
+ * 用 `paint-order: stroke` 令描邊喺字底下，即使壓到底圖都讀得到。 */
+.zone-label {
+  user-select: none;
+  letter-spacing: 0.3px;
+  paint-order: stroke fill;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 響應式（Responsive）
+ * ══════════════════════════════════════════════════════════════════════════
+ * 原本**完全冇 media query** —— 1280px 以下嘅螢幕，380px 面板佔咗
+ * 成個畫面三分之一，地圖剩返好窄；再窄啲（平板／手機）更加用唔到。
+ *
+ * 分三級：
+ *   ≥1280px  完整佈局（地圖 + 380px 面板）
+ *   1024–1279 面板收窄到 320px
+ *   <1024px   面板變浮層抽屜，用「面板」按鈕開關
+ */
+
+/* 面板切換按鈕：預設隱藏（闊螢幕唔需要） */
+.panel-toggle { display: none; }
+
+@media (max-width: 1279px) {
+  .pane-story { width: 320px; padding: var(--sp-3); }
+}
+
+@media (max-width: 1023px) {
+  /* 面板變浮層：由右邊滑入，蓋喺地圖上面 */
+  .panel-toggle { display: inline-block; }
+  .pane-story {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(360px, 88vw);
+    z-index: 60;
+    box-shadow: var(--shadow-lg);
+    transition: transform var(--transition);
+  }
+  .pane-story.is-collapsed {
+    transform: translateX(100%);
+    /* 收起時唔應該攔截點擊（否則會擋住地圖右邊） */
+    pointer-events: none;
+  }
+  .workspace { position: relative; }
+
+  /* 窄螢幕：圖例縮細，唔好霸太多位 */
+  .map-legend {
+    font-size: var(--fs-xs);
+    padding: var(--sp-2) var(--sp-3);
+    max-width: 44vw;
+  }
+  .legend-item { padding: 2px 0; }
+}
+
+@media (max-width: 639px) {
+  #topbar { padding: var(--sp-2) var(--sp-3); }
+  #topbar h1 { font-size: var(--fs-lg); }
+  #topbar .tagline { display: none; }
+  .nav-btn { padding: 5px 10px; font-size: var(--fs-sm); }
+  .map-legend { max-width: 56vw; }
+  .map-ctrl { width: 30px; height: 30px; font-size: var(--fs-base); }
+  .ch-pill { min-width: 30px; height: 24px; }
+}
+
+/* 尊重「減少動態」偏好（無障礙） */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

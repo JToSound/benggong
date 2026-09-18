@@ -59,6 +59,12 @@ export class SearchBox {
     modal.classList.add("open");
   }
 
+  /** 目前有冇開住（Esc 處理要用）。 */
+  isOpen(): boolean {
+    const modal = this.root.querySelector("#search-modal");
+    return Boolean(modal?.classList.contains("open"));
+  }
+
   hide(): void {
     const modal = this.root.querySelector("#search-modal");
     if (modal) modal.classList.remove("open");
