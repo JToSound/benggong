@@ -88,7 +88,17 @@ LOD_TIERS = [
     #   region    13 m/px → 主要道路約 2 px：畫路；建築 1.5 px：唔畫
     #   district   7 m/px → 道路 3 px、建築 3 px：兩者都畫
     #   street     4 m/px → 道路 6 px、建築 5 px：加樓宇標籤
+    # ⚠️ 新增 0.45° 一級。
+    #
+    # 為何：`build_map_lods.py` 加咗全港分區層（hk-nw/ne/sw/se，各 0.35°）
+    # 之後，原本 0.900 嘅門檻會令佢哋被判為 `overview`（唔畫道路）——
+    # 但 0.35° 喺 2048 px 畫布下係 **17 m/px**，道路有 1–2 px 闊，
+    # 畫得出而且有資訊價值。實測 `phase-j-lod` 測試報
+    # 「hk-nw 應該有道路圖層」。
+    #
+    # 所以喺 0.45–0.90 之間加一級「regional overview」：畫路唔畫樓。
     (0.900, "overview", False, False, False),
+    (0.450, "regional", True, False, False),
     (0.260, "region", True, False, False),
     (0.120, "district", True, True, False),
     (0.070, "street", True, True, True),

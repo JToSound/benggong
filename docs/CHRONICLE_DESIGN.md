@@ -199,6 +199,31 @@ events.geojson（1,796 條）
 
 ---
 
+## 6.5 模型存取（實測）
+
+用戶指定用 `deepseek-v4.1-flash`。研究結果：
+
+| 模型 | OpenRouter 可用 | 實測 |
+|---|---|---|
+| `deepseek/deepseek-v4.1-flash` | ✅ 存在（1M context） | ⚠️ **HTTP 402 額度不足** —— 細請求過得，20 條 × 16K tokens 嘅批次被拒 |
+| `deepseek/deepseek-v4-flash-0731:free` | ✅ 免費 | ✅ 可用（同一個 V4 Flash 家族） |
+
+**採用**：免費版本 + 縮細批次（8 條）。可用 `--model` 覆寫。
+
+### 兩個實測踩到嘅坑
+
+**1. Reasoning 模型會燒爆 token 預算**
+`deepseek-v4.1-flash` 係 reasoning 模型 —— 先推理才出答案。
+`max_tokens=4000` 會出現 `finish_reason=length`、`content` 變 `null`。
+→ 提升到 16,000，並將 `OPENROUTER_EFFORT` 設為 `low`
+  （呢個任務只需要分類，唔需要深度推理）。
+
+**2. 中途斷咗要續跑**
+全量 1,716 條要 132 次呼叫（免費模型批次 8）。中途遇過 402、
+網絡中斷。→ 加 `--resume`，跳過已經處理過嘅條目。
+
+---
+
 ## 7. 誠實嘅限制
 
 1. **`story_time` 唔一定準確** —— 小說冇明確日期。只能由章節次序 + 文中線索

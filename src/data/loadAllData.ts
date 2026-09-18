@@ -32,6 +32,46 @@ export type {
   TimelineRecord,
 };
 
+/** 編年史條目嘅章節參照。 */
+export interface ChronicleChapterRef {
+  chapter: number;
+  role: "first_mention" | "reveal" | "flashback";
+  note?: string;
+}
+
+/**
+ * 編年史條目 = 故事世界入面嘅一件事。
+ *
+ * 核心係 `story_time`（幾時發生）同 `first_mention_chapter`（讀者幾時知）
+ * 分開 —— 兩者唔同就係「回帶」，即係用戶想要嘅伏筆補完效果。
+ */
+export interface ChronicleEntry {
+  id: string;
+  title: string;
+  summary: string;
+  story_time: { order: number | null; label: string; source: string };
+  first_mention_chapter: number;
+  chapters: ChronicleChapterRef[];
+  foreshadows: string[];
+  pays_off: string[];
+  location_id: string | null;
+  location_name: string | null;
+  characters: string[];
+  confidence: number;
+  source_event_ids: string[];
+  review_status: string;
+  /** 由 LLM 判斷（階段 2）。 */
+  flashback?: boolean;
+  reviewed_by?: string;
+}
+
+export interface ChronicleDoc {
+  version: number;
+  season: number;
+  generated_by: string;
+  entries: ChronicleEntry[];
+}
+
 export interface AppData {
   config: MapConfig;
   locations: LocationsFeatureCollection;
@@ -40,6 +80,8 @@ export interface AppData {
   timeline: TimelineRecord[];
   characters: CharactersData;
   zones: ZonesFeatureCollection;
+  /** 第一季編年史（跨章聚合嘅事件）。見 docs/CHRONICLE_DESIGN.md */
+  chronicle: ChronicleDoc;
   chapterAppearances: ChapterAppearances;
   chapterSummaries: ChapterSummaries;
   // Indices
@@ -97,6 +139,7 @@ export async function loadAllData(): Promise<AppData> {
     timeline,
     characters,
     zones,
+    chronicle,
     chapterAppearances,
     chapterSummaries,
   ] = await Promise.all([
@@ -107,6 +150,7 @@ export async function loadAllData(): Promise<AppData> {
     fetchJSON<TimelineRecord[]>(base + "timeline.json"),
     fetchJSON<CharactersData>(base + "characters.json"),
     fetchJSON<ZonesFeatureCollection>(base + "zones.geojson"),
+    fetchJSON<ChronicleDoc>(base + "chronicle.json"),
     fetchJSON<ChapterAppearances>(base + "chapter-appearances.json"),
     fetchJSON<ChapterSummaries>(base + "chapter-summaries.json"),
   ]);
@@ -150,6 +194,7 @@ export async function loadAllData(): Promise<AppData> {
     timeline,
     characters,
     zones,
+    chronicle,
     chapterAppearances,
     chapterSummaries,
     locationsById,

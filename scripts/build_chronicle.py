@@ -163,6 +163,42 @@ def main() -> int:
                 "review_status": "pending",
             })
 
+    # ---- 3. 套用 LLM 時期判斷（階段 2）----
+    #
+    # 治理模式同地點推斷一致：LLM 輸出留喺 `data/private/`（唔部署），
+    # 只將**衍生欄位**（時期、係唔係回帶）套用入公開資料。
+    #
+    # ⚠️ 用戶明確要求跳過人手覆核，所以直接標 `approved`。
+    #    但仍然記錄 `reviewed_by: user_waiver` 保留審計軌跡 ——
+    #    將來要追查「點解未經覆核」時有答案。
+    llm_path = REPO / "data" / "private" / "review" / "chronicle-llm.jsonl"
+    applied = 0
+    if llm_path.exists():
+        verdicts = {}
+        for line in llm_path.read_text(encoding="utf-8").splitlines():
+            if line:
+                r = json.loads(line)
+                verdicts[r["entry_id"]] = r
+        for e in entries:
+            v = verdicts.get(e["id"])
+            if not v:
+                continue
+            e["story_time"] = {
+                "order": e["first_mention_chapter"],
+                "label": v.get("period_label") or "未知",
+                "source": "llm_period",
+            }
+            e["flashback"] = bool(v.get("flashback"))
+            if v.get("flashback"):
+                # 回帶：故事時間早過首次提及
+                for c in e["chapters"]:
+                    if c["chapter"] == e["first_mention_chapter"]:
+                        c["role"] = "flashback"
+            e["review_status"] = "approved"
+            e["reviewed_by"] = "user_waiver"
+            applied += 1
+        print(f"  套用 LLM 時期判斷：{applied} / {len(entries)}")
+
     entries.sort(key=lambda e: (e["first_mention_chapter"], e["title"]))
 
     multi = sum(1 for e in entries if len(e["chapters"]) > 1)

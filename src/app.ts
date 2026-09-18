@@ -12,6 +12,7 @@
  * └──────────────────────────────────────────┘
  */
 
+import { ChronicleView } from "./components/ChronicleView";
 import { exportMapPng } from "./exportMap";
 import { initTheme, toggleTheme, type Theme } from "./theme";
 import type { AppData } from "./data/loadAllData";
@@ -22,6 +23,7 @@ import { AboutModal } from "./components/AboutModal";
 import { SearchBox } from "./components/SearchBox";
 
 export class App {
+  private chronicleView!: ChronicleView;
   root: HTMLElement;
   data: AppData;
   currentChapter: number = 1;
@@ -79,6 +81,7 @@ export class App {
           <p class="tagline">第一章 <span class="badge">將軍澳 2010s</span> · 香港網絡小說</p>
         </div>
         <nav aria-label="主要導覽">
+          <button id="btn-mode" type="button" class="nav-btn" title="切換編年史／章節視圖">📜 編年史</button>
           <button id="btn-search" type="button" class="nav-btn">🔍 搜尋</button>
           <button id="btn-share" type="button" class="nav-btn" title="複製呢一章嘅連結">🔗</button>
           <button id="btn-export" type="button" class="nav-btn" title="匯出目前地圖為 PNG">⬇</button>
@@ -114,12 +117,28 @@ export class App {
       this.root.querySelector("#story-panel-mount")!,
       this,
     );
+    /*
+     * 編年史視圖 —— **預設**（用戶選擇「並存，編年史做預設」）。
+     *
+     * 章節條由「切換章節」改為「篩選編年史」（見 `setChapter`）。
+     * 兩者共用同一個 mount point，用 `viewMode` 決定顯示邊個。
+     */
+    this.chronicleView = new ChronicleView(
+      this.root.querySelector("#story-panel-mount")!,
+      this,
+      this.data.chronicle,
+    );
     this.aboutModal = new AboutModal(this.root, this.data);
     this.searchBox = new SearchBox(this.root, this);
 
     // Bind nav buttons
     this.root.querySelector("#btn-about")!.addEventListener("click", () => this.aboutModal.show());
     this.root.querySelector("#btn-search")!.addEventListener("click", () => this.searchBox.show());
+    // 編年史／章節視圖切換
+    this.root.querySelector("#btn-mode")!.addEventListener("click", () => {
+      this.setViewMode(this.viewMode === "chronicle" ? "chapter" : "chronicle");
+    });
+
     // 分享連結
     this.root
       .querySelector("#btn-share")!
@@ -272,19 +291,62 @@ export class App {
     });
   }
 
+  /**
+   * 目前嘅面板模式。
+   *
+   * 用戶選擇「並存，編年史做預設，章節條保留做篩選器」——
+   * 所以 `chronicle` 係預設，`chapter` 係原本嘅逐章視圖。
+   */
+  private viewMode: "chronicle" | "chapter" = "chronicle";
+
+  setViewMode(mode: "chronicle" | "chapter"): void {
+    this.viewMode = mode;
+    const btn = this.root.querySelector("#btn-mode");
+    if (btn) btn.textContent = mode === "chronicle" ? "📜 編年史" : "📖 章節";
+    if (mode === "chronicle") {
+      this.chronicleView.render();
+    } else {
+      this.storyPanel.updateForChapter(this.currentChapter);
+    }
+  }
+
+  getViewMode(): "chronicle" | "chapter" {
+    return this.viewMode;
+  }
+
   setChapter(ch: number): void {
     if (ch === this.currentChapter) return;
     this.currentChapter = ch;
     this.chapterStrip.updateSelection();
     this.svgMap.flyToChapter(ch);
-    this.storyPanel.updateForChapter(ch);
+    /*
+     * ⚠️ 章節條嘅角色已經改變。
+     *
+     * 用戶選擇「章節條保留做篩選器」—— 喺編年史模式下，點章節條應該
+     * **篩選**該章相關嘅編年史條目，而唔係切換去逐章視圖。
+     * 只有喺章節模式下才更新 StoryPanel。
+     */
+    if (this.viewMode === "chronicle") {
+      this.chronicleView.setChapterFilter(ch);
+    } else {
+      this.storyPanel.updateForChapter(ch);
+    }
     this.syncHash();
+  }
+
+  /** 由編年史條目嘅章節標籤跳去該章（會切換到章節模式）。 */
+  goToChapter(ch: number): void {
+    this.setViewMode("chapter");
+    this.setChapter(ch);
   }
 
   setSelectedLocation(locId: string | null): void {
     this.selectedLocationId = locId;
     this.selectedEventId = null;
     this.svgMap.render();
+    // 地點詳情屬逐章視圖 —— 點地圖標記時自動切過去，否則用戶
+    // 見到嘅係編年史，會以為點擊冇反應。
+    if (locId) this.setViewMode("chapter");
     this.storyPanel.updateForLocation(locId);
     this.syncHash();
   }

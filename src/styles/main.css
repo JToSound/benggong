@@ -1166,3 +1166,176 @@ html, body {
     --border-subtle: #eae5da;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 編年史視圖（Chronicle）
+ * ══════════════════════════════════════════════════════════════════════════
+ * 設計理念見 `docs/CHRONICLE_DESIGN.md`。
+ *
+ * 視覺隱喻：**檔案館嘅時間軸**。左側一條垂直線串起時期，事件卡喺右邊。
+ * 用「時間軸」而唔係「列表」係因為用戶要嘅係**編年**感 ——
+ * 事件之間嘅先後關係係重點。 */
+.chronicle { display: flex; flex-direction: column; height: 100%; }
+.chronicle-head {
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: var(--sp-3);
+}
+.chronicle-head h2 {
+  margin: 0 0 var(--sp-1);
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  letter-spacing: -0.1px;
+}
+.chronicle-sub {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+  line-height: 1.6;
+}
+.chronicle-sub strong { color: var(--fg-secondary); font-weight: 600; }
+.chronicle-count { color: var(--fg-faint); }
+.chr-clear {
+  margin-top: var(--sp-2);
+  padding: 3px 10px;
+  font-size: var(--fs-xs);
+  border-radius: var(--r-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  cursor: pointer;
+}
+.chr-clear:hover { color: var(--fg-primary); border-color: var(--border-strong); }
+
+.chronicle-body { flex: 1; overflow-y: auto; padding-right: var(--sp-2); }
+.chronicle-empty { color: var(--fg-muted); font-size: var(--fs-base); padding: var(--sp-5) 0; }
+
+/* ---- 時期分組（時間軸骨幹）---- */
+.chr-period { margin-bottom: var(--sp-5); position: relative; }
+.chr-period-title {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  letter-spacing: 0.6px;
+  color: var(--accent-teal);
+  text-transform: none;
+}
+/* 時間軸嘅垂直線：由時期標題向下延伸，串起該期事件 */
+.chr-period-title::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 18px;
+  bottom: -8px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-teal), transparent);
+  opacity: 0.35;
+}
+.chr-period-line {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-teal) 22%, transparent);
+}
+.chr-period-count {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--fg-faint);
+  background: var(--bg-elevated);
+  border-radius: var(--r-full);
+  padding: 1px 7px;
+}
+
+/* ---- 事件卡 ---- */
+.chr-entry {
+  position: relative;
+  margin: 0 0 var(--sp-2) var(--sp-3);
+  padding: var(--sp-3);
+  background: var(--bg-light);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--r-md);
+  transition: var(--transition-fast);
+}
+.chr-entry:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border);
+}
+.chr-entry.is-open { border-color: var(--border-strong); }
+
+/* 回帶條目：虛線邊框 + 唔同色調 —— 一眼睇得出「呢條係補完伏筆」 */
+.chr-entry.is-flashback {
+  border-left: 3px solid var(--accent-purple);
+  background: color-mix(in srgb, var(--accent-purple) 6%, var(--bg-light));
+}
+.chr-entry-head { display: flex; align-items: baseline; gap: var(--sp-2); }
+.chr-mark { color: var(--accent-teal); font-size: 10px; flex-shrink: 0; }
+.chr-entry.is-flashback .chr-mark { color: var(--accent-purple); }
+.chr-entry-title {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--fg-primary);
+}
+.chr-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin: var(--sp-1) 0 0 18px;
+  font-size: var(--fs-xs);
+  color: var(--fg-muted);
+}
+.chr-flag {
+  color: var(--accent-purple);
+  background: color-mix(in srgb, var(--accent-purple) 14%, transparent);
+  border-radius: var(--r-sm);
+  padding: 1px 6px;
+  font-weight: 600;
+}
+.chr-loc { color: var(--fg-muted); }
+
+/* 章節標籤：可點擊跳去該章 */
+.chr-chapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin: var(--sp-2) 0 0 18px;
+}
+.chr-ch {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  border-radius: var(--r-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--fg-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.chr-ch:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+.chr-ch-role { color: var(--fg-faint); font-size: 9px; }
+
+.chr-entry-summary {
+  margin: var(--sp-2) 0 0 18px;
+  font-size: var(--fs-sm);
+  line-height: 1.72;
+  color: var(--fg-secondary);
+}
+.chr-toggle {
+  margin: var(--sp-1) 0 0 18px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--accent-blue);
+  font-size: var(--fs-xs);
+  cursor: pointer;
+}
+.chr-toggle:hover { text-decoration: underline; }

@@ -42,6 +42,122 @@
       "label_layer_bytes": 131687
     },
     {
+      "id": "hk-nw",
+      "label": "香港西北（屯門／元朗／大嶼山北）",
+      "note": "全港分區層：西北",
+      "image": "assets/map-lod/hk-nw.png",
+      "coords": "assets/map-lod/hk-nw-coords.json",
+      "bbox": {
+        "lon_min": 113.79,
+        "lon_max": 114.145,
+        "lat_min": 22.36,
+        "lat_max": 22.61
+      },
+      "lod": "regional",
+      "lod_layers": {
+        "roads": true,
+        "buildings": false,
+        "building_labels": false
+      },
+      "output_size": [
+        2048,
+        1561
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1561,
+        "aspect": 1.31198
+      },
+      "bytes": 2128799
+    },
+    {
+      "id": "hk-ne",
+      "label": "香港東北（沙田／西貢／大埔）",
+      "note": "全港分區層：東北",
+      "image": "assets/map-lod/hk-ne.png",
+      "coords": "assets/map-lod/hk-ne-coords.json",
+      "bbox": {
+        "lon_min": 114.14,
+        "lon_max": 114.49,
+        "lat_min": 22.36,
+        "lat_max": 22.61
+      },
+      "lod": "regional",
+      "lod_layers": {
+        "roads": true,
+        "buildings": false,
+        "building_labels": false
+      },
+      "output_size": [
+        2048,
+        1583
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1583,
+        "aspect": 1.293746
+      },
+      "bytes": 2143848
+    },
+    {
+      "id": "hk-sw",
+      "label": "香港西南（大嶼山／港島西）",
+      "note": "全港分區層：西南",
+      "image": "assets/map-lod/hk-sw.png",
+      "coords": "assets/map-lod/hk-sw-coords.json",
+      "bbox": {
+        "lon_min": 113.79,
+        "lon_max": 114.145,
+        "lat_min": 22.11,
+        "lat_max": 22.365
+      },
+      "lod": "regional",
+      "lod_layers": {
+        "roads": true,
+        "buildings": false,
+        "building_labels": false
+      },
+      "output_size": [
+        2048,
+        1589
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1589,
+        "aspect": 1.288861
+      },
+      "bytes": 1860054
+    },
+    {
+      "id": "hk-se",
+      "label": "香港東南（港島東／九龍／將軍澳）",
+      "note": "全港分區層：東南",
+      "image": "assets/map-lod/hk-se.png",
+      "coords": "assets/map-lod/hk-se-coords.json",
+      "bbox": {
+        "lon_min": 114.14,
+        "lon_max": 114.49,
+        "lat_min": 22.11,
+        "lat_max": 22.365
+      },
+      "lod": "regional",
+      "lod_layers": {
+        "roads": true,
+        "buildings": false,
+        "building_labels": false
+      },
+      "output_size": [
+        2048,
+        1612
+      ],
+      "canvas": {
+        "width": 2048,
+        "height": 1612,
+        "aspect": 1.270471
+      },
+      "bytes": 1911057
+    },
+    {
       "id": "tko-region",
       "label": "將軍澳／西貢一帶",
       "note": "主場景所在區域；開始見到主要道路同大型建築群",

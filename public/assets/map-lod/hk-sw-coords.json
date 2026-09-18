@@ -1,0 +1,49 @@
+{
+  "canvas": {
+    "width": 2048,
+    "height": 1589,
+    "aspect": 1.288861
+  },
+  "bbox": {
+    "lon_min": 113.79,
+    "lon_max": 114.145,
+    "lat_min": 22.11,
+    "lat_max": 22.365
+  },
+  "lod": "regional",
+  "lod_layers": {
+    "roads": true,
+    "buildings": false,
+    "building_labels": false
+  },
+  "projection": "equirectangular",
+  "standard_parallel": 22.2375,
+  "projection_note": "x = (lon - lon_min) * px_per_deg_lon; y = (lat_max - lat) * px_per_deg_lon / cos(lat0); px_per_deg_lon = canvas.width / (lon_max - lon_min)",
+  "style": "binggang_handdrawn_parchment",
+  "crop_box": [
+    0,
+    0,
+    2048,
+    1589
+  ],
+  "output_size": [
+    2048,
+    1589
+  ],
+  "layers": {
+    "base": "hk-sw.png"
+  },
+  "stats": {
+    "trees": 2982,
+    "labels": 7,
+    "roads": 5202,
+    "buildings": 0,
+    "water_bodies": 101,
+    "water_px": 6820,
+    "urban_px": 121114,
+    "urban_share_of_land": 0.1736,
+    "land_px": 697856,
+    "land_share": 0.2144,
+    "bbox_span_deg": 0.355
+  }
+}
