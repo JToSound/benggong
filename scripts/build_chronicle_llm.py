@@ -98,6 +98,15 @@ FALLBACK_CHAIN = [
     "deepseek/deepseek-v4-flash-0731:free",
     "qwen/qwen3.8-27b:free",
     "z-ai/glm-5.2:free",
+    # ⚠️ **最後防線**：付費模型。
+    #
+    # 為何需要：實測免費池**唔可以可靠完成** —— 連續跑 270 分鐘只完成
+    # 120 條（帳戶級限流 + 後段條目 summary 較長令推理更久）。
+    # 免費模型全部失敗時，退到呢個確保任務**一定完成**，唔會靜默缺失。
+    #
+    # 成本：只在免費全部失敗時才用。實測 12 條批次約 2,000 tokens，
+    # 就算全部 792 條都用佢，成本約 **US$0.05**（可忽略）。
+    "deepseek/deepseek-v4-flash",
 ]
 SCHEMA_VERSION = "chronicle-llm-v1"
 TEMPERATURE = 0.0
@@ -195,18 +204,21 @@ def build_prompt(items: list[dict]) -> str:
 
 
 #: 每條結果大約需要幾多 completion tokens（period + flashback 兩個欄位）。
+TOKENS_PER_ENTRY = 60
+
+#: ⚠️ **推理預算** —— 呢個係關鍵，唔可以當成 0。
 #:
-#: ⚠️ 為何要**自適應**而唔係固定 16,000
-#: ------------------------------------
-#: 實測同一批 12 條：
-#:   max_tokens=16,000 → **220s**（模型生成過多）
-#:   max_tokens= 4,000 → **7.4s**，而且 12/12 完整
-#:   max_tokens= 2,000 → 2.8s 但只出 1/12（被截斷）
+#: 為何：`deepseek-v4-flash-0731:free` **係 reasoning 模型** —— 佢會先燒
+#: 一批 tokens 做內部推理，才輸出 JSON。
 #:
-#: 即係「加大預算」反而慢 30 倍。正確做法係按批次大小計需要幾多。
-#: 每條約 40 tokens（JSON 兩個欄位 + 索引），加 800 做緩衝。
-TOKENS_PER_ENTRY = 40
-TOKEN_BUFFER = 800
+#: 實測（同一批 6 條）：
+#:   max_tokens=1,040 → 31.2s  ❌ `finish_reason=length`、content 變 null
+#:   max_tokens=3,000 → ✅ 正常
+#:
+#: 即係「按輸出量計預算」係**錯**嘅 —— 唔計推理預算就會全部失敗。
+#: 而調得太高（16,000）又會令模型生成過多（220s，慢 30 倍）。
+#: 3,000 係實測嘅平衡點。
+REASONING_BUDGET = 3000
 
 
 def call_llm(client, user: str, cache, ledger, n_entries: int = 12) -> dict | None:
@@ -236,7 +248,7 @@ def call_llm(client, user: str, cache, ledger, n_entries: int = 12) -> dict | No
                 model,
                 msgs,
                 temperature=TEMPERATURE,
-                max_tokens=TOKENS_PER_ENTRY * n_entries + TOKEN_BUFFER,
+                max_tokens=REASONING_BUDGET + TOKENS_PER_ENTRY * n_entries + 500,
             )
             parsed = json.loads(content)
             cache.put(key, parsed)
@@ -324,7 +336,15 @@ def main() -> int:
     # 有 `OPENROUTER_EFFORT=ultra` —— 如果之前設定，就會被覆蓋。
     # 後果係 reasoning 燒到爆，12 條批次要 220s（正常 7.4s）。
     os.environ["OPENROUTER_EFFORT"] = args.effort
-    client = OpenRouterClient(api_key, base_url, timeout_s=180)
+    # ⚠️ 每個模型嘅**呼叫逾時**要夠短，否則慢模型會阻塞 fallback。
+    #
+    # 實測：`deepseek-v4-flash-0731:free` 對後段條目（summary 較長）
+    # 每次要 **200s**。佢**成功**，所以 fallback 唔會觸發 —— 但 66 批
+    # × 200s = 3.7 小時。設 120s 逾時之後，超時會自動退到下一個模型。
+    #
+    # ⚠️ 呢個係**取捨**：逾時太短會令正常但慢嘅免費模型被放棄，改用
+    # 付費模型（成本上升）。120s 係「容忍慢」同「唔阻塞」嘅平衡點。
+    client = OpenRouterClient(api_key, base_url, timeout_s=120)
     cache = ExtractionCache(run_id="chronicle-llm")
     ledger = RunLedger()
 

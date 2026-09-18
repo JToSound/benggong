@@ -4718,14 +4718,14 @@
       "summary": "少佐承認老賢早在病腦事件前已派他跟蹤監視M，直到發現M去病窩救夏晴先撤下戒心。",
       "story_time": {
         "order": 20,
-        "label": "第 20 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 20,
       "chapters": [
         {
           "chapter": 20,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "少佐承認老賢早在病腦事件前已派他跟蹤監視M，直到發現M去病窩救夏晴先撤下戒心。"
         }
       ],
@@ -4743,7 +4743,9 @@
       "source_event_ids": [
         "bg_event_143"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5913b4cbc8",
@@ -4751,8 +4753,8 @@
       "summary": "商場血戰後，老賢嘅同伴天黑前離開，老賢獨自留喺空曠商場陪伴重傷嘅少佐直到黎明，期間病者無接近佢哋。",
       "story_time": {
         "order": 20,
-        "label": "第 20 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 20,
       "chapters": [
@@ -4774,7 +4776,9 @@
       "source_event_ids": [
         "bg_event_145"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_72d0da6aa8",
@@ -4782,8 +4786,8 @@
       "summary": "M在公眾休息室熟睡期間，有人在他手臂旁放下一封無名卡片，邀請他前往D橦大樓六樓608號房。",
       "story_time": {
         "order": 21,
-        "label": "第 21 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 21,
       "chapters": [
@@ -4805,7 +4809,9 @@
       "source_event_ids": [
         "bg_event_148"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_72aa276da6",
@@ -4813,8 +4819,8 @@
       "summary": "M應卡片之邀前往608號房，Dr.D以紅酒、蠟燭和香煎牛排款待他，二人相對用餐。",
       "story_time": {
         "order": 21,
-        "label": "第 21 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 21,
       "chapters": [
@@ -4836,7 +4842,9 @@
       "source_event_ids": [
         "bg_event_149"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3c12b3fee4",
@@ -4844,14 +4852,14 @@
       "summary": "M夢中回憶起學生時代在鬼樹下安慰被欺負的哨牙女生，得知她名叫阿晴，這段往事令他此後對帶「晴」字的女生特別敏感。",
       "story_time": {
         "order": 21,
-        "label": "第 21 章前後",
-        "source": "chapter_order"
+        "label": "爆發前",
+        "source": "llm_period"
       },
       "first_mention_chapter": 21,
       "chapters": [
         {
           "chapter": 21,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "M夢中回憶起學生時代在鬼樹下安慰被欺負的哨牙女生，得知她名叫阿晴，這段往事令他此後對帶「晴」字的女生特別敏感。"
         }
       ],
@@ -4867,7 +4875,9 @@
       "source_event_ids": [
         "bg_event_150"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_45ec1f53ea",
@@ -4875,14 +4885,14 @@
       "summary": "少佐指出，夏晴當時身在醫療室卻被人當死人運出去，此事十居其九與Dr.D脫不了關係。",
       "story_time": {
         "order": 21,
-        "label": "第 21 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 21,
       "chapters": [
         {
           "chapter": 21,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "少佐指出，夏晴當時身在醫療室卻被人當死人運出去，此事十居其九與Dr.D脫不了關係。"
         }
       ],
@@ -4899,7 +4909,9 @@
       "source_event_ids": [
         "bg_event_147"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6d74481d0b",
@@ -4907,8 +4919,8 @@
       "summary": "Dr.D請M吃牛排並要求他幫忙抽取病爪的血液樣本以完成研究，M以自己冇義務為由拒絕並離開。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -4931,7 +4943,9 @@
       "source_event_ids": [
         "bg_event_151"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_49e4e4baa4",
@@ -4939,8 +4953,8 @@
       "summary": "M用之前摧毀病窩後掠奪回來、儲放在大本營倉庫的一盒香煙，向市集大叔換購檔內全部購檔內全部鬧鐘（鬧鐘沒有電池）。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -4961,7 +4975,9 @@
       "source_event_ids": [
         "bg_event_157"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_71431aadc7",
@@ -4969,8 +4985,8 @@
       "summary": "一星期後M主動找Dr.D，答應抽取病爪血液樣本，獲發一支空針筒及兩粒聲稱可在藥效內不受病者感染、名叫D1的藥丸。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -4994,7 +5010,9 @@
       "source_event_ids": [
         "bg_event_155"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8e52e10e5b",
@@ -5002,8 +5020,8 @@
       "summary": "M在太陽西下後於李惠利大樓旁垃圾站等候約一小時，遇見黑商王達尼，打算用香煙換購大量電池，以便運作大量鬧鐘製造固定嘈音來對付病爪抽血。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5026,7 +5044,9 @@
       "source_event_ids": [
         "bg_event_158"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_89ca3fcddd",
@@ -5034,8 +5054,8 @@
       "summary": "主角與王達尼在垃圾場討價還價，由十包壓價至八包，最終以一口價九包香煙換取整袋電池成交。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5056,7 +5076,9 @@
       "source_event_ids": [
         "bg_event_160"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1984ae44ba",
@@ -5064,8 +5086,8 @@
       "summary": "大本營又撐過一星期，物資食糧繼續嚴重短缺，幾乎每人每餐只分到一塊小餐包和一小杯水；Dr.D則過著喝紅酒、煎牛排的奢華生活。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5086,7 +5108,9 @@
       "source_event_ids": [
         "bg_event_159"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c66a28ffef",
@@ -5094,8 +5118,8 @@
       "summary": "主角在宿舍把電池逐一裝入鬧鐘測試，得出至少十個會響的成品，並全部較到他指定的時間備用。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5114,7 +5138,9 @@
       "source_event_ids": [
         "bg_event_161"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_02371db231",
@@ -5122,14 +5148,14 @@
       "summary": "此前曾發生第一次摧毀病窩的行動，天明有份參與並很回味當時的回報，但主角勸他不要再出大本營。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
         {
           "chapter": 22,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "此前曾發生第一次摧毀病窩的行動，天明有份參與並很回味當時的回報，但主角勸他不要再出大本營。"
         }
       ],
@@ -5144,7 +5170,9 @@
       "source_event_ids": [
         "bg_event_164"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f45d0576c0",
@@ -5152,8 +5180,8 @@
       "summary": "老賢要求M暫時替Dr.D做事、成為間諜套取其所有研究資料，以一顆糖果象徵M接受任務，並囑咐連少佐也不可以告知。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5176,7 +5204,9 @@
       "source_event_ids": [
         "bg_event_154"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_59ce3dbe50",
@@ -5184,8 +5214,8 @@
       "summary": "老賢秘密要求主角監視醫生Dr.D做間諜，主角推斷老賢掌握未公開的資訊，並認為先取得Dr.D信任最重要。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5206,7 +5236,9 @@
       "source_event_ids": [
         "bg_event_162"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_094e7379c9",
@@ -5214,8 +5246,8 @@
       "summary": "老賢在圖書館向M道歉，解釋當日心理測驗原是用來測試新入住者中有無混入「不良人」的間諜，並已證實M無辜。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5237,7 +5269,9 @@
       "source_event_ids": [
         "bg_event_153"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_123523269f",
@@ -5245,8 +5279,8 @@
       "summary": "主角站在天台觀景時，被一隻藏於幼稚園暗角窗口的舌女長時間凝視，被發現後舌女裂嘴一笑俯身消失，令主角渾身發毛。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5265,7 +5299,9 @@
       "source_event_ids": [
         "bg_event_163"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_da0c1a4808",
@@ -5273,8 +5309,8 @@
       "summary": "M帶著針筒和藥丸離開Dr.D房間時被阿玲攔住質問，阿玲揪住他的頸領推到牆邊，冷不防揮拳被他俯身躲開，拳头打中牆身。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5297,7 +5333,9 @@
       "source_event_ids": [
         "bg_event_156"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_400ce67358",
@@ -5305,8 +5343,8 @@
       "summary": "M隔天發現被人跟蹤，由C橦走到A橦後在樓梯間轉角位埋伏，一手捉住跟蹤者——社工阿玲。",
       "story_time": {
         "order": 22,
-        "label": "第 22 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 22,
       "chapters": [
@@ -5328,7 +5366,9 @@
       "source_event_ids": [
         "bg_event_152"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c349450568",
@@ -7284,8 +7324,8 @@
       "summary": "老賢喺演講大典上宣布以自願制招募搜索隊員，半年內要訓練出精銳搜索隊應付資源問題並擴張對外搜索範圍，主角M係負責訓練嘅導師之一。",
       "story_time": {
         "order": 34,
-        "label": "第 34 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 34,
       "chapters": [
@@ -7307,7 +7347,9 @@
       "source_event_ids": [
         "bg_event_227"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5c9bcffe0b",
@@ -7315,14 +7357,14 @@
       "summary": "主角此前曾幫賴三的大本營處理了病爪，因此全營人都欠他一個人情。",
       "story_time": {
         "order": 35,
-        "label": "第 35 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 35,
       "chapters": [
         {
           "chapter": 35,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "主角此前曾幫賴三的大本營處理了病爪，因此全營人都欠他一個人情。"
         }
       ],
@@ -7337,7 +7379,9 @@
       "source_event_ids": [
         "bg_event_232"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d27fd908d2",
@@ -7345,8 +7389,8 @@
       "summary": "一星期後，主角開始任教「病者攻擊學」，首堂向三十多名青少年學生教授舌女的知識。",
       "story_time": {
         "order": 35,
-        "label": "第 35 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 35,
       "chapters": [
@@ -7367,7 +7411,9 @@
       "source_event_ids": [
         "bg_event_231"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ebe22852bc",
@@ -7375,8 +7421,8 @@
       "summary": "主角宣布實戰課三人一組後，八樓子弟與低層子弟各自跟同層的人一組。",
       "story_time": {
         "order": 35,
-        "label": "第 35 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 35,
       "chapters": [
@@ -7395,7 +7441,9 @@
       "source_event_ids": [
         "bg_event_233"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_36b82cc49e",
@@ -7403,8 +7451,8 @@
       "summary": "賴三向主角解釋懷疑相中小女孩是病者的原因，並指點他前往將軍澳華人永遠墳場找北賢取得進一步情報。",
       "story_time": {
         "order": 35,
-        "label": "第 35 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 35,
       "chapters": [
@@ -7427,7 +7475,9 @@
       "source_event_ids": [
         "bg_event_230"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c2c9a96c26",
@@ -7435,8 +7485,8 @@
       "summary": "主角用作貨幣的香煙已全部用光，因此要專心教書一段時間。",
       "story_time": {
         "order": 35,
-        "label": "第 35 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 35,
       "chapters": [
@@ -7455,7 +7505,9 @@
       "source_event_ids": [
         "bg_event_234"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_428691fe3d",
@@ -7463,8 +7515,8 @@
       "summary": "下課後公仔返回學堂，表示家人為感激主角而想請他食飯；主角表明不會去八樓，公仔遂提議家人可在七樓、六樓或五樓租房。",
       "story_time": {
         "order": 36,
-        "label": "第 36 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 36,
       "chapters": [
@@ -7485,7 +7537,9 @@
       "source_event_ids": [
         "bg_event_238"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_efcb32d259",
@@ -7493,8 +7547,8 @@
       "summary": "主角把學生分成十組，每組一人扮病者、兩人扮人類進行對抗演練，不認真的學生會被他用雨傘敲頭。",
       "story_time": {
         "order": 36,
-        "label": "第 36 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 36,
       "chapters": [
@@ -7513,7 +7567,9 @@
       "source_event_ids": [
         "bg_event_235"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0002abfc6e",
@@ -7521,8 +7577,8 @@
       "summary": "大舊告知主角，學生們喜歡在背後討論他，稱他為「長髮鳥嘴怪人」、「黑袍死神」之類。",
       "story_time": {
         "order": 36,
-        "label": "第 36 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 36,
       "chapters": [
@@ -7543,7 +7599,9 @@
       "source_event_ids": [
         "bg_event_237"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5070730140",
@@ -7551,8 +7609,8 @@
       "summary": "演練中瑜小六飾演病者撲向兩兄妹，仰後避開攻擊後把娃娃壓倒地上，令兩兄妹徹底落敗。",
       "story_time": {
         "order": 36,
-        "label": "第 36 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 36,
       "chapters": [
@@ -7575,7 +7633,9 @@
       "source_event_ids": [
         "bg_event_236"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ab8bb22462",
@@ -7583,8 +7643,8 @@
       "summary": "主角喺晚宴上先切牛排餵公仔食、再遞紅酒畀公仔飲，藉口話唔慣太生太澀，實際係想公仔幫手試吓有冇毒。",
       "story_time": {
         "order": 37,
-        "label": "第 37 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 37,
       "chapters": [
@@ -7605,7 +7665,9 @@
       "source_event_ids": [
         "bg_event_240"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_19a64dee14",
@@ -7613,8 +7675,8 @@
       "summary": "公仔一家按主角要求租咗八樓以下嘅房間（四樓活動室），以水果、美酒及香煎T骨扒宴請主角，全家四口恭敬迎接。",
       "story_time": {
         "order": 37,
-        "label": "第 37 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 37,
       "chapters": [
@@ -7635,7 +7697,9 @@
       "source_event_ids": [
         "bg_event_239"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a9b8e604e2",
@@ -7643,8 +7707,8 @@
       "summary": "公仔之父席間追問主角覺得大本營半年之後仲維唔維持得到，並指不論制度定食糧都好難，話中似有暗示。",
       "story_time": {
         "order": 37,
-        "label": "第 37 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 37,
       "chapters": [
@@ -7666,7 +7730,9 @@
       "source_event_ids": [
         "bg_event_241"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5092e4a285",
@@ -7674,8 +7740,8 @@
       "summary": "「我」喺通往將軍澳華人永遠墳場嘅上坡路附近，遇到一名全身佈滿紅點、企喺樹後以微笑窺視窺視嘅普通病者，猶豫應該上前對付定拔腿跑走。",
       "story_time": {
         "order": 38,
-        "label": "第 38 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 38,
       "chapters": [
@@ -7694,7 +7760,9 @@
       "source_event_ids": [
         "bg_event_245"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a87f289821",
@@ -7702,8 +7770,8 @@
       "summary": "「我」同老賢推斷不良人內奸已混入大本營一段時間並取得八樓大部份權貴支持，計劃喺適當時機拆開大門障礙結構、中斷重要設施電源引不良人攻入；老賢叫「我」搵出另一個內奸。",
       "story_time": {
         "order": 38,
-        "label": "第 38 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 38,
       "chapters": [
@@ -7725,7 +7793,9 @@
       "source_event_ids": [
         "bg_event_243"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d7e858a588",
@@ -7733,8 +7803,8 @@
       "summary": "「我」喺翌日獨自離開安全區，由東門向北行去將軍澳華人墳場，打算喺凌晨搵北賢購買新型病者情報。",
       "story_time": {
         "order": 38,
-        "label": "第 38 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 38,
       "chapters": [
@@ -7755,7 +7825,9 @@
       "source_event_ids": [
         "bg_event_244"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6636b49671",
@@ -7763,8 +7835,8 @@
       "summary": "「我」獲邀到馬德梵屋企食飯，馬德梵整晚試探「我」立場並引導「我」認知「不良人」理念，想拉攏「我」支持佢哋。",
       "story_time": {
         "order": 38,
-        "label": "第 38 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 38,
       "chapters": [
@@ -7786,7 +7858,9 @@
       "source_event_ids": [
         "bg_event_242"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_521e739d08",
@@ -7794,8 +7868,8 @@
       "summary": "三天後六名學員在學堂集合，Chirs及時趕到，主角帶眾人前往大本營市集揀武器。",
       "story_time": {
         "order": 39,
-        "label": "第 39 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 39,
       "chapters": [
@@ -7816,7 +7890,9 @@
       "source_event_ids": [
         "bg_event_249"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_13ae7e4fbd",
@@ -7824,8 +7900,8 @@
       "summary": "南愚不收物件作交易，要求主角到靈實醫院五樓宿舍拉開每個抽屜，找出一張有南愚樣貌的相片交回，便會講出病童的情報。",
       "story_time": {
         "order": 39,
-        "label": "第 39 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 39,
       "chapters": [
@@ -7847,7 +7923,9 @@
       "source_event_ids": [
         "bg_event_246"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_03a948a0b5",
@@ -7855,8 +7933,8 @@
       "summary": "主角以果汁糖向北賢購買病童資料被拒，北賢堅持要十包即溶咖啡，雙方交涉失敗，主角空手而回。",
       "story_time": {
         "order": 39,
-        "label": "第 39 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 39,
       "chapters": [
@@ -7878,7 +7956,9 @@
       "source_event_ids": [
         "bg_event_247"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_77bf6e954f",
@@ -7886,8 +7966,8 @@
       "summary": "主角在學堂宣布選出瑜小六、阿文、奧迪、Chirs、公仔和娃娃共六人，一星期後出外實習殺病者，並任命瑜小六為小隊長。",
       "story_time": {
         "order": 39,
-        "label": "第 39 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 39,
       "chapters": [
@@ -7913,7 +7993,9 @@
       "source_event_ids": [
         "bg_event_248"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_35581d06ae",
@@ -7921,8 +8003,8 @@
       "summary": "老師讓阿文、Chirs、奧迪及兩兄妹在市集自行挑選裝備，由他評價實用性並付款。",
       "story_time": {
         "order": 40,
-        "label": "第 40 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 40,
       "chapters": [
@@ -7946,7 +8028,9 @@
       "source_event_ids": [
         "bg_event_250"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f5384e07af",
@@ -7954,8 +8038,8 @@
       "summary": "老師索性為公仔和娃娃兩兄妹分配物品：娃娃拿急救包，公仔拿電筒屆時幫眾人照路。",
       "story_time": {
         "order": 40,
-        "label": "第 40 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 40,
       "chapters": [
@@ -7977,7 +8061,9 @@
       "source_event_ids": [
         "bg_event_252"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3373ee207d",
@@ -7985,8 +8071,8 @@
       "summary": "王達尼取出精銳短劍砍向瑜小六手上的圓形鐵盾，發出幾乎震耳欲鳴的耳欲鳴的鏗聲，證明武器是真材實料。",
       "story_time": {
         "order": 40,
-        "label": "第 40 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 40,
       "chapters": [
@@ -8008,7 +8094,9 @@
       "source_event_ids": [
         "bg_event_251"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c52347c29a",
@@ -8016,8 +8104,8 @@
       "summary": "出發前三天，瑜小六充當領隊安排各人負責位置，並訓練突發陣容變換、攻擊病者致命部位等項目。",
       "story_time": {
         "order": 41,
-        "label": "第 41 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 41,
       "chapters": [
@@ -8038,7 +8126,9 @@
       "source_event_ids": [
         "bg_event_255"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_36d2a1e4bb",
@@ -8046,8 +8136,8 @@
       "summary": "主角放任學生三天自由活動，但於第二日偷偷到活動室附近偷看六人的訓練，六人全部到齊並視瑜小六為領導。",
       "story_time": {
         "order": 41,
-        "label": "第 41 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 41,
       "chapters": [
@@ -8068,7 +8158,9 @@
       "source_event_ids": [
         "bg_event_256"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b7e7930a3b",
@@ -8076,8 +8168,8 @@
       "summary": "主角原本質疑未殺過病者的瑜小六配不上貴重武器，最終以兩顆果汁糖向王達尼買下短劍和圓盾，並謊稱是黑商免費相贈。",
       "story_time": {
         "order": 41,
-        "label": "第 41 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 41,
       "chapters": [
@@ -8099,7 +8191,9 @@
       "source_event_ids": [
         "bg_event_253"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_aedc50b27d",
@@ -8107,8 +8201,8 @@
       "summary": "在瑜小六帶領下，六名學生進行同伴間的「搭手儀式」，最終六個人手貼手搭在一起。",
       "story_time": {
         "order": 41,
-        "label": "第 41 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 41,
       "chapters": [
@@ -8129,7 +8223,9 @@
       "source_event_ids": [
         "bg_event_254"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_10463a1b10",
@@ -8137,8 +8233,8 @@
       "summary": "大本營以果汁糖作交易貨幣，兩顆果汁糖可換取防燙傷藥膏或短劍加圓盾，藥品價值遠高於咖啡、肉類、香煙、電子零件或武器等物資。",
       "story_time": {
         "order": 41,
-        "label": "第 41 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 41,
       "chapters": [
@@ -8157,7 +8253,9 @@
       "source_event_ids": [
         "bg_event_258"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_735eaebd0d",
@@ -8165,8 +8263,8 @@
       "summary": "瑜小六的圓盾上畫有一個「M」字，她表示那不是自己英文名開頭，而是代表一個她十分尊敬的人。",
       "story_time": {
         "order": 41,
-        "label": "第 41 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 41,
       "chapters": [
@@ -8187,7 +8285,9 @@
       "source_event_ids": [
         "bg_event_257"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8fd6f3bb38",
@@ -8195,8 +8295,8 @@
       "summary": "「我」趁Dr.D煎牛排期間搜查其宿舍，喺最後一間房發現病爪嘅實驗手札，記錄顯示病爪雜食、黑暗中傷口極速治癒、紫外光下會假死、不會複雜思考。",
       "story_time": {
         "order": 42,
-        "label": "第 42 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 42,
       "chapters": [
@@ -8218,7 +8318,9 @@
       "source_event_ids": [
         "bg_event_259"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9cac24e098",
@@ -8226,8 +8328,8 @@
       "summary": "「我」揭開魚缸上嘅黑布，發現病爪嘅頭正浮沉喺水中，一旁有青蛙、金魚、蝦毛游動，魚缸玻璃面貼住「第３４６次實驗」紙條，缸底有大量被咬斷一半嘅動物屍骸。",
       "story_time": {
         "order": 42,
-        "label": "第 42 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 42,
       "chapters": [
@@ -8248,7 +8350,9 @@
       "source_event_ids": [
         "bg_event_260"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b6890d2dcc",
@@ -8256,8 +8360,8 @@
       "summary": "「我」向Dr.D報告暫時確認到有一種病者叫做「病童」，但其能力、弱點仲未清楚。",
       "story_time": {
         "order": 42,
-        "label": "第 42 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 42,
       "chapters": [
@@ -8278,7 +8382,9 @@
       "source_event_ids": [
         "bg_event_262"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_006a541c80",
@@ -8286,8 +8392,8 @@
       "summary": "「我」按熄魚缸紫外光燈做測試，病爪隨即發出喝水咀嚼怪聲並猛烈撞擊魚缸；「我」重新開燈後病爪如石化般靜止，數條金魚青蛙瞬間死亡，其中一隻小青蛙上半身被病爪含喺嘴中半死不活。",
       "story_time": {
         "order": 42,
-        "label": "第 42 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 42,
       "chapters": [
@@ -8308,7 +8414,9 @@
       "source_event_ids": [
         "bg_event_261"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3106fd1b11",
@@ -8316,8 +8424,8 @@
       "summary": "主角默默記下Dr.D房間照片上所寫的兩個名字，向老賢查詢，但老賢表示沒有印象並答應幫忙問周圍的人。",
       "story_time": {
         "order": 43,
-        "label": "第 43 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 43,
       "chapters": [
@@ -8338,7 +8446,9 @@
       "source_event_ids": [
         "bg_event_263"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fe2ed4c249",
@@ -8346,8 +8456,8 @@
       "summary": "主角帶領六名學生於早上八時在大本營南門集合，通過職員開門後正式步出營外，前往靈實醫院。",
       "story_time": {
         "order": 43,
-        "label": "第 43 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 43,
       "chapters": [
@@ -8366,7 +8476,9 @@
       "source_event_ids": [
         "bg_event_266"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8d0ff36832",
@@ -11299,8 +11411,8 @@
       "summary": "公仔與娃娃承認自入學堂起便想殺老師，二人是從「不良人」轉過大本營的人，受家人指使。",
       "story_time": {
         "order": 61,
-        "label": "第 61 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 61,
       "chapters": [
@@ -11322,7 +11434,9 @@
       "source_event_ids": [
         "bg_event_359"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7a8346ff5e",
@@ -11330,8 +11444,8 @@
       "summary": "老師以一顆果汁糖賄賂職員，着他在少佐面前改稱兩兄妹犯「殺人罪」而非「間諜罪」，以免二人被少佐盤問。",
       "story_time": {
         "order": 61,
-        "label": "第 61 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 61,
       "chapters": [
@@ -11353,7 +11467,9 @@
       "source_event_ids": [
         "bg_event_356"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0e702ffc28",
@@ -11361,8 +11477,8 @@
       "summary": "瑜小六回到海邊後一言不發，用釣魚線輪上的韌線綁住毫無防備的公仔雙手，把他壓在地上。",
       "story_time": {
         "order": 61,
-        "label": "第 61 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 61,
       "chapters": [
@@ -11384,7 +11500,9 @@
       "source_event_ids": [
         "bg_event_355"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0d5c353c0c",
@@ -11392,8 +11510,8 @@
       "summary": "老師放棄強硬拷問，以攻擊學老師之名從醫療部借來醫療用品給公仔和娃娃療傷，改行懷柔手段。",
       "story_time": {
         "order": 61,
-        "label": "第 61 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 61,
       "chapters": [
@@ -11416,7 +11534,9 @@
       "source_event_ids": [
         "bg_event_360"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a39d7596ca",
@@ -11424,8 +11544,8 @@
       "summary": "攻擊學老師殺退病者後因太累躺在地上休息，瑜小六誤以為他已死，蹲下欲揭其面具卻放棄，低頭飲泣。",
       "story_time": {
         "order": 61,
-        "label": "第 61 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 61,
       "chapters": [
@@ -11447,7 +11567,9 @@
       "source_event_ids": [
         "bg_event_353"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6ca14bbc31",
@@ -11455,8 +11577,8 @@
       "summary": "老師在墳場路段殺死至少八隻病者，其中三隻舌女較有攻擊力，其餘為大眼、大耳等，自己亦付出受傷代價。",
       "story_time": {
         "order": 61,
-        "label": "第 61 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 61,
       "chapters": [
@@ -11475,7 +11597,9 @@
       "source_event_ids": [
         "bg_event_361"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e7ac62e040",
@@ -11483,8 +11607,8 @@
       "summary": "老師以仍有電的防狼電棍電擊公仔逼供，公仔為保護妹妹娃娃激動反抗，最終兄妹開口道出原因。",
       "story_time": {
         "order": 61,
-        "label": "第 61 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 61,
       "chapters": [
@@ -11506,7 +11630,9 @@
       "source_event_ids": [
         "bg_event_357"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7e78108a31",
@@ -11514,8 +11640,8 @@
       "summary": "主角在天台翻閱已完成一大半的《病者圖鑑》，認為完成度頗高，但自覺寫來供自己自娛意義不大。",
       "story_time": {
         "order": 62,
-        "label": "第 62 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 62,
       "chapters": [
@@ -11534,7 +11660,9 @@
       "source_event_ids": [
         "bg_event_366"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2c804108cc",
@@ -11542,8 +11670,8 @@
       "summary": "主角計劃在之後兩個多月的學堂課程中，由對付病者的教學改為教導學生在不良人入侵當日拿起武器抵抗。",
       "story_time": {
         "order": 62,
-        "label": "第 62 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 62,
       "chapters": [
@@ -11562,7 +11690,9 @@
       "source_event_ids": [
         "bg_event_365"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5cdb751f1d",
@@ -11570,8 +11700,8 @@
       "summary": "為了準備不良人入侵的一天到來，主角暫時把攻略「病童」一事放下。",
       "story_time": {
         "order": 62,
-        "label": "第 62 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 62,
       "chapters": [
@@ -11590,7 +11720,9 @@
       "source_event_ids": [
         "bg_event_367"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_efdbe3db3d",
@@ -11598,8 +11730,8 @@
       "summary": "主角離開盤問室後以誤會一場為由暫時釋放二人，只把此事告知老賢，並打算向賴三老師和廢柴三人組訛稱只是模擬演習。",
       "story_time": {
         "order": 62,
-        "label": "第 62 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 62,
       "chapters": [
@@ -11623,7 +11755,9 @@
       "source_event_ids": [
         "bg_event_364"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a3c21c8757",
@@ -11631,8 +11765,8 @@
       "summary": "主角與老賢商量一夜後，決定將營火會推遲至不良人行動前一兩日舉行，趁機暗殺董倫與馬德梵夫婦，並讓公仔和娃娃做雙面間諜、逐步解除八樓人士的重要職位。",
       "story_time": {
         "order": 62,
-        "label": "第 62 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 62,
       "chapters": [
@@ -11657,7 +11791,9 @@
       "source_event_ids": [
         "bg_event_363"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_47cb957f60",
@@ -13481,8 +13617,8 @@
       "summary": "Dr.D打開桌上印有「D」字圖案的鐵盒，盒內放有三枝深紅色的血液藥劑。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13503,7 +13639,9 @@
       "source_event_ids": [
         "bg_event_506"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7143689b98",
@@ -13511,8 +13649,8 @@
       "summary": "戰事開始後Dr.D打開桌子上一個印有「D」字圖案的鐵盒，盒內放有三枝深紅色的血液藥劑。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13533,7 +13671,9 @@
       "source_event_ids": [
         "bg_event_475"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7792619b60",
@@ -13541,8 +13681,8 @@
       "summary": "Dr.D透露自己與馬姑娘只注射過代表記憶的綠針和代表意志的黃針，並不需要代表外表的紅色藥劑。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13563,7 +13703,9 @@
       "source_event_ids": [
         "bg_event_497"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2bb4b3e6c1",
@@ -13571,8 +13713,8 @@
       "summary": "Dr.D打開桌子上一個印有「D」字圖案嘅鐵盒，入面放住三枝深紅色嘅血液藥劑。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13593,7 +13735,9 @@
       "source_event_ids": [
         "bg_event_448"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ebe7b3a791",
@@ -13601,8 +13745,8 @@
       "summary": "被綁喺輪椅上嘅主角與Dr.D及馬姑娘拍下三人合照，二人分別站喺左右邊，面向鏡頭露出人類不應擁有嘅扭曲笑容。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13623,7 +13767,9 @@
       "source_event_ids": [
         "bg_event_438"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9cb2d706ec",
@@ -13631,8 +13777,8 @@
       "summary": "倒數結束後不良人開戰：貨車撞擊防禦鐵板二十多分鐘後，八樓內奸偽裝平民殺害看門職員並打開大鐵門，三輛貨車載著約四、五十名配備消防斧、尼泊爾軍刀、電鋸、鐵棍、武士刀等武器的不良人攻入大本營廣場。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13652,7 +13798,9 @@
         "bg_event_435",
         "bg_event_444"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4ee0c2a657",
@@ -13660,8 +13808,8 @@
       "summary": "倒數結束後不良人正式開戰，貨車撞擊防禦鐵板二十多分鐘，其後約四、五十名配備近戰武器的暴徒隨三輛貨車攻入大本營。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13681,7 +13829,9 @@
         "bg_event_470",
         "bg_event_500"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_13e18e7299",
@@ -13689,8 +13839,8 @@
       "summary": "八樓部份人偽裝成普通平民搶奪大鐵門控制權，先下手為強殺死看門職員並打開大鐵門，防守多時的防線就此失守。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13709,7 +13859,9 @@
       "source_event_ids": [
         "bg_event_471"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_933ecea23c",
@@ -13717,8 +13869,8 @@
       "summary": "兩個落單學生被不良人用軍刀割頸刺喉斬殺，兇徒其後被大舊從三樓擲落，墮地時更壓死廣場上另一名不良人。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13739,7 +13891,9 @@
       "source_event_ids": [
         "bg_event_504"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_feba9177f6",
@@ -13747,8 +13901,8 @@
       "summary": "八樓部份人偽裝成普通平民衝往大鐵門，殺死看門職員搶奪控制權並打開大鐵門，讓三輛貨車及約四、五十名武裝暴徒駛入廣場。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13768,7 +13922,9 @@
         "bg_event_443",
         "bg_event_501"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a5f505c59c",
@@ -13776,8 +13932,8 @@
       "summary": "搜索隊從二、三樓走廊擲下裝有強酸的玻璃瓶重創不良人，其後約一百多人在大本營廣場互相斬殺，不良人更遊走到各樓層襲擊。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13796,7 +13952,9 @@
       "source_event_ids": [
         "bg_event_436"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d0f1234220",
@@ -13804,8 +13962,8 @@
       "summary": "少佐難以靠近旋轉電鋸嘅對手，於是取出棒球擊中電鋸男鼻樑，再衝前給予天靈蓋一棍將其爽快打倒。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13827,7 +13985,9 @@
       "source_event_ids": [
         "bg_event_446"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5a9af7ca6a",
@@ -13835,8 +13995,8 @@
       "summary": "約一百多人在大本營廣場互相斬殺打鬥，有人被開山刀劈斷頸喉、被電鋸直穿肚皮，不良人戰力遠勝並開始遊走到各樓層襲擊。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13855,7 +14015,9 @@
       "source_event_ids": [
         "bg_event_473"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_dc3381f885",
@@ -13863,8 +14025,8 @@
       "summary": "約一百多人在大本營廣場互相斬殺打鬥，其後戰力較強的不良人遊走至各樓層，大本營周遭都可能遇襲。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13883,7 +14045,9 @@
       "source_event_ids": [
         "bg_event_503"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ae77574872",
@@ -13891,8 +14055,8 @@
       "summary": "少佐下令後，數十名搜索隊成員在大本營二樓、三樓走廊向不良人投擲裝有強酸的玻璃瓶，濺中的不良人痛苦大叫。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13913,7 +14077,9 @@
       "source_event_ids": [
         "bg_event_502"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c1b62bba7c",
@@ -13921,8 +14087,8 @@
       "summary": "少佐下令數十名搜索隊成員從大本營二樓、三樓走廊向不良人投擲裝有強酸的玻璃瓶，被濺中的不良人痛苦大叫。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13943,7 +14109,9 @@
       "source_event_ids": [
         "bg_event_472"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b7505543c1",
@@ -13951,8 +14119,8 @@
       "summary": "少佐大喊「強酸」後，數十名搜索隊成員喺大本營二樓、三樓走廊向不良人擲下載有強酸嘅玻璃瓶，濺中者痛苦大叫。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -13973,7 +14141,9 @@
       "source_event_ids": [
         "bg_event_445"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5785a5e76b",
@@ -13981,8 +14151,8 @@
       "summary": "倒數進入最後二十四小時，馬姑娘推「我」出廳共進最後晚餐，Dr.D席間勸「我」接受即將成為病者的事實並一起打低愚蠢的人類。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -14004,7 +14174,9 @@
         "bg_event_468",
         "bg_event_498"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_68811d1510",
@@ -14012,8 +14184,8 @@
       "summary": "倒數進入最後二十四小時後，馬姑娘把主角的輪椅推出廳外共進最後晚餐，Dr.D邊切牛排品美酒邊勸主角接受成為病者、一同打低人類。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -14035,7 +14207,9 @@
         "bg_event_433",
         "bg_event_441"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_96d9b5cc82",
@@ -14043,8 +14217,8 @@
       "summary": "Dr.D瞞著主角替他注射代表外表的紅針，令他日後注射病者血型成為病者後仍可保留人類外貌；而Dr.D與馬姑娘自己只打過代表記憶的綠針和代表意志的黃針。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -14066,7 +14240,9 @@
         "bg_event_432",
         "bg_event_496"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_538cd6a348",
@@ -14074,8 +14250,8 @@
       "summary": "Dr.D特登為主角注射代表外表嘅紅針，令主角日後即使注射病者血型成為病者，都可以保留人類外貌。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -14096,7 +14272,9 @@
       "source_event_ids": [
         "bg_event_439"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_51274c71a3",
@@ -14104,8 +14282,8 @@
       "summary": "兩名第五搜索隊成員奉老賢之命上門查問失蹤多日的攻擊學病者老師，馬姑娘謊稱該老師疑似因驚怕不良人入侵而偷走出大本營。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -14127,7 +14305,9 @@
       "source_event_ids": [
         "bg_event_434"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_58c7cdb7fe",
@@ -14135,8 +14315,8 @@
       "summary": "兩名第五搜索隊成員奉老賢之命上門，查問失蹤幾日嘅攻擊學病者老師下落，馬姑娘謊稱該老師疑似因驚咗不良人入侵而偷走出大本營。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -14158,7 +14338,9 @@
       "source_event_ids": [
         "bg_event_442"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d36c698f33",
@@ -14166,8 +14348,8 @@
       "summary": "老賢派第五搜索隊兩名成員上門查問失蹤多日的攻擊學病者老師，馬姑娘編謊稱該老師因驚怕不良人入侵而偷走出大本營。",
       "story_time": {
         "order": 68,
-        "label": "第 68 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 68,
       "chapters": [
@@ -14189,7 +14371,9 @@
       "source_event_ids": [
         "bg_event_469"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_bc6d233434",
@@ -14563,8 +14747,8 @@
       "summary": "M按老賢遺願，向瑜小六取回雨傘後刺入老賢腹部，令他從六樓墜下身亡，藉此換取不良人對M的高度信任以守護大本營。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14586,7 +14770,9 @@
       "source_event_ids": [
         "bg_event_461"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e350f87fef",
@@ -14594,8 +14780,8 @@
       "summary": "唯一配戴手槍的不良人正向不破尚通報求援時，被馬姑娘如獵豹般追上，手腳被強行扯斷分屍而死。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14616,7 +14802,9 @@
       "source_event_ids": [
         "bg_event_464"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c85400fb81",
@@ -14624,8 +14812,8 @@
       "summary": "垂死的Dr.D欲把病者血液注射入M體內之際，老賢挺身擋在M面前代為受針。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14646,7 +14834,9 @@
       "source_event_ids": [
         "bg_event_450"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8d7c970966",
@@ -14654,8 +14844,8 @@
       "summary": "垂死的Dr.D拿著病者血液針筒想注射入M體內的一刻，老賢挺身擋在M面前代他承受那一針而受感染。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14676,7 +14866,9 @@
       "source_event_ids": [
         "bg_event_528"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cd1b59796b",
@@ -14684,8 +14876,8 @@
       "summary": "老賢趁Dr.D發狂分心之際向他連開三槍，命中胸、腹、頸側，但子彈用光未能即時置其於死地。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14706,7 +14898,9 @@
       "source_event_ids": [
         "bg_event_527"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cd69af6074",
@@ -14714,8 +14908,8 @@
       "summary": "老賢認為自己死於M之手可換取不良人對M的高度信任，堅持要求M一定要做殺他的人。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14736,7 +14930,9 @@
       "source_event_ids": [
         "bg_event_453"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e892cd1900",
@@ -14744,8 +14940,8 @@
       "summary": "老賢趁Dr.D精神發狂分心之際向他連開三槍，命中胸、腹、頸側，但子彈隨即用光。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14767,7 +14963,9 @@
         "bg_event_449",
         "bg_event_460"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ca9f95ff49",
@@ -14775,8 +14973,8 @@
       "summary": "加強版舌女馬姑娘如獵豹般追上唯一持手槍的不良人，用長手拉住他衣袖再強行扯斷其手腳將他分屍。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14795,7 +14993,9 @@
       "source_event_ids": [
         "bg_event_532"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e1e933d4d2",
@@ -14803,8 +15003,8 @@
       "summary": "馬姑娘如獵豹般追上以無線電求援的不良人，將其手腳硬生生扯斷分屍。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14823,7 +15023,9 @@
       "source_event_ids": [
         "bg_event_456"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a36fd76c24",
@@ -14831,8 +15033,8 @@
       "summary": "馬姑娘被注射病者血液後異變成手腳扭曲伸長、舌頭極度腫脹的加強版舌女，能如青蛙般伸出長舌把人拉回殘殺，或以帶強酸的舌頭劃喉。",
       "story_time": {
         "order": 69,
-        "label": "第 69 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 69,
       "chapters": [
@@ -14852,7 +15054,9 @@
         "bg_event_452",
         "bg_event_463"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5eb0b1de84",
@@ -14860,8 +15064,8 @@
       "summary": "Dr.D一個肥而臃腫嘅拳頭擦破成座D樓三樓嘅走廊及樓梯間，一秒之間封鎖咗兩人眼前嘅逃生路線。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -14882,7 +15086,9 @@
       "source_event_ids": [
         "bg_event_550"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0d840214ce",
@@ -14890,8 +15096,8 @@
       "summary": "一個肥而臃腫嘅拳頭一秒間擦破D樓三樓成條走廊及樓梯間，將主角眼前嘅逃生路線變成大缺口。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -14912,7 +15118,9 @@
       "source_event_ids": [
         "bg_event_520"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fa623a5e50",
@@ -15624,8 +15832,8 @@
       "summary": "Dr.D未真正死亡，從皺摺厚皮中以身高約一米九、滿身甲蟲外殼般皮層的人形姿態站起，留下一條蠹魚作「禮物」後，在無人敢阻止下離開大本營。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15646,7 +15854,9 @@
       "source_event_ids": [
         "bg_event_580"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b22b61af83",
@@ -15654,8 +15864,8 @@
       "summary": "Dr.D未真正死去，從皺摺厚皮中以身高約一米九、滿身甲蟲外殼皮層的人形姿態站起，留下一條蠹魚作「禮物」後，無一人敢阻止地離開大本營。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15676,7 +15886,9 @@
       "source_event_ids": [
         "bg_event_541"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6ac0b5ae9d",
@@ -15684,8 +15896,8 @@
       "summary": "Dr.D未真正死去，從皺摺表皮中以貫穿皮層的人形姿態站起，蛻變成甲蟲外殼形態，留下一條蠹魚在大本營瓦礫中作為「禮物」後當眾離開，無人敢阻止，市民情緒崩潰。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15706,7 +15918,9 @@
       "source_event_ids": [
         "bg_event_510"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_327e72723d",
@@ -15714,8 +15928,8 @@
       "summary": "巨型病者Dr.D襲擊大本營，飛虎隊奉不破尚指示持續開火攻擊其腳脛，令牠雙腳失去活動能力，其吼叫音波更震裂大本營並令附近市民五觀出血死亡。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15737,7 +15951,9 @@
       "source_event_ids": [
         "bg_event_578"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_60caa50f4c",
@@ -15745,8 +15961,8 @@
       "summary": "Dr.D未真正死去，從皺摺表皮中以一米九高、滿身甲蟲外殼皮層的人形姿態重生，把一條蠹魚留在大本營瓦礫中作為「禮物」，然後無人敢阻止地離開。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15767,7 +15983,9 @@
       "source_event_ids": [
         "bg_event_490"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f0f0216161",
@@ -15775,8 +15993,8 @@
       "summary": "Dr.D的毀滅性音波吼叫震裂大本營，附近死者大都五官出血，其音波攻擊亦曾把敘事者擊飛幾米遠。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15797,7 +16015,9 @@
       "source_event_ids": [
         "bg_event_487"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2aae4d5415",
@@ -15805,8 +16025,8 @@
       "summary": "Dr.D張口吸入空氣後發出毀滅性音波攻擊與震力，將主角擊飛數米致雙耳耳鳴；其早前的吼叫聲亦疑令附近死者大多五官出血。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15827,7 +16047,9 @@
       "source_event_ids": [
         "bg_event_545"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9224d2db28",
@@ -15835,8 +16057,8 @@
       "summary": "為試探主角忠誠，不破尚帶出一對畏懼的夫婦命主角親手開槍殺死，董倫喊停並提議改在大本營廣場公開處決；主角認出是天明兩夫婦，被迫以冷酷眼神瞄向他們的前額。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15859,7 +16081,9 @@
       "source_event_ids": [
         "bg_event_513"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f43b66262c",
@@ -15867,8 +16091,8 @@
       "summary": "戰後克里絲娜搜索隊以主角殺死老賢為由上前要誅殺他，二、三十名不良人緩緩走到主角背後及身邊與他同一戰線保護他，搜索隊不敢再前行。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15889,7 +16113,9 @@
       "source_event_ids": [
         "bg_event_511"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d8f69a7a78",
@@ -15897,8 +16123,8 @@
       "summary": "董倫分析接收大本營利弊並提議挾持一部份細路做人質、要求定時供奉物資，主角則提議今日暫時撤退，日後以不交供奉為由再次進攻。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15919,7 +16145,9 @@
       "source_event_ids": [
         "bg_event_544"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_879fd00e32",
@@ -15927,8 +16155,8 @@
       "summary": "董倫分析接收大本營的利弊後，提議掌握大本營一部份細路做人質，要求對方留在大本營搜索物資定時供奉；主角則建議暫時撤退，日後以不交供奉為由再次進攻。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15949,7 +16177,9 @@
       "source_event_ids": [
         "bg_event_581"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7f1aca6693",
@@ -15957,8 +16187,8 @@
       "summary": "董倫分析接收大本營利弊並提議挾持兒童作人質索取供奉，敘事者則提議暫時撤退，日後以不交供奉為由再次進攻。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -15979,7 +16209,9 @@
       "source_event_ids": [
         "bg_event_493"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9bc5b9e047",
@@ -15987,8 +16219,8 @@
       "summary": "主角向不破尚表示願效勞對付病者並承認殺死老賢，戰後獲不破尚接納為不良人一份子，不良人為他歡呼鼓動。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16010,7 +16242,9 @@
       "source_event_ids": [
         "bg_event_543"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f9058585eb",
@@ -16018,8 +16252,8 @@
       "summary": "主角向不破尚表示願效勞對付病者並承認殺死老賢，戰後返回飯堂受不良人歡呼鼓動，不破尚詢問其名字後宣佈他以後統稱「不良人」一份子。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16041,7 +16275,9 @@
       "source_event_ids": [
         "bg_event_512"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a810c8b90c",
@@ -16049,8 +16285,8 @@
       "summary": "戰後「克里絲娜」搜索隊以敘事者殺死大本營領袖老賢為由欲將其誅殺，但二、三十個不良人走到敘事者背後與他站同一戰線保護他。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16071,7 +16307,9 @@
       "source_event_ids": [
         "bg_event_491"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_bfe2bd4042",
@@ -16079,8 +16317,8 @@
       "summary": "不破尚交出Glock19手槍命令主角親手殺死天明夫婦以示忠誠，董倫喊停並改提議在大本營廣場公開處決，夫婦被押跪地上痛泣，處決尚未完成。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16103,7 +16341,9 @@
       "source_event_ids": [
         "bg_event_542"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5127864096",
@@ -16111,8 +16351,8 @@
       "summary": "約十米高的變異病者Dr.D襲擊大本營，其咆哮音波震裂整個大本營並令附近死者多為五官出血；飛虎隊依不破尚指示射擊其腳脛令雙腳失去活動能力後，牠仍猛擊大樓結構企圖使其倒塌。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16134,7 +16374,9 @@
       "source_event_ids": [
         "bg_event_507"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a33e7a3e40",
@@ -16142,8 +16384,8 @@
       "summary": "不破尚先把Glock19手槍交給主角命其親手殺死天明夫婦，董倫喊停後提議改在大本營廣場公開處決，不破尚點頭同意，全體不良人跟出廣場觀看。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16166,7 +16408,9 @@
       "source_event_ids": [
         "bg_event_582"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c85403b87c",
@@ -16174,8 +16418,8 @@
       "summary": "不破尚交出Glock19手槍命敘事者親手殺死天明夫婦以示忠誠，董倫喊停後改提議在大本營廣場公開處決二人，作為章末懸念。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16198,7 +16442,9 @@
       "source_event_ids": [
         "bg_event_494"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_69dce37f7c",
@@ -16206,8 +16452,8 @@
       "summary": "趁Dr.D張嘴吸入空氣準備音波咆哮之際，敘事者將手榴彈擲入其口內，體內爆炸令其臃腫身體塌下，看似將其消滅。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16228,7 +16474,9 @@
       "source_event_ids": [
         "bg_event_489"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1d26dcad41",
@@ -16236,8 +16484,8 @@
       "summary": "趁Dr.D張嘴吸氣準備發動最強音波咆哮之際，主角逆眾人而進，將手榴彈擲入其口中被吸入腹中引爆，Dr.D身體塌陷如穿洞氣球，眾人以為牠已死去而歡呼。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16258,7 +16506,9 @@
       "source_event_ids": [
         "bg_event_509"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_edae8d14a9",
@@ -16266,8 +16516,8 @@
       "summary": "敘事者看穿Dr.D巨大臃腫的身軀主要由血液充塞而成，率領不良人及「克里絲娜」搜索隊切割其皮膚放血，令其體積縮至一半。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16288,7 +16538,9 @@
       "source_event_ids": [
         "bg_event_488"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4bbe37e00c",
@@ -16296,8 +16548,8 @@
       "summary": "主角識破Dr.D巨大臃腫的身軀主要由血液充塞而非骨骼肌肉，率不良人及克里絲娜搜索隊切割其皮膚放血，令其體積縮至原本一半。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16318,7 +16570,9 @@
       "source_event_ids": [
         "bg_event_508"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4ec54ce856",
@@ -16326,8 +16580,8 @@
       "summary": "主角識破Dr.D臃腫身軀主要由血液充塞而成，率不良人與克里絲娜搜索隊切割其皮膚放血令其縮細一半，再趁其張口吸氣時將手榴彈擲入其口中引爆。",
       "story_time": {
         "order": 71,
-        "label": "第 71 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 71,
       "chapters": [
@@ -16348,7 +16602,9 @@
       "source_event_ids": [
         "bg_event_540"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_33aa8ea9c3",
@@ -20763,8 +21019,8 @@
       "summary": "凱銘奉命派出F小隊前往病童所在地搜索，該隊拉住一堆堆物資返回據點，豐厚物資印證病童已死。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -20787,7 +21043,9 @@
       "source_event_ids": [
         "bg_event_661"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_41df54f325",
@@ -20795,8 +21053,8 @@
       "summary": "不破尚宣布主角從此留下成為不良人的人，並安排翌日有人前來教授不良人獨有的技巧。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -20817,7 +21075,9 @@
       "source_event_ids": [
         "bg_event_692"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a4b03d3900",
@@ -20825,8 +21085,8 @@
       "summary": "因消滅病童並帶回物資，不破尚宣告主角以後是不良人的人，可留在據點，並稱聽日會有人教導不良人獨有技巧。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -20849,7 +21109,9 @@
         "bg_event_732",
         "bg_event_753"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_097e16fc4b",
@@ -20857,8 +21119,8 @@
       "summary": "不破尚見到豐厚物資後宣告主角以後是不良人的人，可以留在據點，並指聽日會有人來教他不良人獨有的技巧。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -20879,7 +21141,9 @@
       "source_event_ids": [
         "bg_event_664"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9f87789050",
@@ -20887,8 +21151,8 @@
       "summary": "主角捧來多份餐點（包括蜜糖、麵包及錫紙包住用酒和香茹煮的菜式）讓剛獲自由的兩兄妹充飢。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -20909,7 +21173,9 @@
       "source_event_ids": [
         "bg_event_752"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5057d7aa04",
@@ -20917,8 +21183,8 @@
       "summary": "主角遵守約定，向不破尚的手下交還無線電對講機，並帶回一堆瑞士萬用刀作回報，但找不到槍。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -20939,7 +21205,9 @@
       "source_event_ids": [
         "bg_event_748"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a03e33bbcc",
@@ -20947,8 +21215,8 @@
       "summary": "主角遵守約定，把無線電對講機還給不破尚的手下，並帶回一批瑞士萬用刀作回報，但找不到槍。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -20969,7 +21237,9 @@
       "source_event_ids": [
         "bg_event_688"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cbd1f70912",
@@ -20977,8 +21247,8 @@
       "summary": "娃娃獲釋後，公仔馬上落去迎接，兩兄妹相見即互相擁抱，感情深厚。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -21000,7 +21270,9 @@
       "source_event_ids": [
         "bg_event_663"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3286f3c88e",
@@ -21008,8 +21280,8 @@
       "summary": "娃娃被釋放後，公仔馬上前去迎接，兩兄妹相見即擁抱，彼此是在扭曲世界中最能信任的人。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -21031,7 +21303,9 @@
       "source_event_ids": [
         "bg_event_751"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a8d52ee470",
@@ -21039,8 +21313,8 @@
       "summary": "主角走上最高樓層向不破尚匯報消滅病童，消息傳出後據點各樓層的人都議論紛紛。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -21062,7 +21336,9 @@
       "source_event_ids": [
         "bg_event_689"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_17e77b8fee",
@@ -21070,8 +21346,8 @@
       "summary": "主角走上最高樓層向不破尚交代病童已死，消息傳出後全據點議論紛紛，不破尚震驚得把軍刀掉在地上。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -21093,7 +21369,9 @@
       "source_event_ids": [
         "bg_event_660"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0c45d25109",
@@ -21101,8 +21379,8 @@
       "summary": "主角走上據點最高樓層告知不破尚病童已死，消息傳出後全據點各樓層的人都議論紛紛。",
       "story_time": {
         "order": 79,
-        "label": "第 79 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 79,
       "chapters": [
@@ -21124,7 +21402,9 @@
       "source_event_ids": [
         "bg_event_728"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2e57636c5b",
