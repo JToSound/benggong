@@ -65,10 +65,20 @@ OUT = REPO / "data" / "private" / "review" / "chronicle-llm.jsonl"
 #: "This request requires more credits"）。細請求（單條測試）過得，
 #: 但 20 條 × 16,000 tokens 嘅批次就被拒。
 #:
-#: 改用同系列嘅**免費版本** `deepseek/deepseek-v4-flash-0731:free`
-#: —— 同一個 DeepSeek V4 Flash 家族，任務性質（分類）唔需要最強版本。
+#: 改為**免費模型實測對比**之後揀嘅 `nvidia/nemotron-3-super-120b-a12b:free`。
+#:
+#: 實測（同一批 12 條、同一 prompt）：
+#:   nvidia/nemotron-3-super-120b-a12b:free   **18.4s**  ✅ JSON 可靠
+#:   deepseek/deepseek-v4-flash-0731:free      220s（波動大）✅
+#:   qwen/qwen3.8-27b:free                     ❌ HTTP 429（共享池擠塞）
+#:   z-ai/glm-5.2:free                         ❌ HTTP 429
+#:   google/gemma-4-31b-it:free                ❌ HTTP 429
+#:   thinkingmachines/inkling:free             ❌ HTTP 403
+#:   nex-agi/nex-n2.5-pro:free                 118.6s  ⚠️ JSON 格式錯
+#:
+#: nemotron 比 deepseek 免費版快 **12 倍**，所以揀佢。
 #: 可用 `--model` 覆寫。
-MODEL = "deepseek/deepseek-v4-flash-0731:free"
+MODEL = "nvidia/nemotron-3-super-120b-a12b:free"
 SCHEMA_VERSION = "chronicle-llm-v1"
 TEMPERATURE = 0.0
 BATCH = 20

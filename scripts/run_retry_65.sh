@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Retry 65 error chapters with minimax/minimax-m3:free
+# Retry 65 error chapters with nvidia/nemotron-3-super-120b-a12b:free
 set -e
 cd /c/Users/User/Desktop/benggong
 export OPENROUTER_EFFORT=ultra

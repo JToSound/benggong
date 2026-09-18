@@ -13,7 +13,7 @@ from extraction_core import load_env, require_api_key  # noqa: E402
 def main() -> int:
     key, base = require_api_key()
     env = load_env()
-    model = env.get("OPENROUTER_EXTRACTION_MODEL", "stealth/ox-alpha")
+    model = env.get("OPENROUTER_EXTRACTION_MODEL", "nvidia/nemotron-3-super-120b-a12b:free")
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": "回覆一個字：好"}],

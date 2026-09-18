@@ -31,7 +31,7 @@ def main() -> int:
 
     key, base = require_api_key()
     payload = {
-        "model": "stealth/ox-alpha",
+        "model": "nvidia/nemotron-3-super-120b-a12b:free",
         "messages": [
             {"role": "system", "content": EXTRACTION_SYSTEM_PROMPT},
             {"role": "user", "content": user_prompt},

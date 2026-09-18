@@ -199,16 +199,40 @@ events.geojson（1,796 條）
 
 ---
 
-## 6.5 模型存取（實測）
+## 6.5 模型存取（實測對比）
 
-用戶指定用 `deepseek-v4.1-flash`。研究結果：
+### 首選（用戶指定）：`deepseek-v4.1-flash`
+❌ **HTTP 402 額度不足** —— 細請求過得，批次被拒。
 
-| 模型 | OpenRouter 可用 | 實測 |
+### 免費模型對比（同一批 12 條、同一 prompt）
+
+| 模型 | 速度 | 結果 |
 |---|---|---|
-| `deepseek/deepseek-v4.1-flash` | ✅ 存在（1M context） | ⚠️ **HTTP 402 額度不足** —— 細請求過得，20 條 × 16K tokens 嘅批次被拒 |
-| `deepseek/deepseek-v4-flash-0731:free` | ✅ 免費 | ✅ 可用（同一個 V4 Flash 家族） |
+| **`nvidia/nemotron-3-super-120b-a12b:free`** | **18.4s** | ✅ JSON 可靠 ← **採用** |
+| `deepseek/deepseek-v4-flash-0731:free` | 220s（波動大） | ✅ 但慢 12 倍 |
+| `nex-agi/nex-n2.5-pro:free` | 118.6s | ⚠️ JSON 格式錯 |
+| `nvidia/nemotron-3.5-lightning:free` | 165.0s | ⚠️ JSON 格式錯 |
+| `qwen/qwen3.8-27b:free` | — | ❌ HTTP 429 |
+| `z-ai/glm-5.2:free` | — | ❌ HTTP 429 |
+| `google/gemma-4-31b-it:free` | — | ❌ HTTP 429 |
+| `inclusionai/ling-3.0-flash-sante:free` | — | ❌ HTTP 400 |
+| `thinkingmachines/inkling:free` | — | ❌ HTTP 403 |
 
-**採用**：免費版本 + 縮細批次（8 條）。可用 `--model` 覆寫。
+**結論**：22 個免費模型之中只有 **2 個**真正可用，而 nemotron 比
+deepseek 快 **12 倍**。→ 採用 nemotron。
+
+⚠️ **「免費」唔等於「可用」**：免費池係共享額度，實測大量模型回
+429／403。所以揀模型要**實測連續呼叫嘅吞吐**，唔可以只睇單次延遲。
+
+### 3 個失效模型嘅替換（用戶指出已無法調用）
+
+| 用途 | 舊（已下架） | 新（實測） |
+|---|---|---|
+| `ORCHESTRATOR_MODEL` | `stealth/ox-alpha` | `nvidia/nemotron-3-super-120b-a12b:free` |
+| `CODING_MODEL` | `stealth/ox-alpha` | `cohere/north-mini-code:free`（6.5s，代碼專用） |
+| `EXTRACTION_MODEL` | `minimax/minimax-m3:free` | `nvidia/nemotron-3-super-120b-a12b:free` |
+| `VISION_MODEL` | `stealth/ox-alpha` | `~deepseek/deepseek-flash-latest`（免費池冇視覺模型，$0.15/M） |
+| 地點推斷 | `stealth/union-alpha` | `nvidia/nemotron-3-super-120b-a12b:free` |
 
 ### 兩個實測踩到嘅坑
 

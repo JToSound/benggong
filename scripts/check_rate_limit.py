@@ -13,7 +13,7 @@ from extraction_core import require_api_key  # noqa: E402
 def main() -> int:
     key, base = require_api_key()
     payload = {
-        "model": "stealth/ox-alpha",
+        "model": "nvidia/nemotron-3-super-120b-a12b:free",
         "messages": [{"role": "user", "content": "hi"}],
         "max_tokens": 1,
     }
