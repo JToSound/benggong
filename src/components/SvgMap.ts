@@ -714,6 +714,23 @@ export class SvgMap {
         this.animFrameId = requestAnimationFrame(step);
       } else {
         this.animFrameId = null;
+        /*
+         * ⚠️ 動畫完成後一定要重新渲染標記。
+         *
+         * 為何：標記半徑係 `markerR(base) = base / viewScale`，
+         * 即係**隨縮放動態調整**，目的係令屏幕尺寸大致恆定。
+         *
+         * 但 `animateViewBox` 只呼叫 `applyViewBox()`（改 SVG viewBox
+         * 同標籤透明度），**唔會**重建標記。而 `flyToChapter` 係喺
+         * 動畫**之前**就 render 咗（嗰時 `this.view` 仍然係舊值 0.70，
+         * `viewScale` = 1）—— 結果標記用咗「全港視圖」嘅尺寸畫，
+         * 動畫完之後冇人再更新，就一直維持咁大。
+         *
+         * 實測：飛到第 150 章（span 0.0414°）之後，事件標記半徑
+         * 0.008 user unit = **畫面寬度嘅 38.7%**，成個地圖被圓圈蓋住。
+         * 正確值應該係 0.008 / 16.9 ≈ 0.00047（約 2%）。
+         */
+        this.render();
       }
     };
     this.animFrameId = requestAnimationFrame(step);

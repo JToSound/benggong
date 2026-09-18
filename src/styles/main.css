@@ -6,23 +6,81 @@
  * - 鍾意用 CSS variable 方便日後 re-skin
  */
 
+/*
+ * 設計語言：「現代檔案館」（Modern Archive）
+ * ============================================
+ * 用戶選擇方案 C —— **手繪底圖 + 現代 UI 外框**。
+ *
+ * 核心想法：底圖係暖色手繪羊皮紙（敘事質感），外框係冷色現代介面
+ * （工具質感）。兩者用**同一個色相家族**收斂：底圖嘅暖褐（#d9c9a8 系）
+ * 配外框嘅深藍灰（#0d1117 系），暖冷對比令底圖更突出，但唔會衝突。
+ *
+ * 三個原則：
+ *   1. **8px 節奏** —— 所有間距用 --sp-* token，唔好寫死數字
+ *   2. **兩層邊框** —— `--border` 分隔、`--border-strong` 強調，
+ *      唔用純黑邊（太硬）亦唔用純白邊（太亮）
+ *   3. **陰影分層** —— sm/md/lg 三級，對應「貼面／浮起／懸浮」
+ */
 :root {
-  --bg-dark: #0a0e14;
-  --bg-mid: #131921;
-  --bg-light: #1c2330;
-  --bg-elevated: #232c3d;
-  --fg-primary: #e8eef5;
-  --fg-secondary: #a8b8cc;
-  --fg-muted: #687898;
-  --accent-red: #e74c3c;
-  --accent-orange: #f39c12;
-  --accent-yellow: #ffeb3b;
-  --accent-green: #2ecc71;
-  --accent-blue: #3498db;
-  --accent-purple: #9b59b6;
-  --border: #2a3548;
-  --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --transition: 200ms ease-out;
+  /* ---- 表面（由深到淺）---- */
+  --bg-dark: #0b0f16;
+  --bg-mid: #121820;
+  --bg-light: #1a212c;
+  --bg-elevated: #222b39;
+  --bg-hover: #2a3444;
+
+  /* ---- 文字（由亮到暗）---- */
+  --fg-primary: #eef3f9;
+  --fg-secondary: #a9b8cc;
+  --fg-muted: #6b7c96;
+  --fg-faint: #4a5769;
+
+  /* ---- 強調色 ----
+     刻意收斂飽和度（原本 #e74c3c 太刺眼）。手繪底圖已經好花，
+     外框嘅強調色要克制，否則搶焦點。 */
+  --accent-red: #d9534f;
+  --accent-orange: #e8963c;
+  --accent-yellow: #e8c547;
+  --accent-green: #3fb87a;
+  --accent-blue: #4a9edb;
+  --accent-purple: #9b6fc4;
+  --accent-teal: #2fb3a3;
+
+  /* ---- 邊框 ---- */
+  --border: #26303f;
+  --border-strong: #364355;
+  --border-subtle: #1d2531;
+
+  /* ---- 陰影（三級）---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.32);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.38);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.48);
+  --shadow: var(--shadow-md);
+
+  /* ---- 間距（8px 節奏）---- */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+
+  /* ---- 圓角 ---- */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-full: 999px;
+
+  /* ---- 字級 ---- */
+  --fs-xs: 11px;
+  --fs-sm: 12px;
+  --fs-base: 13px;
+  --fs-md: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 20px;
+
+  --transition: 180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: 120ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * { box-sizing: border-box; }
@@ -702,3 +760,225 @@ html, body {
   cursor: pointer;
 }
 .bg-retry-btn:hover { filter: brightness(1.12); }
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 現代檔案館 —— 元件精緻化層
+ * ══════════════════════════════════════════════════════════════════════════
+ * 方案 C：手繪底圖（暖）＋ 現代外框（冷）。
+ *
+ * 為何用「覆寫層」而唔係逐條改上面嘅規則：
+ *   1. 改動集中一處，容易 review 同回退
+ *   2. 上面嘅規則保留做基準，唔會因為大範圍 sed 而漏改
+ *   3. 註解可以完整講「為何」而唔會夾雜舊碼
+ */
+
+/* ---- 頂欄：由「漸變色塊」改為「實色 + 細分隔線」----
+   漸變色塊喺現代介面入面顯得過時；實色加一條 1px 亮邊更有質感。 */
+#topbar {
+  padding: var(--sp-3) var(--sp-5);
+  background: var(--bg-mid);
+  border-bottom: 1px solid var(--border);
+  box-shadow: none;
+}
+#topbar h1 {
+  font-size: var(--fs-xl);
+  font-weight: 650;
+  letter-spacing: -0.2px;
+}
+#topbar .tagline {
+  font-size: var(--fs-xs);
+  color: var(--fg-faint);
+  letter-spacing: 0.2px;
+}
+#topbar .badge {
+  padding: 1px 7px;
+  border-radius: var(--r-full);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.3px;
+  background: color-mix(in srgb, var(--accent-red) 18%, transparent);
+  color: var(--accent-red);
+  border: 1px solid color-mix(in srgb, var(--accent-red) 35%, transparent);
+}
+
+.nav-btn {
+  padding: 6px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  transition: var(--transition-fast);
+}
+.nav-btn:hover {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+.nav-btn:active { transform: translateY(0); }
+.nav-btn:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* ---- 章節條：藥丸改為「現代 chip」---- */
+.chapter-strip {
+  background: var(--bg-dark);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-2) 0;
+}
+.ch-pill {
+  min-width: 34px;
+  height: 26px;
+  padding: 0 var(--sp-2);
+  border-radius: var(--r-sm);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--fg-muted);
+  transition: var(--transition-fast);
+}
+.ch-pill:hover {
+  background: var(--bg-elevated);
+  color: var(--fg-secondary);
+  border-color: var(--border);
+}
+.ch-pill.is-current {
+  background: var(--accent-blue);
+  color: #fff;
+  border-color: var(--accent-blue);
+  font-weight: 650;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-blue) 22%, transparent);
+}
+
+/* ---- 圖例：收斂密度，分組 ---- */
+.map-legend {
+  background: color-mix(in srgb, var(--bg-mid) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lg);
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--fs-sm);
+}
+.legend-title {
+  font-size: var(--fs-xs);
+  font-weight: 650;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.legend-item {
+  padding: 3px 0;
+  gap: var(--sp-2);
+  color: var(--fg-secondary);
+  transition: var(--transition-fast);
+}
+.legend-item:hover { color: var(--fg-primary); }
+.legend-lang-btn {
+  border-radius: var(--r-sm);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.4px;
+  padding: 2px 7px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  color: var(--fg-muted);
+  transition: var(--transition-fast);
+}
+.legend-lang-btn:hover {
+  background: var(--bg-hover);
+  color: var(--fg-primary);
+}
+
+/* ---- 地圖控制項：由「方塊」改為「圓角浮動按鈕」---- */
+.map-ctrl {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  color: var(--fg-secondary);
+  font-size: var(--fs-lg);
+  line-height: 1;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-fast);
+}
+.map-ctrl:hover {
+  background: var(--bg-hover);
+  color: var(--fg-primary);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+.map-ctrl:active { transform: translateY(0); }
+.map-ctrl:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* ---- 故事面板：卡片化 + 排版層級 ---- */
+.pane-story {
+  background: var(--bg-mid);
+  border-left: 1px solid var(--border);
+  padding: var(--sp-4);
+}
+.pane-story h2 {
+  font-size: var(--fs-lg);
+  font-weight: 650;
+  letter-spacing: -0.1px;
+  margin: 0 0 var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--border);
+}
+.pane-story h3 {
+  font-size: var(--fs-sm);
+  font-weight: 650;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--fg-faint);
+  margin: var(--sp-4) 0 var(--sp-2);
+}
+.pane-story p {
+  font-size: var(--fs-base);
+  line-height: 1.72;
+  color: var(--fg-secondary);
+}
+.pane-story strong { color: var(--fg-primary); font-weight: 600; }
+
+/* 事件／角色列表項：卡片化，hover 有回饋 */
+.pane-story li {
+  padding: var(--sp-2) var(--sp-3);
+  margin-bottom: var(--sp-1);
+  border-radius: var(--r-sm);
+  border: 1px solid transparent;
+  transition: var(--transition-fast);
+}
+.pane-story li:hover {
+  background: var(--bg-light);
+  border-color: var(--border-subtle);
+}
+
+/* ---- 焦點可見性（無障礙）---- */
+:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+/* ---- 捲軸：幼身、低調 ---- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+*::-webkit-scrollbar { width: 8px; height: 8px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: var(--r-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--fg-faint); background-clip: content-box; }

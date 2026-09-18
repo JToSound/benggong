@@ -15417,8 +15417,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251708,
-          22.306559
+          114.2484,
+          22.3227
         ]
       },
       "properties": {
@@ -15426,8 +15426,8 @@
         "name": "香港中文大學專業進修學院",
         "display_name": "香港中文大學專業進修學院（參考位置）",
         "location_type": "district",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.525,
           "y": 0.372
@@ -15442,7 +15442,7 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "inferred_from": null,
-        "position_source": "重分類為虛構：故事場景（ch156 康城）話三腦逃向「香港中文大學專業進修學院」，但 OSM 冇呢間學院（只有 HKU SPACE）。原本嘅座標 (114.165, 22.318) 落喺旺角／何文田，同故事場景（將軍澳康城）相差 10 km，明顯唔對。既然無法核實將軍澳有分校，寧願標為 fictional，由錨定腳本放到康城一帶 —— 誠實表達「位置唔確定」。"
+        "position_source": "人手核實修正 → 香港中文大學專業進修學院（將軍澳教學中心）；原本座標 (114.165, 22.318) 落喺旺角／何文田，同故事場景（ch156 康城）相差 10 km。經用戶指出，該學院確實有**將軍澳教學中心**，位於翠林邨（Tsui Lam Estate）。"
       }
     },
     {

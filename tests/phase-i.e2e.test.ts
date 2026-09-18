@@ -107,9 +107,36 @@ describe("Phase I 互動驗證（Playwright）", () => {
       const after = await viewBoxWidth(page);
 
       expect(after, "flyToChapter 應該放大到章節 bbox").toBeLessThan(before);
-      // 放大之後標籤圖層應該比全港視圖（0.5）更明顯
-      // （實際值取決於章節 bbox 大小，所以只驗證方向，唔硬編 1.0）
-      expect(await labelOpacity(page)).toBeGreaterThan(0.5);
+
+      /*
+       * 標籤圖層嘅預期要跟 LOD 設計，唔可以硬編。
+       *
+       * 設計：**只有 overview 層**用獨立標籤圖層（`#label-detail-layer`）。
+       * 將軍澳各層（tko-region / district / street / campus）嘅標籤已經
+       * **烙入圖磚**，所以該層強制歸零 —— 否則兩套唔同比例嘅字會疊埋。
+       *
+       * 所以飛到第 9 章（將軍澳）之後，正確行為係：
+       *   - 揀到 TKO 層 → `data-tier-label-layer="0"` → 獨立圖層關閉
+       *   - 圖磚本身有標籤（睇截圖可見「調景嶺」「將軍澳」等地名）
+       *
+       * ⚠️ 原本嘅斷言係 `opacity > 0.5`，假設咗「放大 = 獨立圖層更明顯」。
+       * 嗰個假設喺 TKO 分層出現之前成立，之後就唔再成立。
+       */
+      const tierLabelLayer = await page.getAttribute(
+        "#label-detail-layer",
+        "data-tier-label-layer",
+      );
+      if (tierLabelLayer === "0") {
+        expect(
+          await labelOpacity(page),
+          "標籤已烙入圖磚時，獨立圖層必須歸零（否則雙重標籤）",
+        ).toBe(0);
+      } else {
+        expect(
+          await labelOpacity(page),
+          "用 overview 層時，獨立圖層應該隨縮放顯示",
+        ).toBeGreaterThan(0.5);
+      }
     } finally {
       await browser.close();
     }

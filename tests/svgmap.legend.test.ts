@@ -54,8 +54,14 @@ describe("Phase H: SvgMap flyToChapter smart zoom", () => {
 
   it("flyToChapter pads bbox by ~25% to give breathing room", () => {
     const src = readFileSync("src/components/SvgMap.ts", "utf-8");
-    // 0.25 padding ratio should be in the flyToChapter section
-    const idx = src.indexOf("flyToChapter");
+    /*
+     * ⚠️ 一定要搵**函式定義**，唔可以 `indexOf("flyToChapter")`。
+     *
+     * 實測踩過：喺 `animateViewBox` 嘅註解入面提到 `flyToChapter` 之後，
+     * `indexOf` 就搵到嗰個註解（位置喺函式定義之前），令切片起點錯位，
+     * 測試假失敗。
+     */
+    const idx = src.indexOf("flyToChapter(_ch");
     expect(idx).toBeGreaterThan(-1);
     const slice = src.slice(idx, idx + 3000);
     expect(slice).toContain("0.25");

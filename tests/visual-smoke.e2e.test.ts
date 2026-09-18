@@ -146,6 +146,77 @@ describe("視覺煙霧測試", () => {
     }
   }, 60_000);
 
+  it("章節跳轉後標記唔會過大（唔可以蓋住地圖）", async () => {
+    /*
+     * 為何要驗證呢個
+     * --------------
+     * 實測踩過：`flyToChapter` 喺動畫**之前**就 render，嗰時
+     * `this.view` 仍然係舊值（全港 0.70），`viewScale` = 1 ——
+     * 標記用咗「全港視圖」嘅尺寸畫。而 `animateViewBox` 只改 SVG
+     * viewBox，唔會重建標記，所以動畫完之後冇人再更新。
+     *
+     * 結果：飛到第 150 章（span 0.0414°）之後，事件標記半徑
+     * 0.008 user unit = **畫面寬度嘅 38.7%**，成個地圖被圓圈蓋住。
+     *
+     * 呢個係「有渲染但渲染錯」——一般「有冇元素」嘅測試捉唔到。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1600, height: 950 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(1000);
+
+      for (const target of [60, 150, 198]) {
+        const cur = await page.evaluate(() =>
+          Number(document.querySelector("#strip-ch-num")?.textContent || 1),
+        );
+        for (let i = cur; i < target; i++) await page.keyboard.press("k");
+        await page.waitForTimeout(1300);
+
+        const worst = await page.evaluate(() => {
+          const vb = document
+            .querySelector("#svg-map")!
+            .getAttribute("viewBox")!
+            .split(/\s+/)
+            .map(Number);
+          const span = vb[2];
+          let maxPct = 0;
+          let who = "";
+          const check = (sel: string, kind: string) => {
+            document.querySelectorAll(sel).forEach((el) => {
+              const r = Number(
+                el.getAttribute("r") ||
+                  el.querySelector("circle")?.getAttribute("r") ||
+                  0,
+              );
+              if (r > 0 && (r * 2) / span > maxPct) {
+                maxPct = (r * 2) / span;
+                who = kind;
+              }
+            });
+          };
+          // ⚠️ 只檢查**標記**（event／cluster）。區域（zone）唔可以
+          // 用同一個門檻 —— 區域係按**真實地理尺寸**畫（例如坑口大病窩
+          // 半徑 800 m），視圖縮到 5.6 km 闊時佢佔 28.7% 係**正確**嘅，
+          // 唔係 bug。標記就唔同：佢哋嘅半徑應該同縮放無關（屏幕尺寸
+          // 恆定），所以過大就代表 markerR 冇生效。
+          check(".event-marker", "event");
+          check(".location-marker-cluster circle", "cluster");
+          return { span, maxPct, who };
+        });
+
+        expect(
+          worst.maxPct,
+          `第 ${target} 章（span ${worst.span.toFixed(4)}°）：最大嘅 ${worst.who} ` +
+            `圓形佔畫面寬度 ${(worst.maxPct * 100).toFixed(1)}% —— 標記半徑冇跟隨縮放`,
+        ).toBeLessThan(0.25);
+      }
+    } finally {
+      await browser.close();
+    }
+  }, 120_000);
+
   it("地圖有真正渲染：標記、區域、事件", async () => {
     const browser = await launch();
     if (!browser) return;
