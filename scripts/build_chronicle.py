@@ -55,9 +55,19 @@ MAX_CROSS_CHAPTER_GAP = 5
 SAME_CHAPTER_SIM = 0.55
 
 
-def sig(title: str) -> str:
-    """由標題產生穩定 id（唔用序號 —— 序號會令 id 每次重跑都變）。"""
-    return hashlib.sha1(title.encode("utf-8")).hexdigest()[:10]
+def sig(title: str, first_chapter: int) -> str:
+    """由**標題 + 首次提及章節**產生穩定 id。
+
+    為何要包埋章節號
+    ----------------
+    ⚠️ 實測踩過：只用標題 hash 會產生**重複 id** —— 同名標題可以出現喺
+    唔同嘅跨章群組（例如「搜查」喺 ch20 同 ch90 係兩件唔同嘅事）。
+    `tests/test_chronicle.py::test_entry_ids_are_stable_and_unique` 捉到。
+
+    唔用序號：序號會令每次重跑（規則改動、次序改變）都令同一個 id
+    指向唔同記錄 —— 審計軌跡會靜默失效。
+    """
+    return hashlib.sha1(f"{title}|{first_chapter}".encode("utf-8")).hexdigest()[:10]
 
 
 def jaccard(a: str, b: str) -> float:
@@ -143,7 +153,7 @@ def main() -> int:
 
             loc_id = body.get("location_id")
             entries.append({
-                "id": f"chr_{sig(title)}",
+                "id": f"chr_{sig(title, first)}",
                 "title": title,
                 "summary": (body.get("description") or "")[:400],
                 "story_time": {
