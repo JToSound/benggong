@@ -285,6 +285,14 @@ html, body {
   background: radial-gradient(ellipse at center, #0a1822 0%, #050a0f 100%);
 }
 .svg-map:active { cursor: grabbing; }
+/*
+ * ⚠️ `touch-action: none` 係手機手勢嘅**必要條件**。
+ *
+ * 冇佢嘅話，瀏覽器會將單指拖拽當成「滾動頁面」、雙指當成「縮放視口」，
+ * 令地圖自己嘅 touchstart/touchmove 收唔到（或者只收到第一個事件）。
+ * 實測：冇呢行嘅話，手機上單指拖唔動地圖、雙指會縮放成個網頁。
+ */
+.svg-map { touch-action: none; }
 .location-marker, .event-marker {
   cursor: pointer;
   transition: r 200ms ease, opacity 200ms ease;
@@ -1057,5 +1065,104 @@ html, body {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 章節過場動畫
+ * ══════════════════════════════════════════════════════════════════════════
+ * 章節切換時面板內容淡入 + 輕微上移，令「內容換咗」有感知。
+ *
+ * 為何要「輕微」（6px）：大幅位移喺頻繁按 `k` 快速瀏覽時會令人暈。
+ * 由 `StoryPanel.playEnterTransition()` 加 class 觸發。 */
+@keyframes story-enter {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+/*
+ * ⚠️ class 加喺 `#story-panel-mount`（StoryPanel 嘅 root）而唔係
+ * `.pane-story`。實測踩過：寫成 `.pane-story.story-enter` 就永遠唔會
+ * 觸發 —— 因為 mount 係 `.pane-story` 嘅**子元素**。
+ */
+#story-panel-mount.story-enter > * {
+  animation: story-enter 260ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+/* 分段延遲：令標題先出現、內文跟住，有層次感 */
+#story-panel-mount.story-enter > *:nth-child(2) { animation-delay: 30ms; }
+#story-panel-mount.story-enter > *:nth-child(3) { animation-delay: 60ms; }
+#story-panel-mount.story-enter > *:nth-child(4) { animation-delay: 90ms; }
+#story-panel-mount.story-enter > *:nth-child(n + 5) { animation-delay: 120ms; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+ * 淺色主題（Light theme）
+ * ══════════════════════════════════════════════════════════════════════════
+ * 設計考量：底圖係**暖色手繪羊皮紙**（#d9c9a8 系），所以淺色外框唔可以
+ * 用純白 —— 會同底圖撞色、睇唔清邊界。用帶灰嘅暖白（#f4f1ea 系），
+ * 令底圖仍然突出，同時保持「同一份文件」嘅感覺。
+ *
+ * 由 `ThemeToggle` 設定 `data-theme="light"` 喺 `<html>` 上。
+ * 預設跟 `prefers-color-scheme`（見下面嘅 media query）。
+ */
+[data-theme="light"] {
+  --bg-dark: #f4f1ea;
+  --bg-mid: #faf8f3;
+  --bg-light: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-hover: #f0ece3;
+
+  --fg-primary: #1f2733;
+  --fg-secondary: #4a5568;
+  --fg-muted: #7b8794;
+  --fg-faint: #a8b0ba;
+
+  /* 淺底上嘅強調色要加深，否則對比不足（WCAG AA 需要 4.5:1） */
+  --accent-red: #c0392b;
+  --accent-orange: #b9721c;
+  --accent-yellow: #a8861a;
+  --accent-green: #1e8e5a;
+  --accent-blue: #2472a4;
+  --accent-purple: #7a4fa3;
+  --accent-teal: #1a8578;
+
+  --border: #ddd6c8;
+  --border-strong: #c4bba8;
+  --border-subtle: #eae5da;
+
+  --shadow-sm: 0 1px 2px rgba(31, 39, 51, 0.08);
+  --shadow-md: 0 4px 12px rgba(31, 39, 51, 0.10);
+  --shadow-lg: 0 12px 32px rgba(31, 39, 51, 0.14);
+}
+
+/* 淺色主題下，地圖上嘅標記描邊要由白色改為深色（否則喺淺底睇唔到） */
+[data-theme="light"] .location-marker,
+[data-theme="light"] .event-marker,
+[data-theme="light"] .location-marker-cluster circle {
+  stroke: rgba(31, 39, 51, 0.75);
+}
+/* 區域標籤嘅描邊亦要反轉 */
+[data-theme="light"] .zone-label {
+  stroke: rgba(244, 241, 234, 0.9);
+}
+
+/* 預設跟系統偏好（用戶未手動揀過嘅話） */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --bg-dark: #f4f1ea;
+    --bg-mid: #faf8f3;
+    --bg-light: #ffffff;
+    --bg-elevated: #ffffff;
+    --bg-hover: #f0ece3;
+    --fg-primary: #1f2733;
+    --fg-secondary: #4a5568;
+    --fg-muted: #7b8794;
+    --fg-faint: #a8b0ba;
+    --accent-red: #c0392b;
+    --accent-orange: #b9721c;
+    --accent-green: #1e8e5a;
+    --accent-blue: #2472a4;
+    --accent-teal: #1a8578;
+    --border: #ddd6c8;
+    --border-strong: #c4bba8;
+    --border-subtle: #eae5da;
   }
 }

@@ -28,6 +28,9 @@ export class StoryPanel {
     return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] as string));
   }
 
+  /** 上次渲染嘅章節（用嚟判斷係唔係真嘅章節切換）。 */
+  private lastRenderedChapter: number | null = null;
+
   updateForChapter(ch: number): void {
     const events = this.data.eventsByChapter.get(ch) || [];
     const summaryObj = this.data.chapterSummaries?.[ch];
@@ -106,6 +109,7 @@ export class StoryPanel {
     `;
 
     this.bindEvents();
+    this.playEnterTransition(ch);
     this.bindSummaryEvents();
   }
 
@@ -177,6 +181,25 @@ export class StoryPanel {
       const max = this.data.config.chapters?.total || 198;
       this.app.setChapter(Math.min(max, this.app.getCurrentChapter() + 1));
     });
+  }
+
+  /**
+   * 章節切換時嘅淡入過場。
+   *
+   * 為何要「先移除 class、強制 reflow、再加返」：
+   * 同一個 CSS animation 只會播一次。如果唔重設，用戶連續按 `k` 時
+   * 只有第一次有動畫（因為 class 一直都喺度）。
+   * `void offsetWidth` 會強制瀏覽器計算樣式，令動畫重新開始。
+   *
+   * ⚠️ 只喺**真正換章節**時播 —— 選中／取消地點都會呼叫
+   * `updateForChapter`，嗰啲情況唔應該有過場（否則每次點標記都閃）。
+   */
+  private playEnterTransition(ch: number): void {
+    if (this.lastRenderedChapter === ch) return;
+    this.lastRenderedChapter = ch;
+    this.root.classList.remove("story-enter");
+    void this.root.offsetWidth;
+    this.root.classList.add("story-enter");
   }
 
   updateForLocation(locId: string | null): void {

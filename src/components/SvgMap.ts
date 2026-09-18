@@ -535,19 +535,49 @@ export class SvgMap {
           y: this.panStartView.y - (e.touches[0].clientY - this.panStartY) * u,
         };
         this.applyViewBox();
+        // 平移唔改 viewScale，所以標記尺寸唔變 —— 唔需要 applyLiveScale()
       } else if (e.touches.length === 2 && pinchStartDist > 0) {
         const dist = Math.hypot(
           e.touches[0].clientX - e.touches[1].clientX,
           e.touches[0].clientY - e.touches[1].clientY,
         );
         const factor = dist / pinchStartDist;
-        this.view = this.scaledView(pinchStartView, factor);
+        const next = this.scaledView(pinchStartView, factor);
+
+        /*
+         * 以**雙指中點**為錨，而唔係視圖中心。
+         *
+         * 為何：用戶捏兩隻手指嘅位置就係佢想放大嘅位置。如果以視圖
+         * 中心縮放，手指以外嘅內容會移走，感覺「唔跟手」。
+         *
+         * 做法：記低起始時中點喺 viewBox 內嘅相對位置（0–1），
+         * 縮放後令同一相對位置仍然對應同一個屏幕點。
+         */
+        const rect = this.svg.getBoundingClientRect();
+        if (rect.width > 0 && rect.height > 0) {
+          const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+          const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+          const fx = (midX - rect.left) / rect.width;
+          const fy = (midY - rect.top) / rect.height;
+          // 起始 viewBox 入面，中點對應嘅 user unit
+          const anchorX = pinchStartView.x + fx * pinchStartView.w;
+          const anchorY = pinchStartView.y + fy * pinchStartView.h;
+          next.x = anchorX - fx * next.w;
+          next.y = anchorY - fy * next.h;
+        }
+
+        this.view = next;
         this.applyViewBox();
+        // ⚠️ 標記半徑隨 viewScale 改變，要同步更新（同章節動畫一樣）
+        this.applyLiveScale();
       }
     }, { passive: true });
     this.svg.addEventListener("touchend", () => {
       this.isPanning = false;
       pinchStartDist = 0;
+      // 手勢結束後重繪一次：確保標記、區域標籤、LOD 層級都同最終
+      // viewBox 一致（例如由 overview 捏到 street 層）
+      this.render();
     }, { passive: true });
   }
 

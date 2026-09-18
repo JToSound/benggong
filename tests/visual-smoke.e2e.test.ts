@@ -324,6 +324,131 @@ describe("視覺煙霧測試", () => {
     }
   }, 90_000);
 
+  it("觸控：touch-action 已停用瀏覽器手勢，單指平移生效", async () => {
+    /*
+     * 為何：`touch-action: none` 係手機手勢嘅**必要條件**。冇佢嘅話，
+     * 瀏覽器會將單指拖拽當成滾動頁面、雙指當成縮放視口。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const ctx = await browser.newContext({
+        viewport: { width: 900, height: 700 },
+        hasTouch: true,
+      });
+      const page = await ctx.newPage();
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(1000);
+
+      const ta = await page.evaluate(
+        () => getComputedStyle(document.querySelector("#svg-map")!).touchAction,
+      );
+      expect(ta, "SVG 應該設 touch-action: none").toBe("none");
+
+      const before = await page.evaluate(() =>
+        document.querySelector("#svg-map")!.getAttribute("viewBox")!.split(/\s+/).map(Number),
+      );
+      await page.evaluate(() => {
+        const svg = document.querySelector("#svg-map")!;
+        const r = svg.getBoundingClientRect();
+        const mk = (type: string, touches: Array<{ id: number; x: number; y: number }>) =>
+          new TouchEvent(type, {
+            bubbles: true,
+            cancelable: true,
+            touches: touches.map(
+              (t) =>
+                new Touch({ identifier: t.id, target: svg, clientX: t.x, clientY: t.y }),
+            ),
+          });
+        const cx = r.left + r.width / 2;
+        const cy = r.top + r.height / 2;
+        svg.dispatchEvent(mk("touchstart", [{ id: 1, x: cx, y: cy }]));
+        svg.dispatchEvent(mk("touchmove", [{ id: 1, x: cx - 80, y: cy - 40 }]));
+        svg.dispatchEvent(mk("touchend", []));
+      });
+      await page.waitForTimeout(400);
+      const after = await page.evaluate(() =>
+        document.querySelector("#svg-map")!.getAttribute("viewBox")!.split(/\s+/).map(Number),
+      );
+      expect(
+        Math.abs(after[0] - before[0]),
+        "單指拖拽應該平移視圖",
+      ).toBeGreaterThan(1e-4);
+      await ctx.close();
+    } finally {
+      await browser.close();
+    }
+  }, 90_000);
+
+  it("主題切換：可切換、可持久化", async () => {
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(900);
+
+      const t0 = await page.evaluate(() =>
+        document.documentElement.getAttribute("data-theme"),
+      );
+      await page.click("#btn-theme");
+      await page.waitForTimeout(400);
+      const t1 = await page.evaluate(() => ({
+        theme: document.documentElement.getAttribute("data-theme"),
+        stored: localStorage.getItem("binggang-theme"),
+      }));
+      expect(t1.theme, "按鈕應該切換主題").not.toBe(t0);
+      expect(t1.stored, "主題應該存落 localStorage").toBe(t1.theme);
+
+      await page.reload({ waitUntil: "networkidle" });
+      await page.waitForTimeout(900);
+      const t2 = await page.evaluate(() =>
+        document.documentElement.getAttribute("data-theme"),
+      );
+      expect(t2, "重載之後應該記住主題").toBe(t1.theme);
+    } finally {
+      await browser.close();
+    }
+  }, 90_000);
+
+  it("匯出 PNG：檔案夠大（代表底圖有包含在內）", async () => {
+    /*
+     * 為何要驗大小：SVG 內嘅 `<image>` 係外部資源，直接序列化會令
+     * 匯出嘅圖**只有標記、冇底圖**。所以匯出前要將 href 換成 data URL。
+     * 如果冇做，PNG 會細好多（少於 100 KB）。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const ctx = await browser.newContext({
+        viewport: { width: 1200, height: 800 },
+        acceptDownloads: true,
+      });
+      const page = await ctx.newPage();
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await page.waitForTimeout(1500);
+
+      const [dl] = await Promise.all([
+        page.waitForEvent("download", { timeout: 30_000 }),
+        page.click("#btn-export"),
+      ]);
+      const name = dl.suggestedFilename();
+      expect(name, "檔名應該含章節號").toMatch(/binggang-ch\d+\.png/);
+
+      const path = `${process.env.TEMP ?? "/tmp"}/bg-export-test.png`;
+      await dl.saveAs(path);
+      const { statSync } = await import("node:fs");
+      const size = statSync(path).size;
+      expect(
+        size,
+        `匯出嘅 PNG 只有 ${(size / 1024).toFixed(0)} KB —— 太細，底圖可能冇包含在內`,
+      ).toBeGreaterThan(100_000);
+      await ctx.close();
+    } finally {
+      await browser.close();
+    }
+  }, 90_000);
+
   it("地圖有真正渲染：標記、區域、事件", async () => {
     const browser = await launch();
     if (!browser) return;

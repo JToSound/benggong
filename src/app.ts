@@ -12,6 +12,8 @@
  * └──────────────────────────────────────────┘
  */
 
+import { exportMapPng } from "./exportMap";
+import { initTheme, toggleTheme, type Theme } from "./theme";
 import type { AppData } from "./data/loadAllData";
 import { ChapterStrip } from "./components/ChapterStrip";
 import { SvgMap } from "./components/SvgMap";
@@ -78,6 +80,8 @@ export class App {
         </div>
         <nav aria-label="主要導覽">
           <button id="btn-search" type="button" class="nav-btn">🔍 搜尋</button>
+          <button id="btn-export" type="button" class="nav-btn" title="匯出目前地圖為 PNG">⬇</button>
+          <button id="btn-theme" type="button" class="nav-btn" title="切換深色／淺色主題">🌙</button>
           <button id="btn-help" type="button" class="nav-btn" title="鍵盤快捷鍵（?）">?</button>
           <button id="btn-about" type="button" class="nav-btn">關於</button>
           <button id="btn-toggle-panel" type="button" class="nav-btn panel-toggle"
@@ -115,10 +119,66 @@ export class App {
     // Bind nav buttons
     this.root.querySelector("#btn-about")!.addEventListener("click", () => this.aboutModal.show());
     this.root.querySelector("#btn-search")!.addEventListener("click", () => this.searchBox.show());
+    // 匯出 PNG
+    this.root.querySelector("#btn-export")!.addEventListener("click", () => {
+      void this.exportCurrentMap();
+    });
+
+    // 主題切換：按鈕圖示反映「下一個」主題（唔係目前主題）
+    initTheme((t: Theme) => {
+      const btn = this.root.querySelector("#btn-theme");
+      if (btn) {
+        btn.textContent = t === "dark" ? "🌙" : "☀️";
+        btn.setAttribute(
+          "title",
+          t === "dark" ? "切換到淺色主題" : "切換到深色主題",
+        );
+      }
+    });
+    this.root
+      .querySelector("#btn-theme")!
+      .addEventListener("click", () => toggleTheme());
+
     // 快捷鍵提示：`?` 按鈕同鍵盤 `?` 都開同一個 modal
     this.root
       .querySelector("#btn-help")!
       .addEventListener("click", () => this.aboutModal.show());
+  }
+
+  /**
+   * 匯出目前地圖視圖為 PNG。
+   *
+   * 用 `viewBox` 嘅章節號做檔名（例如 `binggang-ch150.png`），方便
+   * 用戶分辨。失敗要**明確講原因** —— 「匯出失敗」四個字幫唔到手。
+   */
+  private async exportCurrentMap(): Promise<void> {
+    const btn = this.root.querySelector("#btn-export") as HTMLButtonElement | null;
+    const svg = this.root.querySelector<SVGSVGElement>("#svg-map");
+    if (!svg) return;
+    const prev = btn?.textContent ?? "⬇";
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "…";
+    }
+    try {
+      const r = await exportMapPng(svg, {
+        scale: 2,
+        filename: `binggang-ch${this.currentChapter}`,
+        // 深色主題用深底，淺色主題用暖白（同 UI 一致）
+        background: document.documentElement.getAttribute("data-theme") === "light"
+          ? "#f4f1ea"
+          : "#0b0f16",
+      });
+      console.info(`[匯出] ${r.filename}（${r.width}×${r.height}）`);
+    } catch (e) {
+      console.error("[匯出] 失敗", e);
+      window.alert(`匯出失敗：${e instanceof Error ? e.message : String(e)}`);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = prev;
+      }
+    }
   }
 
   private bindKeys(): void {
