@@ -26,6 +26,7 @@ SOURCES: dict[str, str] = {
     "character": "characters.json",
     "chapter_summary": "chapter-summaries.json",
     "zone": "zones.geojson",
+    "chronicle_entry": "chronicle.json",
 }
 
 
@@ -33,6 +34,8 @@ def count(fn: str) -> int:
     d = json.loads((PUBLIC / fn).read_text(encoding="utf-8"))
     if isinstance(d, dict) and "features" in d:
         return len(d["features"])
+    if isinstance(d, dict) and "entries" in d:
+        return len(d["entries"])
     return len(d)
 
 

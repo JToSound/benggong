@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/chronicle.schema.json",
+  "title": "《病港》第一季編年史",
+  "description": "一條編年史條目 = 故事世界入面嘅一件事（唔係「某章嘅一段」）。由 scripts/build_chronicle.py 產生。核心係將同一件事喺多章嘅提及聚合，並區分「故事時間」同「首次提及章節」。",
+  "type": "object",
+  "required": ["version", "season", "generated_by", "entries"],
+  "properties": {
+    "version": { "const": 1 },
+    "season": { "const": 1 },
+    "generated_by": { "type": "string" },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id", "title", "summary", "story_time", "first_mention_chapter",
+          "chapters", "characters", "confidence", "source_event_ids",
+          "review_status"
+        ],
+        "properties": {
+          "id": { "type": "string", "pattern": "^chr_[0-9a-f]{10}$" },
+          "title": { "type": "string", "maxLength": 60 },
+          "summary": { "type": "string", "maxLength": 400 },
+
+          "story_time": {
+            "description": "故事內時間。冇明確線索就 order=null，唔可以估。",
+            "type": "object",
+            "required": ["order", "label"],
+            "properties": {
+              "order": {
+                "description": "排序用（細 = 早）。null = 未知，排喺最後。",
+                "type": ["integer", "null"]
+              },
+              "label": { "type": "string", "maxLength": 40 },
+              "source": {
+                "description": "時間判斷嘅依據（章節次序／文中線索／未知）",
+                "enum": ["chapter_order", "text_clue", "unknown"]
+              }
+            }
+          },
+
+          "first_mention_chapter": {
+            "description": "敍事上首次出現嘅章節。",
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 210
+          },
+
+          "chapters": {
+            "description": "所有相關章節同佢哋嘅角色。",
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": ["chapter", "role"],
+              "properties": {
+                "chapter": { "type": "integer" },
+                "role": {
+                  "description": "first_mention = 首次提及；reveal = 補充／揭示；flashback = 回帶。",
+                  "enum": ["first_mention", "reveal", "flashback"]
+                },
+                "note": { "type": "string", "maxLength": 120 }
+              }
+            }
+          },
+
+          "foreshadows": {
+            "description": "本條為呢啲條目埋下伏筆。",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "pays_off": {
+            "description": "本條解答咗呢啲條目。",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+
+          "location_id": { "type": ["string", "null"] },
+          "location_name": { "type": ["string", "null"] },
+          "characters": { "type": "array", "items": { "type": "string" } },
+
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+          "source_event_ids": {
+            "description": "合併嘅原始事件 id（可追溯）。",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "review_status": {
+            "enum": ["pending", "approved", "rejected"]
+          }
+        }
+      }
+    }
+  }
+}

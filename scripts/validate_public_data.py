@@ -58,6 +58,7 @@ SCHEMA_FILES = {
     "timeline.json": "timeline.schema.json",
     "characters.json": "character.schema.json",
     "zones.geojson": "zone.schema.json",
+    "chronicle.json": "chronicle.schema.json",
     "chapter-summaries.json": "chapter-summaries.schema.json",
 }
 
@@ -164,14 +165,24 @@ def main() -> int:
         # 收集統計同 id
         key_map = {"locations.geojson": "location", "events.geojson": "event", "routes.geojson": "route",
                    "timeline.json": "timeline", "characters.json": "character",
-                   "chapter-summaries.json": "chapter_summary", "zones.geojson": "zone"}
+                   "chapter-summaries.json": "chapter_summary", "zones.geojson": "zone",
+                   "chronicle.json": "chronicle_entry"}
         if fname in key_map:
-            stats[key_map[fname]] = len(items) if isinstance(items, list) else sum(
-                1 for _ in items
-            )
+            # ⚠️ chronicle.json 係 {version, season, entries}，要數 entries
+            # 而唔係 dict 嘅 key 數（後者會得出 4）。
+            if fname == "chronicle.json" and isinstance(items, dict):
+                stats[key_map[fname]] = len(items.get("entries", []))
+            else:
+                stats[key_map[fname]] = len(items) if isinstance(items, list) else sum(
+                    1 for _ in items
+                )
         # chapter-summaries.json 唔需要 per-item review_status check (schema 已驗)
         if fname == "chapter-summaries.json":
             continue
+        # chronicle.json 係 {version, season, entries:[...]}，唔係 FeatureCollection。
+        # 要抽出 entries 才做 per-item 檢查，否則會 iterate dict 嘅 key（字串）。
+        if fname == "chronicle.json":
+            items = doc.get("entries", []) if isinstance(doc, dict) else []
         for item in items:
             p = item.get("properties", item)
             rs = p.get("review_status")

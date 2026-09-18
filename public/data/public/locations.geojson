@@ -23932,7 +23932,8 @@
         "confidence": 1.0,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[198]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）"
+        "position_source": "由地圖排除：「港島區」係**故事以外嘅地區**，唔屬將軍澳場景。原本被同章錨定拉到將軍澳，喺地圖上標一個錯嘅點。",
+        "map_hidden": true
       }
     },
     {

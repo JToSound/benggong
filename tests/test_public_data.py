@@ -172,6 +172,8 @@ def test_manifest_counts_match():
         "character": len(load(PUBLIC / "characters.json")),
         "chapter_summary": len(load(PUBLIC / "chapter-summaries.json")),
         "zone": len(load(PUBLIC / "zones.geojson")["features"]),
+        "chronicle_entry": len(load(PUBLIC / "chronicle.json")["entries"]),
+        "chronicle_entry": len(load(PUBLIC / "chronicle.json")["entries"]),
     }
     assert mf["counts"] == counts
 

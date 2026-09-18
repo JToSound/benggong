@@ -16,7 +16,8 @@ Phase J 期間我一直手動逐支跑，結果出過幾次次序錯誤（例如
     5. propagate_location_coords  將最終座標傳播到 events／timeline／routes
     6. derive_zones.py            區域（讀最終座標）+ 反向填 zone_ids
     6. link_event_characters.py   事件角色連結 + 身份
-    7. normalize_public_data.py   時間線排序 + 路線精度
+    7. build_chronicle.py         建置第一季編年史
+    8. normalize_public_data.py   時間線排序 + 路線精度
     8. update_manifest.py         重算 asset-manifest counts
     9. sync_public_data.py        同步到 public/data/public/
 
@@ -54,6 +55,7 @@ STEPS: list[tuple[str, str]] = [
     ("propagate_location_coords.py", "將最終座標傳播到 events／timeline／routes"),
     ("derive_zones.py", "區域（讀最終座標）+ 反向填 zone_ids"),
     ("link_event_characters.py", "事件角色連結 + 身份"),
+    ("build_chronicle.py", "建置第一季編年史（跨章聚合）"),
     ("normalize_public_data.py", "時間線排序 + 路線精度"),
     ("update_manifest.py", "重算 asset-manifest counts"),
     ("sync_public_data.py", "同步到 public/data/public/"),

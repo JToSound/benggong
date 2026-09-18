@@ -1130,7 +1130,13 @@ def build_urban_mask(
     W, H = CANVAS_W, CANVAS_H
     dots = Image.new("L", (W, H), 0)
     dd = ImageDraw.Draw(dots)
-    urban_use = {"residential", "industrial", "commercial", "retail", "railway", "depot"}
+    urban_use = {
+        "residential", "industrial", "commercial", "retail", "railway", "depot",
+        # ⚠️ 機場用地。實測赤鱲角（香港國際機場）只有 `landuse=industrial`
+        # （貨運區），客運廊／停機坪係 `aeroway=terminal/apron/runway`，
+        # 唔喺原本嘅名單之內 → 被當成未發展土地 → 睇落似樹林。
+        "aerodrome", "airport",
+    }
     n = 0
     for el in elements:
         if el.get("type") != "way":
@@ -1322,13 +1328,23 @@ def build_green_mask(elements: list[dict[str, Any]], land: np.ndarray) -> np.nda
     W, H = CANVAS_W, CANVAS_H
     dev = Image.new("L", (W, H), 0)
     dd = ImageDraw.Draw(dev)
-    developed_use = {"residential", "industrial", "commercial", "retail", "railway"}
+    developed_use = {
+        "residential", "industrial", "commercial", "retail", "railway",
+        # ⚠️ 機場用地 —— 見上面 urban_use 嘅註解。
+        "aerodrome", "airport",
+    }
     for el in elements:
         if el.get("type") != "way":
             continue
         tags = el.get("tags") or {}
         pts: list[tuple[float, float]] | None = None
-        if tags.get("landuse") in developed_use or "building" in tags:
+        # `aeroway=*`（客運廊、停機坪、跑道、機庫）亦係已發展土地。
+        # 冇呢個判斷嘅話，香港國際機場會顯示成一片綠色。
+        if (
+            tags.get("landuse") in developed_use
+            or "building" in tags
+            or tags.get("aeroway")
+        ):
             geom = el.get("geometry") or []
             if geom:
                 lons = [g["lon"] for g in geom]

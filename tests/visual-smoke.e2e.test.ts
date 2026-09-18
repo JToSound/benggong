@@ -345,6 +345,14 @@ describe("視覺煙霧測試", () => {
       );
       expect(ta, "SVG 應該設 touch-action: none").toBe("none");
 
+      // ⚠️ 一定要先放大。
+      //
+      // `MIN_SCALE = 1.0` 令全港視圖啱啱好等於底圖覆蓋範圍 —— 即係
+      // **冇位可以平移**（`clampView` 會夾死）。所以要縮到一個章節
+      // 令視圖細過底圖，先測得到平移。
+      await page.keyboard.press("k");
+      await page.waitForTimeout(900);
+
       const before = await page.evaluate(() =>
         document.querySelector("#svg-map")!.getAttribute("viewBox")!.split(/\s+/).map(Number),
       );

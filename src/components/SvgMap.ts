@@ -103,6 +103,43 @@ function tierRect(t: LodTier): { x: number; y: number; w: number; h: number } {
 }
 
 /**
+ * 將一串頂點畫成平滑曲線（Catmull-Rom → 三次 Bézier）。
+ *
+ * 為何用 Catmull-Rom 而唔係普通 B-spline
+ * --------------------------------------
+ * Catmull-Rom 嘅曲線**穿過每一個輸入點** —— 對「角色去過呢啲地方」
+ * 嚟講係必要嘅（B-spline 會偏離控制點，令路線唔再經過實際地點）。
+ *
+ * 轉換公式：對 P1→P2 段，
+ *   C1 = P1 + (P2 − P0) / 6
+ *   C2 = P2 − (P3 − P1) / 6
+ *   → `C C1 C2 P2`
+ *
+ * ⚠️ 兩點嘅話冇足夠資訊做平滑（只有直線），所以直接畫 `L`。
+ *    實測好多路線只有兩三個有效頂點，唔可以當成 bug。
+ */
+function smoothPath(pts: Array<{ x: number; y: number }>): string {
+  if (pts.length < 2) return "";
+  if (pts.length === 2) {
+    return `M ${pts[0].x} ${pts[0].y} L ${pts[1].x} ${pts[1].y}`;
+  }
+  let d = `M ${pts[0].x} ${pts[0].y}`;
+  for (let i = 0; i < pts.length - 1; i++) {
+    // 端點重複（令頭尾段都有「鄰居」可用）
+    const p0 = pts[i - 1] ?? pts[i];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[i + 2] ?? pts[i + 1];
+    const c1x = p1.x + (p2.x - p0.x) / 6;
+    const c1y = p1.y + (p2.y - p0.y) / 6;
+    const c2x = p2.x - (p3.x - p1.x) / 6;
+    const c2y = p2.y - (p3.y - p1.y) / 6;
+    d += ` C ${c1x} ${c1y} ${c2x} ${c2y} ${p2.x} ${p2.y}`;
+  }
+  return d;
+}
+
+/**
  * manifest 入面嘅路徑係相對 `public/`（例如 `assets/map-lod/tko-street.png`）。
  * 要加 `BASE_URL` 前綴才喺 GitHub Pages 之類嘅子路徑部署下正確解析。
  */
@@ -136,7 +173,18 @@ function assetUrl(p: string): string {
  * 兩邊一齊修：圖磚解像度 1536 → 2048 px、新增 campus-core 層
  * （0.020°），同時將 MAX_SCALE 調到 35 令最細層啱好覆蓋最窄視窗。
  */
-const MIN_SCALE = 0.5;
+/*
+ * ⚠️ MIN_SCALE 一定要係 1.0（唔可以縮到細過底圖）。
+ *
+ * 為何：底圖（overview 層）只覆蓋 BASEMAP_BBOX（0.70°）。如果容許縮到
+ * 1.40°（MIN_SCALE = 0.5），視窗就會大過底圖 —— 底圖變成畫面中央
+ * 一小塊，周圍全部係黑色底色。
+ *
+ * 實測：用戶截圖顯示縮細之後就係咁。
+ *
+ * 1.0 = 視窗啱啱好等於底圖覆蓋範圍 = 睇晒全香港。
+ */
+const MIN_SCALE = 1.0;
 const MAX_SCALE = 35;
 
 /** 標籤圖層淡入區間：viewScale ≤ 0.8 完全隱藏，≥ 1.2 完全顯示。 */
@@ -505,11 +553,11 @@ export class SvgMap {
       const rect = this.svg.getBoundingClientRect();
       if (rect.width === 0 || rect.height === 0) return;
       const u = this.pxToUserUnits(rect.width, rect.height);
-      this.view = {
+      this.view = this.clampView({
         ...this.panStartView,
         x: this.panStartView.x - (e.clientX - this.panStartX) * u,
         y: this.panStartView.y - (e.clientY - this.panStartY) * u,
-      };
+      });
       this.applyViewBox();
     });
     window.addEventListener("mouseup", () => {
@@ -549,11 +597,11 @@ export class SvgMap {
         const rect = this.svg.getBoundingClientRect();
         if (rect.width === 0 || rect.height === 0) return;
         const u = this.pxToUserUnits(rect.width, rect.height);
-        this.view = {
+        this.view = this.clampView({
           ...this.panStartView,
           x: this.panStartView.x - (e.touches[0].clientX - this.panStartX) * u,
           y: this.panStartView.y - (e.touches[0].clientY - this.panStartY) * u,
-        };
+        });
         this.applyViewBox();
         // 平移唔改 viewScale，所以標記尺寸唔變 —— 唔需要 applyLiveScale()
       } else if (e.touches.length === 2 && pinchStartDist > 0) {
@@ -607,7 +655,28 @@ export class SvgMap {
     const cy = base.y + base.h / 2;
     const w = Math.max(BASE_VIEW.w / MAX_SCALE, Math.min(BASE_VIEW.w / MIN_SCALE, base.w / factor));
     const h = w * (BASE_VIEW.h / BASE_VIEW.w);
-    return { x: cx - w / 2, y: cy - h / 2, w, h };
+    return this.clampView({ x: cx - w / 2, y: cy - h / 2, w, h });
+  }
+
+  /**
+   * 限制視窗喺底圖範圍之內（唔可以平移到出界）。
+   *
+   * 為何需要：底圖只有 BASEMAP_BBOX 咁大。如果視窗移出界，就會露出
+   * 黑色底色（用戶見到嘅「黑邊」）。
+   *
+   * 做法：將視窗嘅 x／y 夾到 [BASE_VIEW 起點, 終點 − 視窗尺寸]。
+   * 如果視窗大過底圖（唔應該發生，MIN_SCALE 已經擋住），就置中。
+   */
+  private clampView(v: ViewBox): ViewBox {
+    const minX = BASE_VIEW.x;
+    const maxX = BASE_VIEW.x + BASE_VIEW.w - v.w;
+    const minY = BASE_VIEW.y;
+    const maxY = BASE_VIEW.y + BASE_VIEW.h - v.h;
+    return {
+      ...v,
+      x: maxX < minX ? BASE_VIEW.x + (BASE_VIEW.w - v.w) / 2 : Math.min(Math.max(v.x, minX), maxX),
+      y: maxY < minY ? BASE_VIEW.y + (BASE_VIEW.h - v.h) / 2 : Math.min(Math.max(v.y, minY), maxY),
+    };
   }
 
   private zoomBy(factor: number): void {
@@ -832,12 +901,12 @@ export class SvgMap {
       const t = Math.min(1, (now - t0) / durationMs);
       // ease-in-out cubic
       const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      this.view = {
+      this.view = this.clampView({
         x: start.x + (target.x - start.x) * eased,
         y: start.y + (target.y - start.y) * eased,
         w: start.w + (target.w - start.w) * eased,
         h: start.h + (target.h - start.h) * eased,
-      };
+      });
       this.applyViewBox();
       this.applyLiveScale();
       if (t < 1) {
@@ -1069,19 +1138,40 @@ export class SvgMap {
       const wps = route.properties.waypoints || [];
       if (coords.length < 2) continue;
 
-      const segments: string[] = [];
+      /*
+       * 收集**連續嘅有效頂點串**，再將每串畫成平滑曲線。
+       *
+       * 為何唔再逐段畫直線
+       * ----------------
+       * 用戶反映「路線純粹係點對點好簡陋」。原本每段係獨立嘅
+       * `M…L…`，除咗生硬之外，段與段之間冇連續性（轉角係尖角）。
+       *
+       * 改為：先收集連續嘅有效頂點（遇到無效段就斷開），再用
+       * **Catmull-Rom 轉三次 Bézier** 畫成平滑曲線 —— 曲線會穿過
+       * 每一個頂點（唔似一般 B-spline 會偏離控制點），適合表達
+       * 「角色經過呢啲地方」。
+       */
+      const runs: Array<Array<{ x: number; y: number }>> = [];
+      let run: Array<{ x: number; y: number }> = [];
       for (let i = 0; i < coords.length - 1; i++) {
-        // waypoints 同 coordinates 係 1:1（見 scripts/derive_routes_geojson.py）
         const a = wps[i]?.location_id;
         const b = wps[i + 1]?.location_id;
-        if (!a || !b) continue;
-        if (fictionalById.get(a) !== false) continue;
-        if (fictionalById.get(b) !== false) continue;
+        if (!a || !b || fictionalById.get(a) !== false || fictionalById.get(b) !== false) {
+          if (run.length >= 2) runs.push(run);
+          run = [];
+          continue;
+        }
         const p = this.routeVertex(a, coords[i]);
         const q = this.routeVertex(b, coords[i + 1]);
-        // 同一個 location 連續出現兩次 → 零長度線段，畫出嚟冇意思
         if (Math.abs(p.x - q.x) < 1e-6 && Math.abs(p.y - q.y) < 1e-6) continue;
-        segments.push(`M ${p.x} ${p.y} L ${q.x} ${q.y}`);
+        if (run.length === 0) run.push(p);
+        run.push(q);
+      }
+      if (run.length >= 2) runs.push(run);
+
+      const segments: string[] = [];
+      for (const r of runs) {
+        segments.push(smoothPath(r));
       }
       if (segments.length === 0) continue;
 
@@ -1329,12 +1419,19 @@ export class SvgMap {
     const fy1 =
       (BASEMAP_BBOX.lat_max - latMin) / (BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min);
 
-    const target: ViewBox = {
+    // ⚠️ 目標視窗要夾到縮放範圍之內，否則飛去一個章節之後
+    // 用戶可以縮到細過底圖（露出黑邊）。
+    const rawW = Math.abs(fx1 - fx0) * BASE_VIEW.w;
+    const clampedW = Math.max(
+      BASE_VIEW.w / MAX_SCALE,
+      Math.min(BASE_VIEW.w / MIN_SCALE, rawW),
+    );
+    const target: ViewBox = this.clampView({
       x: BASE_VIEW.x + Math.min(fx0, fx1) * BASE_VIEW.w,
       y: BASE_VIEW.y + Math.min(fy0, fy1) * BASE_VIEW.h,
-      w: Math.abs(fx1 - fx0) * BASE_VIEW.w,
-      h: Math.abs(fy1 - fy0) * BASE_VIEW.h,
-    };
+      w: clampedW,
+      h: clampedW * (BASE_VIEW.h / BASE_VIEW.w),
+    });
     // 標記同路線唔跟 viewBox 縮放，所以要即刻重繪（章節已變）。
     this.render();
     this.animateViewBox(target);

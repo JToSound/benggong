@@ -76,7 +76,7 @@ export class App {
       <header id="topbar">
         <div class="brand">
           <h1>《病港》互動地圖</h1>
-          <p class="tagline">第一章 <span class="badge">將軍澳 1990s</span> · 香港網絡小說</p>
+          <p class="tagline">第一章 <span class="badge">將軍澳 2010s</span> · 香港網絡小說</p>
         </div>
         <nav aria-label="主要導覽">
           <button id="btn-search" type="button" class="nav-btn">🔍 搜尋</button>
