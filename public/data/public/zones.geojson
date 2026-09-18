@@ -35,8 +35,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251459,
-          22.305237
+          114.252951,
+          22.305524
         ]
       },
       "properties": {
@@ -239,8 +239,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256309,
-          22.322126
+          114.257905,
+          22.318534
         ]
       },
       "properties": {
@@ -266,8 +266,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.275464,
-          22.310169
+          114.252874,
+          22.305084
         ]
       },
       "properties": {
@@ -383,16 +383,16 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26023,
-          22.305079
+          114.253262,
+          22.305254
         ]
       },
       "properties": {
         "id": "zone_ece9f6df6c",
         "name": "康城倖存區",
         "kind": "survivor",
-        "radius_m": 300.0,
-        "radius_source": "default",
+        "radius_m": 93.4,
+        "radius_source": "members",
         "member_location_ids": [
           "loc_0479",
           "loc_0480",
@@ -408,7 +408,7 @@
         ],
         "first_appearance": 156,
         "description": "康城內嘅倖存區，生活質素遠高於外面，設有閉路電視、保安室、資訊室等設施。",
-        "evidence": "由 3 個同地區相鄰區域合併；半徑係估算",
+        "evidence": "由 3 個同地區相鄰區域合併（康城一期倖存區／康城二期倖存區／康城倖存區）；半徑由 5 個成員地點分佈推導",
         "source": "bing_gang"
       }
     },
@@ -417,8 +417,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252873,
-          22.307839
+          114.253267,
+          22.306111
         ]
       },
       "properties": {
@@ -444,8 +444,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.249628,
-          22.313504
+          114.273424,
+          22.317566
         ]
       },
       "properties": {

@@ -280,6 +280,28 @@ def is_candidate(props: dict[str, Any]) -> bool:
 
     加咗 `inferred_from` 之後，推斷 → 套用 → 再推斷會收斂到同一結果。
     """
+    # ⚠️ 人手核實修正係**權威**，唔可以被推斷覆蓋。
+    #
+    # 實測踩過：「室內體育館」經人手修正到坑口體育館（114.26827, 22.31733），
+    # 但測試 fixture 只跑步驟 1–3（infer + apply），R-NAME-PLACE 就將佢
+    # 還原成原本配錯嘅西貢北座標 —— 修正靜默失效。
+    #
+    # 呢個係危險嘅一類缺陷：修正記錄仍然喺 log 度顯示「已套用」，
+    # 但實際資料已經被覆蓋。
+    if str(props.get("position_source") or "").startswith("人手核實修正"):
+        return False
+
+    # ⚠️ 人手核實修正係**權威**，唔可以被推斷覆蓋。
+    #
+    # 實測踩過：「室內體育館」經人手修正到坑口體育館（114.26827, 22.31733），
+    # 但測試 fixture 只跑步驟 1–3（infer + apply），R-NAME-PLACE 就將佢
+    # 還原成原本配錯嘅西貢北座標 —— 修正靜默失效。
+    #
+    # 呢個係危險嘅一類缺陷：修正記錄仍然喺 log 度顯示「已套用」，
+    # 但實際資料已經被覆蓋。
+    if str(props.get("position_source") or "").startswith("人手核實修正"):
+        return False
+
     return (
         is_vague(props)
         or props.get("location_precision") == "fictional"

@@ -20,6 +20,7 @@ from pathlib import Path
 import pytest
 
 REPO = Path(__file__).resolve().parent.parent
+PIPELINE = REPO / "scripts" / "run_pipeline.py"
 INFER = REPO / "scripts" / "infer_places.py"
 APPLY = REPO / "scripts" / "apply_place_inferences.py"
 LOCATIONS = REPO / "data" / "public" / "locations.geojson"
@@ -44,12 +45,15 @@ def ready() -> None:
     """
     if not (REPO / "data" / "private" / "cache" / "osm-hk.json").exists():
         pytest.skip("缺 OSM cache")
-    r = _run(INFER)
+    # ⚠️ 要跑**完整管線**，唔止 infer + apply。
+    #
+    # 為何：`locations.geojson` 係多步共同產生嘅（infer → apply →
+    # anchor_fictional → corrections → derive_zones）。如果 fixture 只跑
+    # 頭兩步，之後嘅測試就會見到**中間狀態**，而同「完整管線之後」嘅
+    # 比對必然唔同 —— 產生假失敗（實測踩過）。
+    r = _run(PIPELINE)
     if r.returncode != 0:
-        pytest.skip(f"推斷引擎跑唔起：{r.stderr[-300:]}")
-    r2 = _run(APPLY)
-    if r2.returncode != 0:
-        pytest.skip(f"套用管線跑唔起：{r2.stderr[-300:]}")
+        pytest.skip(f"管線跑唔起：{(r.stderr or r.stdout)[-300:]}")
 
 
 @pytest.fixture(scope="module")
@@ -144,15 +148,20 @@ def test_pipeline_is_idempotent(ready):
     `location_precision` 由 `fictional` 改成 `approximate`，如果候選集
     只睇 `fictional`，重跑就會令已套用嘅推斷消失（管線非冪等）。
     """
+    # ⚠️ 要跑**完整管線**，唔可以只跑 infer + apply。
+    #
+    # 為何：`locations.geojson` 係多步共同產生嘅 ——
+    #   infer → apply → anchor_fictional → corrections → derive_zones
+    # 只跑前兩步會停喺**中間狀態**（未錨定、未修正），同最終狀態比對
+    # 必然唔同 —— 但嗰個唔係「唔冪等」，係「比錯對象」。
+    # 實測踩過呢個假失敗。
     before = LOCATIONS.read_text(encoding="utf-8")
-    r1 = _run(INFER)
-    assert r1.returncode == 0, r1.stderr[-500:]
-    r2 = _run(APPLY)
-    assert r2.returncode == 0, r2.stderr[-500:]
+    r = _run(PIPELINE)
+    assert r.returncode == 0, (r.stderr or r.stdout)[-500:]
     after = LOCATIONS.read_text(encoding="utf-8")
     assert before == after, (
-        "管線唔冪等：重跑推斷＋套用之後 locations.geojson 改變咗。"
-        "通常係候選集依賴咗被 apply 改動嘅欄位。"
+        "管線唔冪等：重跑完整管線之後 locations.geojson 改變咗。"
+        "通常係某條規則依賴咗被自己改動嘅欄位（反饋循環）。"
     )
 
 

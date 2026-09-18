@@ -198,6 +198,26 @@ const FALLBACK_ANCHORS: Record<string, { lon: number; lat: number }> = {
 export type CoordSource = "fallback" | "full-hk" | "raw";
 
 /**
+ * 呢個地點嘅座標有冇**可稽核嘅證據來源**。
+ *
+ * 為何唔止睇 `inferred_from`
+ * -------------------------
+ * 座標嘅來源有兩種記錄方式：
+ *   1. `inferred_from` —— `scripts/infer_places.py` 嘅推斷 id
+ *   2. `position_source` —— 人手修正、依附父項、同章錨定等
+ *
+ * ⚠️ 實測踩過：`scripts/anchor_fictional_locations.py` 把虛構地點錨定到
+ * 父項並升級為 `approximate` 之後，佢哋**冇** `inferred_from` ——
+ * 結果 `evidenceBacked` 變 false，硬編碼錨點再次覆蓋已核實座標。
+ * 路線最長線段由 4,457 m 暴增到 7,729 m。
+ *
+ * 只要有任何一種來源記錄，就唔應該被硬編碼猜測覆蓋。
+ */
+function hasEvidence(p: { inferred_from?: string; position_source?: string }): boolean {
+  return Boolean(p.inferred_from || p.position_source);
+}
+
+/**
  * 座標解析（四層）。
  *
  * 0. **資料集自帶座標（有證據支持）** — 最高優先
@@ -609,7 +629,7 @@ export class SvgMap {
     if (!loc) return;
     const raw = loc.geometry.coordinates as [number, number];
     const { lon, lat } = resolveCoord(loc.properties.name, raw[0], raw[1], {
-      evidenceBacked: Boolean(loc.properties.inferred_from),
+      evidenceBacked: hasEvidence(loc.properties),
     });
     const { x, y } = lonlatToViewbox(lon, lat);
     const target = this.scaledView(this.view, 2);
@@ -865,7 +885,7 @@ export class SvgMap {
       loc.properties.name,
       fallback[0],
       fallback[1],
-      { evidenceBacked: Boolean(loc.properties.inferred_from) },
+      { evidenceBacked: hasEvidence(loc.properties) },
     );
     return lonlatToViewbox(lon, lat);
   }
@@ -1108,7 +1128,7 @@ export class SvgMap {
       const props = loc.properties;
       const raw = loc.geometry.coordinates as [number, number];
       const { lon, lat } = resolveCoord(props.name, raw[0], raw[1], {
-        evidenceBacked: Boolean(props.inferred_from),
+        evidenceBacked: hasEvidence(props),
       });
       const { x, y } = lonlatToViewbox(lon, lat);
       markerBuf.push({
@@ -1213,7 +1233,7 @@ export class SvgMap {
         : undefined;
       const { lon, lat } = loc
         ? resolveCoord(loc.properties.name, raw[0], raw[1], {
-            evidenceBacked: Boolean(loc.properties.inferred_from),
+            evidenceBacked: hasEvidence(loc.properties),
           })
         : resolveCoord(props.title, raw[0], raw[1]);
       const { x, y } = lonlatToViewbox(lon, lat);
@@ -1262,7 +1282,7 @@ export class SvgMap {
       if (!chs.some((c: number) => contextChs.has(c))) continue;
       const [rawLon, rawLat] = loc.geometry.coordinates as [number, number];
       const { lon, lat } = resolveCoord(loc.properties.name, rawLon, rawLat, {
-        evidenceBacked: Boolean(loc.properties.inferred_from),
+        evidenceBacked: hasEvidence(loc.properties),
       });
       if (lon < BASEMAP_BBOX.lon_min || lon > BASEMAP_BBOX.lon_max) continue;
       if (lat < BASEMAP_BBOX.lat_min || lat > BASEMAP_BBOX.lat_max) continue;

@@ -17,6 +17,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -775,3 +776,74 @@ def test_dist_data_matches_source():
         f"建置之後 dist 仍然同來源唔一致（{len(stale)} 個）：{stale}\n"
         "代表 vite 嘅 publicDir 複製有問題，或者 prebuild 冇跑到"
     )
+
+
+# ---------------------------------------------------------------------------
+# 虛構地點錨定
+# ---------------------------------------------------------------------------
+def test_fictional_locations_have_position_source():
+    """每個 `fictional` 地點都要有 `position_source` 講明位置點嚟。
+
+    ⚠️ 為何重要：呢啲地點冇真實對照，位置係「示意」。如果唔講明來源，
+    用戶會以為佢哋係真實位置。
+    """
+    locs = json.loads(
+        (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
+    )["features"]
+    missing = [
+        f["properties"]["name"]
+        for f in locs
+        if f["properties"]["location_precision"] == "fictional"
+        and not f["properties"].get("position_source")
+    ]
+    assert not missing, f"{len(missing)} 個 fictional 地點冇 position_source：{missing[:5]}"
+
+
+def test_parent_anchored_locations_inherit_precision():
+    """依附父項嘅地點，精度必須**等於**父項（唔可以更準，亦唔應該係 fictional）。
+
+    子項係父項內部嘅房間，位置準確度同父項一樣 —— 唔會更準。
+    """
+    locs = json.loads(
+        (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
+    )["features"]
+    by_name = {f["properties"]["name"]: f["properties"] for f in locs}
+
+    checked = 0
+    for f in locs:
+        p = f["properties"]
+        src = str(p.get("position_source") or "")
+        if "依附於" not in src:
+            continue
+        # 由 source 抽父項名
+        m = re.search(r"依附於「([^」]+)」", src)
+        assert m, f"{p['name']} 嘅 position_source 格式唔對：{src[:60]}"
+        parent = by_name.get(m.group(1))
+        if parent is None:
+            continue
+        assert p["location_precision"] == parent["location_precision"], (
+            f"{p['name']} 精度 {p['location_precision']} 唔等於父項"
+            f"「{m.group(1)}」嘅 {parent['location_precision']}"
+        )
+        assert p["location_precision"] != "fictional", (
+            f"{p['name']} 依附咗父項但精度仍然係 fictional"
+        )
+        checked += 1
+    assert checked > 20, f"依附父項嘅個案太少（{checked}），規則可能冇觸發"
+
+
+def test_anchored_locations_stay_in_story_region():
+    """錨定之後全部地點都要喺將軍澳範圍（唔可以散落全港）。"""
+    locs = json.loads(
+        (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
+    )["features"]
+    outside = [
+        f["properties"]["name"]
+        for f in locs
+        if not f["properties"].get("map_hidden")
+        and not (
+            114.225 <= f["geometry"]["coordinates"][0] <= 114.310
+            and 22.265 <= f["geometry"]["coordinates"][1] <= 22.350
+        )
+    ]
+    assert not outside, f"{len(outside)} 個可見地點喺將軍澳以外：{outside[:5]}"

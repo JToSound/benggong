@@ -71,6 +71,9 @@ def in_story_region(c: list[float]) -> bool:
 M_PER_DEG_LON = 111320 * math.cos(math.radians(22.36))
 M_PER_DEG_LAT = 110570
 
+#: 組織／群體後綴 —— 唔可以當父項（同 infer_places.py 一致）
+ORG_SUFFIX = ("人", "幫", "會", "團", "隊", "軍", "黨", "社", "派")
+
 
 def offset_for(loc_id: str, ring: float = RING_RADIUS_M) -> tuple[float, float]:
     """由 id 決定一個 deterministic 嘅環形偏移（米）。
@@ -95,18 +98,74 @@ def main() -> int:
 
     # 每章嘅已解析地點座標
     by_ch: dict[int, list[list[float]]] = defaultdict(list)
+    # 已解析地點名 → 座標（用嚟做「父項優先」錨定）
+    parent_xy: dict[str, list[float]] = {}
+    parent_props: dict[str, dict] = {}
     for f in feats:
         p = f["properties"]
         if p["location_precision"] == "fictional":
             continue
         for ch in p["chapters"]:
             by_ch[ch].append(f["geometry"]["coordinates"])
+        nm = p["name"]
+        # 只收 ≥3 字、有識別性詞幹、唔係組織名嘅（同 R-CONTAIN-RESOLVED 一致）
+        if len(nm) >= 3 and not nm.endswith(ORG_SUFFIX):
+            parent_xy.setdefault(nm, f["geometry"]["coordinates"])
+            parent_props.setdefault(nm, p)
+    parent_names = sorted(parent_xy.keys(), key=len, reverse=True)
 
     moved = 0
     no_anchor = 0
+    anchored_to_parent = 0
     for f in feats:
         p = f["properties"]
         if p["location_precision"] != "fictional":
+            continue
+
+        # ---- 錨點優先次序 ----
+        #
+        # 1. **名含已解析地點名** → 直接用父項座標（最準）
+        #    例：「七樓圖書館」→「圖書館」；「圖書館４號會議室」→「圖書館」
+        # 2. **描述含已解析地點名** → 用該地點座標
+        # 3. 同章已解析地點質心（原本做法）
+        #
+        # 為何要分優先次序：同章質心可能離實際位置幾百米（同章跨越多個
+        # 地點）。有名稱父項嘅話，父項座標就係最準嘅已知值。
+        nm = p["name"]
+        desc = p["description"] or ""
+        parent = next(
+            (x for x in parent_names if x != nm and x in nm),
+            None,
+        )
+        via = "名"
+        if parent is None:
+            parent = next((x for x in parent_names if x in desc), None)
+            via = "描述"
+
+        if parent is not None:
+            base = parent_xy[parent]
+            dx0, dy0 = offset_for(p["id"], ring=90.0)  # 父項附近小偏移
+            lon = round(base[0] + dx0 / M_PER_DEG_LON, 6)
+            lat = round(base[1] + dy0 / M_PER_DEG_LAT, 6)
+            f["geometry"]["coordinates"] = [lon, lat]
+
+            # ⚠️ **精度升級**：由 `fictional` 改為父項嘅精度。
+            #
+            # 為何合理：子項嘅聲明係「喺父項之內」。父項嘅座標係最佳已知
+            # 值，所以子項嘅位置準確度**同父項一樣** —— 唔應該繼續標
+            # `fictional`（嗰個意思係「完全唔知喺邊」）。
+            #
+            # 唔可以升級到比父項更準：子項係父項內部嘅一個房間，
+            # 唔會比父項本身更準確。
+            pp = parent_props[parent]
+            p["location_precision"] = pp["location_precision"]
+            p["fictional"] = False
+            p["position_source"] = (
+                f"依附於「{parent}」（由{via}配對）；"
+                f"精度繼承自父項（{pp['location_precision']}）"
+            )
+            anchored_to_parent += 1
+            moved += 1
             continue
 
         # 只准用落喺故事區域內嘅錨點（單一偏遠錨點會污染質心）
@@ -154,7 +213,7 @@ def main() -> int:
         1 for f in feats if f["properties"]["location_precision"] == "fictional"
     )
     print(f"虛構地點：{total_fic}")
-    print(f"  位置有改動：{moved}")
+    print(f"  位置有改動：{moved}（其中依附父項：{anchored_to_parent}）")
     print(f"  冇同章錨點（用後備）：{no_anchor}")
     print(f"  錨定後喺將軍澳範圍內：{in_tko} / {total_fic}")
 
