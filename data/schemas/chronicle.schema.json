@@ -34,8 +34,8 @@
               },
               "label": { "type": "string", "maxLength": 40 },
               "source": {
-                "description": "時間判斷嘅依據（章節次序／文中線索／未知）",
-                "enum": ["chapter_order", "text_clue", "unknown"]
+                "description": "時間判斷嘅依據：chapter_order（章節次序）／text_clue（文中線索）／llm_period（LLM 判斷，見 scripts/build_chronicle_llm.py）／unknown",
+                "enum": ["chapter_order", "text_clue", "llm_period", "unknown"]
               }
             }
           },
@@ -88,6 +88,22 @@
           },
           "review_status": {
             "enum": ["pending", "approved", "rejected"]
+          },
+          "flashback": {
+            "description": "係唔係回帶（故事時間早過首次提及章節）。由 LLM 判斷。",
+            "type": "boolean"
+          },
+          "reviewed_by": {
+            "description": "覆核者。`user_waiver` = 用戶明確要求跳過人手覆核，保留審計軌跡。",
+            "type": "string"
+          },
+          "flashback": {
+            "description": "係唔係回帶（故事時間早過首次提及章節）。由 LLM 判斷。",
+            "type": "boolean"
+          },
+          "reviewed_by": {
+            "description": "覆核者。`user_waiver` = 用戶明確要求跳過人手覆核，保留審計軌跡。",
+            "type": "string"
           }
         }
       }
