@@ -221,6 +221,90 @@ export class ChronicleView {
   }
 
   /**
+   * 匯出目前檢視為 JSON。
+   *
+   * ⚠️ 匯出嘅係**目前篩選後**嘅條目 —— 用戶篩選咗某章再匯出，
+   * 應該只得到嗰章嘅資料（符合直覺）。
+   */
+  private exportJson(): void {
+    const items = this.visibleEntries().map((e) => ({
+      id: e.id,
+      title: e.title,
+      summary: e.summary,
+      period: this.periodOf(e),
+      first_mention_chapter: e.first_mention_chapter,
+      chapters: e.chapters,
+      flashback: e.flashback ?? false,
+      location: e.location_name,
+      foreshadows: e.foreshadows ?? [],
+      pays_off: e.pays_off ?? [],
+    }));
+    const payload = {
+      exported_at: new Date().toISOString(),
+      filter_chapter: this.filterChapter,
+      count: items.length,
+      entries: items,
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `bing-gang-chronicle${this.filterChapter ? `-ch${this.filterChapter}` : ""}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  /**
+   * 橫向時間軸：每章一格，顏色代表時期。
+   *
+   * 為何用「章節格」而唔係「時間線」：小說冇明確日曆，章節號係唯一
+   * 可靠嘅時序。一格 = 一章，顏色 = 該章所屬時期，高度 = 該章條目數。
+   *
+   * ⚠️ 為何要視覺化：用戶要嘅係**編年**感 —— 見到事件喺全書嘅分佈
+   * （邊度密集、邊度稀疏、時期點轉換），比純列表直觀得多。
+   */
+  private renderTimeline(): string {
+    // 每章：條目數 + 時期
+    const perCh = new Map<number, { n: number; period: string | null }>();
+    let maxCh = 0;
+    for (const e of this.doc.entries) {
+      const c = e.first_mention_chapter;
+      maxCh = Math.max(maxCh, c);
+      const cur = perCh.get(c) ?? { n: 0, period: null };
+      cur.n++;
+      // 用該章第一條有時期嘅條目做代表色
+      if (!cur.period) cur.period = this.periodOf(e);
+      perCh.set(c, cur);
+    }
+    if (!maxCh) return "";
+    const maxN = Math.max(...Array.from(perCh.values(), (v) => v.n), 1);
+
+    const bars: string[] = [];
+    for (let c = 1; c <= maxCh; c++) {
+      const v = perCh.get(c);
+      const h = v ? Math.max(2, Math.round((v.n / maxN) * 100)) : 0;
+      const key = Object.keys(PERIOD_LABEL).find(
+        (k) => PERIOD_LABEL[k] === v?.period,
+      );
+      const cls = key ? ` is-${key}` : "";
+      const title = `ch${c}${v ? `　${v.n} 條${v.period ? `　${v.period}` : ""}` : ""}`;
+      bars.push(
+        `<button class="chr-tl-bar${cls}" data-tl-ch="${c}" title="${title}" ` +
+          `style="height:${h}%" aria-label="${title}"></button>`,
+      );
+    }
+    return `
+      <div class="chr-timeline" role="group" aria-label="章節時間軸">
+        <div class="chr-tl-bars">${bars.join("")}</div>
+        <div class="chr-tl-axis">
+          <span>ch1</span><span>ch${Math.round(maxCh / 2)}</span><span>ch${maxCh}</span>
+        </div>
+      </div>`;
+  }
+
+  /**
    * 伏筆／解答連結。
    *
    * 用戶想要嘅「後續篇章回帶補完伏筆」效果 —— 呢個就係佢嘅呈現：
@@ -265,12 +349,16 @@ export class ChronicleView {
             按<strong>故事時間</strong>排列，唔係敍事次序。
             <span class="chronicle-count">${total} 條 · ${filterLabel}</span>
           </p>
-          ${
-            this.filterChapter !== null
-              ? `<button id="chr-clear-filter" class="chr-clear">✕ 清除篩選</button>`
-              : ""
-          }
+          <div class="chr-actions">
+            ${
+              this.filterChapter !== null
+                ? `<button id="chr-clear-filter" class="chr-clear">✕ 清除篩選</button>`
+                : ""
+            }
+            <button id="chr-export-json" class="chr-clear" title="匯出目前檢視為 JSON">⬇ JSON</button>
+          </div>
         </header>
+        ${this.renderTimeline()}
         <div class="chronicle-body">
           ${
             groups.length === 0
@@ -311,6 +399,17 @@ export class ChronicleView {
         const id = el.dataset.toggle!;
         this.expanded = this.expanded === id ? null : id;
         this.render();
+      });
+    });
+    // 匯出 JSON（目前檢視：包含篩選後嘅條目）
+    this.root
+      .querySelector("#chr-export-json")
+      ?.addEventListener("click", () => this.exportJson());
+    // 時間軸：點一格 → 篩選該章
+    this.root.querySelectorAll<HTMLElement>("[data-tl-ch]").forEach((el) => {
+      el.addEventListener("click", () => {
+        const ch = Number(el.dataset.tlCh);
+        if (ch) this.setChapterFilter(ch);
       });
     });
     // 伏筆／解答連結 → 跳到對應條目並展開

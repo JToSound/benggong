@@ -1405,3 +1405,47 @@ html, body {
 .chr-link:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
 .chr-link.is-fs { border-left: 2px solid var(--accent-orange, #e8963f); }
 .chr-link.is-po { border-left: 2px solid var(--accent-purple); }
+
+/* ---- 橫向時間軸 ---- */
+/* 每章一格，高度 = 該章條目數，顏色 = 時期。
+   用戶要嘅係「編年」感 —— 見到事件分佈同時期轉換，比純列表直觀。 */
+.chr-timeline {
+  margin: var(--sp-2) 0 var(--sp-3);
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--border);
+}
+.chr-tl-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 52px;
+  padding: 0 2px;
+}
+.chr-tl-bar {
+  flex: 1 1 0;
+  min-width: 1px;
+  border: none;
+  padding: 0;
+  border-radius: 1px 1px 0 0;
+  background: var(--fg-faint);
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.12s ease, transform 0.12s ease;
+  align-self: flex-end;
+}
+.chr-tl-bar:hover { opacity: 1; transform: scaleY(1.08); }
+.chr-tl-bar.is-pre_outbreak { background: var(--accent-purple); }
+.chr-tl-bar.is-outbreak { background: var(--accent-red, #d9534f); }
+.chr-tl-bar.is-early { background: var(--accent-orange, #e8963f); }
+.chr-tl-bar.is-basecamp { background: var(--accent-teal); }
+.chr-tl-bar.is-lohas { background: var(--accent-blue); }
+.chr-tl-bar.is-endgame { background: var(--accent-red, #d9534f); }
+.chr-tl-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3px;
+  padding: 0 2px;
+  font-size: 9px;
+  color: var(--fg-faint);
+  font-variant-numeric: tabular-nums;
+}
