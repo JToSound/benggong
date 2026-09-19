@@ -41,6 +41,16 @@ from pathlib import Path
 from typing import Any
 
 REPO = Path(__file__).resolve().parent.parent
+
+#: 時期代號 → 中文標籤（同 `apply_agent_analysis.py` 一致）
+PERIOD_LABEL = {
+    "pre_outbreak": "爆發前",
+    "outbreak": "病毒爆發",
+    "early": "爆發初期",
+    "basecamp": "大本營時期",
+    "lohas": "康城時期",
+    "endgame": "終局",
+}
 EVENTS = REPO / "data" / "public" / "events.geojson"
 LOCATIONS = REPO / "data" / "public" / "locations.geojson"
 OUT = REPO / "data" / "public" / "chronicle.json"
@@ -294,6 +304,45 @@ def main() -> int:
                 prior_fixed += 1
         if prior_fixed:
             print(f"  時期先驗修正：{prior_fixed} 條（章節號同敍事階段矛盾）")
+
+    # ---- 4.5 套用「逐章時期邊界」（階段 3，子代理逐章審視）----
+    #
+    # 來源：`data/private/review/period-boundaries.json`
+    #
+    # ⚠️ 為何需要（實測驗證）
+    # ---------------------
+    # 階段 2 嘅 LLM 逐條判斷有**系統性錯誤**。抽樣核實：
+    #   ch89 病腦大廚煮童（不良人 arc）→ LLM 判「康城時期」✗（應為大本營）
+    #   ch77 病童哀哭聲、刀具架        → LLM 判「康城時期」✗（應為大本營）
+    #   ch113 莎士比亞違禁品、艾寶琳共和國 → LLM 判「大本營時期」✗（應為康城）
+    #
+    # 原因：LLM 只睇標題 + 150 字摘要，缺乏**章節上下文**。
+    # 而逐章審視（每期讀開頭 170 字）能準確判斷「呢一期主體喺邊」。
+    #
+    # 套用規則：
+    #   - **非回帶**條目 → 用所屬章節嘅時期（章節係硬約束）
+    #   - **回帶**條目 → 保留原判斷（故事時間可以同章節唔同，例如
+    #     喺 ch169 回帶病毒爆發當日）
+    #   - 冇邊界資料嘅章節 → 保留原判斷
+    bd_path = REPO / "data" / "private" / "review" / "period-boundaries.json"
+    if bd_path.exists():
+        bd = json.loads(bd_path.read_text(encoding="utf-8"))
+        agent_ch: dict[int, str] = {}
+        for r in bd.get("ranges", {}).values():
+            for b in r.get("boundaries", []):
+                for c in range(b["from"], b["to"] + 1):
+                    agent_ch[c] = b["period"]
+        changed = 0
+        for e in entries:
+            if e.get("flashback"):
+                continue
+            want = PERIOD_LABEL.get(agent_ch.get(e["first_mention_chapter"], ""))
+            if want and e["story_time"]["label"] != want:
+                e["story_time"]["label"] = want
+                e["story_time"]["source"] = "chapter_boundary"
+                e["boundary_corrected"] = True
+                changed += 1
+        print(f"  逐章邊界修正：{changed} 條（章節上下文 vs LLM 摘要）")
 
     # ---- 5. 套用伏筆關係（階段 2，子代理分析）----
     #

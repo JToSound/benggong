@@ -258,3 +258,50 @@ def test_merged_entries_have_multiple_chapters() -> None:
     for e in merged:
         assert e["chapters"], f"{e['title']} 合併後冇章節"
         assert e["first_mention_chapter"] == min(c["chapter"] for c in e["chapters"])
+
+
+def test_period_matches_chapter_boundary() -> None:
+    """非回帶條目嘅時期必須同**所屬章節嘅時期邊界**一致。
+
+    ⚠️ 為何要測（實測發現系統性錯誤）
+    --------------------------------
+    階段 2 嘅 LLM 逐條判斷有系統性錯誤，因為佢只睇標題 + 150 字摘要，
+    缺乏章節上下文。抽樣核實：
+      - ch89 病腦大廚煮童（不良人 arc）→ LLM 判「康城時期」✗
+      - ch77 病童哀哭聲、刀具架        → LLM 判「康城時期」✗
+      - ch113 莎士比亞違禁品、艾寶琳共和國 → LLM 判「大本營時期」✗
+
+    階段 3 用「逐章審視」得出嘅邊界修正咗 **391 條**。呢個測試保護
+    嗰個修正唔會因為重跑而失效。
+
+    ⚠️ **回帶條目豁免** —— 故事時間可以同章節唔同（例如 ch169 回帶
+    病毒爆發當日）。
+    """
+    import json as _json
+    from pathlib import Path as _Path
+
+    bd_path = REPO / "data" / "private" / "review" / "period-boundaries.json"
+    if not bd_path.exists():
+        return  # 邊界檔唔存在就唔測（例如公開 checkout）
+    bd = _json.loads(bd_path.read_text(encoding="utf-8"))
+    agent_ch: dict[int, str] = {}
+    for r in bd.get("ranges", {}).values():
+        for b in r.get("boundaries", []):
+            for c in range(b["from"], b["to"] + 1):
+                agent_ch[c] = b["period"]
+
+    label = {
+        "pre_outbreak": "爆發前", "outbreak": "病毒爆發", "early": "爆發初期",
+        "basecamp": "大本營時期", "lohas": "康城時期", "endgame": "終局",
+    }
+    bad = []
+    for e in load()["entries"]:
+        if e.get("flashback"):
+            continue
+        want = label.get(agent_ch.get(e["first_mention_chapter"], ""))
+        if want and e["story_time"]["label"] != want:
+            bad.append((e["title"], e["first_mention_chapter"],
+                        e["story_time"]["label"], want))
+    assert not bad, (
+        f"{len(bad)} 條時期同章節邊界唔一致（逐章修正失效？）：{bad[:3]}"
+    )
