@@ -207,6 +207,48 @@ def main() -> int:
             e["review_status"] = "approved"
             e["reviewed_by"] = "user_waiver"
             applied += 1
+
+        # ---- 4. 確定性時期先驗修正 ----
+        #
+        # ⚠️ 為何需要（抽樣驗證發現）
+        # --------------------------
+        # LLM 只睇到**標題 + 150 字摘要**，唔夠判斷敍事階段。實測
+        # 「終局」有 **7 條落喺 ch1-50** —— 例如 ch24 嘅「Dr.D揭示M免疫
+        # 與秘密任務」被判為「終局」，但 ch24 明顯係故事早期。
+        #
+        # 呢個係**確定性**問題：章節號係硬約束。除非有明確回帶證據，
+        # 早期章節唔應該屬於後期敍事階段。
+        #
+        # 修正規則（保守 —— 只改明顯矛盾嘅）：
+        #   - ch ≤ 40 且判為「終局」→ 改為「大本營時期」
+        #   - ch ≤ 20 且判為「康城時期」→ 改為「大本營時期」
+        #   （康城時期喺故事中段才開始，ch ≤ 20 唔可能）
+        #
+        # ⚠️ 唔可以改「爆發前」—— 佢係故事時間，同章節號無關
+        #    （背景交代可以喺任何章節出現）。
+        prior_fixed = 0
+        for e in entries:
+            if e["story_time"]["source"] != "llm_period":
+                continue
+            ch = e["first_mention_chapter"]
+            lab = e["story_time"]["label"]
+            if e.get("flashback"):
+                continue  # 明確回帶：尊重 LLM 判斷
+            # ⚠️ 保留 `source = "llm_period"`，只加 `prior_corrected` 標記。
+            #
+            # 實測踩過：如果改成 `chapter_order`，前端 `periodOf()` 會
+            # 當佢係「未判定」—— 明明有時期標籤卻唔顯示，比唔修正更差。
+            # 前端要同時接受兩種來源，所以用獨立旗標記錄修正。
+            if lab == "終局" and ch <= 40:
+                e["story_time"]["label"] = "大本營時期"
+                e["prior_corrected"] = True
+                prior_fixed += 1
+            elif lab == "康城時期" and ch <= 20:
+                e["story_time"]["label"] = "大本營時期"
+                e["prior_corrected"] = True
+                prior_fixed += 1
+        if prior_fixed:
+            print(f"  時期先驗修正：{prior_fixed} 條（章節號同敍事階段矛盾）")
         print(f"  套用 LLM 時期判斷：{applied} / {len(entries)}")
 
     entries.sort(key=lambda e: (e["first_mention_chapter"], e["title"]))

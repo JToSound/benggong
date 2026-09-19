@@ -118,3 +118,93 @@ def test_review_status_and_provenance() -> None:
             assert e.get("reviewed_by"), (
                 f"{e['title']} 用咗 LLM 判斷但冇 reviewed_by —— 審計軌跡唔完整"
             )
+
+
+def test_period_does_not_contradict_chapter_order() -> None:
+    """時期標籤唔可以同章節號**明顯矛盾**。
+
+    ⚠️ 為何要測（抽樣驗證發現）
+    --------------------------
+    LLM 只睇到標題 + 150 字摘要，唔夠判斷敍事階段。實測「終局」有
+    **7 條落喺 ch1-50**（例如 ch24 嘅「Dr.D揭示M免疫與秘密任務」）。
+
+    章節號係**硬約束**：除非有明確回帶證據，早期章節唔應該屬於後期
+    敍事階段。呢個測試保護 `build_chronicle.py` 嘅先驗修正步驟。
+    """
+    for e in load()["entries"]:
+        if e["story_time"]["source"] != "llm_period":
+            continue
+        ch = e["first_mention_chapter"]
+        lab = e["story_time"]["label"]
+        # 回帶條目嘅故事時間可以早過章節，但唔可以**遲**過敍事階段
+        if e.get("flashback"):
+            continue
+        if lab == "終局":
+            assert ch > 40, (
+                f"「{e['title']}」喺 ch{ch} 但標為終局 —— "
+                f"章節號同敍事階段矛盾（先驗修正應該改咗）"
+            )
+        if lab == "康城時期":
+            assert ch > 20, (
+                f"「{e['title']}」喺 ch{ch} 但標為康城時期 —— 矛盾"
+            )
+
+
+def test_prior_correction_keeps_llm_source() -> None:
+    """經先驗修正嘅條目必須**保留** `source == "llm_period"`。
+
+    ⚠️ 實測踩過：如果改成 `chapter_order`，前端 `periodOf()` 會當佢係
+    「未判定」—— 明明有時期標籤卻唔顯示，比唔修正更差。
+    """
+    corrected = [e for e in load()["entries"] if e.get("prior_corrected")]
+    assert corrected, "應該有先驗修正過嘅條目（否則規則冇觸發）"
+    for e in corrected:
+        assert e["story_time"]["source"] == "llm_period", (
+            f"「{e['title']}」經先驗修正但 source 變成 "
+            f"{e['story_time']['source']} —— 前端會當佢未判定"
+        )
+
+
+def test_period_does_not_contradict_chapter_order() -> None:
+    """時期標籤唔可以同章節號**明顯矛盾**。
+
+    ⚠️ 為何要測（抽樣驗證發現）
+    --------------------------
+    LLM 只睇到標題 + 150 字摘要，唔夠判斷敍事階段。實測「終局」有
+    **7 條落喺 ch1-50**（例如 ch24 嘅「Dr.D揭示M免疫與秘密任務」）。
+
+    章節號係**硬約束**：除非有明確回帶證據，早期章節唔應該屬於後期
+    敍事階段。呢個測試保護 `build_chronicle.py` 嘅先驗修正步驟。
+    """
+    for e in load()["entries"]:
+        if e["story_time"]["source"] != "llm_period":
+            continue
+        ch = e["first_mention_chapter"]
+        lab = e["story_time"]["label"]
+        # 回帶條目嘅故事時間可以早過章節，但唔可以**遲**過敍事階段
+        if e.get("flashback"):
+            continue
+        if lab == "終局":
+            assert ch > 40, (
+                f"「{e['title']}」喺 ch{ch} 但標為終局 —— "
+                f"章節號同敍事階段矛盾（先驗修正應該改咗）"
+            )
+        if lab == "康城時期":
+            assert ch > 20, (
+                f"「{e['title']}」喺 ch{ch} 但標為康城時期 —— 矛盾"
+            )
+
+
+def test_prior_correction_keeps_llm_source() -> None:
+    """經先驗修正嘅條目必須**保留** `source == "llm_period"`。
+
+    ⚠️ 實測踩過：如果改成 `chapter_order`，前端 `periodOf()` 會當佢係
+    「未判定」—— 明明有時期標籤卻唔顯示，比唔修正更差。
+    """
+    corrected = [e for e in load()["entries"] if e.get("prior_corrected")]
+    assert corrected, "應該有先驗修正過嘅條目（否則規則冇觸發）"
+    for e in corrected:
+        assert e["story_time"]["source"] == "llm_period", (
+            f"「{e['title']}」經先驗修正但 source 變成 "
+            f"{e['story_time']['source']} —— 前端會當佢未判定"
+        )

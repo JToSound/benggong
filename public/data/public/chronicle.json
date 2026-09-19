@@ -5505,7 +5505,7 @@
       "summary": "Dr.D向M確認他沒有出紅點、不會受感染變成病者，並詭異地低聲追問有沒有把任務告知小六，又透露早已在M的袋中找到病爪血液。",
       "story_time": {
         "order": 24,
-        "label": "終局",
+        "label": "大本營時期",
         "source": "llm_period"
       },
       "first_mention_chapter": 24,
@@ -5531,7 +5531,8 @@
       ],
       "review_status": "approved",
       "flashback": false,
-      "reviewed_by": "user_waiver"
+      "reviewed_by": "user_waiver",
+      "prior_corrected": true
     },
     {
       "id": "chr_e94cc9b6ab",
@@ -5539,7 +5540,7 @@
       "summary": "舌女飛撲壓住M並舔其右邊臉頰，造成如火舌般刺熱的劇痛，事後證實為深二度灼傷需用繃帶包住臉部。",
       "story_time": {
         "order": 24,
-        "label": "終局",
+        "label": "大本營時期",
         "source": "llm_period"
       },
       "first_mention_chapter": 24,
@@ -5563,7 +5564,8 @@
       ],
       "review_status": "approved",
       "flashback": false,
-      "reviewed_by": "user_waiver"
+      "reviewed_by": "user_waiver",
+      "prior_corrected": true
     },
     {
       "id": "chr_b593b1a440",
@@ -5571,7 +5573,7 @@
       "summary": "鬧鐘聲引來舌女、大鼻、大耳三隻病者同時圍攻M和小六，大鼻噴出的毒氣令兩人陷入濃煙之中難以逃脫。",
       "story_time": {
         "order": 24,
-        "label": "終局",
+        "label": "大本營時期",
         "source": "llm_period"
       },
       "first_mention_chapter": 24,
@@ -5597,7 +5599,8 @@
       ],
       "review_status": "approved",
       "flashback": false,
-      "reviewed_by": "user_waiver"
+      "reviewed_by": "user_waiver",
+      "prior_corrected": true
     },
     {
       "id": "chr_04f93d9e1d",
@@ -5605,7 +5608,7 @@
       "summary": "M在白濃煙霧中吞下Dr.D交給他的D-1藥丸賭一把，隨即眼前一黑，醒來時已被送到大本營D橦的隔離病房。",
       "story_time": {
         "order": 24,
-        "label": "終局",
+        "label": "大本營時期",
         "source": "llm_period"
       },
       "first_mention_chapter": 24,
@@ -5630,7 +5633,8 @@
       ],
       "review_status": "approved",
       "flashback": false,
-      "reviewed_by": "user_waiver"
+      "reviewed_by": "user_waiver",
+      "prior_corrected": true
     },
     {
       "id": "chr_0673d1ca40",
@@ -5638,7 +5642,7 @@
       "summary": "M取出Dr.D給他的針筒，刺入病爪另一邊耳朵成功抽出血液樣本，完成Dr.D交託的任務。",
       "story_time": {
         "order": 24,
-        "label": "終局",
+        "label": "大本營時期",
         "source": "llm_period"
       },
       "first_mention_chapter": 24,
@@ -5664,7 +5668,8 @@
       ],
       "review_status": "approved",
       "flashback": false,
-      "reviewed_by": "user_waiver"
+      "reviewed_by": "user_waiver",
+      "prior_corrected": true
     },
     {
       "id": "chr_dbad45702f",
@@ -5672,7 +5677,7 @@
       "summary": "M一手扯住舌女濕油的頭髮，用刀刺穿其早受過傷的頸喉令它死亡，再發狂狂斬大耳直至刀鋒刺穿其耳膜。",
       "story_time": {
         "order": 24,
-        "label": "終局",
+        "label": "大本營時期",
         "source": "llm_period"
       },
       "first_mention_chapter": 24,
@@ -5697,7 +5702,8 @@
       ],
       "review_status": "approved",
       "flashback": false,
-      "reviewed_by": "user_waiver"
+      "reviewed_by": "user_waiver",
+      "prior_corrected": true
     },
     {
       "id": "chr_1a389a71d1",
@@ -5705,7 +5711,7 @@
       "summary": "病爪原本埋藏在商場一樓的屍堆裡，突然跳出並以舞蹈者般的姿態衝向二樓的小六。",
       "story_time": {
         "order": 24,
-        "label": "終局",
+        "label": "大本營時期",
         "source": "llm_period"
       },
       "first_mention_chapter": 24,
@@ -5729,7 +5735,8 @@
       ],
       "review_status": "approved",
       "flashback": false,
-      "reviewed_by": "user_waiver"
+      "reviewed_by": "user_waiver",
+      "prior_corrected": true
     },
     {
       "id": "chr_354d53d40e",
@@ -15848,8 +15855,8 @@
       "summary": "喺手術室內，主角用牆上舊式電擊器充電嘅電擊板迎擊馬姑娘嘅舌頭攻擊，令佢灼痛縮舌。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -15868,7 +15875,9 @@
       "source_event_ids": [
         "bg_event_516"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2473f62f57",
@@ -15876,8 +15885,8 @@
       "summary": "主角將混集血液污垢嘅污水倒喺發電機上，待馬姑娘破門時將通電電線掉入污水，電流貫穿馬姑娘全身，同時發電機一部部冒煙報廢。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -15896,7 +15905,9 @@
       "source_event_ids": [
         "bg_event_553"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b49ce4e611",
@@ -15904,8 +15915,8 @@
       "summary": "主角將混雜細菌嘅污水淋喺發電機上，再投入通電電線，令衝入嚟嘅馬姑娘全身觸電麻痺，同時醫療大樓所有燈光熄滅。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -15924,7 +15935,9 @@
       "source_event_ids": [
         "bg_event_518"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_aea2466907",
@@ -15932,8 +15945,8 @@
       "summary": "主角把混集血液污垢的醫療污水倒在發電機上，再將通電電線投入污水中電擊馬姑娘，令發電機一部部冒煙焚毀、醫療大樓全面停電。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -15952,7 +15965,9 @@
       "source_event_ids": [
         "bg_event_483"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0785c76a20",
@@ -15960,8 +15975,8 @@
       "summary": "主角把發電機推到門前，將污水處理機的污水倒在發電機上，再投入通電電線，令衝進來的馬姑娘全身觸電麻痺，同時導致醫療大樓全面斷電。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -15980,7 +15995,9 @@
       "source_event_ids": [
         "bg_event_476"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_bd0b03f9a0",
@@ -15988,8 +16005,8 @@
       "summary": "主角與不良人經茶水間天花通風口爬行逃生，馬姑娘從下方以鐵枝猛刺管道，不良人右手掌心被刺穿了一個血洞。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -16010,7 +16027,9 @@
       "source_event_ids": [
         "bg_event_482"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ef793a2167",
@@ -16018,8 +16037,8 @@
       "summary": "主角與不良人經茶水間天花通風口爬行逃生，期間遭馬姑娘從下方以鐵枝猛刺，不良人右手掌心被刺穿。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -16040,7 +16059,9 @@
       "source_event_ids": [
         "bg_event_477"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5f84e19e71",
@@ -16048,8 +16069,8 @@
       "summary": "主角與不良人爬入通風管逃生，馬姑娘用鐵枝從下方猛刺追擊，最終不良人右手掌被刺穿一個血洞。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -16070,7 +16091,9 @@
       "source_event_ids": [
         "bg_event_517"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d5e2794c86",
@@ -16078,8 +16101,8 @@
       "summary": "兩人爬通風管道逃生期間，馬姑娘從下方用尖銳鐵枝柱不斷插入管道追擊，中途突然停頓再突襲。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -16098,7 +16121,9 @@
       "source_event_ids": [
         "bg_event_551"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_786713ef21",
@@ -16106,8 +16131,8 @@
       "summary": "主角啟動牆上舊式電擊器，用充上電流嘅電擊板迎擊馬姑娘伸長過嚟嘅舌頭，令佢好似碰到火一樣灼痛縮開。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -16126,7 +16151,9 @@
       "source_event_ids": [
         "bg_event_548"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_36d88ba6af",
@@ -16134,8 +16161,8 @@
       "summary": "地面多咗一輛全黑特種部隊防彈車，數十名精良裝備嘅飛虎部隊成員持高火力槍械圍攻Dr.D，待佢肥重大手攻擊時先開火。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -16156,7 +16183,9 @@
       "source_event_ids": [
         "bg_event_554"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7cc81dba0e",
@@ -16164,8 +16193,8 @@
       "summary": "地面出現一輛全黑特種部隊防彈車，數十名穿精良特種部隊裝備的人持高火力槍械射擊Dr.D，且待其大手攻擊時才開火。",
       "story_time": {
         "order": 70,
-        "label": "第 70 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 70,
       "chapters": [
@@ -16186,7 +16215,9 @@
       "source_event_ids": [
         "bg_event_479"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_58b269c7fa",
