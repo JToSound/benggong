@@ -110,16 +110,33 @@ def do_merge(files: list[str], entries: dict[str, dict]) -> int:
         for p in problems[:10]:
             print(f"  - {p}")
 
+    # ⚠️ **寫入全部建議，唔可以按當前狀態過濾**。
+    #
+    # 實測踩過：呢個腳本原本只寫「id 存在於當前 chronicle.json」嘅組。
+    # 但 `build_chronicle.py` 係由**原始事件重建**條目（唔係增量），
+    # 所以「已合併走嘅 id」喺重建後**會再出現**。
+    #
+    # 後果：第二次跑嘅時候，之前已套用嘅組合被當成「id 唔存在」而濾走，
+    # 令合併效果**倒退**（實測 1,480 → 1,556，即少合併咗 76 條）。
+    #
+    # 正確做法：呢度只做**格式層面**嘅去重（同一組唔好重複），
+    # 存在性檢查留返 `build_chronicle.py`（佢先係對住重建後嘅條目）。
+    seen_sig: set[tuple[str, ...]] = set()
+    deduped: list[dict] = []
+    for g in groups:
+        sig = tuple(sorted(g.get("ids") or []))
+        if len(sig) < 2 or sig in seen_sig:
+            continue
+        seen_sig.add(sig)
+        deduped.append(g)
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     out = OUT_DIR / "chronicle-merge-suggestions.json"
     out.write_text(
-        json.dumps(
-            [g for g in groups if all(i in entries for i in (g.get("ids") or []))],
-            ensure_ascii=False, indent=2,
-        ) + "\n",
+        json.dumps(deduped, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
-    print(f"寫入 {out}（全部建議，未過濾 —— 供人手覆核）")
+    print(f"寫入 {out}（{len(deduped)} 組，已去重；存在性檢查由 build_chronicle 做）")
     return 0
 
 
@@ -136,7 +153,10 @@ def do_foreshadow(files: list[str], entries: dict[str, dict]) -> int:
     for p in pairs:
         a, b = p.get("foreshadows"), p.get("pays_off")
         if a not in entries or b not in entries:
-            problems.append(f"id 唔存在：{a} / {b}")
+            # ⚠️ 唔可以因為「當前唔存在」就丟棄 —— 跨章合併會令 id 消失，
+            # 但 `build_chronicle.py` 會用**合併映射**重定向到存活嘅條目。
+            # 呢度只記錄，唔過濾（否則重跑會令伏筆數量倒退）。
+            problems.append(f"id 唔存在（可能已被合併）：{a} / {b}")
             continue
         if a == b:
             problems.append(f"自我指向：{a}")
@@ -166,7 +186,11 @@ def do_foreshadow(files: list[str], entries: dict[str, dict]) -> int:
         json.dumps(
             [{"foreshadows": p["foreshadows"], "pays_off": p["pays_off"],
               "reason": p.get("reason", "")}
-             for p in valid if (p["foreshadows"], p["pays_off"]) not in cycles],
+             for p in valid if (p["foreshadows"], p["pays_off"]) not in cycles]
+            + [{"foreshadows": p["foreshadows"], "pays_off": p["pays_off"],
+                "reason": p.get("reason", "")}
+               for p in pairs
+               if (p.get("foreshadows") not in entries or p.get("pays_off") not in entries)],
             ensure_ascii=False, indent=2,
         ) + "\n",
         encoding="utf-8",

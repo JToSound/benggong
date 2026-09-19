@@ -305,9 +305,22 @@ def main() -> int:
     if fs_path.exists():
         pairs = json.loads(fs_path.read_text(encoding="utf-8"))
         by_id = {e["id"]: e for e in entries}
+        # ⚠️ 用**合併映射**重定向：跨章合併會令端點 id 消失，但關係本身
+        # 仍然有效 —— 應該連到存活嘅代表條目，唔係丟棄。
+        # 實測：冇重定向嘅話伏筆由 101 跌到 65（36 對因為合併而靜默消失）。
+        def resolve(i: str) -> str | None:
+            if i in by_id:
+                return i
+            seen = set()
+            while i in merged_away and i not in seen:
+                seen.add(i)
+                i = merged_away[i]
+            return i if i in by_id else None
+
         for pr in pairs:
-            a, b = pr.get("foreshadows"), pr.get("pays_off")
-            if a in by_id and b in by_id:
+            a = resolve(pr.get("foreshadows") or "")
+            b = resolve(pr.get("pays_off") or "")
+            if a and b and a != b:
                 by_id[a]["foreshadows"].append(b)
                 by_id[b]["pays_off"].append(a)
                 n_fs += 1
