@@ -305,3 +305,47 @@ def test_period_matches_chapter_boundary() -> None:
     assert not bad, (
         f"{len(bad)} 條時期同章節邊界唔一致（逐章修正失效？）：{bad[:3]}"
     )
+
+
+#: 前端 `ChronicleView.periodOf()` 接受嘅 `story_time.source` 值。
+#:
+#: ⚠️ 呢個清單必須同 `src/components/ChronicleView.ts` 保持同步。
+#: 唔同步嘅話，新增嘅 source 值會令條目喺 UI 顯示為「未判定」——
+#: **明明有時期標籤卻唔顯示**，比唔修正更差。
+FRONTEND_ACCEPTS = {"llm_period", "chapter_boundary"}
+
+
+def test_all_sources_displayable_by_frontend() -> None:
+    """每個有時期標籤嘅條目，其 `source` 必須係前端認得嘅值。
+
+    ⚠️ 為何要測（同一類 bug 踩過兩次）
+    ----------------------------------
+    1. 第一次：`prior_corrected` 條目改咗 `source` 做 `chapter_order`
+       → UI 顯示「未判定」
+    2. 第二次：`chapter_boundary` 條目（391 條）→ UI 顯示「未判定」
+
+    兩次都係「後端加咗新 source 值，但前端唔認」。呢個測試喺**資料層**
+    捉呢類問題，唔需要起瀏覽器。
+    """
+    bad = []
+    for e in load()["entries"]:
+        src = e["story_time"]["source"]
+        # 冇時期標籤（unknown）唔算問題
+        if src == "unknown":
+            continue
+        if src not in FRONTEND_ACCEPTS:
+            bad.append((e["title"], src, e["story_time"]["label"]))
+    assert not bad, (
+        f"{len(bad)} 條嘅 story_time.source 前端唔認得（會顯示「未判定」）："
+        f"{bad[:3]}"
+    )
+
+
+def test_no_entry_shows_as_undetermined() -> None:
+    """唔應該有條目顯示為「時期未判定」。
+
+    呢個係端到端嘅驗收標準：用戶見到「未判定」= 資料缺失。
+    """
+    bad = [e["title"] for e in load()["entries"]
+           if e["story_time"]["source"] not in FRONTEND_ACCEPTS]
+    assert not bad, f"{len(bad)} 條會顯示「時期未判定」：{bad[:5]}"

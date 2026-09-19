@@ -94,9 +94,26 @@ export class ChronicleView {
     this.render();
   }
 
-  /** 條目嘅時期標籤（LLM 判斷；未判斷就回 null）。 */
+  /**
+   * 條目嘅時期標籤（未判斷就回 null）。
+   *
+   * ⚠️ **必須接受兩個來源**
+   * ----------------------
+   * - `llm_period` —— 階段 2 嘅 LLM 逐條判斷
+   * - `chapter_boundary` —— 階段 3 嘅逐章邊界修正（391 條）
+   *
+   * 實測踩過**兩次**同一類 bug：只認 `llm_period` 會令
+   *   - `prior_corrected` 條目顯示「未判定」
+   *   - `chapter_boundary` 條目顯示「未判定」（391 條！）
+   *
+   * 明明有時期標籤卻唔顯示，**比唔修正更差** —— 因為用戶見到
+   * 「未判定」會以為資料缺失。
+   */
   private periodOf(e: ChronicleEntry): string | null {
-    return e.story_time.source === "llm_period" ? e.story_time.label : null;
+    const src = e.story_time.source;
+    return src === "llm_period" || src === "chapter_boundary"
+      ? e.story_time.label
+      : null;
   }
 
   /** 章節條點擊 → 篩選（唔再係切換章節）。 */
