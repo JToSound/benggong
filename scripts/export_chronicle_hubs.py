@@ -175,8 +175,92 @@ def draw_hubs(entries: list[dict]) -> Path:
     return out
 
 
+PERIOD_ORDER = ["爆發前", "病毒爆發", "爆發初期", "大本營時期", "康城時期", "終局"]
+
+
 def draw_network(entries: list[dict]) -> Path:
-    """圓形佈局嘅伏筆網絡圖（只畫度數最高嘅節點，避免變毛球）。"""
+    """時期流向矩陣：伏筆同解答各屬邊個時期。
+
+    ⚠️ 為何唔用「節點網絡圖」
+    ------------------------
+    實測度數分佈極稀疏：525 個節點度數=1、136 個=2、只有 23 個 ≥3。
+    畫出嚟只係散點，冇結構可言。
+
+    改為**時期 × 時期**嘅流向矩陣 —— 回答一個更有意義嘅問題：
+    「邊個時期埋嘅伏筆，喺邊個時期收？」呢個先係編年史嘅核心。
+    """
+    by_id = {e["id"]: e for e in entries}
+    # 建立 時期 × 時期 矩陣
+    mat: dict[tuple[str, str], int] = {}
+    for e in entries:
+        fp = e["story_time"]["label"]
+        for fid in e.get("foreshadows", []):
+            f = by_id.get(fid)
+            if not f:
+                continue
+            pp = f["story_time"]["label"]
+            if fp in PERIOD_ORDER and pp in PERIOD_ORDER:
+                mat[(fp, pp)] = mat.get((fp, pp), 0) + 1
+
+    W, H = 1200, 760
+    img = Image.new("RGB", (W, H), BG)
+    d = ImageDraw.Draw(img)
+    f_title = load_font(30)
+    f_sub = load_font(15)
+    f_body = load_font(16)
+    f_small = load_font(13)
+
+    n_rel = sum(len(e.get("foreshadows", [])) for e in entries)
+    d.text((50, 36), "《病港》編年史：伏筆流向矩陣", font=f_title, fill=FG)
+    d.text(
+        (50, 78),
+        f"{n_rel} 對伏筆關係　·　橫軸 = 解答時期　·　縱軸 = 伏筆時期",
+        font=f_sub, fill=MUTED,
+    )
+
+    # 格仔尺寸
+    cw, chh = 130, 62
+    ox, oy = 210, 150
+    maxv = max(mat.values()) if mat else 1
+    for j, pp in enumerate(PERIOD_ORDER):
+        d.text((ox + j * cw + 6, oy - 26), pp, font=f_small, fill=MUTED)
+    for i, fp in enumerate(PERIOD_ORDER):
+        d.text((50, oy + i * chh + 20), fp, font=f_body, fill=FG)
+        for j, pp in enumerate(PERIOD_ORDER):
+            v = mat.get((fp, pp), 0)
+            x0, y0 = ox + j * cw, oy + i * chh
+            if v:
+                # 顏色深淺按數量
+                t = v / maxv
+                col = (
+                    int(30 + 66 * t),
+                    int(70 + 95 * t),
+                    int(120 + 130 * t),
+                )
+                d.rectangle([(x0 + 2, y0 + 2), (x0 + cw - 4, y0 + chh - 4)], fill=col)
+                d.text((x0 + cw // 2 - 8, y0 + chh // 2 - 9), str(v),
+                       font=f_body, fill=FG)
+            else:
+                d.rectangle([(x0 + 2, y0 + 2), (x0 + cw - 4, y0 + chh - 4)],
+                            outline=GRID)
+
+    # 對角線（同章／同時期）加註
+    d.text((50, oy + len(PERIOD_ORDER) * chh + 24),
+           "對角線 = 伏筆同解答喺同一時期（通常係同章或相鄰章）。",
+           font=f_small, fill=MUTED)
+    d.text((50, oy + len(PERIOD_ORDER) * chh + 46),
+           "右上角 = 跨度最長（早期埋、後期收）。",
+           font=f_small, fill=ACCENT2)
+    d.text((50, H - 30), "病港互動地圖　·　原創資料集　·　CC BY-NC-SA 4.0",
+           font=f_small, fill=(90, 96, 106))
+
+    out = OUT_DIR / "chronicle-network.png"
+    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    img.save(out, "PNG", optimize=True)
+    return out
+
+
+def _unused_old_network(entries: list[dict]) -> Path:
     import math
 
     deg = degree(entries)
