@@ -218,7 +218,9 @@
           "note": "大舊追問M的全名時，M回答「M for Monster」。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8a57a265aa"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -391,7 +393,9 @@
           "note": "M在大本營圖書館盡頭的房間首次與首領老賢會面，並獲贈一枝巧克力能量棒。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_055bdd6fc3"
+      ],
       "pays_off": [],
       "location_id": "loc_0538",
       "location_name": "大本營圖書館",
@@ -424,8 +428,12 @@
           "note": "凌晨兩點多，M用自製抓勾爬上李惠利大樓五樓，打破窗戶潛入食物儲藏室飽餐一頓，並偷走一包巧克力奶。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_8fa7ac4423"
+      ],
+      "pays_off": [
+        "chr_66bb92b059"
+      ],
       "location_id": "loc_0008",
       "location_name": "李惠利大樓",
       "characters": [
@@ -456,7 +464,9 @@
           "note": "M用雜物房取得的粗繩和金屬鐵片，經營火燒成勾形、再以裁衣機鑽孔打結，製成攀爬用的抓勾。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_7310526f5d"
+      ],
       "pays_off": [],
       "location_id": "loc_0027",
       "location_name": "雜物房",
@@ -650,9 +660,7 @@
           "note": "玲玲請M吃牛奶糖，並以再多一粒牛奶糖為條件替他做心理測驗，結果指他心理幾健康。"
         }
       ],
-      "foreshadows": [
-        "chr_094e7379c9"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -685,7 +693,10 @@
           "note": "大本營課堂上導師講解病腦的特性：智力高、少主動出擊、以荒廢建築為病窩，並警告見到詭異裝飾品要立即逃走。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_08d6127a7d",
+        "chr_8beb4dcd97"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -718,7 +729,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_62df6a6262"
+      ],
       "location_id": "loc_0008",
       "location_name": "李惠利大樓",
       "characters": [
@@ -756,7 +769,9 @@
           "note": "大本營定時運送疑似病人或死人屍體去病腦嘅病窩做貢品，換取搜索隊可以入商場搵食物同水。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f2b2fafafc"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -956,7 +971,9 @@
           "note": "主角決定唔靠任何人，帶齊武器同埋另外四人幫手，親自破壞大本營與病腦嘅交易以奪取物資。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c2ed5e7a0e"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -990,7 +1007,9 @@
           "note": "主角將一枝未開封嘅Bonaqua蒸餾水交俾阿登，等佢喺大本營市場用以物易物換取武器同少量天拿水。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6bb8cdcc0c"
+      ],
       "pays_off": [],
       "location_id": "loc_0022",
       "location_name": "大本營市場",
@@ -1185,7 +1204,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0f8bd43082"
+      ],
       "location_id": "loc_0025",
       "location_name": "病窩商場",
       "characters": [
@@ -1218,7 +1239,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7310526f5d"
+      ],
       "location_id": "loc_0024",
       "location_name": "大本營市集",
       "characters": [
@@ -1350,7 +1373,8 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_bb29a752df"
+        "chr_bb29a752df",
+        "chr_ea9e145cb7"
       ],
       "location_id": "loc_0013",
       "location_name": "病窩",
@@ -1553,10 +1577,10 @@
           "note": "病窩深處佈滿多隻人手製作的花牌、深紅似血的長地毯及被支架固定站住的死者，加上不停的婚禮奏樂，環境宛如舉行婚禮。"
         }
       ],
-      "foreshadows": [
-        "chr_6e0717b28d"
+      "foreshadows": [],
+      "pays_off": [
+        "chr_8a4d7776ef"
       ],
-      "pays_off": [],
       "location_id": "loc_0013",
       "location_name": "病窩",
       "characters": [],
@@ -1652,7 +1676,9 @@
           "note": "少佐從暗處先以高速直球擊中病腦腦部令「我」得以脫身，再以曲球擊中其手部使針筒墜地。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e84da61771"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -1686,8 +1712,11 @@
           "note": "「我」將僅有的火柴擦燃後擲向已被天拿水澆到的病腦，火焰急速吞噬其巨大頭顱，病腦負傷奔向商場更深處。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_4ebbda145c"
+      ],
       "pays_off": [
+        "chr_03b245feaa",
         "chr_62f410fcc1"
       ],
       "location_id": "loc_0029",
@@ -1754,8 +1783,12 @@
           "note": "病腦正在商場四樓舉行婚禮，奏樂聲越來越大顯示眾人接近會場，會場內設有攝影大燈。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_6e0717b28d"
+      ],
+      "pays_off": [
+        "chr_8a4d7776ef"
+      ],
       "location_id": "loc_0032",
       "location_name": "商場四樓",
       "characters": [
@@ -1852,9 +1885,7 @@
           "note": "少佐救場後正式加入隊伍成為新同伴，眾人惋惜佢太遲先出現，否则以佢身手大概可以慳返啲力。"
         }
       ],
-      "foreshadows": [
-        "chr_acbe179067"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -1953,7 +1984,9 @@
           "note": "玩具反斗城深處傳出異常大力嘅咳聲，M憶起某年曾喺家中窗前見過類似怪物，少佐確認係大鼻並講解其毒氣能力同弱點。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_804c6d1d9d"
+      ],
       "pays_off": [],
       "location_id": "loc_0034",
       "location_name": "玩具反斗城",
@@ -1989,7 +2022,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_08d6127a7d"
+        "chr_8beb4dcd97"
       ],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -2023,8 +2056,12 @@
           "note": "M提議從貨架攞起星際大戰白兵玩具頭盔直接套入大鼻個頭，令佢啲鼻氣噴唔出嚟，眾人恍然大悟認為可行。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_7bae674f8f"
+      ],
+      "pays_off": [
+        "chr_5f69fffb5d"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -2059,7 +2096,9 @@
       "foreshadows": [
         "chr_3712eb0b9c"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6bb8cdcc0c"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -2223,9 +2262,7 @@
           "note": "M知道大本營的人曾把夏晴製造假死、運送去病窩給病腦當貢品，但無法當面揭穿，只能刻意隱瞞救人的初衷。"
         }
       ],
-      "foreshadows": [
-        "chr_122f3a3a18"
-      ],
+      "foreshadows": [],
       "pays_off": [
         "chr_4aa679c607"
       ],
@@ -2301,7 +2338,9 @@
           "note": "離開前，M趁還有時間掠光就近一間便利店的所有香煙捧走，之後用作交換物資的儲備。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_aa9b28e5f2"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -2367,7 +2406,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_804c6d1d9d"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -2439,7 +2480,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_e1c217a237"
+      ],
       "location_id": "loc_0040",
       "location_name": "A橦五樓",
       "characters": [
@@ -2471,7 +2514,9 @@
           "note": "少佐酒後向主角透露老賢曾就招募一事徵詢其意見，並約主角翌日到A橦五樓見面，最終主角決定為大本營效力。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f07df2c0e4"
+      ],
       "pays_off": [],
       "location_id": "loc_0040",
       "location_name": "A橦五樓",
@@ -2537,7 +2582,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_2f0601a740"
+      ],
       "location_id": "loc_0046",
       "location_name": "安區",
       "characters": [
@@ -2635,7 +2682,9 @@
           "note": "搜尋隊喺幾條街外嘅巴士站發現一種新病者，暫時命名為「病爪」。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ff65c86a9c"
+      ],
       "pays_off": [],
       "location_id": "loc_0048",
       "location_name": "巴士站",
@@ -2701,7 +2750,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_de2ae96503"
+      ],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -2764,9 +2815,7 @@
           "note": "敘述者預告要到往後的日子才會真正知道瑜小六靠近他的原因。"
         }
       ],
-      "foreshadows": [
-        "chr_c39187f1d5"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0143",
       "location_name": "醫院",
@@ -2897,7 +2946,9 @@
           "note": "少佐指派M越快越好出發調查，首要原則是保護自身安全，若見到學生屍骸須立即撤隊返回大本營。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fec6693846"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -2931,7 +2982,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b7e7f9860e"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -3056,8 +3109,12 @@
           "note": "M喺大本營廣場召集B隊，宣布任務改為拯救失蹤嘅A隊，准許自由跟隨與否，最終只有瑜小六同肥西留下。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_02528363dd"
+      ],
+      "pays_off": [
+        "chr_9065bd7af3"
+      ],
       "location_id": "loc_0209",
       "location_name": "大本營廣場",
       "characters": [
@@ -3093,7 +3150,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fec6693846"
+      ],
       "location_id": "loc_0050",
       "location_name": "將軍澳中心",
       "characters": [
@@ -3504,7 +3563,9 @@
           "note": "少佐承認失職，請求主角協助一同尋回大舊，主角點頭答應。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_30ca3ce5b4"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -3634,7 +3695,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f2c3937d91",
+        "chr_fe45b2112b"
+      ],
       "location_id": "loc_0067",
       "location_name": "廣場",
       "characters": [
@@ -3763,7 +3827,9 @@
           "note": "主角認為殺唔到病爪，但覺得有辦法可以困住佢。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a130a32d50"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -3860,7 +3926,9 @@
           "note": "眾人撿獲被舌女舔死的男人緊握的無線電對講機，少佐判斷看似是聯絡人的對講機，其後對講機突然傳出男性的聲音。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fe4ba13781"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -3926,7 +3994,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_50ac8330cd"
+      ],
       "location_id": "loc_0059",
       "location_name": "popcorn商場",
       "characters": [
@@ -3960,7 +4030,9 @@
           "note": "大約一個月多前，犬京喺路上救咗一名正被病者襲擊嘅女生Bomi，兩人就此相識。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ff65c86a9c"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -4059,7 +4131,9 @@
           "note": "M、少佐與大舊在商場二樓體育店與病爪纏鬥，M刺傷病爪耳朵後拋亂店內球類製造聲響擾亂其聽覺，三人從二樓跳下屍山卸力逃生。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a130a32d50"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -4129,7 +4203,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9de535a983"
+      ],
       "location_id": "loc_0067",
       "location_name": "廣場",
       "characters": [
@@ -4228,7 +4304,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0d4bece458",
+        "chr_f6f709ec9d"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -4398,9 +4477,7 @@
           "note": "M同大舊被病爪抓傷後去醫療室快速抽血，Dr.D檢視後指血液大致搵唔到感染痕跡，但對M露出深長詭笑，令M渾身不安。"
         }
       ],
-      "foreshadows": [
-        "chr_9d2b6071e4"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0006",
       "location_name": "醫療室",
@@ -4502,7 +4579,9 @@
           "note": "新入大本營嘅人要接受一位社工嘅心理測驗，M入營時亦做過。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_094e7379c9"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -4600,9 +4679,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_0cc04833a6"
-      ],
+      "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -4635,9 +4712,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_161caed6d5"
-      ],
+      "pays_off": [],
       "location_id": "loc_0013",
       "location_name": "病窩",
       "characters": [
@@ -4841,7 +4916,9 @@
           "note": "Dr.D請M吃牛排並要求他幫忙抽取病爪的血液樣本以完成研究，M以自己冇義務為由拒絕並離開。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_71431aadc7"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -4875,7 +4952,10 @@
           "note": "M用之前摧毀病窩後掠奪回來、儲放在大本營倉庫的一盒香煙，向市集大叔換購檔內全部購檔內全部鬧鐘（鬧鐘沒有電池）。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c349450568",
+        "chr_c66a28ffef"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -4907,8 +4987,13 @@
           "note": "一星期後M主動找Dr.D，答應抽取病爪血液樣本，獲發一支空針筒及兩粒聲稱可在藥效內不受病者感染、名叫D1的藥丸。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_04f93d9e1d",
+        "chr_0673d1ca40"
+      ],
+      "pays_off": [
+        "chr_6d74481d0b"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -5009,7 +5094,7 @@
         }
       ],
       "foreshadows": [
-        "chr_1b3cf83b54"
+        "chr_d7cad844fc"
       ],
       "pays_off": [],
       "location_id": "loc_0004",
@@ -5043,7 +5128,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_49e4e4baa4"
+      ],
       "location_id": "loc_0078",
       "location_name": "宿舍",
       "characters": [],
@@ -5104,7 +5191,10 @@
           "note": "老賢要求M暫時替Dr.D做事、成為間諜套取其所有研究資料，以一顆糖果象徵M接受任務，並囑咐連少佐也不可以告知。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8fd6f3bb38",
+        "chr_f1917aaa71"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -5141,7 +5231,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_b388a21164"
+        "chr_fa66095f9b"
       ],
       "location_id": "loc_0007",
       "location_name": "圖書館",
@@ -5174,7 +5264,9 @@
           "note": "主角站在天台觀景時，被一隻藏於幼稚園暗角窗口的舌女長時間凝視，被發現後舌女裂嘴一笑俯身消失，令主角渾身發毛。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e94cc9b6ab"
+      ],
       "pays_off": [],
       "location_id": "loc_0088",
       "location_name": "幼稚園",
@@ -5204,7 +5296,9 @@
           "note": "M帶著針筒和藥丸離開Dr.D房間時被阿玲攔住質問，阿玲揪住他的頸領推到牆邊，冷不防揮拳被他俯身躲開，拳头打中牆身。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_400ce67358"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -5239,7 +5333,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_da0c1a4808"
+      ],
       "location_id": "loc_0329",
       "location_name": "樓梯間",
       "characters": [
@@ -5272,7 +5368,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_49e4e4baa4"
+      ],
       "location_id": "loc_0059",
       "location_name": "popcorn商場",
       "characters": [
@@ -5344,7 +5442,9 @@
           "note": "出發前一天主角在天台答應帶瑜小六出去一次，翌日二人帶同兩把開山刀通過北門守衛，正式步出大本營。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f4cf9abf27"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -5377,7 +5477,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_5c5190f98a"
+      ],
       "location_id": "loc_0089",
       "location_name": "行人隧道",
       "characters": [
@@ -5409,10 +5511,10 @@
           "note": "Dr.D向M確認他沒有出紅點、不會受感染變成病者，並詭異地低聲追問有沒有把任務告知小六，又透露早已在M的袋中找到病爪血液"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_474440e63b"
+      "foreshadows": [
+        "chr_977be04c63"
       ],
+      "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -5447,7 +5549,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_123523269f"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -5514,8 +5618,12 @@
           "note": "M在白濃煙霧中吞下Dr.D交給他的D-1藥丸賭一把，隨即眼前一黑，醒來時已被送到大本營D橦的隔離病房。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_70ea64c3f7"
+      ],
+      "pays_off": [
+        "chr_71431aadc7"
+      ],
       "location_id": "loc_0091",
       "location_name": "隔離病房",
       "characters": [
@@ -5548,8 +5656,12 @@
           "note": "M取出Dr.D給他的針筒，刺入病爪另一邊耳朵成功抽出血液樣本，完成Dr.D交託的任務。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_fe9147ce25"
+      ],
+      "pays_off": [
+        "chr_71431aadc7"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -5650,7 +5762,9 @@
           "note": "Dr.D親自將他最珍貴的中世紀歐洲瘟疫醫生鳥嘴面具與全黑衣袍送贈給M，並指鳥嘴內放藥草薄荷可防屍臭及大鼻毒氣攻擊。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0002abfc6e"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -5683,7 +5797,10 @@
           "note": "M主動提議假死，大本營醫療部對外宣稱他已死去並稱屍體已被處理，實際上他一直躺在隔離病房養傷，只有老賢和Dr.D知道真相。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a52ce866e2",
+        "chr_c39187f1d5"
+      ],
       "pays_off": [],
       "location_id": "loc_0091",
       "location_name": "隔離病房",
@@ -5717,7 +5834,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_04f93d9e1d"
+      ],
       "location_id": "loc_0091",
       "location_name": "隔離病房",
       "characters": [
@@ -5782,7 +5901,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1984ae44ba"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [],
@@ -5845,7 +5966,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d95632bdf0"
+      ],
       "location_id": "loc_0051",
       "location_name": "天台",
       "characters": [
@@ -5941,7 +6064,10 @@
           "note": "主角用四包香煙向王達尼購入一把黑色布質雨傘，認為若把傘頭尖端改成尖刀，會是最適合對付病者的武器。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_95923fb1c4",
+        "chr_dc391f36aa"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -6070,7 +6196,9 @@
           "note": "董倫一直主張大本營對外開放，想把孤兒所變做妓院換取物資收入，孤兒全部變做童工幫輕人力開支；老賢拖延未敢批准。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e0d4c3d56d"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -6103,8 +6231,12 @@
           "note": "M在會議上提議設立學堂教育細路，以制衡董倫改建妓院的方案，獲席上富商貴婦支持討論。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_4fc4e97590"
+      ],
+      "pays_off": [
+        "chr_bfa48471a9"
+      ],
       "location_id": "loc_0104",
       "location_name": "學堂",
       "characters": [
@@ -6141,8 +6273,12 @@
           "note": "大本營昨晚通過議案，決定起學堂以平衡兩邊細路的利益，之後還會推行「童工政策」，孤兒所物品隨即被搬走。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_ccacfb6ccf"
+      ],
+      "pays_off": [
+        "chr_e0d4c3d56d"
+      ],
       "location_id": "loc_0101",
       "location_name": "六樓６０１室至６０６室",
       "characters": [
@@ -6174,8 +6310,12 @@
           "note": "會議結束後，董倫宣佈為慶祝私人會所改建計劃成功，聽晚九點在九樓舉行派對。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_4f68c0ad3f"
+      ],
+      "pays_off": [
+        "chr_4fc4e97590"
+      ],
       "location_id": "loc_0649",
       "location_name": "九樓",
       "characters": [
@@ -6238,7 +6378,9 @@
           "note": "主角以一顆老賢才派得的果汁糖交給八樓鐵閘看守，藉此獲准進入八樓，事後只餘三顆果汁糖。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_38e985c740"
+      ],
       "pays_off": [],
       "location_id": "loc_0113",
       "location_name": "八樓",
@@ -6270,8 +6412,13 @@
           "note": "董倫將於聽晚在大本營八、九樓舉行慶祝會，出席者必須持有邀請卡，主角的邀請卡已被阿玲取用。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_0d80cdf8a8",
+        "chr_620c5a5cf2"
+      ],
+      "pays_off": [
+        "chr_ccacfb6ccf"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -6306,7 +6453,9 @@
       "foreshadows": [
         "chr_c97d1448a8"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_4f68c0ad3f"
+      ],
       "location_id": "loc_0104",
       "location_name": "學堂",
       "characters": [
@@ -6339,7 +6488,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_e9a06e90f2"
+      ],
       "location_id": "loc_0113",
       "location_name": "八樓",
       "characters": [],
@@ -6374,7 +6525,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_4f68c0ad3f"
+      ],
       "location_id": "loc_0109",
       "location_name": "董倫的大宅",
       "characters": [
@@ -6409,9 +6562,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_1984ae44ba"
-      ],
+      "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [],
@@ -6472,7 +6623,9 @@
           "note": "董倫在慶祝會餘興節目舉辦「地獄轉盤遊戲」，迫一對十歲孖仔在圍板場地中求生，手下掉下小刀、水管棍、斧頭、小錘子等武器，轉盤"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d105af0a46"
+      ],
       "pays_off": [],
       "location_id": "loc_0109",
       "location_name": "董倫的大宅",
@@ -6610,7 +6763,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fede3ff88e"
+      ],
       "location_id": null,
       "location_name": null,
       "characters": [
@@ -6643,7 +6798,9 @@
           "note": "Dr.D提議以後主角負責狩獵病者、佢自己負責研究病者。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ef384422ca"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -6675,8 +6832,12 @@
           "note": "Dr.D經過三個月研究病爪血，發現病爪細胞基因對陽光極脆弱，一照就會好似雞蛋咁碎開。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_88acc0616a"
+      ],
+      "pays_off": [
+        "chr_0673d1ca40"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -6708,7 +6869,9 @@
           "note": "主角用防反光小刀收割病爪身體部位，割低個頭作「戰利品」交俾Dr.D。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_9cac24e098"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -6742,7 +6905,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9d2b6071e4"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -6838,7 +7003,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fe9147ce25"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -6902,7 +7069,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f45d0576c0"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -6934,7 +7103,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b121a268bd"
+      ],
       "location_id": "loc_0579",
       "location_name": "辦公室",
       "characters": [
@@ -7030,7 +7201,9 @@
           "note": "帶病爪頭返營之後，大本營人心惶惶，謠言如病毒般快速散播，有人稱「我」係「不良人」派嚟嘅內奸，目的係感染全營嘅人。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e3c897934a"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -7063,7 +7236,9 @@
           "note": "強風吹走瑜小六放在地上嘅水瓶地上嘅水瓶滾到「我」腳旁，「我」拾起交還俾佢，瑜小六驚恐咁道謝並道歉話營內人叫佢小心「我」，"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c39187f1d5"
+      ],
       "pays_off": [],
       "location_id": "loc_0051",
       "location_name": "天台",
@@ -7096,7 +7271,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_dfb6fb56f9"
+      ],
       "location_id": "loc_0117",
       "location_name": "拘留所",
       "characters": [
@@ -7131,7 +7308,8 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_c34167ae40"
+        "chr_d95632bdf0",
+        "chr_fd34419093"
       ],
       "location_id": "loc_0051",
       "location_name": "天台",
@@ -7163,7 +7341,9 @@
           "note": "老賢舉行兩小時演講振奮人心，宣佈大本營學堂即將成立並逐一介紹導師，最後介紹「我」出任「病者攻擊學」導師，並為帶頭入營一事"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d27fd908d2"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -7195,8 +7375,12 @@
           "note": "Dr.D委託主角M喺半年內出外發掘至少五隻新型病者並割取身體部份返嚟，指明可搵C座攝影大樓嘅人幫手，成功後先會透露真正目"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_b6890d2dcc"
+      ],
+      "pays_off": [
+        "chr_d06f4b0224"
+      ],
       "location_id": "loc_0119",
       "location_name": "C座攝影大樓",
       "characters": [
@@ -7258,7 +7442,9 @@
           "note": "老賢喺演講大典上宣布以自願制招募搜索隊員，半年內要訓練出精銳搜索隊應付資源問題並擴張對外搜索範圍，主角M係負責訓練嘅導師"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_77bf6e954f"
+      ],
       "pays_off": [],
       "location_id": "loc_0119",
       "location_name": "C座攝影大樓",
@@ -7324,7 +7510,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_cb6e4e4860"
+      ],
       "location_id": "loc_0221",
       "location_name": "攻擊學",
       "characters": [
@@ -7385,7 +7573,9 @@
           "note": "賴三向主角解釋懷疑相中小女孩是病者的原因，並指點他前往將軍澳華人永遠墳場找北賢取得進一步情報。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d7e858a588"
+      ],
       "pays_off": [],
       "location_id": "loc_0120",
       "location_name": "將軍澳華人永遠墳場",
@@ -7449,7 +7639,9 @@
           "note": "下課後公仔返回學堂，表示家人為感激主角而想請他食飯；主角表明不會去八樓，公仔遂提議家人可在七樓、六樓或五樓租房。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_19a64dee14"
+      ],
       "pays_off": [],
       "location_id": "loc_0104",
       "location_name": "學堂",
@@ -7512,7 +7704,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_54c90e2c07"
+      ],
       "location_id": "loc_0104",
       "location_name": "學堂",
       "characters": [
@@ -7610,7 +7804,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_428691fe3d"
+      ],
       "location_id": "loc_0122",
       "location_name": "四樓活動室",
       "characters": [
@@ -7641,7 +7837,9 @@
           "note": "公仔之父席間追問主角覺得大本營半年之後仲維唔維持得到，並指不論制度定食糧都好難，話中似有暗示。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6636b49671"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -7737,8 +7935,12 @@
           "note": "「我」喺翌日獨自離開安全區，由東門向北行去將軍澳華人墳場，打算喺凌晨搵北賢購買新型病者情報。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_03a948a0b5"
+      ],
+      "pays_off": [
+        "chr_36b82cc49e"
+      ],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
       "characters": [
@@ -7770,7 +7972,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_a9b8e604e2"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -7868,7 +8072,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d7e858a588"
+      ],
       "location_id": "loc_0078",
       "location_name": "宿舍",
       "characters": [
@@ -7901,7 +8107,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d0aca475ea"
+      ],
       "location_id": "loc_0104",
       "location_name": "學堂",
       "characters": [
@@ -8005,7 +8213,9 @@
           "note": "王達尼取出精銳短劍砍向瑜小六手上的圓形鐵盾，發出幾乎震耳欲鳴的耳欲鳴的鏗聲，證明武器是真材實料。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_b7e7930a3b"
+      ],
       "pays_off": [],
       "location_id": "loc_0052",
       "location_name": "市集",
@@ -8102,8 +8312,12 @@
           "note": "主角原本質疑未殺過病者的瑜小六配不上貴重武器，最終以兩顆果汁糖向王達尼買下短劍和圓盾，並謊稱是黑商免費相贈。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_735eaebd0d"
+      ],
+      "pays_off": [
+        "chr_3373ee207d"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -8198,7 +8412,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b7e7930a3b"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -8229,8 +8445,12 @@
           "note": "「我」趁Dr.D煎牛排期間搜查其宿舍，喺最後一間房發現病爪嘅實驗手札，記錄顯示病爪雜食、黑暗中傷口極速治癒、紫外光下會假"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_006a541c80"
+      ],
+      "pays_off": [
+        "chr_f45d0576c0"
+      ],
       "location_id": "loc_0078",
       "location_name": "宿舍",
       "characters": [
@@ -8263,7 +8483,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9780952285"
+      ],
       "location_id": "loc_0078",
       "location_name": "宿舍",
       "characters": [
@@ -8295,7 +8517,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_ef384422ca"
+      ],
       "location_id": "loc_0078",
       "location_name": "宿舍",
       "characters": [
@@ -8327,7 +8551,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8fd6f3bb38"
+      ],
       "location_id": "loc_0078",
       "location_name": "宿舍",
       "characters": [
@@ -8390,7 +8616,9 @@
           "note": "主角帶領六名學生於早上八時在大本營南門集合，通過職員開門後正式步出營外，前往靈實醫院。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0ab8865bc6"
+      ],
       "pays_off": [],
       "location_id": "loc_0137",
       "location_name": "大本營南門",
@@ -8452,8 +8680,12 @@
           "note": "一行人在寶琳南路遭舌女突襲，Chris險被舔中，小六被拖入草叢，最終主角用鐵長矛貫穿其舌喉至腸部，將它殺死。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_a48c8795b8"
+      ],
+      "pays_off": [
+        "chr_0c508e737c"
+      ],
       "location_id": "loc_0135",
       "location_name": "寶琳南路",
       "characters": [
@@ -8484,7 +8716,9 @@
           "note": "草叢中一隻野貓尾巴伸高、毛都豎起後逃走，主角憑動物第六感的本能判斷附近有危險，下令全員提起武器警戒。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_277bc2241d"
+      ],
       "pays_off": [],
       "location_id": "loc_0132",
       "location_name": "地下層多媒體攝影棚",
@@ -8549,7 +8783,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_277bc2241d"
+      ],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
       "characters": [
@@ -8647,8 +8883,12 @@
           "note": "眾人整理隊形後抵達靈實醫院，見到正門接待處躺著屍體，其後一同進入醫院大堂，發現幾具被咬傷過的屍體。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_40e9e61081"
+      ],
+      "pays_off": [
+        "chr_fe2ed4c249"
+      ],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
       "characters": [],
@@ -8678,7 +8918,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0ab8865bc6"
+      ],
       "location_id": null,
       "location_name": null,
       "characters": [],
@@ -8707,7 +8949,9 @@
           "note": "樓上傳來大眼的尖叫聲，病嘴聽到後眼神活過來，朝聲音來源跑去，顯示留守的學生可能已被大眼發現。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_dc391f36aa"
+      ],
       "pays_off": [],
       "location_id": null,
       "location_name": null,
@@ -8746,7 +8990,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_5643f54f91",
+        "chr_e9a06e90f2"
+      ],
       "location_id": null,
       "location_name": null,
       "characters": [
@@ -8778,7 +9025,9 @@
           "note": "敘事者接過公仔的小軍刀往病嘴身上狂刺，但傷害完全無效，軍刀刺入其臉頰後更被吸收，再也扯不出來。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fa407c60c9"
+      ],
       "pays_off": [],
       "location_id": "loc_0143",
       "location_name": "醫院",
@@ -8811,7 +9060,9 @@
           "note": "瑜小六等四人沒有跑出醫院反而跑去樓上，在樓上發出叫聲及奔跑聲，疑被大眼發現追趕。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0661ffac53"
+      ],
       "pays_off": [],
       "location_id": "loc_0143",
       "location_name": "醫院",
@@ -8844,7 +9095,9 @@
           "note": "眾人發現娃娃在逃跑途中失散失蹤，公仔懇求老師先找回妹妹，老師思考後決定放棄前進、返轉頭尋找娃娃。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ed3c5a1dce"
+      ],
       "pays_off": [],
       "location_id": "loc_0143",
       "location_name": "醫院",
@@ -8877,7 +9130,9 @@
           "note": "主角一行喺二樓聽到玻璃碎裂聲，發現一隻滿身紅點、成口密麻麻牙齒嘅新型病者（病牙）；主角用雨傘戳佢個口無效，傘尖仲被咬至破"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_faa2e9a3c0"
+      ],
       "pays_off": [],
       "location_id": "loc_0360",
       "location_name": "二樓",
@@ -8941,7 +9196,9 @@
           "note": "公仔對鞋被地上病嘴遠低嘅奶白色接近透明嘅舔液黐住，花大力氣都扯唔甩，最後放棄對真皮男裝鞋赤腳行走。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e856c34cb6"
+      ],
       "pays_off": [],
       "location_id": "loc_0143",
       "location_name": "醫院",
@@ -8975,7 +9232,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f5e3ddf4ff"
+      ],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -9009,7 +9268,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_2ce5315779"
+      ],
       "location_id": "loc_0152",
       "location_name": "地下層",
       "characters": [
@@ -9041,8 +9302,12 @@
           "note": "病嘴被發現死喺樓梯口前，死因疑似嘴部受硬物襲擊；主角推斷醫院內有知道病嘴弱點嘅人類第三者存在。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_ea2f3c9049"
+      ],
+      "pays_off": [
+        "chr_5d3ba85194"
+      ],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -9107,7 +9372,10 @@
           "note": "娃娃遭人帶走而非即時殺害，敘事者認為這證明對方無意即時殺死她，因此決定先尋找小六等人，途中或可找到娃娃。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5cc7adc66b",
+        "chr_7bb385d048"
+      ],
       "pays_off": [],
       "location_id": "loc_0424",
       "location_name": "走廊",
@@ -9140,7 +9408,9 @@
           "note": "敘事者根據病者的群體行為（如大鼻交換鼻液、大眼跟蹤舌女、大耳集體抹玻璃窗）推斷病者正在不斷進化，可能擁有獨特的生活方式、"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_04f7106610"
+      ],
       "pays_off": [],
       "location_id": "loc_0424",
       "location_name": "走廊",
@@ -9175,7 +9445,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f4792b0544"
+      ],
       "location_id": "loc_0424",
       "location_name": "走廊",
       "characters": [
@@ -9241,7 +9513,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_3e9c21e4aa"
+      ],
       "location_id": "loc_0424",
       "location_name": "走廊",
       "characters": [],
@@ -9431,7 +9705,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_700e4a66e5"
+      ],
       "location_id": "loc_0151",
       "location_name": "實驗室",
       "characters": [
@@ -9496,7 +9772,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_700e4a66e5"
+      ],
       "location_id": "loc_0151",
       "location_name": "實驗室",
       "characters": [
@@ -9530,7 +9808,9 @@
       "foreshadows": [
         "chr_9022e6919c"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_31cb42bce2"
+      ],
       "location_id": "loc_0014",
       "location_name": "香港",
       "characters": [
@@ -9726,7 +10006,9 @@
           "note": "刺中主角前膊的手術刀有毒，麻痺發作後滿天踢起傘子並順勢重擊主角肩頸，令主角膊頭骨骼作響、近乎散掉。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e3ee7a72f6"
+      ],
       "pays_off": [],
       "location_id": null,
       "location_name": null,
@@ -9758,7 +10040,9 @@
           "note": "在敘事者快被滿天殺掉之際，Chris把鐵製長矛刺入病腦腦中，令病腦痛苦按頭退後，扭轉戰局。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_dccced32eb"
+      ],
       "pays_off": [],
       "location_id": "loc_0151",
       "location_name": "實驗室",
@@ -9792,7 +10076,9 @@
           "note": "滿天表示自己清楚大本營防禦術，是因為他是被大本營拋棄的人，並稱自己已永遠不再是大本營的人。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_85757d291c"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -9858,7 +10144,9 @@
           "note": "病腦拿著餅乾糖果半拐走到學生面前伸出微抖雙手請他們吃，眾人不敢取用，最終瑜小六主動伸手接過果汁糖和餅乾並道謝。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a7fc694597"
+      ],
       "pays_off": [],
       "location_id": "loc_0151",
       "location_name": "實驗室",
@@ -9893,7 +10181,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c6e6feb2de"
+      ],
       "location_id": "loc_0151",
       "location_name": "實驗室",
       "characters": [
@@ -9992,7 +10282,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0b01d792cf"
+      ],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -10028,7 +10320,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_77a29c7989"
+      ],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -10061,7 +10355,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fa407c60c9"
+      ],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -10094,7 +10390,7 @@
         }
       ],
       "foreshadows": [
-        "chr_1b4150883c"
+        "chr_234f13fc99"
       ],
       "pays_off": [],
       "location_id": "loc_0143",
@@ -10264,7 +10560,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1ad99a8bb2"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -10300,9 +10598,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_1ad99a8bb2"
-      ],
+      "pays_off": [],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -10368,7 +10664,9 @@
           "note": "大舊向小六介紹大本營唯一全女班的04小隊——克里絲娜前線女子搜索隊，並建議她考慮加入，主角認為再觀察多一排都冇壞。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_de42314323"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -10442,7 +10740,9 @@
           "note": "傑夫丸憶述其搜索隊在日常必經的道路上，遭一名穿醫生袍、臉容冰冷無情的男人率領不良人突襲。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_30bc5afe31"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -10511,7 +10811,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7870860dd5"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -10546,9 +10848,7 @@
           "note": "王達尼在C樓工坊請鐵匠為紅寶石頸鏈進行打磨、切割、拋光，準備送給織衣室內一位織圍巾的清純少女。"
         }
       ],
-      "foreshadows": [
-        "chr_fd356f9d34"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0158",
       "location_name": "工坊",
@@ -10612,8 +10912,12 @@
           "note": "大舊表示瑜小六雖符合面試基本要求，但要成為克里絲娜搜索隊正式成員，須先訓練一至兩星期，再接受江子千的三個試煉。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_91e3ba8383"
+      ],
+      "pays_off": [
+        "chr_ddb02d7d3b"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -10676,7 +10980,9 @@
           "note": "王達尼帶著木塊、小刀和合照到一樓紡織部，委託當年送饅頭給他的女生雕出相中人的樣貌，對方估計至少需要半日，約定日落時份完成"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_60e7dda880"
+      ],
       "pays_off": [],
       "location_id": "loc_0161",
       "location_name": "紡織部",
@@ -10745,7 +11051,9 @@
           "note": "王達尼承諾幫傑夫丸放低往事，條件是以後木工部出產的成品要分10%給他自己出售，愛孫心切的老主管答應了。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fb01d2c17d"
+      ],
       "pays_off": [],
       "location_id": "loc_0159",
       "location_name": "病者陷阱設計室",
@@ -10813,7 +11121,9 @@
           "note": "敘述者以一罐豉汁鯪魚、一包公仔麵及一粒果汁糖作報酬，委託武器製造室把傘前端的木塞狀物體改造成利器兼維修。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_58e5a5c6aa"
+      ],
       "pays_off": [],
       "location_id": "loc_0165",
       "location_name": "武器製造室",
@@ -10846,7 +11156,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_594de85ce1"
+      ],
       "location_id": "loc_0165",
       "location_name": "武器製造室",
       "characters": [
@@ -10973,9 +11285,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_e443cec5b0"
-      ],
+      "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -11008,7 +11318,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d674b062cb"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -11040,8 +11352,13 @@
           "note": "鐵匠主管完成咗主角托佢改造嘅傘子，前端由木塞改成可刺穿人類或病者嘅粗銀色鐵針狀物體。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_d4f25b14fa",
+        "chr_fc1472034a"
+      ],
+      "pays_off": [
+        "chr_ac6824fc35"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -11072,7 +11389,9 @@
           "note": "主角安排上次去靈實醫院實習嘅學生組合，星期六跟賴三老師出外實習學採集；真正目的係主角要順路去見南愚。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6bc1765437"
+      ],
       "pays_off": [],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
@@ -11105,7 +11424,9 @@
           "note": "大本營每半年舉辦一次嘅大型盛會「營火會」，由全橦工坊嘅人一齊準備，有表演，兩星期後將會舉行。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a3c21c8757"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -11135,10 +11456,10 @@
           "note": "瑜小六為加入江子千嘅全女子搜索隊接受三項試煉：七樓支柱上嘅膽量測試、十二分鐘格鬥術測試，以及大本營外三日生存嘅真實測試，"
         }
       ],
-      "foreshadows": [
-        "chr_f570857500"
+      "foreshadows": [],
+      "pays_off": [
+        "chr_de42314323"
       ],
-      "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -11170,7 +11491,9 @@
           "note": "主角晚上心血來潮，用半塊乾麵包喺市集換嚟空白筆記同原子筆，獨自坐喺天台開始製作《病者圖鑑》。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_7e78108a31"
+      ],
       "pays_off": [],
       "location_id": "loc_0051",
       "location_name": "天台",
@@ -11201,7 +11524,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_58e5a5c6aa"
+      ],
       "location_id": null,
       "location_name": null,
       "characters": [
@@ -11266,7 +11591,9 @@
           "note": "主角被病嘴唾液黏住地面時，公仔與娃娃拒絕上前幫忙割袍，道歉後趁大鼻毒氣散去繞過主角逃跑，留下他被病者圍困。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d70f4e01da"
+      ],
       "pays_off": [],
       "location_id": null,
       "location_name": null,
@@ -11303,7 +11630,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6af7b73b9f"
+      ],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
       "characters": [
@@ -11436,7 +11765,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d3165a8008"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -11665,8 +11996,12 @@
           "note": "主角在天台翻閱已完成一大半的《病者圖鑑》，認為完成度頗高，但自覺寫來供自己自娛意義不大。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_a4c67a2c81"
+      ],
+      "pays_off": [
+        "chr_b585eae313"
+      ],
       "location_id": "loc_0051",
       "location_name": "天台",
       "characters": [],
@@ -11755,7 +12090,9 @@
           "note": "主角離開盤問室後以誤會一場為由暫時釋放二人，只把此事告知老賢，並打算向賴三老師和廢柴三人組訛稱只是模擬演習。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_867bdab0f4"
+      ],
       "pays_off": [],
       "location_id": "loc_0184",
       "location_name": "盤問室",
@@ -11791,10 +12128,12 @@
         }
       ],
       "foreshadows": [
-        "chr_867bdab0f4",
-        "chr_f550acc658"
+        "chr_f550acc658",
+        "chr_fc1472034a"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_cb6f900374"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -11829,9 +12168,11 @@
           "note": "公仔與娃娃偷到一些標明日期的信件，證明馬德梵曾經與不良人互相溝通。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f550acc658"
+      ],
       "pays_off": [
-        "chr_a3c21c8757"
+        "chr_efdbe3db3d"
       ],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -11864,7 +12205,9 @@
           "note": "「我」命學生圍住大本營六樓欄杆外圍繞一圈作訓練，踏錯一步便會粉身碎骨，結果連瑜小六在內無一人敢行出去。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f570857500"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -11928,7 +12271,9 @@
           "note": "愛紗與大本營新武器製造商之一的漢森等主管研究防禦方案，提議增加鐵板牆塊、偵測塔、鐵捲網等基建。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_99c98dc0a7"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -11962,7 +12307,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7e78108a31"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [],
@@ -11992,7 +12339,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8c3631813c"
+      ],
       "location_id": "loc_0113",
       "location_name": "八樓",
       "characters": [
@@ -12025,7 +12374,7 @@
         }
       ],
       "foreshadows": [
-        "chr_9cb2d706ec"
+        "chr_5116005543"
       ],
       "pays_off": [],
       "location_id": "loc_0004",
@@ -12127,7 +12476,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_91e3ba8383"
+        "chr_357caba3f5"
       ],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -12194,7 +12543,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_a3eba2ef28"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -12261,6 +12612,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
+        "chr_867bdab0f4",
         "chr_a3c21c8757"
       ],
       "location_id": "loc_0592",
@@ -12329,7 +12681,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_58e5a5c6aa",
+        "chr_a3c21c8757"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -12678,7 +13033,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c4a95a6df8"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -12710,7 +13067,9 @@
           "note": "馬德梵嘅軍刀塗有毒藥，戰鬥中無意劃傷少佐腹部，令佢四肢力量逐漸薄弱、腳步一拐一摔。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_4134f68e44"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -12773,7 +13132,9 @@
           "note": "深夜兩時半，馬姑娘捧住被白布刻意掩蓋嘅不明盤子步出大本營，進入多媒體地下攝影棚約二十分鐘，空手而回。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e0d463b0a5"
+      ],
       "pays_off": [],
       "location_id": "loc_0195",
       "location_name": "多媒體地下攝影棚",
@@ -12871,10 +13232,7 @@
           "note": "Dr.D計劃喺不良人攻入當日，同馬姑娘及M一齊注射佢特別調配嘅病者血液，變成最新型病者去統治人類。"
         }
       ],
-      "foreshadows": [
-        "chr_13e18e7299",
-        "chr_6efcb3d275"
-      ],
+      "foreshadows": [],
       "pays_off": [
         "chr_181e2dfc01"
       ],
@@ -13022,10 +13380,10 @@
           "note": "Dr.D帶嚟一部數字鐘，調校好六日倒數並按下Start按鈕，聲稱倒數到零一刻不良人就會正式攻入。"
         }
       ],
-      "foreshadows": [
-        "chr_9cb2d706ec"
+      "foreshadows": [],
+      "pays_off": [
+        "chr_7093fe7cdc"
       ],
-      "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -13127,6 +13485,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
+        "chr_31b7978eb1",
         "chr_bbb4c729be"
       ],
       "location_id": "loc_0200",
@@ -13159,7 +13518,9 @@
           "note": "Dr.D放下一部數字鐘，調校好六天倒數並按下Start，聲稱倒數到零一刻不良人便會正式攻入。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_9cb2d706ec"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -13192,7 +13553,9 @@
           "note": "Dr.D揭露計劃：待大本營與不良人打到兩敗俱傷，他們三人便會插針筒變身，從天而降收拾殘局。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_96d9b5cc82"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -13226,7 +13589,9 @@
           "note": "Dr.D打開桌上印有「D」字圖案的鐵盒，盒內放有三枝深紅色的血液藥劑。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_96d9b5cc82"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -13326,10 +13691,12 @@
           "note": "倒數結束後不良人開戰：貨車撞擊防禦鐵板二十多分鐘後，八樓內奸偽裝平民殺害看門職員並打開大鐵門，三輛貨車載著約四、五十名配"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1a52c1b18d",
+        "chr_52f8f08a19"
+      ],
       "pays_off": [
-        "chr_5116005543",
-        "chr_7093fe7cdc"
+        "chr_0eb7b2b06e"
       ],
       "location_id": "loc_0209",
       "location_name": "大本營廣場",
@@ -13363,9 +13730,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_6bba64484c"
-      ],
+      "pays_off": [],
       "location_id": "loc_0113",
       "location_name": "八樓",
       "characters": [],
@@ -13563,7 +13928,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d409877457",
+        "chr_feef8afdd4"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -13667,10 +14035,11 @@
           "note": "Dr.D自我注射病者血液後仰後消失於欄杆外，隨即異變成約三層樓高、身形肥壯、全身腐爛的巨型病者，一拳已能把三樓打毀一大半"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_6bba64484c"
+      "foreshadows": [
+        "chr_36d88ba6af",
+        "chr_5eb0b1de84"
       ],
+      "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -13941,7 +14310,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6efcb3d275"
+      ],
       "location_id": "loc_0214",
       "location_name": "D樓三樓",
       "characters": [
@@ -14006,7 +14377,9 @@
           "note": "主角表示有對付前面廣場大病者嘅方法，但堅持要先見不破尚，由不良人代為向飛虎部隊提出。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_9bc5b9e047"
+      ],
       "pays_off": [],
       "location_id": "loc_0217",
       "location_name": "前面廣場",
@@ -14245,8 +14618,12 @@
           "note": "地面多咗一輛全黑特種部隊防彈車，數十名精良裝備嘅飛虎部隊成員持高火力槍械圍攻Dr.D，待佢肥重大手攻擊時先開火。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_13e17656b3"
+      ],
+      "pays_off": [
+        "chr_6efcb3d275"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -14314,9 +14691,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_69dce37f7c"
-      ],
+      "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -14495,7 +14870,9 @@
           "note": "董倫分析接收大本營利弊並提議挾持一部份細路做人質、要求定時供奉物資，主角則提議今日暫時撤退，日後以不交供奉為由再次進攻。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a261496c6c"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -14531,7 +14908,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_a6b09d4fa7"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -14566,9 +14945,7 @@
           "note": "趁Dr.D張嘴吸入空氣準備音波咆哮之際，敘事者將手榴彈擲入其口內，體內爆炸令其臃腫身體塌下，看似將其消滅。"
         }
       ],
-      "foreshadows": [
-        "chr_a00b5dec7c"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -14637,7 +15014,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_36d88ba6af"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -14669,8 +15048,12 @@
           "note": "不良人早前入侵了大本營，公仔和娃娃的父母因差點破壞該入侵計劃而被問罪。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_beec849547"
+      ],
+      "pays_off": [
+        "chr_9cb2d706ec"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -14702,7 +15085,10 @@
           "note": "主角向不破尚請求釋放斷頭台上的兩名學生，不破尚念其殺死老賢答應先放一人，另一人則需主角完成任務作交換——對付將軍澳商場二"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_3b6d5020fe",
+        "chr_cbd1f70912"
+      ],
       "pays_off": [],
       "location_id": "loc_0226",
       "location_name": "將軍澳商場",
@@ -14808,7 +15194,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1a52c1b18d"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -14841,7 +15229,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d8f69a7a78"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -14874,7 +15264,9 @@
           "note": "主角向不破尚承諾在一星期內消滅病童，以換取放走一名俘虜的機會。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a8d52ee470"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -14980,8 +15372,12 @@
           "note": "在只能放走一人之下，主角選擇放走哥哥公仔，妹妹娃娃留在原處。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_dc97feadc0"
+      ],
+      "pays_off": [
+        "chr_b402de42a7"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -15050,7 +15446,9 @@
           "note": "王白蛋擅自把從公仔身上搜出的軍刀放上射擊場作賭注，公仔來不及回答便成為挑戰者。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d4c9ecded8"
+      ],
       "pays_off": [],
       "location_id": "loc_0245",
       "location_name": "射擊樂",
@@ -15086,7 +15484,9 @@
           "note": "展示檯上嘅貴重十字弓係不良人早年劫殺艾寶琳共和國一個有錢商人所得，相傳出自歐洲古代宮廷工匠之手。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d4c9ecded8"
+      ],
       "pays_off": [],
       "location_id": "loc_0230",
       "location_name": "艾寶琳共和國",
@@ -15120,7 +15520,9 @@
           "note": "主角規定被放走的一人必須跟他一起去對付病童。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_690a71631c"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -15215,7 +15617,9 @@
           "note": "主角向不破尚的飛虎部隊成員借得兩部無線電對講機，條件是到二樓從死去隊員的屍身上回收子彈、軍刀、手榴彈及槍械，袋好放在隱蔽"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5057d7aa04"
+      ],
       "pays_off": [],
       "location_id": "loc_0360",
       "location_name": "二樓",
@@ -15251,7 +15655,9 @@
           "note": "主角從遊戲室酒吧的醉漢身上偷來一把精鋼打造的高級軍用手斧。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_506c49b5c1"
+      ],
       "pays_off": [],
       "location_id": "loc_0237",
       "location_name": "遊戲室酒吧",
@@ -15321,7 +15727,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1f6473f4c5",
+        "chr_fac6446227"
+      ],
       "location_id": "loc_0360",
       "location_name": "二樓",
       "characters": [
@@ -15391,7 +15800,7 @@
         }
       ],
       "foreshadows": [
-        "chr_4d78a5c499"
+        "chr_0000ed34ea"
       ],
       "pays_off": [],
       "location_id": "loc_0592",
@@ -15429,7 +15838,7 @@
         }
       ],
       "foreshadows": [
-        "chr_1338c0979a"
+        "chr_309356937d"
       ],
       "pays_off": [],
       "location_id": "loc_0125",
@@ -15531,7 +15940,9 @@
           "note": "為保持清醒，主角敲碎貨架上的紅酒瓶，其後又倒光一罐汽水、以空罐敲打周邊物件發出聲響，藉刺激腦內神經的噪音抵禦病童的催眠歌"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fe75fb3b9f"
+      ],
       "pays_off": [],
       "location_id": "loc_0246",
       "location_name": "不良人據點",
@@ -15567,7 +15978,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_37e2bd3a59"
+      ],
       "location_id": "loc_0246",
       "location_name": "不良人據點",
       "characters": [
@@ -15605,7 +16018,9 @@
           "note": "主角交給公仔一部無線電對講機作遠距離聯絡，並提醒今次對付的病者據講以聲音攻擊人，必須保護好耳朵。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a6c1cc34e8"
+      ],
       "pays_off": [],
       "location_id": "loc_0246",
       "location_name": "不良人據點",
@@ -15640,7 +16055,9 @@
           "note": "公仔在超市內離奇失蹤且對講機無回應，主角循哼唱聲找回他時，他已被催眠走進傢俱店踏上椅子，面前吊著一條吊頸繩。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5a8070d907"
+      ],
       "pays_off": [],
       "location_id": "loc_0249",
       "location_name": "傢俱店",
@@ -15677,7 +16094,9 @@
           "note": "公仔自述世界未變之前與娃娃一起讀書，父母十分疼愛他們，家中金錢上全力支援，每日都在幸福之中度過。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5a8070d907"
+      ],
       "pays_off": [],
       "location_id": "loc_0246",
       "location_name": "不良人據點",
@@ -15710,10 +16129,10 @@
           "note": "主角踢到汽水罐才驚醒，發現自己差點被病童歌聲催眠而失去思考，推斷其聲音具有催眠能力，並懷疑其他不良人都是因此而死。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_a521a03ef0"
+      "foreshadows": [
+        "chr_9a71716f50"
       ],
+      "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -15749,7 +16168,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_a521a03ef0"
+      ],
       "location_id": "loc_0238",
       "location_name": "將軍澳廣場",
       "characters": [
@@ -15815,7 +16236,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_05b468d6f5"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -15849,7 +16272,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1905fef37c"
+      ],
       "location_id": "loc_0254",
       "location_name": "員工室",
       "characters": [
@@ -15883,7 +16308,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_45c5e7a1a4",
+        "chr_6c363388b9"
+      ],
       "location_id": "loc_0249",
       "location_name": "傢俱店",
       "characters": [
@@ -15917,8 +16345,12 @@
           "note": "主角推斷病童哼唱時會令被催眠者的腦部自動聯想幸福的事，哭泣時則令其看見最畏懼的人（心魔），並因此相信商場內死者大多自殺而"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_b2f1406761"
+      ],
+      "pays_off": [
+        "chr_4d78a5c499"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -15986,8 +16418,7 @@
         }
       ],
       "foreshadows": [
-        "chr_85db7b9fd0",
-        "chr_b2f1406761"
+        "chr_85db7b9fd0"
       ],
       "pays_off": [],
       "location_id": "loc_0029",
@@ -16024,7 +16455,9 @@
           "note": "兩人在行李箱貨架打開多個外殼腫脹、染有血印的行李箱，發現被人放置大量臭丸掩蓋屍臭的人類殘骸。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a1bc906234"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -16060,7 +16493,9 @@
           "note": "主角先後把雨傘刺入幻化成母親、父親及欺凌者的病童，最後一擊貫穿其前額，令幻覺如解除結界般消退。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a7469a6dd7"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -16202,7 +16637,9 @@
           "note": "體力近乎耗盡的主角循哼唱聲追至商場二樓無欄杆的破損邊緣，發現病童正不斷對外哼唱，就像真的對某人唱著一首歌。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0ffa9c75c4"
+      ],
       "pays_off": [],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -16238,8 +16675,12 @@
           "note": "公仔推開被鐵鎚敲爛一半的員工室門，握住手斧往神秘人背部瘋狂砍劈，與主角前後夾攻。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_c2d176f458"
+      ],
+      "pays_off": [
+        "chr_c1979aaa81"
+      ],
       "location_id": "loc_0254",
       "location_name": "員工室",
       "characters": [
@@ -16447,10 +16888,11 @@
         }
       ],
       "foreshadows": [
-        "chr_0ffa9c75c4",
-        "chr_670155b0a2"
+        "chr_2725c17d50"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_36942f2204"
+      ],
       "location_id": "loc_0029",
       "location_name": "商場",
       "characters": [
@@ -16525,7 +16967,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_30720810da"
+        "chr_9a71716f50"
       ],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -16596,7 +17038,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_535a15be8a"
+      ],
       "location_id": "loc_0053",
       "location_name": "超市",
       "characters": [
@@ -16674,11 +17118,9 @@
           "note": "敘事者搭電梯離開商場時回頭望見暗角有個小男孩抱住一個貌似病童嘅小女孩背住佢哋離開，其後小男孩喺漆黑中消失。"
         }
       ],
-      "foreshadows": [
-        "chr_8311a20e3d"
-      ],
+      "foreshadows": [],
       "pays_off": [
-        "chr_a1bc906234"
+        "chr_9ec0d1d933"
       ],
       "location_id": "loc_0029",
       "location_name": "商場",
@@ -16714,7 +17156,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_506c49b5c1"
+      ],
       "location_id": "loc_0053",
       "location_name": "超市",
       "characters": [
@@ -16922,7 +17366,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fec1e7f3f0"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -16957,7 +17403,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b402de42a7"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -16994,7 +17442,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b562bd6606"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -17030,9 +17480,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_0ffa9c75c4"
-      ],
+      "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -17067,7 +17515,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c094b3aa8c"
+      ],
       "location_id": "loc_0246",
       "location_name": "不良人據點",
       "characters": [
@@ -17101,7 +17551,10 @@
           "note": "王白蛋、白魂與主角三人組成搜索隊外出，先繞過馬路上的車輛，再到停車場最下層樓梯出入口放置捕獸器陷阱。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_3fef9b3c67",
+        "chr_924e198ef8"
+      ],
       "pays_off": [],
       "location_id": "loc_0268",
       "location_name": "停車場",
@@ -17138,7 +17591,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9cb2d706ec"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -17243,7 +17698,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_3b6d5020fe"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -17277,7 +17734,9 @@
           "note": "三人在天台用望遠鏡發現一名拖著蒼白屍體的黑衣瘦漢，跟蹤追逐後對方棄屍逃脫，主角推斷他是病者。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_4fa9652a8b"
+      ],
       "pays_off": [],
       "location_id": "loc_0051",
       "location_name": "天台",
@@ -17414,7 +17873,9 @@
       "foreshadows": [
         "chr_7edc293343"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_88c66b82b8"
+      ],
       "location_id": "loc_0270",
       "location_name": "宣基中學",
       "characters": [
@@ -17447,8 +17908,12 @@
           "note": "核心幹部對回報不屑一顧、只當聽過就算，凱銘亦表明基於利益不會派人營救，王白蛋的命被視為不值錢。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_986df2bbf7"
+      ],
+      "pays_off": [
+        "chr_924e198ef8"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -17483,7 +17948,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7265a13ada"
+      ],
       "location_id": "loc_0275",
       "location_name": "平台",
       "characters": [
@@ -17519,9 +17986,11 @@
         }
       ],
       "foreshadows": [
-        "chr_8fd01fd430"
+        "chr_511a9380f1"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7265a13ada"
+      ],
       "location_id": "loc_0275",
       "location_name": "平台",
       "characters": [
@@ -17553,7 +18022,9 @@
           "note": "班尼帶敘述者到其地下室房間，展示油浸舌頭、清水浸泡的眼球及玻璃片封存的焦黃耳垢等病者身體部位收藏。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2725c17d50"
+      ],
       "pays_off": [],
       "location_id": "loc_0275",
       "location_name": "平台",
@@ -17588,7 +18059,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_511a9380f1"
+      ],
       "location_id": "loc_0246",
       "location_name": "不良人據點",
       "characters": [
@@ -17693,7 +18166,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_a1bc906234",
+        "chr_b442db9cdb"
+      ],
       "location_id": "loc_0291",
       "location_name": "下水道",
       "characters": [
@@ -17829,7 +18305,9 @@
           "note": "班尼喺外面遊蕩時發現一隻從未有人提及、拖住屍體嘅病者，因捕捉唔到就一直跟蹤佢返到下水道地盤。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d433322722"
+      ],
       "pays_off": [],
       "location_id": "loc_0291",
       "location_name": "下水道",
@@ -17934,8 +18412,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_9688af27b7",
-        "chr_a1bc906234"
+        "chr_9688af27b7"
       ],
       "location_id": "loc_0291",
       "location_name": "下水道",
@@ -18076,8 +18553,12 @@
           "note": "敘述者同班尼喺下水道中央聚水處目睹數之不盡、被人堆疊得如高山般嘅人類屍體，班尼指呢度係最大嘅人類屍體收集站。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_c6209a65f0"
+      ],
+      "pays_off": [
+        "chr_57ac752453"
+      ],
       "location_id": "loc_0285",
       "location_name": "下水道中央聚水處",
       "characters": [
@@ -18111,7 +18592,9 @@
           "note": "不破尚得知另有倖存者團隊後，下令翌日開始點算物資武器，大後日開始清除將軍澳區所有小型倖存團體。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5080b4782a"
+      ],
       "pays_off": [],
       "location_id": "loc_0044",
       "location_name": "將軍澳區",
@@ -18147,7 +18630,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d433322722"
+      ],
       "location_id": "loc_0291",
       "location_name": "下水道",
       "characters": [
@@ -18213,7 +18698,9 @@
           "note": "班尼表明因主角是病獵而必須殺死他，持木弓射箭、拔狩獵小刀攻擊，主角以裝有刺針的雨傘防禦反擊，最後把班尼的頭按入水中，二人"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1eb45b5f12"
+      ],
       "pays_off": [],
       "location_id": "loc_0291",
       "location_name": "下水道",
@@ -18248,8 +18735,12 @@
           "note": "班尼與主角雙雙跌落污水後各自爬上渠口，班尼收起鐵鍊阻止主角跟隨，拋下狠話後轉身逃離。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_1eff7da9ac"
+      ],
+      "pays_off": [
+        "chr_82911aa93a"
+      ],
       "location_id": "loc_0291",
       "location_name": "下水道",
       "characters": [
@@ -18281,7 +18772,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1eb45b5f12"
+      ],
       "location_id": "loc_0291",
       "location_name": "下水道",
       "characters": [
@@ -18315,10 +18808,10 @@
           "note": "白魂調查發現擄走王白蛋的是一個人類組織，名叫「病者平權組織」（又稱「病者平權協會」），該組織綁架了不少附近的倖存者，並計"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_924e198ef8"
+      "foreshadows": [
+        "chr_43dd29274f"
       ],
+      "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -18425,7 +18918,9 @@
           "note": "主角向公仔和娃娃交代幾日後會將佢哋送走離開不良人，著佢哋自己去搵滿天同大BOSS，臨別贈言「一切都在於自我認同」及「不仁"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8e1edbbf07"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -18462,8 +18957,12 @@
           "note": "主角喺限時三分鐘嘅射靶遊戲中，喺子彈耗盡之際擲出手槍擊中最後一個靶，贏出遊戲並獲得十字弓大獎。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_6e29bb526a"
+      ],
+      "pays_off": [
+        "chr_5a07fd1e41"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -18537,7 +19036,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_35c32aa4d7"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -18571,7 +19072,9 @@
           "note": "不破尚率領的不良人已攻破最後一個大型倖存團體的大本營，幾乎掌控全區，但因消耗大量子彈和菁英而不敢再浪費。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_7a3844080e"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -18639,7 +19142,9 @@
           "note": "董倫喺聯誼會上喺主角耳邊低語，暗示自己從來冇逃出過主角嘅動靜並稱呼佢做M，令主角震驚佢竟然知道真正身份。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_22106e20fb"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -18675,7 +19180,9 @@
           "note": "主角認為要解決四肢發達頭腦簡單的不良人很容易，最大問題是不破尚配備槍械的私人部隊，須想辦法消耗飛虎部隊的子彈。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_627d36166e"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -18742,7 +19249,9 @@
           "note": "遊戲室嘅射靶遊戲由銘凱設計，佢一早設定就算射中哂所有靶，最後都一定會差一粒彈先贏到。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_606d92175f"
+      ],
       "pays_off": [],
       "location_id": "loc_0229",
       "location_name": "遊戲室",
@@ -18774,8 +19283,12 @@
           "note": "主角拾起喪伯脫手的十字弓和鐵箭，射中俯衝而來的病翼胸膛，再取回傘子痛打並以傘針刺入其頸部，重傷的病翼其後被約十隻同伴捉住"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_efbde77f04"
+      ],
+      "pays_off": [
+        "chr_606d92175f"
+      ],
       "location_id": "loc_0296",
       "location_name": "寶康路",
       "characters": [
@@ -18981,7 +19494,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6e29bb526a"
+      ],
       "location_id": "loc_0296",
       "location_name": "寶康路",
       "characters": [
@@ -19049,7 +19564,9 @@
           "note": "一隻生前似跑手的大鼻撲向喪伯瘋狂噴嚏釋出毒氣；喪伯以巨劍刺入其鼻孔後逃出氣體範圍，但已中毒跪地咳血。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0a4fe2eaef"
+      ],
       "pays_off": [],
       "location_id": "loc_0296",
       "location_name": "寶康路",
@@ -19208,8 +19725,12 @@
           "note": "娃娃與敘事者以小碰拳道別，約定再次相遇，之後敘事者獨自維修雨傘。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_ffeb5fe0bb"
+      ],
+      "pays_off": [
+        "chr_652262acc3"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -19404,7 +19925,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8fd01fd430"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -19436,7 +19959,9 @@
           "note": "病腦假裝逃走引主角一行追到十字路口，上方一個鐵籠從天而降將四人困住，之後推住籠子去大魚檔，途中重學人類哼《望春風》。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2eaa2613ab"
+      ],
       "pays_off": [],
       "location_id": "loc_0311",
       "location_name": "大魚檔",
@@ -19472,10 +19997,10 @@
           "note": "滿天有次出征喺靈實醫院消失後冇再返過嚟，其他去過嘅人都全部冇返過嚟；主角清楚佢哋唔係俾病牙或病嘴殺咗，就係俾滿天親自操刀"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_c094b3aa8c"
+      "foreshadows": [
+        "chr_225cd4be3d"
       ],
+      "pays_off": [],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
       "characters": [
@@ -19785,7 +20310,9 @@
           "note": "主角三人快逃出魚檔時，遭白衣男人夏當以鐵撬襲擊，全部失去行動能力並被繩子綁住。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_cfd9c33976"
+      ],
       "pays_off": [],
       "location_id": "loc_0316",
       "location_name": "魚檔",
@@ -19889,9 +20416,7 @@
           "note": "病腦「大廚」在街市的大鍋中先後烹煮多名兒童，鍋中遺下多副白骨。"
         }
       ],
-      "foreshadows": [
-        "chr_bbfcf5c4e4"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0305",
       "location_name": "街市",
@@ -19925,9 +20450,7 @@
           "note": "主角拆解病腦的鐵鍊豬肉刀後，瘋狂斬擊其腦部並把刀刺入天靈蓋；病腦最後掙扎反撲時，被娃娃用手槍連環射擊腦部擊斃倒下。"
         }
       ],
-      "foreshadows": [
-        "chr_8c84ee3d9c"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0316",
       "location_name": "魚檔",
@@ -19963,7 +20486,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_dcacf52efb"
+      ],
       "location_id": "loc_0316",
       "location_name": "魚檔",
       "characters": [
@@ -19995,8 +20520,12 @@
           "note": "主角定下計劃，由阿漢吼叫、公仔射箭激怒病腦，待它打開鐵籠的瞬間一同衝出去逃脫。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_d8260ca00c"
+      ],
+      "pays_off": [
+        "chr_e0c875de6f"
+      ],
       "location_id": "loc_0575",
       "location_name": "鐵籠",
       "characters": [
@@ -20032,7 +20561,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_2eaa2613ab"
+      ],
       "location_id": "loc_0316",
       "location_name": "魚檔",
       "characters": [
@@ -20068,10 +20599,10 @@
           "note": "娃娃追問主角姓名，主角沉默一陣後答「M」。"
         }
       ],
-      "foreshadows": [
-        "chr_dde32c3b29"
+      "foreshadows": [],
+      "pays_off": [
+        "chr_766cb1990d"
       ],
-      "pays_off": [],
       "location_id": "loc_0305",
       "location_name": "街市",
       "characters": [
@@ -20105,9 +20636,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_6056d5c66d"
-      ],
+      "pays_off": [],
       "location_id": "loc_0305",
       "location_name": "街市",
       "characters": [
@@ -20140,8 +20669,12 @@
           "note": "主角認為公仔和娃娃有能力自保，讓二人獨自前往滿天所在嘅地方。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_8598e46a6f"
+      ],
+      "pays_off": [
+        "chr_1338c0979a"
+      ],
       "location_id": "loc_0305",
       "location_name": "街市",
       "characters": [
@@ -20211,7 +20744,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8e1edbbf07"
+      ],
       "location_id": "loc_0305",
       "location_name": "街市",
       "characters": [
@@ -20347,7 +20882,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_225cd4be3d"
+      ],
       "location_id": "loc_0153",
       "location_name": "一樓",
       "characters": [
@@ -20381,10 +20918,10 @@
           "note": "夏當供出病者平權組織奉上頭之命尋找可讓「大廚」安心做病窩的地方，因寶琳區內有病獵公會不斷狙擊他們而離開該區。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_2378ccbed5"
+      "foreshadows": [
+        "chr_d5893eea45"
       ],
+      "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -20416,7 +20953,9 @@
           "note": "銘凱以逐條提問配合徒手拗斷手指的方式拷問夏當，最終斷其七隻手指；夏當供出所屬組織、奉命尋找讓大廚安心做病窩的地方、寶琳區"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e1382f05d9"
+      ],
       "pays_off": [],
       "location_id": "loc_0399",
       "location_name": "病獵公會",
@@ -20452,7 +20991,9 @@
           "note": "鳥嘴老師通過不破尚的觀察後，在一樓紋身室於右臂紋上正式不良人標記（等同幹部身份），並獲告知須隱藏標記以免成為所有倖存區的"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ae1464657d"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -20487,7 +21028,9 @@
           "note": "鳥嘴老師的出征隊伍遭遇病腦，全軍覆沒，僅鳥嘴老師一人生還，另捉了一名病者平權組織成員返回據點。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_3f05202ead"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -20522,7 +21065,9 @@
           "note": "銘凱透露不良人從各倖存區搶奪的物資差不多有一年半份量，即使一般不良人每日暴飲暴食也充足。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_872e00c80f"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -20555,7 +21100,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_66c991377d"
+      ],
       "location_id": "loc_0357",
       "location_name": "武器庫",
       "characters": [
@@ -20586,8 +21133,12 @@
           "note": "不破尚委派鳥嘴老師搜出來到將軍澳的病者平權組織，銘凱協助，並計劃先從附近所有教堂入手調查。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_a5ab192fea"
+      ],
+      "pays_off": [
+        "chr_b4f6557657"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -20715,7 +21266,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c8d702c129"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -20746,7 +21299,9 @@
           "note": "銘凱帶敘事者紋上正式「不良人」圖案，並著他凌晨兩時半到六樓等候。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_883803f35c"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -20843,7 +21398,10 @@
           "note": "竊屍賊狼狽爬上西餐廳屍山最高處時不小心弄跌一個人類頭顱，驚醒了藏在屍山中冬眠的病爪，塔般高的屍山隨即瓦解。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0a4fe2eaef",
+        "chr_2967bcefbc"
+      ],
       "pays_off": [],
       "location_id": "loc_0325",
       "location_name": "西餐廳",
@@ -20877,7 +21435,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_567d406dba"
+      ],
       "location_id": "loc_0324",
       "location_name": "酒店",
       "characters": [
@@ -20909,7 +21469,7 @@
         }
       ],
       "foreshadows": [
-        "chr_0a4fe2eaef"
+        "chr_0971dade31"
       ],
       "pays_off": [],
       "location_id": "loc_0324",
@@ -21042,7 +21602,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_555d933a93"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -21145,7 +21707,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1b425879f7"
+      ],
       "location_id": "loc_0324",
       "location_name": "酒店",
       "characters": [
@@ -21178,7 +21742,9 @@
           "note": "銘凱把其中一包麻醉粉末送給敘述者，二人分別把粉末塗到萬用刀刃與雨傘前端的針刺上。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ec589660d1"
+      ],
       "pays_off": [],
       "location_id": "loc_0329",
       "location_name": "樓梯間",
@@ -21212,7 +21778,9 @@
           "note": "兩名大本營倖存者在教堂與主角及銘凱相遇，健仁持刀索求物資不果；二人轉身打算離開時，銘凱從暗角擲出萬用刀偷襲，插中健仁背肩"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_065ce11146"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -21248,7 +21816,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_72e9652c32"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -21282,7 +21852,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6164958c45"
+      ],
       "location_id": "loc_0229",
       "location_name": "遊戲室",
       "characters": [
@@ -21313,7 +21885,9 @@
           "note": "主角基於內心問題，同認識唔夠一日嘅阿洛學上拳擊，一直練到朝早七時。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_941b926531"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -21346,7 +21920,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c9813b004b"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -21408,7 +21984,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f79bcdcb2f"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [],
@@ -21469,7 +22047,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f95383ad7d"
+      ],
       "location_id": "loc_0333",
       "location_name": "糧食庫",
       "characters": [
@@ -21533,9 +22113,11 @@
         }
       ],
       "foreshadows": [
-        "chr_fd92db59d0"
+        "chr_364dfd780d"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bec5ee7762"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -21569,7 +22151,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_ae1464657d"
+      ],
       "location_id": "loc_0044",
       "location_name": "將軍澳區",
       "characters": [
@@ -21666,9 +22250,12 @@
         }
       ],
       "foreshadows": [
+        "chr_6943d9c0de",
         "chr_84b18c03e0"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_93bd41f54d"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -21701,7 +22288,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bbfcf5c4e4"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -21735,7 +22324,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6943d9c0de"
+      ],
       "location_id": "loc_0335",
       "location_name": "酒館",
       "characters": [
@@ -21766,7 +22357,9 @@
           "note": "銘凱在「真實之房」以挖眼、強行拔甲、針插指尖、灌沸水、傷口灑鹽及炮烙等酷刑折磨夏當。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_bec5ee7762"
+      ],
       "pays_off": [],
       "location_id": "loc_0450",
       "location_name": "真實之房",
@@ -21833,7 +22426,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_29731156d5"
+      ],
       "location_id": "loc_0093",
       "location_name": "寶琳",
       "characters": [
@@ -21865,7 +22460,9 @@
           "note": "聖誕期間，半空亮起閃爍藍光、空間扭曲、地面微震，一名全身繃帶的男人從天而降到小女孩面前，並以聖誕老人身份作掩飾。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_eb3be86b72"
+      ],
       "pays_off": [],
       "location_id": "loc_0269",
       "location_name": "寶琳倖存區",
@@ -21898,8 +22495,13 @@
           "note": "聖誕老人步出安全區兩小時後，倖存區圍牆外出現至少三十隻病者屍體堆成的屍山，守衛震驚直呼神蹟，事後他獲得百多元艾幣。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_1c85568b53",
+        "chr_862b47672e"
+      ],
+      "pays_off": [
+        "chr_664671df04"
+      ],
       "location_id": "loc_0065",
       "location_name": "安全區",
       "characters": [
@@ -21932,7 +22534,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_eb3be86b72"
+      ],
       "location_id": "loc_0175",
       "location_name": "魔鬼山",
       "characters": [
@@ -21964,7 +22568,9 @@
           "note": "聖誕老人道別前把一把漆黑、比一般傘重幾倍的「夜行傘」送給小女孩作聖誕禮物，著她有危險時用它對付敵人。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_873ac4b29f"
+      ],
       "pays_off": [],
       "location_id": "loc_0093",
       "location_name": "寶琳",
@@ -21999,7 +22605,8 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_567d406dba"
+        "chr_1b425879f7",
+        "chr_c02b9f0c23"
       ],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -22064,7 +22671,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_eb3be86b72"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -22130,7 +22739,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0363aa8c80"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -22163,7 +22774,9 @@
           "note": "鳥嘴在聖安得肋堂通過三條病者知識題，最後一條組織「祈禱」病語靠回想夏當在囚牢喃喃之句，答出「嗄‧‧‧吧吧嘎！嗨！」。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c408ee05ce"
+      ],
       "pays_off": [
         "chr_bec5ee7762"
       ],
@@ -22200,7 +22813,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_84b18c03e0"
+      ],
       "location_id": "loc_0224",
       "location_name": "倖存區",
       "characters": [],
@@ -22230,7 +22845,10 @@
           "note": "平子小姐帶鳥嘴參觀祭品室，逐一打開裝住被粗繩綁住、嘴巴被貼膠紙嘅活人嘅棺木，並透露未來一個月會用寶琳公主作最珍貴祭品供奉"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_74c46344ae",
+        "chr_e3e039b26b"
+      ],
       "pays_off": [],
       "location_id": "loc_0340",
       "location_name": "祭品室",
@@ -22472,7 +23090,9 @@
           "note": "主角在用餐時計劃以不良人身分把寶琳公主擄走到不良人據點，使病者平權組織失去要脅寶琳倖存區的生命線。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_10e8d1b125"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -22541,7 +23161,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fd1301c997"
+      ],
       "location_id": "loc_0343",
       "location_name": "祭品存放室",
       "characters": [
@@ -22579,7 +23201,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fd1301c997"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -22678,7 +23302,9 @@
           "note": "因艾匡對病者平權組織極為重要，引發大規模戰爭，銘凱下令全體不良人做好戰鬥準備。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fd92db59d0"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -22772,7 +23398,9 @@
           "note": "太陽完全下山之時，哨兵塔發現約六十幾人同一架大貨車由將軍澳運動場方向接近，敲響三級防禦警告。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fd92db59d0"
+      ],
       "pays_off": [],
       "location_id": "loc_0295",
       "location_name": "將軍澳運動場",
@@ -22803,7 +23431,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_3d10ab7bf3"
+      ],
       "location_id": "loc_0093",
       "location_name": "寶琳",
       "characters": [
@@ -22967,7 +23597,9 @@
           "note": "白魂承認之前放口訊時已將據點地址告知對方，方便對方前來。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fd92db59d0"
+      ],
       "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
@@ -23031,7 +23663,9 @@
           "note": "犬京透露Bomi已死，且M曾帶Bomi的頭返回大本營；此事成為犬京離開大本營、改投病者平權組織的轉捩點。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_dde32c3b29"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -23141,7 +23775,9 @@
           "note": "教主喺被帶走後走甩，銘凱校內校外都搵唔到佢，不破尚簡單交代一句「追」。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a9688f43d8"
+      ],
       "pays_off": [],
       "location_id": "loc_0350",
       "location_name": "渠道",
@@ -23248,9 +23884,11 @@
           "note": "M與昔日同伴犬京在城市公園展開近乎捨命的肉搏，M的面具被打飛，最終兩敗俱傷，犬京自行離去。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2e6a1f9cc9"
+      ],
       "pays_off": [
-        "chr_22106e20fb"
+        "chr_9a5f626e78"
       ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -23320,7 +23958,9 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_6943d9c0de"
+        "chr_00a6245b72",
+        "chr_59b4bc1c07",
+        "chr_6fcb3721da"
       ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -23351,7 +23991,9 @@
           "note": "病者平權組織以貨車貨櫃運來大批病者，包括新型病者「舞者」，令人類方面的戰局急轉直下。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2b37e9c03a"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -23417,7 +24059,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f0a297dbf1"
+      ],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -23479,7 +24123,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c05857c207"
+      ],
       "location_id": "loc_0246",
       "location_name": "不良人據點",
       "characters": [
@@ -23511,8 +24157,7 @@
         }
       ],
       "foreshadows": [
-        "chr_d6d6c95acf",
-        "chr_fcb5ddcf20"
+        "chr_81e109257a"
       ],
       "pays_off": [],
       "location_id": "loc_0592",
@@ -23544,9 +24189,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_b2e3f66dec"
-      ],
+      "pays_off": [],
       "location_id": "loc_0592",
       "location_name": "不良人",
       "characters": [
@@ -23675,10 +24318,12 @@
           "note": "鳥嘴由蠹魚怕火把高溫一事，聯想到Dr.D嘅冰膜遇火會溶、硬化如鋼嘅身體遇火會變軟，從而推斷火係佢嘅弱點。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_b2e3f66dec"
+      "foreshadows": [
+        "chr_2991cb1498",
+        "chr_366940aefa",
+        "chr_e11187dc6c"
       ],
+      "pays_off": [],
       "location_id": "loc_0357",
       "location_name": "武器庫",
       "characters": [
@@ -23709,7 +24354,9 @@
           "note": "武器庫門鎖嘅多重鐵鏈被人砍斷，原來係唔會上前線戰鬥嘅董倫同佢班知識份子闖入咗武器庫周圍搜索武器。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a8d33f9e46"
+      ],
       "pays_off": [],
       "location_id": "loc_0357",
       "location_name": "武器庫",
@@ -23747,7 +24394,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fcb5ddcf20"
+      ],
       "location_id": "loc_0357",
       "location_name": "武器庫",
       "characters": [
@@ -23814,7 +24463,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b2e3f66dec"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -23907,7 +24558,9 @@
           "note": "被數十隻蠹魚人圍困、體力見底之際，不破尚取出一顆手榴彈，打算突破重圍與病者主腦同歸於盡，二人相約「地獄見」，後因大本營增"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_33758c8902"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -23940,7 +24593,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_fcb5ddcf20"
+      ],
       "location_id": "loc_0360",
       "location_name": "二樓",
       "characters": [
@@ -24006,7 +24661,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f5def831d6"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -24069,7 +24726,9 @@
           "note": "奄奄一息的Dr.D從火海中跑出，以虛拐的步伐奔往該貨車的貨櫃之中。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_4d3f9de246"
+      ],
       "pays_off": [],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
@@ -24132,7 +24791,10 @@
           "note": "不破尚於垂死前把左輪手槍和手榴彈分別交給敘事者與少佐，留下「阻止佢」一句後合上眼皮死去。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_33758c8902",
+        "chr_90d0d01e82"
+      ],
       "pays_off": [],
       "location_id": "loc_0360",
       "location_name": "二樓",
@@ -24165,7 +24827,9 @@
           "note": "不破尚抓住Dr.D的後腦，將其壓按到石磚地面並拖行到已灑滿天拿水的有蓋操場中，此時Dr.D大腦受損無力反抗。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2991cb1498"
+      ],
       "pays_off": [],
       "location_id": "loc_0359",
       "location_name": "有蓋操場",
@@ -24292,7 +24956,9 @@
           "note": "Dr.D釋出蠹魚吸吮暈倒的大本營市民血液後爬回其身，令所有疲勞與傷痕消失，展現出新陳代謝式的復原能力。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_4d3f9de246"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -24453,7 +25119,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d66efdfd31",
+        "chr_fcb5ddcf20"
+      ],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
       "characters": [],
@@ -24483,7 +25152,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_37eb098c57",
+        "chr_496bc78f45"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -24515,7 +25187,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_dde32c3b29"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -24548,7 +25222,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_ac191804fb"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [],
@@ -24622,7 +25298,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_234575509c",
+        "chr_ac191804fb"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -24654,7 +25333,9 @@
           "note": "敘事者、白魂同艾匡公主計劃經過死亡之路、巴士廠、圖書館、泳池、張沛松中學前往寶琳倖存區。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_82a5d42e69"
+      ],
       "pays_off": [],
       "location_id": "loc_0269",
       "location_name": "寶琳倖存區",
@@ -24688,7 +25369,9 @@
           "note": "喺寶康公園入面遇到兩男一女，自稱國王派出嘅搜索隊但實際只係投機份子，被敘事者用左輪手槍制服跪地。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d0fa8024d3"
+      ],
       "pays_off": [],
       "location_id": "loc_0380",
       "location_name": "寶康公園",
@@ -24888,7 +25571,9 @@
           "note": "正當某人快要趕到之際，一隻舞者從暗角出現，以蜻蜓點水般的腳法急速逼近白魂。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_36f810c346"
+      ],
       "pays_off": [],
       "location_id": "loc_0380",
       "location_name": "寶康公園",
@@ -24956,9 +25641,7 @@
           "note": "一隻男病童在公園出口前凝視眾人，被白魂斬成兩半後發出猶如飛機引擎的刺耳噪音，主角擲石命中其臉製造空檔，白魂舉刀逼退它，眾"
         }
       ],
-      "foreshadows": [
-        "chr_f19f9e84f1"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0020",
       "location_name": "小公園",
@@ -24992,7 +25675,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_47decd1e24"
+      ],
       "location_id": "loc_0093",
       "location_name": "寶琳",
       "characters": [
@@ -25024,7 +25709,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_32679db1f9"
+      ],
       "location_id": "loc_0093",
       "location_name": "寶琳",
       "characters": [
@@ -25063,7 +25750,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b5df9f69a0"
+      ],
       "location_id": "loc_0269",
       "location_name": "寶琳倖存區",
       "characters": [
@@ -25190,7 +25879,9 @@
           "note": "主角在「寶琳柒拾」與老闆傾談期間，得知苬怡花園旁居屋約10艾幣一晚可租、賭場可快速賺錢但十賭九輸，最後主角開口向老闆借一"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e13a29cf27"
+      ],
       "pays_off": [],
       "location_id": "loc_0398",
       "location_name": "「寶琳柒拾」",
@@ -25321,7 +26012,9 @@
           "note": "主角深夜前往皇政府總部，從貼板公告讀到違禁品清單，包括槍械爆炸品、病者身體肢件、仿造艾幣、《病學》、《病語》、《背叛者》"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f8bd66979e"
+      ],
       "pays_off": [],
       "location_id": "loc_0374",
       "location_name": "皇政府總部",
@@ -25353,7 +26046,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_74472a5d88"
+      ],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
       "characters": [],
@@ -25383,7 +26078,10 @@
           "note": "老闆告知國王一星期後會出皇宮視察民情，主角決定屆時趁機把艾匡交還給國王。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_9ee22f2912",
+        "chr_d766db92b7"
+      ],
       "pays_off": [],
       "location_id": "loc_0372",
       "location_name": "皇宮",
@@ -25416,7 +26114,10 @@
           "note": "老闆介紹專在夜晚買賣違禁品的黑鼠商團，指其利潤豐厚但被捕風險極大，主角表示想藉此大賺一筆。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_54099d07f4",
+        "chr_6d2f9bdb69"
+      ],
       "pays_off": [],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
@@ -25653,7 +26354,9 @@
           "note": "主角夾一大口烤魚肉畀飢餓嘅攝影師雨川，作為購買其病者照片嘅報酬。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c87292e5d9"
+      ],
       "pays_off": [],
       "location_id": "loc_0365",
       "location_name": "哈姆雷特",
@@ -25730,7 +26433,9 @@
           "note": "瓦安告知主角梁潔華小學附近仍有病者平權組織餘黨，並表示願意資助狂熱份子去做撼動政權的事。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c87292e5d9"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -25870,7 +26575,9 @@
           "note": "主角打算將雨川拍攝嘅病者照片高價販賣畀對病者有興趣嘅人。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c87292e5d9"
+      ],
       "pays_off": [],
       "location_id": "loc_0365",
       "location_name": "哈姆雷特",
@@ -25904,7 +26611,11 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_4931eb2aee",
+        "chr_5e2ba8f9d2",
+        "chr_696860e860"
+      ],
       "location_id": "loc_0208",
       "location_name": "六樓",
       "characters": [],
@@ -25935,7 +26646,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0e5b07abd9"
+      ],
       "location_id": "loc_0508",
       "location_name": "詭區406號室",
       "characters": [
@@ -25968,7 +26681,9 @@
           "note": "王達尼讓主角下星期才決定是否加入「黑鼠商團」助他們一臂之力，而主角個人沒有特別想法。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_09b48fc905"
+      ],
       "pays_off": [],
       "location_id": "loc_0386",
       "location_name": "詭區",
@@ -26009,7 +26724,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8b040db623"
+      ],
       "location_id": "loc_0224",
       "location_name": "倖存區",
       "characters": [
@@ -26178,8 +26895,12 @@
           "note": "白魂背起艾匡以肉身撞開守衛，走到大馬路高喊帶了公主來，國王確認艾匡身份後上前把她抱住，公主正式被接回皇宮。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_e32d9fff09"
+      ],
+      "pays_off": [
+        "chr_8b040db623"
+      ],
       "location_id": "loc_0386",
       "location_name": "詭區",
       "characters": [
@@ -26215,7 +26936,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0e5b07abd9"
+      ],
       "location_id": "loc_0508",
       "location_name": "詭區406號室",
       "characters": [],
@@ -26251,7 +26974,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d766db92b7"
+      ],
       "location_id": "loc_0372",
       "location_name": "皇宮",
       "characters": [
@@ -26291,9 +27016,7 @@
           "note": "一年多前，白鯨帶領差不多全隊病獵公會成員外出調查後失蹤，其後眾人在寶康公園發現幾乎全隊的殘骸，公會自此沒落。"
         }
       ],
-      "foreshadows": [
-        "chr_2a63e5133e"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0380",
       "location_name": "寶康公園",
@@ -26331,7 +27054,9 @@
           "note": "主角與王達尼以十塊艾幣賄賂出入口守衛，趁指揮不在的深夜違規離開寶琳倖存區，徒步前往山邊聖堂。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_09b48fc905"
+      ],
       "pays_off": [],
       "location_id": "loc_0269",
       "location_name": "寶琳倖存區",
@@ -26366,7 +27091,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1b406571d7",
+        "chr_2f26d071f8"
+      ],
       "location_id": "loc_0400",
       "location_name": "聖堂",
       "characters": [
@@ -26466,7 +27194,7 @@
         }
       ],
       "foreshadows": [
-        "chr_3d9b0eaf0d"
+        "chr_0cc3c27e4d"
       ],
       "pays_off": [],
       "location_id": "loc_0269",
@@ -26498,8 +27226,12 @@
           "note": "因病翼襲擊而失去兒女的家屬跪在皇政府總部前哭訴，而被病翼捉走的孩子無一能夠回來。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_a0130f2e8a"
+      ],
+      "pays_off": [
+        "chr_079b469bf6"
+      ],
       "location_id": "loc_0374",
       "location_name": "皇政府總部",
       "characters": [],
@@ -26607,7 +27339,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_39e00df28c"
+      ],
       "location_id": "loc_0365",
       "location_name": "哈姆雷特",
       "characters": [
@@ -26642,7 +27376,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0cc3c27e4d"
+      ],
       "location_id": "loc_0365",
       "location_name": "哈姆雷特",
       "characters": [
@@ -26773,7 +27509,9 @@
           "note": "瓦安提出若主角替他做跑腿送一封開封口黏好的信往翠林邨，完成後就私人贈送一本違禁的《哈姆雷特》；王達尼一口答應。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fabd22f2a9"
+      ],
       "pays_off": [],
       "location_id": "loc_0365",
       "location_name": "哈姆雷特",
@@ -26838,7 +27576,9 @@
           "note": "二人在寶琳北路發現一部仍有電的相機，內有前兩日以偷拍角度拍下北賢與南愚的照片，最後一張拍到二人突然停下、以危險眼神盯住攝"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2c2fbce5e4"
+      ],
       "pays_off": [],
       "location_id": "loc_0390",
       "location_name": "寶琳北路",
@@ -26872,7 +27612,9 @@
           "note": "主角與王達尼在寶拉協助下打開沉重渠蓋，跳入漆黑的地下渠道，由熟悉路徑的王達尼摸黑帶路走出寶琳倖存區外。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e1bdb16513"
+      ],
       "pays_off": [],
       "location_id": "loc_0269",
       "location_name": "寶琳倖存區",
@@ -27000,7 +27742,9 @@
           "note": "主角偷聽到三把怪異聲音討論今晚要抽取更多人類血液（美酒），否則聽日會不夠用。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_645adf282b"
+      ],
       "pays_off": [],
       "location_id": "loc_0395",
       "location_name": "人類村莊",
@@ -27332,8 +28076,11 @@
           "note": "主角翻查十樓記錄薄，比對「酒精供應體」資料後推斷康林樓用人血做酒，並回憶起酒吧「血酒」帶有說不出的鐵味。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c814377be8"
+      ],
       "pays_off": [
+        "chr_12c8adbc96",
         "chr_3d0ccc34de"
       ],
       "location_id": "loc_0394",
@@ -27369,7 +28116,9 @@
           "note": "敘事者與王達尼在酒館內對決南愚和北賢：北賢以高伏特電流攻擊、南愚以血液縱火，最終二人合力將南愚踢出破窗墮地，自己也被北賢"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_3d9b0eaf0d"
+      ],
       "pays_off": [],
       "location_id": "loc_0258",
       "location_name": "酒吧",
@@ -27406,8 +28155,12 @@
           "note": "根據康林樓記錄冊，「酒精供應體」係一班年齡平均十二歲以下、唔夠十個人嘅細路，而佢哋已經俾病爪捉走咗。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_3d9b0eaf0d"
+      ],
+      "pays_off": [
+        "chr_645adf282b"
+      ],
       "location_id": "loc_0394",
       "location_name": "康林樓",
       "characters": [
@@ -27440,7 +28193,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bae26febec"
+      ],
       "location_id": "loc_0258",
       "location_name": "酒吧",
       "characters": [
@@ -27473,9 +28228,12 @@
           "note": "決鬥後北賢兌現承諾回答兩條問題，指病翼捉走的班細路被帶到白鯨處——坑口的希望塔，並稱到該處可更接近所有真相。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f3bcda7df7"
+      ],
       "pays_off": [
-        "chr_079b469bf6"
+        "chr_51178ef359",
+        "chr_c814377be8"
       ],
       "location_id": "loc_0397",
       "location_name": "希望塔",
@@ -27510,7 +28268,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_95056acfa8"
+      ],
       "location_id": "loc_0269",
       "location_name": "寶琳倖存區",
       "characters": [
@@ -27577,9 +28337,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_ef1b66e5b9"
-      ],
+      "pays_off": [],
       "location_id": "loc_0379",
       "location_name": "病獵公會聖堂",
       "characters": [
@@ -27645,7 +28403,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_211c677205"
+      ],
       "location_id": "loc_0365",
       "location_name": "哈姆雷特",
       "characters": [
@@ -27853,7 +28613,9 @@
           "note": "村長當眾向病者平權組織獻上一袋貨真價實的寶石作貢品，懇求天使帶他上天國見家人，眾人這才得知偷寶石的是村長而非漢木老伯。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f6d7c8bab1"
+      ],
       "pays_off": [
         "chr_0277aabc2a"
       ],
@@ -27890,7 +28652,9 @@
           "note": "主角沿牆外水管和藤蔓爬上被木板封住的三樓，發現漢木老伯珍藏一套全木製的火車模型。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_b385d2dc0b"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -28019,7 +28783,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bdd3fd1364"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -28051,7 +28817,9 @@
           "note": "附近教堂傳來鐘聲，與昨日病者平權組織到松木村時敲響的相同，似乎對組織有特別意義。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_66ce3489b4"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -28082,7 +28850,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bf563aa3c6"
+      ],
       "location_id": "loc_0416",
       "location_name": "寧養院",
       "characters": [
@@ -28115,7 +28885,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_66ce3489b4"
+      ],
       "location_id": "loc_0416",
       "location_name": "寧養院",
       "characters": [
@@ -28147,10 +28919,10 @@
           "note": "病獵公會資料記載病童一般由6至12歲女性變成，男性變成病童機率幾乎只有0.60%，但能力遠超一般病童，主角曾遇上一隻男病"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_3178c4ed6e"
+      "foreshadows": [
+        "chr_c3ca58c72e"
       ],
+      "pays_off": [],
       "location_id": "loc_0399",
       "location_name": "病獵公會",
       "characters": [],
@@ -28273,8 +29045,12 @@
           "note": "鐘聲響起後，寧養院內病者平權組織的白衣教徒紛紛走出來並進入教堂，令寧養院一度沒有動靜。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_e1b1e6adc9"
+      ],
+      "pays_off": [
+        "chr_243ed12503"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -28335,7 +29111,9 @@
           "note": "病者平權組織在教堂舉行「恩賜」儀式，宣佈教徒可接見天使；教堂內有女人彈琴、修女唱歌，教徒們面露滿足幸福地傻笑。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_3078079173"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -28402,7 +29180,9 @@
           "note": "戰鬥失利後主角與奎斯被五花大綁押到靈實教堂，被幾名白衣男子毆打約十五分鐘，德蘭教主吩咐不要把他們打死。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6501b9fc92"
+      ],
       "pays_off": [],
       "location_id": "loc_0417",
       "location_name": "靈實教堂",
@@ -28437,7 +29217,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_95d195b08b"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -28540,7 +29322,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c287e5a84a"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -28573,7 +29357,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_a85cdc6d21"
+      ],
       "location_id": "loc_0602",
       "location_name": "密室",
       "characters": [],
@@ -28603,7 +29389,9 @@
           "note": "奎斯疊起玩具積木攀高翻倒火炬，令地下室化為火海，二人關上密門將數十名病童活活燒死，以斷絕病者平權組織利用病童能力行騙洗腦"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fded089e73"
+      ],
       "pays_off": [
         "chr_e675443093"
       ],
@@ -28638,7 +29426,9 @@
           "note": "精神崩潰的犬京滿懷殺氣，持短刀疾速攻向空手赤拳的黑鴉與奎斯，主角滑跪後仰避開頸部橫砍。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8132aa9c46"
+      ],
       "pays_off": [],
       "location_id": "loc_0332",
       "location_name": "教堂",
@@ -28673,7 +29463,9 @@
           "note": "主角在教堂牧師檯上發現聖書《病學》，書頁中夾有一張描繪門、牧師檯及倒十字架的建築藍圖。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_51c21b5c7a"
+      ],
       "pays_off": [],
       "location_id": "loc_0332",
       "location_name": "教堂",
@@ -28707,7 +29499,9 @@
       "foreshadows": [
         "chr_5047959742"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9a58f20b6f"
+      ],
       "location_id": "loc_0416",
       "location_name": "寧養院",
       "characters": [],
@@ -28737,8 +29531,12 @@
           "note": "主角要求奎斯答應同行前往病者之都，以尋找南愚與北賢所謂的「真相」及白鯨；奎斯則以先摧毀病者平權組織為條件。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_87039dcc9c"
+      ],
+      "pays_off": [
+        "chr_3d9b0eaf0d"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -28772,8 +29570,12 @@
           "note": "主角與犬京展開真正對戰，雙方以拳腳短刀互攻，最後主角以空手入白刃擋住劈向頭顱的一刀，再使出致命的撩陰腿終結戰鬥，犬京倒地"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_1766e50722"
+      ],
+      "pays_off": [
+        "chr_f36b4d14f9"
+      ],
       "location_id": "loc_0416",
       "location_name": "寧養院",
       "characters": [
@@ -28872,7 +29674,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_68efe9af8b"
+      ],
       "location_id": "loc_0416",
       "location_name": "寧養院",
       "characters": [
@@ -29002,7 +29806,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8132aa9c46"
+      ],
       "location_id": "loc_0416",
       "location_name": "寧養院",
       "characters": [
@@ -29068,7 +29874,9 @@
           "note": "主角與奎斯逐間房搜索王達尼的蹤影，房間不是有自殺的死人便是空空如也，直至從樓梯上去最高的一層。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_454bce2015"
+      ],
       "pays_off": [],
       "location_id": "loc_0416",
       "location_name": "寧養院",
@@ -29102,7 +29910,9 @@
           "note": "犬京在走廊遇到奎斯並判斷是男病童所為，於是叫奎斯去教堂拉琴，自己去教堂後台拿喇叭前來救人。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_da31588054"
+      ],
       "pays_off": [],
       "location_id": "loc_0423",
       "location_name": "教堂後台",
@@ -29170,8 +29980,12 @@
           "note": "犬京拿喇叭讓身邊的狗對住咆哮，聲如洪鐘，令周遭幻覺景物逐漸變化消退，王達尼回復本來面貌。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_f76ec8629c"
+      ],
+      "pays_off": [
+        "chr_bd94aefe1d"
+      ],
       "location_id": "loc_0424",
       "location_name": "走廊",
       "characters": [
@@ -29204,7 +30018,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_733c13c725"
+      ],
       "location_id": "loc_0424",
       "location_name": "走廊",
       "characters": [
@@ -29269,7 +30085,9 @@
           "note": "早前發生過許多病童集體哭泣的事件，犬京因而憶起痛苦回憶，罪惡感滋生促成他醒悟。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_9b00b2a615"
+      ],
       "pays_off": [],
       "location_id": "loc_0424",
       "location_name": "走廊",
@@ -29303,7 +30121,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f19f9e84f1"
+      ],
       "location_id": "loc_0424",
       "location_name": "走廊",
       "characters": [
@@ -29369,7 +30189,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_da31588054"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -29433,7 +30255,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6fb4039246"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -29465,8 +30289,12 @@
           "note": "在男病童能力全開之下，王達尼、犬京、奎斯相繼痛苦倒地，主角耳朵流出血液，四人最終全部倒下不醒。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_a658be496d"
+      ],
+      "pays_off": [
+        "chr_2dba32a4c8"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -29533,9 +30361,11 @@
         }
       ],
       "foreshadows": [
-        "chr_1a697ca7d6"
+        "chr_12131db7d4"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_12b18f2e25"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -29566,9 +30396,7 @@
           "note": "大BOSS用精密儀器研究男病童腦部，認為要刺激腦部先掂，而腦波測量分析暫時未有儀器做到；滿天推測要挖出佢腦部嘅秘密先得出"
         }
       ],
-      "foreshadows": [
-        "chr_4b06a31789"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0332",
       "location_name": "教堂",
@@ -29601,7 +30429,9 @@
           "note": "奎斯雙手扣住男病童下顎用力一扭，發出清脆斷裂聲，男病童頸骨貌似斷裂但仍能掙扎並放出哭聲影響眾人。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_3c9433e041"
+      ],
       "pays_off": [],
       "location_id": "loc_0332",
       "location_name": "教堂",
@@ -29700,7 +30530,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f3bcda7df7"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -29764,7 +30596,9 @@
           "note": "王達尼在貢品房中驚喜尋回裝滿寶石的袋子，隨即觸發電視雪花等靈異現象，即男病童的腦電波攻擊。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_97c5cceef8"
+      ],
       "pays_off": [],
       "location_id": "loc_0332",
       "location_name": "教堂",
@@ -29832,7 +30666,9 @@
           "note": "男病童令奎斯、犬京和王達尼三人互相打鬥不停，奎斯更轉為掐住主角頸子想扭斷其頸骨。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_12b18f2e25"
+      ],
       "pays_off": [],
       "location_id": "loc_0332",
       "location_name": "教堂",
@@ -29867,8 +30703,12 @@
           "note": "牆角老舊電視自動啟動出現雪花、房門擺動，犬京判斷這是男病童以腦電波干擾他人腦部的攻擊模式。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_465d46118a"
+      ],
+      "pays_off": [
+        "chr_57529a799d"
+      ],
       "location_id": "loc_0332",
       "location_name": "教堂",
       "characters": [
@@ -29900,10 +30740,10 @@
           "note": "滿天計劃遲早去公立醫院搵腦波測量機等相關儀器，順便檢查四人身上有冇嘢可以查出佢哋認識嘅人，再問有咩事物可以刺激佢哋。"
         }
       ],
-      "foreshadows": [
-        "chr_bd306c9efe"
+      "foreshadows": [],
+      "pays_off": [
+        "chr_97c5cceef8"
       ],
-      "pays_off": [],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -29999,7 +30839,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_a658be496d"
+      ],
       "location_id": "loc_0435",
       "location_name": "艾寶琳倖存區",
       "characters": [],
@@ -30094,7 +30936,9 @@
           "note": "主角手上的南瓜貝果先後被衣衫襤褸男、青少年、肌肉惡漢奪走，最後惡漢欲以貝果向大佬傑賠罪"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_958bc5a464"
+      ],
       "pays_off": [],
       "location_id": "loc_0433",
       "location_name": "製毒工場",
@@ -30131,7 +30975,9 @@
           "note": "同黨將貝果拋給大佬傑，他接過後驚惶地經後門逃離製毒工場。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_958bc5a464"
+      ],
       "pays_off": [],
       "location_id": "loc_0433",
       "location_name": "製毒工場",
@@ -30327,7 +31173,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_26a2e66533",
+        "chr_666dbc7c6d"
+      ],
       "location_id": "loc_0093",
       "location_name": "寶琳",
       "characters": [
@@ -30675,7 +31524,9 @@
           "note": "賴桑透露瓦安與董倫密謀殺死公主艾匡，行動將於三十分鐘內發生，但艾匡有皇室御用劍客保護。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d9c67d6497"
+      ],
       "pays_off": [],
       "location_id": "loc_0372",
       "location_name": "皇宮",
@@ -30778,7 +31629,9 @@
           "note": "主角因阿禮被人包圍，改以寫上「皇宮外露天花園見」的紙飛機傳訊，成功約她單獨到花園見面。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1f0b19ce51"
+      ],
       "pays_off": [],
       "location_id": "loc_0454",
       "location_name": "皇宮外露天花園",
@@ -30813,7 +31666,9 @@
           "note": "晚宴上供應名為「血酒」的特產酒精飲品，據講是瓦安從外面其他倖存區買入，深受貴族歡迎。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6c3bc7b5c4"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -30850,7 +31705,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bfc3deeb52"
+      ],
       "location_id": "loc_0372",
       "location_name": "皇宮",
       "characters": [
@@ -30891,7 +31748,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_3886b95eae"
+      ],
       "location_id": "loc_0006",
       "location_name": "醫療室",
       "characters": [
@@ -30929,7 +31788,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8f4cc66e05"
+      ],
       "location_id": "loc_0187",
       "location_name": "會議室",
       "characters": [
@@ -31065,7 +31926,10 @@
           "note": "賴桑用袖劍對準班尼喉嚨追問幕後主使；班尼澄清組織名稱是「病者和平協會」而非平權組織，目標是剷除隔絕病者的艾氏皇室，並供出"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_7819b48945",
+        "chr_b374a9a9dc"
+      ],
       "pays_off": [],
       "location_id": "loc_0187",
       "location_name": "會議室",
@@ -31098,7 +31962,10 @@
           "note": "小老鼠因老闆黑鼠失蹤而有手尾跟，提出可以教滿天潛入瓦安的屋，條件是他先幫她處理「詭區」的事情——向人皮工房追討人皮手袋。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1e6f5f99e0",
+        "chr_8de4f0c5b3"
+      ],
       "pays_off": [],
       "location_id": "loc_0401",
       "location_name": "「詭區」",
@@ -31166,7 +32033,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_230724b854"
+      ],
       "location_id": "loc_0441",
       "location_name": "人皮工房",
       "characters": [
@@ -31364,7 +32233,9 @@
           "note": "賴桑勉強落床、一拐一拐走到滿天面前，表明決心要摧毀「病者和平協會」並請求他幫忙。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5607f41054"
+      ],
       "pays_off": [],
       "location_id": "loc_0093",
       "location_name": "寶琳",
@@ -31490,7 +32361,9 @@
           "note": "「病者平權組織」曾在醫院附近出現，滿天因某些不敢面對的往事而沒有主動迎擊。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_abd3b79151"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -31752,8 +32625,12 @@
           "note": "滿天持手術刀脅持瓦安，以一句大話斬一隻手指的規則逼問，確認病者和平協會位於翠林邨、班尼暗殺計劃屬實、領導人是三腦。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_0c09ba3d00"
+      ],
+      "pays_off": [
+        "chr_95fb59ed57"
+      ],
       "location_id": "loc_0388",
       "location_name": "翠林邨",
       "characters": [
@@ -31788,7 +32665,10 @@
           "note": "滿天拒絕賴桑等人傷癒後同行潛入的提議，表明今晚要獨自進行暗殺，一次過結束病者和平協會之事。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ea6d702f0a",
+        "chr_f477642e59"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -31826,6 +32706,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
+        "chr_230724b854",
         "chr_711b4b1c39"
       ],
       "location_id": "loc_0224",
@@ -31871,7 +32752,8 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_507e3f6406"
+        "chr_507e3f6406",
+        "chr_bbb2a500cd"
       ],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -31906,7 +32788,9 @@
           "note": "三腦乘坐經改裝嘅電動輪椅逃走，速度與扭力異於市面產品，椅背固定一樽用意不明嘅瓦斯桶，周遭接駁不明管線。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_04d12ab5bb"
+      ],
       "pays_off": [],
       "location_id": "loc_0388",
       "location_name": "翠林邨",
@@ -31942,7 +32826,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_4245ac132d"
+      ],
       "location_id": "loc_0388",
       "location_name": "翠林邨",
       "characters": [
@@ -32042,7 +32928,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7819b48945"
+      ],
       "location_id": "loc_0388",
       "location_name": "翠林邨",
       "characters": [],
@@ -32073,7 +32961,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_570085db96"
+      ],
       "location_id": "loc_0037",
       "location_name": "學校",
       "characters": [
@@ -32105,7 +32995,9 @@
           "note": "主角把火炬擲向易燃的傢俱外牆，令翠林邨短時間內化為火海，藉此逼使首領三腦現身。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8b97d62913"
+      ],
       "pays_off": [],
       "location_id": "loc_0388",
       "location_name": "翠林邨",
@@ -32144,7 +33036,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_170dab4b8f",
+        "chr_95fb59ed57"
+      ],
       "location_id": "loc_0388",
       "location_name": "翠林邨",
       "characters": [
@@ -32218,7 +33113,9 @@
           "note": "三腦一早暗中觀察倖存區半年，預先放置捕獸夾夾住老鄧雙腳，再以施援方式令老鄧為其效命"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_b374a9a9dc"
+      ],
       "pays_off": [],
       "location_id": "loc_0447",
       "location_name": "心朗村",
@@ -32252,7 +33149,9 @@
           "note": "三腦取出火焰噴射器，毫不顧忌地燒毀自己嘅藝術品同整個校園，喺大閘外等待滿天出來對決"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_04d12ab5bb"
+      ],
       "pays_off": [],
       "location_id": "loc_0037",
       "location_name": "學校",
@@ -32358,8 +33257,14 @@
           "note": "綁在三腦電動輪椅上的小型瓦斯罐發生爆炸，敘事者當場被炸飛到十米之外，身體幾乎散掉。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_6d6dab2736",
+        "chr_ea6d702f0a"
+      ],
+      "pays_off": [
+        "chr_09a91245bf",
+        "chr_8433ce1dc7"
+      ],
       "location_id": "loc_0037",
       "location_name": "學校",
       "characters": [
@@ -32394,7 +33299,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_04d12ab5bb"
+      ],
       "location_id": null,
       "location_name": null,
       "characters": [],
@@ -32457,7 +33364,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_04d12ab5bb",
+        "chr_570085db96"
+      ],
       "location_id": "loc_0143",
       "location_name": "醫院",
       "characters": [
@@ -32518,10 +33428,11 @@
           "note": "主角攞返自己袋入面嘅腦波測量器，帶去研究室交俾大BOSS，用嚟測量男病童嘅腦。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_465d46118a"
+      "foreshadows": [
+        "chr_0ee8eda8cb",
+        "chr_4b06a31789"
       ],
+      "pays_off": [],
       "location_id": "loc_0427",
       "location_name": "研究室",
       "characters": [
@@ -32616,7 +33527,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bd306c9efe"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -32648,7 +33561,9 @@
           "note": "無法再忍受每日喺與病者戰鬥嘅生死邊緣存活，過去的滿天決定偷走Dr.D研究室中所有關於病者嘅研究資料（特別係病腦嗰份文件）"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d7de909cf5"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -32683,7 +33598,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0c04748bf6"
+      ],
       "location_id": "loc_0044",
       "location_name": "將軍澳區",
       "characters": [
@@ -32716,8 +33633,12 @@
           "note": "抵達靈實醫院執行搜查任務時，滿天趁整隊不良人成員背向自己上前探路之際，掏出手術刀將佢哋全部殺掉，決定斬斷不良人嘅枷鎖。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_0c04748bf6"
+      ],
+      "pays_off": [
+        "chr_e8f070c331"
+      ],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
       "characters": [
@@ -32750,7 +33671,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_9e8f79a60f"
+        "chr_bd306c9efe"
       ],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
@@ -32783,8 +33704,12 @@
           "note": "滿天離開大本營途中斬至重傷埋伏嘅不良人，不破尚現身；滿天舉刀想刺向佢頸喉，但不破尚以更快速度捉住其手腕，刀尖距頸喉只差0"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_3c17cd5959"
+      ],
+      "pays_off": [
+        "chr_d7de909cf5"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -32816,12 +33741,8 @@
           "note": "主角昏迷一週後於病房中醒來，娃娃在旁照顧，滿天進來檢查並拔去輸送管。"
         }
       ],
-      "foreshadows": [
-        "chr_d01c08e5cc"
-      ],
-      "pays_off": [
-        "chr_a658be496d"
-      ],
+      "foreshadows": [],
+      "pays_off": [],
       "location_id": "loc_0207",
       "location_name": "病房",
       "characters": [
@@ -32896,7 +33817,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8ca1d0e9d9"
+      ],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
       "characters": [
@@ -33102,9 +34025,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_a97f0e9a4b"
-      ],
+      "pays_off": [],
       "location_id": "loc_0435",
       "location_name": "艾寶琳倖存區",
       "characters": [
@@ -33180,7 +34101,9 @@
           "note": "M與董倫於天台對峙，因奎斯、犬京和賴桑到場而無法動手，董倫撤退。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_b5be50731e"
+      ],
       "pays_off": [],
       "location_id": "loc_0051",
       "location_name": "天台",
@@ -33215,7 +34138,9 @@
           "note": "M感到肌肉、關節、胸腹隱痛，並有時發燒影響視力，預示健康惡化。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_47e3171322"
+      ],
       "pays_off": [],
       "location_id": "loc_0051",
       "location_name": "天台",
@@ -33345,7 +34270,9 @@
           "note": "瓦禮表示願意放棄上流身份，由王達尼安排護送前往大本營過平凡生活。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8c3ff232ec"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -33441,7 +34368,9 @@
           "note": "董倫嘅鷹頭拐杖內部藏有一把可拔出嘅暗劍，鷹頭與拐杖可一分為二。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5ce82980e6"
+      ],
       "pays_off": [],
       "location_id": "loc_0051",
       "location_name": "天台",
@@ -33543,7 +34472,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_5861def9a8"
+      ],
       "location_id": "loc_0470",
       "location_name": "地下水道",
       "characters": [
@@ -33586,9 +34517,7 @@
           "note": "敘述者嘅朋友夏晴喺魔鬼山附近被捉走；明雲認為魔鬼山離康城好遠，不法者未必會特登走咁遠綁人。"
         }
       ],
-      "foreshadows": [
-        "chr_f9f2d8099f"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -33630,7 +34559,9 @@
           "note": "第二任領導人少佐因無法接受夏晴失蹤而獨自外出調查。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1801a80f21"
+      ],
       "pays_off": [],
       "location_id": "loc_0114",
       "location_name": "圖書館辦公室",
@@ -33764,7 +34695,9 @@
           "note": "M於大本營內被搜索隊識別，半邊臉受損的男子遭封鎖追捕，M用自製游繩工具嘗試逃離天台。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_96886ad208"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -33794,7 +34727,9 @@
           "note": "少佐在將軍澳康城一帶地圖上用油筆新標記「不法者」，推測為新出現或潛藏已久的勢力。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_12b68aa041"
+      ],
       "pays_off": [],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
@@ -33861,7 +34796,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_24142a8dd7"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -33926,7 +34863,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_aee52e823e"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -34082,7 +35021,9 @@
           "note": "章首主角憑毫無破綻嘅潛步技巧從巨型怪物手上逃脫，並相信正常兵器難以攻堅佢岩石般堅硬嘅外皮。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8fc81d0638"
+      ],
       "pays_off": [],
       "location_id": "loc_0471",
       "location_name": "康城",
@@ -34176,7 +35117,9 @@
           "note": "基於衛生問題，主角替Sona將開始發臭嘅爺爺屍身拖出走廊，放到後樓梯垃圾桶之中，因缺乏火化材料只能棄屍。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2a4855e20e"
+      ],
       "pays_off": [],
       "location_id": "loc_0035",
       "location_name": "後樓梯",
@@ -34266,7 +35209,9 @@
           "note": "據Sona所述，康城以前有十二個樓宇領導人再選出決策人，持有千足金鷹頭拐杖「金鷹頭」作主宰權力象徵；眾人為此明槍暗箭權鬥"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5ce82980e6"
+      ],
       "pays_off": [],
       "location_id": "loc_0486",
       "location_name": "康城倖存區",
@@ -34296,8 +35241,12 @@
           "note": "約兩年前康城倖存區用計將不法者監禁喺康城外嘅監獄大樓，初時有人駐守餵食，最近半年已停止，估計囚犯已全部餓死。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_9eb1c22ab8"
+      ],
+      "pays_off": [
+        "chr_3a6a04b775"
+      ],
       "location_id": "loc_0486",
       "location_name": "康城倖存區",
       "characters": [
@@ -34359,7 +35308,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7ca923130f"
+      ],
       "location_id": "loc_0566",
       "location_name": "地鐵站",
       "characters": [
@@ -34424,7 +35375,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_e476515395"
+      ],
       "location_id": "loc_0224",
       "location_name": "倖存區",
       "characters": [
@@ -34460,7 +35413,9 @@
           "note": "琴日董倫引導一隻病獸撞穿地鐵站道閘，入內大肆破壞，並將此稱為帶畀眾人嘅「見面禮」。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_921b20e3b7"
+      ],
       "pays_off": [],
       "location_id": "loc_0474",
       "location_name": "康城地鐵站",
@@ -34498,11 +35453,9 @@
           "note": "半年前Sona放走不法者，引發後續康城戰役"
         }
       ],
-      "foreshadows": [
-        "chr_6aa533eb40"
-      ],
+      "foreshadows": [],
       "pays_off": [
-        "chr_2dbde590c0"
+        "chr_12b68aa041"
       ],
       "location_id": "loc_0550",
       "location_name": "仁興工業大廈",
@@ -34536,7 +35489,7 @@
         }
       ],
       "foreshadows": [
-        "chr_9eb1c22ab8"
+        "chr_b5be50731e"
       ],
       "pays_off": [],
       "location_id": "loc_0493",
@@ -34722,7 +35675,10 @@
       "foreshadows": [
         "chr_058692f543"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_63a82d18e2",
+        "chr_cf7d7991b1"
+      ],
       "location_id": "loc_0493",
       "location_name": "監獄",
       "characters": [
@@ -34823,7 +35779,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_2dbde590c0",
+        "chr_fd9c8877ce"
+      ],
       "location_id": "loc_0480",
       "location_name": "康城二期倖存區",
       "characters": [
@@ -35025,9 +35984,7 @@
           "note": "Sona將夏晴推向敘事者後，以刀割傷自己頸側，敘事者即時上前止血並將其送往康城倖存區救治。"
         }
       ],
-      "foreshadows": [
-        "chr_20078e6339"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0486",
       "location_name": "康城倖存區",
@@ -35123,7 +36080,6 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_04638a4982",
         "chr_886b51435d"
       ],
       "location_id": "loc_0224",
@@ -35154,7 +36110,9 @@
           "note": "明霧命令董倫以間諜身份繼續暗殺康城二期嘅人，目標係殺到多人以震懾對方。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_20078e6339"
+      ],
       "pays_off": [],
       "location_id": "loc_0495",
       "location_name": "康城二期",
@@ -35188,7 +36146,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_381ea02ce0",
+        "chr_39c6e4befb"
+      ],
       "location_id": "loc_0479",
       "location_name": "康城一期倖存區",
       "characters": [
@@ -35221,9 +36182,7 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [
-        "chr_1a697ca7d6"
-      ],
+      "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
       "characters": [
@@ -35254,7 +36213,9 @@
           "note": "主角在四樓402室發現五爺屍體，估計案件發生於大前日。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2a4855e20e"
+      ],
       "pays_off": [],
       "location_id": "loc_0482",
       "location_name": "四樓402室",
@@ -35313,8 +36274,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_25c7a5ecf1",
-        "chr_3970bf81d2"
+        "chr_f7f3aa082f"
       ],
       "location_id": "loc_0488",
       "location_name": "康城二期KTV館",
@@ -35488,7 +36448,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_036860328d"
+      ],
       "location_id": "loc_0471",
       "location_name": "康城",
       "characters": [
@@ -35520,7 +36482,9 @@
           "note": "主角假稱檢查維修，將保安室內有線管連接外面、疑似存放閉路電視畫面嘅硬碟拆走帶離。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_acc200b3f6"
+      ],
       "pays_off": [],
       "location_id": "loc_0489",
       "location_name": "保安室",
@@ -35551,7 +36515,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b213bec619"
+      ],
       "location_id": "loc_0490",
       "location_name": "資訊室",
       "characters": [
@@ -35615,7 +36581,9 @@
           "note": "明哥喺康城一期會所設宴招待區內達官貴人以擴展人脈，並宣佈一星期後十二元老會投票。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_7c05c465fb"
+      ],
       "pays_off": [],
       "location_id": "loc_0494",
       "location_name": "康城一期會所",
@@ -35749,7 +36717,9 @@
           "note": "陸軒從二樓平台以改裝氣槍掃射特製圓珠彈，重傷全場賓客並射暈明哥，令明哥競逐「金鷹頭」嘅聲望大跌。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f857a8c0cb"
+      ],
       "pays_off": [],
       "location_id": "loc_0275",
       "location_name": "平台",
@@ -35782,7 +36752,10 @@
           "note": "Sona在醫療室病房內突然情緒失控，高空擲物、企圖衝出病房，聲稱要回到「嗰到」（二期K房）。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2006a20b19",
+        "chr_6aa533eb40"
+      ],
       "pays_off": [],
       "location_id": "loc_0006",
       "location_name": "醫療室",
@@ -35812,7 +36785,9 @@
           "note": "少佐上星期潛入康城倖存區，被哨兵帶入保安室盤問時打傷保安等人並逃脫，更取走標示不法者監獄位置的康城區地圖。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1795bcf376"
+      ],
       "pays_off": [],
       "location_id": "loc_0486",
       "location_name": "康城倖存區",
@@ -35847,7 +36822,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_9eb1c22ab8"
+        "chr_dc743b8d74"
       ],
       "location_id": "loc_0486",
       "location_name": "康城倖存區",
@@ -35881,8 +36856,12 @@
           "note": "心理醫生用催眠法治療Sona，勾起佢深層記憶，喚醒真正嘅Sona"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_25c7a5ecf1"
+      ],
+      "pays_off": [
+        "chr_dc743b8d74"
+      ],
       "location_id": "loc_0224",
       "location_name": "倖存區",
       "characters": [
@@ -35913,7 +36892,9 @@
           "note": "Sona醒嚟後，即刻緊抱住敘事者（鳥嘴先生），話記番起所有事"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_43b418d118"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -35944,7 +36925,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c5e9b43781"
+      ],
       "location_id": "loc_0258",
       "location_name": "酒吧",
       "characters": [
@@ -35978,7 +36961,9 @@
           "note": "康城一期與二期達成停戰，條件為互相交出殺敵最多的殺手（董倫與陸軒）任由對方處置。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8cc78f2853"
+      ],
       "pays_off": [],
       "location_id": "loc_0487",
       "location_name": "康城一期",
@@ -36046,8 +37031,12 @@
           "note": "明哥與康城二期元老率領五十多名西裝手下包圍酒吧Eagle，宣佈董倫背叛並將董倫、陸軒交給對方陣營處置。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_0ec25258d1"
+      ],
+      "pays_off": [
+        "chr_80d31942d1"
+      ],
       "location_id": "loc_0495",
       "location_name": "康城二期",
       "characters": [
@@ -36083,7 +37072,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_21bd8b4a7d",
+        "chr_f857a8c0cb"
+      ],
       "location_id": "loc_0258",
       "location_name": "酒吧",
       "characters": [
@@ -36118,7 +37110,9 @@
           "note": "老賢原本答應用疫苗配方換康城嘅發電機同濾水器技術，但其後老賢加多咗一個條件"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_43b418d118"
+      ],
       "pays_off": [],
       "location_id": "loc_0471",
       "location_name": "康城",
@@ -36150,7 +37144,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9aa57e91be"
+      ],
       "location_id": "loc_0572",
       "location_name": "露天帳篷",
       "characters": [
@@ -36182,7 +37178,9 @@
           "note": "二人於「暗倉」接受一星期的酷刑，包括刀刺、火燒、灑鹽、電擊、毆打、拔甲、斷骹、挖眼、切指、餵蟲等。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_46dcab34e1"
+      ],
       "pays_off": [],
       "location_id": "loc_0570",
       "location_name": "暗倉",
@@ -36250,7 +37248,9 @@
           "note": "董倫因無法下手殺小孩，迷茫下到陸軒的酒吧「Eagle」買醉，結識陸軒並以拳頭幹架建立友誼。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0ec25258d1"
+      ],
       "pays_off": [],
       "location_id": "loc_0569",
       "location_name": "酒吧「Eagle」",
@@ -36285,7 +37285,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0f8a504c08"
+      ],
       "location_id": "loc_0471",
       "location_name": "康城",
       "characters": [
@@ -36354,7 +37356,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d398336c99"
+      ],
       "location_id": "loc_0493",
       "location_name": "監獄",
       "characters": [],
@@ -36384,7 +37388,9 @@
           "note": "敘事者因動氣再次咯血，讓雨水沖走血液後繼續向電視台進發。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_84038dfbc4"
+      ],
       "pays_off": [],
       "location_id": "loc_0587",
       "location_name": "電視台",
@@ -36415,8 +37421,12 @@
           "note": "敘事者到達金門建築有限公司，穿過佈滿高壓電線嘅走廊並關閉發電機，發現鐵門內被囚男子及多具屍體"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_d398336c99"
+      ],
+      "pays_off": [
+        "chr_0f548bcf0b"
+      ],
       "location_id": "loc_0577",
       "location_name": "金門建築有限公司",
       "characters": [
@@ -36449,7 +37459,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_aeba3b196e"
+      ],
       "location_id": "loc_0493",
       "location_name": "監獄",
       "characters": [
@@ -36481,7 +37493,10 @@
           "note": "董倫透過錄影帶邀請敘事者前往金門建築有限公司，並提及「捕捉董倫」遊戲"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_248a96b8f7",
+        "chr_fa617da2cb"
+      ],
       "pays_off": [],
       "location_id": "loc_0577",
       "location_name": "金門建築有限公司",
@@ -36514,7 +37529,9 @@
           "note": "敘影播放新影片，場景類似廠景，董倫以拐杖舞出場，嘲笑敘事者為「M」，透露下一目的地。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_aa3ef93cba"
+      ],
       "pays_off": [],
       "location_id": "loc_0493",
       "location_name": "監獄",
@@ -36549,7 +37566,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_747fac5043"
+      ],
       "location_id": "loc_0583",
       "location_name": "D-16號影廠",
       "characters": [
@@ -36582,7 +37601,9 @@
           "note": "風流醫生喺酒館遭流氓尋仇，英國紳士以傘術將全部流氓擊倒"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_8846114005"
+      ],
       "pays_off": [],
       "location_id": "loc_0335",
       "location_name": "酒館",
@@ -36616,8 +37637,12 @@
           "note": "敘事者透過找出九具不法者屍體麻布袋上的英文字母，拼出「Wrongdoer」作為鐵門密碼，耗時約三小時。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_140a8b71f6"
+      ],
+      "pays_off": [
+        "chr_248a96b8f7"
+      ],
       "location_id": "loc_0493",
       "location_name": "監獄",
       "characters": [
@@ -36650,7 +37675,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0f548bcf0b",
+        "chr_a6cb9fa786"
+      ],
       "location_id": "loc_0471",
       "location_name": "康城",
       "characters": [
@@ -36682,7 +37710,10 @@
           "note": "M先生同董倫準備進行一場三公賭博遊戲，賭注為三個籌碼。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_73bb93a029",
+        "chr_ddd4c0870b"
+      ],
       "pays_off": [],
       "location_id": "loc_0471",
       "location_name": "康城",
@@ -36716,10 +37747,10 @@
           "note": "M先生同董倫進行咗問答環節遊戲，每答錯一題都會有活人籌碼從半空墜地而死，最終比數為七比四。"
         }
       ],
-      "foreshadows": [
+      "foreshadows": [],
+      "pays_off": [
         "chr_a6cb9fa786"
       ],
-      "pays_off": [],
       "location_id": "loc_0471",
       "location_name": "康城",
       "characters": [
@@ -36753,7 +37784,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_52e828010a"
+      ],
       "location_id": "loc_0471",
       "location_name": "康城",
       "characters": [],
@@ -36850,10 +37883,11 @@
           "note": "董倫幾日前嚟到康城，用氣槍襲擊咗不法者總部，將所有不法者俘虜，作為同M先生玩遊戲嘅籌碼。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_93a363065f"
+      "foreshadows": [
+        "chr_93a363065f",
+        "chr_fa617da2cb"
       ],
+      "pays_off": [],
       "location_id": "loc_0471",
       "location_name": "康城",
       "characters": [
@@ -36886,7 +37920,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_52e828010a"
+      ],
       "location_id": "loc_0471",
       "location_name": "康城",
       "characters": [
@@ -36954,7 +37990,9 @@
           "note": "M喺康城區花園徒手拔咗一朵深紅薔薇送俾少佐，叫佢送俾夏晴並承諾保護佢。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1795bcf376"
+      ],
       "pays_off": [],
       "location_id": "loc_0640",
       "location_name": "康城區",
@@ -36988,7 +38026,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f35fdb6899"
+      ],
       "location_id": "loc_0006",
       "location_name": "醫療室",
       "characters": [
@@ -37021,7 +38061,7 @@
         }
       ],
       "foreshadows": [
-        "chr_bed80ef590"
+        "chr_f35fdb6899"
       ],
       "pays_off": [],
       "location_id": "loc_0575",
@@ -37056,8 +38096,14 @@
           "note": "少佐解脫束縛後，揹著受傷嘅M跑出鐵籠，喺傾盤大雨中返回康城倖存區。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_9c9173f610"
+      ],
+      "pays_off": [
+        "chr_1795bcf376",
+        "chr_3bcd969f13",
+        "chr_b076557930"
+      ],
       "location_id": "loc_0486",
       "location_name": "康城倖存區",
       "characters": [],
@@ -37086,8 +38132,13 @@
           "note": "少佐因夏晴被侵犯一事失去理性，用棒球棍打死不法者佬大，結果被捕毒打。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_f35fdb6899"
+      ],
+      "pays_off": [
+        "chr_255b0b8df3",
+        "chr_42bace4841"
+      ],
       "location_id": "loc_0575",
       "location_name": "鐵籠",
       "characters": [
@@ -37185,7 +38236,9 @@
           "note": "董倫與M進行撲克牌比試，雙方同點數但因公仔牌大過數字牌，董倫勝出。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_b076557930"
+      ],
       "pays_off": [],
       "location_id": "loc_0575",
       "location_name": "鐵籠",
@@ -37217,8 +38270,13 @@
           "note": "遊戲結束後董倫以金鷹頭拐杖內嘅劍刃斬斷鐵籠門鎖，聲稱會放少佐走。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_92776a86d1",
+        "chr_f35fdb6899"
+      ],
+      "pays_off": [
+        "chr_9f5c674544"
+      ],
       "location_id": "loc_0575",
       "location_name": "鐵籠",
       "characters": [
@@ -37250,7 +38308,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b076557930"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -37281,10 +38341,10 @@
           "note": "明雲喺敘事者鼓勵下向Sona道歉，Sona最終接受咗佢嘅歉意。"
         }
       ],
-      "foreshadows": [
-        "chr_20078e6339"
+      "foreshadows": [],
+      "pays_off": [
+        "chr_2006a20b19"
       ],
-      "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -37315,7 +38375,9 @@
           "note": "昏迷一段時間後夏晴喺本章末段醒嚟，第一眼見到少佐。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_bed80ef590"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -37354,7 +38416,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
-        "chr_3bcd969f13"
+        "chr_930112318c"
       ],
       "location_id": "loc_0486",
       "location_name": "康城倖存區",
@@ -37495,9 +38557,12 @@
           "note": "明雲推斷敘事者（M）因停藥仲有大約一年壽命。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_bdd02d1dfa"
+      ],
       "pays_off": [
-        "chr_a0a2a8b73e"
+        "chr_a0a2a8b73e",
+        "chr_cf77eb3f82"
       ],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -37624,7 +38689,9 @@
           "note": "受毒傷嘅董倫以氣槍、桌球棍、金鷹頭拐杖劍刃對抗能操控電流嘅新型病者北賢，最終董倫倒下，北賢雙目被毀。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_27875f32a7"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -37659,8 +38726,12 @@
           "note": "M 決定前往病者之都，唔選擇以假死任務嘅謊言留喺大本營生活，並同少佐約定會返嚟出席佢同夏晴嘅婚禮。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_1d3624bb90"
+      ],
+      "pays_off": [
+        "chr_84038dfbc4"
+      ],
       "location_id": "loc_0469",
       "location_name": "病者之都",
       "characters": [
@@ -37691,8 +38762,12 @@
           "note": "五人拍攝團隊收了貴華投資的艾幣後消失，令貴華的親友在影院白等"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_98a81dd23f"
+      ],
+      "pays_off": [
+        "chr_4ab036f36e"
+      ],
       "location_id": "loc_0306",
       "location_name": "雜貨店",
       "characters": [
@@ -37724,7 +38799,9 @@
           "note": "滿天到哈姆雷特雜貨店買戒指時，遇上衝上二樓的貴華，被認出是南瓜貝果先生"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_bad072f2ec"
+      ],
       "pays_off": [],
       "location_id": "loc_0527",
       "location_name": "哈姆雷特雜貨店",
@@ -37791,7 +38868,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_87c04d2b7f"
+      ],
       "location_id": "loc_0298",
       "location_name": "死亡之路",
       "characters": [
@@ -37826,7 +38905,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_e6ae6ca2a7"
+      ],
       "location_id": "loc_0153",
       "location_name": "一樓",
       "characters": [
@@ -37858,7 +38939,9 @@
           "note": "貴華如常在街上撒錢時被拍攝團隊跟拍，繼而投資對方拍攝自己當男主角的影片"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_e6ae6ca2a7"
+      ],
       "pays_off": [],
       "location_id": "loc_0306",
       "location_name": "雜貨店",
@@ -37891,8 +38974,12 @@
           "note": "不破尚命令所有隊員撤退，自己留下獨戰余智海博士。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_d5c29d73ed"
+      ],
+      "pays_off": [
+        "chr_c399b74a20"
+      ],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
       "characters": [
@@ -37961,9 +39048,7 @@
           "note": "不破尚捉住博士嘅手時，博士身上嘅紅色能量轉移至不破尚身上，導致佢身上憑空出血撕裂。"
         }
       ],
-      "foreshadows": [
-        "chr_c399b74a20"
-      ],
+      "foreshadows": [],
       "pays_off": [],
       "location_id": "loc_0602",
       "location_name": "密室",
@@ -37996,8 +39081,12 @@
           "note": "不破尚以拳腳近距離重擊博士，包括刺鼻拳、連環拳及轉身擺踢，將博士踢飛到牆邊。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_ffdce615d7"
+      ],
+      "pays_off": [
+        "chr_b8504b625f"
+      ],
       "location_id": "loc_0602",
       "location_name": "密室",
       "characters": [
@@ -38099,10 +39188,10 @@
           "note": "病者爆發前數日，不破尚與銘凱於魔鬼山林中古宅地下密室重創余智海博士，但余智海表示傷害已轉移至不破尚身上"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [
-        "chr_5fa9cd980f"
+      "foreshadows": [
+        "chr_b8504b625f"
       ],
+      "pays_off": [],
       "location_id": "loc_0602",
       "location_name": "密室",
       "characters": [
@@ -38173,7 +39262,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_5b686a8d94"
+      ],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
       "characters": [
@@ -38206,7 +39297,9 @@
           "note": "唔破尚憑腳步回音探查到地毯下嘅隱形密室通道口"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6e4722d544"
+      ],
       "pays_off": [],
       "location_id": "loc_0599",
       "location_name": "別墅地下密室",
@@ -38237,7 +39330,9 @@
           "note": "受病童幻覺影響，記錄影片嘅飛虎隊員對樓下三名同袍瘋狂開槍後逃走"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d837849867"
+      ],
       "pays_off": [],
       "location_id": "loc_0602",
       "location_name": "密室",
@@ -38269,7 +39364,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_393905ccca"
+      ],
       "location_id": "loc_0602",
       "location_name": "密室",
       "characters": [
@@ -38302,7 +39399,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_d5c29d73ed"
+      ],
       "location_id": "loc_0602",
       "location_name": "密室",
       "characters": [
@@ -38336,7 +39435,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1ae87e7d26"
+      ],
       "location_id": "loc_0602",
       "location_name": "密室",
       "characters": [],
@@ -38398,7 +39499,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1ae87e7d26"
+      ],
       "location_id": "loc_0602",
       "location_name": "密室",
       "characters": [],
@@ -38428,7 +39531,10 @@
           "note": "十多名飛虎隊成員坐裝甲車上山，對林中別墅進行爆破攻堅，遇上舌女、病牙、大眼、病嘴等病者襲擊"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_40fd3c2e63",
+        "chr_93793df780"
+      ],
       "pays_off": [],
       "location_id": "loc_0598",
       "location_name": "林中別墅",
@@ -38460,7 +39566,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_771572ab6b",
+        "chr_b9b7b56c16"
+      ],
       "location_id": "loc_0175",
       "location_name": "魔鬼山",
       "characters": [
@@ -38527,7 +39636,9 @@
           "note": "敘事者整頓休息後向少佐拿取出閘紙，從大本營正門出發準備前往魔鬼山調查"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1859be8f89"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -38656,7 +39767,10 @@
       "foreshadows": [
         "chr_0441722610"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_0ab0c5c2d9",
+        "chr_b247fab5c3"
+      ],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
       "characters": [
@@ -38689,7 +39803,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_cee9d94c4b"
+      ],
       "location_id": "loc_0596",
       "location_name": "暗門",
       "characters": [
@@ -38721,8 +39837,12 @@
           "note": "敘事者利用竊屍賊堆積屍體的特性，偷偷跟隨戴紅色冷帽的竊屍賊，找到余智海博士的林中古宅"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_0ab0c5c2d9"
+      ],
+      "pays_off": [
+        "chr_785e55bef2"
+      ],
       "location_id": "loc_0603",
       "location_name": "林中古宅",
       "characters": [
@@ -38755,8 +39875,12 @@
           "note": "敘事者拉開大廳密室的秘門進入地下室，關上暗門避開病爪"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_27875f32a7"
+      ],
+      "pays_off": [
+        "chr_1859be8f89"
+      ],
       "location_id": "loc_0596",
       "location_name": "暗門",
       "characters": [
@@ -38788,7 +39912,9 @@
           "note": "戴綠帽的竊屍賊臨死前推倒大廳的古式長身座鐘，鐘聲喚醒二樓的病爪"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_b7d2f9c791"
+      ],
       "pays_off": [],
       "location_id": "loc_0360",
       "location_name": "二樓",
@@ -38853,7 +39979,9 @@
           "note": "南愚喺林中古宅追擊敘事者，用自身血液燃火燒成個古宅，最後古宅發生爆炸"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2eb0ffc6ad"
+      ],
       "pays_off": [],
       "location_id": "loc_0603",
       "location_name": "林中古宅",
@@ -38919,8 +40047,12 @@
           "note": "敘事者用雷明頓870霰彈槍從背後向南愚開槍，令其腸穿肚爛但未死"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_e2bfb760b3"
+      ],
+      "pays_off": [
+        "chr_aa99e1263c"
+      ],
       "location_id": "loc_0603",
       "location_name": "林中古宅",
       "characters": [
@@ -38985,6 +40117,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
+        "chr_2eb0ffc6ad",
         "chr_8b4ea39484"
       ],
       "location_id": "loc_0603",
@@ -39143,7 +40276,9 @@
           "note": "派對後少佐向M透露會有人隨M前往「病者之都」，並交低林中古宅嘅線索物品"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2ae9303e94"
+      ],
       "pays_off": [],
       "location_id": "loc_0469",
       "location_name": "病者之都",
@@ -39176,7 +40311,9 @@
       "foreshadows": [
         "chr_ac3555956f"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6e6499818a"
+      ],
       "location_id": "loc_0616",
       "location_name": "A005室攝影棚",
       "characters": [
@@ -39207,7 +40344,9 @@
           "note": "Dr.D以電擊、刀刺、窒息、毒物、高溫、低溫、痛楚、智商、情感、饑餓等多項測試改造第二任助手，意圖令其成為可自我控制的病"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_87a32a9aba"
+      ],
       "pays_off": [],
       "location_id": "loc_0298",
       "location_name": "死亡之路",
@@ -39312,7 +40451,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_bdd02d1dfa"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -39482,7 +40623,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_462c68530c"
+      ],
       "location_id": "loc_0435",
       "location_name": "艾寶琳倖存區",
       "characters": [
@@ -39516,7 +40659,9 @@
           "note": "奎斯、賴桑、王達尼決定一齊跟主角進入病者之都調查白鯨下落。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_a97f0e9a4b"
+      ],
       "pays_off": [],
       "location_id": "loc_0469",
       "location_name": "病者之都",
@@ -39621,7 +40766,9 @@
           "note": "主角向艾匡提出係要脫離社會束縛，定係接受社會真實面貌並對付佢嘅選擇。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_5325f8ce3a"
+      ],
       "pays_off": [],
       "location_id": "loc_0469",
       "location_name": "病者之都",
@@ -39655,7 +40802,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_82464569a9"
+      ],
       "location_id": "loc_0469",
       "location_name": "病者之都",
       "characters": [
@@ -39688,7 +40837,9 @@
           "note": "區內有堆人係潛藏信徒，走之前一日，突然拐走埋艾匡公主先走。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fc084232b8"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -39723,7 +40874,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_c16338eeff"
+      ],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
       "characters": [
@@ -39822,7 +40975,9 @@
           "note": "敘事者決定親自前往靈實醫院將需翻譯嘅信件交俾大BOSS。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_02d86f2f24"
+      ],
       "pays_off": [],
       "location_id": "loc_0125",
       "location_name": "靈實醫院",
@@ -39858,10 +41013,10 @@
           "note": "主角帶同公仔、娃娃去寶康公園，調查信中提及嘅白鯨帶領嘅病者狩獵行動線索。"
         }
       ],
-      "foreshadows": [
-        "chr_177e80d14a"
+      "foreshadows": [],
+      "pays_off": [
+        "chr_cb472af319"
       ],
-      "pays_off": [],
       "location_id": "loc_0380",
       "location_name": "寶康公園",
       "characters": [
@@ -39897,7 +41052,9 @@
           "note": "敘事者分配王達尼、犬京、奎斯前往「病者平權組織」根據地進行調查。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fc084232b8"
+      ],
       "pays_off": [],
       "location_id": "loc_0634",
       "location_name": "病者平權組織",
@@ -39934,7 +41091,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_59993226ff",
+        "chr_87f042ad9c"
+      ],
       "location_id": "loc_0435",
       "location_name": "艾寶琳倖存區",
       "characters": [
@@ -40489,7 +41649,9 @@
           "note": "白魂踏出倖存區時回望艾寶琳，掛念艾匡公主"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_f37ac502eb"
+      ],
       "pays_off": [],
       "location_id": "loc_0224",
       "location_name": "倖存區",
@@ -40522,7 +41684,9 @@
           "note": "賴桑在門後殺死埋伏的大眼，大眼的叫聲引來街上病者大軍湧入大樓。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_cbb25dfa47"
+      ],
       "pays_off": [],
       "location_id": "loc_0639",
       "location_name": "政府綜合大樓",
@@ -40593,7 +41757,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7fd675877e"
+      ],
       "location_id": "loc_0424",
       "location_name": "走廊",
       "characters": [
@@ -40624,7 +41790,9 @@
           "note": "王達尼出發前將紅色鞭炮及火機交給敘事者，讓其最後留守頂門時點燃。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_59e5f2175e"
+      ],
       "pays_off": [],
       "location_id": "loc_0639",
       "location_name": "政府綜合大樓",
@@ -40656,8 +41824,12 @@
           "note": "賴桑最後滑繩時，敘事者/王達尼一方以鞭炮掩護；惟途中一隻病嘴撲出黏住賴桑腰部。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_716f7de004"
+      ],
+      "pays_off": [
+        "chr_30c5760dc7"
+      ],
       "location_id": "loc_0639",
       "location_name": "政府綜合大樓",
       "characters": [
@@ -40784,7 +41956,9 @@
           "note": "南愚咬破手掌露出滲血傷口，意圖將血液揮灑到主角等人身上點火。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_bdb7b49222"
+      ],
       "pays_off": [],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
@@ -40914,7 +42088,9 @@
           "note": "犬京帶住Ricky向樓下奔逃以擺脫北賢追擊，賴桑同奎斯則一齊協助阻止北賢。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_ff1b52324c"
+      ],
       "pays_off": [],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
@@ -40951,7 +42127,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_7a07641512"
+      ],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
       "characters": [
@@ -40984,7 +42162,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8a6d82e408"
+      ],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
       "characters": [
@@ -41049,7 +42229,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_59e5f2175e"
+      ],
       "location_id": "loc_0043",
       "location_name": "將軍澳",
       "characters": [
@@ -41081,7 +42263,9 @@
           "note": "隊伍透過停電電梯上到八樓後，重複行同一樓層，無法上到第九層"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_32007c44a3"
+      ],
       "pays_off": [],
       "location_id": "loc_0113",
       "location_name": "八樓",
@@ -41145,7 +42329,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1fd34d6d5b"
+      ],
       "location_id": "loc_0208",
       "location_name": "六樓",
       "characters": [
@@ -41178,7 +42364,9 @@
           "note": "北賢將全身凝聚嘅雷電力量貫穿到天空，影子從龐大電柱中消失。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_410f060846"
+      ],
       "pays_off": [],
       "location_id": "loc_0649",
       "location_name": "九樓",
@@ -41211,7 +42399,9 @@
           "note": "賴桑用暗器袖箭射中北賢背部心臟位置，北賢因陷入極度沉思冇注意到。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_be6a231cc2"
+      ],
       "pays_off": [],
       "location_id": "loc_0649",
       "location_name": "九樓",
@@ -41277,7 +42467,9 @@
           "note": "奎斯同賴桑刻意透露聲音將北賢引入連接大樓嘅坑口體育館"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_76173ef612"
+      ],
       "pays_off": [],
       "location_id": "loc_0651",
       "location_name": "坑口體育館",
@@ -41311,8 +42503,12 @@
           "note": "奎斯、賴桑喺室內籃球場推出籃球車並以彈地籃球模糊北賢聽力"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_8ed87ed87b"
+      ],
+      "pays_off": [
+        "chr_2198ca2261"
+      ],
       "location_id": "loc_0649",
       "location_name": "九樓",
       "characters": [
@@ -41346,7 +42542,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_76173ef612"
+      ],
       "location_id": "loc_0649",
       "location_name": "九樓",
       "characters": [
@@ -41380,7 +42578,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9585b32a36"
+      ],
       "location_id": "loc_0649",
       "location_name": "九樓",
       "characters": [
@@ -41446,8 +42646,12 @@
           "note": "北賢造成極端天氣，落大雨、八級風暴，沿海聚成龍捲風"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_eec9f68d6c"
+      ],
+      "pays_off": [
+        "chr_5b0682f173"
+      ],
       "location_id": "loc_0654",
       "location_name": "城市",
       "characters": [
@@ -41478,7 +42682,9 @@
           "note": "敘事者同白魂喺九樓發現多具男孩屍體，身上有艾寶琳身份證同若隱若現嘅紅點"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_87fec93210"
+      ],
       "pays_off": [],
       "location_id": "loc_0635",
       "location_name": "艾寶琳",
@@ -41510,7 +42716,9 @@
           "note": "敘事者與白魂追蹤地上的血跡，穿越九樓大樓，最終發現一群病翼的巢穴。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c233036411"
+      ],
       "pays_off": [],
       "location_id": "loc_0662",
       "location_name": "病翼巢穴",
@@ -41543,7 +42751,9 @@
           "note": "Nosyag獨自進入「病者之都」生存接近數個月，調查並嘗試進入大樓最高層"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6e0b04b938"
+      ],
       "pays_off": [],
       "location_id": "loc_0469",
       "location_name": "病者之都",
@@ -41614,7 +42824,9 @@
           "note": "敘事者同白魂經過九曲十三彎到達九樓盡頭，發現一道被鎖上嘅大鐵門"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_0cf2ffc5af"
+      ],
       "pays_off": [],
       "location_id": "loc_0649",
       "location_name": "九樓",
@@ -41647,7 +42859,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_9b17d38247"
+      ],
       "location_id": "loc_0649",
       "location_name": "九樓",
       "characters": [],
@@ -41676,8 +42890,12 @@
           "note": "敘事者踏上彎曲鋼鐵，從病翼巢穴嘅斷掌上取得另一半鎖匙"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_0cf2ffc5af"
+      ],
+      "pays_off": [
+        "chr_ef199209aa"
+      ],
       "location_id": "loc_0662",
       "location_name": "病翼巢穴",
       "characters": [],
@@ -41705,7 +42923,9 @@
           "role": "first_mention"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_d6052401d8"
+      ],
       "pays_off": [],
       "location_id": "loc_0649",
       "location_name": "九樓",
@@ -41741,7 +42961,10 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8c0f7b960e",
+        "chr_c233036411"
+      ],
       "location_id": "loc_0649",
       "location_name": "九樓",
       "characters": [],
@@ -41771,7 +42994,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_f1d9da7082"
+      ],
       "location_id": "loc_0649",
       "location_name": "九樓",
       "characters": [
@@ -41834,7 +43059,10 @@
           "note": "敘事者瀕死時進入虛夢，於大本營天台與已故嘅「老賢」對話，回憶起守護大本營嘅原因。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_976309bac9",
+        "chr_f9d71dc8df"
+      ],
       "pays_off": [],
       "location_id": "loc_0669",
       "location_name": "大本營天台",
@@ -41865,7 +43093,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_4c4b39866d"
+      ],
       "location_id": "loc_0666",
       "location_name": "政府綜合大樓十樓",
       "characters": [
@@ -41902,7 +43132,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_4474427efe"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -41937,7 +43169,9 @@
           "note": "敘事者扣住白鯨時腦中浮現其記憶片段，包括病獵公會、病者對戰、撰寫文章、聖堂日落、同伴戰死、孤獨及守護艾寶琳的強烈意志，最"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6c8d6536bb"
+      ],
       "pays_off": [],
       "location_id": "loc_0399",
       "location_name": "病獵公會",
@@ -42068,7 +43302,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1532e587fb"
+      ],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
       "characters": [
@@ -42132,7 +43368,9 @@
           "note": "敘事者同白魂推開包含真相嘅門，入到十樓盡頭嘅研究室"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_2b5f383f2f"
+      ],
       "pays_off": [],
       "location_id": "loc_0672",
       "location_name": "十樓盡頭嘅研究室",
@@ -42164,8 +43402,12 @@
           "note": "敘事者閱讀余智海最新研究文件，得悉HIV血液為唯一有效免疫「笑毒」嘅血液"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_976f181d5d"
+      ],
+      "pays_off": [
+        "chr_392ed3ffa5"
+      ],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
       "characters": [
@@ -42196,7 +43438,9 @@
           "note": "白魂揭開黑布發現圓柱狀大型實驗器皿，入面有一名沉睡嘅女孩"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_6acb462fb6"
+      ],
       "pays_off": [],
       "location_id": "loc_0427",
       "location_name": "研究室",
@@ -42229,7 +43473,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_68cdda0430"
+      ],
       "location_id": "loc_0427",
       "location_name": "研究室",
       "characters": [
@@ -42262,7 +43508,9 @@
           "note": "白魂拔出鯨牙大劍斬斷余智海握住相機嘅一臂"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_23325dad30"
+      ],
       "pays_off": [],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
@@ -42295,8 +43543,12 @@
           "note": "白鯨完成對話後揚起淺澀微笑，隨風消逝，敘事者之後喺現實中醒來"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_7ed8981052"
+      ],
+      "pays_off": [
+        "chr_ec3677729d"
+      ],
       "location_id": "loc_0427",
       "location_name": "研究室",
       "characters": [
@@ -42334,7 +43586,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_2b5f383f2f"
+      ],
       "location_id": "loc_0427",
       "location_name": "研究室",
       "characters": [
@@ -42366,7 +43620,9 @@
           "note": "雷暴突然響起後，外面嘅風勢同雨勢都變得異常大，強風令人難以站立。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_eec9f68d6c"
+      ],
       "pays_off": [],
       "location_id": "loc_0427",
       "location_name": "研究室",
@@ -42397,7 +43653,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_6c8d6536bb"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [
@@ -42550,8 +43808,13 @@
           "note": "明雲向少佐報告將軍澳海濱對出海域正逐漸形成一股龍捲風，吹陸方向為大本營，預計半日內到達，威力難以想像。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_f3cecf3c25"
+      ],
+      "pays_off": [
+        "chr_410f060846",
+        "chr_51fb42c3d7"
+      ],
       "location_id": "loc_0685",
       "location_name": "將軍澳海濱",
       "characters": [
@@ -42584,7 +43847,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_11b96d9d38"
+      ],
       "location_id": "loc_0382",
       "location_name": "新都城三期",
       "characters": [
@@ -42615,7 +43880,9 @@
           "note": "王達尼利用特製迴紋針開鎖潛入鎖上嘅攝影大樓，藏身暗房，發現器材租用室有論文寫住瑜小六名字以及病者照片。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_110e1df381"
+      ],
       "pays_off": [],
       "location_id": "loc_0683",
       "location_name": "器材租用室",
@@ -42722,7 +43989,9 @@
       "foreshadows": [
         "chr_e1f9c812c7"
       ],
-      "pays_off": [],
+      "pays_off": [
+        "chr_dac192c155"
+      ],
       "location_id": "loc_0682",
       "location_name": "攝影大樓",
       "characters": [
@@ -42994,7 +44263,10 @@
           "note": "敘事者被注射特製病者血液後長出漆黑雙翼，獲得病爪與快速回復能力。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_1d02522e47",
+        "chr_d31be2db1c"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -43102,7 +44374,9 @@
           "note": "滿天按「F」制後，男病童腦電波釋放幻覺，包圍全場並放大絕望、悲傷、痛苦等負面情緒。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_72d2859dd2"
+      ],
       "pays_off": [],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
@@ -43173,8 +44447,13 @@
           "note": "瑜小六與余智海在魔鬼山盡頭崖邊對峙，敘事者介入並與失去視覺發狂的余智海一同飛入巨型龍捲風"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_eabf7d020a",
+        "chr_ff20728d56"
+      ],
+      "pays_off": [
+        "chr_eec9f68d6c"
+      ],
       "location_id": "loc_0175",
       "location_name": "魔鬼山",
       "characters": [
@@ -43241,7 +44520,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_912464feab"
+      ],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
       "characters": [
@@ -43272,8 +44553,12 @@
           "note": "敘事者於吊機上割斷繩索，令束束鐵柱墜入凹洞，其中一支從余智海鎖骨刺穿胸腔。"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_eabf7d020a"
+      ],
+      "pays_off": [
+        "chr_f3cecf3c25"
+      ],
       "location_id": "loc_0178",
       "location_name": "將軍澳海旁",
       "characters": [
@@ -43304,8 +44589,13 @@
           "note": "龍捲風事件五年後，世界回復正常，瑜小六收到「病獵公會」邀請信"
         }
       ],
-      "foreshadows": [],
-      "pays_off": [],
+      "foreshadows": [
+        "chr_b596697bff"
+      ],
+      "pays_off": [
+        "chr_f3cecf3c25",
+        "chr_ff20728d56"
+      ],
       "location_id": "loc_0399",
       "location_name": "病獵公會",
       "characters": [
@@ -43530,7 +44820,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_eabf7d020a"
+      ],
       "location_id": "loc_0399",
       "location_name": "病獵公會",
       "characters": [],
@@ -43657,7 +44949,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_27a19b82e0"
+      ],
       "location_id": "loc_0614",
       "location_name": "大本營圖書館禁書區",
       "characters": [],
@@ -43718,7 +45012,9 @@
           "note": "距離天亮約一小時，病者之都深處商場中央沉睡的殘破軀體痛苦甦醒，驚呼自己為何會輸並要求攝取更多人類"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_fbc95fff85"
+      ],
       "pays_off": [],
       "location_id": "loc_0469",
       "location_name": "病者之都",
@@ -43779,7 +45075,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_27a19b82e0"
+      ],
       "location_id": "loc_0704",
       "location_name": "碉堡",
       "characters": [
@@ -43811,7 +45109,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_1503b3cd7e"
+      ],
       "location_id": "loc_0706",
       "location_name": "力學健身室",
       "characters": [
@@ -43874,7 +45174,9 @@
           "note": "胡師傅宣布會喺新都城商場舉辦一場格鬥賽，由肥施對貴華對打。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_195bfe9ec6"
+      ],
       "pays_off": [],
       "location_id": "loc_0619",
       "location_name": "新都城商場",
@@ -43908,7 +45210,9 @@
           "note": "胡師傅帶同西裝弟子到力霸健身踩場，與王達尼立下三個月健身對賭，輸咗就要結業並將學生轉移到對方。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_3d56a863e7"
+      ],
       "pays_off": [],
       "location_id": "loc_0705",
       "location_name": "力霸健身",
@@ -44010,6 +45314,7 @@
       ],
       "foreshadows": [],
       "pays_off": [
+        "chr_2961d5e841",
         "chr_827755ae98"
       ],
       "location_id": "loc_0705",
@@ -44077,7 +45382,9 @@
           "note": "貴華因為貝果少女嘅關心而決心改變，之後每日最早開閘、最晚收閘，以清水青菜淡粥過日，並學習大本營防身術。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_c7a35e9c36"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -44142,7 +45449,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_886897c8aa"
+      ],
       "location_id": "loc_0709",
       "location_name": "貴族醫院",
       "characters": [],
@@ -44173,7 +45482,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8d467b8913"
+      ],
       "location_id": "loc_0714",
       "location_name": "病者國度",
       "characters": [
@@ -44205,7 +45516,9 @@
           "note": "M喺Dr.D離開將軍澳區後繼續追蹤，來到港島區海洋公園發現新品種病者。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_101658f8b9"
+      ],
       "pays_off": [],
       "location_id": "loc_0044",
       "location_name": "將軍澳區",
@@ -44236,7 +45549,9 @@
           "note": "眼見倖存區已穩定，少佐決定派發禮物畀大本營居民。"
         }
       ],
-      "foreshadows": [],
+      "foreshadows": [
+        "chr_b8c0838517"
+      ],
       "pays_off": [],
       "location_id": "loc_0004",
       "location_name": "大本營",
@@ -44267,7 +45582,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_8fe5b7a0ac"
+      ],
       "location_id": "loc_0712",
       "location_name": "海洋公園",
       "characters": [],
@@ -44297,7 +45614,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_4c4b39866d"
+      ],
       "location_id": "loc_0051",
       "location_name": "天台",
       "characters": [],
@@ -44327,7 +45646,9 @@
         }
       ],
       "foreshadows": [],
-      "pays_off": [],
+      "pays_off": [
+        "chr_b93fae5a85"
+      ],
       "location_id": "loc_0004",
       "location_name": "大本營",
       "characters": [],
