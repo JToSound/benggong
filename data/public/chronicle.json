@@ -41518,8 +41518,8 @@
       "summary": "主角取出自己餘下所有手術刀，十指緊扣逐一擲向奄奄待斃嘅三腦，數十把手術刀全數刺入佢腦袋，令佢一動不動斷氣。",
       "story_time": {
         "order": 142,
-        "label": "第 142 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 142,
       "chapters": [
@@ -41540,7 +41540,9 @@
       "source_event_ids": [
         "bg_event_1314"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c6dcb4e726",
@@ -41548,8 +41550,8 @@
       "summary": "重傷嘅主角喺黎明將近之際，一拐一拐徒步離開周圍嘅火海，自覺就算突然摔倒地上死去亦不足為奇。",
       "story_time": {
         "order": 142,
-        "label": "第 142 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 142,
       "chapters": [
@@ -41568,7 +41570,9 @@
       "source_event_ids": [
         "bg_event_1315"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_bd306c9efe",
@@ -41576,8 +41580,8 @@
       "summary": "主角攞返自己袋入面嘅腦波測量器，帶去研究室交俾大BOSS，用嚟測量男病童嘅腦。",
       "story_time": {
         "order": 142,
-        "label": "第 142 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 142,
       "chapters": [
@@ -41598,7 +41602,9 @@
       "source_event_ids": [
         "bg_event_1317"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6a15bd794a",
@@ -41606,8 +41612,8 @@
       "summary": "面對滿天「只要我仲在生，你都唔洗諗住攻陷到大本營」嘅宣示，不破尚沉吟微笑後許下承諾：只要滿天一天仲在生，都唔會派人進攻大本營。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
@@ -41629,7 +41635,9 @@
       "source_event_ids": [
         "bg_event_1325"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_33e5ac9ab2",
@@ -41637,8 +41645,8 @@
       "summary": "寶盈倖存區倖存者全滅後，不良人緊急召開臨時會議商討，迫於無奈之下暫時中斷進攻大本營嘅計劃。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
@@ -41657,7 +41665,9 @@
       "source_event_ids": [
         "bg_event_1322"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0ee8eda8cb",
@@ -41665,8 +41675,8 @@
       "summary": "大BOSS提醒儀器啟動後男病童腦部有機會發出20.5～28Hz腦波頻率影響眾人，滿天仍以學者立場撳下按鈕啟動儀器，隨後耳邊出現刺耳聲音並陷入回憶。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
@@ -41688,7 +41698,9 @@
       "source_event_ids": [
         "bg_event_1318"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_72f4606368",
@@ -41696,14 +41708,14 @@
       "summary": "為免大本營受不良人間諜襲擊，滿天投下催眠瓦斯彈弄暈寶盈中立小型倖存區所有人，再戴防毒面具用手術刀逐家逐戶殺死全部四十八名倖存者，包括抱住父母瞓覺嘅小孩。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "為免大本營受不良人間諜襲擊，滿天投下催眠瓦斯彈弄暈寶盈中立小型倖存區所有人，再戴防毒面具用手術刀逐家逐戶殺死全部四十八名"
         }
       ],
@@ -41718,7 +41730,9 @@
       "source_event_ids": [
         "bg_event_1319"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e8f070c331",
@@ -41726,14 +41740,14 @@
       "summary": "無法再忍受每日喺與病者戰鬥嘅生死邊緣存活，過去的滿天決定偷走Dr.D研究室中所有關於病者嘅研究資料（特別係病腦嗰份文件），帶同資料逃離大本營。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "無法再忍受每日喺與病者戰鬥嘅生死邊緣存活，過去的滿天決定偷走Dr.D研究室中所有關於病者嘅研究資料（特別係病腦嗰份文件）"
         }
       ],
@@ -41750,7 +41764,9 @@
       "source_event_ids": [
         "bg_event_1320"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3c17cd5959",
@@ -41758,14 +41774,14 @@
       "summary": "作為對不破尚承諾嘅回報，滿天利用引導病者入侵其他敵方倖存區嘅方式，幫不破尚消除大量當時嘅敵人，令不良人逐漸喺將軍澳區內有統一之勢。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "作為對不破尚承諾嘅回報，滿天利用引導病者入侵其他敵方倖存區嘅方式，幫不破尚消除大量當時嘅敵人，令不良人逐漸喺將軍澳區內有"
         }
       ],
@@ -41782,7 +41798,9 @@
       "source_event_ids": [
         "bg_event_1326"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d7de909cf5",
@@ -41790,14 +41808,14 @@
       "summary": "抵達靈實醫院執行搜查任務時，滿天趁整隊不良人成員背向自己上前探路之際，掏出手術刀將佢哋全部殺掉，決定斬斷不良人嘅枷鎖。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "抵達靈實醫院執行搜查任務時，滿天趁整隊不良人成員背向自己上前探路之際，掏出手術刀將佢哋全部殺掉，決定斬斷不良人嘅枷鎖。"
         }
       ],
@@ -41812,7 +41830,9 @@
       "source_event_ids": [
         "bg_event_1323"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4b06a31789",
@@ -41820,14 +41840,14 @@
       "summary": "喺靈實醫院，滿天問病腦叫咩名，對方表示自己冇名，滿天便替佢命名為「大BOSS」（大佬嘅意思），並話以後跟實佢。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "喺靈實醫院，滿天問病腦叫咩名，對方表示自己冇名，滿天便替佢命名為「大BOSS」（大佬嘅意思），並話以後跟實佢。"
         }
       ],
@@ -41843,7 +41863,9 @@
       "source_event_ids": [
         "bg_event_1324"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0c04748bf6",
@@ -41851,14 +41873,14 @@
       "summary": "滿天離開大本營途中斬至重傷埋伏嘅不良人，不破尚現身；滿天舉刀想刺向佢頸喉，但不破尚以更快速度捉住其手腕，刀尖距頸喉只差0.2公分，並反架刀仔喺滿天頸喉上，邀請佢跟自己返去。",
       "story_time": {
         "order": 143,
-        "label": "第 143 章前後",
-        "source": "chapter_order"
+        "label": "大本營時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 143,
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "滿天離開大本營途中斬至重傷埋伏嘅不良人，不破尚現身；滿天舉刀想刺向佢頸喉，但不破尚以更快速度捉住其手腕，刀尖距頸喉只差0"
         }
       ],
@@ -41874,7 +41896,9 @@
       "source_event_ids": [
         "bg_event_1321"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1a697ca7d6",
@@ -41882,8 +41906,8 @@
       "summary": "主角昏迷一週後於病房中醒來，娃娃在旁照顧，滿天進來檢查並拔去輸送管。",
       "story_time": {
         "order": 144,
-        "label": "第 144 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 144,
       "chapters": [
@@ -41906,7 +41930,9 @@
         "bg_event_1329",
         "bg_event_1427"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_95fa0336b6",
@@ -41914,8 +41940,8 @@
       "summary": "主角在天台向滿天致謝並道別後離開，未與公仔娃娃正式道別。",
       "story_time": {
         "order": 144,
-        "label": "第 144 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 144,
       "chapters": [
@@ -41938,7 +41964,9 @@
       "source_event_ids": [
         "bg_event_1431"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5607f41054",
@@ -41946,8 +41974,8 @@
       "summary": "奎斯與賴桑已向皇室申報，摧毀了「病者平權組織」和「病者和平協會」兩個組織。",
       "story_time": {
         "order": 144,
-        "label": "第 144 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 144,
       "chapters": [
@@ -41970,7 +41998,9 @@
       "source_event_ids": [
         "bg_event_1327"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4944bf613c",
@@ -41978,8 +42008,8 @@
       "summary": "滿天獨力對付並摧毀了「病者和平協會」，聲稱自己幾乎無命回來。",
       "story_time": {
         "order": 144,
-        "label": "第 144 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 144,
       "chapters": [
@@ -42001,7 +42031,9 @@
       "source_event_ids": [
         "bg_event_1428"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a4159c8dc3",
@@ -42009,8 +42041,8 @@
       "summary": "犬京開導失戀中的貴華，貴華激動地稱他為「戀愛教主」。",
       "story_time": {
         "order": 144,
-        "label": "第 144 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 144,
       "chapters": [
@@ -42032,7 +42064,9 @@
       "source_event_ids": [
         "bg_event_1430"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3345ede50f",
@@ -42040,8 +42074,8 @@
       "summary": "眾人獲邀到皇宮與國王共進晚餐，由等待皇室成員到真正上餐大約花費了一個多小時。",
       "story_time": {
         "order": 144,
-        "label": "第 144 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 144,
       "chapters": [
@@ -42062,7 +42096,9 @@
       "source_event_ids": [
         "bg_event_1328"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_18af22b574",
@@ -42070,8 +42106,8 @@
       "summary": "主角、奎斯、犬京、王達尼四人經地下渠道從下水道回到艾寶琳倖存區。",
       "story_time": {
         "order": 144,
-        "label": "第 144 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 144,
       "chapters": [
@@ -42094,7 +42130,9 @@
       "source_event_ids": [
         "bg_event_1429"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_904aa39839",
@@ -42102,8 +42140,8 @@
       "summary": "國王在迎賓廳宴會上鄭重宣布贊助病獵公會繼續發展，並表示既然做出成績便樂意投放更多資源在他們身上。",
       "story_time": {
         "order": 145,
-        "label": "第 145 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 145,
       "chapters": [
@@ -42124,7 +42162,9 @@
       "source_event_ids": [
         "bg_event_1330"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7e64e11413",
@@ -42132,8 +42172,8 @@
       "summary": "國王提出請奎斯和賴桑（或其中一位）指導女兒艾匡基本野外生存知識，因為就算請了實力高超的劍客也不及教懂她自己保護自己。",
       "story_time": {
         "order": 145,
-        "label": "第 145 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 145,
       "chapters": [
@@ -42158,7 +42198,9 @@
       "source_event_ids": [
         "bg_event_1331"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e14aff20ce",
@@ -42166,8 +42208,8 @@
       "summary": "病獵公會趁病者平權組織與不良人開戰後元氣大傷將其一網打盡，又暗殺地下組織病者和平協會的領導人，成功摧毀兩個外來勢力組織。",
       "story_time": {
         "order": 145,
-        "label": "第 145 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 145,
       "chapters": [
@@ -42186,7 +42228,9 @@
       "source_event_ids": [
         "bg_event_1332"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_947ae65663",
@@ -42194,8 +42238,8 @@
       "summary": "飽餐一頓後，主角一行五人獲邀到皇宮套房住上一天，套房內放有五張豪華單人床。",
       "story_time": {
         "order": 145,
-        "label": "第 145 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 145,
       "chapters": [
@@ -42214,7 +42258,9 @@
       "source_event_ids": [
         "bg_event_1335"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_177e80d14a",
@@ -42222,14 +42268,14 @@
       "summary": "病獵公會第一代會長白鯨在一次行動中連同大部份會員一起消失，此後艾寶琳倖存區的希望彷彿一同消失。",
       "story_time": {
         "order": 145,
-        "label": "第 145 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 145,
       "chapters": [
         {
           "chapter": 145,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "病獵公會第一代會長白鯨在一次行動中連同大部份會員一起消失，此後艾寶琳倖存區的希望彷彿一同消失。"
         }
       ],
@@ -42244,7 +42290,9 @@
       "source_event_ids": [
         "bg_event_1333"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0b92c36a0b",
@@ -42252,8 +42300,8 @@
       "summary": "奎斯主張讓艾匡外出狩獵病者歷練，賴桑主張她學習帝王學並提防極有嫌疑的兄長艾康；王達尼投賴桑一票，犬京支持奎斯，M則建議遲些再決定。",
       "story_time": {
         "order": 145,
-        "label": "第 145 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 145,
       "chapters": [
@@ -42278,7 +42326,9 @@
       "source_event_ids": [
         "bg_event_1334"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fc98d136a4",
@@ -42286,8 +42336,8 @@
       "summary": "舞者入侵「哈姆雷特」雜貨店時，M與王達尼聯手以天拿水及香煙燒死舞者救出瓦禮。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42309,7 +42359,9 @@
       "source_event_ids": [
         "bg_event_1434"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fd9c8877ce",
@@ -42317,8 +42369,8 @@
       "summary": "M與董倫於天台對峙，因奎斯、犬京和賴桑到場而無法動手，董倫撤退。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42342,7 +42394,9 @@
       "source_event_ids": [
         "bg_event_1432"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_24142a8dd7",
@@ -42350,8 +42404,8 @@
       "summary": "M感到肌肉、關節、胸腹隱痛，並有時發燒影響視力，預示健康惡化。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42370,7 +42424,9 @@
       "source_event_ids": [
         "bg_event_1436"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ccd215b4bd",
@@ -42378,8 +42434,8 @@
       "summary": "敘事者跟蹤董倫到天台質問老賢與不破尚之死，雙方以雨傘與拐杖交手，一度互相對峙。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42401,7 +42457,9 @@
       "source_event_ids": [
         "bg_event_1338"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f8bb94d8b0",
@@ -42409,8 +42467,8 @@
       "summary": "為決定支助金額，王達尼與董倫喺賭場進行德州撲克對戰，雙方各持五十萬籌碼，最終董倫憑「Q」勝出。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42432,7 +42490,9 @@
       "source_event_ids": [
         "bg_event_1336"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ea0e025e44",
@@ -42440,8 +42500,8 @@
       "summary": "董倫疑似將一袋裝有艾幣嘅袋掉入垃圾桶收買負責發牌嘅荷官，操縱賭局。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42462,7 +42522,9 @@
       "source_event_ids": [
         "bg_event_1337"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5861def9a8",
@@ -42470,8 +42532,8 @@
       "summary": "瓦禮表示願意放棄上流身份，由王達尼安排護送前往大本營過平凡生活。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42493,7 +42555,9 @@
       "source_event_ids": [
         "bg_event_1435"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7e09543a01",
@@ -42501,8 +42565,8 @@
       "summary": "經撲克對戰後，病獵公會合共獲得三十五萬艾幣捐助（賭局結果五萬、董倫名義二十萬、國王名義十萬）。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42524,7 +42588,9 @@
       "source_event_ids": [
         "bg_event_1340"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_59934c7bb2",
@@ -42532,8 +42598,8 @@
       "summary": "大批病者及病翼入侵，第一道邊境圍牆被舞者踢破，守衛及居民合力應對。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
@@ -42552,7 +42618,9 @@
       "source_event_ids": [
         "bg_event_1433"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d9facc1cf1",
@@ -42560,14 +42628,14 @@
       "summary": "會長白鯨消失後，同行所有病獵公會成員遇害，呢個倖存區跌入谷底，變成搵錢緊要、享樂至上。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
         {
           "chapter": 146,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "會長白鯨消失後，同行所有病獵公會成員遇害，呢個倖存區跌入谷底，變成搵錢緊要、享樂至上。"
         }
       ],
@@ -42582,7 +42650,9 @@
       "source_event_ids": [
         "bg_event_1342"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e28cddaf36",
@@ -42590,14 +42660,14 @@
       "summary": "董倫加入艾寶琳倖存區無幾耐便建議實行童工政策，將細路由返學改為返工；賴桑指工廠童工因身形細被要求維修危險機器而夾斷手慘死。",
       "story_time": {
         "order": 146,
-        "label": "第 146 章前後",
-        "source": "chapter_order"
+        "label": "康城時期",
+        "source": "llm_period"
       },
       "first_mention_chapter": 146,
       "chapters": [
         {
           "chapter": 146,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "董倫加入艾寶琳倖存區無幾耐便建議實行童工政策，將細路由返學改為返工；賴桑指工廠童工因身形細被要求維修危險機器而夾斷手慘死"
         }
       ],
@@ -42613,7 +42683,9 @@
       "source_event_ids": [
         "bg_event_1341"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_63a82d18e2",
@@ -48022,8 +48094,8 @@
       "summary": "不破尚捉住博士嘅手時，博士身上嘅紅色能量轉移至不破尚身上，導致佢身上憑空出血撕裂。",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48044,7 +48116,9 @@
       "source_event_ids": [
         "bg_event_1574"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d5c29d73ed",
@@ -48052,8 +48126,8 @@
       "summary": "不破尚以拳腳近距離重擊博士，包括刺鼻拳、連環拳及轉身擺踢，將博士踢飛到牆邊。",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48074,7 +48148,9 @@
       "source_event_ids": [
         "bg_event_1573"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8cfbdeb9fc",
@@ -48082,8 +48158,8 @@
       "summary": "余智海博士將密室入面嘅催淚煙霧吸收後，無視飛虎隊射傷右腿，更用手指手勢向靠近嘅隊員開槍",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48105,7 +48181,9 @@
       "source_event_ids": [
         "bg_event_1570"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4ea3493da1",
@@ -48113,8 +48191,8 @@
       "summary": "博士拾起手槍向自己身體猛射，將子彈吸收後再站起行動。",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48133,7 +48211,9 @@
       "source_event_ids": [
         "bg_event_1575"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c399b74a20",
@@ -48141,8 +48221,8 @@
       "summary": "余智海博士喺密室內以反射能力擊殺多名飛虎隊員，最終不破尚獨自肉搏拖延佢，銘凱以戰術反光刀協助。",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48166,7 +48246,9 @@
       "source_event_ids": [
         "bg_event_1571"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_78b8604a79",
@@ -48174,8 +48256,8 @@
       "summary": "余智海博士表示要將「笑聲」歸還畀所有人，因為佢嘅女曾被人以嘲笑、恥笑、譏笑害死。",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48197,7 +48279,9 @@
       "source_event_ids": [
         "bg_event_1576"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6e4722d544",
@@ -48205,8 +48289,8 @@
       "summary": "飛虎隊喺地下密室發現余智海博士，並宣布佢因靈實醫院非法實驗等罪行被捕",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48228,7 +48312,9 @@
       "source_event_ids": [
         "bg_event_1569"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5b686a8d94",
@@ -48236,8 +48322,8 @@
       "summary": "唔破尚憑腳步回音探查到地毯下嘅隱形密室通道口",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48256,7 +48342,9 @@
       "source_event_ids": [
         "bg_event_1568"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_393905ccca",
@@ -48264,8 +48352,8 @@
       "summary": "受病童幻覺影響，記錄影片嘅飛虎隊員對樓下三名同袍瘋狂開槍後逃走",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48284,7 +48372,9 @@
       "source_event_ids": [
         "bg_event_1565"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d837849867",
@@ -48292,8 +48382,8 @@
       "summary": "銘凱喺大廳附近發現被舞者踢傷嘅記錄者後，取去其步槍作為防身並接手記錄",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48314,7 +48404,9 @@
       "source_event_ids": [
         "bg_event_1566"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ffdce615d7",
@@ -48322,8 +48414,8 @@
       "summary": "銘凱用戰術反光刀擲向博士臉頰，為不破尚創造突擊空檔。",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48345,7 +48437,9 @@
       "source_event_ids": [
         "bg_event_1578"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_40fd3c2e63",
@@ -48353,8 +48447,8 @@
       "summary": "一名手持衝鋒槍嘅隊員踏步走向雙胞胎女孩途中，被房間衝出嘅病牙狂啃致死",
       "story_time": {
         "order": 169,
-        "label": "第 169 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 169,
       "chapters": [
@@ -48373,7 +48467,9 @@
       "source_event_ids": [
         "bg_event_1564"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4ed84921a8",
@@ -49526,8 +49622,8 @@
       "summary": "敘事者與滿天確認靈實醫院曾秘密對精神科病人進行病者相關活體實驗，且推測病者為人為造成。",
       "story_time": {
         "order": 175,
-        "label": "第 175 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 175,
       "chapters": [
@@ -49548,7 +49644,9 @@
       "source_event_ids": [
         "bg_event_1611"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ac3555956f",
@@ -49556,8 +49654,8 @@
       "summary": "大本營決定暫時囚禁半人半怪的第二任助手，由賴三等人負責記錄研究。",
       "story_time": {
         "order": 175,
-        "label": "第 175 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 175,
       "chapters": [
@@ -49579,7 +49677,9 @@
       "source_event_ids": [
         "bg_event_1608"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d22d381a54",
@@ -49587,8 +49687,8 @@
       "summary": "白魂喺賭場玩德州撲克，唔夠十分鐘就輸到近乎清光帶出門嘅艾幣。",
       "story_time": {
         "order": 175,
-        "label": "第 175 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 175,
       "chapters": [
@@ -49609,7 +49709,9 @@
       "source_event_ids": [
         "bg_event_1615"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2ae9303e94",
@@ -49617,8 +49719,8 @@
       "summary": "敘事者與王達尼透過下水道非法進入艾寶琳倖存區，準備召集奎斯、賴桑等人出發往病者之都。",
       "story_time": {
         "order": 175,
-        "label": "第 175 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 175,
       "chapters": [
@@ -49641,7 +49743,9 @@
       "source_event_ids": [
         "bg_event_1613"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cb472af319",
@@ -49649,8 +49753,8 @@
       "summary": "奎斯、賴桑、王達尼決定一齊跟主角進入病者之都調查白鯨下落。",
       "story_time": {
         "order": 176,
-        "label": "第 176 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 176,
       "chapters": [
@@ -49674,7 +49778,9 @@
       "source_event_ids": [
         "bg_event_1620"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6adf6ec2f5",
@@ -49682,8 +49788,8 @@
       "summary": "奎斯與賴桑同皇室政務官、福利宮、財務部長商討興辦「病獵學院」嘅事宜。",
       "story_time": {
         "order": 176,
-        "label": "第 176 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 176,
       "chapters": [
@@ -49705,7 +49811,9 @@
       "source_event_ids": [
         "bg_event_1618"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1eab4d3b2d",
@@ -49713,8 +49821,8 @@
       "summary": "白魂向艾康王子使出「口水拳」，被解除護衛職權一星期，王達尼以賠款作條件達成協議。",
       "story_time": {
         "order": 176,
-        "label": "第 176 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 176,
       "chapters": [
@@ -49737,7 +49845,9 @@
       "source_event_ids": [
         "bg_event_1617"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_82464569a9",
@@ -49745,8 +49855,8 @@
       "summary": "主角向艾匡提出係要脫離社會束縛，定係接受社會真實面貌並對付佢嘅選擇。",
       "story_time": {
         "order": 176,
-        "label": "第 176 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 176,
       "chapters": [
@@ -49767,7 +49877,9 @@
       "source_event_ids": [
         "bg_event_1619"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5325f8ce3a",
@@ -49775,8 +49887,8 @@
       "summary": "主角決定讓艾匡跟賴桑學習病獵技能。",
       "story_time": {
         "order": 176,
-        "label": "第 176 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 176,
       "chapters": [
@@ -49798,7 +49910,9 @@
       "source_event_ids": [
         "bg_event_1621"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_59993226ff",
@@ -49806,8 +49920,8 @@
       "summary": "區內有堆人係潛藏信徒，走之前一日，突然拐走埋艾匡公主先走。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -49829,7 +49943,9 @@
       "source_event_ids": [
         "bg_event_1623"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_02d86f2f24",
@@ -49837,8 +49953,8 @@
       "summary": "公仔於靈實醫院前用繩圈套住舌女頸部，再以十字弓射殺，協助敘事者脫險。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -49859,7 +49975,9 @@
       "source_event_ids": [
         "bg_event_1628"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_dceb48110f",
@@ -49867,8 +49985,8 @@
       "summary": "娃娃用從外面蜂窩拆下的天然蜜糖製作蜜糖鬆餅，食用後令敘事者產生強烈、如獲色彩般的感官衝擊。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -49889,7 +50007,9 @@
       "source_event_ids": [
         "bg_event_1632"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_66e3b2ba1b",
@@ -49897,8 +50017,8 @@
       "summary": "敘事者因天色已晚，接受公仔一家邀請寄宿於滿天的研究室一晚。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -49920,7 +50040,9 @@
       "source_event_ids": [
         "bg_event_1630"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c16338eeff",
@@ -49928,8 +50050,8 @@
       "summary": "敘事者決定親自前往靈實醫院將需翻譯嘅信件交俾大BOSS。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -49948,7 +50070,9 @@
       "source_event_ids": [
         "bg_event_1627"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a97f0e9a4b",
@@ -49956,8 +50080,8 @@
       "summary": "敘事者計劃於翌日（聽日）前往寶康公園調查白鯨相關事件，並向滿天借得耳塞。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -49979,7 +50103,9 @@
       "source_event_ids": [
         "bg_event_1631"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_87f042ad9c",
@@ -49987,8 +50113,8 @@
       "summary": "敘事者分配王達尼、犬京、奎斯前往「病者平權組織」根據地進行調查。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -50012,7 +50138,9 @@
       "source_event_ids": [
         "bg_event_1625"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fc084232b8",
@@ -50020,8 +50148,8 @@
       "summary": "白鯨帶領下秘密行動、調查，先連根拔起成個組織趕出艾寶琳倖存區。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -50043,7 +50171,9 @@
       "source_event_ids": [
         "bg_event_1622"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b268b845ab",
@@ -50051,8 +50181,8 @@
       "summary": "白鯨於六月六日失蹤，滿天認為更貼切的說法是「死咗」。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -50074,7 +50204,9 @@
       "source_event_ids": [
         "bg_event_1629"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a16c925008",
@@ -50082,8 +50214,8 @@
       "summary": "敘事者推測四大頭目（南愚、北賢、三腦、男病童）聯手合力圍攻病獵公會整隊人，導致白鯨最終難逃一劫。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -50108,7 +50240,9 @@
       "source_event_ids": [
         "bg_event_1624"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1131194e6a",
@@ -50116,8 +50250,8 @@
       "summary": "敘事者指派賴桑、白魂去「病者和平協會」根據地進行調查，敘事者本人亦會跟隨。",
       "story_time": {
         "order": 178,
-        "label": "第 178 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 178,
       "chapters": [
@@ -50140,7 +50274,9 @@
       "source_event_ids": [
         "bg_event_1626"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_97470d2f2d",
@@ -50148,8 +50284,8 @@
       "summary": "主角帶同公仔、娃娃去寶康公園，調查信中提及嘅白鯨帶領嘅病者狩獵行動線索。",
       "story_time": {
         "order": 179,
-        "label": "第 179 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 179,
       "chapters": [
@@ -50172,7 +50308,9 @@
       "source_event_ids": [
         "bg_event_1633"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_153f765af0",
@@ -50180,8 +50318,8 @@
       "summary": "主角從病窩中帶走任務文件同成員生前使用嘅劍刃，打算交畀奎斯等人。",
       "story_time": {
         "order": 179,
-        "label": "第 179 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 179,
       "chapters": [
@@ -50202,7 +50340,9 @@
       "source_event_ids": [
         "bg_event_1638"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_651d05d884",
@@ -50210,8 +50350,8 @@
       "summary": "主角用白鯨嘅牙齒項鍊逐一刺死奄奄一息嘅竊屵賊，確認佢哋生前係病獵公會成員。",
       "story_time": {
         "order": 179,
-        "label": "第 179 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 179,
       "chapters": [
@@ -50232,7 +50372,9 @@
       "source_event_ids": [
         "bg_event_1637"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a43fdd78ee",
@@ -50240,8 +50382,8 @@
       "summary": "主角同公仔喺病窩內擊殺多隻竊屍賊，並遭逃脫嘅一隻召來數十隻持武器嘅同伴圍攻。",
       "story_time": {
         "order": 179,
-        "label": "第 179 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 179,
       "chapters": [
@@ -50262,7 +50404,9 @@
       "source_event_ids": [
         "bg_event_1635"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0955c3fd59",
@@ -50270,8 +50414,8 @@
       "summary": "主角三人在寶康公園西北面泥地上發現由竊屍賊自行搭建嘅病窩。",
       "story_time": {
         "order": 179,
-        "label": "第 179 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 179,
       "chapters": [
@@ -50290,7 +50434,9 @@
       "source_event_ids": [
         "bg_event_1634"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_aa2ca718c3",
@@ -50298,8 +50444,8 @@
       "summary": "主角同公仔跌穿木板後發現祭壇，搵到一張白鯨、奎斯、賴桑等人喺病獵公會前嘅合照。",
       "story_time": {
         "order": 179,
-        "label": "第 179 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 179,
       "chapters": [
@@ -50323,7 +50469,9 @@
       "source_event_ids": [
         "bg_event_1636"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d41adc7426",
@@ -50331,14 +50479,14 @@
       "summary": "六月六號當天，病獵公會全體出動前往寶康公園營救，成為三腦設計嘅陷阱，死傷慘重",
       "story_time": {
         "order": 180,
-        "label": "第 180 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 180,
       "chapters": [
         {
           "chapter": 180,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "六月六號當天，病獵公會全體出動前往寶康公園營救，成為三腦設計嘅陷阱，死傷慘重"
         }
       ],
@@ -50353,7 +50501,9 @@
       "source_event_ids": [
         "bg_event_1640"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_abf77574c1",
@@ -50361,14 +50511,14 @@
       "summary": "老師宣佈「聽日出發」，全體成員同意前往將軍澳第44區綜合大樓",
       "story_time": {
         "order": 180,
-        "label": "第 180 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 180,
       "chapters": [
         {
           "chapter": 180,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "老師宣佈「聽日出發」，全體成員同意前往將軍澳第44區綜合大樓"
         }
       ],
@@ -50381,7 +50531,9 @@
       "source_event_ids": [
         "bg_event_1642"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cad3d2615f",
@@ -50389,14 +50541,14 @@
       "summary": "六月六號當日，病者平權組織計劃於寶康公園進行集體自殺血祭儀式，並將死者轉化為病者",
       "story_time": {
         "order": 180,
-        "label": "第 180 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 180,
       "chapters": [
         {
           "chapter": 180,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "六月六號當日，病者平權組織計劃於寶康公園進行集體自殺血祭儀式，並將死者轉化為病者"
         }
       ],
@@ -50409,7 +50561,9 @@
       "source_event_ids": [
         "bg_event_1639"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fb55473d4c",
@@ -50417,14 +50571,14 @@
       "summary": "老師進入寶康公園兒童樂園高塔，發現塔頂血字「Hope」及「Road 38」，並拆開鐵皮進入塔內，發現牆上血繪地圖",
       "story_time": {
         "order": 180,
-        "label": "第 180 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 180,
       "chapters": [
         {
           "chapter": 180,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "老師進入寶康公園兒童樂園高塔，發現塔頂血字「Hope」及「Road 38」，並拆開鐵皮進入塔內，發現牆上血繪地圖"
         }
       ],
@@ -50437,7 +50591,9 @@
       "source_event_ids": [
         "bg_event_1641"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_86500fe0b3",
@@ -50445,8 +50601,8 @@
       "summary": "敘述者同奎斯、賴桑、王達尼、犬京、白魂出發往坑口對付大佬",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50471,7 +50627,9 @@
       "source_event_ids": [
         "bg_event_1643"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ae100674fa",
@@ -50479,8 +50637,8 @@
       "summary": "團隊喺單車徑遭遇病嘴、舌女、竊屍賊等病者襲擊",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50499,7 +50657,9 @@
       "source_event_ids": [
         "bg_event_1644"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4ae326ac4d",
@@ -50507,8 +50667,8 @@
       "summary": "敘述者用電路接閉技術偷車，王達尼用天拿水點火牆抵擋病者大軍",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50529,7 +50689,9 @@
       "source_event_ids": [
         "bg_event_1645"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_473de7040b",
@@ -50537,8 +50699,8 @@
       "summary": "賴桑釋放彩煙到車尾後，令病獸視線模糊並消失於車後",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50560,7 +50722,9 @@
       "source_event_ids": [
         "bg_event_1649"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_08bddb4036",
@@ -50568,8 +50732,8 @@
       "summary": "敘述者用王達尼背包內嘅紅藥水同繃帶為犬京處理傷口",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50591,7 +50755,9 @@
       "source_event_ids": [
         "bg_event_1651"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_15aa52f3b9",
@@ -50599,8 +50765,8 @@
       "summary": "犬京鬆手跌落地面，沿馬路拖行導致雙腳擦傷褲子半爛",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50621,7 +50787,9 @@
       "source_event_ids": [
         "bg_event_1650"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_5d26cd3375",
@@ -50629,8 +50797,8 @@
       "summary": "犬京喺小巴車頂起跳，躍到病獸胸膛並用短刀刺其頭頂",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50652,7 +50820,9 @@
       "source_event_ids": [
         "bg_event_1648"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1048f97c7c",
@@ -50660,8 +50830,8 @@
       "summary": "病獸出現並同病翼一齊襲擊小巴",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50682,7 +50852,9 @@
       "source_event_ids": [
         "bg_event_1646"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_68cdda0430",
@@ -50690,8 +50862,8 @@
       "summary": "白魂踏出倖存區時回望艾寶琳，掛念艾匡公主",
       "story_time": {
         "order": 181,
-        "label": "第 181 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 181,
       "chapters": [
@@ -50713,7 +50885,9 @@
       "source_event_ids": [
         "bg_event_1647"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7fd675877e",
@@ -50721,8 +50895,8 @@
       "summary": "賴桑在門後殺死埋伏的大眼，大眼的叫聲引來街上病者大軍湧入大樓。",
       "story_time": {
         "order": 182,
-        "label": "第 182 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 182,
       "chapters": [
@@ -50743,7 +50917,9 @@
       "source_event_ids": [
         "bg_event_1654"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e6966d9035",
@@ -50751,8 +50927,8 @@
       "summary": "賴桑用錨鉤發射器架設滑繩，隊員逐一由居屋滑向政府綜合大樓。",
       "story_time": {
         "order": 182,
-        "label": "第 182 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 182,
       "chapters": [
@@ -50773,7 +50949,9 @@
       "source_event_ids": [
         "bg_event_1653"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cbb25dfa47",
@@ -50781,8 +50959,8 @@
       "summary": "王達尼在大樓走廊佈置鋼索、獵網、刺尖、YAG酒瓶燃燒彈及圈套等陷阱以拖延病者。",
       "story_time": {
         "order": 182,
-        "label": "第 182 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 182,
       "chapters": [
@@ -50803,7 +50981,9 @@
       "source_event_ids": [
         "bg_event_1655"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_30c5760dc7",
@@ -50811,8 +50991,8 @@
       "summary": "王達尼出發前將紅色鞭炮及火機交給敘事者，讓其最後留守頂門時點燃。",
       "story_time": {
         "order": 182,
-        "label": "第 182 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 182,
       "chapters": [
@@ -50833,7 +51013,9 @@
       "source_event_ids": [
         "bg_event_1656"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_59e5f2175e",
@@ -50841,8 +51023,8 @@
       "summary": "賴桑最後滑繩時，敘事者/王達尼一方以鞭炮掩護；惟途中一隻病嘴撲出黏住賴桑腰部。",
       "story_time": {
         "order": 182,
-        "label": "第 182 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 182,
       "chapters": [
@@ -50864,7 +51046,9 @@
       "source_event_ids": [
         "bg_event_1657"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a4674bc4e6",
@@ -50872,8 +51056,8 @@
       "summary": "為了避開地面病者，隊伍利用竊屍賊搭建的接駁口，由大樓內穿梭前往政府綜合大樓方向。",
       "story_time": {
         "order": 182,
-        "label": "第 182 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 182,
       "chapters": [
@@ -50892,7 +51076,9 @@
       "source_event_ids": [
         "bg_event_1652"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_21f486718d",
@@ -50900,8 +51086,8 @@
       "summary": "北賢以彈指釋出微弱電流令主角等人小腿麻痺短暫跪地。",
       "story_time": {
         "order": 183,
-        "label": "第 183 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 183,
       "chapters": [
@@ -50922,7 +51108,9 @@
       "source_event_ids": [
         "bg_event_1666"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c480a60a6a",
@@ -50930,8 +51118,8 @@
       "summary": "南愚首先從樓梯踏上九樓，其後北賢亦緩緩從後而出",
       "story_time": {
         "order": 183,
-        "label": "第 183 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 183,
       "chapters": [
@@ -50953,7 +51141,9 @@
       "source_event_ids": [
         "bg_event_1663"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7a07641512",
@@ -50961,8 +51151,8 @@
       "summary": "南愚咬破手掌露出滲血傷口，意圖將血液揮灑到主角等人身上點火。",
       "story_time": {
         "order": 183,
-        "label": "第 183 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 183,
       "chapters": [
@@ -50983,7 +51173,9 @@
       "source_event_ids": [
         "bg_event_1664"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ae1120d3b9",
@@ -51383,8 +51575,8 @@
       "summary": "北賢將全身凝聚嘅雷電力量貫穿到天空，影子從龐大電柱中消失。",
       "story_time": {
         "order": 184,
-        "label": "第 184 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 184,
       "chapters": [
@@ -51405,7 +51597,9 @@
       "source_event_ids": [
         "bg_event_1679"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e909bf90cd",
@@ -51413,8 +51607,8 @@
       "summary": "北賢全身運電近乎亮起電藍色，燃燒自身生命進入最終狀態",
       "story_time": {
         "order": 184,
-        "label": "第 184 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 184,
       "chapters": [
@@ -51435,7 +51629,9 @@
       "source_event_ids": [
         "bg_event_1675"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9585b32a36",
@@ -51443,8 +51639,8 @@
       "summary": "賴桑用暗器袖箭射中北賢背部心臟位置，北賢因陷入極度沉思冇注意到。",
       "story_time": {
         "order": 184,
-        "label": "第 184 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 184,
       "chapters": [
@@ -51466,7 +51662,9 @@
       "source_event_ids": [
         "bg_event_1678"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9eacf3a622",
@@ -51474,8 +51672,8 @@
       "summary": "奎斯以狩獵小刀刺入北賢腹中，再用膝蓋將刀推得更入",
       "story_time": {
         "order": 184,
-        "label": "第 184 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 184,
       "chapters": [
@@ -51497,7 +51695,9 @@
       "source_event_ids": [
         "bg_event_1673"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2198ca2261",
@@ -51505,8 +51705,8 @@
       "summary": "奎斯同賴桑刻意透露聲音將北賢引入連接大樓嘅坑口體育館",
       "story_time": {
         "order": 184,
-        "label": "第 184 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 184,
       "chapters": [
@@ -51529,7 +51729,9 @@
       "source_event_ids": [
         "bg_event_1676"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_76173ef612",
@@ -51537,8 +51739,8 @@
       "summary": "奎斯、賴桑喺室內籃球場推出籃球車並以彈地籃球模糊北賢聽力",
       "story_time": {
         "order": 184,
-        "label": "第 184 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 184,
       "chapters": [
@@ -51561,7 +51763,9 @@
       "source_event_ids": [
         "bg_event_1677"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8ed87ed87b",
@@ -51569,8 +51773,8 @@
       "summary": "賴桑同奎斯以鋼索陷阱將北賢扯到半空倒吊",
       "story_time": {
         "order": 184,
-        "label": "第 184 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 184,
       "chapters": [
@@ -51593,7 +51797,9 @@
       "source_event_ids": [
         "bg_event_1674"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_be6a231cc2",
@@ -51601,8 +51807,8 @@
       "summary": "南愚喺犬京、王達尼、Ricky夾擊之下自爆身亡，連同北賢都以自我毀滅方式死去",
       "story_time": {
         "order": 185,
-        "label": "第 185 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 185,
       "chapters": [
@@ -51626,7 +51832,9 @@
       "source_event_ids": [
         "bg_event_1680"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c9d428d3fa",
@@ -51634,14 +51842,14 @@
       "summary": "九樓大樓上層曾經發生過一場大戰，導致石柱斷裂、天花板倒塌等嚴重破壞。",
       "story_time": {
         "order": 185,
-        "label": "第 185 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 185,
       "chapters": [
         {
           "chapter": 185,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "九樓大樓上層曾經發生過一場大戰，導致石柱斷裂、天花板倒塌等嚴重破壞。"
         }
       ],
@@ -51654,7 +51862,9 @@
       "source_event_ids": [
         "bg_event_1685"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d36387b817",
@@ -51662,8 +51872,8 @@
       "summary": "犬京同王達尼用防火沙對付南愚，南愚最後自爆身亡",
       "story_time": {
         "order": 185,
-        "label": "第 185 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 185,
       "chapters": [
@@ -51685,7 +51895,9 @@
       "source_event_ids": [
         "bg_event_1681"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_410f060846",
@@ -51693,8 +51905,8 @@
       "summary": "北賢造成極端天氣，落大雨、八級風暴，沿海聚成龍捲風",
       "story_time": {
         "order": 185,
-        "label": "第 185 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 185,
       "chapters": [
@@ -51715,7 +51927,9 @@
       "source_event_ids": [
         "bg_event_1684"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_07c46fa993",
@@ -51723,8 +51937,8 @@
       "summary": "犬京抱住必死決心返身救Ricky，喺南愚自爆時同歸於盡；王達尼喺外圍見證慘劇後痛哭",
       "story_time": {
         "order": 185,
-        "label": "第 185 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 185,
       "chapters": [
@@ -51747,7 +51961,9 @@
       "source_event_ids": [
         "bg_event_1682"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9b17d38247",
@@ -51755,8 +51971,8 @@
       "summary": "敘事者同白魂喺九樓發現多具男孩屍體，身上有艾寶琳身份證同若隱若現嘅紅點",
       "story_time": {
         "order": 185,
-        "label": "第 185 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 185,
       "chapters": [
@@ -51777,7 +51993,9 @@
       "source_event_ids": [
         "bg_event_1683"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ef199209aa",
@@ -51785,8 +52003,8 @@
       "summary": "敘事者與白魂追蹤地上的血跡，穿越九樓大樓，最終發現一群病翼的巢穴。",
       "story_time": {
         "order": 185,
-        "label": "第 185 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 185,
       "chapters": [
@@ -51808,7 +52026,9 @@
       "source_event_ids": [
         "bg_event_1686"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f1d9da7082",
@@ -51816,14 +52036,14 @@
       "summary": "Nosyag獨自進入「病者之都」生存接近數個月，調查並嘗試進入大樓最高層",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
         {
           "chapter": 186,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "Nosyag獨自進入「病者之都」生存接近數個月，調查並嘗試進入大樓最高層"
         }
       ],
@@ -51839,7 +52059,9 @@
       "source_event_ids": [
         "bg_event_1691"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a13fa6df75",
@@ -51847,8 +52069,8 @@
       "summary": "",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -51869,7 +52091,9 @@
       "source_event_ids": [
         "bg_event_1696"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8c0f7b960e",
@@ -51877,8 +52101,8 @@
       "summary": "敘事者同白魂經過九曲十三彎到達九樓盡頭，發現一道被鎖上嘅大鐵門",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -51899,7 +52123,9 @@
       "source_event_ids": [
         "bg_event_1687"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_87fec93210",
@@ -51907,8 +52133,8 @@
       "summary": "九樓地板因裂隙擴散而崩塌，放滿男童屍堆嘅地板陷落，露出下層火焰",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -51927,7 +52153,9 @@
       "source_event_ids": [
         "bg_event_1689"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_55dcb12c77",
@@ -51935,14 +52163,14 @@
       "summary": "「病獵公會」成員喺寶康公園受到病者大規模埋伏，白鯨被帶走，副會長Nosyag倖存",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
         {
           "chapter": 186,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "「病獵公會」成員喺寶康公園受到病者大規模埋伏，白鯨被帶走，副會長Nosyag倖存"
         }
       ],
@@ -51959,7 +52187,9 @@
       "source_event_ids": [
         "bg_event_1690"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c233036411",
@@ -51967,8 +52197,8 @@
       "summary": "敘事者踏上彎曲鋼鐵，從病翼巢穴嘅斷掌上取得另一半鎖匙",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -51987,7 +52217,9 @@
       "source_event_ids": [
         "bg_event_1693"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4474427efe",
@@ -51995,8 +52227,8 @@
       "summary": "",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -52017,7 +52249,9 @@
       "source_event_ids": [
         "bg_event_1697"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_e2f482d008",
@@ -52025,8 +52259,8 @@
       "summary": "",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -52047,7 +52281,9 @@
       "source_event_ids": [
         "bg_event_1695"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0cf2ffc5af",
@@ -52055,8 +52291,8 @@
       "summary": "敘事者用AA膠將兩半鎖匙黏合，插到門穴扭動成功開鎖",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -52075,7 +52311,9 @@
       "source_event_ids": [
         "bg_event_1694"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6e0b04b938",
@@ -52083,8 +52321,8 @@
       "summary": "鐵門旁邊發現死去超過半年嘅男人Nosyag，佢死前仍緊抱日記",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -52105,7 +52343,9 @@
       "source_event_ids": [
         "bg_event_1688"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8f0fa92d57",
@@ -52113,8 +52353,8 @@
       "summary": "白魂以凌厲劍術獨力對抗七隻病翼，將其斬殺",
       "story_time": {
         "order": 186,
-        "label": "第 186 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 186,
       "chapters": [
@@ -52135,7 +52375,9 @@
       "source_event_ids": [
         "bg_event_1692"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_16ab9f464b",
@@ -52143,8 +52385,8 @@
       "summary": "敘事者同白魂被大量「病獵」圍攻，敘事者身中多刀、白魂右手被錘碎（幻覺中），最終雙方皆陷入絕望劣勢。",
       "story_time": {
         "order": 187,
-        "label": "第 187 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 187,
       "chapters": [
@@ -52166,7 +52408,9 @@
       "source_event_ids": [
         "bg_event_1698"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_4c4b39866d",
@@ -52174,14 +52418,14 @@
       "summary": "敘事者瀕死時進入虛夢，於大本營天台與已故嘅「老賢」對話，回憶起守護大本營嘅原因。",
       "story_time": {
         "order": 187,
-        "label": "第 187 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 187,
       "chapters": [
         {
           "chapter": 187,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "敘事者瀕死時進入虛夢，於大本營天台與已故嘅「老賢」對話，回憶起守護大本營嘅原因。"
         }
       ],
@@ -52194,7 +52438,9 @@
       "source_event_ids": [
         "bg_event_1699"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f9d71dc8df",
@@ -52202,8 +52448,8 @@
       "summary": "敘事者瞳孔收縮後發現一切皆為幻覺，「病獵」實為施放幻覺嘅病童，傷口自動縫合，聖堂場景瓦解為政府綜合大樓十樓原貌。",
       "story_time": {
         "order": 187,
-        "label": "第 187 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 187,
       "chapters": [
@@ -52224,7 +52470,9 @@
       "source_event_ids": [
         "bg_event_1700"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d6052401d8",
@@ -52232,8 +52480,8 @@
       "summary": "幻覺破滅後，白鯨（已病化）對敘事者同白魂發動實體攻擊，敘事者以傘做盾、白魂以左手持刀劍反擊，最終兩人並肩作戰仍處於體力耗盡嘅劣勢。",
       "story_time": {
         "order": 187,
-        "label": "第 187 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 187,
       "chapters": [
@@ -52255,7 +52503,9 @@
       "source_event_ids": [
         "bg_event_1701"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_a1c1b0c7ed",
@@ -52263,8 +52513,8 @@
       "summary": "敘事者與白魂引導白鯨斬毀十樓多條石柱，導致樓底激烈震盪、天花石磚墜落，白鯨施放的幻覺隨之消失",
       "story_time": {
         "order": 188,
-        "label": "第 188 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 188,
       "chapters": [
@@ -52286,7 +52536,9 @@
       "source_event_ids": [
         "bg_event_1705"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ec3677729d",
@@ -52294,14 +52546,14 @@
       "summary": "敘事者扣住白鯨時腦中浮現其記憶片段，包括病獵公會、病者對戰、撰寫文章、聖堂日落、同伴戰死、孤獨及守護艾寶琳的強烈意志，最終因腦部劇痛而鬆手",
       "story_time": {
         "order": 188,
-        "label": "第 188 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 188,
       "chapters": [
         {
           "chapter": 188,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "敘事者扣住白鯨時腦中浮現其記憶片段，包括病獵公會、病者對戰、撰寫文章、聖堂日落、同伴戰死、孤獨及守護艾寶琳的強烈意志，最"
         }
       ],
@@ -52317,7 +52569,9 @@
       "source_event_ids": [
         "bg_event_1704"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": true,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fd5a028f39",
@@ -52325,8 +52579,8 @@
       "summary": "戰鬥結束後敘事者失去意識，醒來時身處魔鬼山沿崖，旁邊傳來陌生聲音",
       "story_time": {
         "order": 188,
-        "label": "第 188 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 188,
       "chapters": [
@@ -52345,7 +52599,9 @@
       "source_event_ids": [
         "bg_event_1706"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fc1efc7952",
@@ -52353,8 +52609,8 @@
       "summary": "白魂因受白鯨潛意識影響，誤將病童視為白鯨分身並持續迴避，直至殺光病童後幻覺消失方恢復",
       "story_time": {
         "order": 188,
-        "label": "第 188 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 188,
       "chapters": [
@@ -52377,7 +52633,9 @@
       "source_event_ids": [
         "bg_event_1703"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_94427a51f1",
@@ -52385,8 +52643,8 @@
       "summary": "敘事者與白魂於大樓內對決白鯨，白鯨透過控制病童製造幻覺影響白魂，最終大樓石柱被斬毀導致天花塌陷，白鯨被瓦石壓住後由白魂給予頸項致命一擊",
       "story_time": {
         "order": 188,
-        "label": "第 188 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 188,
       "chapters": [
@@ -52409,7 +52667,9 @@
       "source_event_ids": [
         "bg_event_1702"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f460f97028",
@@ -52417,8 +52677,8 @@
       "summary": "余智海將白魂嘅斬擊傷害反射到白魂身上，造成「Z」型斬割傷口並捏住其頸喉",
       "story_time": {
         "order": 189,
-        "label": "第 189 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 189,
       "chapters": [
@@ -52440,7 +52700,9 @@
       "source_event_ids": [
         "bg_event_1711"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_6acb462fb6",
@@ -52448,8 +52710,8 @@
       "summary": "余智海爆發能量擊飛敘事者同白魂，因敘事者以女孩器皿作要脅而退後並轉身逃脫",
       "story_time": {
         "order": 189,
-        "label": "第 189 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 189,
       "chapters": [
@@ -52471,7 +52733,9 @@
       "source_event_ids": [
         "bg_event_1713"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_9363292d13",
@@ -52861,8 +53125,8 @@
       "summary": "喺暴雨狂風下，敘事者用鯨牙大劍引開大量病者，讓奎斯同王達尼先返回大本營。",
       "story_time": {
         "order": 190,
-        "label": "第 190 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 190,
       "chapters": [
@@ -52883,7 +53147,9 @@
       "source_event_ids": [
         "bg_event_1720"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b4f759e66c",
@@ -52891,8 +53157,8 @@
       "summary": "敘事者被舌女舔傷手臂，但酸液隨雨水沖走，未受感染。",
       "story_time": {
         "order": 190,
-        "label": "第 190 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 190,
       "chapters": [
@@ -52911,7 +53177,9 @@
       "source_event_ids": [
         "bg_event_1721"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_bfeb64dded",
@@ -52919,8 +53187,8 @@
       "summary": "王達尼表示「六個去、三個返」，暗示任務多人傷亡",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -52939,7 +53207,9 @@
       "source_event_ids": [
         "bg_event_1724"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_83741091bc",
@@ -52947,8 +53217,8 @@
       "summary": "少佐下令大本營即時封鎖所有出入口並準備全體撤離，因龍捲風將於數小時內吹襲。",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -52967,7 +53237,9 @@
       "source_event_ids": [
         "bg_event_1730"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_eec9f68d6c",
@@ -52975,8 +53247,8 @@
       "summary": "明雲向少佐報告將軍澳海濱對出海域正逐漸形成一股龍捲風，吹陸方向為大本營，預計半日內到達，威力難以想像。",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -52997,7 +53269,9 @@
       "source_event_ids": [
         "bg_event_1729"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8f667b06ec",
@@ -53005,8 +53279,8 @@
       "summary": "康城領導人明雲透過短波通訊聯絡少佐，告知近日天氣異常的發現",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -53027,7 +53301,9 @@
       "source_event_ids": [
         "bg_event_1728"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_23325dad30",
@@ -53035,8 +53311,8 @@
       "summary": "王達尼於新都城三期電器鋪修好相機，發現內有多張瑜小六的偷拍照，拍攝地點全在大本營",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -53057,7 +53333,9 @@
       "source_event_ids": [
         "bg_event_1726"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_dac192c155",
@@ -53065,8 +53343,8 @@
       "summary": "王達尼利用特製迴紋針開鎖潛入鎖上嘅攝影大樓，藏身暗房，發現器材租用室有論文寫住瑜小六名字以及病者照片。",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -53087,7 +53365,9 @@
       "source_event_ids": [
         "bg_event_1731"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_33a29742d7",
@@ -53095,8 +53375,8 @@
       "summary": "王達尼稱已將余智海所有研究器材整爛，並偷走研究文件",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -53117,7 +53397,9 @@
       "source_event_ids": [
         "bg_event_1725"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c49539f054",
@@ -53125,8 +53407,8 @@
       "summary": "王達尼以一萬艾幣賄賂艾寶琳邊境守衛長，於暴風雨中進入艾寶琳",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -53149,7 +53431,9 @@
       "source_event_ids": [
         "bg_event_1723"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cdb5969f11",
@@ -53157,8 +53441,8 @@
       "summary": "王達尼將相機留給奎斯，獨自回大本營營救愛紗並對付潛入敵人",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -53180,7 +53464,9 @@
       "source_event_ids": [
         "bg_event_1727"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_110e1df381",
@@ -53188,8 +53474,8 @@
       "summary": "瑜小六被綁手綁腳、用黑膠紙封口，坐於攝影大樓內荒廢小房嘅椅子上，賴三老師聲稱佢將「正式成為佢個女」。",
       "story_time": {
         "order": 191,
-        "label": "第 191 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 191,
       "chapters": [
@@ -53210,7 +53496,9 @@
       "source_event_ids": [
         "bg_event_1733"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_484b24e652",
@@ -53605,8 +53893,8 @@
       "summary": "滿天按下T按鈕，以男病童腦部釋放腦電波令余智海陷入幻覺",
       "story_time": {
         "order": 192,
-        "label": "第 192 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 192,
       "chapters": [
@@ -53627,7 +53915,9 @@
       "source_event_ids": [
         "bg_event_1739"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2036fd04ea",
@@ -53635,8 +53925,8 @@
       "summary": "余智海用手掌貼緊大本營機關大閘，令其扭曲變形，破出一個大洞。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53657,7 +53947,9 @@
       "source_event_ids": [
         "bg_event_1753"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f3cecf3c25",
@@ -53665,8 +53957,8 @@
       "summary": "敘事者計劃喚醒瑜小六並由她引余智海至魔鬼山沿崖，再由敘事者帶其飛入巨型龍捲風以削減風暴威力。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53688,7 +53980,9 @@
       "source_event_ids": [
         "bg_event_1751"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f758704490",
@@ -53696,8 +53990,8 @@
       "summary": "敘事者被注射特製病者血液後長出漆黑雙翼，獲得病爪與快速回復能力。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53718,7 +54012,9 @@
       "source_event_ids": [
         "bg_event_1748"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7eaaedb5e7",
@@ -53726,8 +54022,8 @@
       "summary": "滿天於學生休息室啟動播碟，播放 Local Natives 的《Mt. Washington》，作為陪伴眾人走到最後的音樂。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53748,7 +54044,9 @@
       "source_event_ids": [
         "bg_event_1750"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_72d2859dd2",
@@ -53756,8 +54054,8 @@
       "summary": "滿天利用余智海陷入幻覺時機，以雙節刀連續擊斬並劃破其左眼。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53778,7 +54076,9 @@
       "source_event_ids": [
         "bg_event_1747"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0dc876720e",
@@ -53786,8 +54086,8 @@
       "summary": "瑜小六開始誘引余智海追捕，按計劃進行，敘事者在後方跟隨。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53809,7 +54109,9 @@
       "source_event_ids": [
         "bg_event_1752"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b5b25a94b2",
@@ -53817,8 +54119,8 @@
       "summary": "滿天按「F」制後，男病童腦電波釋放幻覺，包圍全場並放大絕望、悲傷、痛苦等負面情緒。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53839,7 +54141,9 @@
       "source_event_ids": [
         "bg_event_1746"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ff20728d56",
@@ -53847,8 +54151,8 @@
       "summary": "敘事者於吊機上割斷繩索，令束束鐵柱墜入凹洞，其中一支從余智海鎖骨刺穿胸腔。",
       "story_time": {
         "order": 193,
-        "label": "第 193 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 193,
       "chapters": [
@@ -53869,7 +54173,9 @@
       "source_event_ids": [
         "bg_event_1749"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_eabf7d020a",
@@ -53877,8 +54183,8 @@
       "summary": "龍捲風事件五年後，世界回復正常，瑜小六收到「病獵公會」邀請信",
       "story_time": {
         "order": 194,
-        "label": "第 194 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 194,
       "chapters": [
@@ -53899,7 +54205,9 @@
       "source_event_ids": [
         "bg_event_1755"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3f61d5a2d7",
@@ -53907,8 +54215,8 @@
       "summary": "瑜小六與余智海在魔鬼山盡頭崖邊對峙，敘事者介入並與失去視覺發狂的余智海一同飛入巨型龍捲風",
       "story_time": {
         "order": 194,
-        "label": "第 194 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 194,
       "chapters": [
@@ -53930,7 +54238,9 @@
       "source_event_ids": [
         "bg_event_1754"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_43cf25607d",
@@ -53938,8 +54248,8 @@
       "summary": "本章以「全文完」作結，標誌整部作品完結",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -53958,7 +54268,9 @@
       "source_event_ids": [
         "bg_event_1767"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_225a0d52f4",
@@ -53966,8 +54278,8 @@
       "summary": "大舊Sir同王達尼喺艾寶琳合開嘅健身室第一日開張",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -53988,7 +54300,9 @@
       "source_event_ids": [
         "bg_event_1759"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ea649a9fc3",
@@ -53996,8 +54310,8 @@
       "summary": "翌日小六收拾背包，經地下水道由王達尼帶領前往艾寶琳",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54016,7 +54330,9 @@
       "source_event_ids": [
         "bg_event_1757"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b86f287abe",
@@ -54024,8 +54340,8 @@
       "summary": "小六向少佐申請離開大本營前往艾寶琳，即場獲批准",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54044,7 +54360,9 @@
       "source_event_ids": [
         "bg_event_1756"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fbf409dbb3",
@@ -54052,8 +54370,8 @@
       "summary": "敘事者獨自前往位於教堂嘅病獵公會，並獲秘書Nina接待",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54074,7 +54392,9 @@
       "source_event_ids": [
         "bg_event_1763"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b9f98351d3",
@@ -54082,8 +54402,8 @@
       "summary": "一星期後，敘事者以新老師身份喺病獵學院開堂，向學生提問史上最偉大嘅人",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54102,7 +54422,9 @@
       "source_event_ids": [
         "bg_event_1766"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ef7afc81e4",
@@ -54110,8 +54432,8 @@
       "summary": "敘事者了解工作地點及教書詳情後，想也不想就簽下合約",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54130,7 +54452,9 @@
       "source_event_ids": [
         "bg_event_1765"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_213785bb4b",
@@ -54138,8 +54462,8 @@
       "summary": "敘事者同坐輪椅嘅賴桑會面，獲邀加入病獵公會教書",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54158,7 +54482,9 @@
       "source_event_ids": [
         "bg_event_1764"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_0e0ef1fe96",
@@ -54166,8 +54492,8 @@
       "summary": "王達尼趁機向貴華推銷其新開嘅樓上健身室終生黃金會員",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54186,7 +54512,9 @@
       "source_event_ids": [
         "bg_event_1762"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b596697bff",
@@ -54194,8 +54522,8 @@
       "summary": "王達尼推薦小六加入艾寶琳嘅病獵公會",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54214,7 +54542,9 @@
       "source_event_ids": [
         "bg_event_1760"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c6104bf414",
@@ -54222,8 +54552,8 @@
       "summary": "王達尼喺地下水道向團友講解艾寶琳三大守則：尊重皇室、唔好入詭區、有錢就係上帝",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54242,7 +54572,9 @@
       "source_event_ids": [
         "bg_event_1758"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_87743a471d",
@@ -54250,8 +54582,8 @@
       "summary": "貴華喺街上向敘事者搭訕，邀請食飯但被拒絕",
       "story_time": {
         "order": 195,
-        "label": "第 195 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 195,
       "chapters": [
@@ -54270,7 +54602,9 @@
       "source_event_ids": [
         "bg_event_1761"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_54601ee4b8",
@@ -54278,8 +54612,8 @@
       "summary": "Dr.D在碉堡內捉獲少年，再以蠹魚擊倒病獵及家人，將一家四口綁在大廳進行痛楚實驗",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54300,7 +54634,9 @@
       "source_event_ids": [
         "bg_event_1770"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1d02522e47",
@@ -54308,8 +54644,8 @@
       "summary": "Dr.D在大本營圖書館禁書區外以蠹魚入侵兩名守衛並控制其行動以分散注意力",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54328,7 +54664,9 @@
       "source_event_ids": [
         "bg_event_1773"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_cd8b11d32c",
@@ -54336,8 +54674,8 @@
       "summary": "Dr.D在圖書館收回重要文件後，下令守衛自殺、墜樓身亡，並從天台離開，返回碉堡",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54356,7 +54694,9 @@
       "source_event_ids": [
         "bg_event_1774"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_7f42433369",
@@ -54364,8 +54704,8 @@
       "summary": "Dr.D穿上病獵裝束潛入大本營，到D橦醫療大樓七樓圖書館禁書區奪取自己生前的文件，包括《壓抑HIV免疫系統元素》",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54384,7 +54724,9 @@
       "source_event_ids": [
         "bg_event_1771"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_89f2e918ea",
@@ -54392,8 +54734,8 @@
       "summary": "艾寶琳一家四口以高酬請病獵帶隊登上魔鬼山觀光，尋找黑色賢者痕跡",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54414,7 +54756,9 @@
       "source_event_ids": [
         "bg_event_1768"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_57bf594a2e",
@@ -54422,8 +54766,8 @@
       "summary": "少佐在展覽廳向群眾講述大本營歷史及黑色賢者的犧牲精神",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54442,7 +54786,9 @@
       "source_event_ids": [
         "bg_event_1772"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_f1b19241e2",
@@ -54450,8 +54796,8 @@
       "summary": "少年無視勸告，獨自拉開石板進入碉堡內部，發現隱藏的醫療器材及血跡",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54472,7 +54818,9 @@
       "source_event_ids": [
         "bg_event_1769"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8d467b8913",
@@ -54480,8 +54828,8 @@
       "summary": "距離天亮約一小時，病者之都深處商場中央沉睡的殘破軀體痛苦甦醒，驚呼自己為何會輸並要求攝取更多人類",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54500,7 +54848,9 @@
       "source_event_ids": [
         "bg_event_1777"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_14de22d8f9",
@@ -54508,8 +54858,8 @@
       "summary": "Dr.D回到碉堡後發現原本被病嘴唾液黏在牆上的營養供應體全部消失",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54528,7 +54878,9 @@
       "source_event_ids": [
         "bg_event_1776"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_d31be2db1c",
@@ -54536,8 +54888,8 @@
       "summary": "M從天而降突襲碉堡，與硬化雙拳成鋼的Dr.D正面交鋒，最終火化其控制的身軀銘凱",
       "story_time": {
         "order": 196,
-        "label": "第 196 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 196,
       "chapters": [
@@ -54558,7 +54910,9 @@
       "source_event_ids": [
         "bg_event_1775"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_3d56a863e7",
@@ -54566,8 +54920,8 @@
       "summary": "力霸健身室嘅貴華與力學健身室嘅肥施三個月後進行體格比鬥，結果不分勝負。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54588,7 +54942,9 @@
       "source_event_ids": [
         "bg_event_1782"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8fd5bb4d46",
@@ -54596,8 +54952,8 @@
       "summary": "貴華勝出後，王達尼在台上招生，觀眾爭相報名。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54616,7 +54972,9 @@
       "source_event_ids": [
         "bg_event_1790"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_2961d5e841",
@@ -54624,8 +54982,8 @@
       "summary": "胡師傅宣布會喺新都城商場舉辦一場格鬥賽，由肥施對貴華對打。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54647,7 +55005,9 @@
       "source_event_ids": [
         "bg_event_1783"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_1503b3cd7e",
@@ -54655,8 +55015,8 @@
       "summary": "胡師傅帶同西裝弟子到力霸健身踩場，與王達尼立下三個月健身對賭，輸咗就要結業並將學生轉移到對方。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54677,7 +55037,9 @@
       "source_event_ids": [
         "bg_event_1778"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_59db7e9f32",
@@ -54685,8 +55047,8 @@
       "summary": "幾名蒙面健朗男子打碎健身室玻璃門強闖破壞，大舊同貴華被襲擊，王達尼開槍制伏。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54707,7 +55069,9 @@
       "source_event_ids": [
         "bg_event_1784"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_827755ae98",
@@ -54715,8 +55079,8 @@
       "summary": "貝果少女將最後僅餘嘅南瓜貝果送贈貴華，貴華食後自覺身體湧現力量同勇氣。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54735,7 +55099,9 @@
       "source_event_ids": [
         "bg_event_1785"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_195bfe9ec6",
@@ -54743,8 +55109,8 @@
       "summary": "貴華以健身僅三個月的身體擊敗對手，對手不解其異常力量，貴華感覺力量短暫且恐怖。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54763,7 +55129,9 @@
       "source_event_ids": [
         "bg_event_1788"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_75be470963",
@@ -54771,8 +55139,8 @@
       "summary": "貴華上台後以一拳直接擊暈肥施，五秒不到 KO。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54793,7 +55161,9 @@
       "source_event_ids": [
         "bg_event_1786"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_af9ee7afc7",
@@ -54801,8 +55171,8 @@
       "summary": "貴華以敏捷嘅身軀、音速般嘅拳頭同完美假動作，將健壯如虎嘅胡師傅打得落花流水。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54823,7 +55193,9 @@
       "source_event_ids": [
         "bg_event_1787"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_886897c8aa",
@@ -54831,8 +55203,8 @@
       "summary": "貴華因為貝果少女嘅關心而決心改變，之後每日最早開閘、最晚收閘，以清水青菜淡粥過日，並學習大本營防身術。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54851,7 +55223,9 @@
       "source_event_ids": [
         "bg_event_1780"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_ba104b2ee7",
@@ -54859,8 +55233,8 @@
       "summary": "貴華第一次真正操練後太酸軟，落樓梯時滾到街上大字型暴曬，期間被貝果少女上前關心並獲贈南瓜貝果。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54879,7 +55253,9 @@
       "source_event_ids": [
         "bg_event_1779"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_031a851855",
@@ -54887,8 +55263,8 @@
       "summary": "貴華在擂台賽後追出，將身上沉重的艾幣送給街頭結他男，最終追到生命之牆邊境並向貝果少女道謝。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54909,7 +55285,9 @@
       "source_event_ids": [
         "bg_event_1789"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_c7a35e9c36",
@@ -54917,8 +55295,8 @@
       "summary": "貴華因過度健身體力不支倒下，被送入貴族醫院。",
       "story_time": {
         "order": 197,
-        "label": "第 197 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 197,
       "chapters": [
@@ -54937,7 +55315,9 @@
       "source_event_ids": [
         "bg_event_1781"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_fbc95fff85",
@@ -54945,8 +55325,8 @@
       "summary": "M喺病者國度被一股思想入侵後得知病者背後有更高智慧嘅存在──天腦。",
       "story_time": {
         "order": 198,
-        "label": "第 198 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 198,
       "chapters": [
@@ -54967,7 +55347,9 @@
       "source_event_ids": [
         "bg_event_1796"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_8fe5b7a0ac",
@@ -54975,8 +55357,8 @@
       "summary": "M喺Dr.D離開將軍澳區後繼續追蹤，來到港島區海洋公園發現新品種病者。",
       "story_time": {
         "order": 198,
-        "label": "第 198 章前後",
-        "source": "chapter_order"
+        "label": "終局",
+        "source": "llm_period"
       },
       "first_mention_chapter": 198,
       "chapters": [
@@ -54995,7 +55377,9 @@
       "source_event_ids": [
         "bg_event_1793"
       ],
-      "review_status": "pending"
+      "review_status": "approved",
+      "flashback": false,
+      "reviewed_by": "user_waiver"
     },
     {
       "id": "chr_b93fae5a85",
