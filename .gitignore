@@ -59,3 +59,6 @@ desktop.ini
 
 # 編年史子代理嘅中間檔案（任務完成後可刪）
 .chronicle-todo/
+
+# 編年史子代理任務數據（中間檔案）
+.chronicle-task/
