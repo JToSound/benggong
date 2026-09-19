@@ -41619,7 +41619,7 @@
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "面對滿天「只要我仲在生，你都唔洗諗住攻陷到大本營」嘅宣示，不破尚沉吟微笑後許下承諾：只要滿天一天仲在生，都唔會派人進攻大"
         }
       ],
@@ -41636,7 +41636,7 @@
         "bg_event_1325"
       ],
       "review_status": "approved",
-      "flashback": false,
+      "flashback": true,
       "reviewed_by": "user_waiver"
     },
     {
@@ -41652,7 +41652,7 @@
       "chapters": [
         {
           "chapter": 143,
-          "role": "first_mention",
+          "role": "flashback",
           "note": "寶盈倖存區倖存者全滅後，不良人緊急召開臨時會議商討，迫於無奈之下暫時中斷進攻大本營嘅計劃。"
         }
       ],
@@ -41666,7 +41666,7 @@
         "bg_event_1322"
       ],
       "review_status": "approved",
-      "flashback": false,
+      "flashback": true,
       "reviewed_by": "user_waiver"
     },
     {
