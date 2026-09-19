@@ -98,15 +98,17 @@ FALLBACK_CHAIN = [
     "deepseek/deepseek-v4-flash-0731:free",
     "qwen/qwen3.8-27b:free",
     "z-ai/glm-5.2:free",
-    # ⚠️ **最後防線**：付費模型。
+    # ⚠️ 付費模型**唔可以**放入鏈（實測）
     #
-    # 為何需要：實測免費池**唔可以可靠完成** —— 連續跑 270 分鐘只完成
-    # 120 條（帳戶級限流 + 後段條目 summary 較長令推理更久）。
-    # 免費模型全部失敗時，退到呢個確保任務**一定完成**，唔會靜默缺失。
+    # 原本打算用付費模型做「最後防線」。但查 OpenRouter `/credits` 發現
+    # 帳戶 `total_credits: 0`（累計用咗 US$0.198）—— 付費模型**永遠回
+    # 402**，加入鏈只會浪費一次呼叫（每次 ~0.3s × 17 批）。
     #
-    # 成本：只在免費全部失敗時才用。實測 12 條批次約 2,000 tokens，
-    # 就算全部 792 條都用佢，成本約 **US$0.05**（可忽略）。
-    "deepseek/deepseek-v4-flash",
+    # → 移除。如果將來增值，可以加返：
+    #     "deepseek/deepseek-v4-flash",
+    #
+    # ⚠️ 冇付費防線嘅後果：免費池全部限流時，批次會失敗（重試耗盡）。
+    #    呢個係**已知限制**，失敗嘅批次會標「時期未判定」而唔會靜默缺失。
 ]
 SCHEMA_VERSION = "chronicle-llm-v1"
 TEMPERATURE = 0.0
@@ -221,17 +223,35 @@ TOKENS_PER_ENTRY = 60
 REASONING_BUDGET = 3000
 
 
+#: 上一次成功嘅模型 —— 下次由佢開始試（見 `call_llm`）。
+_last_good_model: str = ""
+
+
 def call_llm(client, user: str, cache, ledger, n_entries: int = 12) -> dict | None:
     """逐個試 fallback 鏈上嘅模型，回傳第一個成功嘅結果。
 
     ⚠️ 快取 key **包括模型名** —— 唔同模型嘅輸出可能唔同，唔可以撈埋。
+
+    ⚠️ `global` 必須喺函式**最開頭** —— `ast.parse()` 捉唔到呢類
+    編譯期錯誤（實測踩過 `name used prior to global declaration`）。
     """
+    global _last_good_model
+
     msgs = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": user},
     ]
+    # ⚠️ 由**上一次成功嘅模型**開始試（輪詢）。
+    #
+    # 為何：鏈頭（nemotron）經常 429。如果每次都由頭試，每個批次都會
+    # 白費一次呼叫。記住上次成功嘅模型，令常見情況下一次就中。
+    chain = FALLBACK_CHAIN
+    if _last_good_model in chain:
+        i = chain.index(_last_good_model)
+        chain = chain[i:] + chain[:i]
+
     last_err: Exception | None = None
-    for model in FALLBACK_CHAIN:
+    for model in chain:
         key = hashlib.sha256(
             json.dumps(
                 {"model": model, "system": SYSTEM_PROMPT, "user": user,
@@ -251,6 +271,7 @@ def call_llm(client, user: str, cache, ledger, n_entries: int = 12) -> dict | No
                 max_tokens=REASONING_BUDGET + TOKENS_PER_ENTRY * n_entries + 500,
             )
             parsed = json.loads(content)
+            _last_good_model = model
             cache.put(key, parsed)
             ledger.append({
                 "run_id": "chronicle-llm", "chapter": 0, "segment_index": 0,
