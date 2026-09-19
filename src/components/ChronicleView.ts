@@ -193,13 +193,43 @@ export class ChronicleView {
         <div class="chr-chapters">${badges}</div>
         ${
           isOpen
-            ? `<p class="chr-entry-summary">${this.esc(e.summary)}</p>`
+            ? `<p class="chr-entry-summary">${this.esc(e.summary)}</p>` +
+              this.renderLinks(e)
             : ""
         }
         <button class="chr-toggle" data-toggle="${e.id}">
           ${isOpen ? "收起" : "展開"}
         </button>
       </article>`;
+  }
+
+  /**
+   * 伏筆／解答連結。
+   *
+   * 用戶想要嘅「後續篇章回帶補完伏筆」效果 —— 呢個就係佢嘅呈現：
+   * 一條條目可以標明「為 X 埋下伏筆」同「解答咗 Y」，而且**可點擊跳去**。
+   *
+   * ⚠️ 只顯示**已驗證**嘅關係（`scripts/apply_agent_analysis.py` 驗過：
+   * id 存在、冇自我指向、伏筆章節唔遲過解答章節、冇循環）。
+   */
+  private renderLinks(e: ChronicleEntry): string {
+    const byId = new Map(this.doc.entries.map((x) => [x.id, x]));
+    const chip = (id: string, cls: string, arrow: string) => {
+      const t = byId.get(id);
+      if (!t) return "";
+      return (
+        `<button class="chr-link ${cls}" data-goto="${id}" title="ch${t.first_mention_chapter}">` +
+        `${arrow} ${this.esc(t.title.slice(0, 18))}</button>`
+      );
+    };
+    const fs = (e.foreshadows ?? []).map((id) => chip(id, "is-fs", "→")).join("");
+    const po = (e.pays_off ?? []).map((id) => chip(id, "is-po", "↩")).join("");
+    if (!fs && !po) return "";
+    return `
+      <div class="chr-links">
+        ${po ? `<div class="chr-links-row"><span class="chr-links-label">↩ 解答咗</span>${po}</div>` : ""}
+        ${fs ? `<div class="chr-links-row"><span class="chr-links-label">→ 埋下伏筆</span>${fs}</div>` : ""}
+      </div>`;
   }
 
   render(): void {
@@ -264,6 +294,19 @@ export class ChronicleView {
         const id = el.dataset.toggle!;
         this.expanded = this.expanded === id ? null : id;
         this.render();
+      });
+    });
+    // 伏筆／解答連結 → 跳到對應條目並展開
+    this.root.querySelectorAll<HTMLElement>("[data-goto]").forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        ev.stopPropagation();
+        const id = el.dataset.goto!;
+        this.expanded = id;
+        this.render();
+        // 捲到該條目（用 scrollIntoView 令用戶見到）
+        this.root
+          .querySelector(`[data-entry-id="${id}"]`)
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
       });
     });
     // 清除篩選

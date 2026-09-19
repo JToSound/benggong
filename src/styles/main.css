@@ -1339,3 +1339,69 @@ html, body {
   cursor: pointer;
 }
 .chr-toggle:hover { text-decoration: underline; }
+
+/* ---- 伏筆／解答連結 ---- */
+/* 用戶想要嘅「後續篇章回帶補完伏筆」效果 —— 呢個就係佢嘅呈現。
+   用箭頭方向區分：→ 埋下伏筆（指向未來）、↩ 解答咗（指向過去）。 */
+.chr-links {
+  margin: var(--sp-2) 0 0 18px;
+  padding-top: var(--sp-2);
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.chr-links-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1); }
+.chr-links-label {
+  font-size: 10px;
+  color: var(--fg-faint);
+  flex-shrink: 0;
+  min-width: 62px;
+}
+.chr-link {
+  padding: 2px 7px;
+  font-size: 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--fg-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: left;
+}
+.chr-link:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+.chr-link.is-fs { border-left: 2px solid var(--accent-orange, #e8963f); }
+.chr-link.is-po { border-left: 2px solid var(--accent-purple); }
+
+/* ---- 伏筆／解答連結 ---- */
+/* 用戶想要嘅「後續篇章回帶補完伏筆」效果 —— 呢個就係佢嘅呈現。
+   用箭頭方向區分：→ 埋下伏筆（指向未來）、↩ 解答咗（指向過去）。 */
+.chr-links {
+  margin: var(--sp-2) 0 0 18px;
+  padding-top: var(--sp-2);
+  border-top: 1px dashed var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.chr-links-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1); }
+.chr-links-label {
+  font-size: 10px;
+  color: var(--fg-faint);
+  flex-shrink: 0;
+  min-width: 62px;
+}
+.chr-link {
+  padding: 2px 7px;
+  font-size: 10px;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--fg-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+  text-align: left;
+}
+.chr-link:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+.chr-link.is-fs { border-left: 2px solid var(--accent-orange, #e8963f); }
+.chr-link.is-po { border-left: 2px solid var(--accent-purple); }

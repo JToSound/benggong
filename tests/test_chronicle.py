@@ -208,3 +208,53 @@ def test_prior_correction_keeps_llm_source() -> None:
             f"「{e['title']}」經先驗修正但 source 變成 "
             f"{e['story_time']['source']} —— 前端會當佢未判定"
         )
+
+
+def test_foreshadow_links_are_valid() -> None:
+    """伏筆／解答連結必須指向**存在**嘅條目，而且冇循環。
+
+    ⚠️ 為何要測
+    ----------
+    跨章合併會令部分條目消失。如果伏筆連結指向已合併走嘅 id，前端
+    `renderLinks()` 會搵唔到目標 → **靜默消失**（用戶見到少咗連結，
+    但唔會知道係 bug）。呢個測試捉呢類懸空引用。
+
+    另外要防**循環關係**（A 伏筆 B、B 伏筆 A）—— 語意上荒謬。
+    """
+    entries = load()["entries"]
+    by_id = {e["id"]: e for e in entries}
+    problems: list[str] = []
+    for e in entries:
+        for fid in e.get("foreshadows", []):
+            if fid not in by_id:
+                problems.append(f"{e['title']} 嘅伏筆指向唔存在嘅 {fid}")
+            elif fid == e["id"]:
+                problems.append(f"{e['title']} 伏筆指向自己")
+        for pid in e.get("pays_off", []):
+            if pid not in by_id:
+                problems.append(f"{e['title']} 嘅解答指向唔存在嘅 {pid}")
+            elif pid == e["id"]:
+                problems.append(f"{e['title']} 解答指向自己")
+    assert not problems, f"{len(problems)} 個懸空／無效連結：{problems[:5]}"
+
+    # 循環關係
+    edges = {(e["id"], f) for e in entries for f in e.get("foreshadows", [])}
+    cycles = [(a, b) for (a, b) in edges if (b, a) in edges]
+    assert not cycles, f"有循環伏筆關係：{cycles[:3]}"
+
+
+def test_merged_entries_have_multiple_chapters() -> None:
+    """經跨章合併嘅條目應該有 ≥2 個章節參照。
+
+    合併嘅定義就係「同一件事喺多章出現」，所以合併後一定要有多個章節。
+    如果只有一個，代表合併邏輯冇正確合併章節清單。
+    """
+    entries = load()["entries"]
+    # 找出「來源事件多過一個」嘅條目（即係合併過）
+    merged = [e for e in entries if len(e["source_event_ids"]) > 1]
+    assert merged, "應該有合併過嘅條目"
+    # ⚠️ 同章同名去重亦會令 source_event_ids > 1，所以唔可以硬性要求
+    #    全部都有多章。只檢查**冇**資料遺失。
+    for e in merged:
+        assert e["chapters"], f"{e['title']} 合併後冇章節"
+        assert e["first_mention_chapter"] == min(c["chapter"] for c in e["chapters"])

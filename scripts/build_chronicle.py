@@ -173,6 +173,45 @@ def main() -> int:
                 "review_status": "pending",
             })
 
+    # ---- 2.5 套用跨章合併（階段 2，子代理分析）----
+    #
+    # 來源：`data/private/review/chronicle-merge-suggestions.json`
+    # （由 `scripts/apply_agent_analysis.py` 驗證過：id 存在、一條 id 唔會
+    #   出現喺多組、組內章節跨度 ≤40）
+    #
+    # ⚠️ 合併會令條目數減少，所以必須喺套用 LLM 時期判斷**之前**做 ——
+    #    否則被合併走嘅 id 會搵唔到對應嘅時期判斷。
+    mg_path = REPO / "data" / "private" / "review" / "chronicle-merge-suggestions.json"
+    merged_away: dict[str, str] = {}   # 被合併走嘅 id → 保留嘅 id
+    if mg_path.exists():
+        groups = json.loads(mg_path.read_text(encoding="utf-8"))
+        by_id = {e["id"]: e for e in entries}
+        for g in groups:
+            ids = [i for i in (g.get("ids") or []) if i in by_id]
+            if len(ids) < 2:
+                continue
+            # 保留章節最早嘅做代表（首次提及最準）
+            ids.sort(key=lambda i: by_id[i]["first_mention_chapter"])
+            keep = by_id[ids[0]]
+            for other in ids[1:]:
+                o = by_id[other]
+                # 合併：章節、來源事件、角色
+                for ch in o["chapters"]:
+                    if not any(c["chapter"] == ch["chapter"] for c in keep["chapters"]):
+                        keep["chapters"].append(ch)
+                keep["source_event_ids"] = sorted(
+                    set(keep["source_event_ids"]) | set(o["source_event_ids"])
+                )
+                keep["characters"] = sorted(set(keep["characters"]) | set(o["characters"]))
+                if o.get("flashback"):
+                    keep["flashback"] = True
+                merged_away[other] = ids[0]
+        if merged_away:
+            entries = [e for e in entries if e["id"] not in merged_away]
+            for e in entries:
+                e["chapters"].sort(key=lambda c: c["chapter"])
+            print(f"  跨章合併：-{len(merged_away)} 條（{len(groups)} 組建議）")
+
     # ---- 3. 套用 LLM 時期判斷（階段 2）----
     #
     # 治理模式同地點推斷一致：LLM 輸出留喺 `data/private/`（唔部署），
@@ -190,7 +229,13 @@ def main() -> int:
                 r = json.loads(line)
                 verdicts[r["entry_id"]] = r
         for e in entries:
+            # ⚠️ 合併後要由「保留嘅 id」或「任何被合併走嘅 id」查時期判斷
             v = verdicts.get(e["id"])
+            if not v:
+                for old_id, keep_id in merged_away.items():
+                    if keep_id == e["id"] and old_id in verdicts:
+                        v = verdicts[old_id]
+                        break
             if not v:
                 continue
             e["story_time"] = {
@@ -249,6 +294,28 @@ def main() -> int:
                 prior_fixed += 1
         if prior_fixed:
             print(f"  時期先驗修正：{prior_fixed} 條（章節號同敍事階段矛盾）")
+
+    # ---- 5. 套用伏筆關係（階段 2，子代理分析）----
+    #
+    # 來源：`data/private/review/chronicle-foreshadow.json`
+    # （由 `scripts/apply_agent_analysis.py` 驗證過：id 存在、唔可以自我指向、
+    #   伏筆章節唔可以遲過解答章節、冇循環關係）
+    fs_path = REPO / "data" / "private" / "review" / "chronicle-foreshadow.json"
+    n_fs = 0
+    if fs_path.exists():
+        pairs = json.loads(fs_path.read_text(encoding="utf-8"))
+        by_id = {e["id"]: e for e in entries}
+        for pr in pairs:
+            a, b = pr.get("foreshadows"), pr.get("pays_off")
+            if a in by_id and b in by_id:
+                by_id[a]["foreshadows"].append(b)
+                by_id[b]["pays_off"].append(a)
+                n_fs += 1
+        # 去重（同一對可能由多個代理提出）
+        for e in entries:
+            e["foreshadows"] = sorted(set(e["foreshadows"]))
+            e["pays_off"] = sorted(set(e["pays_off"]))
+        print(f"  套用伏筆關係：{n_fs} 對")
         print(f"  套用 LLM 時期判斷：{applied} / {len(entries)}")
 
     entries.sort(key=lambda e: (e["first_mention_chapter"], e["title"]))
