@@ -1,10 +1,45 @@
-// 《病港》互動地圖 — Phase F 主入口
-// Single-page app with: Chapter Strip + SVG Map + Story Panel
+// 《病港》世界地圖 — World Atlas V2 主入口（B2）
+//
+// ⚠️ 相對 Phase F 版本嘅改動：
+//   1. 只 import B1 嘅 `styles/index.css`（tokens + base），移除舊
+//      `main.css` / `timeline.css` / `hud.css`（B1 契約 §3.1；舊檔由主代理
+//      喺 Gate 2 legacy cleanup 刪）。
+//   2. 開機注入本機 SVG sprite（`mountIconSprite()`）。
+//   3. bootstrap 單一 state store（`src/state/store.ts`）+ 由 URL 還原 state。
+import "./styles/index.css";
+
+/*
+ * ⚠️ 過渡期雙軌（主代理 2026-09-21 裁定）
+ * ------------------------------------
+ * B1 只交付 tokens + base；B6／B7／B8 嘅元件 CSS 未交付之前，卸走舊
+ * `main.css` / `timeline.css` / `hud.css` 會令版面完全解體（實測
+ * `.svg-map-wrap` 變成 1400×26890、`#svg-map` viewBox 寬由 ~0.5 跌到
+ * 0.1475，`tests/phase-j-lod.test.ts` 隨即變紅）。
+ *
+ * 所以**暫時**保留舊 CSS，等元件 CSS 陸續落地。舊檔本身**唔可以**
+ * 被新 code 依賴；Gate 2 legacy cleanup 會連同呢三行一併刪除。
+ * 載入次序：B1 token/base 先 → 舊 CSS 後（舊規則勝出，保持現況外觀）。
+ */
 import "./styles/main.css";
 import "./styles/timeline.css";
+import "./styles/hud.css";
+
+/*
+ * B7 元件 CSS（主代理 2026-09-22 接線）
+ * ------------------------------------
+ * 刻意排喺舊 CSS **之後**：`chronicle.css` 係 V2 編年史樣式，要勝過舊
+ * `timeline.css` 嘅 V1 時間軸規則。兩者選擇器唔重疊（V2 用 `.chronicle-`
+ * 前綴），所以次序只係保險，唔會誤傷舊介面。
+ *
+ * ⚠️ Gate 2 移除上面三行舊 CSS 時，呢行要保留（佢係正式元件 CSS）。
+ */
+import "./styles/chronicle.css";
+
+import { mountIconSprite } from "./ui/icons";
 import { App } from "./app";
 import { initRouter } from "./router";
 import { loadAllData } from "./data/loadAllData";
+import { createAppStore, createUrlEffects, persistedInitialState } from "./state";
 
 const root = document.getElementById("app-root") || document.body;
 
@@ -17,11 +52,7 @@ const root = document.getElementById("app-root") || document.body;
  * 如果瀏覽器喺同步／建置期間請求，會撞到 404 → SPA 回退 → 收到 HTML 而
  * 唔係 JSON（即係 `Unexpected token '<'`）。
  *
- * 實測踩過：用戶開住 `localhost:5174`（測試用 preview server），而我喺
- * 另一邊跑建置，就撞到呢個情況。
- *
- * 重試 3 次（間隔 0.6s / 1.2s）足以跨過短暫嘅檔案寫入窗口，同時唔會
- * 令真正嘅錯誤（例如檔案根本唔存在）等太耐。
+ * 重試 3 次（間隔 0.6s / 1.2s）足以跨過短暫嘅檔案寫入窗口。
  */
 async function loadWithRetry(attempts = 3, baseDelayMs = 600) {
   let lastErr: unknown;
@@ -61,8 +92,28 @@ function showError(err: unknown): void {
 async function boot(): Promise<void> {
   if (!root) return;
   try {
+    // 本機 SVG sprite（零 network request）；idempotent。
+    mountIconSprite();
+
     const data = await loadWithRetry();
-    const app = new App(root, data);
+
+    /*
+     * 單一 state store（規則 S1）。`createUrlEffects()` 令每次 action 將
+     * state 投影落 URL（規則 S4 / U5）；node 環境會自動 no-op。
+     */
+    const store = createAppStore({
+      initial: persistedInitialState(),
+      effects: createUrlEffects(),
+      chapterTotal: data.config.chapters?.total || 198,
+    });
+
+    const app = new App(root, data, store);
+
+    // 啟動時由 URL 還原 state（含 legacy `#ch=` / `#loc=` alias，並 canonicalize）。
+    app.hydrateFromUrl(new URL(window.location.href));
+
+    // 規則 U6：popstate 還原；hashchange 由 legacy shim 處理。
+    app.bindUrlSync();
     initRouter(app);
   } catch (e) {
     console.error("[病港地圖] 初始化失敗", e);
@@ -73,8 +124,7 @@ async function boot(): Promise<void> {
 /**
  * 註冊 service worker（只喺 production）。
  *
- * ⚠️ 為何 dev 唔註冊：開發期間 SW 會快取 `dist/` 嘅舊版，令改動
- * 睇唔到 —— 呢個係好常見嘅陷阱（「明明改咗但畫面冇變」）。
+ * ⚠️ 為何 dev 唔註冊：開發期間 SW 會快取 `dist/` 嘅舊版，令改動睇唔到。
  * `import.meta.env.PROD` 由 Vite 喺 build 時靜態替換，dev 直接跳過。
  */
 function registerServiceWorker(): void {

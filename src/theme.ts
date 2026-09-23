@@ -1,19 +1,23 @@
 /**
- * 主題切換（深色 ↔ 淺色）。
+ * 主題切換（dark-first）。
  *
- * 設計決定
- * ========
- * 1. **跟系統偏好做預設** —— 用戶未手動揀過嘅話，跟
- *    `prefers-color-scheme`。呢個係現代網頁嘅標準做法。
- * 2. **手動揀過就記住** —— 存 localStorage，下次開直接套用。
- * 3. **套用喺 `<html>` 而唔係 `<body>`** —— CSS 用 `[data-theme]`
- *    選擇器；放喺 html 可以令 `:root` 變數一齊覆蓋（body 唔得）。
+ * 設計決定（spec §1.2 D1 / world-atlas-v2-visual-motion-system.md §2）
+ * ================================================================
+ * 1. **預設永遠 dark** —— 唔再跟 `prefers-color-scheme`。產品定位係
+ *    「末日情報指揮室」，深色係視覺方向本身，唔應該由用戶嘅 OS 設定
+ *    決定第一印象（A2 P0-1：實測 default 走咗淺色羊皮紙，同定位相反）。
+ * 2. **light 係用戶主動 opt-in + 持久化** —— 撳過就記住，下次開直接套用。
+ * 3. **套用喺 `<html>` 而唔係 `<body>`** —— CSS 用 `[data-theme]` 選擇器；
+ *    放喺 html 可以令 `:root` 變數一齊覆蓋（body 唔得）。
  *
- * ⚠️ 為何唔用 `class`：`data-*` 屬性嘅語意更清楚（係「狀態」唔係
- *    「樣式」），而且可以同時放多個維度（例如日後加 `data-density`）。
+ * ⚠️ 保留 `basemap-theme-change` 事件：canvas 唔會讀 CSS 變數，
+ *    `VectorBasemap` 靠呢個事件換底圖配色（唔可以刪）。
  */
 
 export type Theme = "dark" | "light";
+
+/** 預設主題（dark-first，唔跟系統偏好）。 */
+export const DEFAULT_THEME: Theme = "dark";
 
 const STORAGE_KEY = "binggang-theme";
 
@@ -28,18 +32,25 @@ function stored(): Theme | null {
   }
 }
 
-function systemPrefers(): Theme {
-  return window.matchMedia?.("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
-}
-
 export function currentTheme(): Theme {
-  return stored() ?? systemPrefers();
+  return stored() ?? DEFAULT_THEME;
 }
 
 function apply(theme: Theme): void {
   document.documentElement.setAttribute("data-theme", theme);
+  /*
+   * 通知 canvas 底圖換色。
+   *
+   * 為何要一個自訂事件而唔係直接呼叫：`theme.ts` 唔應該知道地圖嘅存在
+   * （依賴方向係 app → theme，唔可以反向）。用事件可以令主題模組保持
+   * 零依賴，同時任何需要跟主題嘅 canvas／WebGL 圖層都可以訂閱。
+   *
+   * ⚠️ 實測踩過：唔通知嘅話，淺色主題之下 UI 變白、文字變深，但 canvas
+   * 底圖仍然係深色 —— 深色標籤配深色底，完全睇唔到。
+   */
+  window.dispatchEvent(
+    new CustomEvent("basemap-theme-change", { detail: { theme } }),
+  );
 }
 
 export function setTheme(theme: Theme): void {
@@ -58,19 +69,13 @@ export function toggleTheme(): Theme {
 }
 
 /**
- * 初始化：套用目前主題，並喺用戶未手動揀過時跟隨系統變化。
+ * 初始化：套用目前主題（dark-first），並回呼一次通知 UI。
  *
- * 回傳一個更新按鈕標籤嘅函式（由 app.ts 傳入）。
+ * 回傳值唔用；呼叫方傳入更新按鈕標籤嘅函式（由 AppShell 傳入）。
  */
 export function initTheme(onChange: (t: Theme) => void): void {
-  apply(currentTheme());
-  onChange(currentTheme());
-
-  // 用戶未手動揀過 → 系統切換時跟住變
-  const mq = window.matchMedia?.("(prefers-color-scheme: light)");
-  mq?.addEventListener?.("change", () => {
-    if (stored()) return;
-    apply(systemPrefers());
-    onChange(currentTheme());
-  });
+  const t = currentTheme();
+  apply(t);
+  onChange(t);
+  // 註：dark-first 之下**唔**跟隨系統 light 偏好變化 —— 用戶冇揀過就永遠 dark。
 }

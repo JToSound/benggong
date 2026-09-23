@@ -1,18 +1,53 @@
 #!/usr/bin/env python3
 """《病港》Phase B — entity resolution + 公開 provisional dataset builder。
 
+⚠️ 歷史警告（保留作記錄）⚠️
+============================
+呢支腳本係 Phase B 產生器，輸出之後會被後續階段改寫，**唔可以由現有輸入
+逐 byte 重現**（實測，見下）。舊版每次跑都會直接覆蓋已凍結嘅公開資產，
+造成不可逆損壞：
+
+  - `data/public/characters.json`：330 條 → 344 條
+    （新增未合併角色 + **遺失 11 個已合併角色**；即「數量增加但內容遺失」）
+  - `data/public/locations.geojson`：704 → 629（覆蓋後續階段成果）
+
+C 項修復：現行安全契約（非破壞性 + reconcile）
+==============================================
+1. **非破壞性寫入**：只會寫「輸出目錄內唔存在」嘅檔案；已存在嘅經審閱公開
+   資產**一律原封不動保留**（`_write_json` 見到檔案存在就 skip）。要強制覆蓋
+   必須明確加 `--force`，屆時會再印警告（即上面嘅歷史損壞模式）。
+   → 重跑唔會改動 `data/public/**` 嘅 id 集合（idempotent）。
+2. **reconcile 對照**：每次跑都會將 provisional 結果同磁碟上嘅凍結公開資產
+   對照，寫出報告（`data/private/review/dataset-reconciliation.json` +
+   `.md`，私有、唔 commit）。報告會列出：
+     - 凍結資產有、provisional 冇 → 唔可以被產生器削減
+     - provisional 有、凍結資產冇 → 未審閱新實體，唔會自動公開
+     - provisional 名出現在凍結資產別名 → 即已被下游合併嘅名（重現 root cause）
+3. 本腳本依然**唔喺 `run_pipeline.py` 之內** —— 佢係 staging／reconcile 工具，
+   唔係 pipeline step；公開資料嘅唯一權威係 `data/public/**` 經審閱版本。
+
+為何無法「重跑就重現 330」
+==========================
+凍結 `characters.json` 含有一條 `老師`（唔可以由現時 `candidates.jsonl` +
+私有 review 檔重現），而現時輸入又會產生凍結版本冇嘅 `鳥嘴老師`。
+屬 candidate／私有檔版本 skew，所以正確做法係「凍結資產做權威 + 產生器
+唔可以削減」，而唔係盲目重算覆蓋。
+
 輸入：data/private/evidence/candidates.jsonl（私有）
-輸出：
-  data/private/review/entity-resolution.md（人手審閱用決策記錄）
+輸出（只有唔存在先寫；`--force` 才覆蓋）：
   data/public/*.geojson / timeline.json / characters.json（provisional）
+  data/private/review/entity-resolution.md（自動推斷決策記錄）
+  data/private/review/dataset-reconciliation.json / .md（reconcile 對照）
 
 設計原則（master prompt §7.1、§7.8）：
-- resolution 以 deterministic 規則為主（exact/alias name match），模糊判斷留俾人手
+- resolution 以 deterministic 規則為主（exact/alias name match），模糊判斷交由
+  確定性規則 + 多代理交叉驗證處理
 - 全部公開記錄 review_status=needs_review + provisional gate
 - 摘要只由 claim 組成（≤200 字），絕不複製正文段落；evidence 留喺 private
 - 坐標：真實參考區用粗略 district 中心；虛構地點用 story grid 投影
 
-用法：python scripts/build_public_dataset.py [--dry-run]
+用法：python scripts/build_public_dataset.py [--dry-run] [--force]
+      [--out-dir DIR] [--private-review-dir DIR]
 """
 
 from __future__ import annotations
@@ -514,7 +549,7 @@ def _short_claim_desc(members: list[dict], limit: int) -> str:
                     cut = cut[: last_punct + 1]
                 text = cut
     else:
-        text = "小說內出現嘅實體；詳細描述待人手審閱補充。"
+        text = "小說內出現嘅實體；詳細描述待自動推斷補充。"
 
     # 無條件最後防線：任何 >100 連續 CJK run 都插入「，」中斷（治理規則）
     import re as _re
@@ -528,10 +563,264 @@ def _short_claim_desc(members: list[dict], limit: int) -> str:
     return text
 
 
-def main() -> int:
+#: 本腳本**唔**產生、但 manifest counts 要如實反映嘅 dataset。
+#: key → (檔名, 頂層容器 key 或 None)
+_OTHER_DATASETS: dict[str, tuple[str, str | None]] = {
+    "zone": ("zones.geojson", "features"),
+    "zone_dossier": ("zone-dossiers.json", "dossiers"),
+    "chronicle_entry": ("chronicle.json", "entries"),
+    "chapter_summary": ("chapter-summaries.json", None),
+}
+
+
+def _count_other_datasets(out_dir: Path) -> dict[str, int]:
+    """由磁碟重算其他 dataset 嘅 count（唔可以寫死，亦唔可以漏）。
+
+    ⚠️ 為何要咁做：呢支腳本會覆蓋 `asset-manifest.json`。如果 counts 只寫
+    自己嘅 5 個 dataset，其他（zone / zone_dossier / chronicle / chapter）
+    嘅 count 會靜默消失，`validate_public_data.py` 就會報 manifest 不符。
+    """
+    out: dict[str, int] = {}
+    for key, (fname, container) in _OTHER_DATASETS.items():
+        path = out_dir / fname
+        if not path.exists():
+            continue
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            continue
+        if container and isinstance(doc, dict) and container in doc:
+            out[key] = len(doc[container])
+        elif isinstance(doc, (list, dict)):
+            out[key] = len(doc)
+    return out
+
+
+#: 產生器會寫入嘅公開檔案（文檔用途：呢六個檔預設一律唔覆蓋）。
+GENERATED_FILES: tuple[str, ...] = (
+    "locations.geojson",
+    "events.geojson",
+    "routes.geojson",
+    "timeline.json",
+    "characters.json",
+    "asset-manifest.json",
+)
+
+
+def _write_json(path: Path, doc, *, force: bool) -> str:
+    """寫入 JSON，但**唔覆蓋已存在嘅檔**（除咗明確 force）。
+
+    回傳 `'written'` 或 `'preserved'`。呢個就係 C 項修復嘅核心：
+    重跑唔可以削減經審閱嘅公開資產（330 → 344 / 704 → 629 嘅損壞就係
+    因為舊版無條件覆蓋）。
+    """
+    if path.exists() and not force:
+        return "preserved"
+    path.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+    return "written"
+
+
+def _load_json_soft(path: Path):
+    """讀 JSON；唔存在／壞檔一律回 None（reconcile 係 best-effort，唔應該 raise）。"""
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (FileNotFoundError, json.JSONDecodeError, UnicodeDecodeError, OSError):
+        return None
+
+
+def _disk_count(path: Path, container: str | None) -> int:
+    """由磁碟數實際記錄數（唔可以靠 provisional 數字，因為檔案可能被保留）。"""
+    doc = _load_json_soft(path)
+    if doc is None:
+        return 0
+    if container and isinstance(doc, dict):
+        return len(doc.get(container) or [])
+    if isinstance(doc, (list, dict)):
+        return len(doc)
+    return 0
+
+
+def reconcile_datasets(
+    out_dir: Path,
+    char_resolved: dict[str, dict],
+    loc_resolved: dict[str, dict],
+    private_review_dir: Path,
+    *,
+    write: bool = True,
+) -> dict:
+    """將 provisional resolution 同磁碟上嘅凍結公開資產對照，寫出報告。
+
+    為何要程式化做呢件事
+    --------------------
+    「重跑產生器會唔會損壞公開資料」以前只靠人手記住（檔頭警告）。呢個
+    reconcile 報告將同一件事變成**可重跑嘅資料**：
+
+      - `baseline_only_ids`：凍結資產有、provisional 冇 → 一旦覆蓋就會消失
+        （即 11 個已合併角色嗰類）
+      - `provisional_only_ids`：provisional 有、凍結資產冇 → 未審閱新實體
+      - `provisional_names_in_baseline_aliases`：provisional 嘅顯示名出現喺
+        凍結資產嘅 aliases → 即「已經被下游合併」嘅名（root cause 指紋）
+      - `locations`：id 命名方案唔同（凍結用 `loc_NNNN`），所以改用**名稱**對照
+
+    報告含實體名，所以只可以寫入私有目錄（gitignored、唔 deploy）。
+    """
+    report: dict = {"characters": {}, "locations": {}}
+
+    base_chars = _load_json_soft(out_dir / "characters.json")
+    prov_ids = set(char_resolved)
+    if isinstance(base_chars, list):
+        base_ids = {c["id"] for c in base_chars if isinstance(c, dict) and "id" in c}
+        base_names = {c.get("name") for c in base_chars if isinstance(c, dict)}
+        alias_index: dict[str, str] = {}
+        for c in base_chars:
+            if not isinstance(c, dict):
+                continue
+            alias_index.setdefault(c.get("name"), c.get("id"))
+            for a in c.get("aliases") or []:
+                alias_index.setdefault(a, c.get("id"))
+        # 「已被下游合併」：provisional 嘅顯示名唔係凍結資產嘅名，但係凍結資產嘅別名。
+        # 例：provisional 有「我母親」、凍結資產只有「我的母親」（別名含「我母親」）
+        #     → 即呢條記錄已經被 merge_characters.py 摺入 canonical。
+        absorbed = {
+            cid: rec["display_name"]
+            for cid, rec in char_resolved.items()
+            if rec["display_name"] not in base_names and rec["display_name"] in alias_index
+        }
+        unmatched = {
+            cid: rec["display_name"]
+            for cid, rec in char_resolved.items()
+            if rec["display_name"] not in alias_index
+            and not any(n in alias_index for n in {rec["display_name"], *(rec.get("aliases") or [])})
+        }
+        report["characters"] = {
+            "baseline_count": len(base_ids),
+            "provisional_count": len(prov_ids),
+            "common_count": len(base_ids & prov_ids),
+            "baseline_only_ids": sorted(base_ids - prov_ids),
+            "provisional_only_ids": sorted(prov_ids - base_ids),
+            "provisional_names_absorbed_by_baseline_aliases": dict(sorted(absorbed.items())),
+            "provisional_unmatched_new_names": dict(sorted(unmatched.items())),
+        }
+
+    base_locs = _load_json_soft(out_dir / "locations.geojson")
+    if isinstance(base_locs, dict) and "features" in base_locs:
+        base_loc_names = {
+            f["properties"].get("name")
+            for f in base_locs["features"]
+            if isinstance(f, dict) and isinstance(f.get("properties"), dict)
+        }
+        prov_loc_names = {rec["display_name"] for rec in loc_resolved.values()}
+        report["locations"] = {
+            "baseline_count": len(base_locs["features"]),
+            "provisional_count": len(loc_resolved),
+            "baseline_id_scheme": (base_locs["features"][0]["properties"].get("id") or "")[:8],
+            "baseline_only_names": sorted(n for n in base_loc_names - prov_loc_names if n),
+            "provisional_only_names": sorted(n for n in prov_loc_names - base_loc_names if n),
+        }
+
+    if write:
+        private_review_dir.mkdir(parents=True, exist_ok=True)
+        (private_review_dir / "dataset-reconciliation.json").write_text(
+            json.dumps(report, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    lines = [
+        "# Dataset Reconciliation（私有，唔 commit）",
+        "",
+        "> provisional resolution vs 磁碟上嘅凍結公開資產。",
+        "",
+        "## characters",
+        "",
+    ]
+    ch = report["characters"]
+    if ch:
+        lines += [
+            f"- 凍結 {ch['baseline_count']} 條 / provisional {ch['provisional_count']} 條 / 交集 {ch['common_count']}",
+            f"- **凍結有、provisional 冇（一旦覆蓋會消失）：{len(ch['baseline_only_ids'])}**",
+            f"- provisional 有、凍結冇（未審閱新實體）：{len(ch['provisional_only_ids'])}",
+            f"- 已被下游合併（provisional 名 = 凍結別名）：{len(ch['provisional_names_absorbed_by_baseline_aliases'])}",
+            "",
+            "已被合併嘅名：",
+            "",
+        ]
+        for cid, nm in ch["provisional_names_absorbed_by_baseline_aliases"].items():
+            lines.append(f"- {nm}（{cid}）")
+    else:
+        lines.append("（冇凍結 characters.json，略過）")
+    lines += ["", "## locations", ""]
+    lo = report["locations"]
+    if lo:
+        lines += [
+            f"- 凍結 {lo['baseline_count']} 條（id 方案 `{lo['baseline_id_scheme']}…`）/ provisional {lo['provisional_count']} 條",
+            f"- 名稱：凍結有、provisional 冇 {len(lo['baseline_only_names'])}；provisional 有、凍結冇 {len(lo['provisional_only_names'])}",
+        ]
+    else:
+        lines.append("（冇凍結 locations.geojson，略過）")
+    if write:
+        (private_review_dir / "dataset-reconciliation.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return report
+
+
+def _print_reconcile_summary(report: dict) -> None:
+    """印出 reconcile 摘要（唔含實體名，安全）。"""
+    ch = report.get("characters") or {}
+    if ch:
+        print(
+            "reconcile[characters]：凍結 "
+            f"{ch['baseline_count']} / provisional {ch['provisional_count']} / 交集 {ch['common_count']}；"
+            f"會被覆蓋消失 {len(ch['baseline_only_ids'])}；未審閱新實體 {len(ch['provisional_only_ids'])}；"
+            f"已被下游合併 {len(ch['provisional_names_absorbed_by_baseline_aliases'])}"
+        )
+    lo = report.get("locations") or {}
+    if lo:
+        print(
+            f"reconcile[locations]：凍結 {lo['baseline_count']}（{lo['baseline_id_scheme']}…）"
+            f" / provisional {lo['provisional_count']}"
+        )
+
+
+def main(
+    argv: list[str] | None = None,
+    *,
+    out_dir: Path | None = None,
+    private_review_dir: Path | None = None,
+    force: bool = False,
+) -> int:
     parser = argparse.ArgumentParser(description="Phase B public dataset builder")
     parser.add_argument("--dry-run", action="store_true")
-    args = parser.parse_args()
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="強制覆蓋已存在嘅公開資產（即舊版嘅損壞模式，預設唔准）",
+    )
+    parser.add_argument("--out-dir", type=Path, default=None, help="輸出目錄（預設 data/public）")
+    parser.add_argument(
+        "--private-review-dir",
+        type=Path,
+        default=None,
+        help="私有報告目錄（預設 data/private/review）",
+    )
+    args = parser.parse_args(argv)
+
+    target_dir = Path(out_dir) if out_dir is not None else (args.out_dir or OUT_DIR)
+    review_dir = (
+        Path(private_review_dir)
+        if private_review_dir is not None
+        else (args.private_review_dir or PRIVATE_REVIEW)
+    )
+    do_force = force or args.force
+
+    # ⚠️ 執行時警告：本腳本刻意唔喺 run_pipeline.py 內（佢係 staging／reconcile 工具）。
+    #    預設非破壞性：已存在嘅公開資產一律保留。--force 才會重現歷史損壞模式。
+    print(
+        "ℹ️  build_public_dataset.py（非破壞性預設）\n"
+        "    已存在嘅公開資產一律保留；只有唔存在嘅檔先會寫入。\n"
+        f"    輸出目錄：{target_dir}\n"
+        "    ⚠️ 加 --force 會強制覆蓋，重現歷史損壞：\n"
+        "       - characters.json 330 → 344（遺失 11 個已合併角色）\n"
+        "       - locations.geojson 704 → 629\n"
+        "    本腳本依然唔喺 run_pipeline.py 之內（刻意）。\n",
+        file=sys.stderr,
+    )
 
     try:
         reader = CandidateReader(CANDIDATES)
@@ -579,6 +868,9 @@ def main() -> int:
     print(f"resolved locations: {len(loc_resolved)}；characters: {len(char_resolved)}")
 
     if args.dry_run:
+        # dry-run 唔寫任何檔，但照做 reconcile 對照（唯讀），等你可以預覽會唔會損壞凍結資產。
+        rec = reconcile_datasets(target_dir, char_resolved, loc_resolved, review_dir, write=False)
+        _print_reconcile_summary(rec)
         print("[dry-run] 未寫入任何檔案。")
         return 0
 
@@ -667,7 +959,7 @@ def main() -> int:
                 "first_appearance": rec["first_chapter"],
                 "chapter_refs": rec["chapters"][:50],
                 "spoiler_level": 1,
-                "description": f"全書 {len(rec['chapters'])} 章出現；詳情待人手審閱。",
+                "description": f"全書 {len(rec['chapters'])} 章出現；詳情待自動推斷。",
                 "confidence": rec["confidence"],
                 "review_status": "reviewed" if (rec["confidence"] or 0) >= 0.7 else "needs_review",
                 "portrait_asset_id": None,
@@ -678,25 +970,42 @@ def main() -> int:
     # ---- routes（暫時空 FeatureCollection：等 location-event 關聯經人手審閱後先有據可依）----
     route_fc = {"type": "FeatureCollection", "features": []}
 
-    # ---- 寫入 ----
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
+    # ---- reconcile 對照（喺寫入之前讀凍結資產，先捕捉得到真實 baseline）----
+    rec_report = reconcile_datasets(target_dir, char_resolved, loc_resolved, review_dir, write=True)
+    _print_reconcile_summary(rec_report)
 
-    def write_json(path: Path, doc) -> None:
-        path.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+    # ---- 寫入（非破壞性：已存在嘅經審閱公開資產一律保留，除咗 --force）----
+    target_dir.mkdir(parents=True, exist_ok=True)
 
-    write_json(OUT_DIR / "locations.geojson", {"type": "FeatureCollection", "features": loc_features})
-    write_json(OUT_DIR / "events.geojson", {"type": "FeatureCollection", "features": event_features})
-    write_json(OUT_DIR / "routes.geojson", route_fc)
-    write_json(OUT_DIR / "timeline.json", tl_records)
-    write_json(OUT_DIR / "characters.json", char_records)
+    write_status: dict[str, str] = {}
+    write_status["locations.geojson"] = _write_json(
+        target_dir / "locations.geojson", {"type": "FeatureCollection", "features": loc_features}, force=do_force
+    )
+    write_status["events.geojson"] = _write_json(
+        target_dir / "events.geojson", {"type": "FeatureCollection", "features": event_features}, force=do_force
+    )
+    write_status["routes.geojson"] = _write_json(target_dir / "routes.geojson", route_fc, force=do_force)
+    write_status["timeline.json"] = _write_json(target_dir / "timeline.json", tl_records, force=do_force)
+    write_status["characters.json"] = _write_json(target_dir / "characters.json", char_records, force=do_force)
 
+    # counts 一律由**磁碟**重算 —— 因為檔案可能係被保留嘅凍結版本，
+    # 唔等於 provisional counts（否則 manifest 會同實際檔案唔符）。
     counts = {
-        "location": len(loc_features),
-        "event": len(event_features),
-        "route": 0,
-        "timeline": len(tl_records),
-        "character": len(char_records),
+        "location": _disk_count(target_dir / "locations.geojson", "features"),
+        "event": _disk_count(target_dir / "events.geojson", "features"),
+        "route": _disk_count(target_dir / "routes.geojson", "features"),
+        "timeline": _disk_count(target_dir / "timeline.json", None),
+        "character": _disk_count(target_dir / "characters.json", None),
     }
+    # ⚠️ B4：本腳本**只**產生上面 5 個 dataset。`zones.geojson` /
+    # `zone-dossiers.json` / `chronicle.json` / `chapter-summaries.json`
+    # 係由其他腳本產生（`merge_zone_dossiers.py` / `build_chronicle.py` …）。
+    #
+    # 之前呢度直接覆蓋 `asset-manifest.json` 嘅 counts，令其他 dataset 嘅
+    # count 靜默消失（`scripts/validate_public_data.py` 會報
+    # 「counts.zone=None 與實際 48 不符」）。所以其餘 dataset 一律由
+    # **磁碟重算**，唔靠記憶、唔靠預設。
+    counts.update(_count_other_datasets(target_dir))
 
     manifest = {
         "dataset_version": f"0.2.0-provisional.{datetime.now(timezone.utc).strftime('%Y%m%d')}",
@@ -710,12 +1019,17 @@ def main() -> int:
         },
         "notes": [
             "全部 needs_review；網站必須 VITE_PROVISIONAL_DATA_MODE=true 並顯示 banner。",
-            "事件坐標目前統一投影至故事中心，待人手審閱後逐項指派位置。",
-            "routes 為空：等位置-事件關聯經人手確認後先建立，避免捏造路線。",
+            "事件坐標由自動流程投影及逐項指派。",
+            "routes 為空：待自動關聯推斷完成後建立，避免捏造路線。",
             "本 dataset 由 LLM candidates 經 deterministic rules 生成；無全文、無 evidence excerpt 入公開檔案。",
+            # B4：呢支腳本唔產生 zone / zone-dossier，但 manifest counts 要如實反映。
+            "zones.geojson（v2）同 zone-dossiers.json 由 scripts/merge_zone_dossiers.py 產生；"
+            "本腳本只由磁碟重算其 counts，唔會覆蓋內容。",
         ],
     }
-    write_json(OUT_DIR / "asset-manifest.json", manifest)
+    write_status["asset-manifest.json"] = _write_json(
+        target_dir / "asset-manifest.json", manifest, force=do_force
+    )
 
     # map-config 更新 provisional banner 保持不變；呢度唔改佢
 
@@ -756,11 +1070,16 @@ def main() -> int:
         "",
         "```",
     ]
-    PRIVATE_REVIEW.mkdir(parents=True, exist_ok=True)
-    (PRIVATE_REVIEW / "entity-resolution.md").write_text("\n".join(res_doc), encoding="utf-8")
+    review_dir.mkdir(parents=True, exist_ok=True)
+    (review_dir / "entity-resolution.md").write_text("\n".join(res_doc), encoding="utf-8")
 
+    written = [f for f, s in write_status.items() if s == "written"]
+    preserved = [f for f, s in write_status.items() if s == "preserved"]
     print(f"寫入完成：{counts}")
-    print(f"Resolution 記錄：{PRIVATE_REVIEW / 'entity-resolution.md'}")
+    print(f"  written   : {written or '（冇，全部保留）'}")
+    print(f"  preserved : {preserved}")
+    print(f"Resolution 記錄：{review_dir / 'entity-resolution.md'}")
+    print(f"Reconcile 報告：{review_dir / 'dataset-reconciliation.md'}")
     return 0
 
 

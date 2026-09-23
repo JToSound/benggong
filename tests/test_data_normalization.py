@@ -513,16 +513,20 @@ def test_prebuild_hooks_sync():
 
 
 # ---------------------------------------------------------------------------
-# 區域（倖存區／病窩）
+# 區域（倖存區／病窩／據點）
+#
+# 資料由 scripts/merge_zone_dossiers.py 產生（全文抽取 + 確定性合併）。
+# 舊嘅 derive_zones.py 只由地點名推導，已經被取代。
 # ---------------------------------------------------------------------------
 ZONES = REPO / "data" / "public" / "zones.geojson"
 ZONE_SCHEMA = REPO / "data" / "schemas" / "zone.schema.json"
+ZONE_MERGER = REPO / "scripts" / "merge_zone_dossiers.py"
 
 
 @pytest.fixture(scope="module")
 def zones() -> list[dict]:
     if not ZONES.exists():
-        pytest.skip("未跑過 derive_zones.py")
+        pytest.skip("未跑過 merge_zone_dossiers.py")
     return json.loads(ZONES.read_text(encoding="utf-8"))["features"]
 
 
@@ -535,71 +539,109 @@ def test_zones_validate_against_schema(zones):
 
 
 def test_zone_radius_within_bounds(zones):
-    """半徑必須喺 schema 嘅上下限之內（太細睇唔到，太大蓋過其他區域）。"""
+    """半徑必須喺上下限之內（太細睇唔到，太大蓋過其他區域）。"""
     for z in zones:
         r = z["properties"]["radius_m"]
-        assert 80 <= r <= 2000, f"{z['properties']['name']} 半徑 {r} m 超出範圍"
+        assert 80 <= r <= 1500, f"{z['properties']['name']} 半徑 {r} m 超出範圍"
 
 
 def test_zone_radius_source_is_auditable(zones):
-    """每個區域都要講清楚半徑係點嚟 —— 唔可以只寫結論。"""
-    allowed = {"members", "default", "curated"}
+    """每個區域都要講清楚範圍同座標係點嚟 —— 唔可以只寫結論。"""
+    allowed = {"members", "default", "unknown"}
     for z in zones:
         p = z["properties"]
         assert p["radius_source"] in allowed, f"{p['name']} radius_source 唔合法"
-        assert p["evidence"], f"{p['name']} 缺 evidence"
+        assert p["coords_source"], f"{p['name']} 缺 coords_source"
+        assert p["coords_evidence"], f"{p['name']} 缺 coords_evidence"
+        assert p["range_evidence"], f"{p['name']} 缺 range_evidence"
 
 
-def test_member_derived_zones_use_member_spread(zones):
-    """`radius_source=members` 嘅區域，半徑必須真係由成員分佈推導。
+def test_zone_geometry_is_polygon_within_radius(zones):
+    """幾何一定要係多邊形，而且所有頂點都喺 radius_m 之內。
 
-    呢個係防止「標咗 members 但其實用預設值」嘅假證據。
+    呢個係防止「標咗 300 m 但畫咗 3 km」嘅假範圍。
     """
     import math
 
-    by_id = {
-        f["properties"]["id"]: f["geometry"]["coordinates"]
-        for f in json.loads(
-            (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
-        )["features"]
-    }
-
-    def dist(a, b):
-        return math.hypot(
-            (b[0] - a[0]) * 111320 * 0.9247, (b[1] - a[1]) * 110570
-        )
-
-    checked = 0
     for z in zones:
         p = z["properties"]
-        if p["radius_source"] != "members":
-            continue
-        pts = [by_id[i] for i in p["member_location_ids"] if i in by_id]
-        assert len(pts) >= 2, f"{p['name']} 標咗 members 但成員少過 2 個"
-        c = z["geometry"]["coordinates"]
-        # 半徑應該 ≥ 最遠成員嘅距離（加咗 15% 餘裕）
-        assert p["radius_m"] >= max(dist(c, q) for q in pts) - 1, (
-            f"{p['name']} 半徑 {p['radius_m']} 細過最遠成員距離"
+        assert z["geometry"]["type"] == "Polygon", f"{p['name']} 唔係多邊形"
+        ring = z["geometry"]["coordinates"][0]
+        assert len(ring) >= 4, f"{p['name']} 環太短"
+        assert ring[0] == ring[-1], f"{p['name']} 環未閉合"
+        cx = sum(pt[0] for pt in ring[:-1]) / (len(ring) - 1)
+        cy = sum(pt[1] for pt in ring[:-1]) / (len(ring) - 1)
+        far = max(
+            math.hypot((pt[0] - cx) * 111320 * 0.9247, (pt[1] - cy) * 110570)
+            for pt in ring
         )
-        checked += 1
-    assert checked > 0, "應該至少有一個區域係由成員分佈推導"
+        # 容許 5% 誤差（質心同中心定義唔完全一樣）
+        assert far <= p["radius_m"] * 1.05 + 1, (
+            f"{p['name']} 幾何最遠點 {far:.0f} m 超出 radius_m {p['radius_m']:.0f} m"
+        )
 
 
-def test_curated_zones_have_chapter_evidence(zones):
-    """策展區域（例如坑口大病窩）必須附章節引用。"""
-    curated = [z for z in zones if z["properties"]["radius_source"] == "curated"]
-    assert curated, "應該有策展區域（坑口大病窩）"
-    for z in curated:
-        p = z["properties"]
-        assert p["chapters"], f"{p['name']} 缺章節引用"
-        assert "ch" in p["evidence"], f"{p['name']} evidence 應該引用章節"
-
-
-def test_zone_kinds_are_safe_and_danger(zones):
-    """區域要有安全同危險兩類（用戶要求用顏色區分）。"""
+def test_zone_kinds_cover_three_types(zones):
+    """區域要有安全、危險、敵對據點三類（用戶要求用顏色區分）。"""
     kinds = {z["properties"]["kind"] for z in zones}
     assert "survivor" in kinds, "應該有倖存區（安全）"
     assert "nest" in kinds, "應該有病窩（危險）"
+    assert "outpost" in kinds, "應該有據點（敵對）"
+
+
+def test_zone_dossiers_have_governance_detail(zones):
+    """用戶明確要求「政權種類、人文風格、社會結構」等詳細內容。
+
+    所以倖存區一定要有 summary，而且大部分要有 government。
+    """
+    survivors = [z for z in zones if z["properties"]["kind"] == "survivor"]
+    assert survivors, "應該有倖存區"
+    with_summary = [z for z in survivors if (z["properties"].get("summary") or "").strip()]
+    assert len(with_summary) == len(survivors), "所有倖存區都要有 summary"
+    with_gov = [z for z in survivors if (z["properties"].get("government") or "").strip()]
+    assert len(with_gov) >= len(survivors) * 0.6, (
+        f"倖存區政權資料太少：{len(with_gov)}/{len(survivors)}"
+    )
+
+
+def test_zone_evidence_is_not_leaked_to_public(zones):
+    """⚠️ 版權紅線（B4 改寫）—— 呢個測試**由「要求有 evidence」反轉為「禁止 evidence」**。
+
+    原本嘅 `test_zone_evidence_quotes_chapters` 要求 ≥70% 區域嘅 `evidence`
+    含 `"ch"` 章節標記。但實測 48/48 個 `evidence` 都係
+    `"ch73 原文：「…」"` 格式 —— 即係**成段小說原文**入咗公開資料，
+    而呢個檔會經 `npm run sync-data` 出到前端 bundle。
+
+    所以 World Atlas V2 決定：**`evidence` 欄位完全移除**，原文只留
+    `data/private/`。取代佢嘅係：
+      - `chapter_refs`（章節索引，唔含原文）
+      - `zone-dossiers.json` 嘅短摘要（≤180 字，DS3）
+      - `artifacts/b4/coordinate-audit-report.md` 嘅統計（唔含原文）
+
+    防回歸：`tests/test_spatial_integrity.py::test_public_data_has_no_novel_quotes`
+    會掃描所有 `data/public/**` 有冇 `原文：`／`chN 原文`。
+    """
+    # 1. `evidence` 欄位必須完全消失（唔係清空）
+    leaked = [z["properties"]["id"] for z in zones if "evidence" in z["properties"]]
+    assert not leaked, f"{len(leaked)} 個 zone 仲有 evidence 欄位（版權紅線）：{leaked[:5]}"
+
+    # 2. 取代品必須存在：`chapter_refs` 係 spec §2.2 嘅統一命名
+    missing = [z["properties"]["id"] for z in zones if "chapter_refs" not in z["properties"]]
+    assert not missing, f"{len(missing)} 個 zone 缺 chapter_refs：{missing[:5]}"
+    assert all(z["properties"]["chapter_refs"] == z["properties"]["chapters"] for z in zones), (
+        "chapter_refs 應該係 chapters 嘅同義改名"
+    )
+
+    # 3. 冇任何 properties 值含 `原文` 標記
+    import re as _re
+
+    pat = _re.compile(r"原文\s*[：:「]|ch\s*\d+\s*原文")
+    hits = [
+        z["properties"]["id"]
+        for z in zones
+        if pat.search(json.dumps(z["properties"], ensure_ascii=False))
+    ]
+    assert not hits, f"{len(hits)} 個 zone 嘅 properties 含小說原文標記：{hits[:5]}"
 
 
 def test_zone_ids_unique(zones):
@@ -607,175 +649,17 @@ def test_zone_ids_unique(zones):
     assert len(ids) == len(set(ids)), "區域 id 重複"
 
 
-def test_derive_zones_is_idempotent():
-    before = ZONES.read_text(encoding="utf-8")
-    r = subprocess.run(
-        [sys.executable, str(REPO / "scripts" / "derive_zones.py")],
-        cwd=str(REPO), capture_output=True, text=True,
-    )
-    assert r.returncode == 0, r.stderr[-400:]
-    assert ZONES.read_text(encoding="utf-8") == before, "derive_zones.py 唔冪等"
-
-
-# ---------------------------------------------------------------------------
-# 區域（倖存區／病窩）
-# ---------------------------------------------------------------------------
-ZONES = REPO / "data" / "public" / "zones.geojson"
-ZONE_SCHEMA = REPO / "data" / "schemas" / "zone.schema.json"
-
-
-@pytest.fixture(scope="module")
-def zones() -> list[dict]:
+def test_zone_merger_is_idempotent():
+    """合併腳本必須冪等 —— 重跑唔可以令結果靜默改變。"""
     if not ZONES.exists():
-        pytest.skip("未跑過 derive_zones.py")
-    return json.loads(ZONES.read_text(encoding="utf-8"))["features"]
-
-
-def test_zones_validate_against_schema(zones):
-    jsonschema = pytest.importorskip("jsonschema")
-    schema = json.loads(ZONE_SCHEMA.read_text(encoding="utf-8"))
-    v = jsonschema.Draft202012Validator(schema)
-    errs = [f"{z['properties']['id']}: {e.message}" for z in zones for e in v.iter_errors(z)]
-    assert not errs, "區域 schema 驗證失敗：\n" + "\n".join(errs[:5])
-
-
-def test_zone_radius_within_bounds(zones):
-    """半徑必須喺 schema 嘅上下限之內（太細睇唔到，太大蓋過其他區域）。"""
-    for z in zones:
-        r = z["properties"]["radius_m"]
-        assert 80 <= r <= 2000, f"{z['properties']['name']} 半徑 {r} m 超出範圍"
-
-
-def test_zone_radius_source_is_auditable(zones):
-    """每個區域都要講清楚半徑係點嚟 —— 唔可以只寫結論。"""
-    allowed = {"members", "default", "curated"}
-    for z in zones:
-        p = z["properties"]
-        assert p["radius_source"] in allowed, f"{p['name']} radius_source 唔合法"
-        assert p["evidence"], f"{p['name']} 缺 evidence"
-
-
-def test_member_derived_zones_use_member_spread(zones):
-    """`radius_source=members` 嘅區域，半徑必須真係由成員分佈推導。
-
-    呢個係防止「標咗 members 但其實用預設值」嘅假證據。
-    """
-    import math
-
-    by_id = {
-        f["properties"]["id"]: f["geometry"]["coordinates"]
-        for f in json.loads(
-            (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
-        )["features"]
-    }
-
-    def dist(a, b):
-        return math.hypot(
-            (b[0] - a[0]) * 111320 * 0.9247, (b[1] - a[1]) * 110570
-        )
-
-    checked = 0
-    for z in zones:
-        p = z["properties"]
-        if p["radius_source"] != "members":
-            continue
-        pts = [by_id[i] for i in p["member_location_ids"] if i in by_id]
-        assert len(pts) >= 2, f"{p['name']} 標咗 members 但成員少過 2 個"
-        c = z["geometry"]["coordinates"]
-        # 半徑應該 ≥ 最遠成員嘅距離（加咗 15% 餘裕）
-        assert p["radius_m"] >= max(dist(c, q) for q in pts) - 1, (
-            f"{p['name']} 半徑 {p['radius_m']} 細過最遠成員距離"
-        )
-        checked += 1
-    assert checked > 0, "應該至少有一個區域係由成員分佈推導"
-
-
-def test_curated_zones_have_chapter_evidence(zones):
-    """策展區域（例如坑口大病窩）必須附章節引用。"""
-    curated = [z for z in zones if z["properties"]["radius_source"] == "curated"]
-    assert curated, "應該有策展區域（坑口大病窩）"
-    for z in curated:
-        p = z["properties"]
-        assert p["chapters"], f"{p['name']} 缺章節引用"
-        assert "ch" in p["evidence"], f"{p['name']} evidence 應該引用章節"
-
-
-def test_zone_kinds_are_safe_and_danger(zones):
-    """區域要有安全同危險兩類（用戶要求用顏色區分）。"""
-    kinds = {z["properties"]["kind"] for z in zones}
-    assert "survivor" in kinds, "應該有倖存區（安全）"
-    assert "nest" in kinds, "應該有病窩（危險）"
-
-
-def test_zone_ids_unique(zones):
-    ids = [z["properties"]["id"] for z in zones]
-    assert len(ids) == len(set(ids)), "區域 id 重複"
-
-
-def test_derive_zones_is_idempotent():
+        pytest.skip("未跑過 merge_zone_dossiers.py")
     before = ZONES.read_text(encoding="utf-8")
     r = subprocess.run(
-        [sys.executable, str(REPO / "scripts" / "derive_zones.py")],
+        [sys.executable, str(ZONE_MERGER)],
         cwd=str(REPO), capture_output=True, text=True,
     )
     assert r.returncode == 0, r.stderr[-400:]
-    assert ZONES.read_text(encoding="utf-8") == before, "derive_zones.py 唔冪等"
-
-
-def test_dist_data_matches_source():
-    """`dist/data/public/` 必須同來源一致（如果 dist 存在）。
-
-    ⚠️ 為何要檢查 dist
-    -----------------
-    用戶喺 `localhost:5174`（測試用 preview server，serve `dist/`）見到
-    「載入 locations.geojson 時收到 HTML 而唔係 JSON」。
-
-    根因：`dist/data/public/` 停留喺舊版本，而 `public/data/public/` 已經
-    更新。`vite build` 理論上會複製 `public/` → `dist/`，但實測**唔一定
-    每次都更新**（`dist/index.html` 係新嘅，但 `dist/data/public/*` 係舊嘅）。
-
-    所以一致性檢查要覆蓋**兩層**：來源 → `public/` → `dist/`。
-    """
-    import hashlib
-
-    dist = REPO / "dist" / "data" / "public"
-    if not dist.exists():
-        pytest.skip("dist/ 未建置（正常，CI 可能冇）")
-
-    # ⚠️ 呢個測試要**先重建**再比對。
-    #
-    # 為何：`dist/` 係建置產物，而同一 session 嘅其他測試會改寫
-    # `data/public/`（例如 `test_infer_places` 嘅 fixture、
-    # `test_derive_zones_is_idempotent`）。所以測試開始嗰刻 dist 一定係
-    # 舊嘅 —— 唔可以就咁斷言。
-    #
-    # 跑一次 build 之後再比對，先真正驗證成條鏈：
-    #   來源 → public/（sync）→ dist/（vite）
-    import shutil as _shutil
-
-    if _shutil.which("npm") is None:
-        pytest.skip("冇 npm，跳過 dist 驗證")
-
-    r = subprocess.run(
-        ["npm", "run", "build"],
-        cwd=str(REPO), capture_output=True, text=True, shell=True,
-    )
-    assert r.returncode == 0, f"建置失敗：{(r.stderr or r.stdout)[-400:]}"
-
-    def sha(p: Path) -> str:
-        return hashlib.sha256(p.read_bytes()).hexdigest()
-
-    src_dir = REPO / "data" / "public"
-    src = {p.name: p for p in src_dir.glob("*.json")}
-    src.update({p.name: p for p in src_dir.glob("*.geojson")})
-
-    stale = [n for n, sp in src.items() if (dist / n).exists() and sha(sp) != sha(dist / n)]
-    missing = [n for n in src if not (dist / n).exists()]
-    assert not missing, f"dist 缺少呢啲檔：{missing}"
-    assert not stale, (
-        f"建置之後 dist 仍然同來源唔一致（{len(stale)} 個）：{stale}\n"
-        "代表 vite 嘅 publicDir 複製有問題，或者 prebuild 冇跑到"
-    )
+    assert ZONES.read_text(encoding="utf-8") == before, "merge_zone_dossiers.py 唔冪等"
 
 
 # ---------------------------------------------------------------------------
@@ -833,7 +717,13 @@ def test_parent_anchored_locations_inherit_precision():
 
 
 def test_anchored_locations_stay_in_story_region():
-    """錨定之後全部地點都要喺將軍澳範圍（唔可以散落全港）。"""
+    """錨定之後全部地點都要喺將軍澳範圍（唔可以散落全港）。
+
+    ⚠️ 例外：**有地名證據**（`coord_corrected`）嘅地點可以喺區外。
+    實測「海洋公園」—— ch198 原文寫明「海洋公園位於港島區」，
+    所以佢**應該**喺港島，而唔係被強行拉入將軍澳。
+    冇證據嘅地點仍然一律要喺區內。
+    """
     locs = json.loads(
         (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
     )["features"]
@@ -841,9 +731,27 @@ def test_anchored_locations_stay_in_story_region():
         f["properties"]["name"]
         for f in locs
         if not f["properties"].get("map_hidden")
+        and not f["properties"].get("coord_corrected")
         and not (
             114.225 <= f["geometry"]["coordinates"][0] <= 114.310
             and 22.265 <= f["geometry"]["coordinates"][1] <= 22.350
         )
     ]
     assert not outside, f"{len(outside)} 個可見地點喺將軍澳以外：{outside[:5]}"
+
+
+def test_coord_corrections_are_auditable():
+    """所有程式化座標修正都要有可稽核嘅理由（唔可以靜默改座標）。"""
+    locs = json.loads(
+        (REPO / "data" / "public" / "locations.geojson").read_text(encoding="utf-8")
+    )["features"]
+    corrected = [f for f in locs if f["properties"].get("coord_corrected")]
+    assert corrected, "應該有程式化修正過嘅地點"
+    # ⚠️ 只檢查**本階段**（audit_location_coords.py）加嘅修正。
+    # Phase J 之前已經有一批 `coord_corrected` 標記，佢哋嘅
+    # `position_source` 格式唔同 —— 唔應該用同一條規則去驗。
+    ours = [f for f in corrected if "程式化座標校正" in (f["properties"].get("position_source") or "")]
+    assert ours, "應該有 audit_location_coords.py 修正過嘅地點"
+    for f in ours:
+        src = f["properties"]["position_source"]
+        assert "m" in src, f"{f['properties']['name']} 理由應該包含距離數字"

@@ -1,0 +1,2780 @@
+{
+  "schema_version": 2,
+  "generated_from": {
+    "zones": "45a4520dc8d62438f7327987b472e89f6b97a23ac00b3d2cce9e754a506f1c86",
+    "chapter_summaries": "5e237c280210eefcb2a5053f983202ce92bd64ab40b7b522dcd3bff387cd1612",
+    "events": "9a2209972c9323bbc77ab39cce363e57932f1ca4cfa553fef2bbbd220484c6ff",
+    "timeline": "25c485351deaf20a330319d5115e2f015405f849538d396f474b7bf2eb8399f5"
+  },
+  "dossiers": [
+    {
+      "schema_version": 2,
+      "id": "dossier_0190fb28f4",
+      "zone_id": "zone_0190fb28f4",
+      "overview": "介乎大本營與靈實醫院之間的學校，位於寶順路旁、與上山小路僅一馬路之隔，賴三繪製的地圖上明確標示為「危險區域」。校園上空有大量烏鴉盤旋，校內粗略估計有七、八隻舌女，有的像人一樣站直拍打校閘，有的互相追逐如狗兒玩耍。不知情的人從校門外經過，隨時會死得不明不白，因此主角選擇繞行山路避開。",
+      "nest_profile": {
+        "threat_signature": "舌女",
+        "activity_pattern": "活躍章節 ch43–ch44；區內事件 27 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "舌女"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "不破尚",
+        "不破尚手下",
+        "主角",
+        "五人拍攝團隊",
+        "公仔",
+        "娃娃",
+        "滿天",
+        "瑜小六",
+        "瓦禮",
+        "病腦",
+        "白鯨",
+        "銘凱"
+      ],
+      "chapter_refs": [
+        43,
+        44
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_08f9447a47",
+      "zone_id": "zone_08f9447a47",
+      "overview": "位於坑口３８號街（舊稱將軍澳４４區綜合大樓），共十層，即所謂的「希望塔」。九樓滿佈男孩屍體與病翼巢穴，十樓為余智海改裝的秘密研究室，收藏著被注入病者血液、成為實驗對象的女兒余三村。白鯨病化後坐守十樓盡頭，以幻覺與意識入侵守護背後那道門。最終白鯨在此被殺，研究室被王達尼破壞、文件被帶走。",
+      "nest_profile": {
+        "threat_signature": "白鯨（病化）；病童；病翼；南愚；北賢；余智海",
+        "activity_pattern": "活躍章節 ch180–ch189；區內事件 38 條",
+        "affected_radius": "半徑約 600.8 m（來源：members）"
+      },
+      "risk_profile": {
+        "threats": [
+          "白鯨（病化）",
+          "病童",
+          "病翼",
+          "南愚",
+          "北賢",
+          "余智海"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "Nina",
+        "主角",
+        "公仔",
+        "北賢",
+        "南愚",
+        "國王",
+        "夏當",
+        "奎斯",
+        "戴頭紗的女人",
+        "犬京",
+        "王達尼",
+        "瑜小六",
+        "病獸",
+        "病童",
+        "病翼",
+        "病腦",
+        "白魂",
+        "白鯨",
+        "艾匡",
+        "董倫",
+        "賴三",
+        "銘凱"
+      ],
+      "chapter_refs": [
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 1.0,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_14d4957e04",
+      "zone_id": "zone_14d4957e04",
+      "overview": "全區最大型的倖存區社會，設獨立貨幣「艾幣」，連鄰近中小型倖存區亦承認。區內按財富與學歷劃分三等公民，皇室與貴族居於寶琳地鐵站上蓋的皇室區，皇宮設於新都城二期商場，平民則在地鐵站對出的大馬路擺賣維生。邊境以鐵板、木塊、磚頭堆砌成高牆，出入需公民證與安檢。區內有皇政府總部、疊翠軒會所（醫療與知識中心）、病獵公會（區外山上）等設施，並靠深洞陷阱防禦病者。",
+      "governance": {
+        "system": "由「艾氏皇室」統治，設皇政府，國王為元首；下有皇室顧問董倫及掌管行政、財富、外交、文化、軍隊的大臣，並實行公民三等制",
+        "authority": "艾氏皇室國王、艾康（王子／王位繼承人）、艾匡（公主）、董倫（皇室顧問／重臣）、瓦安（大商家、商團老闆）、賴桑（病獵）、國王、艾匡公主、賴桑、奎斯",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "按學歷與財富分三等公民：一等為高學歷或巨大財富者，二等為基本教育及受認可技能者，三等為不符上述者；其上另有皇室與貴族，貴族居於地鐵站上蓋的皇室區，與下蓋平民生活形成強烈對比",
+        "daily_life": "unknown",
+        "culture": "階級觀念強烈，貴族每週在皇宮舉行宴會交流，飲「血酒」、食牛排紅酒；艾氏皇室制定慶年日子，年宵一連七天，有紅燈籠、賀年攤位、心口碎大石、走火路等表演；居民普遍嚮往賺錢享樂，早已忘記牆外的病者世界"
+      },
+      "infrastructure": {
+        "security": "邊境圍牆以鐵板、支架、木塊、鐵桶、磚頭、硬盒堆砌而成，十分堅固；圍牆上有守衛，出入需公民證與安檢；疊翠軒停車場掘有深洞陷阱，底部放長鐵刺，引誘病者墮下",
+        "resources": "擁有獨立貨幣「艾幣」，鄰近中、小型倖存區亦承認；主街道就地擺賣，由刀斧劍器到茶米油鹽皆有；瓦安商團對外貿易，區內另有賭場、雜房店、製毒工場等地下經濟",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "不良人（劫殺其商人）",
+          "病者（舞者、病翼、舌女）",
+          "病者平權組織",
+          "病者和平協會",
+          "製毒工場（大佬傑）",
+          "童工政策",
+          "病者",
+          "奸商",
+          "不良人",
+          "皇室內鬥（艾康王子）"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "不良人",
+        "佬大傑",
+        "喪伯",
+        "國王",
+        "奎斯",
+        "滿天",
+        "犬京",
+        "王達尼",
+        "瑜小六",
+        "瓦安",
+        "病童",
+        "病翼",
+        "白魂",
+        "白鯨",
+        "艾匡",
+        "艾寶琳",
+        "董倫",
+        "賴三",
+        "阿禮"
+      ],
+      "chapter_refs": [
+        73,
+        126,
+        132,
+        133,
+        134,
+        135,
+        136,
+        137,
+        138,
+        144,
+        145,
+        146,
+        147,
+        151,
+        155,
+        163,
+        168,
+        175,
+        176,
+        177,
+        178,
+        180,
+        181,
+        191,
+        195,
+        196,
+        197
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.93,
+      "review_status": "validated"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_19c4406ae4",
+      "zone_id": "zone_19c4406ae4",
+      "overview": "位於往靈實協會禮拜堂路上的公園，病童數量特別多。奎斯提醒滿天，經過此處前必須帶備軟木耳塞，戴上後便可完全無視病童的聲音。滿天亦憶起跟白魂初到此處時，發現一切都是幻覺，恐怖非常。",
+      "nest_profile": {
+        "threat_signature": "病童（數量特別多）",
+        "activity_pattern": "活躍章節 ch126–ch126；區內事件 17 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病童（數量特別多）"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "喪伯",
+        "大眼",
+        "大鼻",
+        "病翼"
+      ],
+      "chapter_refs": [
+        126
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_200f5e8911",
+      "zone_id": "zone_200f5e8911",
+      "overview": "位於寶琳地鐵站上蓋及商場的貴族專屬區域，須貴族證明書或皇室邀請函方可進入，皇宮即新都城二期商場。區內有專門用膳、看書、玩樂的地方，上蓋住宅與花園採歐陸花園式風格，貴婦會在園中喝茶看書，與下蓋天光就要擺賣的平民形成強烈對比。皇室每週舉辦一次宴會，是知識份子交流結識的平台，飲品包括以血液調配的「血酒」。貴族普遍帶有優越感，甚至已忘記牆外病者的存在。",
+      "governance": {
+        "system": "由艾氏皇室與貴族佔據，須持貴族證明書或皇室邀請函方可進入；皇宮為皇室成員與貴族的活動核心",
+        "authority": "艾氏皇室成員、艾康（王子）、艾匡（公主）、瓦安（貴族大商家）、瓦禮（Angel，交際花）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "只准貴族與皇室成員進入；區內有專門用膳、看書、玩樂的地方，貴婦會在歐陸式花園喝茶看書，與外面繁忙喧嘩的倖存區是兩回事",
+        "daily_life": "區內人少少，貴族圈子不大",
+        "culture": "上蓋住宅與花園採歐陸花園式風格；貴族飲「血酒」、食牛排紅酒、看雜技與魔術表演；每週皇室宴會是知識份子交流結識的平台，由交際花Angel（瓦禮）任司儀；貴族普遍認為一半人已忘記病者存在"
+      },
+      "infrastructure": {
+        "security": "皇宮入口需皇室邀請函；會議房外有皇家守衛把守；貴族身份本身即為進入憑證",
+        "resources": "以貴族消費為主，設皇室區主要餐廳、書館、甜品鋪、洋服店；皇室每週舉辦一次宴會，並以艾幣支助區內組織",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者和平協會的暗殺陰謀",
+          "變態跟蹤者"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "滿天",
+        "賴三"
+      ],
+      "chapter_refs": [
+        132,
+        133,
+        134,
+        135,
+        137,
+        138
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_21f011edeb",
+      "zone_id": "zone_21f011edeb",
+      "overview": "病腦以病者語「嘎嘎戈咕圭」所指、位於西面的地方。那是一個人為興建的領地，有城牆和鐵門，入口正中央以六條柱的鐵鏈連繫著一頭身高達十六米的特殊病獸。M一踏足地面，即被一股無法抵抗的思想入侵腦髓，被迫逃走。他由此得知病者背後仍有智慧更高的存在——「天腦」。",
+      "nest_profile": {
+        "threat_signature": "天腦；特殊病獸",
+        "activity_pattern": "活躍章節 ch198–ch198；區內事件 30 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "天腦",
+          "特殊病獸"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "不破尚",
+        "公仔",
+        "夏當",
+        "天腦",
+        "娃娃",
+        "少佐",
+        "教主",
+        "滿天",
+        "王達尼",
+        "班尼",
+        "病爪",
+        "病腦",
+        "董倫",
+        "銘凱",
+        "阿漢",
+        "馬德梵"
+      ],
+      "chapter_refs": [
+        198
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_24f0592ad1",
+      "zone_id": "zone_24f0592ad1",
+      "overview": "位於艾寶琳倖存區外山區、走過長石梯才到達的古老教堂，是病獵公會的根據地。會長白鯨失蹤後由賴桑、奎斯等成員維持，秘書為Nina。聖堂內有主聖堂、二樓與地下室寢室，成員互當一家人。白鯨的房間自他失蹤後一直保留兩年前的面目，放有白色小鯨魚玩具與大王鯨魚項鍊。公會亦是策劃進入病者之都的行動基地。",
+      "governance": {
+        "system": "由會長及幹部管理；會長白鯨失蹤後由賴桑、奎斯等成員維持運作",
+        "authority": "白鯨（會長）、賴桑、奎斯、Nina（秘書）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "成員同住於聖堂，地下室曾放雙人床，大家當對方是一家人；二樓可住人（犬京與狗曾住此）",
+        "daily_life": "unknown",
+        "culture": "以消滅病者、追查真相為使命；重視傳承與同伴情誼"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "接受委託消滅病者（需先寄信過來）；皇室以免費宿舍和糧食吸引人加入公會",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者",
+          "病者平權組織與病者和平協會的聯手反撲"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "A隊",
+        "B隊",
+        "Chirs",
+        "Dr.D第二任助手",
+        "F小隊",
+        "Leo",
+        "Nina",
+        "Ricky",
+        "不法者佬大",
+        "不破尚",
+        "不良人",
+        "不良人廚師",
+        "主角",
+        "五爺",
+        "余智海",
+        "健仁",
+        "健仁嘅友人",
+        "傑夫丸",
+        "八字鬍青年",
+        "公仔",
+        "公仔之父",
+        "凱銘",
+        "前任領導人",
+        "北賢",
+        "十歲孖仔",
+        "南愚",
+        "喪伯",
+        "國王",
+        "夏晴",
+        "夏當",
+        "大本營",
+        "大眼",
+        "大耳",
+        "大舊",
+        "大鼻",
+        "天明",
+        "奎斯",
+        "奧迪",
+        "娃娃",
+        "少佐",
+        "巴力",
+        "德蘭女教主",
+        "心理醫生",
+        "愛紗",
+        "攻擊學病者老師",
+        "新型病者「王」",
+        "明哥",
+        "明雲",
+        "星宇",
+        "木工部老主管",
+        "村長",
+        "滿天",
+        "漢木",
+        "漢森",
+        "犬京",
+        "王白蛋",
+        "王達尼",
+        "玲玲",
+        "班尼",
+        "瑜小六",
+        "瓦安",
+        "瓦禮",
+        "病爪",
+        "病王",
+        "病童",
+        "病者和平協會",
+        "病腦",
+        "白魂",
+        "白鯨",
+        "第二任助手",
+        "米奇老鼠男人",
+        "紅點病者",
+        "紡織部女生",
+        "老賢",
+        "老鄧",
+        "老闆",
+        "肥西",
+        "艾匡",
+        "艾康王子",
+        "華哥",
+        "董倫",
+        "說書人",
+        "賴三",
+        "送葬隊",
+        "遊戲負責人",
+        "醫療室職員",
+        "銘凱",
+        "鐵匠主管",
+        "間諜",
+        "阿乃",
+        "阿偉",
+        "阿宇",
+        "阿寶",
+        "阿文",
+        "阿明",
+        "阿洛",
+        "阿漢",
+        "阿玲",
+        "阿登",
+        "阿禮",
+        "陸軒",
+        "雨川",
+        "電鋸男",
+        "馬德梵",
+        "馬德梵老婆",
+        "黑鴉"
+      ],
+      "chapter_refs": [
+        177,
+        178,
+        180,
+        186,
+        195
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.87,
+      "review_status": "validated"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_294577f090",
+      "zone_id": "zone_294577f090",
+      "overview": "不良人活動的整個地區，涵蓋大本營、坑口、寶琳、康城等據點。病者平權組織曾與將軍澳區的不良人開戰，結果兩敗俱傷。滿天投靠不良人後，利用引導病者入侵敵方倖存區的方式，為不破尚消除大量敵人，令其在將軍澳區內逐漸取得統一之勢。至後期，將軍澳區的倖存者勢力已所餘無幾。",
+      "governance": {
+        "system": "由不良人控制，首領為不破尚；在滿天的協助下逐漸取得統一之勢",
+        "authority": "不破尚、銘凱",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "unknown",
+        "daily_life": "unknown",
+        "culture": "unknown"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者平權組織",
+          "大本營（敵對）"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "不破尚",
+        "滿天",
+        "病童",
+        "銘凱"
+      ],
+      "chapter_refs": [
+        126,
+        143,
+        149
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_2a22537f9c",
+      "zone_id": "zone_2a22537f9c",
+      "overview": "位於將軍澳北面的超大型倖存區，被喻為「死亡之路」盡頭的穩定聚居地。它實行貨幣政策，通用「艾幣」，區內商場有店鋪擺賣，居民可替國王做紡織或獵殺病者賺錢。政體行帝制，由國王統治並設有公主，設邊境圍牆及守衛。往寶琳的必經之路長期有大量病者徘徊，十人去只有三人能到，區外更有群體出沒的識飛病者「病翼」。",
+      "governance": {
+        "system": "奉行帝制，由艾氏一族的國王（君主）統治，下設「皇政府」；另設貴族階層，由高學歷分子及其後代組成",
+        "authority": "國王、艾氏國王（艾匡之父，年約六十、頭髮灰白）、艾匡（公主）、董倫（貴族成員）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "分貴族與平民兩層：貴族為高學歷分子及後代，住寶琳地鐵站上蓋花苑私樓，享貴族福利；平民散居商業區與住宅區，靠工作賺艾幣維生。另有露宿者、性工作者、信奉病者的教徒等邊緣人士",
+        "daily_life": "unknown",
+        "culture": "商業至上、人人為艾幣奔波；閱讀成風；以違禁品清單禁絕病者相關事物；貴族有強烈階級思想；國王出巡被視為精神象徵，居民多抱看熱鬧心態"
+      },
+      "infrastructure": {
+        "security": "以金屬板／鐵板圍封整個區域作邊境，設五、六米高鐵板牆及守衛；病翼來襲時靠守衛發箭、居民匿藏；邊境守衛可受賄放行",
+        "resources": "全面貨幣制度，以「艾幣」交易；皇政府派人外出挖掘採集資源，供應大商家購入再分貨零售；商戶幾乎二十四小時營業。另有賭場、妓館、釀酒廠、食店與病獵懸賞",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "識飛的病者「病翼」群體",
+          "「死亡之路」上徘徊的大量病者",
+          "病翼",
+          "病者平權組織餘黨",
+          "黑鼠商團等走私者",
+          "內部皇權鬥爭與綁架陰謀"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "Chris",
+        "不破尚",
+        "主角",
+        "北賢",
+        "南愚",
+        "國王",
+        "夏當",
+        "寶琳柒拾老闆",
+        "教主",
+        "時空旅者",
+        "王達尼",
+        "瓦禮",
+        "病童",
+        "病翼",
+        "白魂",
+        "白鯨",
+        "艾匡",
+        "董倫",
+        "銘凱",
+        "雨川"
+      ],
+      "chapter_refs": [
+        25,
+        80,
+        86,
+        88,
+        91,
+        98,
+        99,
+        100,
+        101,
+        102,
+        109,
+        110,
+        111,
+        112,
+        113,
+        114,
+        115,
+        116,
+        117,
+        118,
+        123,
+        124
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.93,
+      "review_status": "validated"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_2dd9d2ab58",
+      "zone_id": "zone_2dd9d2ab58",
+      "overview": "由病獵公會開辦、皇室支持的培訓學校，位於東華三院呂潤財紀念中學和仁濟醫院靚次伯紀念中學兩個區域，其中一間提供學生宿舍。王達尼為校監，賴桑為訓導主任，奎斯任導師，瑜小六應邀出任「病者學」教授。學員需學習一切生存技能和基本知識。",
+      "governance": {
+        "system": "由病獵公會開辦，皇室支持",
+        "authority": "王達尼（校監）、賴桑（訓導主任）、奎斯（導師）、瑜小六（病者學教授）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "其中一間校舍提供學生宿舍；學員需學習一切生存技能和基本知識，包括至少七種繩索綁法",
+        "daily_life": "unknown",
+        "culture": "以培訓病獵人才為目標，規模比大本營的小課室大得多"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "以免費宿舍和糧食吸引人加入病獵公會；老師一日工資約三十五艾幣",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "病腦"
+      ],
+      "chapter_refs": [
+        176,
+        194,
+        195
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_2f870cd708",
+      "zone_id": "zone_2f870cd708",
+      "overview": "位於將軍澳海皮附近、大本營東門外一段上坡路之後的墳場，是情報販子北賢的落腳點。北賢躺在最右面一列墓碑前休息，向來訪者出售關於病者的情報，收費驚人，拒絕果汁糖，只肯收十包即溶咖啡。前往途中會遇到自稱「假病者」、全身塗上紅點的南愚，他以病童情報為餌，要求主角到靈實醫院替他取回一張照片。",
+      "governance": {
+        "system": "unknown",
+        "authority": "北賢",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "情報販子北賢獨自駐守，躺在墓碑前接見買家",
+        "daily_life": "unknown",
+        "culture": "unknown"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "以情報換取物資，收費驚人，拒絕果汁糖，只收十包即溶咖啡",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "普通病者",
+          "自稱假病者的南愚"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "Ricky",
+        "不破尚",
+        "北賢",
+        "南愚",
+        "夏晴",
+        "奎斯",
+        "少佐",
+        "村長",
+        "犬京",
+        "王達尼",
+        "病嘴",
+        "病童",
+        "白魂",
+        "艾匡",
+        "賴三",
+        "阿玲"
+      ],
+      "chapter_refs": [
+        35,
+        38,
+        39
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.53,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_3371b02c9d",
+      "zone_id": "zone_3371b02c9d",
+      "overview": "表面上是一個自給自足的中小型倖存區，實際是「病者和平協會」的根據地。首領「三腦」是三個人格融合而成的巨型病腦，以「病者同人類應該和平共處」為號召，暗中操控村內一切。他傳授淨水、發電、食物檢驗等技術令村落自給自足，卻暗中殺害前任人類領導人，並以被殺倖存者的人血釀造「血酒」對外輸出。村落外圍只用傢俱堆疊成牆，守衛稀少，最終被滿天放火燒成一片火海。",
+      "governance": {
+        "system": "表面由人類幹部（老鄧）管理，實際由病腦「三腦」秘密操控；三腦同時是「病者和平協會」的領導人",
+        "authority": "村長、三腦（病腦，真正領導人）、老鄧（人類幹部，被三腦拋棄而毒死）、前任人類領導人（被殺，其妻女骨製成刀）、三腦",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "村民樸素、關係親密，買賣以輕鬆心態進行；村中有說書人、小販、酒館；康林樓為抽血與製酒工場，由搬運工人、抽血醫生、文員等分層運作",
+        "daily_life": "屬中、小型倖存區規模，有數十人協助搬運酒桶",
+        "culture": "普遍村民主張人類與病者和平共處；「共歡日」為人類與病者共歡的慶典；買賣病者藝術品風氣興盛；說書人向小孩講「三腦創世」故事；村民戴軟木耳塞隔絕病者笑聲"
+      },
+      "infrastructure": {
+        "security": "以木板密密圍封，設大木閘及小哨塔；村中守衛持木錘，村民自製木弓、木箭、長木矛、鐵斧；夜間靠火炬照明；遇病者全村動員",
+        "resources": "自給自足：經衛奕信徑３段行約三十分鐘到大牛湖取水，再行一小時到附近村落的原居民泥田大規模種植。特產為病者相關藝術品；亦出產「血酒」——實以人血釀造，記錄冊列有「酒精供應體」的年齡、性別、血型",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病腦（藏於村中社區會堂）",
+          "病翼",
+          "以人血製酒的黑暗秘密",
+          "南愚與北賢",
+          "三腦（病腦）",
+          "火災",
+          "血池中的毒",
+          "艾寶琳吞併",
+          "集體處決"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "不破尚",
+        "主角",
+        "佬大傑",
+        "光頭大叔",
+        "公仔",
+        "北賢",
+        "南愚",
+        "國王",
+        "大舊",
+        "奎斯",
+        "守衛長",
+        "小老鼠",
+        "教主",
+        "時空旅者",
+        "滿天",
+        "王白蛋",
+        "王達尼",
+        "班尼",
+        "瓦安",
+        "瓦禮",
+        "病童",
+        "病翼",
+        "病腦",
+        "白魂",
+        "白鯨",
+        "皇室御用劍客",
+        "結他男",
+        "美容中心男店員",
+        "老鄧",
+        "肥施",
+        "胡子老闆",
+        "胡師傅",
+        "舞者",
+        "艾匡",
+        "艾寶琳",
+        "艾康王子",
+        "董倫",
+        "賴三",
+        "阿禮"
+      ],
+      "chapter_refs": [
+        119,
+        120,
+        121,
+        122,
+        138,
+        139,
+        140,
+        163,
+        175,
+        178,
+        183,
+        195
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.9,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_3c22142525",
+      "zone_id": "zone_3c22142525",
+      "overview": "位於將軍澳魔鬼山林中的歐式別墅，原是病毒學家余智海博士的住所，四周樹木枯死、死氣沉沉。飛虎隊曾在此與病童、病牙、舞者激戰，不破尚與余智海在地下研究室交手。事後古宅被七隻戴七彩冷帽的竊屍賊佔據，大廳有《白雪公主》圖書，二樓有女孩房間與病爪。南愚最終縱火，古宅在爆炸中全毀。",
+      "nest_profile": {
+        "threat_signature": "竊屍賊；病爪；南愚；北賢",
+        "activity_pattern": "活躍章節 ch167–ch172；區內事件 10 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "竊屍賊",
+          "病爪",
+          "南愚",
+          "北賢"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "不破尚",
+        "主角",
+        "余智海博士",
+        "南愚",
+        "戴紅色冷帽竊屍賊",
+        "銘凱"
+      ],
+      "chapter_refs": [
+        167,
+        169,
+        170,
+        171,
+        172
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_3dbd872a01",
+      "zone_id": "zone_3dbd872a01",
+      "overview": "將軍澳日出康城的倖存聚居地，分一期與二期，樓宇如城牆般包圍中心。全盛時由「十二元老會」管治，每幢樓選出一位領導人，再互選手握金鷹頭拐杖的最高決策人。居民多為中上階層專業人士，自製發電機、濾水器、熱火爐，生活優悠，不與外界往來。十二元老被董倫槍殺後由明雲繼承。防守鬆懈，僅靠零星哨兵與閉路電視，終遭不法者與病獸威脅。",
+      "governance": {
+        "system": "由「十二元老會」管治：康城一期六位、二期六位大樓領導人，十二人互選出最高決策人「金鷹頭」；十二元老被殺後由明雲繼承領導",
+        "authority": "明雲、明霧（明哥）、董倫、巴力",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "每幢大樓由居民選出一位領導人（類似議員），十二位領導人組成「十二元老會」，再互選「金鷹頭」；居民多為中上階層專業人士",
+        "daily_life": "約一百多人",
+        "culture": "居民多為高學歷知識份子，重視享樂、自我實現與工作熱情；有讀書會、音樂、唱片機、燒烤派對、心理診所與病學研究"
+      },
+      "infrastructure": {
+        "security": "設短波通訊設備，並有前天氣分析師、技術專員與大學氣象學家負責天氣監測",
+        "resources": "自給自足，靠自製發電機、濾水器、熱火爐與工程師技術維持；不與外界往來，後期以「貢獻值」換取皮鞋、手錶、自行車等奢侈品",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病獸",
+          "不法者",
+          "董倫",
+          "病者"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        151,
+        152,
+        153,
+        155,
+        156,
+        158,
+        159,
+        162,
+        164,
+        165,
+        166,
+        181,
+        191,
+        195
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 1.0,
+      "review_status": "validated"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_3e668045b2",
+      "zone_id": "zone_3e668045b2",
+      "overview": "李惠利大樓位於調景嶺大本營附近，不良人入侵大本營時將此處佔據為重點防線，並把李惠利飯堂當作前線指揮處。不破尚與其飛虎部隊在此集結、調度人手攻擊大本營的巨型病者Dr.D；董倫亦在此向不破尚獻策。戰事後期，大本營的M（黑袍老師）亦跟隨不良人退入此處的後方戰線。",
+      "governance": {
+        "system": "不良人佔據作前線據點",
+        "authority": "不破尚、董倫",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "unknown",
+        "daily_life": "unknown",
+        "culture": "unknown"
+      },
+      "infrastructure": {
+        "security": "不良人的重點防線，設重重武裝警戒",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "大本營",
+          "Dr.D異變成的巨型病者"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        71,
+        72
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.53,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_401442fd69",
+      "zone_id": "zone_401442fd69",
+      "overview": "尚德街市被病者平權組織刻意封鎖鐵捲門、加鎖並佈滿陷阱，改造成一隻名為「大廚」的病腦的巢穴，組織稱之為「飼養圈」。病腦在肉檔、魚檔以人類為食材，用大甕烹煮人肉湯，並以雞籠困住十多個活人保持新鮮。組織成員夏當匿藏其中，利用不良人俘虜設局誘敵，是主角首次遇上病者平權組織的地方。",
+      "nest_profile": {
+        "threat_signature": "病腦「大廚」；病者平權組織成員夏當；滿佈的陷阱",
+        "activity_pattern": "活躍章節 ch87–ch90；區內事件 11 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病腦「大廚」",
+          "病者平權組織成員夏當",
+          "滿佈的陷阱"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "公仔",
+        "娃娃",
+        "王白蛋",
+        "病童",
+        "病腦",
+        "白魂",
+        "銘凱"
+      ],
+      "chapter_refs": [
+        87,
+        88,
+        89,
+        90
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_4600c0fe59",
+      "zone_id": "zone_4600c0fe59",
+      "overview": "將軍澳彩明一帶的商場，曾有一隻病腦出沒，在不良人之間只是未經證實的傳聞。主角早前曾在此對付該病腦，即使出動火燒大腦也未能把它完全殺死，最終將它宰掉。當不良人王白蛋提起此事時，消息已然過時。",
+      "nest_profile": {
+        "threat_signature": "病腦",
+        "activity_pattern": "活躍章節 ch80–ch89；區內事件 7 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病腦"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "公仔",
+        "南愚",
+        "娃娃",
+        "犬京",
+        "瑜小六",
+        "病爪",
+        "病童"
+      ],
+      "chapter_refs": [
+        80,
+        89
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_4ba70c4d20",
+      "zone_id": "zone_4ba70c4d20",
+      "overview": "位於康城一期與二期交界之間的小酒吧，由陸軒經營，店名「Eagle」，只有一千多呎，有一張貼牆沙發、酒吧檯與點唱機，期望一期與二期的倖存者能坐在一起喝酒。陸軒被處死後酒吧荒廢，董倫常來此喝酒，最後亦在此毒發身亡，臨終前遇上病者北賢並將之重創。",
+      "governance": {
+        "system": "由陸軒開設及經營；陸軒死後荒廢，成為董倫最後的棲身地",
+        "authority": "陸軒、董倫",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "unknown",
+        "daily_life": "unknown",
+        "culture": "店名「Eagle」，老闆兼任酒保，期望康城一期與二期的倖存者能坐在一起愉快喝酒"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "賣酒為主（威士忌、雞尾酒、清酒、伏特加等）",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "明哥派來的殺手"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        160,
+        161,
+        165,
+        166
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.6,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_50501d2eaf",
+      "zone_id": "zone_50501d2eaf",
+      "overview": "佔據佛教志蓮小學的敵對倖存者集團「不良人」，首領是被人喻為「怪物」的活人──不破尚，據說單憑虎刺拳扣就能殺死病者。他們認為亂世殺人搶物資天公地道，殺掉大本營派去交涉的兩人，又派間諜潛入大本營掃光市集武器。少佐識破暗號「不良無道」，在廣場埋伏收拾了其中五人，自此不良人展開復仇，把五名大本營精銳搜索隊的人頭送回北門。少佐本身亦曾是「不良人」成員。",
+      "governance": {
+        "system": "由武裝倖存者集團「不良人」佔領，首領為不破尚",
+        "authority": "不破尚",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "以小隊形式行動（如第四隊），成員之間以暗號識別，對外人抱持敵意",
+        "daily_life": "unknown",
+        "culture": "認為殺人同搶奪物資在亂世都是天公地道，不怪任何人；對大本營派去交涉的兩人痛下殺手，其後把大本營五名精銳搜索隊成員的人頭裝進籃球袋送到北門外，附紙條寫上「不良人回禮」"
+      },
+      "infrastructure": {
+        "security": "持有無線電對講機並設暗號「不良無道」；派間諜混入大本營，一日之內買光市集所有武器",
+        "resources": "以殺人、搶奪其他倖存者的物資為生，並派出間諜潛入大本營掃光市集武器",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "不良人",
+          "往來途中的病者"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        12,
+        18,
+        19
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.93,
+      "review_status": "validated"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_51bf7d8190",
+      "zone_id": "zone_51bf7d8190",
+      "overview": "被病腦佔據的荒廢商場，是區內唯一有智力病者的巢穴。病腦把四樓改裝成婚禮會場，用人手花牌、紅地毯與被固定的死人營造婚禮，並透過與大本營的暗中交易換取活人與屍體作貢品。商場內有以真人殘肢拼成假人的高級衣店、亂葬岡更衣間、百貨超市、寵物店與玩具反斗城，沿途佈滿捲閘、灑水、強光等陷阱。M 兩度潛入，最終靠天拿水與火柴火燒病腦，再以棒球棍補刀摧毀此窩。",
+      "nest_profile": {
+        "threat_signature": "病腦（弱點為火，會假死）；舌女（酸性唾液、可舉起捲閘）；大鼻（有毒氣體）；自動捲閘與各種陷阱",
+        "activity_pattern": "活躍章節 ch2–ch10；區內事件 100 條",
+        "affected_radius": "半徑約 800.0 m（來源：members）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病腦（弱點為火，會假死）",
+          "舌女（酸性唾液、可舉起捲閘）",
+          "大鼻（有毒氣體）",
+          "自動捲閘與各種陷阱"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "W",
+        "不破尚",
+        "主角",
+        "公仔",
+        "夏晴",
+        "大耳",
+        "大腦怪物",
+        "大舊",
+        "大鼻",
+        "天明",
+        "小男孩",
+        "少佐",
+        "推車手",
+        "漢森",
+        "犬京",
+        "王達尼",
+        "瑜小六",
+        "病爪",
+        "病童",
+        "病腦",
+        "米奇老鼠男人",
+        "老賢",
+        "董倫",
+        "送葬隊",
+        "阿寶",
+        "阿玲",
+        "阿登",
+        "黑鼠商團首領"
+      ],
+      "chapter_refs": [
+        2,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 1.0,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_52987957ac",
+      "zone_id": "zone_52987957ac",
+      "overview": "艾寶琳倖存區的醫療與知識中心，位於屋苑疊翠軒的會所內，須經連接寶琳地鐵站上蓋花園的橋進入，橋上有守衛把守。這裡除了是醫療體系中心，更是發電應用、淨水過濾、皇室食物安檢、電腦計算機等專業領域的所在，將軍澳醫院的儀器亦多已搬來，故兵防密佈。公主艾匡每晚前來接受治療。其停車場另挖有深洞陷阱，底部放長鐵刺，用以對付入侵的病者。",
+      "governance": {
+        "system": "由艾寶琳皇室管理，是倖存區醫療體系的中心",
+        "authority": "unknown",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "由各專業人士（醫生、設計師、工程人員等）組成，進入需許可證；區內氣氛寧靜，像專業人士的工作地方",
+        "daily_life": "unknown",
+        "culture": "區內知識寶庫，負責醫療、發電應用、淨水過濾、皇室食物安檢、電腦計算機等專業領域；公主艾匡每晚前來接受治療"
+      },
+      "infrastructure": {
+        "security": "連接花園的橋上站有守衛，防止外人進入；整體兵防密佈",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者和平協會的暗殺陰謀"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        134,
+        146
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_5305022f5e",
+      "zone_id": "zone_5305022f5e",
+      "overview": "位於港島區的舊主題樂園，早已荒廢。園內被一隻穿聖誕老人衣服的高智商病腦佔據，他把過山車拆下改造成「鹿車」，以舌女代替聖誕鹿、數十隻病翼拉動飛行。園內有病者穿上海獅布偶服徘徊，喇叭播放著沙啞斷續、如十九世紀馬戲團的詭異音樂。M在此向病腦查問Dr.D的下落，並代為挑選禮物。",
+      "nest_profile": {
+        "threat_signature": "病腦；大眼",
+        "activity_pattern": "活躍章節 ch198–ch198；區內事件 1 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病腦",
+          "大眼"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        198
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_54e86462b5",
+      "zone_id": "zone_54e86462b5",
+      "overview": "「死亡之路」是將軍澳與寶琳倖存區之間的交界地帶，也是兩地往來的必經之路。區內病者密集，寶琳倖存區就算派人過嚟搶奪公主，行到「死亡之路」時就已經會死大約七成人。M 與白魂帶艾匡穿越時，一步出行人隧道就見烏鴉盤旋，沿途經過巴士廠、橋底六隻舞者、寶康公園等險地，稍一不慎就會喪命。",
+      "nest_profile": {
+        "threat_signature": "大量病者；舞者；舌女；大耳；病童；病嘴；病牙；病翼；大眼；病者",
+        "activity_pattern": "活躍章節 ch102–ch174；區內事件 22 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "大量病者",
+          "舞者",
+          "舌女",
+          "大耳",
+          "病童",
+          "病嘴",
+          "病牙",
+          "病翼",
+          "大眼",
+          "病者"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "七隻彩色冷帽竊屍賊",
+        "不破尚",
+        "主角",
+        "公仔",
+        "夏當",
+        "大眼",
+        "大耳",
+        "大鼻",
+        "娃娃",
+        "小六",
+        "平子小姐",
+        "滿天",
+        "犬京",
+        "王達尼",
+        "病爪",
+        "病牙",
+        "病童",
+        "盜屍賊",
+        "米奇老鼠男人",
+        "舞者",
+        "董倫",
+        "銘凱",
+        "阿文"
+      ],
+      "chapter_refs": [
+        102,
+        109,
+        126,
+        146,
+        147,
+        168,
+        174
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_607bf35f2a",
+      "zone_id": "zone_607bf35f2a",
+      "overview": "將軍澳商場（又稱將軍澳廣場）距不良人據點僅數十步，商場內超市、食店、藥房、鞋店、電腦店等早已被搶掠一空，唯獨二樓左邊的超級市場與右邊的百貨公司物資仍放得滿滿，因為從沒有人在「病童」手上活得過來。病童是一隻約六、七歲的小女孩病者，以幽幽哼唱的歌聲催眠獵物，令人放下防備、意識薄弱，繼而自行走向吊頸繩等陷阱自我了結。南愚曾警告對付牠必須帶耳塞。",
+      "nest_profile": {
+        "threat_signature": "病童（以哼唱催眠獵物，令人自我了結）",
+        "activity_pattern": "活躍章節 ch72–ch75；區內事件 2 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病童（以哼唱催眠獵物，令人自我了結）"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "不破尚",
+        "公仔",
+        "娃娃",
+        "老賢"
+      ],
+      "chapter_refs": [
+        72,
+        73,
+        74,
+        75
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_63245da8ee",
+      "zone_id": "zone_63245da8ee",
+      "overview": "由前身順德聯誼總會梁潔華小學改建而成的地下區域，距皇室區約五、六分鐘路程。每間課室都變成不同店鋪，充斥邪教、來貨不明的肉店、擺滿滲血仿真娃娃的店、自殺室、以痛楚換取借貸的公司、製毒室、人皮衣店，以及以器官作賭注的賭博場所。區內聚集了大量輸家、被迫瘋的人與殺手，氣氛陰沉恐怖。黑鼠商團在此經營走私買賣，其倉庫由「小老鼠」寶拉看管，貨品包括人皮手袋等。",
+      "governance": {
+        "system": "皇政府求其劃出的地方，入面幾乎是不管地帶，只為把潛在危險人士聚在一起；實際由黑鼠商團及不法者活躍",
+        "authority": "王達尼（黑鼠商團首領，代號「黑鼠」）、小老鼠寶拉、黑鼠（黑鼠商團老闆，已失蹤）、小老鼠（寶拉）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "聚集寶琳倖存區的邊緣人士：信邪教的狂熱份子、餓到吃人屍的露宿者、會縱火的精神病、殺手等；小學各層課室被出租開鋪，禮堂住滿流浪露宿者",
+        "daily_life": "unknown",
+        "culture": "病者崇拜的地下教會在小學六樓６０５室暗中收生，以病語「嗄‧‧‧吧吧嘎！嗨！」（意為「你好」）作暗號；牆上留有病語塗鴉及宣傳單張"
+      },
+      "infrastructure": {
+        "security": "常人不願前往，故會舉報的人少；以渠蓋／下水道作為通往區外的秘密通道",
+        "resources": "走私與非法買賣為主：人皮工房、來貨不明的肉店、製毒室、以器官作賭注的賭博場所、以痛楚換取借貸的公司",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "狂熱教徒",
+          "殺手與縱火者",
+          "皇政府打壓病者信仰",
+          "殺手",
+          "怪人",
+          "頻繁的自殺案",
+          "欺騙集團"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "主角",
+        "國王",
+        "夏當",
+        "大眼",
+        "天明",
+        "奎斯",
+        "娃娃",
+        "小老鼠",
+        "少佐",
+        "心理醫生",
+        "怪物",
+        "教主",
+        "明哥",
+        "滿天",
+        "漢森",
+        "犬京",
+        "王白蛋",
+        "王達尼",
+        "班尼",
+        "瑜小六",
+        "瓦安",
+        "病腦",
+        "白魂",
+        "老賢",
+        "英國紳士",
+        "董倫",
+        "銘凱",
+        "陸軒"
+      ],
+      "chapter_refs": [
+        113,
+        114,
+        115,
+        118,
+        119,
+        123,
+        136,
+        137,
+        168
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_71906d0c3d",
+      "zone_id": "zone_71906d0c3d",
+      "overview": "一個中立的細型倖存區，因不良人派出的間諜在此洗底，滿天為免大本營受襲，戴防毒面具以催眠瓦斯彈弄暈全區，再逐家逐戶將四十八人全部殺掉。這是他背負四十八條人命的起點，亦使他自此再也笑不出來。事後不良人被迫暫時中斷進攻大本營的計劃。",
+      "governance": {
+        "system": "unknown",
+        "authority": "unknown",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "unknown",
+        "daily_life": "四十八人（全被滿天殺害）",
+        "culture": "unknown"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "不良人派出的間諜（據稱已混入洗底）"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "不法者",
+        "不破尚",
+        "不良人",
+        "主角",
+        "五爺",
+        "公仔",
+        "北賢",
+        "少佐",
+        "明雲",
+        "班尼",
+        "病爪",
+        "病童",
+        "董倫",
+        "金鷹頭凶手",
+        "銘凱"
+      ],
+      "chapter_refs": [
+        143
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.47,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_8529def03c",
+      "zone_id": "zone_8529def03c",
+      "overview": "即「病者之都」，與艾寶琳倖存區之間只隔著單車徑。區內病者遍佈率超過七成，街口、商場、地鐵站皆滿佈其身影。竊屍賊大量定居並日夜建築，以鐵支架、鐵皮把大廈接駁起來，整個城市本身就像一個大病窩。路上有人刻意設置路障與圍牆，並有南愚的火牆、北賢的雷電籠罩，普通人有入無出。",
+      "nest_profile": {
+        "threat_signature": "大量病者；病翼巢穴；舌女；病翼；病獸；舞者；竊屍賊；大鼻；大耳；病爪",
+        "activity_pattern": "活躍章節 ch122–ch196；區內事件 39 條",
+        "affected_radius": "半徑約 679.9 m（來源：members）"
+      },
+      "risk_profile": {
+        "threats": [
+          "大量病者",
+          "病翼巢穴",
+          "舌女",
+          "病翼",
+          "病獸",
+          "舞者",
+          "竊屍賊",
+          "大鼻",
+          "大耳",
+          "病爪"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "Nosyag",
+        "Ricky",
+        "主角",
+        "公仔",
+        "北賢",
+        "南愚",
+        "奎斯",
+        "犬京",
+        "王達尼",
+        "病童",
+        "病腦",
+        "白魂",
+        "白鯨",
+        "米奇老鼠男人",
+        "董倫",
+        "賴三"
+      ],
+      "chapter_refs": [
+        122,
+        123,
+        176,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        196
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 1.0,
+      "review_status": "validated"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_8d2b97997f",
+      "zone_id": "zone_8d2b97997f",
+      "overview": "僅在老鄧的回憶中提及的地點，他說自己第一次遇見三腦，正是在心朗村摘完果實的時候被附近的捕獸器夾到。文中未交代心朗村是否一個正式的倖存區，只知其附近有果實可採集。",
+      "governance": {
+        "system": "unknown",
+        "authority": "unknown",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "unknown",
+        "daily_life": "unknown",
+        "culture": "unknown"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "抽血醫生",
+        "王達尼",
+        "病爪",
+        "雨川"
+      ],
+      "chapter_refs": [
+        139
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.4,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_8fb5cd71a2",
+      "zone_id": "zone_8fb5cd71a2",
+      "overview": "病者平權組織在坑口的據點，外表是整潔寧靜的教堂，實為供奉「病神／病皇」的異端組織。教主為穿黑袍的光頭教父，成員一律穿白衣，以病語祈禱、誦讀《病詩》。組織分初、中、高三級，初級不得外出。堂內設「祭品室」，用二、三十個棺木囚禁捉來的倖存者作祭品，連寶琳倖存區的公主也被捉來充當祭品。",
+      "nest_profile": {
+        "threat_signature": "教主；白衣成員；被當作祭品的病者",
+        "activity_pattern": "活躍章節 ch97–ch178；區內事件 0 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "教主",
+          "白衣成員",
+          "被當作祭品的病者"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        97,
+        99,
+        100,
+        178
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.7,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_9495051a1c",
+      "zone_id": "zone_9495051a1c",
+      "overview": "將軍澳村倖存區位於將軍澳近山一帶，四周為木林，以木材加工與買賣為生。全村以木板密密圍封，設南門，守衛持木錘，村民自製木弓、木箭、長木矛與鐵斧。村民日常戴軟木耳塞，隔絕外面無止盡的病者笑聲。村長受病者平權組織誘惑，每週以寶石等物資供奉該組織。遇病者來襲時全村動員，死者與病者屍體都會即時火化以防感染。",
+      "governance": {
+        "system": "由村長管理。村長被病者平權組織以「見番家人」誘惑，每週以寶石等物資供奉該組織",
+        "authority": "村長、漢木（木匠老伯）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "村民多為木工，專注木材成品；人數少、關係親密，即使互不相識也會為死者悼念；村中設木材加工廠",
+        "daily_life": "unknown",
+        "culture": "村民日常戴軟木耳塞隔絕病者笑聲；病者單一的笑聲成為村子長期的背景音，取代了蟬鳴；村中央設火化場，由死去到火化不足二十分鐘"
+      },
+      "infrastructure": {
+        "security": "以木板密密圍封，設南門等出入口；守衛持木錘，村民自製木弓、木箭、長木矛、鐵斧；遇病者全村動員，會把病者與死者屍體即時火化以防感染",
+        "resources": "以木材加工與買賣為主，向黑鼠商團等商隊供應木材與加工合板；同時被病者平權組織索取供奉",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "大耳、大眼等病者",
+          "病者平權組織的供奉勒索",
+          "舞者"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        123,
+        124,
+        125
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.73,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_9b5dfc356f",
+      "zone_id": "zone_9b5dfc356f",
+      "overview": "黑鼠商團關押、教訓生事者的地方。黑鼠商團是艾寶琳最強大的地下勢力之一，首領為王達尼；其手下在晚上進行的非法事情，只要不涉及皇室或過份的人命傷亡，守衛們向來都會視而不見。",
+      "governance": {
+        "system": "由黑鼠商團控制，首領為王達尼",
+        "authority": "王達尼、貪鼠",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "黑鼠商團成員穿黑色連衣帽、口罩只露雙目，以「什麼什麼鼠」為代號",
+        "daily_life": "unknown",
+        "culture": "unknown"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        197
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "zones-inline"
+      ],
+      "confidence": 0.53,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_a5768496df",
+      "zone_id": "zone_a5768496df",
+      "overview": "大本營附近的兩層商場，被列為安全的物資搜索區，老練搜索隊每三天到訪一次。新手A隊到此搜刮後整隊七人失聯，M 帶同瑜小六、肥西前往搜救，卻在商場內聽到模仿人聲的求救女聲，並被留守二樓、牽著牧羊犬的倖存者犬京阻止。犬京聲稱這裡是該區「王」的病者地盤，勸他們勿再前來。事後證實商場內並無病窩裝飾，A隊實為越界進入 popcorn 商場後遭病爪殺害。",
+      "nest_profile": {
+        "threat_signature": "病者（牽狗人犬京稱這裡是該區「王」的病者地盤，警告他人勿進）；A隊七名新手搜索隊成員在此失聯（實為誤入病爪範圍被殺）",
+        "activity_pattern": "活躍章節 ch14–ch19；區內事件 44 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者（牽狗人犬京稱這裡是該區「王」的病者地盤，警告他人勿進）",
+          "A隊七名新手搜索隊成員在此失聯（實為誤入病爪範圍被殺）"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "Chris",
+        "Nina",
+        "不破尚",
+        "不破尚的飛虎部隊成員",
+        "主角",
+        "公仔",
+        "奧迪",
+        "小六",
+        "小男孩",
+        "小老鼠",
+        "少佐",
+        "戴綠色冷帽竊屍賊",
+        "滿天",
+        "犬京",
+        "王白蛋",
+        "瑜小六",
+        "病爪",
+        "病牙",
+        "病童",
+        "病腦",
+        "老賢",
+        "肥西",
+        "艾匡",
+        "董倫",
+        "銘凱",
+        "阿文",
+        "阿陳"
+      ],
+      "chapter_refs": [
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_ad35edc961",
+      "zone_id": "zone_ad35edc961",
+      "overview": "病者平權組織以將軍澳的聖安得肋堂為根據地，由光頭教主領導。成員穿白衣、以「弟兄」相稱，每日唸誦《病詩》洗腦。組織靠擄走寶琳公主作籌碼，逼寶琳倖存區定期運送糧食物資，並向將軍澳村等小倖存區索取供奉；哈姆雷特老闆瓦安亦出錢資助。聖安得肋堂以多重木條封門、木板封窗，並能以貨櫃運載飼養的病者出陣。",
+      "governance": {
+        "system": "由教主（光頭）領導，教眾奉病者為「病王／病皇／上帝」，屬洗腦式信仰統治",
+        "authority": "教主（光頭）、平子小姐、犬京、瓦安（背後資助人）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "全體成員穿白衣、以「弟兄」相稱，一律聽從教主；每日集體用餐、讀《病詩》；教主之下有平子小姐等執行者，另有可飼養病者的成員",
+        "daily_life": "unknown",
+        "culture": "以《病詩》反複唸誦洗腦；教主宣稱能令信徒「見番最珍視嘅人」；教徒眼神空洞、失去自我，視病者為神"
+      },
+      "infrastructure": {
+        "security": "聖安得肋堂以大門多重木條封住出口，窗戶用木板圍封，白衣成員持武器看守；作戰時能飼養並以貨櫃運載病者（病爪、病嘴、病牙、舌女、大眼、大鼻、大耳、舞者）出陣",
+        "resources": "以擄走寶琳公主作籌碼，逼寶琳倖存區每隔日運送糧食物資；並向小型倖存區（如將軍澳村）索取供奉；另有哈姆雷特老闆瓦安等富人出錢出物資資助",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "不良人",
+          "寶琳倖存區病獵與皇政府",
+          "舞者（失控時會殺死自己人）"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        101,
+        102,
+        103,
+        104,
+        124
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.73,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_af344e29e8",
+      "zone_id": "zone_af344e29e8",
+      "overview": "位於艾寶琳倖存區外、僅一條馬路之隔的公園，內裡一片兒童遊樂場被竊屍賊改建成病窩：以輪胎、空酒瓶、車殼、染血滑梯、繩網與木板鐵板搭建，如同蟻窩。竊屍賊會分工、同居、尋食、存放屍體，並設祭壇供奉爛果實、死老鼠與人類衣物。公園高塔塔頂用血寫有「Hope」與「Road 38」，並藏有血繪地圖，成為追查白鯨下落的關鍵線索。",
+      "nest_profile": {
+        "threat_signature": "病童（以聲音催眠人腦產生幻覺、令人耳鳴）；舞者；舌女；大耳；偽裝的惡意倖存者；男病童；病童（會跟倖存者玩角色扮演）；竊屍賊",
+        "activity_pattern": "活躍章節 ch109–ch188；區內事件 16 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病童（以聲音催眠人腦產生幻覺、令人耳鳴）",
+          "舞者",
+          "舌女",
+          "大耳",
+          "偽裝的惡意倖存者",
+          "男病童",
+          "病童（會跟倖存者玩角色扮演）",
+          "竊屍賊"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "W",
+        "奎斯",
+        "滿天",
+        "王達尼",
+        "瓦安",
+        "白魂",
+        "艾匡",
+        "雨川"
+      ],
+      "chapter_refs": [
+        109,
+        110,
+        116,
+        117,
+        126,
+        127,
+        178,
+        179,
+        180,
+        188
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_c4afb9384d",
+      "zone_id": "zone_c4afb9384d",
+      "overview": "不良人據點位於將軍澳，以佛教志蓮小學為核心，並打通左邊的田家炳小學。首領不破尚出身飛虎隊，掌有配備重火力槍械的飛虎部隊，地位最高；一般不良人及俘虜地位低微，婦孺更被視為隨時可殺的附屬品。圍牆以幾十呎高金屬板封成，牆外倒吊人類屍體、大閘掛滿女性頭顱作威嚇。物資靠每星期出外獵殺倖存者劫掠，成員間共享；武器等同地位象徵。營內設斷頭台行刑，並有禮堂食堂、",
+      "governance": {
+        "system": "由不破尚獨裁統治，設有貼身親信及「正式不良人」幹部會議（每週五晚在六樓召開），一般成員只負責守門、搜索與前線戰鬥",
+        "authority": "不破尚、董倫、銘凱、不破尚（首領）、銘凱（副手）、董倫（知識份子頭目）、銘凱（得力助手）、董倫（前成員，已逃離至艾寶琳倖存區）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "分三層：首領不破尚；以銘凱為首的正規不良人（戰士）；董倫為首的知識份子（負責研發武器、不上一線）。另有「最終部隊」飛虎菁英，平日守衛六樓以上樓層",
+        "daily_life": "連不破尚私人部隊約四、五十人，加上大本營來的知識份子約七十多人",
+        "culture": "好戰、嗜酒、玩飛鏢玩牌；視殺戮如常；成員間以「兄弟」相稱；首領不破尚信奉「拳頭係唯一立即連結大腦嘅武器」"
+      },
+      "infrastructure": {
+        "security": "學校圍牆、大閘與刺欄，設哨兵塔發三級防禦警告；二樓武器庫藏瓦斯、軍刀等；危急時調動不破尚私人部隊及機關陷阱",
+        "resources": "靠搶掠其他倖存區維生，糧食庫存多得夠全員無節制食用一、兩年；平日行補給制，只分配給有貢獻者，武器等同地位",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病童（將軍澳商場）",
+          "大本營反攻",
+          "內部矛盾",
+          "內部互不信任與猜疑",
+          "不破尚的監視",
+          "病者",
+          "病者平權組織",
+          "大本營",
+          "Dr.D",
+          "大量病者",
+          "不良人"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        72,
+        73,
+        74,
+        75,
+        79,
+        80,
+        81,
+        84,
+        85,
+        91,
+        92,
+        96,
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        143,
+        148,
+        150,
+        165
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 1.0,
+      "review_status": "validated"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_cb2e712257",
+      "zone_id": "zone_cb2e712257",
+      "overview": "魔鬼山上的古舊碉堡，被Dr.D用作「活體營養儲存站」。他把綁架回來的活人以病嘴黏液封住全身，餵食由蠹魚人在山上搜捕的昆蟲漿，再派蠹魚攝取他們的養份，以延續自己的性命和能量。碉堡內有手術室與被倒吊的人類屍體。魔鬼山對海的沿崖亦是M最終帶著余智海飛入龍捲風的地點。",
+      "governance": {
+        "system": "unknown",
+        "authority": "Dr.D",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "「活體營養儲存站」：把綁架回來的活人以病嘴黏液封住全身，餵食由蠹魚人搜捕的昆蟲漿，再由蠹魚攝取他們的養份",
+        "daily_life": "少說也有四十多具活人營養供應體",
+        "culture": "unknown"
+      },
+      "infrastructure": {
+        "security": "古舊碉堡，入口隱蔽；有被控制的蠹魚人與病獵看守",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "Dr.D",
+          "蠹魚",
+          "被控制的病獵"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "不法者",
+        "主角",
+        "余智海",
+        "公仔",
+        "南愚",
+        "夏晴",
+        "大舊",
+        "娃娃",
+        "少佐",
+        "明雲",
+        "時空旅者",
+        "瑜小六",
+        "病童",
+        "病腦",
+        "白鯨",
+        "老賢",
+        "阿玲"
+      ],
+      "chapter_refs": [
+        188,
+        193,
+        194,
+        196
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_d3cb81ec7d",
+      "zone_id": "zone_d3cb81ec7d",
+      "overview": "位於坑口的病者聚居地，被形容為「幾乎有入無出」，危險程度比病者平權組織有過之而無不及。奎斯答應滿天，若成功摧毀病者平權組織，便會相信其實力足以應付病者之都，與他一同前往。南北兄弟與他人都提醒，進入之後的基本生還率低得不能再低。滿天前往坑口是為了尋找南愚與北賢所謂的「真相」及白鯨。",
+      "nest_profile": {
+        "threat_signature": "病者（極度高危）；大量病者",
+        "activity_pattern": "活躍章節 ch128–ch175；區內事件 22 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者（極度高危）",
+          "大量病者"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "主角",
+        "喪伯",
+        "奎斯",
+        "村長",
+        "漢木老伯",
+        "犬京",
+        "王達尼",
+        "瑜小六",
+        "白衣教徒",
+        "賴三",
+        "阿登"
+      ],
+      "chapter_refs": [
+        128,
+        144,
+        146,
+        167,
+        173,
+        175
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_d3f76d3c94",
+      "zone_id": "zone_d3f76d3c94",
+      "overview": "多媒體地下攝影棚位於大本營外，需由外面進入，但與大本營相連。馬姑娘每逢星期一、三、五深夜都會帶同物品前來，逗留約二十分鐘。棚內漆黑、雜物堆積、臭味濃烈，牆上以血寫著「沒有真理！只有痛苦」，角落棄置大量人體殘肢與內臟。這裡住著Dr.D的第二任助手——一個皮膚焦黃、半身紅點、會說話、有智慧、自稱「唔係病者」的怪物，他能在滾軸支架上攀爬移動，以短刀襲擊闖入者。",
+      "governance": {
+        "system": "首領「老賢」為最高話事人，實際行動與決策由前線指揮「少佐」負責；另有秘密行動組織「安區」，成員包括少佐、阿玲等，老賢可派出「貢獻度」（以他獨有的果汁糖代表）",
+        "authority": "老賢、少佐、大舊、Dr.D、董倫、馬姑娘、江子千、老賢（前首領，已死）、少佐（現首領）、阿玲、瑜小六、江子千（搜索隊隊目）、少佐（第二任領導人）、老賢（前任領導人，已死）、愛紗（顧問／代理）、大舊（對外決策部）、M（被指定第三任領導人）、賴三老師、老賢（前領導人）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "以樓層分層：八樓以上為權貴及知識份子（律師、政府公職、工程師、食物安全專家），七樓以下為平民（B區多為平民，打地鋪）；另有學堂師生、各搜索隊（01–07小隊，04為全女班「克里絲娜」）及C幢工坊勞工",
+        "daily_life": "百多人（ch0092：「如果大本營百多個人一起拿著武器衝進不良人據點」）",
+        "culture": "刻意保留人類文明：圖書館、飯堂、演講廳鋼琴演奏、心理輔導、為小孩開班、教導病者知識與對戰技巧的訓練班；同時存在小孩欺凌、私藏物資、內部陰謀等陰暗面"
+      },
+      "infrastructure": {
+        "security": "外圍以廢車、廢鐵、傢俱雜物加上鐵板圍牆堵塞，出入口設看守、須出示出入許可證；夜晚各樓層插火把照明，並有手持武器的年輕壯士站崗",
+        "resources": "糧食行配給制（派飯廣播、糧食卷，一顆果汁糖可換十五張飯票），市集用以物易物（煙、電池、武器、鬧鐘、防冷衣物等），部分物品須以「貢獻度」購買；一顆果汁糖亦可換一分鐘沖涼",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者",
+          "「不良人」派來的間諜",
+          "Dr.D 的野心與人體研究",
+          "糧食與物資嚴重短缺",
+          "高層把活人當貢品送給病腦的秘密交易",
+          "不良人",
+          "八樓權貴派系內鬥",
+          "糧食短缺",
+          "孤兒被充作童工",
+          "性病傳播",
+          "Dr.D 的病者實驗",
+          "曾在此工作的人員失蹤",
+          "病者（病腦、病爪、舌女等）",
+          "Dr.D與馬姑娘",
+          "八樓內奸",
+          "棚中的怪物（以短刀攻擊，行動敏捷，熟悉棚內環境）",
+          "不良人（不準時納貢即隨機殺十人）",
+          "資源短缺",
+          "Dr.D",
+          "病者平權組織",
+          "不良人（敵對）",
+          "居民外出失蹤事件",
+          "不法者",
+          "董倫",
+          "Dr.D／余智海",
+          "龍捲風"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "Chris",
+        "主角",
+        "公仔",
+        "夏晴",
+        "大舊",
+        "天明",
+        "奎斯",
+        "奧迪",
+        "娃娃",
+        "小六",
+        "少佐",
+        "平子小姐",
+        "新型病者「王」",
+        "時空旅者",
+        "滿天",
+        "漢森",
+        "犬京",
+        "王白蛋",
+        "王達尼",
+        "瑜小六",
+        "病童",
+        "病腦",
+        "老賢",
+        "賴三",
+        "阿寶",
+        "阿文",
+        "阿登"
+      ],
+      "chapter_refs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        79,
+        80,
+        84,
+        91,
+        92,
+        95,
+        96,
+        97,
+        102,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        143,
+        144,
+        146,
+        147,
+        148,
+        149,
+        150,
+        167,
+        168,
+        170,
+        172,
+        173,
+        174,
+        175,
+        181,
+        188,
+        191,
+        192,
+        193,
+        195,
+        196,
+        198
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.75,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_d9659abe0c",
+      "zone_id": "zone_d9659abe0c",
+      "overview": "「病者平權組織」的場所之一。犬京在此尋得一封以「病語」寫成的信件，信件雖經火災仍未被波及；信中內容經大BOSS翻譯後，指向寶康公園與白鯨失蹤的六月六號。",
+      "nest_profile": {
+        "threat_signature": "unknown",
+        "activity_pattern": "活躍章節 ch178–ch178；區內事件 0 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [],
+        "danger_level": 4
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        178
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.53,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_dc65269329",
+      "zone_id": "zone_dc65269329",
+      "overview": "位於將軍澳工業邨仁興工業大廈，原為康城倖存區為囚禁罪犯而改建的監獄，由獄長巴力管理。下層是大監倉，上層為單獨監房，專門囚禁危險暴力犯與高智慧罪犯。十二元老死後，明雲設宴用麻痺藥物一網打盡搞事份子，將他們囚於此。半年後停止供糧，任其餓死。其後Sona引病獸撞穿外牆，不法者逃獄，監獄反成他們的根據地。",
+      "governance": {
+        "system": "原為康城倖存區設立的監獄，由獄長巴力管理；後被逃獄的不法者佔據作根據地",
+        "authority": "巴力（前獄長）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "下層為大監倉（囚禁一般犯），上層為單獨監房（專門囚禁危險暴力犯與高智慧罪犯）",
+        "daily_life": "曾囚禁數十名不法者",
+        "culture": "牆身寫滿血書復仇字句、刻劃服刑日數、以排泄物塗滿房間，是過往監倉瘋狂的證明"
+      },
+      "infrastructure": {
+        "security": "外牆原應堅固得連貨車也撞不爛，後被病獸撞穿大洞；監房鐵門一閂即自動上鎖",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病獸",
+          "大眼",
+          "病牙",
+          "逃獄的不法者"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "不法者",
+        "巴力",
+        "明雲",
+        "白鯨",
+        "董倫"
+      ],
+      "chapter_refs": [
+        153,
+        158,
+        159,
+        162,
+        163
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.73,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_dda1a69ddb",
+      "zone_id": "zone_dda1a69ddb",
+      "overview": "彩明商場位於大本營附近，內裡居住著一隻病腦。據馬姑娘所言，這隻病腦對結婚有欲望，性格麻煩，需要定期送女人給牠才能安撫。牠是Dr.D與馬姑娘研究病腦相關資料的來源之一，補足了第一任助手滿天偷走病腦研究後的缺口。",
+      "nest_profile": {
+        "threat_signature": "病腦（需定期送女人給牠安撫）",
+        "activity_pattern": "活躍章節 ch67–ch67；區內事件 0 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病腦（需定期送女人給牠安撫）"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        67
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_df94610cc6",
+      "zone_id": "zone_df94610cc6",
+      "overview": "一個以務農為主的小型倖存區，入口掛著維修中的「松木村」木牌。村民和善勤勞，早上餵雞、搬原木、修村子，對外來者亦願意伸出援手。然而村長信奉病教，暗中與病者平權組織往來，成為組織宣傳的落腳點。村民對村長的行為雖有不滿，卻因性情太和善而不敢動手，最終只能收錢替外人把村長收藏在漢木老伯家密封的三樓。區內有武器店，可購入木箭、木盾、木矛等。",
+      "governance": {
+        "system": "由村長管理，村民以務農及手作為主；村長信奉病教，暗中與病者平權組織往來",
+        "authority": "村長（信奉病教）、漢木老伯",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "村長與村民；村民和善，不願對出賣村落的村長下重手，只求息事寧人",
+        "daily_life": "unknown",
+        "culture": "村民努力工作，餵養母雞、搬運原木、維修村子；對外來者友善，會贈送軟木耳塞以應付病童"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "以工匠技藝聞名，最好的武器、工具和傢俱都在那裡生產；病獵公會曾到此訂購精良的新武器",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病者",
+          "病者平權組織（前來宣傳並敲鐘）"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "主角",
+        "公仔",
+        "娃娃",
+        "班尼",
+        "白魂",
+        "盜屍賊",
+        "老賢",
+        "賴三"
+      ],
+      "chapter_refs": [
+        126,
+        128,
+        155,
+        177,
+        182,
+        195
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.67,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_e0a9ccb6fd",
+      "zone_id": "zone_e0a9ccb6fd",
+      "overview": "病者平權組織的根據地，由幾座寧養院與一間基督教靈實協會教堂組成，與靈實醫院相距不足百步。教主德蘭女教主以病童製造「恩賜」幻覺，讓信徒重見死去親人，從而依賴美好回憶並唯命是從。教堂正門鎖上鐵鏈，牧師檯上的十字架內藏鎖匙，可通往地下密室遊樂場；寧養院頂層則是擺滿珠寶的「寶藏房」。組織以敲鐘召集信徒，最終教堂被焚，男病童被滿天與公仔斬殺，組織正式瓦解。",
+      "governance": {
+        "system": "由「德蘭女教主」獨裁領導，自稱「上帝嘅先知」；前任教主為孤兒院院長（光頭）",
+        "authority": "德蘭女教主、犬京（最忠誠信徒）、前任光頭教主／孤兒院院長、男病童（被奉為「神之子」）",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "教主、白衣信徒（多為由孤兒院帶來的孤兒）、被飼養的病童；教主以病童製造幻覺，令信徒依賴美好回憶而唯命是從",
+        "daily_life": "數十名病童及一批白衣教徒",
+        "culture": "敲鐘召集信徒、禮拜與「恩賜」儀式（以病童幻覺重現死者）、修女唱聖詩、供奉《病學》聖書、教主一邊彈鋼琴一邊說唱"
+      },
+      "infrastructure": {
+        "security": "教堂正門以鐵鏈鎖上；牧師檯上的十字架內藏鎖匙，可開啟通往地下室的多重暗門",
+        "resources": "靠教主飼養病童、招收信徒奉獻；龐大組織運作背後有外部資助人瓦安",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "男病童（腦波控制）",
+          "病童集體哭泣",
+          "白衣信徒"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [],
+      "chapter_refs": [
+        126,
+        127,
+        128,
+        129,
+        130,
+        131
+      ],
+      "evidence_sources": [
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_e335ebdbec",
+      "zone_id": "zone_e335ebdbec",
+      "overview": "將軍澳中心旁通往地鐵站的商場，是新型病者「病爪」的巢穴。病爪把二樓大中央堆成一座三、四十具屍體的「屍山」當食糧，平日埋藏其中。牠無眼、靠聽覺行動，速度快過舌女、刀槍不入，會發出撕裂耳膜的女聲尖叫。牠原是女子 Bomi，被舌女舔傷後自毀雙目變成病者，同伴犬京一直守在附近阻止外人接近贖罪。M 用鬧鐘誘使牠反覆跳落一樓，趁其神志不清抽取血液樣本。",
+      "nest_profile": {
+        "threat_signature": "病爪；被尖叫聲引來的舌女、大鼻、大耳",
+        "activity_pattern": "活躍章節 ch18–ch24；區內事件 15 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病爪",
+          "被尖叫聲引來的舌女、大鼻、大耳"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "主角",
+        "余智海",
+        "北賢",
+        "大舊",
+        "大鼻",
+        "少佐",
+        "滿天",
+        "犬京",
+        "王達尼",
+        "瑜小六",
+        "病爪",
+        "病童",
+        "病腦",
+        "白魂",
+        "白鯨",
+        "舞者",
+        "艾匡"
+      ],
+      "chapter_refs": [
+        18,
+        19,
+        23,
+        24
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_ec954725f8",
+      "zone_id": "zone_ec954725f8",
+      "overview": "靈實醫院位於將軍澳，前身部分為康健中心。醫院二、三樓聚集大量病者（病嘴、病牙），四樓則住著一隻會說人類語言、智商極高、被稱為「大BOSS」的病腦。人類滿天原是Dr.D的助手，偷走病腦研究後離開大本營，長駐此處與大BOSS成為朋友，並替牠隱瞞會說話的秘密。滿天憑四樓直通各層的秘密通道避開病者，密碼只有他與大BOSS知道。二人生活自得其樂，",
+      "nest_profile": {
+        "threat_signature": "病嘴；病牙；病腦；大眼；穿醫生白袍的神秘男人；非常厲害的病者（推測）；滿天；病童；病者；男病童的腦波影響；舌女；大耳；大鼻",
+        "activity_pattern": "活躍章節 ch39–ch195；區內事件 113 條",
+        "affected_radius": "半徑約 545.2 m（來源：members）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病嘴",
+          "病牙",
+          "病腦",
+          "大眼",
+          "穿醫生白袍的神秘男人",
+          "非常厲害的病者（推測）",
+          "滿天",
+          "病童",
+          "病者",
+          "男病童的腦波影響",
+          "舌女",
+          "大耳",
+          "大鼻"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "Bomi",
+        "Chris",
+        "Nosyag",
+        "W",
+        "不破尚",
+        "不良人",
+        "主角",
+        "余智海",
+        "余智海博士",
+        "公仔",
+        "北賢",
+        "南愚",
+        "南愚與北賢",
+        "國王",
+        "夏晴",
+        "夏當",
+        "大舊",
+        "奎斯",
+        "奧迪",
+        "娃娃",
+        "小男孩病者",
+        "少佐",
+        "德蘭女教主",
+        "投機份子",
+        "教主",
+        "星宇",
+        "村長",
+        "滿天",
+        "漢木",
+        "犬京",
+        "王白蛋",
+        "王達尼",
+        "班尼",
+        "瓦安",
+        "病童",
+        "病翼",
+        "病者平權組織",
+        "病腦",
+        "白衣教徒",
+        "白魂",
+        "白鯨",
+        "舞者",
+        "艾匡",
+        "賴三",
+        "銘凱",
+        "阿文",
+        "阿禮"
+      ],
+      "chapter_refs": [
+        39,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        57,
+        86,
+        88,
+        121,
+        122,
+        126,
+        130,
+        131,
+        132,
+        142,
+        143,
+        144,
+        171,
+        175,
+        178,
+        180,
+        195
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.91,
+      "review_status": "needs_validation"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_f05a9c6d8a",
+      "zone_id": "zone_f05a9c6d8a",
+      "overview": "坐落於艾寶琳倖存區外圍山上的狩獵組織，外觀像一幢古老聖堂，需走彎曲石梯到達。由第一代會長白鯨創立，他曾擊退病者而吸引大批人加入，但白鯨與大部份會員在一次行動中消失後，公會便陷入谷底，只剩奎斯與賴桑兩名成員，由一名戴頭紗的女人任管理人。公會以狩獵病者、收集素材調配「靈藥」為業，並與皇室保持聯繫；後獲國王贊助三十五萬艾幣，得以重新招兵買馬。",
+      "governance": {
+        "system": "由會長領導。第一代會長為傳說級病獵「白鯨」，他失蹤一年多後，公會一直未有新會長",
+        "authority": "白鯨（第一代會長，失蹤）、Nina（打理聖堂）、賴桑（病獵）、奎斯（病獵）、白鯨（第一代會長，行動中連同大部份會員消失）、戴頭紗的女人（管理人）、奎斯、賴桑、Nina（靈藥調配）、白鯨",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "白鯨帶全隊外出調查失蹤後，公會只餘三名成員：Nina 負責打理聖堂一切，賴桑與奎斯為僅存的病獵",
+        "daily_life": "正式成員僅餘奎斯與賴桑兩人",
+        "culture": "被寶琳倖存區的人視為危險之地，因而十分冷清；聖堂莊嚴寧靜，長期沒人打理卻「聖氣猶在」；Nina 相信白鯨仍然存活"
+      },
+      "infrastructure": {
+        "security": "聖堂大鐘會發出警報，通知倖存區病者即將入侵；二樓以單筒望遠鏡觀察病翼飛行範圍，判斷巢穴大約位置；聖堂內外牆以書櫃組成，藏有大量書籍",
+        "resources": "接受委託狩獵病者；因會長失蹤而長期缺乏資金，後獲艾寶琳國王與董倫合共三十五萬艾幣贊助重新營運",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "病翼突襲",
+          "人手嚴重不足",
+          "被倖存區排斥",
+          "病者",
+          "病者平權組織與病者和平協會"
+        ],
+        "danger_level": 3
+      },
+      "key_characters": [
+        "主角",
+        "公仔",
+        "北賢",
+        "南愚",
+        "大眼",
+        "大舊",
+        "奧迪",
+        "娃娃",
+        "小六",
+        "滿天",
+        "犬京",
+        "瑜小六",
+        "病嘴",
+        "病牙",
+        "病腦",
+        "老賢",
+        "阿文"
+      ],
+      "chapter_refs": [
+        116,
+        117,
+        123,
+        132,
+        134,
+        145,
+        146,
+        169,
+        175
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_f282cd70b5",
+      "zone_id": "zone_f282cd70b5",
+      "overview": "將軍澳地鐵站旁、全區最高的酒店，因亂世初期各勢力爭奪而屍橫遍野。酒店各樓層走廊中央都被人堆疊出屍山，西餐廳更有一座幾乎碰到吊燈的巨型屍山，供病爪在內冬眠。此處最少棲息着一隻病爪及三隻以上的竊屍賊，牠們分工處理屍體，並以極濃的屍臭掩蓋活人氣味，令竊屍賊察覺不到活人。主角與銘凱在此幾乎喪命。",
+      "nest_profile": {
+        "threat_signature": "病爪；竊屍賊；濃烈屍臭",
+        "activity_pattern": "活躍章節 ch92–ch94；區內事件 30 條",
+        "affected_radius": "半徑約 220.0 m（來源：default）"
+      },
+      "risk_profile": {
+        "threats": [
+          "病爪",
+          "竊屍賊",
+          "濃烈屍臭"
+        ],
+        "danger_level": 4
+      },
+      "key_characters": [
+        "不破尚",
+        "余智海",
+        "余智海博士",
+        "公仔",
+        "北賢",
+        "南愚",
+        "奎斯",
+        "王達尼",
+        "班尼",
+        "瑜小六",
+        "病童",
+        "白魂",
+        "白鯨",
+        "董倫",
+        "賴三",
+        "銘凱",
+        "陸軒"
+      ],
+      "chapter_refs": [
+        92,
+        93,
+        94
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    },
+    {
+      "schema_version": 2,
+      "id": "dossier_fd96bd24d8",
+      "zone_id": "zone_fd96bd24d8",
+      "overview": "日出康城二期一帶的倖存區，與一期同屬康城倖存區但長期對立，關係如泛民派對建制派。二期有六位大樓領導人，屬「十二元老會」一半。區內娛樂場所集中，有私人酒吧、會所與KTV館；輪椅少女Sona的單位、KTV館屠殺案與密室皆在此發生。二期元老森威克遭一期間諜董倫以燃燒彈殺死，KTV館更被董倫血洗，成為兩派內鬥的犧牲品。",
+      "governance": {
+        "system": "由二期六位大樓領導人代表，屬「十二元老會」一半；與一期長期對立，關係如泛民派對建制派",
+        "authority": "森威克、陸軒",
+        "legitimacy": "unknown"
+      },
+      "society": {
+        "population_structure": "每幢樓一位領導人，共六位；居民與一期對立，兩派為爭奪「金鷹頭」互相暗殺",
+        "daily_life": "unknown",
+        "culture": "娛樂場所集中，有私人酒吧、二期會所與KTV館，居民生活放縱享樂"
+      },
+      "infrastructure": {
+        "security": "unknown",
+        "resources": "unknown",
+        "mobility": "unknown"
+      },
+      "risk_profile": {
+        "threats": [
+          "一期派來的間諜（董倫）",
+          "暗殺"
+        ],
+        "danger_level": 1
+      },
+      "key_characters": [
+        "Ricky",
+        "不法者",
+        "不破尚",
+        "不良人",
+        "主角",
+        "公仔",
+        "北賢",
+        "夏晴",
+        "夏當",
+        "大舊",
+        "奎斯",
+        "娃娃",
+        "少佐",
+        "明哥",
+        "明雲",
+        "明霧",
+        "森威克",
+        "滿天",
+        "犬京",
+        "王白蛋",
+        "瑜小六",
+        "病爪",
+        "病童",
+        "病腦",
+        "白魂",
+        "白鯨",
+        "老賢",
+        "董倫",
+        "銘凱",
+        "陸軒"
+      ],
+      "chapter_refs": [
+        151,
+        154,
+        155,
+        157,
+        158
+      ],
+      "evidence_sources": [
+        "chapter-summaries",
+        "events",
+        "zones-inline"
+      ],
+      "confidence": 0.8,
+      "review_status": "auto_inferred"
+    }
+  ]
+}

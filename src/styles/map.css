@@ -1,0 +1,613 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   World Atlas V2 — 地圖互動元件 CSS（B6）
+   ══════════════════════════════════════════════════════════════════════════
+   擁有者：B6（`SvgMap` / `MapControls` / `ZoneLayer` / `map-interactions`）。
+
+   ⚠️ 為何唔喺 src/main.ts import
+   -----------------------------
+   `src/main.ts` 嘅載入次序係：
+
+       styles/index.css → main.css → timeline.css → hud.css
+
+   `main.css:458` 有一條 `.zone-area { pointer-events: none; }`（特異度
+   (0,1,0)），佢係「zone 唔可點」嘅直接原因。`main.ts` 同
+   `src/styles/index.css` **兩者都唔喺 B6 可寫範圍**（B1/B2 擁有），
+   所以本檔由 `SvgMap.init()` 用 `?inline` 注入成 <style id="map-v2-css">，
+   append 到 <head> **最後** → 同等特異度下一定勝過舊 CSS。
+
+   詳細理由同「唔可以用嘅替代方案」見
+   `docs/contracts/b6-interface-contract.md` §10。
+
+   規則（硬性）
+   -----------
+     T1. 色值一律 `var(--token)`；本檔**唔可以**出現 raw hex / rgb() / hsl()。
+         （`tests/map-css-contract.test.ts` 會斷言。）
+     C3. 互動目標 ≥ 44×44 px。
+     A7. focus ring 唔可以被 clip-path 剪走 → 用 outline（唔用 box-shadow）。
+     M1. 只准用 3 個 duration token + 2 個 easing token。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   1. 地圖容器（`.svg-map-wrap` / `#svg-map`）
+   ══════════════════════════════════════════════════════════════════════════
+   為何要由 B6 提供：`main.css` 嘅 `.svg-map-wrap` 有 `overflow: hidden`
+   ＋ `width/height: 100%`，但容器高度係由 `@media` 產生嘅（見下）。
+   Gate 2 移除舊 CSS 之後，如果冇呢段，`.svg-map-wrap` 會塌成 0 高
+   （實測過：1400×26890 嘅退化情況）。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.svg-map-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  overflow: hidden;
+  background: var(--bg-base);
+}
+
+/* 向量底圖未 ready 之前嘅底色（避免閃白） */
+.svg-map-wrap:not(.basemap-vector-ready) {
+  background: var(--bg-base);
+}
+
+.basemap-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-map);
+  pointer-events: none;
+}
+
+.svg-map {
+  position: relative;
+  z-index: var(--z-map-overlay);
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  /* 手勢由 MapViewport 接管 —— 唔可以俾瀏覽器自己 pan/zoom 搶走 */
+  touch-action: none;
+}
+
+.svg-map:active {
+  cursor: grabbing;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   2. hit priority 契約（spec §2.3）—— P0-1 核心
+   ══════════════════════════════════════════════════════════════════════════
+   優先次序：MapControls > Zone > Route > Marker > Event > BaseGeometry
+
+   機制：`document.elementFromPoint()` 只會回傳**最頂**而且**有
+   pointer-events** 嘅元素。所以每個 layer 嘅 `pointer-events` 就直接
+   決定咗命中次序 —— 唔需要（亦唔應該）用 z-index 或者 JS 排序。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Zone（最高嘅 SVG layer） ────────────────────────────────────────── */
+
+/*
+ * ⚠️ 呢條就係 P0-1 嘅修正。
+ *
+ * 舊 CSS `main.css:458`：`.zone-area { pointer-events: none; }` → (0,1,0)
+ * 舊 CSS 載入次序：index.css → main.css → hud.css（hud.css 冇呢條規則，
+ *   所以 main.css:458 係唯一嘅宣告 → 贏）。
+ *
+ * 本規則特異度：`#svg-map` (1,0,0) + `.zone-area` (0,1,0) = **(1,1,0)**
+ *   → 即使載入次序較早都勝出（特異度優先於次序）。
+ *
+ * 為何唔淨係寫 `.zone-area { pointer-events: auto; }`：同特異度下
+ * 「後載入者勝」，而本檔雖然 append 到最後，但用 id 版本可以同時
+ * 對抗將來有人加 `.zones-layer .zone-area` (0,2,0) 嘅情況。
+ */
+#svg-map .zone-area {
+  pointer-events: auto;
+}
+
+/* zone 圖層嘅裝飾元素唔可以搶命中 —— 佢哋疊喺多邊形上面 */
+#svg-map .zone-glow,
+#svg-map .zone-pulse,
+#svg-map .zone-label,
+#svg-map .zone-badge {
+  pointer-events: none;
+}
+
+/* cluster badge 係「數目指示」，唔係命中目標（契約 §3.2 / B6-D2） */
+#svg-map .zone-cluster {
+  pointer-events: none;
+}
+
+/* 隱藏（layer toggle / `hidden` 屬性）—— 用 display 令佢唔參與命中測試 */
+#svg-map [hidden] {
+  display: none;
+}
+
+/* ── Route ───────────────────────────────────────────────────────────── */
+
+/*
+ * `stroke` 而唔係 `auto`：線嘅填充區係空嘅，用 `auto` 會令整條線嘅
+ * bounding box 都變成命中目標，蓋住底下嘅 marker。
+ */
+#svg-map .route-line {
+  pointer-events: stroke;
+  cursor: pointer;
+}
+
+/* ── Marker ──────────────────────────────────────────────────────────── */
+
+#svg-map .location-marker,
+#svg-map .location-marker-cluster {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* ── Event ───────────────────────────────────────────────────────────── */
+
+#svg-map .event-marker {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* ── 標籤圖層（Phase I raster 後備專用） ────────────────────────────── */
+.label-detail-layer,
+.label-detail-image {
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   3. Zone 視覺語言（spec §4）—— cluster / boundary / full 三層
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ 只可以改**視覺**。`.zone-area` / `.zone` / `.zone-badge` /
+   `.zone-label` / `.zone-pulse` 五個 class 名同 DOM 結構由既有測試鎖住
+   （`tests/map-render.test.ts` 斷言 `.zone-area` 總數 = 資料集 features 數；
+   `tests/visual-smoke.e2e.test.ts` 斷言 `fill` **attribute** 有 >1 種色
+   —— 所以 polygon 嘅填充色**一定**要繼續用 inline `fill` attribute，
+   唔可以改用 CSS `fill: var(...)`，否則嗰個測試會變紅）。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+#svg-map .zone {
+  cursor: pointer;
+}
+
+#svg-map .zone-area {
+  transition:
+    fill-opacity var(--dur-normal) var(--ease-standard),
+    stroke-opacity var(--dur-normal) var(--ease-standard);
+}
+
+#svg-map .zone:hover .zone-area {
+  fill-opacity: 0.24;
+  stroke-opacity: 1;
+}
+
+#svg-map .zone.is-selected .zone-area {
+  fill-opacity: 0.3;
+}
+
+/* ── cluster LOD：淡化多邊形，令視覺重量集中喺 cluster badge ────────── */
+
+#svg-map .zone[data-zone-lod="cluster"] .zone-area {
+  /* 48 個多邊形疊埋 —— 一定要近乎透明，否則變成一團色霧 */
+  fill-opacity: 0.04;
+  stroke-opacity: 0.5;
+}
+
+/* cluster 層唔畫 label（48 個名字會變成文字牆） */
+#svg-map .zone[data-zone-lod="cluster"] .zone-label {
+  display: none;
+}
+
+/* ── boundary / full LOD ─────────────────────────────────────────────── */
+
+#svg-map .zone[data-zone-lod="boundary"] .zone-area {
+  fill-opacity: 0.1;
+  stroke-opacity: 0.78;
+}
+
+#svg-map .zone[data-zone-lod="full"] .zone-area {
+  fill-opacity: 0.14;
+  stroke-opacity: 0.78;
+}
+
+/* ── Zone pattern（spec §4 硬性：唔可以只靠顏色） ────────────────────
+   本檔提供 pattern 嘅**降級視覺**（虛線節奏），因為 SVG <pattern> 需要
+   `<defs>` 而 `ZONE_GLYPH` / `pattern` id 由 `SvgMap` 注入（唔可以由
+   CSS 產生）。pattern 完整版（color + pattern + icon 三通道）喺圖例
+   （§5）同 zone badge（icon）已滿足；zone 本體用虛線做第三通道。
+   ═══════════════════════════════════════════════════════════════════════ */
+
+#svg-map .zone-area[data-pattern="contour"],
+#svg-map .zone-area[data-pattern="noise"] {
+  stroke-dasharray: 0.003, 0.003;
+}
+
+#svg-map .zone-area[data-pattern="pulse"] {
+  stroke-dasharray: 0.006, 0.004;
+}
+
+/* ── Zone pulse（病窩掃描光環） ─────────────────────────────────────── */
+
+/*
+ * P0-6：21 條 `transform: scale()` 動畫同時重繪係 idle 20.1 fps 嘅主因
+ * （B5 實測表見 `SvgMap.pulsesSuspended` 註釋）。
+ *
+ * 兩件事：
+ *   1. `will-change` 令瀏覽器為每條動畫開獨立合成層（唔會同其他
+ *      SVG 節點共用光柵化）。
+ *   2. `animation-delay` 用 `--pulse-index` 錯開相位 —— 唔係為咗靚，
+ *      係為咗避免 21 條動畫喺**同一個 frame** 一齊到 keyframe 邊界
+ *      （同步重繪 = 一個超長 frame）。
+ */
+#svg-map {
+  /* 由 SvgMap 逐個 pulse 寫入（0…n-1）；宣告 fallback 令 var() 唔會靜默失效 */
+  --pulse-index: 0;
+}
+
+#svg-map .zone-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: zone-scan 3.6s var(--ease-standard) infinite;
+  animation-delay: calc(var(--pulse-index, 0) * -0.4s);
+  will-change: opacity, transform;
+  pointer-events: none;
+}
+
+@keyframes zone-scan {
+  0% {
+    opacity: 0;
+    transform: scale(0.86);
+  }
+  35% {
+    opacity: 0.55;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.06);
+  }
+}
+
+/* ── Zone badge ─────────────────────────────────────────────────────── */
+
+#svg-map .zone-badge {
+  transition: transform var(--dur-normal) var(--ease-standard);
+  transform-origin: center;
+}
+
+#svg-map .zone:hover .zone-badge {
+  transform: scale(1.18);
+}
+
+#svg-map .zone-label {
+  letter-spacing: 0.06em;
+  transition: opacity var(--dur-normal) var(--ease-standard);
+}
+
+#svg-map .zone:hover .zone-label {
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   4. Cluster badge（P0-2 / spec §3.2 L-Z0）
+   ══════════════════════════════════════════════════════════════════════════ */
+
+#svg-map .zone-cluster-ring {
+  fill: var(--bg-overlay);
+  stroke: var(--accent-strong);
+  stroke-width: 0.0006;
+}
+
+#svg-map .zone-cluster-count {
+  fill: var(--text-primary);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  paint-order: stroke;
+  stroke: var(--bg-base);
+  stroke-width: 0.0008;
+  stroke-linejoin: round;
+}
+
+#svg-map .zone-cluster-glyph {
+  fill: none;
+  stroke: var(--accent-strong);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   5. 圖例（三通道：color + pattern + icon）—— P0-3
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.map-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-map-overlay);
+  pointer-events: none;
+}
+
+.map-legend {
+  position: absolute;
+  left: var(--sp-3);
+  bottom: var(--sp-3);
+  max-width: 260px;
+  padding: var(--sp-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--glass);
+  color: var(--text-secondary);
+  font-size: var(--fs-2xs);
+  line-height: var(--lh-normal);
+  /* 圖例本身要可以 hover／點（lang 掣），所以收返 pointer-events */
+  pointer-events: auto;
+}
+
+.legend-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-2);
+}
+
+.legend-title {
+  color: var(--text-primary);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.legend-lang-btn {
+  min-width: var(--sp-6);
+  min-height: var(--sp-4);
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-primary);
+  font-size: var(--fs-2xs);
+  cursor: pointer;
+}
+
+.legend-lang-btn:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 2px 0;
+}
+
+/* ── 通道 1：color ──────────────────────────────────────────────────── */
+
+.legend-item .dot,
+.legend-item .area,
+.legend-item .line {
+  flex: 0 0 auto;
+  width: var(--sp-3);
+  height: var(--sp-3);
+}
+
+.legend-item .dot {
+  border-radius: var(--radius-pill);
+}
+
+.legend-item .area {
+  border: 1px solid;
+  border-radius: 2px;
+}
+
+.legend-item .line {
+  height: 2px;
+}
+
+.dot-event-current {
+  background: var(--danger);
+}
+.dot-event-other {
+  background: var(--warn);
+}
+.dot-loc-real {
+  background: var(--warn);
+}
+.dot-loc-fictional {
+  background: var(--zone-contested);
+}
+.dot-selected {
+  background: var(--focus-ring);
+}
+
+.route-legend {
+  background: var(--warn);
+}
+
+/*
+ * Zone 圖例項嘅顏色經 `--legend-color` 注入（由 SvgMap 讀 theme-tokens，
+ * 規則 T1：本檔唔寫 raw 色值）。
+ */
+.area-survivor {
+  border-color: var(--zone-survivor);
+  background: var(--zone-survivor-fill);
+}
+.area-nest {
+  border-color: var(--zone-nest);
+  background: var(--zone-nest-fill);
+}
+.area-outpost {
+  border-color: var(--zone-contested);
+  background: var(--zone-contested-fill);
+}
+.area-estimated {
+  border-color: var(--zone-quarantine);
+  border-style: dashed;
+  background: transparent;
+}
+
+/* ── 通道 2：pattern ────────────────────────────────────────────────── */
+
+.legend-pattern {
+  flex: 0 0 auto;
+  width: var(--sp-3);
+  height: var(--sp-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: 2px;
+}
+
+/* ── 通道 3：icon ───────────────────────────────────────────────────── */
+
+.legend-glyph {
+  flex: 0 0 auto;
+  width: var(--sp-3);
+  height: var(--sp-3);
+  fill: none;
+  stroke: var(--text-secondary);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   6. 地圖控制項（`#map-controls`）—— P0-5
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ id 唔可以改：`#map-zoom-in` / `#map-zoom-out` / `#map-reset` /
+   `#map-show-all-events` 由 `tests/map-render.test.ts:493` 同
+   `tests/visual-smoke.e2e.test.ts:233` 直接 page.click()。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+#map-controls {
+  position: absolute;
+  bottom: var(--sp-3);
+  right: var(--sp-3);
+  z-index: var(--z-controls);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  pointer-events: auto;
+}
+
+/*
+ * ⚠️ 44×44 硬下限（spec §3 C3）。
+ * 呢兩個數值同時被 `tests/map-css-contract.test.ts` 讀取 —— 唔可以淨係
+ * 改 CSS 唔改 `MIN_TAP_PX`（`src/map/MapControls.ts`）。
+ */
+#map-controls .map-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--glass-solid);
+  color: var(--text-primary);
+  font-size: var(--fs-md);
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* 「全部事件」係文字掣，要闊啲 */
+#map-controls .map-ctrl-wide {
+  min-width: 44px;
+  padding: 0 var(--sp-3);
+  font-size: var(--fs-2xs);
+}
+
+#map-controls .map-ctrl:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/*
+ * A7 P0-3：focus ring 唔可以被 clip-path 剪走。
+ * 用 `outline`（唔用 box-shadow）—— outline 唔受 border-radius / clip-path
+ * 影響，一定睇得到。
+ */
+#map-controls .map-ctrl:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* toggle 嘅啟用態：唔可以只靠 aria-pressed（唔係所有用戶都見到） */
+#map-controls .map-ctrl[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   7. 圖層開關（`#layer-controls`）—— P0-4
+   ══════════════════════════════════════════════════════════════════════════ */
+
+#layer-controls {
+  position: absolute;
+  top: var(--sp-3);
+  right: var(--sp-3);
+  z-index: var(--z-controls);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  max-width: 220px;
+  padding: var(--sp-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--glass);
+  pointer-events: auto;
+}
+
+#layer-controls .layer-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+  cursor: pointer;
+}
+
+#layer-controls .layer-toggle[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+}
+
+#layer-controls .layer-toggle:hover {
+  color: var(--text-primary);
+}
+
+#layer-controls .layer-toggle:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   8. Reduced motion（spec §6；CSS 層，JS 層由 src/motion.ts 負責）
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ `base.css:170` 已有全域 kill（`animation-duration: 0.01ms !important`），
+   但咁做會令動畫「跳終態」—— 對 `zone-scan` 嚟講終態係 `opacity: 0`，
+   即係光環直接**消失**（唔係靜止）。所以呢度要指定一個靜態可見狀態。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  #svg-map .zone-pulse {
+    animation: none;
+    opacity: 0.28;
+    transform: none;
+    will-change: auto;
+  }
+
+  #svg-map .zone-badge,
+  #svg-map .zone-area,
+  #svg-map .zone-label {
+    transition: none;
+  }
+
+  #svg-map .zone:hover .zone-badge {
+    transform: none;
+  }
+}

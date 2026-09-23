@@ -2,7 +2,16 @@
 <html lang="zh-Hant-HK">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--
+      W1（B8 契約 §7 / P1-7 safe-area）：
+      `viewport-fit=cover` 係 `env(safe-area-inset-*)` 嘅前提 —— 冇佢嘅話
+      iOS 會將 safe-area inset 永遠解析成 0（規則生效但冇效果），
+      bottom sheet 底部會被 home indicator 蓋住。
+    -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
     <meta name="description" content="《病港》互動地圖：完全離線嘅小說世界故事地圖。所有資產本機提供。" />
     <title>《病港》互動地圖</title>
     <link rel="manifest" href="manifest.webmanifest" />
@@ -11,9 +20,28 @@
     <link rel="apple-touch-icon" href="assets/icon-192.png" />
   </head>
   <body>
-    <div id="app-root" role="application" aria-label="《病港》互動地圖主程式">
+    <!--
+      W2（B8 契約 §7 / P1-5）：
+      移除 `#app-root` 嘅 `role="application"`。
+      理由：`role="application"` 包住**全 app** 會令螢幕閱讀器關閉所有
+      標準導覽快捷鍵（唔可以再用 H 跳 heading、唔可以讀文檔結構），
+      用戶只可以用方向鍵 —— 對一個有頂欄 / 面板 / 編年史嘅網站係災難。
+      地圖本體 `#svg-map` 自己已經有 `role="application"`
+      （`tests/map-interaction.test.ts:656` 斷言），需要嘅地方仍然有。
+    -->
+    <div id="app-root" aria-label="《病港》互動地圖主程式">
       <p id="initial-loading">《病港》互動地圖載入中…</p>
     </div>
+    <!--
+      B8 搜尋 overlay host（`SearchOverlay` 嘅 mount 點）。
+
+      ⚠️ 一定要放喺 `#app-root` **外面**（body 直屬子節點）：
+      `SearchOverlay.open()` 會對 `#app-root` 加 `inert`（P0-4 背景隔離）。
+      如果呢個 host 係 `#app-root` 嘅子孫，overlay 會被自己加嘅 `inert`
+      一齊屏蔽 → `#search-input` 永遠收唔到 focus。
+      （`src/app.ts` 嘅 `ensureSearchShell()` 有同樣說明，兩處要一致。）
+    -->
+    <div id="search-shell"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

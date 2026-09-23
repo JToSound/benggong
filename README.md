@@ -8,7 +8,8 @@
 
 一個可自由縮放、拖曳瀏覽嘅小說世界地圖，標示《病港》入面嘅事件、地點同角色路線：
 
-- **故事地圖**：所有 tiles 本機生成並 bundled——唔使用任何 online map API、remote tile 或 runtime geocoding
+- **故事地圖**：**向量底圖**（由本機 OpenStreetMap 快取離線生成），任何縮放都保持鋭利——唔使用任何 online map API、remote tile 或 runtime geocoding
+- **區域檔案**：48 個倖存區／病窩／據點，有範圍多邊形、圖騰記認同互動檔案（政權、社會結構、經濟、防禦、人口、人文風俗）
 - **時間軸**：按章節先後排列（未確認故事日期會清楚標示「按章節先後」）
 - **劇透控制**：0–3 級，預設只顯示 0–1 級
 - **搜尋**：角色／事件／地點／章節編號（撳 `F`）
@@ -35,6 +36,16 @@ python scripts/validate_public_data.py # 驗證公開 dataset
 python -m pytest tests/ -v             # Python 測試
 ```
 
+地圖同區域資產（需要 `data/private/cache/osm-hk.json`）：
+
+```bash
+python scripts/build_osm_gazetteer.py     # OSM → 地名座標索引（私有）
+python scripts/build_vector_basemap.py    # OSM → 向量底圖圖磚
+python scripts/merge_zone_dossiers.py     # 區域檔案合併 + 座標解析
+python scripts/audit_location_coords.py   # 程式化座標審核
+npm run zones                             # 等同 merge_zone_dossiers.py
+```
+
 ## 資料來源與治理
 
 本站只顯示由小說文本抽取嘅**結構化摘要**（事件／地點／角色），全部帶 `review_status` 標記：
@@ -49,17 +60,19 @@ python -m pytest tests/ -v             # Python 測試
 
 | 層 | 工具 |
 |---|---|
-| 前端 | Vite + TypeScript (strict) + Leaflet（本機 tiles） |
-| 測試 | Vitest（21+）、pytest（72+）、Playwright 網絡審計 |
+| 前端 | Vite + TypeScript (strict) + **Canvas 2D 向量底圖** |
+| 底圖 | 由本機 OpenStreetMap 快取離線生成嘅向量圖磚（ODbL） |
+| 測試 | Vitest（78）、pytest（224）、Playwright 網絡審計 |
 | 資料 | JSON Schema 驗證嘅 GeoJSON / JSON |
 | CI | GitHub Actions：lint → typecheck → test → build → 資料驗證 → private-data-guard |
 
 ## 文件
 
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — 系統架構
+- [`docs/progress/phase-l-vector-basemap-and-hud.md`](docs/progress/phase-l-vector-basemap-and-hud.md) — 向量底圖、區域檔案、HUD 設計
 - [`docs/DATA_GOVERNANCE.md`](docs/DATA_GOVERNANCE.md) — 私有／公開資料界線
 - [`docs/progress/`](docs/progress/) — 各階段進度報告
 
 ## 授權
 
-代碼以 MIT 授權發佈（見 [LICENSE](LICENSE)）。《病港》小說內容版權屬原作者；本站對小說文本嘅使用限於短摘要與章節參照，詳見 [NOTICE.md](NOTICE.md)。
+代碼以 MIT 授權發佈（見 [LICENSE](LICENSE)）。《病港》小說內容版權屬原作者；本站對小說文本嘅使用限於短摘要與章節參照。底圖資料來自 © OpenStreetMap contributors（ODbL）。詳見 [NOTICE.md](NOTICE.md)。

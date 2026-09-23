@@ -1,6 +1,13 @@
 /**
  * Phase F: 統一 data loader.
  * 一次性 load 所有 public dataset 然後 expose 為 typed 結構.
+ *
+ * ⚠️ V2（B3）：`timeline.json` **唔再 eager 載入**（A8 P1-2）。
+ * 實測 `grep "\.timeline" src/` 只中一個 CSS class 名，`AppData.timeline`
+ * 冇任何 component 讀 → 每次載入純浪費 195 KB transfer + 3.6 ms parse。
+ * `AppData.timeline` 欄位**保留**（型別同 shape 不變，值改為 `[]`），
+ * 以免整爛下游（B5/B6/B7 正並行依賴 `AppData`）。
+ * 需要 timeline 嘅新 code 用 `src/data/adapter/index.ts` 嘅 `loadTimeline()`（lazy）。
  */
 
 import type {
@@ -136,7 +143,6 @@ export async function loadAllData(): Promise<AppData> {
     locations,
     events,
     routes,
-    timeline,
     characters,
     zones,
     chronicle,
@@ -147,13 +153,15 @@ export async function loadAllData(): Promise<AppData> {
     fetchJSON<LocationsFeatureCollection>(base + "locations.geojson"),
     fetchJSON<EventsFeatureCollection>(base + "events.geojson"),
     fetchJSON<RoutesFeatureCollection>(base + "routes.geojson"),
-    fetchJSON<TimelineRecord[]>(base + "timeline.json"),
     fetchJSON<CharactersData>(base + "characters.json"),
     fetchJSON<ZonesFeatureCollection>(base + "zones.geojson"),
     fetchJSON<ChronicleDoc>(base + "chronicle.json"),
     fetchJSON<ChapterAppearances>(base + "chapter-appearances.json"),
     fetchJSON<ChapterSummaries>(base + "chapter-summaries.json"),
   ]);
+
+  // timeline.json 唔 eager 載入（A8 P1-2）；欄位保留、值為空陣列。
+  const timeline: TimelineRecord[] = [];
 
   // Build indices
   const locationsById = new Map<string, LocationFeature>();

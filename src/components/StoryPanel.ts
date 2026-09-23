@@ -21,7 +21,37 @@ export class StoryPanel {
     this.root = root;
     this.app = app;
     this.data = app.data;
+    /*
+     * P0-5：`.char-chip` 用 event delegation 綁喺 `this.root`。
+     *
+     * ⚠️ 一定要喺 `updateForChapter()` **之前**綁定 —— 後者會 `innerHTML`
+     * 重建 DOM；delegation 掛喺 `this.root` 本身，所以唔會被換走。
+     * （`bindEvents()` 係逐個元素綁定，只有 `updateForChapter()` 會叫佢，
+     * 所以 `updateForLocation()` / `updateForEvent()` 之後嘅 chip 冇反應。）
+     */
+    this.bindCharChipDelegation();
     this.updateForChapter(this.app.getCurrentChapter());
+  }
+
+  /**
+   * P0-5：角色 chip 嘅 event delegation。
+   *
+   * ⚠️ 為何唔入 store：`src/state/*` 係 B2 凍結範圍，加 `selectedCharacter`
+   * 要同步擴充 URL contract（11 → 12 參數）。而角色詳情係**短暫 UI 狀態**
+   * （關閉即消失），唔需要持久化或者可分享 —— 留喺元件內。
+   * （同 B7-D1「展開狀態留元件內」同一原則。）
+   */
+  private bindCharChipDelegation(): void {
+    this.root.addEventListener("click", (e) => {
+      const target = e.target as Element | null;
+      const chip = target?.closest?.(".char-chip") as HTMLElement | null;
+      if (!chip) return;
+      const name = chip.dataset.charName;
+      if (!name) return;
+      const ch = this.data.charactersByName.get(name);
+      if (!ch) return;
+      this.showCharDetail(ch);
+    });
   }
 
   private escapeHtml(s: string): string {
@@ -152,6 +182,37 @@ export class StoryPanel {
     return `<span class="char-chip" data-char-name="${this.escapeHtml(name)}" style="--chip-color:${color}">${this.escapeHtml(name)}</span>`;
   }
 
+  /**
+   * P0-5：顯示角色 dossier。
+   *
+   * ⚠️ 用 `prepend` 而唔係 `append`：令詳情卡出現喺面板**頂部**，
+   * 用戶唔需要捲到底才睇到（`#story-pane` 可能好長）。
+   *
+   * ⚠️ 重用 `.zd-*` class（Zone Dossier 樣式）—— 嗰啲喺 `main.css` / `hud.css`
+   * 仍然保留（Gate 2 裁決）。**唔需要新 CSS**。
+   *
+   * ⚠️ 每次只顯示一張：先移除舊嘅（`.char-detail`），避免疊多張卡。
+   */
+  private showCharDetail(ch: {
+    name: string;
+    aliases: string[];
+    description: string;
+  }): void {
+    this.root.querySelector(".char-detail")?.remove();
+    const el = document.createElement("div");
+    el.className = "char-detail zd";
+    el.innerHTML = `
+      <div class="zd-head">
+        <h3 class="zd-name">${this.escapeHtml(ch.name)}</h3>
+        <button class="close-btn" type="button" aria-label="關閉角色詳情">×</button>
+      </div>
+      ${ch.aliases.length > 0 ? `<p class="zd-alias">別名：${ch.aliases.map((a) => this.escapeHtml(a)).join("、")}</p>` : ""}
+      <p class="zd-text">${ch.description ? this.escapeHtml(ch.description) : "<em>（無描述）</em>"}</p>
+    `;
+    el.querySelector(".close-btn")?.addEventListener("click", () => el.remove());
+    this.root.prepend(el);
+  }
+
   private bindEvents(): void {
     this.root.querySelectorAll(".event-item").forEach((el) => {
       el.addEventListener("click", () => {
@@ -159,14 +220,15 @@ export class StoryPanel {
         if (id) this.app.setSelectedEvent(id);
       });
     });
-    this.root.querySelectorAll(".char-chip").forEach((el) => {
-      el.addEventListener("click", () => {
-        const name = (el as HTMLElement).dataset.charName;
-        if (name) this.app.setSelectedLocation(null);  // could open character detail
-        // TODO: open character modal
-        console.log("char click:", name);
-      });
-    });
+    /*
+     * ⚠️ `.char-chip` 嘅 click **唔喺呢度綁定** —— 改用 event delegation
+     * 掛喺 `this.root`（見建構子 `bindCharChipDelegation()`）。
+     *
+     * 理由：`updateForLocation()` 同 `updateForEvent()` 都會 `innerHTML = ...`
+     * 重建 DOM，但佢哋**冇呼叫 `bindEvents()`**（只有 `updateForChapter()` 叫）。
+     * 逐個 render 綁定會失效 —— 實測：用 `?location=` 開頁之後點 chip 完全冇反應。
+     * Delegation 掛喺 `this.root`（唔會被 `innerHTML` 換走）一次就夠。
+     */
     this.root.querySelectorAll(".route-item").forEach((el) => {
       el.addEventListener("click", () => {
         const id = (el as HTMLElement).dataset.routeId;

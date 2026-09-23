@@ -172,7 +172,9 @@ def test_manifest_counts_match():
         "character": len(load(PUBLIC / "characters.json")),
         "chapter_summary": len(load(PUBLIC / "chapter-summaries.json")),
         "zone": len(load(PUBLIC / "zones.geojson")["features"]),
-        "chronicle_entry": len(load(PUBLIC / "chronicle.json")["entries"]),
+        # B4（方案 B）：dossier 由 zones.geojson inline 抽出成獨立檔，
+        # 所以 manifest 要分開宣告 count（否則驗證器報「counts.zone_dossier=None」）。
+        "zone_dossier": len(load(PUBLIC / "zone-dossiers.json")["dossiers"]),
         "chronicle_entry": len(load(PUBLIC / "chronicle.json")["entries"]),
     }
     assert mf["counts"] == counts

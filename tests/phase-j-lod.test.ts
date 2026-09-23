@@ -20,6 +20,11 @@ import { describe, expect, it } from "vitest";
 
 import basemapCoords from "../public/assets/hk-basemap-coords.json";
 import lodManifest from "../public/assets/map-lod/manifest.json";
+// ⚠️ MAX_SCALE 由政策模組 import，唔再由 `SvgMap.ts` 源碼 regex 抽。
+//    `SvgMap.ts` 已改為 import 同一個政策值（唔再寫死 64），舊 regex
+//    `/const MAX_SCALE = (\d+)/` 會捉唔到 —— 即使加返 fallback 都會
+//    靜默讀到一個**唔生效**嘅數字（B-MAX-2）。
+import { MAX_SCALE } from "../src/map/map-lod";
 
 const BASE_URL = "http://localhost:5174";
 const SRC_RAW = readFileSync("src/components/SvgMap.ts", "utf-8");
@@ -141,23 +146,20 @@ describe("Phase J: LOD 圖磚 manifest", () => {
     //
     // 實測踩過：MAX_SCALE = 12 → 最窄視窗 0.0583°；而 tko-campus
     // 跨度只有 0.036°、tko-north 只有 0.068°，兩者幾乎永遠用唔到。
-    const maxScaleMatch = SRC.match(/const MAX_SCALE = (\d+(?:\.\d+)?)/);
-    expect(maxScaleMatch, "找不到 MAX_SCALE").toBeTruthy();
-    const maxScale = Number(maxScaleMatch![1]);
-    const minViewSpan = LON_SPAN / maxScale;
+    //
+    // ⚠️ MAX_SCALE 由 `src/map/map-lod.ts` import（見檔頭註釋）。
+    const minViewSpan = LON_SPAN / MAX_SCALE;
 
     const narrowest = Math.min(...tiers.map((t) => t.bbox.lon_max - t.bbox.lon_min));
     expect(
       narrowest,
       `最窄圖磚跨度 ${narrowest.toFixed(4)}° 細過視窗最窄寬度 ` +
-        `${minViewSpan.toFixed(4)}°（MAX_SCALE=${maxScale}）→ 永遠揀唔到`,
+        `${minViewSpan.toFixed(4)}°（MAX_SCALE=${MAX_SCALE}）→ 永遠揀唔到`,
     ).toBeGreaterThanOrEqual(minViewSpan * 0.95);
   });
 
   it("每個圖磚都至少喺某個縮放級別可達", () => {
-    const maxScaleMatch = SRC.match(/const MAX_SCALE = (\d+(?:\.\d+)?)/);
-    const maxScale = Number(maxScaleMatch![1]);
-    const minViewSpan = LON_SPAN / maxScale;
+    const minViewSpan = LON_SPAN / MAX_SCALE;
     for (const t of tiers) {
       const span = t.bbox.lon_max - t.bbox.lon_min;
       expect(
@@ -228,10 +230,11 @@ describe("Phase J: LOD 縮放端對端", () => {
           .split(/\s+/)
           .map(Number);
       }
-      async function tier() {
-        const href = (await page.getAttribute("#basemap-group", "href"))!;
-        return href.split("/").pop()!;
-      }
+      /*
+       * ⚠️ 舊版有個 `tier()` 讀 `#basemap-group` 嘅 href 嚟判斷 raster
+       * 圖磚。Phase L 之後 raster 只做後備、預設冇 href，所以呢個
+       * helper 已經冇用 —— 改用 `data-basemap-level`。
+       */
       async function drag(dLon: number, dLatRaw: number) {
         const vb = await viewBox();
         const scale = Math.min(rect.w / vb[2], rect.h / vb[3]);
@@ -264,39 +267,71 @@ describe("Phase J: LOD 縮放端對端", () => {
         await page.waitForTimeout(300);
       }
 
-      // 1) 初始 = 全港總覽
-      expect(await tier()).toContain("hk-basemap");
+      /*
+       * Phase L 之後，底圖係**向量 canvas**，唔再係 raster LOD 圖磚。
+       *
+       * 舊斷言「tier() 由 hk-basemap 變成 tko-*」已經過時 —— raster
+       * 而家只做後備，冇 href。
+       *
+       * 新斷言用 `data-basemap-level`（VectorBasemap 對外暴露嘅 hook）：
+       *   0 = 總覽（主幹道）  1 = 分區（全部道路）  2 = 街道（＋建築）
+       * 呢個係「層級有冇跟住縮放切換」唯一可自動化嘅檢查。
+       */
+      async function level(): Promise<number> {
+        const v = await page.getAttribute("#basemap-canvas", "data-basemap-level");
+        return Number(v ?? "-1");
+      }
+      async function pixels(): Promise<number> {
+        return page.evaluate(() => {
+          const c = document.querySelector("#basemap-canvas") as HTMLCanvasElement;
+          const ctx = c.getContext("2d")!;
+          const d = ctx.getImageData(0, 0, c.width, c.height).data;
+          let sum = 0;
+          for (let i = 0; i < d.length; i += 4013 * 4) sum = (sum + d[i] + d[i + 1] * 3) % 1e9;
+          return sum;
+        });
+      }
 
-      // 2) 拖到將軍澳再放大 → 應該用到細節圖磚
+      // 等向量底圖 ready
+      for (let i = 0; i < 40; i++) {
+        if (
+          await page.evaluate(() =>
+            document.querySelector(".svg-map-wrap")!.classList.contains("basemap-vector-ready"),
+          )
+        ) {
+          break;
+        }
+        await page.waitForTimeout(250);
+      }
+
+      // 1) 初始 = 總覽層
+      expect(await level(), "全港視圖應該係層級 0").toBe(0);
+      const px0 = await pixels();
+
+      // 2) 放大到分區 → 層級升到 1
       await zoom(5);
       await centreOn(114.262, 22.31);
-      await zoom(3);
+      await zoom(2);
       await centreOn(114.262, 22.31);
-      const t1 = await tier();
-      expect(t1, "放大到將軍澳應該切換到細節圖磚").not.toContain("hk-basemap");
+      await page.waitForTimeout(600);
+      const lvl1 = await level();
+      expect(lvl1, "放大到分區應該升到層級 1 或以上").toBeGreaterThanOrEqual(1);
 
-      // 3) 再放大 → 應該用到更窄嘅層級
-      await zoom(3);
+      // 3) 再放大到街道 → 層級 2（有建築）
+      await zoom(6);
       await centreOn(114.262, 22.31);
-      const t2 = await tier();
-      const span1 = (await viewBox())[2];
-      expect(t2).not.toContain("hk-basemap");
-      expect(span1).toBeLessThan(LON_SPAN * 0.2);
-
-      // 4) 細節層唔應該顯示總覽標籤圖層（避免兩套比例嘅字疊埋）
-      const labelOpacity = parseFloat(
-        (await page.getAttribute("#label-detail-layer", "opacity")) ?? "NaN",
-      );
-      expect(labelOpacity).toBe(0);
-
-      // 5) 重置 → 回到總覽，標籤圖層回復
-      await page.click("#map-reset");
       await page.waitForTimeout(900);
-      expect(await tier()).toContain("hk-basemap");
-      const labelOpacity2 = parseFloat(
-        (await page.getAttribute("#label-detail-layer", "opacity")) ?? "NaN",
-      );
-      expect(labelOpacity2).toBeGreaterThan(0);
+      expect(await level(), "街道級應該係層級 2").toBe(2);
+      const span2 = (await viewBox())[2];
+      expect(span2).toBeLessThan(LON_SPAN * 0.05);
+
+      // 4) canvas 內容一定要變（證明真係重繪，唔止改屬性）
+      expect(await pixels(), "縮放之後 canvas 內容必須改變").not.toBe(px0);
+
+      // 5) 重置 → 回到總覽層
+      await page.click("#map-reset");
+      await page.waitForTimeout(1200);
+      expect(await level(), "重置之後應該返到層級 0").toBe(0);
     } finally {
       await browser.close();
     }

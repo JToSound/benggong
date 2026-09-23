@@ -1,0 +1,285 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   World Atlas V2 — Design Tokens（唯一 token 定義處）
+   ══════════════════════════════════════════════════════════════════════════
+   規則（依 docs/specs/world-atlas-v2-visual-motion-system.md §2）：
+     T1. 本檔係全專案**唯一** token 定義處。其他地方出現 raw hex
+         唔可以用於 UI 顏色 —— 元件一律 var(--token)。
+     T2. Canvas 讀唔到 CSS 變數 → 由 src/theme-tokens.ts 手動 mirror，
+         並由 tests/theme-token-parity.test.ts 斷言兩者完全一致。
+     T3. SVG 顏色用 CSS class，唔可以 setAttribute("fill", "#…")。
+     T4. CI gate（stylelint color-no-hex）由主代理決定，本檔係唯一例外。
+
+   主題策略：dark 係 :root 預設（dark-first，唔跟系統偏好）；
+     light 由 [data-theme="light"] 覆蓋（用戶 opt-in + 持久化）。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: dark;
+
+  /* ── 表面（5 層） ─────────────────────────────────────────────── */
+  --bg-base: #0b0f14;
+  --bg-surface: #121820;
+  --bg-elevated: #1a2230;
+  --bg-overlay: rgba(6, 10, 14, 0.72);
+
+  /* ── 線 ──────────────────────────────────────────────────────── */
+  --border-subtle: #232c3a;
+  --border-strong: #33404f;
+
+  /* ── 文字（4 級；全部須 ≥4.5:1，見 base.css 契約） ────────────── */
+  --text-primary: #e8eef5;
+  --text-secondary: #9fb0c2;
+  --text-muted: #7d8fa3;
+  --text-inverse: #0b0f14;
+
+  /* ── 語意色 ───────────────────────────────────────────────────── */
+  --accent: #4fd1c5;
+  --accent-strong: #38e8ff;
+  --danger: #e5484d;
+  --danger-soft: #7f2c30;
+  --safe: #3fb950;
+  --warn: #d9a341;
+  --unknown: #7c8794;
+  --focus-ring: #7dd3fc;
+
+  /* ── Zone 語意色（5 類，spec §2.1 + §4） ──────────────────────── */
+  --zone-survivor: #3fb950;
+  --zone-nest: #e5484d;
+  --zone-quarantine: #d9a341;
+  --zone-contested: #a86bd6;
+  --zone-unknown: #7c8794;
+
+  /* Zone pattern 半透明 fill（spec §4 表；pattern 由 B5/B6 用） */
+  --zone-survivor-fill: rgba(63, 185, 80, 0.12);
+  --zone-nest-fill: rgba(229, 72, 77, 0.16);
+  --zone-quarantine-fill: rgba(217, 163, 65, 0.12);
+  --zone-contested-fill: rgba(168, 107, 214, 0.12);
+  --zone-unknown-fill: rgba(124, 135, 148, 0.08);
+
+  /* ── Basemap palette（canvas 專用；mirror 於 src/theme-tokens.ts，規則 T2） ──
+        canvas 2D 讀唔到 CSS 變數，所以呢批值一定要同 TS mirror 完全一致
+        （tests/theme-token-parity.test.ts 把關）。 */
+  --bm-sea-top: #04080f;
+  --bm-sea-bottom: #071120;
+  --bm-land: #1b222c;
+  --bm-land-hi: #28313d;
+  --bm-coast: rgba(104, 220, 240, 0.55);
+  --bm-coast-glow: rgba(60, 170, 200, 0.22);
+  --bm-green: rgba(28, 72, 54, 0.72);
+  --bm-industrial: rgba(66, 52, 40, 0.62);
+  --bm-water: #071120;
+  --bm-water-edge: rgba(74, 158, 196, 0.32);
+  --bm-bld-1: rgba(126, 168, 200, 0.14);
+  --bm-bld-2: rgba(132, 178, 212, 0.22);
+  --bm-bld-3: rgba(146, 196, 232, 0.3);
+  --bm-bld-4: rgba(162, 214, 246, 0.4);
+  --bm-bld-edge: rgba(110, 180, 215, 0.26);
+  --bm-label-1: #e8f4ff;
+  --bm-label-2: #cfe6f5;
+  --bm-label-3: #b9d6e8;
+  --bm-label-4: #a8c6da;
+  --bm-label-5: #94b4c8;
+  --bm-label-6: #8aa8bc;
+  --bm-label-halo: rgba(6, 12, 20, 0.85);
+  --bm-grid: rgba(70, 140, 180, 0.055);
+  --bm-vignette: rgba(0, 0, 0, 0.55);
+  /* 道路：8 階（現值保留，B5 負責去橙化 —— anti-pattern「橙路網」） */
+  --bm-road-1: #ffc061;
+  --bm-road-2: #e0a052;
+  --bm-road-3: #b8845a;
+  --bm-road-4: #7d8a97;
+  --bm-road-5: #67717d;
+  --bm-road-6: #4b545f;
+  --bm-road-7: #3c444d;
+  --bm-road-8: #343b43;
+  /* 建議：主幹道單一琥珀色（B5 遷移時用，取代 8 階橙） */
+  --bm-road-trunk: #d9a341;
+
+  /* ── 紋理（戰術網格 / 掃描線；低對比底紋，唔可以遮蓋地圖） ────── */
+  --grid-line: rgba(120, 190, 220, 0.055);
+  --grid-line-strong: rgba(120, 190, 220, 0.1);
+  --scanline: rgba(255, 255, 255, 0.03);
+
+  /* ── 玻璃（面積受限；blur ≤8px、面積 ≤25%） ──────────────────── */
+  --glass: rgba(18, 24, 32, 0.86);
+  --glass-solid: rgba(18, 24, 32, 0.97);
+
+  /* ── 切角（HUD 儀器語言，唔用圓角） ─────────────────────────── */
+  --clip: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+  --clip-sm: polygon(
+    6px 0,
+    100% 0,
+    100% calc(100% - 6px),
+    calc(100% - 6px) 100%,
+    0 100%,
+    0 6px
+  );
+
+  /* ── 間距（7 級，4/8 節奏） ──────────────────────────────────── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-12: 48px;
+
+  /* ── 圓角 ────────────────────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ── 陰影 ────────────────────────────────────────────────────── */
+  --shadow-low: 0 1px 2px rgba(0, 0, 0, 0.32);
+  --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.36);
+  --shadow-high: 0 12px 32px rgba(0, 0, 0, 0.44);
+
+  /* ── z-index（7 級；由低到高） ───────────────────────────────── */
+  --z-map: 0;
+  --z-map-overlay: 10;
+  --z-controls: 20;
+  --z-panel: 30;
+  --z-header: 40;
+  --z-sheet: 50;
+  --z-modal: 60;
+  --z-toast: 70;
+
+  /* ── Motion（只准 3 duration + 2 easing，規則 M1） ───────────── */
+  --dur-fast: 120ms;
+  --dur-normal: 220ms;
+  --dur-slow: 420ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-emphasis: cubic-bezier(0.3, 0, 0, 1.1);
+
+  /* ── 字體（純系統 stack，零 bundled font，spec §7.2） ────────── */
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", "PingFang HK", "PingFang TC",
+    "Noto Sans CJK HK", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ── 字級階梯（硬下限 12px，規則見 spec §7.3） ────────────────── */
+  --fs-2xs: 12px;
+  --fs-xs: 13px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 20px;
+  --fs-xl: 24px;
+  --fs-2xl: 32px;
+
+  /* ── 行高 ────────────────────────────────────────────────────── */
+  --lh-tight: 1.25;
+  --lh-normal: 1.5;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Light theme（opt-in；唔跟系統偏好）
+   ══════════════════════════════════════════════════════════════════════════ */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg-base: #f5f2ec;
+  --bg-surface: #ffffff;
+  --bg-elevated: #faf8f4;
+  --bg-overlay: rgba(20, 24, 28, 0.48);
+
+  --border-subtle: #e2ddd3;
+  --border-strong: #c8c1b4;
+
+  --text-primary: #1b1f26;
+  --text-secondary: #4a525e;
+  --text-muted: #5f6873;
+  --text-inverse: #f5f2ec;
+
+  --accent: #0c6f88;
+  --accent-strong: #0a6b85;
+  --danger: #c62a2f;
+  --danger-soft: #f3d6d6;
+  --safe: #1f7a33;
+  --warn: #8a6414;
+  --unknown: #71777f;
+  --focus-ring: #0b5f80;
+
+  --zone-survivor: #1f7a33;
+  --zone-nest: #c62a2f;
+  --zone-quarantine: #8a6414;
+  --zone-contested: #7a4fa3;
+  --zone-unknown: #71777f;
+
+  --zone-survivor-fill: rgba(31, 122, 51, 0.12);
+  --zone-nest-fill: rgba(198, 42, 47, 0.16);
+  --zone-quarantine-fill: rgba(138, 100, 20, 0.12);
+  --zone-contested-fill: rgba(122, 79, 163, 0.12);
+  --zone-unknown-fill: rgba(113, 119, 127, 0.08);
+
+  /* Basemap palette（light） */
+  --bm-sea-top: #c3d2e0;
+  --bm-sea-bottom: #aec1d3;
+  --bm-land: #eef1f3;
+  --bm-land-hi: #f8fafb;
+  --bm-coast: rgba(40, 96, 130, 0.55);
+  --bm-coast-glow: rgba(60, 130, 170, 0.18);
+  --bm-green: rgba(150, 200, 160, 0.6);
+  --bm-industrial: rgba(205, 186, 166, 0.55);
+  --bm-water: #c8d8e6;
+  --bm-water-edge: rgba(60, 120, 160, 0.35);
+  --bm-bld-1: rgba(90, 110, 130, 0.16);
+  --bm-bld-2: rgba(80, 100, 122, 0.24);
+  --bm-bld-3: rgba(70, 92, 116, 0.32);
+  --bm-bld-4: rgba(58, 80, 106, 0.42);
+  --bm-bld-edge: rgba(60, 90, 120, 0.28);
+  --bm-label-1: #12202e;
+  --bm-label-2: #1c2c3c;
+  --bm-label-3: #28394a;
+  --bm-label-4: #354857;
+  --bm-label-5: #435766;
+  --bm-label-6: #4f6373;
+  --bm-label-halo: rgba(248, 250, 251, 0.9);
+  --bm-grid: rgba(40, 90, 130, 0.07);
+  --bm-vignette: rgba(40, 60, 80, 0.2);
+  --bm-road-1: #d98a1f;
+  --bm-road-2: #c47f2c;
+  --bm-road-3: #a8763f;
+  --bm-road-4: #8b9199;
+  --bm-road-5: #7c848c;
+  --bm-road-6: #9aa2ab;
+  --bm-road-7: #a8b0b8;
+  --bm-road-8: #b3bac1;
+  --bm-road-trunk: #8a6414;
+
+  --grid-line: rgba(40, 80, 110, 0.07);
+  --grid-line-strong: rgba(40, 80, 110, 0.12);
+  --scanline: rgba(0, 0, 0, 0.022);
+
+  --glass: rgba(255, 255, 255, 0.86);
+  --glass-solid: rgba(255, 255, 255, 0.97);
+
+  --shadow-low: 0 1px 2px rgba(31, 39, 51, 0.08);
+  --shadow-medium: 0 4px 12px rgba(31, 39, 51, 0.1);
+  --shadow-high: 0 12px 32px rgba(31, 39, 51, 0.14);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   高對比偏好（spec §7.1 a11y）—— 只加強線同次文字，唔改語意色。
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (prefers-contrast: more) {
+  :root {
+    --border-subtle: #3a475a;
+    --border-strong: #4d5d72;
+    --text-secondary: #c2d0e0;
+    --text-muted: #a3b3c6;
+  }
+  [data-theme="light"] {
+    --border-subtle: #b8b0a2;
+    --border-strong: #9c9488;
+    --text-secondary: #333b46;
+    --text-muted: #4a525e;
+  }
+}

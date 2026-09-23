@@ -32,7 +32,9 @@
   /* ---- 文字（由亮到暗）---- */
   --fg-primary: #eef3f9;
   --fg-secondary: #a9b8cc;
-  --fg-muted: #6b7c96;
+  /* P2-3（a11y）：由 #6b7c96（4.23:1，FAIL）改為 `tokens.css` 嘅 `--text-muted` 值
+     #7d8fa3（5.41:1 on rgb(20,23,30)）—— 統一兩套 token，同時修好對比違規。 */
+  --fg-muted: #7d8fa3;
   --fg-faint: #4a5769;
 
   /* ---- 強調色 ----
@@ -117,7 +119,10 @@ html, body {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--accent-blue);
+  /* P2-3（a11y）：`--accent-blue`（#4a9edb）配 white 只有 2.91:1（FAIL）。
+     skip link 係鍵盤用戶**第一個**應該見到嘅元素，對比必須合格 →
+     用專用加深背景 #1d5c8a（7.12:1）。**唔改 `--accent-blue`** —— 佢另有 3 處用途。 */
+  background: #1d5c8a;
   color: white;
   padding: 8px 16px;
   z-index: 1000;
@@ -277,12 +282,51 @@ html, body {
   position: relative;
   overflow: hidden;
 }
+/*
+ * 向量底圖層。
+ *
+ * `z-index: 0` + SVG `z-index: 1`：canvas 喺下、標記喺上。
+ * `pointer-events: none` —— 手勢一定要由 SVG 收（SVG 先有 viewBox 換算）。
+ */
+.basemap-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+  /* 未載入完之前唔顯示，避免「黑屏一閃」 */
+  opacity: 0;
+  transition: opacity 420ms ease;
+}
+.svg-map-wrap.basemap-vector-ready .basemap-canvas {
+  opacity: 1;
+}
+.svg-map-wrap.basemap-vector-failed .basemap-canvas {
+  display: none;
+}
 .svg-map {
+  position: relative;
+  z-index: 1;
   width: 100%;
   height: 100%;
   cursor: grab;
   display: block;
+  /* 向量底圖喺下面 —— SVG 自己唔可以再有底色 */
+  background: transparent;
+}
+/* 向量底圖未 ready 時（或者失敗退回 raster 時）先用底色撐住 */
+.svg-map-wrap:not(.basemap-vector-ready) {
   background: radial-gradient(ellipse at center, #0a1822 0%, #050a0f 100%);
+}
+/* raster 後備圖層：向量正常時完全隱藏 */
+.basemap-layer {
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.svg-map-wrap.basemap-vector-failed .basemap-layer {
+  opacity: 1;
 }
 .svg-map:active { cursor: grabbing; }
 /*
@@ -314,6 +358,8 @@ html, body {
   position: absolute;
   top: 12px;
   left: 12px;
+  /* ⚠️ 一定要高過 .svg-map（z-index: 1），否則 SVG 會攔截圖例上嘅按鈕 */
+  z-index: 2;
   pointer-events: none;
   color: var(--fg-muted);
   font-size: 11px;
@@ -420,6 +466,8 @@ html, body {
   position: absolute;
   bottom: 12px;
   right: 12px;
+  /* 同上：一定要高過 SVG，否則放大／縮細掣㩒唔到 */
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -1112,13 +1160,14 @@ html, body {
 
   --fg-primary: #1f2733;
   --fg-secondary: #4a5568;
-  --fg-muted: #7b8794;
+  --fg-muted: #5f6873;
   --fg-faint: #a8b0ba;
 
   /* 淺底上嘅強調色要加深，否則對比不足（WCAG AA 需要 4.5:1） */
   --accent-red: #c0392b;
   --accent-orange: #b9721c;
-  --accent-yellow: #a8861a;
+  /* P2-3（a11y）：由 #a8861a（3.06:1，FAIL）改為 #7d6312（5.08:1 on rgb(244,241,234)）。 */
+  --accent-yellow: #7d6312;
   --accent-green: #1e8e5a;
   --accent-blue: #2472a4;
   --accent-purple: #7a4fa3;
@@ -1154,7 +1203,7 @@ html, body {
     --bg-hover: #f0ece3;
     --fg-primary: #1f2733;
     --fg-secondary: #4a5568;
-    --fg-muted: #7b8794;
+    --fg-muted: #5f6873;
     --fg-faint: #a8b0ba;
     --accent-red: #c0392b;
     --accent-orange: #b9721c;
@@ -1448,4 +1497,559 @@ html, body {
   font-size: 9px;
   color: var(--fg-faint);
   font-variant-numeric: tabular-nums;
+}
+
+/* ===========================================================================
+ * Phase L — 未來感 HUD 重做
+ * ===========================================================================
+ *
+ * 用戶反饋：「UI/UX 太過簡陋、直接，好似直接塞資料噉，但係我想有未來感覺、
+ * 高質素嘅專業 UI/UX，並且可以用到特效、動畫令到畫面更加生動。」
+ *
+ * 設計語言：「戰術 HUD」（Tactical HUD）
+ * ------------------------------------
+ *   1. **切角框** —— 用 clip-path 切走四角，取代圓角。圓角係消費級
+ *      產品語言；切角係儀器／軍工語言。
+ *   2. **單色主調 + 單一強調色** —— 底調係近黑藍，強調色只有青色
+ *      （#38e8ff）。琥珀同紅只留畀「危險」語意，唔做裝飾。
+ *   3. **髮絲線** —— 1px 半透明線做分隔，唔用粗邊框。
+ *   4. **動效要克制但有方向** —— 進場由上而下、由左至右；唔用彈跳。
+ *      全部尊重 `prefers-reduced-motion`。
+ *   5. **掃描線 + 微網格** —— 令平面面板有「儀器」質感。
+ *
+ * 為何用 clip-path 而唔用 border-radius
+ * ------------------------------------
+ * 切角喺任何尺寸都保持銳利，而且唔會影響內容佈局（border-radius 大咗
+ * 會夾住文字）。代價係冇得用 `border` 畫框 —— 所以要改用
+ * 「外層 clip-path + 內層背景」或者 box-shadow inset 模擬。
+ */
+
+:root {
+  /* ---- HUD 專用 token ---- */
+  --hud-cyan: #38e8ff;
+  --hud-cyan-dim: rgba(56, 232, 255, 0.32);
+  --hud-cyan-faint: rgba(56, 232, 255, 0.10);
+  --hud-amber: #ffb347;
+  --hud-danger: #ff5a4d;
+  --hud-safe: #2fd6a8;
+  --hud-violet: #a06bd8;
+
+  --glass: rgba(12, 18, 27, 0.78);
+  --glass-solid: rgba(10, 15, 23, 0.94);
+  --hairline: rgba(120, 190, 220, 0.16);
+  --hairline-strong: rgba(120, 200, 235, 0.30);
+
+  --hud-clip: polygon(
+    10px 0, 100% 0, 100% calc(100% - 10px),
+    calc(100% - 10px) 100%, 0 100%, 0 10px
+  );
+  --hud-clip-sm: polygon(
+    6px 0, 100% 0, 100% calc(100% - 6px),
+    calc(100% - 6px) 100%, 0 100%, 0 6px
+  );
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ---- 全域細節 ---- */
+
+::selection {
+  background: var(--hud-cyan-dim);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(56, 232, 255, 0.28), rgba(56, 232, 255, 0.10));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--hud-cyan-dim); background-clip: padding-box; }
+
+:focus-visible {
+  outline: 1px solid var(--hud-cyan);
+  outline-offset: 2px;
+}
+
+/* ---- 頂欄：儀器面板 ---- */
+
+#topbar {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(20, 30, 44, 0.96), rgba(9, 14, 21, 0.96));
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: 0 1px 0 rgba(56, 232, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+/* 頂欄底部一條發光掃描線 */
+#topbar::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hud-cyan), transparent);
+  opacity: 0.5;
+  animation: hud-sweep 6s var(--ease-in-out) infinite;
+}
+@keyframes hud-sweep {
+  0%, 100% { transform: translateX(-30%); opacity: 0.12; }
+  50%      { transform: translateX(30%);  opacity: 0.6; }
+}
+
+#topbar h1 {
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 18px rgba(56, 232, 255, 0.35);
+}
+#topbar .tagline { letter-spacing: 0.03em; }
+#topbar .badge {
+  background: var(--hud-cyan-faint);
+  border: 1px solid var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+  letter-spacing: 0.06em;
+}
+
+.nav-btn {
+  clip-path: var(--hud-clip-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--hairline);
+  letter-spacing: 0.04em;
+  transition: background var(--transition), color var(--transition),
+              border-color var(--transition), transform var(--transition-fast);
+}
+.nav-btn:hover {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+  transform: translateY(-1px);
+}
+
+/* ---- 章節條：時間軸 scrubber ---- */
+
+.chapter-strip {
+  background: linear-gradient(180deg, rgba(11, 16, 24, 0.9), rgba(8, 12, 19, 0.9));
+  border-bottom: 1px solid var(--hairline);
+}
+.ch-pill {
+  position: relative;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), color var(--transition-fast),
+              transform var(--transition-fast);
+}
+.ch-pill:hover {
+  background: var(--hud-cyan-faint);
+  color: var(--hud-cyan);
+  transform: translateY(-2px);
+}
+.ch-pill[aria-current="true"],
+.ch-pill.active {
+  background: var(--hud-cyan);
+  color: #05131a;
+  box-shadow: 0 0 0 1px var(--hud-cyan), 0 0 18px rgba(56, 232, 255, 0.55);
+  font-weight: 700;
+}
+/* 已讀標記：底部一條細線 */
+.ch-pill::after {
+  content: "";
+  position: absolute;
+  left: 25%; right: 25%; bottom: 2px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.28;
+}
+
+/* ---- 地圖圖例：HUD 面板 ----
+ *
+ * 🔴 2026-09-23 緊急修正：呢條
+ *   `.map-overlay { background: var(--glass); backdrop-filter: blur(10px) ... }`
+ * 規則**完全錯誤**，會令整個地圖被模糊（`hud.css` 有同一條，兩處都已移除）。
+ *
+ * 根因：`map.css`（V2）將 `.map-overlay` 定義為**全尺寸透明定位容器**
+ * （`position: absolute; inset: 0; pointer-events: none`），玻璃效果應該落喺
+ * 內層 `.map-legend`（`map.css` 已定義）。呢條規則令 1060×741 嘅容器帶
+ * `backdrop-filter: blur(10px)` → 底下成個地圖被模糊
+ * （用戶報「加咗個超級模糊嘅濾鏡，完全睇唔到地圖」）。
+ *
+ * 已移除。玻璃效果由 `map.css` 嘅 `.map-legend` 提供。
+ */
+@keyframes hud-in-left {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+.legend-title {
+  color: var(--hud-cyan);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+}
+.legend-item {
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+.legend-item:hover { color: var(--fg-primary); transform: translateX(2px); }
+.legend-item .dot,
+.legend-item .area { box-shadow: 0 0 10px currentColor; }
+.legend-lang-btn {
+  clip-path: var(--hud-clip-sm);
+  border: 1px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.03);
+}
+.legend-lang-btn:hover { border-color: var(--hud-cyan-dim); color: var(--hud-cyan); }
+
+/* ---- 地圖控制 ---- */
+
+.map-ctrl {
+  clip-path: var(--hud-clip-sm);
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--hairline);
+  color: var(--fg-primary);
+  transition: all var(--transition-fast);
+}
+.map-ctrl:hover {
+  background: var(--hud-cyan);
+  color: #05131a;
+  border-color: var(--hud-cyan);
+  box-shadow: 0 0 20px rgba(56, 232, 255, 0.45);
+}
+.map-ctrl:active { transform: scale(0.94); }
+
+/* ---- 右側面板 ---- */
+
+.pane-story {
+  background: linear-gradient(180deg, rgba(11, 16, 24, 0.98), rgba(8, 12, 19, 0.98));
+  border-left: 1px solid var(--hairline);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.35);
+}
+
+.story-header {
+  border-bottom: 1px solid var(--hairline);
+  background: linear-gradient(180deg, rgba(56, 232, 255, 0.045), transparent);
+}
+.story-chapter-num {
+  color: var(--hud-cyan);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+}
+.story-title { letter-spacing: 0.02em; }
+
+.story-summary,
+.story-events,
+.story-characters,
+.story-routes {
+  animation: hud-in-up 420ms var(--ease-out) both;
+}
+@keyframes hud-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ===========================================================================
+ * 區域圖層（SVG）
+ * =========================================================================== */
+
+.zone { cursor: pointer; }
+
+.zone-area {
+  transition: fill-opacity 220ms var(--ease-out), stroke-opacity 220ms var(--ease-out);
+}
+.zone:hover .zone-area { fill-opacity: 0.24; stroke-opacity: 1; }
+.zone.is-selected .zone-area { fill-opacity: 0.30; }
+
+/* 病窩掃描光環：由中心向外擴散，令「危險區」有生命感 */
+.zone-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: zone-scan 3.6s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+@keyframes zone-scan {
+  0%   { opacity: 0.0; transform: scale(0.86); }
+  35%  { opacity: 0.55; }
+  100% { opacity: 0.0; transform: scale(1.06); }
+}
+
+.zone-badge {
+  transition: transform 240ms var(--ease-out);
+  transform-origin: center;
+}
+.zone:hover .zone-badge { transform: scale(1.18); }
+
+.zone-label {
+  letter-spacing: 0.06em;
+  transition: opacity 200ms var(--ease-out);
+}
+.zone:hover .zone-label { opacity: 1; }
+
+/* 圖例上嘅區域樣本亦要有圖騰色 */
+.area-survivor { border-color: var(--hud-safe); color: var(--hud-safe); }
+.area-nest     { border-color: var(--hud-danger); color: var(--hud-danger); }
+.area-estimated { border-style: dashed; }
+
+/* ===========================================================================
+ * 區域檔案面板（Zone Dossier）
+ * =========================================================================== */
+
+.zone-dossier-mount {
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.zone-dossier-mount[hidden] { display: none; }
+
+.zd {
+  --zd-accent: var(--hud-cyan);
+  padding: 0 0 48px;
+  animation: hud-in-up 460ms var(--ease-out) both;
+}
+
+/* ---- 頭部 ---- */
+.zd-head {
+  position: relative;
+  padding: 18px 18px 16px;
+  background:
+    radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--zd-accent) 16%, transparent), transparent 62%),
+    linear-gradient(180deg, rgba(16, 23, 33, 0.96), rgba(10, 15, 23, 0.96));
+  border-bottom: 1px solid var(--hairline);
+  overflow: hidden;
+}
+/* 頭部掃描線 */
+.zd-head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.028) 0px,
+    rgba(255, 255, 255, 0.028) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.zd-kind {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.zd-glyph {
+  font-size: 15px;
+  color: var(--zd-accent);
+  text-shadow: 0 0 14px var(--zd-accent);
+  animation: zd-glyph-pulse 2.8s var(--ease-in-out) infinite;
+}
+@keyframes zd-glyph-pulse {
+  0%, 100% { opacity: 0.75; }
+  50%      { opacity: 1; }
+}
+.zd-kind-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--zd-accent);
+  text-transform: uppercase;
+}
+.zd-kind-sub {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+}
+
+.zd-name {
+  margin: 0 0 6px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-shadow: 0 0 26px color-mix(in srgb, var(--zd-accent) 40%, transparent);
+}
+.zd-alias {
+  margin: 0 0 12px;
+  font-size: 11px;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+
+.zd-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 6px;
+  margin-top: 12px;
+}
+.zd-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 8px;
+  background: rgba(255, 255, 255, 0.035);
+  clip-path: var(--hud-clip-sm);
+  border-left: 2px solid var(--zd-accent);
+}
+.zd-metric b {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-primary);
+  font-variant-numeric: tabular-nums;
+}
+.zd-metric i {
+  font-style: normal;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+}
+
+.zd-hint {
+  margin: 0;
+  padding: 10px 18px;
+  font-size: 11.5px;
+  color: var(--fg-secondary);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  gap: 8px;
+}
+.zd-hint span { color: var(--zd-accent); flex-shrink: 0; }
+
+.zd-summary {
+  margin: 0;
+  padding: 14px 18px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--fg-primary);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--zd-accent) 7%, transparent), transparent);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.zd-body { padding: 4px 0; }
+
+/* ---- 分節卡片 ---- */
+.zd-section {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(120, 190, 220, 0.07);
+  animation: hud-in-up 380ms var(--ease-out) both;
+}
+.zd-section:nth-child(1) { animation-delay: 40ms; }
+.zd-section:nth-child(2) { animation-delay: 80ms; }
+.zd-section:nth-child(3) { animation-delay: 120ms; }
+.zd-section:nth-child(4) { animation-delay: 160ms; }
+.zd-section:nth-child(5) { animation-delay: 200ms; }
+
+.zd-section-title {
+  margin: 0 0 7px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--zd-accent);
+}
+.zd-icon { font-size: 11px; opacity: 0.9; }
+
+.zd-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.78;
+  color: var(--fg-secondary);
+}
+
+.zd-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.zd-chip {
+  padding: 3px 9px;
+  font-size: 11px;
+  color: var(--fg-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hairline);
+  clip-path: var(--hud-clip-sm);
+  transition: all var(--transition-fast);
+}
+.zd-chip:hover {
+  border-color: var(--zd-accent);
+  color: var(--zd-accent);
+  transform: translateY(-1px);
+}
+
+.zd-audit { list-style: none; margin: 0; padding: 0; }
+.zd-audit li {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 11px;
+  line-height: 1.6;
+  border-bottom: 1px dashed rgba(120, 190, 220, 0.10);
+}
+.zd-audit li:last-child { border-bottom: none; }
+.zd-audit i {
+  font-style: normal;
+  color: var(--fg-muted);
+  letter-spacing: 0.06em;
+}
+.zd-audit span { color: var(--fg-secondary); }
+
+.zd-evidence {
+  margin-top: 8px;
+  border: 1px solid var(--hairline);
+  clip-path: var(--hud-clip-sm);
+  background: rgba(0, 0, 0, 0.22);
+}
+.zd-evidence summary {
+  padding: 7px 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--hud-cyan);
+  cursor: pointer;
+  list-style: none;
+}
+.zd-evidence summary::marker { content: ""; }
+.zd-evidence summary::before { content: "▸ "; }
+.zd-evidence[open] summary::before { content: "▾ "; }
+.zd-evidence p {
+  margin: 0;
+  padding: 0 10px 10px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--fg-secondary);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.zd-chapters { display: flex; flex-wrap: wrap; gap: 3px; }
+.zd-ch {
+  min-width: 26px;
+  padding: 2px 5px;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.zd-ch:hover {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+  transform: translateY(-1px);
+}
+
+/* ---- 減少動效偏好 ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

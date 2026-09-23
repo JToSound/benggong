@@ -176,7 +176,7 @@
           "type": "boolean"
         },
         "position_source": {
-          "description": "座標嘅來源說明（人手修正／同章錨定等），可稽核。",
+          "description": "座標嘅來源說明（修正規則／同章錨定等），可稽核。",
           "type": "string"
         }
       }

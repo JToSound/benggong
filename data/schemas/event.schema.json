@@ -105,7 +105,7 @@
           "maximum": 3
         },
         "location_id": {
-          "description": "對應 locations.geojson id；null = 未指派（待人手審閱或後續 pipeline）。",
+          "description": "對應 locations.geojson id；null = 未指派（待自動推斷或後續 pipeline）。",
           "type": [
             "string",
             "null"

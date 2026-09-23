@@ -1,8 +1,41 @@
 #!/usr/bin/env python3
-"""由地點資料推導「區域」（倖存區／病窩）→ `data/public/zones.geojson`。
+"""⚠️⚠️ **DEPRECATED — 唔好再跑（World Atlas V2 / B4）** ⚠️⚠️
 
-為何要獨立一支腳本
-==================
+呢支腳本**已經被取代**，唔會再更新，亦**唔應該**寫入
+`data/public/zones.geojson`。
+
+為何唔可以再跑
+==============
+`data/public/zones.geojson` 而家係 **v2**（`schema_version: 2`），由
+`merge_zone_dossiers.py`（4 階段編排）→ `infer_zone_membership.py` →
+`build_zone_dossiers.py` 產生，欄位包括：
+
+    zone_type / status / danger_level / spatial_precision / display_style
+    chapter_refs / event_ids / character_ids / member_location_ids
+    dossier_id / confidence / confidence_inputs / review_status
+    coordinate_confidence / coordinate_source / coordinate_review_status
+    spatial_evidence_count
+
+**本腳本只識 v1 欄位**（`kind` + 一句描述）。跑佢會：
+  1. 覆蓋 `zones.geojson`，令 44 個 v2 欄位**全部消失**；
+  2. 令 `zone-dossiers.json` 嘅 `generated_from.zones` hash 失效；
+  3. 令 `tests/test_data_normalization.py` 嘅 schema 驗證**失敗**；
+  4. 令 `npm run typecheck` 之後嘅前端讀唔到 `zone_type`。
+
+即係典型嘅「**雙軌寫入**」災難（spec §7 已列為要刪嘅死 script）。
+B4 **刻意唔刪**呢個檔（`docs/specs/world-atlas-v2-migration-plan.md` §7
+話「可能仲有引用」），但加咗 `--force-deprecated` 守門：
+
+    python scripts/derive_zones.py                      # ❌ 直接拒絕
+    python scripts/derive_zones.py --dry-run            # ❌ 直接拒絕
+    python scripts/derive_zones.py --force-deprecated   # ⚠️ 得，但唔應該
+
+正確做法：
+    python scripts/merge_zone_dossiers.py
+
+原本用途（歷史記錄）
+====================
+由**地點名稱**推導「區域」（倖存區／病窩）→ `data/public/zones.geojson`。
 地點係「點」，區域係「面」。地圖上要表達「呢一帶係安全區」或者
 「呢度係病窩」，需要一個有**範圍**嘅圖層，唔可以只靠點標記。
 
@@ -20,9 +53,8 @@
 另外有一批區域係**文中明文描述**但冇對應地點（例如「坑口這個大病窩」），
 以策展清單形式加入，每條都附章節引用。
 
-用法：
-    python scripts/derive_zones.py --dry-run
-    python scripts/derive_zones.py
+⚠️ 呢個「只由名推導」嘅做法係佢被淘汰嘅主因：`merge_zone_dossiers.py`
+改為由**全文抽取**（政權／社會結構／經濟／防禦…），資訊量完全唔同級。
 """
 
 from __future__ import annotations
@@ -150,10 +182,35 @@ def zone_seed(name: str) -> str | None:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="推導區域（倖存區／病窩）")
+    ap = argparse.ArgumentParser(
+        description="⚠️ DEPRECATED —— 請改用 scripts/merge_zone_dossiers.py"
+    )
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument(
+        "--force-deprecated",
+        action="store_true",
+        help="⚠️ 明知故犯：覆蓋 zones.geojson 並消滅所有 v2 欄位（唔應該用）",
+    )
     args = ap.parse_args()
 
+    if not args.force_deprecated:
+        print(
+            "❌ 拒絕執行：scripts/derive_zones.py 已 DEPRECATED（World Atlas V2 / B4）。\n"
+            "\n"
+            "   原因：本腳本只識 v1 欄位（kind + 一句描述）。跑佢會覆蓋\n"
+            "   data/public/zones.geojson，令 44 個 v2 欄位（zone_type /\n"
+            "   status / danger_level / display_style / event_ids / dossier_id /\n"
+            "   review_status / coordinate_* …）全部消失，並令\n"
+            "   zone-dossiers.json 嘅 generated_from hash 失效、schema 測試失敗。\n"
+            "\n"
+            "   正確做法：python scripts/merge_zone_dossiers.py\n"
+            "\n"
+            "   真係要跑（唔建議）：加 --force-deprecated\n",
+            file=sys.stderr,
+        )
+        return 2
+
+    print("⚠️ --force-deprecated：正在用已淘汰嘅 v1 邏輯覆蓋 zones.geojson …", file=sys.stderr)
     locs = json.loads(LOCATIONS.read_text(encoding="utf-8"))["features"]
     by_id = {f["properties"]["id"]: f for f in locs}
 

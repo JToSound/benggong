@@ -13,6 +13,14 @@
  *
  * ⚠️ 為何唔用 `foreignObject`：Safari 對 SVG 內嘅 foreignObject 支援
  *    唔完整，而且會將 HTML 樣式帶入 SVG，令匯出結果同畫面唔一致。
+ *
+ * Phase L 新增：向量底圖係 `<canvas>`
+ * ==================================
+ * 向量底圖唔喺 SVG 入面（見 `src/map/VectorBasemap.ts`），所以序列化
+ * SVG **完全唔會包含底圖** —— 實測匯出嘅 PNG 由 800 KB 跌到 58 KB，
+ * 即係得一層標記。
+ *
+ * 解法：呼叫者傳入底圖 `<canvas>`，匯出時先畫底圖，再畫 SVG。
  */
 
 /** 將一個 URL 轉成 data URL。 */
@@ -35,6 +43,13 @@ export interface ExportOptions {
   filename?: string;
   /** 背景色（唔填就用透明）。 */
   background?: string;
+  /**
+   * 向量底圖 `<canvas>`。
+   *
+   * 有傳入嘅話，會先畫佢再畫 SVG —— 因為底圖唔屬於 SVG 樹，
+   * 序列化 SVG 攞唔到。
+   */
+  underlay?: HTMLCanvasElement | null;
 }
 
 /**
@@ -102,6 +117,10 @@ export async function exportMapPng(
     if (opts.background) {
       ctx.fillStyle = opts.background;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    // 先畫向量底圖（如果當下用緊），再畫 SVG 標記層
+    if (opts.underlay && opts.underlay.width > 0) {
+      ctx.drawImage(opts.underlay, 0, 0, canvas.width, canvas.height);
     }
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 

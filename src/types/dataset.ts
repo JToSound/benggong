@@ -26,6 +26,36 @@ export type LocationPrecision =
   | "fictional"
   | "unknown";
 
+// ---- Coordinate Integrity（V2 新增，見 spatial-data-contract §4）----
+//
+// 4 個 coordinate_* 欄位喺 V2 加到全部 spatial layer。用途：令「座標可信度」
+// 可稽核、可顯示，避免「未知當已知」。全部 optional —— v1 資料仍然讀得到。
+
+/** 座標證據來源。`legacy` = 舊資料未分類；**唔可以**當作已驗證。 */
+export type CoordinateSource =
+  | "explicit_text"
+  | "cross_chapter_evidence"
+  | "zone_inference"
+  | "legacy"
+  | "manual_geometry";
+
+/** 座標審核狀態。`quarantined` = 已排除出地圖，但資料保留。 */
+export type CoordinateReviewStatus =
+  | "validated"
+  | "auto_corrected"
+  | "needs_validation"
+  | "quarantined";
+
+/** 全部 spatial layer 共用嘅座標完整性欄位（V2）。 */
+export interface CoordinateIntegrity {
+  /** 0–1；`unknown` 精度必須係 0.0。 */
+  coordinate_confidence?: number;
+  coordinate_source?: CoordinateSource;
+  coordinate_review_status?: CoordinateReviewStatus;
+  /** schema 版本；v1 資料冇呢個欄位。 */
+  schema_version?: number;
+}
+
 export type LocationType =
   | "district"
   | "street"
@@ -53,7 +83,7 @@ interface FeatureBase<P> {
 
 // ---- Locations ----
 
-export interface LocationProperties {
+export interface LocationProperties extends CoordinateIntegrity {
   id: string;
   name: string;
   display_name: string;
@@ -84,7 +114,7 @@ export type LocationFeature = FeatureBase<LocationProperties>;
 
 // ---- Events ----
 
-export interface EventProperties {
+export interface EventProperties extends CoordinateIntegrity {
   id: string;
   title: string;
   description: string; // ≤200 字，不可轉載長段正文
@@ -99,6 +129,8 @@ export interface EventProperties {
   confidence: number;
   review_status: ReviewStatus;
   source: SourceId;
+  /** V2：三層 join 得出嘅 zone id；無法確定 → null + needs_validation（spatial §4.2）。 */
+  zone_id?: string | null;
 }
 
 export type EventFeature = FeatureBase<EventProperties>;
@@ -112,7 +144,7 @@ export interface RouteWaypoint {
   confidence: number;
 }
 
-export interface RouteProperties {
+export interface RouteProperties extends CoordinateIntegrity {
   id: string;
   character_id: string;
   character_name: string;
@@ -285,30 +317,183 @@ export const CHARACTER_COLORS: Record<string, string> = {
 /** 其他角色 deterministic palette。 */
 export const FALLBACK_PALETTE = ["#F39C12", "#9B59B6", "#1ABC9C", "#E67E22"];
 
-// ---- Zones（倖存區／病窩）----
+// ---- Zones（倖存區／病窩／據點）----
 
-export type ZoneKind = "survivor" | "nest";
+export type ZoneKind = "survivor" | "nest" | "outpost";
 
-/** 半徑來源：members = 由成員地點分佈推導；default = 按類型預設；curated = 文中明文。 */
-export type ZoneRadiusSource = "members" | "default" | "curated";
+// ---- Zone Schema v2（spatial-data-contract §5）----
+//
+// `kind` 保留作向後兼容，但**前端只讀 `zone_type`**（規則 Z2）。
+// 映射：survivor → survivor_zone、nest → infected_nest、outpost → contested。
 
-export interface ZoneProperties {
+export type ZoneType =
+  | "survivor_zone"
+  | "infected_nest"
+  | "quarantine"
+  | "contested"
+  | "transit"
+  | "unknown";
+
+export type ZoneStatus = "active" | "collapsed" | "unknown" | "historical";
+
+export type ZoneSpatialPrecision = "verified" | "approximate" | "fictional" | "unknown";
+
+/** 灰度可辨用嘅 pattern（規則：唔可以只靠色，spec §2.4）。 */
+export type ZonePattern = "hatch" | "contour" | "noise" | "solid" | "pulse";
+
+/**
+ * 顯示樣式由 `zone_type` 查表；**唔存 raw hex**（用 token 名，規則 Z1/§5.2）。
+ * 顏色一律由 B1 token 決定，資料層只講「用邊個語意色」。
+ */
+export interface ZoneDisplayStyle {
+  /** 語意色 token 名（例如 `--zone-survivor`），唔係 hex。 */
+  fill: string;
+  pattern: ZonePattern;
+  icon: string;
+}
+
+/** zone v2 審核狀態（同 location 嘅 `ReviewStatus` 語意唔同，分開定義）。 */
+export type ZoneReviewStatus = "validated" | "auto_inferred" | "needs_validation";
+
+/** 範圍來源：members = 由成員地點分佈推導（證據）；default = 按類型預設（估算）；unknown = 冇證據。 */
+export type ZoneRadiusSource = "members" | "default" | "unknown";
+
+/** 座標來源。全部可稽核 —— 唔會出現「來源不明」嘅座標。 */
+export type ZoneCoordSource =
+  | "locations"
+  | "locations_prefix"
+  | "district"
+  | "osm"
+  | "unknown";
+
+/**
+ * 區域檔案（dossier）。
+ *
+ * 由 `scripts/merge_zone_dossiers.py` 從全文抽取 + 確定性合併。
+ * 用戶要求嘅「政權種類、人文風格、社會結構」對應 `government`、
+ * `culture`、`social_structure`；`kind_votes` 令「點解係呢個分類」
+ * 可稽核。
+ */
+export interface ZoneProperties extends CoordinateIntegrity {
   id: string;
   name: string;
   kind: ZoneKind;
-  radius_m: number;
-  radius_source: ZoneRadiusSource;
-  member_location_ids: string[];
+  // ── V2 欄位（全部 optional：v1 資料仍然讀得到，由 B4 migration 補齊） ──
+  /** 前端**只讀**呢個（規則 Z2）；缺失時由 `kind` 推導。 */
+  zone_type?: ZoneType;
+  status?: ZoneStatus;
+  /** `unknown` 必須係 `null`，**唔可以亂填**（§5.2）。 */
+  danger_level?: number | null;
+  spatial_precision?: ZoneSpatialPrecision;
+  display_style?: ZoneDisplayStyle;
+  chapter_refs?: number[];
+  event_ids?: string[];
+  character_ids?: string[];
+  member_location_ids?: string[];
+  dossier_id?: string | null;
+  /** v2 審核狀態（同 `kind_votes` 一致 → auto_inferred）。 */
+  zone_review_status?: ZoneReviewStatus;
+  /** 多代理對 kind 嘅票數分佈。 */
+  kind_votes?: Record<string, number>;
+  aliases?: string[];
   chapters: number[];
   first_appearance: number | null;
-  description: string;
-  evidence: string;
+  location_hint?: string | null;
+  government?: string | null;
+  leadership?: string[];
+  social_structure?: string | null;
+  economy?: string | null;
+  defense?: string | null;
+  population?: string | null;
+  culture?: string | null;
+  notable_features?: string[];
+  threats?: string[];
+  summary?: string | null;
+  evidence?: string | null;
+  confidence?: number | null;
+  radius_m: number;
+  radius_source: ZoneRadiusSource;
+  coords_source?: ZoneCoordSource;
+  coords_evidence?: string;
+  range_evidence?: string;
+  sources?: string[];
   source: SourceId;
 }
 
-export type ZoneFeature = FeatureBase<ZoneProperties>;
+/**
+ * 區域用**多邊形**（唔係點）—— 用戶要求「畫晒各個倖存區範圍、病窩範圍」。
+ * 所以唔可以用 `FeatureBase`（佢嘅 geometry 係 `GeometryPoint`）。
+ */
+export interface GeometryPolygon {
+  type: "Polygon";
+  coordinates: number[][][];
+}
+
+export interface ZoneFeature {
+  type: "Feature";
+  geometry: GeometryPolygon;
+  properties: ZoneProperties;
+}
 
 export interface ZonesFeatureCollection {
   type: "FeatureCollection";
   features: ZoneFeature[];
+}
+
+// ---- Zone Dossier（獨立檔 `data/public/zone-dossiers.json`，spatial §6）----
+//
+// 規則 DS1：每個 field **只有 evidence 足夠先可填**；不足 → `unknown`，
+// UI 顯示「資料未足以確認」（**唔可以**補寫 fiction）。
+
+export interface DossierGovernance {
+  system: string;
+  authority: string;
+  legitimacy: string;
+}
+
+export interface DossierSociety {
+  population_structure: string;
+  daily_life: string;
+  culture: string;
+}
+
+export interface DossierInfrastructure {
+  security: string;
+  resources: string;
+  mobility: string;
+}
+
+export interface DossierRiskProfile {
+  threats: string[];
+  danger_level: number | null;
+}
+
+/** 病窩專用（規則 DS2：用呢組代替 governance / society）。 */
+export interface DossierNestProfile {
+  threat_signature: string;
+  activity_pattern: string;
+  affected_radius: string;
+}
+
+export interface ZoneDossier {
+  schema_version: number;
+  id: string;
+  zone_id: string;
+  /** 最多 180 字粵文概述；不足 → `unknown`。 */
+  overview: string;
+  governance?: DossierGovernance;
+  society?: DossierSociety;
+  infrastructure?: DossierInfrastructure;
+  risk_profile?: DossierRiskProfile;
+  nest_profile?: DossierNestProfile;
+  key_characters: string[];
+  chapter_refs: number[];
+  evidence_sources: string[];
+  confidence: number;
+  review_status: ZoneReviewStatus;
+}
+
+export interface ZoneDossiersFile {
+  schema_version: number;
+  dossiers: ZoneDossier[];
 }

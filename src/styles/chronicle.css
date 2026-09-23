@@ -1,0 +1,497 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   World Atlas V2 — 編年史體驗（B7）
+   ══════════════════════════════════════════════════════════════════════════
+   硬性（spec §2 / §5 / §7；B1 契約）：
+     T1. **零 raw hex** —— 所有顏色一律 var(--token)。色值只喺 tokens.css 定義。
+     T4. 冇色函式 literal（色函式統一寫喺 tokens.css）。
+     M1. transition / animation 時長一律 var(--dur-*)，唔硬寫具體毫秒。
+     C3. 互動目標 ≥44×44 CSS px；:focus-visible 用 --focus-ring（唔可以被任何幾何裁剪剪走）。
+     §7.3. 文字最小 12px（--fs-2xs 起）；對比 ≥4.5:1（由 token 保證）。
+
+   ⚠️ 載入方式：本檔需要 `src/main.ts` 加一行 @import。`src/main.ts` 屬 B2
+      allowlist，B7 唔可以改 → 已列為交付報告嘅「需一行接線」項。
+      未接線之前，本檔所有 class 都唔會生效（舊 main.css 規則勝出）。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 版面骨架 ────────────────────────────────────────────────────────── */
+.chronicle {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto minmax(0, 1fr);
+  gap: var(--sp-3);
+  height: 100%;
+  min-height: 0;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+/* 闊螢幕：左邊時期導覽（<=220px）＋ 右邊條目流。 */
+@media (min-width: 768px) {
+  .chronicle {
+    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .chronicle-head {
+    grid-column: 1 / -1;
+  }
+
+  .chr-rail {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .chronicle-body-wrap {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
+/* ── 標題區 ──────────────────────────────────────────────────────────── */
+.chronicle-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-4);
+  padding: var(--sp-3) var(--sp-4);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+}
+
+.chronicle-head h2 {
+  margin: 0;
+  font-size: var(--fs-lg);
+  line-height: var(--lh-tight);
+}
+
+.chronicle-sub {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--fs-2xs);
+  line-height: var(--lh-normal);
+}
+
+.chronicle-sub strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.chronicle-count {
+  display: inline-block;
+  margin-left: var(--sp-2);
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 動作列 ──────────────────────────────────────────────────────────── */
+.chr-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.chr-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: var(--fs-2xs);
+  line-height: 1;
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-fast) var(--ease-standard);
+}
+
+.chr-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: var(--bg-elevated);
+}
+
+.chr-btn[aria-pressed="true"] {
+  color: var(--text-inverse);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── 搜尋 ────────────────────────────────────────────────────────────── */
+.chr-search {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+}
+
+.chr-search:focus-within {
+  border-color: var(--accent);
+}
+
+.chr-search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  border: none;
+  background: none;
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+}
+
+.chr-search input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── 時期導覽（rail） ────────────────────────────────────────────────── */
+.chr-rail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  padding: var(--sp-2);
+  overflow-y: auto;
+  border-right: 1px solid var(--border-subtle);
+  background: var(--bg-base);
+}
+
+@media (max-width: 767px) {
+  /* 窄螢幕：rail 變橫向 chip row（唔再佔一整欄）。 */
+  .chr-rail {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+}
+
+.chr-rail-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  min-height: 44px;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--text-secondary);
+  font-size: var(--fs-2xs);
+  text-align: left;
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    background-color var(--dur-fast) var(--ease-standard);
+}
+
+.chr-rail-item:hover {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+.chr-rail-item[aria-current="true"] {
+  color: var(--accent-strong);
+  border-color: var(--accent);
+  background: var(--bg-elevated);
+}
+
+.chr-rail-count {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 條目流（捲動容器） ──────────────────────────────────────────────── */
+.chronicle-body-wrap {
+  position: relative;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.chronicle-body {
+  padding: var(--sp-3) var(--sp-4);
+}
+
+.chronicle-empty {
+  padding: var(--sp-8) var(--sp-4);
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+/* spacer：虛擬化撐高度用（唔可以有邊框／背景，否則見到一條線）。 */
+.chr-spacer {
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  pointer-events: none;
+}
+
+/* ── 時期段落 ────────────────────────────────────────────────────────── */
+.chr-period {
+  margin: 0 0 var(--sp-6);
+}
+
+.chr-period-title {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-map-overlay);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0 0 var(--sp-2);
+  padding: var(--sp-2) 0;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+.chr-period-line {
+  width: var(--sp-6);
+  height: 2px;
+  background: var(--accent);
+}
+
+.chr-period-count {
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 條目卡 ──────────────────────────────────────────────────────────── */
+.chr-entry {
+  min-height: 92px; /* 同 virtual.ts ROW_H 對齊 */
+  margin: 0 0 var(--sp-2);
+  padding: var(--sp-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+
+.chr-entry:hover {
+  border-color: var(--border-strong);
+}
+
+.chr-entry[aria-expanded="true"] {
+  border-color: var(--accent);
+}
+
+/* 回帶：故事時間早過首次提及 → 虛線邊（唔可以只靠色分辨，用 pattern 冗餘）。 */
+.chr-entry.is-flashback {
+  border-style: dashed;
+  border-color: var(--warn);
+}
+
+.chr-entry.is-focused {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+.chr-entry-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  margin: 0 0 var(--sp-1);
+}
+
+.chr-mark {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-size: var(--fs-2xs);
+}
+
+.chr-entry.is-flashback .chr-mark {
+  color: var(--warn);
+}
+
+.chr-entry-title {
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: var(--lh-tight);
+}
+
+.chr-entry-title:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+.chr-entry-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  margin: 0 0 var(--sp-2);
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+}
+
+.chr-flag {
+  padding: 0 var(--sp-2);
+  border: 1px dashed var(--warn);
+  border-radius: var(--radius-sm);
+  color: var(--warn);
+}
+
+.chr-loc {
+  color: var(--text-secondary);
+}
+
+.chr-conf {
+  color: var(--text-muted);
+}
+
+.chr-conf.is-low {
+  color: var(--warn);
+}
+
+.chr-review {
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+
+/* ── 章節 chip ───────────────────────────────────────────────────────── */
+.chr-chapters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin: 0 0 var(--sp-2);
+}
+
+.chr-ch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: var(--fs-2xs);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+
+.chr-ch:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.chr-ch-role {
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+}
+
+/* ── 展開區 ──────────────────────────────────────────────────────────── */
+.chr-entry-summary {
+  margin: 0 0 var(--sp-2);
+  color: var(--text-secondary);
+  font-size: var(--fs-2xs);
+  line-height: var(--lh-normal);
+}
+
+/* ── 伏筆 / 解答連結 ─────────────────────────────────────────────────── */
+.chr-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin: 0 0 var(--sp-2);
+}
+
+.chr-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.chr-links-label {
+  color: var(--text-muted);
+  font-size: var(--fs-2xs);
+}
+
+.chr-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-height: 44px;
+  padding: 0 var(--sp-2);
+  border: 1px solid var(--border-subtle);
+  border-left-width: 3px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: var(--fs-2xs);
+  transition:
+    color var(--dur-fast) var(--ease-standard),
+    border-color var(--dur-fast) var(--ease-standard);
+}
+
+.chr-link:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+/* 方向用**形狀**冗餘編碼（唔只靠色）：埋下 = 實線左邊、解答 = 虛線左邊。 */
+.chr-link.is-fs {
+  border-left-style: solid;
+  border-left-color: var(--accent);
+}
+
+.chr-link.is-po {
+  border-left-style: dashed;
+  border-left-color: var(--warn);
+}
+
+.chr-link-gap {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── 無資料降級 ──────────────────────────────────────────────────────── */
+.chr-unknown {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Reduced motion（CSS 層；JS 由 src/motion.ts 負責） ─────────────────
+   base.css 已經有全域收斂；呢度只補「保留終態可見性」嘅例外。
+   規則：**唔可以** 用極短 animation 時長強制跳終態（A10 實測會令光環
+   直接消失）。需要終態嘅元素改為直接寫靜態樣式。
+   ────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .chr-entry,
+  .chr-ch,
+  .chr-link,
+  .chr-btn,
+  .chr-rail-item {
+    transition: none;
+  }
+
+  /* 目前所在嘅時期：終態可見性唔依賴 animation。 */
+  .chr-rail-item[aria-current="true"] {
+    background: var(--bg-elevated);
+  }
+}

@@ -41,6 +41,11 @@ FORBIDDEN_PATTERNS: dict[str, re.Pattern[str]] = {
         r"\b\d{1,3}(?:\.\d{1,3}){3}\b|sk-[A-Za-z0-9]{20,}|Bearer\s+[A-Za-z0-9._\-]{20,}",
         re.IGNORECASE,
     ),
+    # ⚠️ 版權紅線（World Atlas V2 / B4）：小說原文只可以留喺 `data/private/`。
+    # B4 之前 `zones.geojson` 48/48 個 feature 嘅 `evidence` 都係
+    # `"ch73 原文：「…」"` 格式 —— 成段原文入咗公開 bundle（`npm run sync-data`
+    # 之後前端任何人下載到）。規則 DS4 明文禁止。
+    "novel_quote": re.compile(r"原文\s*[：:「]|ch\s*\d+\s*原文"),
 }
 
 # 超過 100 字連續 CJK（無標點中斷）視為疑似小說原文段落。
@@ -58,9 +63,183 @@ SCHEMA_FILES = {
     "timeline.json": "timeline.schema.json",
     "characters.json": "character.schema.json",
     "zones.geojson": "zone.schema.json",
+    "zone-dossiers.json": "zone-dossier.schema.json",
     "chronicle.json": "chronicle.schema.json",
     "chapter-summaries.json": "chapter-summaries.schema.json",
 }
+
+# ---- B4：zone v2 確定性映射（spec §5.2）------------------------------------
+#: `kind` → `zone_type`（規則 Z2：前端只讀 `zone_type`，`kind` 只作向後兼容）
+KIND_TO_ZONE_TYPE = {
+    "survivor": "survivor_zone",
+    "nest": "infected_nest",
+    "outpost": "contested",
+}
+ZONE_TYPE_ENUM = {
+    "survivor_zone", "infected_nest", "quarantine", "contested", "transit", "unknown",
+}
+ZONE_STATUS_ENUM = {"active", "collapsed", "unknown", "historical"}
+ZONE_SPATIAL_PRECISION_ENUM = {"verified", "approximate", "fictional", "unknown"}
+ZONE_REVIEW_STATUS_ENUM = {"validated", "auto_inferred", "needs_validation"}
+ZONE_DANGER_BY_TYPE = {
+    "survivor_zone": 1, "contested": 3, "infected_nest": 4,
+    "quarantine": 4, "transit": 2, "unknown": None,
+}
+COORDINATE_SOURCE_ENUM = {
+    "explicit_text", "cross_chapter_evidence", "zone_inference",
+    "legacy", "manual_geometry",
+}
+COORDINATE_REVIEW_STATUS_ENUM = {
+    "validated", "auto_corrected", "needs_validation", "quarantined",
+}
+
+
+def check_zone_v2(items) -> list[str]:
+    """B4：zone v2 欄位存在性 + 確定性映射一致性（規則 Z1／Z2、§5.2）。"""
+    errors: list[str] = []
+    for item in items:
+        p = item.get("properties", {})
+        zid = p.get("id", "?")
+        if p.get("schema_version") != 2:
+            errors.append(f"zones.geojson: {zid} schema_version 唔係 2")
+        for key in ("zone_type", "status", "danger_level", "spatial_precision",
+                    "display_style", "chapter_refs", "event_ids", "character_ids",
+                    "member_location_ids", "dossier_id", "review_status",
+                    "confidence", "confidence_inputs",
+                    "coordinate_confidence", "coordinate_source",
+                    "coordinate_review_status", "spatial_evidence_count"):
+            if key not in p:
+                errors.append(f"zones.geojson: {zid} 缺 v2 欄位 {key}")
+        # ⚠️ 版權紅線：`evidence` 必須完全消失
+        if "evidence" in p:
+            errors.append(f"zones.geojson: {zid} 仲有 evidence 欄位（版權紅線）")
+        if p.get("zone_type") not in ZONE_TYPE_ENUM:
+            errors.append(f"zones.geojson: {zid} 非法 zone_type {p.get('zone_type')!r}")
+        if p.get("status") not in ZONE_STATUS_ENUM:
+            errors.append(f"zones.geojson: {zid} 非法 status {p.get('status')!r}")
+        if p.get("spatial_precision") not in ZONE_SPATIAL_PRECISION_ENUM:
+            errors.append(f"zones.geojson: {zid} 非法 spatial_precision")
+        if p.get("review_status") not in ZONE_REVIEW_STATUS_ENUM:
+            errors.append(f"zones.geojson: {zid} 非法 review_status {p.get('review_status')!r}")
+        if p.get("zone_review_status") != p.get("review_status"):
+            errors.append(f"zones.geojson: {zid} review_status 同 zone_review_status 唔一致")
+        # 確定性映射：kind → zone_type
+        expect_type = KIND_TO_ZONE_TYPE.get(p.get("kind"))
+        if expect_type and p.get("zone_type") != expect_type:
+            errors.append(
+                f"zones.geojson: {zid} kind={p.get('kind')} 應映射到 {expect_type}，"
+                f"實際 {p.get('zone_type')!r}"
+            )
+        # 確定性映射：zone_type → danger_level
+        if p.get("danger_level") != ZONE_DANGER_BY_TYPE.get(p.get("zone_type")):
+            errors.append(
+                f"zones.geojson: {zid} danger_level 唔符合 {p.get('zone_type')} 查表"
+            )
+        # display_style.fill 必須係 B1 token 名（唔可以存 raw hex）
+        ds = p.get("display_style") or {}
+        if not str(ds.get("fill", "")).startswith("--zone-"):
+            errors.append(f"zones.geojson: {zid} display_style.fill 唔係 token 名：{ds.get('fill')!r}")
+        # chapter_refs 必須等於 chapters
+        if p.get("chapter_refs") != p.get("chapters"):
+            errors.append(f"zones.geojson: {zid} chapter_refs 同 chapters 唔一致")
+        # confidence 公式（§4）
+        ci = p.get("confidence_inputs") or {}
+        if all(k in ci for k in ("coord_score", "dossier_score", "kind_score")):
+            expect = round(
+                0.40 * ci["coord_score"] + 0.40 * ci["dossier_score"] + 0.20 * ci["kind_score"], 2
+            )
+            if abs((p.get("confidence") or 0) - expect) > 1e-9:
+                errors.append(f"zones.geojson: {zid} confidence 唔符合公式（應 {expect}）")
+        # coordinate_* enum
+        if p.get("coordinate_source") not in COORDINATE_SOURCE_ENUM:
+            errors.append(f"zones.geojson: {zid} 非法 coordinate_source")
+        if p.get("coordinate_review_status") not in COORDINATE_REVIEW_STATUS_ENUM:
+            errors.append(f"zones.geojson: {zid} 非法 coordinate_review_status")
+        # dossier_id 確定性推導
+        if p.get("dossier_id") != "dossier_" + str(zid)[len("zone_"):]:
+            errors.append(f"zones.geojson: {zid} dossier_id 唔係確定性推導")
+    return errors
+
+
+def check_zone_bidirectional(public_dir: Path) -> list[str]:
+    """B4：zone ↔ event ↔ location ↔ dossier 雙向連結一致性。"""
+    errors: list[str] = []
+    zpath = public_dir / "zones.geojson"
+    if not zpath.exists():
+        return errors
+    zones = list(iter_features(json.loads(zpath.read_text(encoding="utf-8"))))
+    zone_ids = {f["properties"]["id"] for f in zones}
+
+    # zone → event
+    zone_events: dict[str, set] = {}
+    zone_locations: dict[str, set] = {}
+    for f in zones:
+        p = f["properties"]
+        for eid in p.get("event_ids") or []:
+            zone_events.setdefault(eid, set()).add(p["id"])
+        for lid in p.get("member_location_ids") or []:
+            zone_locations.setdefault(lid, set()).add(p["id"])
+
+    epath = public_dir / "events.geojson"
+    if epath.exists():
+        for f in iter_features(json.loads(epath.read_text(encoding="utf-8"))):
+            p = f["properties"]
+            zid = p.get("zone_id")
+            if zid is None:
+                if p["id"] in zone_events:
+                    errors.append(
+                        f"events.geojson: {p['id']} 冇 zone_id 但 zone.event_ids 有佢"
+                    )
+            elif zid not in zone_ids:
+                errors.append(f"events.geojson: {p['id']} zone_id '{zid}' 唔存在")
+            elif zid not in zone_events.get(p["id"], set()):
+                errors.append(
+                    f"events.geojson: {p['id']} zone_id={zid} 但該 zone 冇列佢（單邊連結）"
+                )
+
+    lpath = public_dir / "locations.geojson"
+    if lpath.exists():
+        for f in iter_features(json.loads(lpath.read_text(encoding="utf-8"))):
+            p = f["properties"]
+            zids = set(p.get("zone_ids") or [])
+            expect = zone_locations.get(p["id"], set())
+            if zids != expect:
+                errors.append(
+                    f"locations.geojson: {p['id']} zone_ids {sorted(zids)} "
+                    f"同 zone.member_location_ids {sorted(expect)} 唔一致"
+                )
+            if p.get("coordinate_source") not in COORDINATE_SOURCE_ENUM:
+                errors.append(f"locations.geojson: {p['id']} 非法 coordinate_source")
+            if p.get("coordinate_review_status") not in COORDINATE_REVIEW_STATUS_ENUM:
+                errors.append(f"locations.geojson: {p['id']} 非法 coordinate_review_status")
+
+    # dossier 引用
+    dpath = public_dir / "zone-dossiers.json"
+    if dpath.exists():
+        doc = json.loads(dpath.read_text(encoding="utf-8"))
+        dossiers = doc.get("dossiers", [])
+        dids = {d.get("id") for d in dossiers}
+        if len(dids) != len(dossiers):
+            errors.append("zone-dossiers.json: dossier id 重複")
+        for f in zones:
+            did = f["properties"].get("dossier_id")
+            if did not in dids:
+                errors.append(f"zones.geojson: {f['properties']['id']} dossier_id {did} 唔存在")
+        for d in dossiers:
+            if d.get("zone_id") not in zone_ids:
+                errors.append(f"zone-dossiers.json: {d.get('id')} 指向唔存在 zone {d.get('zone_id')}")
+            if d.get("review_status") not in ZONE_REVIEW_STATUS_ENUM:
+                errors.append(f"zone-dossiers.json: {d.get('id')} 非法 review_status")
+            # 規則 DS2：infected_nest 只可以有 nest_profile
+            zt = next(
+                (f["properties"]["zone_type"] for f in zones
+                 if f["properties"]["id"] == d.get("zone_id")), None
+            )
+            if zt == "infected_nest" and "nest_profile" not in d:
+                errors.append(f"zone-dossiers.json: {d.get('id')} 病窩缺 nest_profile")
+            if zt and zt != "infected_nest" and "nest_profile" in d:
+                errors.append(f"zone-dossiers.json: {d.get('id')} 非病窩唔應該有 nest_profile")
+    return errors
 
 
 def load_schema(name: str) -> dict:
@@ -166,12 +345,17 @@ def main() -> int:
         key_map = {"locations.geojson": "location", "events.geojson": "event", "routes.geojson": "route",
                    "timeline.json": "timeline", "characters.json": "character",
                    "chapter-summaries.json": "chapter_summary", "zones.geojson": "zone",
+                   "zone-dossiers.json": "zone_dossier",
                    "chronicle.json": "chronicle_entry"}
         if fname in key_map:
             # ⚠️ chronicle.json 係 {version, season, entries}，要數 entries
             # 而唔係 dict 嘅 key 數（後者會得出 4）。
             if fname == "chronicle.json" and isinstance(items, dict):
                 stats[key_map[fname]] = len(items.get("entries", []))
+            elif fname == "zone-dossiers.json":
+                # ⚠️ zone-dossiers.json 係 {schema_version, generated_from, dossiers}，
+                # 要數 dossiers 而唔係頂層 key 數（後者會得出 3）。
+                stats[key_map[fname]] = len(doc.get("dossiers", []))
             else:
                 stats[key_map[fname]] = len(items) if isinstance(items, list) else sum(
                     1 for _ in items
@@ -183,6 +367,13 @@ def main() -> int:
         # 要抽出 entries 才做 per-item 檢查，否則會 iterate dict 嘅 key（字串）。
         if fname == "chronicle.json":
             items = doc.get("entries", []) if isinstance(doc, dict) else []
+        # ⚠️ zone-dossiers.json 係 object（唔係 array）—— 唔抽 dossiers 就會
+        # iterate dict 嘅 key（字串），`item.get()` 直接 AttributeError。
+        if fname == "zone-dossiers.json":
+            items = doc.get("dossiers", []) if isinstance(doc, dict) else []
+        # ---- B4：zone v2 欄位 + 確定性映射（規則 Z1／Z2）----
+        if fname == "zones.geojson":
+            errors.extend(check_zone_v2(list(iter_features(doc))))
         for item in items:
             p = item.get("properties", item)
             rs = p.get("review_status")
@@ -237,6 +428,9 @@ def main() -> int:
                 errors.append(f"timeline.json: event_id '{eid}' 唔存在於 events")
             if rec.get("location_id") and rec["location_id"] not in location_ids:
                 errors.append(f"timeline.json: location_id '{rec['location_id']}' 唔存在")
+
+    # ---- B4：zone ↔ event ↔ location ↔ dossier 雙向一致性 ----
+    errors.extend(check_zone_bidirectional(public_dir))
 
     # ---- 治理掃描 ----
     for fpath in sorted(public_dir.glob("*.json*")) + sorted(public_dir.glob("*.geojson")):

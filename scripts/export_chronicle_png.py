@@ -6,7 +6,7 @@
 前端要渲染 DOM 做 PNG 需要 `html2canvas`（新依賴，~50KB）。
 但呢個專案嘅原則係**完全離線、零 runtime 依賴**。
 
-而 Python 側已經有 PIL（`render_binggang_map.py` 用緊），所以用
+而 Python 側已經有 PIL（本專案多支離線匯出 script 用緊），所以用
 伺服器端渲染更符合專案原則，而且可以生成更精緻嘅圖（唔受限於 DOM）。
 
 輸出：

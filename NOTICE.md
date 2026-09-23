@@ -10,11 +10,31 @@
 - 唔包含、唔重組、唔替代小說原文；閱讀體驗請支持原著
 - 如版權持有人認為任何內容越界，請按 `docs/DATA_GOVERNANCE.md` §7 takedown 流程提出，我們會盡快移除
 
+## 地圖資料（OpenStreetMap，ODbL）
+
+底圖（陸地輪廓、海岸線、道路、建築、內陸水體、地名）係由
+**OpenStreetMap** 資料衍生：
+
+- 資料來源：© OpenStreetMap contributors
+- 授權：Open Database License (ODbL) 1.0 —
+  https://www.openstreetmap.org/copyright
+- 產生方式：`scripts/build_vector_basemap.py` 由**本機 OSM 快取**
+  （`data/private/cache/osm-hk.json`，經 Overpass API 匯出）離線渲染成
+  向量圖磚，輸出喺 `public/assets/vector/`。
+  網站運行時**唔會**連任何地圖服務。
+- 衍生檔案（`public/assets/vector/`、`public/assets/hk-basemap*.png`）
+  同樣以 ODbL 提供。
+
+「地名 → 座標」對照表（`data/private/cache/gazetteer.json`）同樣由 OSM
+衍生，但屬**私有中間資料**，唔會 commit、唔會部署 —— 座標只會**烘焙入**
+公開資料集（`data/public/locations.geojson`）。
+
 ## 開源組件
 
 | 組件 | 授權 | 用途 |
 |---|---|---|
-| Leaflet | BSD-2-Clause | 地圖渲染 |
+| OpenStreetMap 資料 | ODbL 1.0 | 底圖幾何（見上） |
+| Leaflet | BSD-2-Clause | 地圖渲染（舊 raster 路線遺留） |
 | Vite / Vitest | MIT | 構建與測試 |
 | TypeScript | Apache-2.0 | 語言工具鏈 |
 | ESLint / typescript-eslint | MIT | 代碼品質 |

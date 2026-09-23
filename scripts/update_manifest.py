@@ -26,6 +26,8 @@ SOURCES: dict[str, str] = {
     "character": "characters.json",
     "chapter_summary": "chapter-summaries.json",
     "zone": "zones.geojson",
+    # B4（方案 B）：dossier 由 inline 抽出成獨立檔，所以 counts 要分開數。
+    "zone_dossier": "zone-dossiers.json",
     "chronicle_entry": "chronicle.json",
 }
 
@@ -36,6 +38,10 @@ def count(fn: str) -> int:
         return len(d["features"])
     if isinstance(d, dict) and "entries" in d:
         return len(d["entries"])
+    # ⚠️ zone-dossiers.json 係 {schema_version, generated_from, dossiers}。
+    # 唔可以 fall through 到 `len(d)` —— 咁會數到頂層 3 個 key。
+    if isinstance(d, dict) and "dossiers" in d:
+        return len(d["dossiers"])
     return len(d)
 
 

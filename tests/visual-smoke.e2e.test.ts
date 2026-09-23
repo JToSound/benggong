@@ -483,11 +483,22 @@ describe("視覺煙霧測試", () => {
       );
       expect(ch2, "超出範圍應該退回第 1 章").toBe("1");
 
-      // 切章節時 hash 應該更新
+      /*
+       * 切章節時 URL 應該更新。
+       *
+       * ⚠️ 2026-09-21（World Atlas V2 決定 D5）：canonical 形式由 hash
+       * `#ch=2` 改為 query string `?chapter=2`。`#ch=` 仍然**可讀**
+       * （legacy alias，見 `tests/url-legacy-alias.test.ts`），但唔會再
+       * 被寫出。所以呢度改為斷言 `location.search`。
+       *
+       * 同一測試上面嘅 `#ch=9999` 讀取路徑**冇拆** —— legacy alias 必須保留。
+       */
       await page.keyboard.press("k");
       await page.waitForTimeout(600);
-      const hash = await page.evaluate(() => window.location.hash);
-      expect(hash, "切章節應該更新 hash").toContain("ch=2");
+      const search = await page.evaluate(() => window.location.search);
+      expect(search, "切章節應該更新 URL（canonical query string）").toContain(
+        "chapter=2",
+      );
     } finally {
       await browser.close();
     }

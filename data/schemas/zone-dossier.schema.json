@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "schemas/zone-dossier.schema.json",
+  "title": "《病港》區域 dossier（獨立檔 zone-dossiers.json，v2）",
+  "description": "由 scripts/build_zone_dossiers.py 由 public 資料（zones.geojson inline 欄位 + chapter-summaries.json + events.geojson + timeline.json）程式化生成。規則 DS1：每個 field 只有 evidence 足夠先可填，不足 → \"unknown\"。規則 DS2：infected_nest 用 nest_profile 代替 governance / society。規則 DS3／DS4：public 檔**唔可以**含小說原文 excerpt。",
+  "type": "object",
+  "required": ["schema_version", "generated_from", "dossiers"],
+  "properties": {
+    "schema_version": { "type": "integer", "minimum": 2 },
+    "generated_from": {
+      "description": "來源檔 SHA-256（AGENTS.md 要求生成檔要有來源 + hash）。冇 timestamp，保證 idempotent。",
+      "type": "object",
+      "required": ["zones", "chapter_summaries", "events", "timeline"],
+      "properties": {
+        "zones": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "chapter_summaries": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "events": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "timeline": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    },
+    "dossiers": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/dossier" }
+    }
+  },
+  "$defs": {
+    "governance": {
+      "type": "object",
+      "required": ["system", "authority", "legitimacy"],
+      "properties": {
+        "system": { "type": "string" },
+        "authority": { "type": "string" },
+        "legitimacy": { "type": "string" }
+      }
+    },
+    "society": {
+      "type": "object",
+      "required": ["population_structure", "daily_life", "culture"],
+      "properties": {
+        "population_structure": { "type": "string" },
+        "daily_life": { "type": "string" },
+        "culture": { "type": "string" }
+      }
+    },
+    "infrastructure": {
+      "type": "object",
+      "required": ["security", "resources", "mobility"],
+      "properties": {
+        "security": { "type": "string" },
+        "resources": { "type": "string" },
+        "mobility": { "type": "string" }
+      }
+    },
+    "risk_profile": {
+      "type": "object",
+      "required": ["threats", "danger_level"],
+      "properties": {
+        "threats": { "type": "array", "items": { "type": "string" } },
+        "danger_level": { "type": ["integer", "null"], "minimum": 0, "maximum": 5 }
+      }
+    },
+    "nest_profile": {
+      "description": "規則 DS2：病窩專用（威脅特徵／活動模式／影響範圍），代替 governance / society。",
+      "type": "object",
+      "required": ["threat_signature", "activity_pattern", "affected_radius"],
+      "properties": {
+        "threat_signature": { "type": "string" },
+        "activity_pattern": { "type": "string" },
+        "affected_radius": { "type": "string" }
+      }
+    },
+    "dossier": {
+      "type": "object",
+      "required": [
+        "schema_version", "id", "zone_id", "overview", "risk_profile",
+        "key_characters", "chapter_refs", "evidence_sources", "confidence",
+        "review_status"
+      ],
+      "properties": {
+        "schema_version": { "type": "integer", "minimum": 2 },
+        "id": { "type": "string", "pattern": "^dossier_[0-9a-f]{10}$" },
+        "zone_id": { "type": "string", "pattern": "^zone_[0-9a-f]{10}$" },
+        "overview": {
+          "description": "≤180 字粵文概述；不足 → \"unknown\"。",
+          "type": "string",
+          "maxLength": 200
+        },
+        "governance": { "$ref": "#/$defs/governance" },
+        "society": { "$ref": "#/$defs/society" },
+        "infrastructure": { "$ref": "#/$defs/infrastructure" },
+        "risk_profile": { "$ref": "#/$defs/risk_profile" },
+        "nest_profile": { "$ref": "#/$defs/nest_profile" },
+        "key_characters": {
+          "description": "只列角色名（characters.json.description 全部係模板，冇人物描述可用）。",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "chapter_refs": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 220 }
+        },
+        "evidence_sources": {
+          "type": "array",
+          "items": { "enum": ["zones-inline", "chapter-summaries", "events", "timeline"] },
+          "uniqueItems": true
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "review_status": { "enum": ["validated", "auto_inferred", "needs_validation"] }
+      }
+    }
+  }
+}

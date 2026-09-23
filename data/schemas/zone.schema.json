@@ -1,64 +1,173 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "schemas/zone.schema.json",
-  "title": "《病港》區域（倖存區／病窩）",
-  "description": "區域係「面」—— 用嚟表達「呢一帶係安全區」或「呢度係病窩」。由 scripts/derive_zones.py 產生。範圍半徑嘅來源必須可稽核（radius_source）。",
+  "title": "《病港》區域 v2（倖存區／病窩／據點）",
+  "description": "區域係「面」—— 用嚟表達「呢一帶係安全區」、「呢度係病窩」。v2 由 scripts/build_zone_dossiers.py 做確定性遷移（kind → zone_type 映射 + status / danger_level / spatial_precision / display_style / review_status / confidence）。`kind` 保留作向後兼容，但前端**只讀** `zone_type`（規則 Z2）。⚠️ 版權紅線：public 檔**唔可以**有 `evidence` 原文引用（規則 DS4）。",
   "type": "object",
   "required": ["type", "geometry", "properties"],
   "properties": {
     "type": { "const": "Feature" },
     "geometry": {
-      "description": "區域中心點。範圍由 properties.radius_m 表示（不確定圓）。",
+      "description": "區域範圍。成員地點 ≥3 個時係凸包 + 外擴嘅多邊形；否則係 48 邊形近似嘅圓。",
       "type": "object",
       "required": ["type", "coordinates"],
       "properties": {
-        "type": { "const": "Point" },
+        "type": { "enum": ["Polygon"] },
         "coordinates": {
           "type": "array",
-          "items": { "type": "number" },
-          "minItems": 2,
-          "maxItems": 2
+          "minItems": 1,
+          "items": {
+            "type": "array",
+            "minItems": 4,
+            "items": {
+              "type": "array",
+              "items": { "type": "number" },
+              "minItems": 2,
+              "maxItems": 2
+            }
+          }
         }
       }
     },
     "properties": {
       "type": "object",
       "required": [
-        "id", "name", "kind", "radius_m", "radius_source",
-        "chapters", "description", "evidence", "source"
+        "id", "name", "kind", "zone_type", "status", "danger_level",
+        "spatial_precision", "display_style", "chapter_refs", "event_ids",
+        "character_ids", "member_location_ids", "dossier_id", "review_status",
+        "schema_version", "chapters", "radius_m", "radius_source",
+        "coords_source", "source"
       ],
       "properties": {
         "id": { "type": "string", "pattern": "^zone_[0-9a-f]{10}$" },
-        "name": { "type": "string", "maxLength": 40 },
+        "name": { "type": "string", "minLength": 2, "maxLength": 40 },
         "kind": {
-          "description": "survivor = 人類聚居（安全）；nest = 病者巢穴（危險）。",
-          "enum": ["survivor", "nest"]
+          "description": "v1 欄位，保留作向後兼容（前端只讀 zone_type，規則 Z2）。survivor = 人類聚居（安全）；nest = 病者巢穴（危險）；outpost = 敵對組織據點。",
+          "enum": ["survivor", "nest", "outpost"]
         },
-        "radius_m": {
-          "description": "區域半徑（米）。",
-          "type": "number",
-          "minimum": 80,
-          "maximum": 2000
+        "kind_votes": {
+          "description": "多代理對 kind 嘅票數分佈 —— 令「點解係呢個分類」可稽核。最高票 < 總票 = 分歧 → review_status: needs_validation。",
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 1 }
         },
-        "radius_source": {
-          "description": "半徑來源。members = 由成員地點實際分佈推導（證據）；default = 按類型預設（估算）；curated = 文中明文描述（附章節引用）。",
-          "enum": ["members", "default", "curated"]
+        "zone_type": {
+          "description": "由 kind 確定性映射：survivor→survivor_zone、nest→infected_nest、outpost→contested（spec §5.2）。",
+          "enum": ["survivor_zone", "infected_nest", "quarantine", "contested", "transit", "unknown"]
         },
-        "member_location_ids": {
+        "status": {
+          "description": "chapters 覆蓋到最後章（198）→ active；內文含「已毀」等字眼 → collapsed；否則 unknown（唔亂填）。",
+          "enum": ["active", "collapsed", "unknown", "historical"]
+        },
+        "danger_level": {
+          "description": "survivor_zone=1、contested=3、infected_nest=4、unknown=null（唔可以亂填）。",
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 5
+        },
+        "spatial_precision": {
+          "description": "radius_source=members → verified；coords_source≠unknown → approximate；否則 unknown。",
+          "enum": ["verified", "approximate", "fictional", "unknown"]
+        },
+        "display_style": {
+          "description": "由 zone_type 查表；fill 係 B1 token 名（例如 --zone-survivor），**唔存 raw hex**。",
+          "type": "object",
+          "required": ["fill", "pattern", "icon"],
+          "properties": {
+            "fill": { "type": "string", "pattern": "^--zone-[a-z-]+$" },
+            "pattern": { "enum": ["hatch", "contour", "noise", "solid", "pulse"] },
+            "icon": { "type": "string", "maxLength": 32 }
+          }
+        },
+        "chapter_refs": {
+          "description": "= chapters（spec §2.2 統一命名）。",
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1, "maximum": 220 }
+        },
+        "event_ids": {
+          "description": "區內事件 id（三層 join，由 scripts/infer_zone_membership.py 產生）。",
           "type": "array",
           "items": { "type": "string" }
         },
+        "character_ids": {
+          "description": "區內出現／路線經過嘅角色 id。",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "member_location_ids": {
+          "description": "區內地點 id；同 location.zone_ids 必須雙向一致。",
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "dossier_id": {
+          "description": "對應 data/public/zone-dossiers.json 嘅 dossier id。",
+          "type": ["string", "null"],
+          "pattern": "^dossier_[0-9a-f]{10}$"
+        },
+        "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "confidence_inputs": {
+          "description": "確定性 confidence 公式嘅三個輸入（可稽核，A6 §3.6c）。",
+          "type": "object",
+          "properties": {
+            "coord_score": { "type": "number", "minimum": 0, "maximum": 1 },
+            "dossier_score": { "type": "number", "minimum": 0, "maximum": 1 },
+            "kind_score": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        },
+        "review_status": {
+          "description": "kind_votes 分歧或核心六欄全空 → needs_validation；其餘 auto_inferred / validated。",
+          "enum": ["validated", "auto_inferred", "needs_validation"]
+        },
+        "zone_review_status": {
+          "description": "`review_status` 嘅別名（為 B2 ZoneProperties.zone_review_status 而設），值必須相同。",
+          "enum": ["validated", "auto_inferred", "needs_validation"]
+        },
+        "schema_version": { "type": "integer", "minimum": 2 },
+        "aliases": { "type": "array", "items": { "type": "string", "maxLength": 40 } },
         "chapters": {
           "type": "array",
-          "items": { "type": "integer", "minimum": 1, "maximum": 210 }
+          "items": { "type": "integer", "minimum": 1, "maximum": 220 }
         },
         "first_appearance": { "type": ["integer", "null"] },
-        "description": { "type": "string", "maxLength": 120 },
-        "evidence": {
-          "description": "半徑／存在嘅依據。必須可回溯，唔可以只寫結論。",
-          "type": "string",
-          "maxLength": 400
+        "location_hint": { "type": ["string", "null"], "maxLength": 200 },
+        "government": { "type": ["string", "null"], "maxLength": 600 },
+        "leadership": { "type": "array", "items": { "type": "string", "maxLength": 60 } },
+        "social_structure": { "type": ["string", "null"], "maxLength": 600 },
+        "economy": { "type": ["string", "null"], "maxLength": 600 },
+        "defense": { "type": ["string", "null"], "maxLength": 600 },
+        "population": { "type": ["string", "null"], "maxLength": 400 },
+        "culture": { "type": ["string", "null"], "maxLength": 600 },
+        "notable_features": { "type": "array", "items": { "type": "string", "maxLength": 80 } },
+        "threats": { "type": "array", "items": { "type": "string", "maxLength": 80 } },
+        "summary": { "type": ["string", "null"], "maxLength": 600 },
+        "radius_m": { "type": "number", "minimum": 80, "maximum": 1500 },
+        "radius_source": {
+          "description": "members = 由成員地點實際分佈推導（證據）；default = 按類型預設半徑（估算）；unknown = 冇座標證據。",
+          "enum": ["members", "default", "unknown"]
         },
+        "coords_source": {
+          "description": "locations = 精確配對已解析地點；locations_prefix = 同名前綴地點分佈；district = 策展地名；osm = OSM gazetteer；unknown = 冇證據。",
+          "enum": ["locations", "locations_prefix", "district", "osm", "unknown"]
+        },
+        "coords_evidence": { "type": "string", "maxLength": 400 },
+        "range_evidence": { "type": "string", "maxLength": 400 },
+        "coordinate_confidence": {
+          "description": "座標可信度 0–1（由 spatial_precision 決定）。",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "coordinate_source": {
+          "enum": ["explicit_text", "cross_chapter_evidence", "zone_inference", "legacy", "manual_geometry"]
+        },
+        "coordinate_review_status": {
+          "enum": ["validated", "auto_corrected", "needs_validation", "quarantined"]
+        },
+        "spatial_evidence_count": {
+          "description": "支持空間歸屬嘅章節重疊證據數（見 b4-interface-contract §3.2）。",
+          "type": "integer",
+          "minimum": 0
+        },
+        "sources": { "type": "array", "items": { "type": "string", "maxLength": 8 } },
         "source": { "const": "bing_gang" }
       }
     }

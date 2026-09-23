@@ -16,7 +16,7 @@
     "prebuild": "npm run sync-data",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "verify:visual": "vitest run tests/visual-smoke.e2e.test.ts",
-    "zones": "python scripts/derive_zones.py || python3 scripts/derive_zones.py"
+    "zones": "python scripts/merge_zone_dossiers.py || python3 scripts/merge_zone_dossiers.py"
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",

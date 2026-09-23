@@ -1,53 +1,80 @@
 /**
  * SvgMap — 《病港》互動故事地圖。
  *
- * 底圖：香港全境 OSM procedural basemap（PNG），由
- * `scripts/render_hk_basemap.py` 生成，覆蓋 bbox
- * lon 113.85–114.45 / lat 22.18–22.55。標記直接由 lon/lat 線性投影。
+ * 底圖：香港全境 **向量** basemap（`VectorBasemap`，Canvas 2D）＋ SVG 故事圖層。
+ *
+ * V2（B5）改動摘要
+ * ================
+ * A4 實測推翻咗「最大 zoom 起格」嘅原假設：raster 路徑 **0 次參與**。
+ * 真正問題係「內容密度隨 zoom 反向下降」，三個成因：
+ *   · G1 章節窗口過濾（location ±3 章、event ±1 章、zone `c ≤ cur ≤ c+12`）
+ *     → 深 zoom 幾乎清空（將軍澳 176 個 event → 畫 0 個）；
+ *   · G2 tile POI 已下載但 0 渲染（街道級地標唯一來源）；
+ *   · G3 建築描繪對比過低。
+ * 本檔處理 G1（zone 永遠 render + Zone LOD；location ±5、event ±1 + 開關）
+ * 同 raster 死重（移除靜態 import，規則 A1）。
  *
  * 互動：
  * - Hover marker → tooltip（<title>）
  * - Click marker → 選中，開詳情面板
- * - 拖曳平移、滾輪／按鈕縮放
+ * - 拖曳平移、滾輪／按鈕縮放（手勢已搬入 `MapViewport`，有 rAF coalesce）
  *
- * Phase I 新增：
+ * Phase I 保留：
  * - `resolveCoord()` 四層座標解析（有證據支持嘅資料集座標 → FALLBACK_ANCHORS → FULL_HK_ANCHORS → 原始座標）
  * - `animateViewBox()` 用 requestAnimationFrame + ease-in-out cubic 做平滑轉場
- * - `#label-detail-layer`：獨立透明標籤圖層，按 `viewScale` 線性插值透明度
- *   （zoom out 時隱藏次要街道名，做到 zoom-dependent label decluttering）
+ * - `#label-detail-layer`：raster 後備專用嘅標籤圖層（預設冇 href）
  * - 雙語圖例（zh / en），`data-i18n` 標記 + `#legend-lang-btn` 切換
  */
 
 import type { App } from "../app";
 import type { AppData, RouteFeature, EventFeature } from "../data/loadAllData";
 import { FULL_HK_ANCHORS } from "../data/fallbackAnchors";
-import basemapPngUrl from "../../public/assets/hk-basemap.png?url";
-import labelDetailPngUrl from "../../public/assets/hk-basemap-labels.png?url";
+import { VectorBasemap } from "../map/VectorBasemap";
+import { MapShell } from "../map/MapShell";
+import {
+  PROJ_COS,
+  clampView as clampViewBox,
+  geoBoundsOfView,
+  projectLonLat,
+  scaleView,
+  viewBoxForGeoBounds,
+  type GeoBbox,
+} from "../map/map-camera";
+import {
+  chapterWindowFor,
+  MAX_SCALE,
+  selectZoneLod,
+  type ZoneLod,
+} from "../map/map-lod";
+import {
+  CLUSTER_BADGE_DIAMETER_PX,
+  clusterBadgeRadiusUser,
+  clusterLabel,
+  clusterZones,
+  type ZoneClusterEntry,
+  type ZoneModelEntry,
+} from "../map/ZoneLayer";
+import {
+  dispatchHit,
+  hiddenSelectors,
+  LAYER_KEYS,
+  LAYER_LABEL_EN,
+  LAYER_LABEL_ZH,
+  resolveHit,
+} from "../map/map-interactions";
+import { MapControls } from "../map/MapControls";
+import type { LayerFlags } from "../types/state";
+import { prefersReducedMotion } from "../motion";
 import basemapCoords from "../../public/assets/hk-basemap-coords.json";
-import lodManifest from "../../public/assets/map-lod/manifest.json";
+import mapCss from "../styles/map.css?inline";
 
-/**
- * 投影：等距圓柱 + 標準緯線校正。
+/*
+ * 標準緯線校正（φ₀ = 22.36°）由 `src/map/map-camera.ts` 提供**唯一一份**。
  *
- * 為何要乘 1/cos(φ₀)
- * ------------------
- * SVG user unit 直接用「度」會令 1° 經度同 1° 緯度一樣長。但喺北緯 22.36°，
- * 1° 緯度（110.6 km）比 1° 經度（103.0 km）長 1.081 倍。所以垂直方向要乘
- * 1/cos(22.36°) ≈ 1.081，圖上長度才同真實距離成比例。
- *
- * 舊版嘅嚴重錯誤
- * --------------
- * 舊底圖係 2048×2048 正方形，但覆蓋 0.6°×0.37°（長寬比 1.622），
- * 再配合 `preserveAspectRatio="xMidYMid slice"` 放入 0.6×0.37 嘅框。
- * slice 會把正方形圖等比放大到覆蓋，再垂直裁走 38% —— 結果底圖相對
- * 標記座標被**垂直拉伸 1.622 倍**（以中心為軸），邊緣位置偏差達
- * ±0.115°（約 12.8 km）。即係「標記唔喺真實位置」嘅主因之一。
- *
- * 現在底圖由 `render_binggang_map.py` 以同一投影產生（畫布長寬比 =
- * 校正後 bbox 長寬比），前端用 `preserveAspectRatio="none"` 精確貼合
- * 對應經緯矩形，兩者像素級對齊。
+ * A4 明確指出「同一組常數喺 3 個地方各自定義」係 1.622 倍垂直拉伸 bug
+ * 嘅溫床。V2 之後 `SvgMap` / `VectorBasemap` / `map-camera` 共用同一個
+ * export；本檔只喺 `BASE_VIEW` 用一次（`h` 嘅 1/cos 校正）。
  */
-const PROJ_COS = lodManifest.projection_cos;
 
 /** 底圖覆蓋嘅經緯範圍（由 render script 生成）。 */
 const BASEMAP_BBOX = (
@@ -70,36 +97,46 @@ const BASE_VIEW = {
 };
 const VIEWBOX = `${BASE_VIEW.x} ${BASE_VIEW.y} ${BASE_VIEW.w} ${BASE_VIEW.h}`;
 
-/** 縮放層級圖磚（由 `scripts/build_map_lods.py` 產生）。 */
-interface LodTier {
+/**
+ * Raster 後備層（emergency only）。
+ *
+ * 規則 A3（spec §4.3）：`fallbackToRaster()` **保留**但只作 emergency，
+ * **唔設預設 `href`**。所以呢度只係一組**runtime 路徑字串** ——
+ * 冇 `import ... ?url`，即係 Vite 唔會將 PNG 打包／複製多一份。
+ * 只有向量底圖真係載入唔到時才會請求。
+ *
+ * ⚠️ 13 層 raster pyramid（`assets/map-lod/`，28 MB）已經確認 0 次參與
+ * （A4），所以呢度只有「總覽」一層，唔再有 pyramid。
+ */
+const RASTER_FALLBACK = {
+  image: "assets/hk-basemap.png",
+  labelLayer: "assets/hk-basemap-labels.png",
+};
+
+interface RasterTier {
   id: string;
   label: string;
-  note: string;
-  image: string;
-  bbox: { lon_min: number; lon_max: number; lat_min: number; lat_max: number };
-  output_size: number[];
   lod: string;
+  image: string;
   label_layer?: string;
+  bbox: GeoBbox;
 }
 
-const LOD_TIERS: LodTier[] = (lodManifest as unknown as { tiers: LodTier[] })
-  .tiers;
+/** 總覽層（唯一一層 raster 後備）。 */
+function rasterTier(): RasterTier {
+  return {
+    id: "overview",
+    label: "全港總覽（後備）",
+    lod: "overview",
+    image: RASTER_FALLBACK.image,
+    label_layer: RASTER_FALLBACK.labelLayer,
+    bbox: { ...BASEMAP_BBOX },
+  };
+}
 
-/** 層級圖磚嘅經度跨度，用嚟揀「最窄但仍然覆蓋視窗」嘅層級。 */
-function tierSpan(t: LodTier): number {
+/** 一層嘅經度跨度（度）—— 揀層時「越窄越清晰」。 */
+function tierSpanOf(t: RasterTier): number {
   return t.bbox.lon_max - t.bbox.lon_min;
-}
-
-/**
- * 層級圖磚 → SVG user unit 矩形。
- *
- * 每個圖磚覆蓋一個經緯 bbox，換算方式同 `lonlatToViewbox` 完全一致，
- * 所以圖磚上任何一點嘅地理位置都同標記座標系對得上。
- */
-function tierRect(t: LodTier): { x: number; y: number; w: number; h: number } {
-  const a = lonlatToViewbox(t.bbox.lon_min, t.bbox.lat_max);
-  const b = lonlatToViewbox(t.bbox.lon_max, t.bbox.lat_min);
-  return { x: a.x, y: a.y, w: b.x - a.x, h: b.y - a.y };
 }
 
 /**
@@ -151,41 +188,28 @@ function assetUrl(p: string): string {
 /**
  * 縮放上下限（相對基準視圖）。
  *
- * ⚠️ MAX_SCALE 必須同 LOD 圖磚嘅跨度匹配
- * ------------------------------------
- * 視窗最窄寬度 = BASE_VIEW.w / MAX_SCALE。如果圖磚跨度細過呢個值，
- * 佢就**永遠唔會被揀到**（因為揀層要求「完全覆蓋視窗」）。
+ * ⚠️ V2：MAX_SCALE 由 35 → **280**（spec §3.1），權威值住喺 `map-lod.ts`
+ * ---------------------------------------------------------------------
+ * 舊值 35 → 最深只到 Z5.13（`Z = log2(0.70 / viewW)`，最窄視窗
+ * 0.0200°）；之後短暫用 64 → Z6.0，spec 嘅 **Z7／Z8 仍然物理上
+ * 不可達**（B9 Q1 量到 Z8 target 嘅 viewW 同 Z6 完全一樣）。
+ * 現時由 `map-lod.MAX_SCALE`（280 → 最窄視窗 0.0025° = Z8.13）統一
+ * 提供，本檔**唔再寫死**，避免出現第二組會漂移嘅門檻。
  *
- * 實測踩過：MAX_SCALE = 12 → 最窄視窗 0.0583°；而 tko-campus 圖磚
- * 跨度只有 0.036°、tko-north 只有 0.068°，結果兩者幾乎永遠用唔到，
- * 白白多咗 3.2 MiB 資產。
+ * ⚠️ 呢個 import 係**必須**，唔係可有可無
+ * ----------------------------------------
+ * `MapShell` 會用政策值做**下限**（`Math.max(傳入, MAX_SCALE)`），
+ * 但 `zoomToLocation`（經 `scaledView()`）同 `flyToChapter`
+ * （`viewBoxForGeoBounds(..., maxScale)`）**唔經** `MapShell` ——
+ * 呢兩條路徑冇下限保護，寫死細值就會令佢哋最深只到 Z6。
  *
- * 現時：0.70 / 35 = 0.0200°，啱啱好等於最細圖磚（tko-campus-core
- * 0.020°）。即係最大放大時圖磚係 **1:1 像素**（2048 px 圖磚對
- * ~1200 px 視窗，實際係縮細，所以鋭利）。
- *
- * ⚠️ 圖磚被拉伸會模糊
- * ------------------
- * 用戶報告「放大會變得低清」。根因係圖磚跨度細過視窗：舊設定
- * MAX_SCALE = 30 → 最窄 0.0233°，而當時最細圖磚係 tko-campus
- * （0.036°）→ 拉伸 **1.55×**，明顯模糊。
- *
- * 兩邊一齊修：圖磚解像度 1536 → 2048 px、新增 campus-core 層
- * （0.020°），同時將 MAX_SCALE 調到 35 令最細層啱好覆蓋最窄視窗。
- */
-/*
- * ⚠️ MIN_SCALE 一定要係 1.0（唔可以縮到細過底圖）。
- *
- * 為何：底圖（overview 層）只覆蓋 BASEMAP_BBOX（0.70°）。如果容許縮到
+ * ⚠️ MIN_SCALE 一定要係 1.0（唔可以縮到細過底圖）
+ * ------------------------------------------------
+ * 底圖（overview 層）只覆蓋 BASEMAP_BBOX（0.70°）。如果容許縮到
  * 1.40°（MIN_SCALE = 0.5），視窗就會大過底圖 —— 底圖變成畫面中央
- * 一小塊，周圍全部係黑色底色。
- *
- * 實測：用戶截圖顯示縮細之後就係咁。
- *
- * 1.0 = 視窗啱啱好等於底圖覆蓋範圍 = 睇晒全香港。
+ * 一小塊，周圍全部係黑色底色。1.0 = 睇晒全香港。
  */
 const MIN_SCALE = 1.0;
-const MAX_SCALE = 35;
 
 /** 標籤圖層淡入區間：viewScale ≤ 0.8 完全隱藏，≥ 1.2 完全顯示。 */
 const LABEL_FADE_IN = 0.8;
@@ -193,9 +217,21 @@ const LABEL_FADE_FULL = 1.2;
 
 const ANIM_DURATION_MS = 500;
 
-// Basemap PNG（由 render script 生成；bbox 同投影常數見上方）。
-const BASEMAP_PNG = basemapPngUrl;
-const LABEL_DETAIL_PNG = labelDetailPngUrl;
+/**
+ * 手勢結束之後幾耐恢復 `.zone-pulse` 動畫（見 `SvgMap.pulsesSuspended`）。
+ * 220 ms 係「最後一次 onChange 之後」，唔係「手勢開始之後」——
+ * 連續點縮放時計時器會不斷重置，所以動畫唔會喺互動中途偷偷開返。
+ */
+const PULSE_IDLE_RESUME_MS = 220;
+
+/*
+ * 底圖 PNG 路徑（由 render script 生成；bbox 同投影常數見上方）。
+ *
+ * ⚠️ V2（規則 A1/A3）：唔再 `import ... ?url`。
+ * raster 只做 emergency 後備（見 `fallbackToRaster()`），預設唔設
+ * `href`。冇靜態 import = Vite 唔會將 2 MB PNG 打包／複製多一份，
+ * 亦唔會喺首屏請求佢。路徑字串集中喺 `RASTER_FALLBACK`。
+ */
 
 /**
  * 虛構／離網故事地點嘅人工錨點。
@@ -309,17 +345,99 @@ export function resolveCoord(
   return { lon, lat, source: "raw" };
 }
 
-/** lon/lat → SVG user unit。超出 bbox 會 clamp 到邊緣。 */
+/**
+ * lon/lat → SVG user unit。超出 bbox 會 clamp 到邊緣。
+ *
+ * ⚠️ V2：投影公式只有一份（`map-camera.projectLonLat`）。
+ * A4 指出「同一組常數喺 3 個地方各自定義」係 1.622 倍垂直拉伸 bug
+ * 嘅溫床，所以呢度只係一層薄 wrapper（保留原本嘅呼叫點同名字）。
+ */
 function lonlatToViewbox(lon: number, lat: number): { x: number; y: number } {
-  // SVG y 軸向下，地理緯度向北遞增，所以 y fraction 要反轉。
-  const x = Math.max(BASEMAP_BBOX.lon_min, Math.min(BASEMAP_BBOX.lon_max, lon));
-  const y = Math.max(BASEMAP_BBOX.lat_min, Math.min(BASEMAP_BBOX.lat_max, lat));
-  const fx =
-    (x - BASEMAP_BBOX.lon_min) / (BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min);
-  const fy =
-    (BASEMAP_BBOX.lat_max - y) / (BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min);
-  return { x: BASE_VIEW.x + fx * BASE_VIEW.w, y: BASE_VIEW.y + fy * BASE_VIEW.h };
+  return projectLonLat(BASEMAP_BBOX, BASE_VIEW, lon, lat);
 }
+
+/**
+ * 區域徽記圖騰（1×1 單位框內嘅 path）。
+ *
+ * 為何要圖騰而唔止顏色
+ * --------------------
+ * 顏色係最弱嘅編碼 —— 色弱用戶分唔到紅綠，而且三種區域（倖存區／病窩／
+ * 據點）如果只靠顏色，喺細地圖上完全分唔清。加圖騰之後**形狀**都可以
+ * 分辨，同時令地圖有「軍事 HUD」嘅識別感。
+ */
+const ZONE_GLYPH: Record<string, string> = {
+  // 盾：防守、安全
+  shield: "M0.5 0.07 L0.9 0.23 L0.9 0.55 Q0.9 0.85 0.5 0.95 Q0.1 0.85 0.1 0.55 L0.1 0.23 Z",
+  // 警告三角：危險、疫區
+  biohazard: "M0.5 0.08 L0.95 0.9 L0.05 0.9 Z M0.5 0.42 L0.5 0.68 M0.5 0.78 L0.5 0.8",
+  // 旗：佔領、據點
+  flag: "M0.24 0.06 L0.24 0.95 M0.24 0.1 L0.82 0.2 L0.64 0.35 L0.82 0.5 L0.24 0.58",
+};
+
+/**
+ * Zone 視覺樣式表（v1 嘅 3 個 style key）。
+ *
+ * 為何仍然只有 3 個 key（而唔係 spec §4 嘅 5 個 zone type）
+ * ------------------------------------------------------
+ * spec 嘅 5 個 `zone_type` 係**資料語義**，呢度係**視覺編碼**。
+ * 5 → 3 嘅映射係「危險程度」而唔係「類別」：
+ *
+ *   survivor_zone → survivor（安全，綠）
+ *   infected_nest → nest（危險，紅）
+ *   quarantine    → nest（同樣係「唔好入」，用同一視覺）
+ *   contested     → outpost（爭奪中，紫）
+ *   transit       → outpost（通道／中轉）
+ *   unknown       → nest（保守：當危險，唔好誤導用戶以為安全）
+ *
+ * ⚠️ 唔可以加第 4 個色 —— 色值係 B1 token（`--zone-*`）。要 5 個獨立
+ * 視覺就要 B1 加 token，屬跨單元改動。
+ */
+const ZONE_STYLE: Record<
+  string,
+  { fill: string; stroke: string; glow: string; glyph: string; label: string }
+> = {
+  survivor: {
+    fill: "#2fd6a8",
+    stroke: "#5cf0c4",
+    glow: "rgba(47, 214, 168, 0.55)",
+    glyph: "shield",
+    label: "倖存區",
+  },
+  nest: {
+    fill: "#ff5a4d",
+    stroke: "#ff8a72",
+    glow: "rgba(255, 90, 77, 0.55)",
+    glyph: "biohazard",
+    label: "病窩",
+  },
+  outpost: {
+    fill: "#a06bd8",
+    stroke: "#c69bf0",
+    glow: "rgba(160, 107, 216, 0.5)",
+    glyph: "flag",
+    label: "據點",
+  },
+};
+
+/**
+ * `zone_type`（v2）→ 視覺樣式 key（v1 `kind`）。
+ *
+ * B4 契約規則 Z2：前端**只讀 `zone_type`**，`kind` 只係向後兼容。
+ * 缺失時才 fallback 去 `kind` —— 令未經 B4 migration 嘅 v1 資料
+ * 仍然讀得到。
+ */
+const ZONE_TYPE_STYLE: Record<string, string> = {
+  survivor_zone: "survivor",
+  infected_nest: "nest",
+  quarantine: "nest",
+  contested: "outpost",
+  transit: "outpost",
+  unknown: "nest",
+  // v1 fallback（`kind` 嘅值）
+  survivor: "survivor",
+  nest: "nest",
+  outpost: "outpost",
+};
 
 /** 圖例文案。key 同 HTML 嘅 `data-i18n` 對應。 */
 const LEGEND_ZH: Record<string, string> = {
@@ -332,6 +450,7 @@ const LEGEND_ZH: Record<string, string> = {
   "legend.route": "角色路線（僅真實地點之間）",
   "legend.zone-survivor": "倖存區（安全）",
   "legend.zone-nest": "病窩（危險）",
+  "legend.zone-outpost": "據點（爭奪中）",
   "legend.zone-estimated": "虛線＝範圍係估算",
 };
 
@@ -343,6 +462,10 @@ const LEGEND_EN: Record<string, string> = {
   "legend.loc-fictional": "Fictional location",
   "legend.selected": "Selected",
   "legend.route": "Character route (real places only)",
+  "legend.zone-survivor": "Survivor zone (safe)",
+  "legend.zone-nest": "Infected nest (danger)",
+  "legend.zone-outpost": "Outpost (contested)",
+  "legend.zone-estimated": "Dashed = estimated extent",
 };
 
 /** 視圖狀態（單一真相來源）。 */
@@ -358,20 +481,121 @@ export class SvgMap {
   app: App;
   data: AppData;
   svg!: SVGSVGElement;
+  /** 地圖容器（canvas 同 SVG 嘅共同父層）。 */
+  private wrap!: HTMLElement;
+  /** 向量底圖（Canvas 2D）。 */
+  private basemap: VectorBasemap | null = null;
+  /** 容器尺寸監察（用嚟喺 panel 開合／視窗縮放時重畫底圖）。 */
+  private resizeObserver: ResizeObserver | null = null;
+  /** 向量底圖是否已失敗（失敗 = 退回 raster）。 */
+  private basemapFailed = false;
 
-  /** 目前 viewBox —— pan／zoom／flyTo 全部改呢個，render() 只負責套用。 */
+  /**
+   * 目前 viewBox —— pan／zoom／flyTo 全部改呢個，render() 只負責套用。
+   *
+   * ⚠️ V2：真正嘅擁有者係 `MapShell.viewport`（`MapViewport`，有 rAF
+   * coalesce）。`this.view` 只係**鏡像**，由 `shell` 嘅 `onChange` 更新 ——
+   * 咁樣手勢、按鈕、flyTo 三條路徑就唔會各自持有一份唔同步嘅狀態。
+   */
   private view: ViewBox = { ...BASE_VIEW };
   /** 目前圖例語言。 */
   private lang: "zh" | "en" = "zh";
   /** 進行中嘅轉場 frame id（用嚟取消舊動畫）。 */
   private animFrameId: number | null = null;
-  /** 拖曳平移狀態。 */
-  private isPanning = false;
-  private panStartX = 0;
-  private panStartY = 0;
-  private panStartView: ViewBox = { ...BASE_VIEW };
   /** 目前生效嘅 LOD 圖磚 id（避免重複設定同一張圖）。 */
   private currentTierId: string = "";
+  /** 容器 + layer 註冊介面（spec §2.2）。B6 嘅 layer 由呢度插入。 */
+  private shell!: MapShell;
+  /**
+   * 「顯示全部事件」開關（spec §3.3）。
+   *
+   * 預設關：event 只畫本章 ± 1 章（避免 176 個標記疊成一大坨）。
+   * 開咗 = 唔過濾章節，畀用戶自己睇全部。
+   */
+  private showAllEvents = false;
+
+  /**
+   * 手勢期間暫停病窩掃描光環（`.zone-pulse`）。
+   *
+   * 為何要暫停
+   * ----------
+   * `.zone-pulse` 嘅 CSS keyframes 同時動 `opacity` 同 `transform: scale()`
+   * （`transform-box: fill-box`），即係**每一幀都要重新光柵化一條帶描邊嘅
+   * 多邊形**。2026-09-21 實測（headless Chromium、1440×900、level 2）：
+   *
+   * | 情境 | pan FPS | 暖 zoom FPS |
+   * |---|---|---|
+   * | 原狀（21 條 pulse 動畫中） | **10.0** | **10.2** |
+   * | 只將 `.zone-pulse` 設 `display:none` | **59.5** | **51.3** |
+   * | 連 `#zones-layer` 都隱藏 | 60.8 | 53.3 |
+   *
+   * 即係話成本幾乎全部嚟自「21 條動畫同時重繪」，而唔係 DOM 數量或者
+   * `render()`。手勢期間用戶根本睇唔到光環（畫面喺高速移動），所以暫停
+   * 完全唔影響觀感，但換嚟 5 倍 pan FPS。
+   *
+   * 恢復時機：最後一次 `onChange` 之後 `PULSE_IDLE_RESUME_MS`。
+   * 為何唔用 `onSettle`：按鈕縮放（`zoomBy`）唔會產生 settle 事件，
+   * 用 timer 兩條路徑都覆蓋得到。
+   */
+  private pulsesSuspended = false;
+  /** 恢復計時器 id。 */
+  private pulseResumeTimer: number | null = null;
+
+  /** 地圖控制項（B6 由 `SvgMap` 抽出嘅元件）。 */
+  private controls: MapControls | null = null;
+
+  /**
+   * Layer toggle 目前狀態嘅**鏡像**（規則 S1：唯一真相係 store）。
+   *
+   * 為何要快取而唔係每次都 `app.store.getState().layers`
+   * ---------------------------------------------------
+   * `applyLayerState()` 喺每個 `render()` 尾都會被呼叫，而 `render()`
+   * 喺動畫結束時亦會跑 —— 每次 `getState()` 都要行一次 selector 鏈。
+   * 快取住再加一個 `hidden` 短路（見 `applyLayerState`）令平移動畫
+   * 唔會產生任何 DOM 寫入。
+   */
+  private layerState: LayerFlags = {
+    zones: true,
+    nests: true,
+    outposts: true,
+    events: true,
+    routes: false,
+    periods: false,
+    detail: true,
+  };
+  /** 上次真正寫入用嘅 layer 簽名（`NaN` 語義：未寫過）。 */
+  private lastLayerSig = "";
+
+  /**
+   * SVG `<defs>` 入面嘅 glyph symbol id（`#zone-glyph-shield` 等）。
+   *
+   * 由 `SvgMap` 建立，圖例（`.legend-glyph use`）同 zone badge 共用
+   * —— 令「同一個圖騰」只有一個 path 定義，唔會兩處漂移。
+   */
+  /**
+   * 注入 B6 元件 CSS（`src/styles/map.css`，`?inline` 變成字串）。
+   *
+   * 為何要呢個機制而唔係 `import "./styles/map.css"` 或喺 `main.ts` import
+   * -------------------------------------------------------------------
+   * `main.ts` 嘅載入次序係 index.css → main.css → hud.css，而
+   * `main.css:458` 有 `.zone-area { pointer-events: none; }`（特異度
+   * (0,1,0)），佢就係「zone 唔可點」嘅直接原因。`main.ts` 同
+   * `src/styles/index.css` **兩者都唔喺 B6 可寫範圍**。
+   *
+   * 注入嘅 `<style>` append 到 `<head>` **最後**，所以：
+   *   · 同等特異度下一定勝過舊 CSS（後載入者勝）；
+   *   · Gate 2 刪走舊 CSS 之後，`SvgMap` 仍然帶住自己嘅 CSS；
+   *   · 係 Vite 內建 `?inline` query —— **零新 runtime 依賴**。
+   *
+   * 詳見 `docs/contracts/b6-interface-contract.md` §10。
+   */
+  private injectMapCss(): void {
+    if (document.getElementById("map-v2-css")) return;
+    const style = document.createElement("style");
+    style.id = "map-v2-css";
+    style.textContent = mapCss;
+    document.head.appendChild(style);
+  }
 
   constructor(root: HTMLElement, app: App) {
     this.root = root;
@@ -385,6 +609,18 @@ export class SvgMap {
    * 見 `setScaled`。
    */
   private scaledEls: Array<{ el: Element; attr: string; base: number }> = [];
+
+  /**
+   * 上次 `applyLiveScale()` 真正寫入用嘅（已 clamp）縮放倍率。
+   * `NaN` = 未套用過。見 `applyLiveScale`。
+   */
+  private lastLiveScale = Number.NaN;
+
+  /**
+   * 上次 `updateLabelLayerOpacity()` 真正寫入嘅 opacity 值。
+   * `NaN` = 未套用過。平移期間 `viewScale` 不變 → 跳過寫入。
+   */
+  private lastLabelOpacity = Number.NaN;
 
   /** 相對基準視圖嘅縮放倍率（1 = 全港）。 */
   get viewScale(): number {
@@ -408,6 +644,37 @@ export class SvgMap {
   }
 
   /**
+   * SVG 元素嘅 CSS 像素闊（`getBoundingClientRect().width`）。
+   *
+   * 為何 cluster badge 需要真 px 而唔係用 viewScale
+   * --------------------------------------------
+   * `markerR()` 嘅 `viewScale = BASE_VIEW.w / view.w` 只反映**縮放**，
+   * 完全冇容器闊度嘅資訊。spec §3.2 L-Z0 要求 badge 渲染直徑係
+   * **8–12 px**（絕對螢幕值），所以一定要知道「1 user unit 等於幾多 px」
+   * —— 即 `rect.width / view.w`。
+   *
+   * 讀唔到（headless 早期／容器未 layout）時回 0，呼叫者要跳過繪製
+   * 而唔係畫一個錯尺寸嘅 badge。
+   */
+  private svgWidthPx(): number {
+    const r = this.svg.getBoundingClientRect();
+    return r.width > 0 ? r.width : 0;
+  }
+
+  /**
+   * 螢幕 px → 當前視圖嘅 user unit。
+   *
+   * 用 `preserveAspectRatio="meet"`：實際比例係 `view.w / rect.width`
+   * （同 `pxToUserUnits` 一致）。讀唔到容器時回 0 —— 呼叫者要跳過，
+   * 唔可以當 1:1。
+   */
+  private userUnitsFor(px: number): number {
+    const w = this.svgWidthPx();
+    if (!(w > 0)) return 0;
+    return px * (this.view.w / w);
+  }
+
+  /**
    * 設定一個「隨縮放調整」嘅 SVG 屬性，同時記錄落快取。
    *
    * 為何要快取
@@ -423,17 +690,50 @@ export class SvgMap {
     el.setAttribute(attr, String(this.markerR(base)));
   }
 
-  /** 動畫每幀呼叫：按目前 viewScale 更新所有快取元素。 */
+  /**
+   * 動畫每幀呼叫：按目前 viewScale 更新所有快取元素。
+   *
+   * ⚠️ 為何要記住上次嘅倍率（V2 新增）
+   * ----------------------------------
+   * **平移期間 viewScale 完全唔變**（view.w 冇改），但 `onChange` 每幀
+   * 都會呼叫呢個方法 —— 即係每幀對 200+ 個元素寫返一模一樣嘅值。
+   * 寫同一個值一樣會令瀏覽器做 style invalidation（SVG presentation
+   * attribute 冇「值相同就跳過」嘅短路），A8 量到嘅 pan 掉幀有一部分
+   * 就係呢度。
+   *
+   * 用 `markerR` 內部嘅同一個 clamp 值做比較 —— 唔可以直接用
+   * `viewScale`，因為 scale > 10 之後標記尺寸已經封頂，唔需要再寫。
+   */
   private applyLiveScale(): void {
+    const s = Math.min(Math.max(this.viewScale, 0.5), 10);
+    if (s === this.lastLiveScale) return;
+    this.lastLiveScale = s;
     for (const { el, attr, base } of this.scaledEls) {
       el.setAttribute(attr, String(this.markerR(base)));
     }
   }
 
   private init(): void {
+    /*
+     * ⚠️ 一定要喺 `root.innerHTML = …` **之前**注入 CSS，否則第一幀會
+     * 用舊 CSS 畫（FOUC）—— 包括 `.zone-area { pointer-events: none }`。
+     */
+    this.injectMapCss();
     this.root.innerHTML = `
       <div class="svg-map-wrap">
-        <svg id="svg-map" class="svg-map" viewBox="${VIEWBOX}" preserveAspectRatio="xMidYMid meet">
+        <!--
+          向量底圖畫喺 <canvas>，SVG 疊喺上面只負責標記／路線／區域。
+
+          為何要分開兩層
+          --------------
+          市區一平方公里有幾千幢建築。用 SVG 畫就要為每個多邊形建一個
+          DOM 節點，5,000 個節點會令平移掉幀。Canvas 冇 DOM 開銷，
+          而且可以用 setTransform 一次過變換整批路徑。
+        -->
+        <canvas id="basemap-canvas" class="basemap-canvas" aria-hidden="true"></canvas>
+        <svg id="svg-map" class="svg-map" viewBox="${VIEWBOX}" preserveAspectRatio="xMidYMid meet"
+             tabindex="0" role="application"
+             aria-label="互動地圖：方向鍵平移、+ / − 縮放、0 重置">
           <defs>
             <filter id="markerGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="0.0015" result="blur"/>
@@ -446,13 +746,56 @@ export class SvgMap {
               <circle cx="0.005" cy="0.005" r="0.0005" fill="#a8c8e8" opacity="0.15"/>
               <circle cx="0.015" cy="0.012" r="0.0005" fill="#88a8c8" opacity="0.15"/>
             </pattern>
+            <!--
+              B6：Zone 圖騰 symbol（同一份 path 由 zone badge 同圖例共用）。
+
+              ⚠️ 圖例（.legend-glyph 內嘅 use 指向 #zone-glyph-x）同 zone badge
+              都用呢三個 symbol —— 令「同一個圖騰」只有一個定義。若果兩邊
+              各自寫一份 path，改圖騰時一定會漏改一邊。
+            -->
+            <symbol id="zone-glyph-shield" viewBox="0 0 1 1">
+              <path d="${ZONE_GLYPH.shield}"/>
+            </symbol>
+            <symbol id="zone-glyph-biohazard" viewBox="0 0 1 1">
+              <path d="${ZONE_GLYPH.biohazard}"/>
+            </symbol>
+            <symbol id="zone-glyph-flag" viewBox="0 0 1 1">
+              <path d="${ZONE_GLYPH.flag}"/>
+            </symbol>
+            <!--
+              B6：圖例 pattern 樣本（三通道之 pattern）。
+
+              spec §4 硬性要求 zone 圖例唔可以只靠顏色。pattern 用
+              SVG <pattern> 元素（唔係 CSS background）係為咗 SVG 內外一致。
+            -->
+            <pattern id="legend-pat-solid" width="4" height="4" patternUnits="userSpaceOnUse">
+              <rect width="4" height="4" fill="currentColor" opacity="0.45"/>
+            </pattern>
+            <pattern id="legend-pat-hatch" width="4" height="4" patternUnits="userSpaceOnUse">
+              <path d="M0 4 L4 0" stroke="currentColor" stroke-width="1"/>
+            </pattern>
+            <pattern id="legend-pat-contour" width="6" height="6" patternUnits="userSpaceOnUse">
+              <path d="M0 3 H6 M0 6 H6" stroke="currentColor" stroke-width="0.8"/>
+            </pattern>
+            <pattern id="legend-pat-noise" width="4" height="4" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="0.7" fill="currentColor"/>
+              <circle cx="3" cy="3" r="0.5" fill="currentColor" opacity="0.6"/>
+            </pattern>
+            <pattern id="legend-pat-pulse" width="6" height="6" patternUnits="userSpaceOnUse">
+              <circle cx="3" cy="3" r="2" fill="none" stroke="currentColor" stroke-width="0.8"/>
+            </pattern>
           </defs>
           <g id="map-content">
-            <image id="basemap-group" class="basemap-layer" href="${BASEMAP_PNG}"
+            <!--
+              Raster 底圖**只做後備**。
+              預設唔設 href —— 冇必要為咗一個平時唔用嘅 2 MB PNG 付流量。
+              向量底圖載入失敗時才由 fallbackToRaster() 填上 href。
+            -->
+            <image id="basemap-group" class="basemap-layer"
                    x="${BASE_VIEW.x}" y="${BASE_VIEW.y}" width="${BASE_VIEW.w}" height="${BASE_VIEW.h}"
                    preserveAspectRatio="none" />
             <g id="label-detail-layer" class="label-detail-layer" pointer-events="none" opacity="0">
-              <image id="label-detail-image" class="label-detail-image" href="${LABEL_DETAIL_PNG}"
+              <image id="label-detail-image" class="label-detail-image"
                      x="${BASE_VIEW.x}" y="${BASE_VIEW.y}" width="${BASE_VIEW.w}" height="${BASE_VIEW.h}"
                      preserveAspectRatio="none" />
             </g>
@@ -468,39 +811,291 @@ export class SvgMap {
               <div class="legend-title" data-i18n="legend.title">地圖標記</div>
               <button id="legend-lang-btn" class="legend-lang-btn" type="button"
                       title="切換圖例語言 / Toggle legend language">EN</button>
+              <!--
+                P1-8（a11y）：圖例摺疊控制項。
+
+                ⚠️ A7 P1-8 量到圖例遮蓋 24.3% 地圖，而原本**冇任何摺疊方式**。
+                CSS 已就緒（mobile.css §7：.map-overlay.is-legend-collapsed
+                會隱藏 .legend-list / .legend-grid）—— 呢度只係接控制項。
+
+                ⚠️ 呢段係 TS template literal 內嘅 HTML 註解 —— **唔可以用反引號**
+                （會提早終止 template literal 令 build 爆）。所以 class 名唔加引號。
+
+                aria-expanded 由 bindEvents() 同步；aria-controls 指向 #map-legend。
+                重用 .legend-lang-btn 樣式（同語言掣一致）。
+              -->
+              <button id="legend-toggle-btn" class="legend-lang-btn" type="button"
+                      aria-expanded="true" aria-controls="map-legend"
+                      title="摺疊／展開圖例 / Collapse legend">▾</button>
             </div>
             <div class="legend-item"><span class="dot dot-event-current"></span><span data-i18n="legend.event-current">本章事件</span></div>
             <div class="legend-item"><span class="dot dot-event-other"></span><span data-i18n="legend.event-other">其他章事件</span></div>
             <div class="legend-item"><span class="dot dot-loc-real"></span><span data-i18n="legend.loc-real">真實地點</span></div>
             <div class="legend-item"><span class="dot dot-loc-fictional"></span><span data-i18n="legend.loc-fictional">虛構地點</span></div>
             <div class="legend-item"><span class="dot dot-selected"></span><span data-i18n="legend.selected">選中</span></div>
-            <div class="legend-item"><span class="area area-survivor"></span><span data-i18n="legend.zone-survivor">倖存區（安全）</span></div>
-            <div class="legend-item"><span class="area area-nest"></span><span data-i18n="legend.zone-nest">病窩（危險）</span></div>
-            <div class="legend-item"><span class="area area-estimated"></span><span data-i18n="legend.zone-estimated">虛線＝範圍係估算</span></div>
+            <!--
+              B6：Zone 圖例三通道（spec §4 硬性 —— 唔可以只靠顏色）。
+
+              color = .area-<key>；pattern = .legend-pattern 內嘅
+              <rect fill="url(#legend-pat-*)">；icon = .legend-glyph 內嘅
+              use 指向 #zone-glyph-*。
+
+              ⚠️ data-i18n key 沿用既有（svgmap.legend.test.ts 鎖住）
+              其中幾個），新增嘅 key 一定要同時加入 LEGEND_ZH / LEGEND_EN，
+              否則切語言時會變成空白。
+            -->
+            <div class="legend-item">
+              <span class="area area-survivor"></span>
+              <svg class="legend-pattern" data-pattern="solid" viewBox="0 0 8 8" aria-hidden="true"><rect width="8" height="8" fill="url(#legend-pat-solid)"/></svg>
+              <svg class="legend-glyph" viewBox="0 0 1 1" aria-hidden="true"><use href="#zone-glyph-shield"/></svg>
+              <span data-i18n="legend.zone-survivor">倖存區（安全）</span>
+            </div>
+            <div class="legend-item">
+              <span class="area area-nest"></span>
+              <svg class="legend-pattern" data-pattern="hatch" viewBox="0 0 8 8" aria-hidden="true"><rect width="8" height="8" fill="url(#legend-pat-hatch)"/></svg>
+              <svg class="legend-glyph" viewBox="0 0 1 1" aria-hidden="true"><use href="#zone-glyph-biohazard"/></svg>
+              <span data-i18n="legend.zone-nest">病窩（危險）</span>
+            </div>
+            <div class="legend-item">
+              <span class="area area-outpost"></span>
+              <svg class="legend-pattern" data-pattern="contour" viewBox="0 0 8 8" aria-hidden="true"><rect width="8" height="8" fill="url(#legend-pat-contour)"/></svg>
+              <svg class="legend-glyph" viewBox="0 0 1 1" aria-hidden="true"><use href="#zone-glyph-flag"/></svg>
+              <span data-i18n="legend.zone-outpost">據點（爭奪中）</span>
+            </div>
+            <div class="legend-item">
+              <span class="area area-estimated"></span>
+              <svg class="legend-pattern" data-pattern="pulse" viewBox="0 0 8 8" aria-hidden="true"><rect width="8" height="8" fill="url(#legend-pat-pulse)"/></svg>
+              <svg class="legend-glyph" viewBox="0 0 1 1" aria-hidden="true"><use href="#zone-glyph-flag"/></svg>
+              <span data-i18n="legend.zone-estimated">虛線＝範圍係估算</span>
+            </div>
             <div class="legend-item"><span class="line route-legend"></span><span data-i18n="legend.route">角色路線（僅真實地點之間）</span></div>
           </div>
         </div>
-        <div class="map-controls">
-          <button id="map-zoom-in" class="map-ctrl" title="放大" type="button">+</button>
-          <button id="map-zoom-out" class="map-ctrl" title="縮小" type="button">−</button>
-          <button id="map-reset" class="map-ctrl" title="重置視圖" type="button">⌂</button>
-        </div>
+        <!--
+          B6：圖層開關（7 個，對應 B2 LayerFlags）。
+
+          ⚠️ 由 renderLayerControls() 填 —— 次序同 LAYER_KEYS
+          （＝ src/state/url.ts LAYER_ORDER）一致。
+        -->
+        <div class="layer-controls" id="layer-controls" role="group" aria-label="圖層開關"></div>
+        <!--
+          B6：地圖控制項容器。掣由 MapControls 元件砌
+          （id 沿用：map-zoom-in / map-zoom-out / map-reset /
+          map-show-all-events —— 既有測試直接 page.click() 佢哋）。
+        -->
+        <div class="map-controls" id="map-controls" role="group" aria-label="地圖控制"></div>
       </div>
     `;
     this.svg = this.root.querySelector<SVGSVGElement>("#svg-map")!;
+    this.wrap = this.root.querySelector<HTMLElement>(".svg-map-wrap")!;
+    this.initShell();
+    this.initBasemap();
+    this.initControls();
     this.bindEvents();
     this.render();
   }
 
+  /**
+   * 建立地圖控制項（B6 由 `SvgMap` 抽出嘅 `MapControls` 元件）。
+   *
+   * 為何要抽
+   * --------
+   * 舊 code 用一大段 `root.innerHTML` 砌控制項 ＋ `this.showAllEvents`
+   * 記狀態。抽出之後：掣嘅 `id`／`class` 只有一個來源（`CTRL_SPECS`）、
+   * 狀態係**寫入式**（`setAllEvents()`）而唔係自己 toggle，
+   * 而且 44×44 / focus ring 嘅契約可以獨立測（見 `map-css-contract`）。
+   */
+  private initControls(): void {
+    const mount = this.root.querySelector<HTMLElement>("#map-controls");
+    if (!mount) return;
+    this.controls = new MapControls(mount, {
+      onZoomIn: () => this.zoomBy(1.3),
+      onZoomOut: () => this.zoomBy(1 / 1.3),
+      onReset: () => this.animateViewBox({ ...BASE_VIEW }),
+      onToggleAllEvents: () => {
+        this.showAllEvents = !this.showAllEvents;
+        this.controls?.setAllEvents(this.showAllEvents);
+        this.render();
+      },
+    });
+    this.controls.setAllEvents(this.showAllEvents);
+  }
+
+  /**
+   * 建立容器層（`MapShell`）並接管手勢。
+   *
+   * 為何手勢唔再留喺 `SvgMap`
+   * ------------------------
+   * A8 P1-1 實測 pan 只有 28.9–30.9 fps（idle 基準 60.2）：舊 code 嘅
+   * `window.mousemove` 每個事件都即刻改 `<svg viewBox>`，一個 frame
+   * 收到 3–5 次 = 做咗 3–5 倍無謂工作。
+   *
+   * `MapViewport` 只累積、每 frame 最多一次 `onChange`；手勢結束
+   * （mouseup／touchend／wheel idle）才 flush + `render()`。
+   *
+   * ⚠️ `this.view` 係鏡像，唯一擁有者係 `shell.viewport`。
+   */
+  private initShell(): void {
+    const content = this.svg.querySelector<SVGGElement>("#map-content")!;
+    this.shell = new MapShell(this.root, {
+      app: this.app,
+      svg: this.svg,
+      layersRoot: content,
+      base: { ...BASE_VIEW },
+      minScale: MIN_SCALE,
+      maxScale: MAX_SCALE,
+      onChange: (patch) => {
+        if (!patch.view) return;
+        this.view = patch.view;
+        this.applyViewBox();
+        // 標記半徑係 base / viewScale —— 縮放期間要逐幀同步
+        this.applyLiveScale();
+        // 病窩光環動畫係互動期間最大嘅成本（見 pulsesSuspended 註釋）
+        this.suspendZonePulses();
+      },
+      onSettle: () => this.render(),
+    });
+    this.shell.attach();
+  }
+
+  /**
+   * 暫停 `.zone-pulse` 動畫（互動期間），並喺靜止 `PULSE_IDLE_RESUME_MS`
+   * 之後恢復。詳見 `pulsesSuspended` 嘅實測表。
+   *
+   * ⚠️ V2 收尾：只有狀態**轉變**時才寫 DOM。
+   *
+   * `onChange` 每幀都會呼叫呢個方法（手勢期間），而 `applyZonePulseState()`
+   * 會 `querySelectorAll` ＋ 對每個 `.zone-pulse` 寫 `display="none"`。
+   * 一個手勢內係同一批元素寫同一個值幾十次 —— 冇意義，但每次 `setAttribute`
+   * 都會令 style invalidation。加守衛之後手勢期間嘅 DOM 寫入次數由
+   * 「每幀 × pulse 數」降到「每次手勢 1 次」。
+   *
+   * `render()` 重建 `#zones-layer` 之後仍然會**無條件**呼叫
+   * `applyZonePulseState()`（見 `render()` 尾部），所以新元素唔會漏。
+   */
+  private suspendZonePulses(): void {
+    if (!this.pulsesSuspended) {
+      this.pulsesSuspended = true;
+      this.applyZonePulseState();
+    }
+    if (this.pulseResumeTimer !== null) window.clearTimeout(this.pulseResumeTimer);
+    this.pulseResumeTimer = window.setTimeout(() => {
+      this.pulseResumeTimer = null;
+      if (!this.pulsesSuspended) return;
+      this.pulsesSuspended = false;
+      this.applyZonePulseState();
+    }, PULSE_IDLE_RESUME_MS);
+  }
+
+  /**
+   * 將 `pulsesSuspended` 套用到 DOM。
+   *
+   * ⚠️ `render()` 會 `replaceChildren()` 重建 `#zones-layer`，所以**每次
+   * 重建之後都要再呼叫一次**（新元素冇 `display` 屬性，預設會動）。
+   */
+  private applyZonePulseState(): void {
+    const pulses = this.svg.querySelectorAll<SVGElement>("#zones-layer .zone-pulse");
+    for (const p of pulses) {
+      if (this.pulsesSuspended) p.setAttribute("display", "none");
+      else p.removeAttribute("display");
+    }
+  }
+
+  /**
+   * 啟動向量底圖。
+   *
+   * 失敗時**唔會令地圖變空白** —— 會退回舊嘅 raster 底圖
+   * （`#basemap-group` 一直留喺 DOM 度，只係平時 opacity 0）。
+   * 用戶見到嘅係「冇咁靚」，而唔係「咩都冇」。
+   */
+  private initBasemap(): void {
+    const canvas = this.root.querySelector<HTMLCanvasElement>("#basemap-canvas");
+    if (!canvas) return;
+    this.basemap = new VectorBasemap(canvas);
+    this.basemap.onReady = () => {
+      this.wrap.classList.add("basemap-vector-ready");
+      this.syncBasemapView();
+    };
+    this.basemap.onError = (e) => {
+      console.warn("[底圖] 向量底圖載入失敗，退回 raster：", e.message);
+      this.fallbackToRaster();
+    };
+    void this.basemap.init().then(() => this.syncBasemapView());
+
+    /*
+     * 容器尺寸改變時重畫底圖。
+     *
+     * 為何一定要監察尺寸而唔係只聽 `window.resize`
+     * ------------------------------------------
+     * 故事面板係可收合嘅（窄螢幕會變浮層）。面板收合會令地圖容器
+     * **變闊**，但 `window` 完全冇 resize 事件 —— canvas 就會維持
+     * 舊尺寸，右邊出現一條未繪製嘅空白。
+     */
+    if (typeof ResizeObserver !== "undefined") {
+      this.resizeObserver = new ResizeObserver(() => this.syncBasemapView());
+      this.resizeObserver.observe(this.wrap);
+    }
+  }
+
+  /**
+   * 退回 raster 底圖。
+   *
+   * 只有喺向量底圖**真係載入唔到**（例如未跑 build 腳本、
+   * 部署漏咗 `assets/vector/`）才會行呢條路。呢個時候用戶仍然有
+   * 一個睇得明嘅地圖，只係放大會起格 —— 好過一片黑。
+   */
+  private fallbackToRaster(): void {
+    if (this.basemapFailed) return;
+    this.basemapFailed = true;
+    this.wrap.classList.add("basemap-vector-failed");
+    /*
+     * 唔喺度直接寫 href —— 交畀 `updateBasemapTier()`（經 `pickTier()`）
+     * 做，令「raster 路徑只有一個來源」（`RASTER_FALLBACK`）。
+     * 重設 `currentTierId` 係為咗強制行一次（否則會 early-return）。
+     */
+    this.currentTierId = "";
+    this.updateBasemapTier();
+  }
+
+  /** 將目前 viewBox 同容器尺寸交畀向量底圖。 */
+  private syncBasemapView(): void {
+    if (!this.basemap) return;
+    const r = this.wrap.getBoundingClientRect();
+    if (r.width < 2 || r.height < 2) return;
+    this.basemap.setView(
+      { ...this.view },
+      r.width,
+      r.height,
+      Math.min(window.devicePixelRatio || 1, 2),
+    );
+  }
+
   private bindEvents(): void {
-    this.root
-      .querySelector("#map-zoom-in")!
-      .addEventListener("click", () => this.zoomBy(1.3));
-    this.root
-      .querySelector("#map-zoom-out")!
-      .addEventListener("click", () => this.zoomBy(1 / 1.3));
-    this.root.querySelector("#map-reset")!.addEventListener("click", () => {
-      this.animateViewBox({ ...BASE_VIEW });
+    /*
+     * ⚠️ 三粒縮放／重置掣同「全部事件」開關已經搬入 `MapControls`
+     * （見 `initControls()`）。呢度**唔可以**再註冊一次 —— 重複註冊
+     * 會令一次點擊做兩次 `zoomBy`（等於放大 1.69 倍）。
+     */
+
+    /*
+     * P1-8（a11y）：圖例摺疊控制項。
+     *
+     * 切換 `#map-overlay` 嘅 `.is-legend-collapsed` class（CSS 已喺
+     * `mobile.css` §7 定義），同時更新 `aria-expanded` + 箭頭方向，
+     * 令螢幕閱讀器知道目前狀態。
+     *
+     * ⚠️ class 加喺 `#map-overlay` 而唔係 `#map-legend` —— CSS 選擇器係
+     * `.map-overlay.is-legend-collapsed`。
+     * ⚠️ Legend DOM 係靜態（唔會被 `render()` 重建），所以喺 `bindEvents()`
+     * 綁一次就夠。
+     */
+    const legendToggle = this.root.querySelector<HTMLButtonElement>("#legend-toggle-btn");
+    const overlay = this.root.querySelector("#map-overlay");
+    legendToggle?.addEventListener("click", () => {
+      if (!overlay) return;
+      const collapsed = overlay.classList.toggle("is-legend-collapsed");
+      legendToggle.setAttribute("aria-expanded", collapsed ? "false" : "true");
+      legendToggle.textContent = collapsed ? "▸" : "▾";
     });
 
     // 圖例語言切換
@@ -509,153 +1104,199 @@ export class SvgMap {
       langBtn.addEventListener("click", () => this.toggleLegendLanguage());
     }
 
-    // Marker / route click delegation
-    this.svg.addEventListener("click", (e) => {
-      const t = e.target as Element;
-      if (t.classList.contains("event-marker")) {
-        const id = t.getAttribute("data-event-id");
-        if (id) this.app.setSelectedEvent(id);
-      } else if (
-        t.classList.contains("location-marker-cluster") ||
-        t.parentElement?.classList.contains("location-marker-cluster")
-      ) {
-        // 聚合標記：放大去拆開佢（而唔係選中單一地點）
-        const cluster =
-          t.closest(".location-marker-cluster") ?? t.parentElement!;
-        const cid = cluster.getAttribute("data-loc-id");
-        if (cid) this.zoomToLocation(cid);
-      } else if (t.classList.contains("location-marker")) {
-        const id = t.getAttribute("data-loc-id");
-        if (id) this.app.setSelectedLocation(id);
-      } else if (t.classList.contains("route-line")) {
-        const id = t.getAttribute("data-route-id");
-        if (id) {
+    this.bindLayerControls();
+    this.bindKeyboard();
+    this.bindSvgDelegation();
+  }
+
+  /**
+   * 圖層開關（7 個）—— P0-4。
+   *
+   * 狀態唯一來源係 **store**（規則 S1）。呢度只係：
+   *   click → `store.toggleLayer(key)` → DOM 反映 `aria-pressed`。
+   *
+   * 為何唔自己記一份 `this.layerState`
+   * ---------------------------------
+   * `?layers=` 參數由 `src/state/url.ts` round-trip 還原。如果 `SvgMap`
+   * 自建一份，URL 還原之後 UI 會同實際狀態唔一致（而 store 已經有
+   * `toggleLayer` / `setLayer`，見 `src/state/store.ts:216`）。
+   */
+  private bindLayerControls(): void {
+    const toggle = this.bindLayerToggleButtons();
+    if (!toggle) return;
+    // 由 store 讀返現況（URL 可能已經指定咗）
+    this.syncLayerStateFromStore();
+  }
+
+  /**
+   * 綁 7 個 `[data-layer]` 掣 —— **每次 `renderLayerControls()` 之後都要
+   * 重新綁**（`replaceChildren()` 會令舊 listener 一齊消失）。
+   *
+   * @returns 有冇成功綁到（冇容器就 false）。
+   */
+  private bindLayerToggleButtons(): boolean {
+    const host = this.root.querySelector<HTMLElement>("#layer-controls");
+    if (!host) return false;
+    for (const key of LAYER_KEYS) {
+      const btn = host.querySelector<HTMLElement>(`[data-layer="${key}"]`);
+      if (!btn) continue;
+      btn.addEventListener("click", () => {
+        /*
+         * ⚠️ 一定要經 store —— 唔可以自己反轉。
+         * `store.toggleLayer()` 會觸發 `onStateChange()`
+         * （`src/app.ts` 訂閱），最終行到 `syncLayerStateFromStore()`。
+         */
+        this.app.store.toggleLayer(key);
+        this.syncLayerStateFromStore();
+      });
+    }
+    return true;
+  }
+
+  /** 由 store 讀圖層狀態 → 寫 `aria-pressed` ＋ 套用 `hidden`。 */
+  private syncLayerStateFromStore(): void {
+    const s = this.app.store.getState().layers;
+    this.layerState = { ...s };
+    const host = this.root.querySelector<HTMLElement>("#layer-controls");
+    if (host) {
+      for (const key of LAYER_KEYS) {
+        const btn = host.querySelector<HTMLElement>(`[data-layer="${key}"]`);
+        btn?.setAttribute("aria-pressed", String(s[key]));
+      }
+    }
+    this.applyLayerState();
+  }
+
+  /**
+   * 將 `this.layerState` 套用到 DOM（只寫 `hidden` 屬性）。
+   *
+   * ⚠️ 為何唔重建 DOM：`hidden` 係 SVG presentation 之外嘅屬性，
+   * 寫入成本係 O(selector)，唔會令 `<path>` 重新光柵化。而
+   * `render()` 每幀都會被呼叫（動畫／平移），所以一定要有
+   * 「值冇變就跳過」嘅短路 —— 見 `lastLayerSig`。
+   */
+  private applyLayerState(): void {
+    const sig = LAYER_KEYS.map((k) => (this.layerState[k] ? "1" : "0")).join("");
+    if (sig === this.lastLayerSig) return;
+    this.lastLayerSig = sig;
+    for (const { selector, hidden } of hiddenSelectors(this.layerState)) {
+      for (const el of this.svg.querySelectorAll(selector)) {
+        if (hidden) el.setAttribute("hidden", "");
+        else el.removeAttribute("hidden");
+      }
+    }
+  }
+
+  /**
+   * 鍵盤導航 —— P0-7。
+   *
+   * 為何要綁喺 `#svg-map` 而唔係 `window`
+   * ------------------------------------
+   * `src/app.ts` 嘅 `bindKeys()` 已經用咗 `window` 上嘅 `k` / `j` /
+   * `Home` / `End` / `?` / `/` / `Escape`。如果地圖嘅方向鍵／`+`／`-`
+   * 都綁 `window`，用戶喺搜尋框打字或者喺編年史捲動時會誤觸。
+   *
+   * 所以：只有焦點喺 `#svg-map`（或 SVG 內部元素）時才生效。
+   * `#svg-map` 有 `tabindex="0"` ＋ `role="application"`（見 `init()`）。
+   */
+  private bindKeyboard(): void {
+    this.svg.addEventListener("keydown", (e) => {
+      // 唔可以搶走輸入框嘅按鍵
+      const t = e.target as Element | null;
+      if (t && t.closest?.("input, textarea, select")) return;
+      const step = e.shiftKey ? 120 : 40;
+      switch (e.key) {
+        case "+":
+        case "=":
+          this.zoomBy(1.3);
+          break;
+        case "-":
+        case "_":
+          this.zoomBy(1 / 1.3);
+          break;
+        case "0":
+          this.animateViewBox({ ...BASE_VIEW });
+          break;
+        case "ArrowUp":
+          this.panByPixels(0, step);
+          break;
+        case "ArrowDown":
+          this.panByPixels(0, -step);
+          break;
+        case "ArrowLeft":
+          this.panByPixels(step, 0);
+          break;
+        case "ArrowRight":
+          this.panByPixels(-step, 0);
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+    });
+  }
+
+  /**
+   * SVG 內嘅 click delegation（hit priority 經 `resolveHit()`）。
+   *
+   * 為何要用 `resolveHit()` 而唔係原本嘅 if-else 鏈
+   * --------------------------------------------
+   * 原本嘅鏈寫死喺 handler 內部，所以「zone 優先過 event」呢個 spec §2.3
+   * 契約**冇辦法單測**（要起整個 Playwright）。抽出純函數之後：
+   *   · `resolveHit()` 嘅次序可以 node 單測；
+   *   · handler 只管分派（`dispatchHit()`）。
+   */
+  private bindSvgDelegation(): void {
+    /** 共用嘅命中處理 —— 由 `click` 同 `pointerup` 兩條路徑呼叫。 */
+    const handleHit = (targetEl: Element): void => {
+      const target = resolveHit(targetEl);
+      dispatchHit(target, {
+        onZone: (id) => this.app.setSelectedZone(id),
+        onRoute: (id) => {
           const route = this.data.routes.features.find(
             (f) => f.properties.id === id,
           );
           if (route) this.app.setChapter(route.properties.chapters_span[0]);
-        }
-      }
-    });
-
-    // 平移：mousedown 記低起點，mousemove 累加 delta
-    this.svg.addEventListener("mousedown", (e) => {
-      const t = e.target as Element;
-      if (t.tagName === "svg" || t.id === "basemap-group" || t.id === "label-detail-layer") {
-        this.isPanning = true;
-        this.panStartX = e.clientX;
-        this.panStartY = e.clientY;
-        this.panStartView = { ...this.view };
-      }
-    });
-    window.addEventListener("mousemove", (e) => {
-      if (!this.isPanning) return;
-      const rect = this.svg.getBoundingClientRect();
-      if (rect.width === 0 || rect.height === 0) return;
-      const u = this.pxToUserUnits(rect.width, rect.height);
-      this.view = this.clampView({
-        ...this.panStartView,
-        x: this.panStartView.x - (e.clientX - this.panStartX) * u,
-        y: this.panStartView.y - (e.clientY - this.panStartY) * u,
+        },
+        // 聚合標記：放大去拆開佢（而唔係選中單一地點）
+        onMarker: (id) => this.zoomToLocation(id),
+        onEvent: (id) => this.app.setSelectedEvent(id),
       });
-      this.applyViewBox();
+    };
+
+    this.svg.addEventListener("click", (e) => handleHit(e.target as Element));
+
+    /*
+     * ⚠️ 補強（2026-09-23）：唔可以只靠 `click`。
+     *
+     * Chromium 嘅 `click` 合成條件係「`mousedown` 同 `mouseup` 喺同一個元素」。
+     * 實測：全套測試（36 檔、9 分鐘、CPU 高負載）之下，**2px 微拖**
+     * （< 4px 門檻，應該當輕觸）**唔會合成 `click`** → 用戶「點極都點唔中 zone」。
+     * （單獨跑冇問題 → 一直被當成 flaky。）
+     *
+     * 修法：喺 `pointerup` 直接處理（唔依賴瀏覽器合成），但係要跳過
+     * **真正拖曳**（`viewportRef.didJustPan` —— 累計位移 ≥ 4px）。
+     *
+     * ⚠️ `click` handler **保留**：`pointerup` 喺某啲情況（例如鍵盤觸發嘅
+     * `click`）唔會派發。兩個 handler 都呼叫 `setSelectedZone` /
+     * `setSelectedEvent`，而佢哋係 **idempotent**（同值唔會再通知）。
+     */
+    this.svg.addEventListener("pointerup", (e) => {
+      if (this.shell.viewportRef.didJustPan) return;
+      handleHit(e.target as Element);
     });
-    window.addEventListener("mouseup", () => {
-      this.isPanning = false;
-    });
-
-    // 滾輪縮放
-    this.svg.addEventListener(
-      "wheel",
-      (e) => {
-        e.preventDefault();
-        this.zoomBy(e.deltaY > 0 ? 0.9 : 1.1);
-      },
-      { passive: false },
-    );
-
-    // 觸控：單指平移、雙指縮放
-    let pinchStartDist = 0;
-    let pinchStartView: ViewBox = { ...BASE_VIEW };
-    this.svg.addEventListener("touchstart", (e) => {
-      if (e.touches.length === 1) {
-        this.isPanning = true;
-        this.panStartX = e.touches[0].clientX;
-        this.panStartY = e.touches[0].clientY;
-        this.panStartView = { ...this.view };
-      } else if (e.touches.length === 2) {
-        this.isPanning = false;
-        pinchStartDist = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY,
-        );
-        pinchStartView = { ...this.view };
-      }
-    }, { passive: true });
-    this.svg.addEventListener("touchmove", (e) => {
-      if (e.touches.length === 1 && this.isPanning) {
-        const rect = this.svg.getBoundingClientRect();
-        if (rect.width === 0 || rect.height === 0) return;
-        const u = this.pxToUserUnits(rect.width, rect.height);
-        this.view = this.clampView({
-          ...this.panStartView,
-          x: this.panStartView.x - (e.touches[0].clientX - this.panStartX) * u,
-          y: this.panStartView.y - (e.touches[0].clientY - this.panStartY) * u,
-        });
-        this.applyViewBox();
-        // 平移唔改 viewScale，所以標記尺寸唔變 —— 唔需要 applyLiveScale()
-      } else if (e.touches.length === 2 && pinchStartDist > 0) {
-        const dist = Math.hypot(
-          e.touches[0].clientX - e.touches[1].clientX,
-          e.touches[0].clientY - e.touches[1].clientY,
-        );
-        const factor = dist / pinchStartDist;
-        const next = this.scaledView(pinchStartView, factor);
-
-        /*
-         * 以**雙指中點**為錨，而唔係視圖中心。
-         *
-         * 為何：用戶捏兩隻手指嘅位置就係佢想放大嘅位置。如果以視圖
-         * 中心縮放，手指以外嘅內容會移走，感覺「唔跟手」。
-         *
-         * 做法：記低起始時中點喺 viewBox 內嘅相對位置（0–1），
-         * 縮放後令同一相對位置仍然對應同一個屏幕點。
-         */
-        const rect = this.svg.getBoundingClientRect();
-        if (rect.width > 0 && rect.height > 0) {
-          const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-          const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-          const fx = (midX - rect.left) / rect.width;
-          const fy = (midY - rect.top) / rect.height;
-          // 起始 viewBox 入面，中點對應嘅 user unit
-          const anchorX = pinchStartView.x + fx * pinchStartView.w;
-          const anchorY = pinchStartView.y + fy * pinchStartView.h;
-          next.x = anchorX - fx * next.w;
-          next.y = anchorY - fy * next.h;
-        }
-
-        this.view = next;
-        this.applyViewBox();
-        // ⚠️ 標記半徑隨 viewScale 改變，要同步更新（同章節動畫一樣）
-        this.applyLiveScale();
-      }
-    }, { passive: true });
-    this.svg.addEventListener("touchend", () => {
-      this.isPanning = false;
-      pinchStartDist = 0;
-      // 手勢結束後重繪一次：確保標記、區域標籤、LOD 層級都同最終
-      // viewBox 一致（例如由 overview 捏到 street 層）
-      this.render();
-    }, { passive: true });
   }
 
-  /** 以視圖中心縮放，並 clamp 到容許範圍。 */
+  /**
+   * 以視圖中心縮放，並 clamp 到容許範圍。
+   *
+   * ⚠️ V2：實作搬入 `map-camera.scaleView`（純函數，可以 node 單測）。
+   */
   private scaledView(base: ViewBox, factor: number): ViewBox {
-    const cx = base.x + base.w / 2;
-    const cy = base.y + base.h / 2;
-    const w = Math.max(BASE_VIEW.w / MAX_SCALE, Math.min(BASE_VIEW.w / MIN_SCALE, base.w / factor));
-    const h = w * (BASE_VIEW.h / BASE_VIEW.w);
-    return this.clampView({ x: cx - w / 2, y: cy - h / 2, w, h });
+    return scaleView(base, BASE_VIEW, factor, {
+      minScale: MIN_SCALE,
+      maxScale: MAX_SCALE,
+    });
   }
 
   /**
@@ -664,23 +1305,21 @@ export class SvgMap {
    * 為何需要：底圖只有 BASEMAP_BBOX 咁大。如果視窗移出界，就會露出
    * 黑色底色（用戶見到嘅「黑邊」）。
    *
-   * 做法：將視窗嘅 x／y 夾到 [BASE_VIEW 起點, 終點 − 視窗尺寸]。
-   * 如果視窗大過底圖（唔應該發生，MIN_SCALE 已經擋住），就置中。
+   * ⚠️ V2：實作搬入 `map-camera.clampView`。
    */
   private clampView(v: ViewBox): ViewBox {
-    const minX = BASE_VIEW.x;
-    const maxX = BASE_VIEW.x + BASE_VIEW.w - v.w;
-    const minY = BASE_VIEW.y;
-    const maxY = BASE_VIEW.y + BASE_VIEW.h - v.h;
-    return {
-      ...v,
-      x: maxX < minX ? BASE_VIEW.x + (BASE_VIEW.w - v.w) / 2 : Math.min(Math.max(v.x, minX), maxX),
-      y: maxY < minY ? BASE_VIEW.y + (BASE_VIEW.h - v.h) / 2 : Math.min(Math.max(v.y, minY), maxY),
-    };
+    return clampViewBox(v, BASE_VIEW);
   }
 
+  /**
+   * 以按鈕／滾輪縮放（相對倍率）。
+   *
+   * ⚠️ V2：改為交畀 `shell.viewportRef`（`MapViewport.zoomBy`）——
+   * 咁樣手勢同按鈕共用同一份 view 狀態。`zoomBy` 係程式呼叫，
+   * 所以會即刻 flush（唔等 rAF），之後再 `render()` 重建標記。
+   */
   private zoomBy(factor: number): void {
-    this.view = this.scaledView(this.view, factor);
+    this.shell.viewportRef.zoomBy(factor);
     this.render();
   }
 
@@ -726,39 +1365,59 @@ export class SvgMap {
     return scale > 0 ? 1 / scale : 0;
   }
 
+  /**
+   * 用**螢幕像素**位移平移視圖。
+   *
+   * 為何要有呢個公開方法
+   * ------------------
+   * `MapViewport` 內部只處理「滑鼠／觸控事件」。B6 嘅
+   * `map-interactions.ts` 需要由**像素**換算（例如鍵盤方向鍵平移、
+   * 由外部 API 觸發嘅拖曳），而 `preserveAspectRatio="meet"` 嘅
+   * 換算唔係 `view.w / rect.width`（見上面 `pxToUserUnits`）。
+   *
+   * 呢度係唯一出口 —— 令 B6 唔需要自己再寫一次比例公式。
+   */
+  panByPixels(dxPx: number, dyPx: number): void {
+    const rect = this.svg.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    const u = this.pxToUserUnits(rect.width, rect.height);
+    this.shell.setView(
+      { ...this.view, x: this.view.x + dxPx * u, y: this.view.y + dyPx * u },
+      "pan",
+    );
+    this.render();
+  }
+
   /** 將 this.view 套用到 <svg>，並按 viewScale 更新標籤圖層透明度。 */
   private applyViewBox(): void {
     const { x, y, w, h } = this.view;
     this.svg.setAttribute("viewBox", `${x} ${y} ${w} ${h}`);
     this.updateBasemapTier();
     this.updateLabelLayerOpacity();
+    // 向量底圖同 SVG 共用同一個 viewBox —— 每次視圖改變都要同步，
+    // 否則平移時底圖會「跟唔上」手指。
+    this.syncBasemapView();
   }
 
-  /** 目前視窗覆蓋嘅經緯範圍。 */
-  private currentGeoBbox(): {
-    lon_min: number;
-    lon_max: number;
-    lat_min: number;
-    lat_max: number;
-  } {
-    const fx0 = (this.view.x - BASE_VIEW.x) / BASE_VIEW.w;
-    const fx1 = (this.view.x + this.view.w - BASE_VIEW.x) / BASE_VIEW.w;
-    const fy0 = (this.view.y - BASE_VIEW.y) / BASE_VIEW.h;
-    const fy1 = (this.view.y + this.view.h - BASE_VIEW.y) / BASE_VIEW.h;
-    const lonSpan = BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min;
-    const latSpan = BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min;
-    return {
-      lon_min: BASEMAP_BBOX.lon_min + fx0 * lonSpan,
-      lon_max: BASEMAP_BBOX.lon_min + fx1 * lonSpan,
-      lat_max: BASEMAP_BBOX.lat_max - fy0 * latSpan,
-      lat_min: BASEMAP_BBOX.lat_max - fy1 * latSpan,
-    };
+  /**
+   * 目前視窗覆蓋嘅經緯範圍。
+   *
+   * ⚠️ V2：實作搬入 `map-camera.geoBoundsOfView`（純函數）。
+   * 舊 code 直接寫 `(view.y − BASE_VIEW.y) / BASE_VIEW.h` 再去乘
+   * `latSpan` —— 咁樣會**漏咗 1/cos(φ₀) 校正**（`BASE_VIEW.h` 已經
+   * 除過 cos，再乘 latSpan 就唔再係緯度）。共用實作之後冇呢個空間。
+   */
+  private currentGeoBbox(): GeoBbox {
+    return geoBoundsOfView(BASEMAP_BBOX, BASE_VIEW, this.view);
   }
 
   /**
    * 按目前視窗揀 LOD 圖磚：**最窄但仍然完全覆蓋視窗**嘅層級。
    *
-   * 為何要「完全覆蓋」而唔係「最接近」
+   * ⚠️ V2：raster 只剩**總覽一層**（emergency 後備），所以 `covers`
+   * 實質恆為真。保留呢個判斷係因為 (a) `tests/phase-j-lod.test.ts`
+   * 要求存在「完全覆蓋」嘅揀層邏輯；(b) 將來真係要加第二層 raster
+   * 時唔使重寫。原本嘅規則（13 層 pyramid 年代）：
    * --------------------------------
    * 圖磚只有 bbox 內嘅內容。如果揀咗一個唔完全覆蓋視窗嘅圖磚，視窗邊緣
    * 就會出現空白（露出底色）。所以先篩「覆蓋得住」，再喺入面揀最窄嘅
@@ -767,87 +1426,49 @@ export class SvgMap {
    * 若果連最闊嘅層級都覆蓋唔到（例如視窗拉到超出香港），就退回最闊層級，
    * 超出部分自然留白。
    */
-  private pickTier(): LodTier {
-    if (LOD_TIERS.length === 0) {
-      throw new Error("LOD manifest 冇任何層級");
-    }
+  private pickTier(): RasterTier {
+    const tiers: RasterTier[] = [rasterTier()];
     const v = this.currentGeoBbox();
-    const covers = LOD_TIERS.filter(
+    const covers = tiers.filter(
       (t) =>
         t.bbox.lon_min <= v.lon_min &&
         t.bbox.lon_max >= v.lon_max &&
         t.bbox.lat_min <= v.lat_min &&
         t.bbox.lat_max >= v.lat_max,
     );
-    const pool = covers.length > 0 ? covers : LOD_TIERS;
-    return pool.reduce((best, t) => (tierSpan(t) < tierSpan(best) ? t : best));
+    const pool = covers.length > 0 ? covers : tiers;
+    return pool.reduce((best, t) => (tierSpanOf(t) < tierSpanOf(best) ? t : best));
   }
 
-  /** 已預載嘅層級 id（避免重複下載）。 */
-  private preloadedTiers = new Set<string>();
-
-  /**
-   * 預載「下一個更細」嘅圖磚。
+  /*
+   * ⚠️ V2 移除：`preloadFinerTier()`。
    *
-   * 為何需要
-   * --------
-   * 圖磚係按需載入（19.85 MB 唔可能一次過下載），但用戶由 overview
-   * 放大到 street 層時要等 2 MB 下載完，畫面會有空白／模糊。
-   *
-   * 做法：喺**瀏覽器空閒時**預載「下一個更細而且覆蓋目前視圖」嘅一層。
-   * 只預載一層 —— 全部預載等於冇按需載入。
-   *
-   * 用 `requestIdleCallback` 而唔係即刻載：唔應該同目前畫面爭頻寬。
-   * 唔支援嘅瀏覽器（Safari 舊版）就唔預載，功能唔受影響。
+   * 佢係為 13 層 raster pyramid 而設（「趁空閒預載下一層」）。A4 實測
+   * pyramid 0 次參與，spec 規則 A1/A3 亦只保留「總覽」一層 emergency
+   * 後備 —— 冇「更細嘅下一層」可以預載，所以整段連 `preloadedTiers`
+   * 一齊刪。向量底圖嘅 tile 快取由 `VectorBasemap` 自己嘅 LRU 管。
    */
-  private preloadFinerTier(): void {
-    const cur = LOD_TIERS.find((t) => t.id === this.currentTierId);
-    if (!cur) return;
-    const v = this.currentGeoBbox();
-    const next = LOD_TIERS.filter(
-      (t) =>
-        tierSpan(t) < tierSpan(cur) &&
-        t.bbox.lon_min <= v.lon_min &&
-        t.bbox.lon_max >= v.lon_max &&
-        t.bbox.lat_min <= v.lat_min &&
-        t.bbox.lat_max >= v.lat_max,
-    ).sort((a, b) => tierSpan(b) - tierSpan(a))[0];
-    if (!next || this.preloadedTiers.has(next.id)) return;
-    this.preloadedTiers.add(next.id);
-    const run = () => {
-      const img = new Image();
-      img.src = assetUrl(next.image);
-    };
-    const ric = (
-      window as unknown as {
-        requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => void;
-      }
-    ).requestIdleCallback;
-    if (ric) ric(run, { timeout: 3000 });
-    else setTimeout(run, 1200);
-  }
 
   /** 切換底圖圖磚（只有層級改變時才改 DOM）。 */
   private updateBasemapTier(): void {
+    // 向量底圖正常運作時，raster LOD 完全唔參與（見 fallbackToRaster）
+    if (!this.basemapFailed) return;
     const tier = this.pickTier();
     if (tier.id === this.currentTierId) return;
     this.currentTierId = tier.id;
 
-    const rect = tierRect(tier);
     const img = this.root.querySelector<SVGImageElement>("#basemap-group");
     if (img) {
+      /*
+       * bbox 直接用 `BASE_VIEW`（raster 後備只有全港一層），
+       * 唔再需要由 tier bbox 反推 viewBox 矩形。
+       */
       img.setAttribute("href", assetUrl(tier.image));
-      img.setAttribute("x", String(rect.x));
-      img.setAttribute("y", String(rect.y));
-      img.setAttribute("width", String(rect.w));
-      img.setAttribute("height", String(rect.h));
+      img.setAttribute("x", String(BASE_VIEW.x));
+      img.setAttribute("y", String(BASE_VIEW.y));
+      img.setAttribute("width", String(BASE_VIEW.w));
+      img.setAttribute("height", String(BASE_VIEW.h));
     }
-
-    // 換完圖磚之後，趁空閒預載下一層（見 preloadFinerTier）
-    this.preloadFinerTier();
-
-    // 換完圖磚之後，趁空閒預載下一層（見 preloadFinerTier）
-    this.preloadFinerTier();
 
     // 標籤圖層只跟總覽層配套（其餘層級嘅標籤已經烙入圖磚，
     // 而且比例唔同，疊上去會變成兩套唔同大小嘅字）。
@@ -874,6 +1495,14 @@ export class SvgMap {
    *
    * 另外：只有總覽層有獨立標籤圖層；分區／街道層嘅標籤已烙入圖磚，
    * 所以該兩層強制歸零，避免兩套唔同比例嘅字疊埋。
+   *
+   * ⚠️ V2：raster 只做 emergency（規則 A3），所以正常情況下
+   * `#label-detail-image` **冇 href** —— 呢個 opacity 只係一個
+   * 唔會見到嘅屬性。保留插值係刻意嘅：
+   *   · `tests/phase-i.e2e.test.ts` 直接斷言 `#label-detail-layer`
+   *     嘅 opacity（overview 時 > 0.5），唔可以硬設 0；
+   *   · `data-tier-label-layer` 由 `updateBasemapTier()` 設，而佢喺
+   *     向量底圖正常時 early-return —— 所以屬性未設時當「有圖層」。
    */
   private updateLabelLayerOpacity(): void {
     const layer = this.root.querySelector("#label-detail-layer");
@@ -883,17 +1512,40 @@ export class SvgMap {
     );
     const tierHasLayer =
       layer.getAttribute("data-tier-label-layer") !== "0" ? 1 : 0;
-    layer.setAttribute("opacity", (labelOpacity * tierHasLayer).toFixed(3));
+    /*
+     * ⚠️ V2 收尾：同 `applyLiveScale` 一樣加「值冇變就跳過」快取。
+     *
+     * 平移期間 `viewScale` 完全唔變，但 `applyViewBox()` 每幀都會呼叫
+     * 呢度 —— 冇快取就等於每幀對 `#label-detail-layer` 寫同一個 opacity
+     * （`setAttribute` 冇短路，會觸發 style invalidation）。
+     */
+    const next = labelOpacity * tierHasLayer;
+    if (next === this.lastLabelOpacity) return;
+    this.lastLabelOpacity = next;
+    layer.setAttribute("opacity", next.toFixed(3));
   }
 
   /**
    * 平滑轉場到目標 viewBox。
-   * 用 ease-in-out cubic；重複呼叫會取消上一個動畫。
+   *
+   * ⚠️ V2：改為**經 `MapShell` 套用**（`shell.setView`）。
+   * 原因：`this.view` 而家係 `MapViewport` 嘅鏡像。如果動畫只改
+   * `this.view`，用戶中途用手勢 pan 就會由一個過期嘅起點開始 ——
+   * 即係「flyTo 期間拖唔動 / 拖完跳返原位」。
+   *
+   * ease-in-out cubic；重複呼叫會取消上一個動畫。
+   * `prefersReducedMotion()` 為真 → 同步跳終態（B1 §2.3 硬性契約：
+   * 唔開 rAF、唔插值）。
    */
   private animateViewBox(target: ViewBox, durationMs: number = ANIM_DURATION_MS): void {
     if (this.animFrameId !== null) {
       cancelAnimationFrame(this.animFrameId);
       this.animFrameId = null;
+    }
+    if (prefersReducedMotion() || durationMs <= 0) {
+      this.shell.setView(this.clampView(target), "set");
+      this.render();
+      return;
     }
     const start: ViewBox = { ...this.view };
     const t0 = performance.now();
@@ -901,14 +1553,15 @@ export class SvgMap {
       const t = Math.min(1, (now - t0) / durationMs);
       // ease-in-out cubic
       const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      this.view = this.clampView({
-        x: start.x + (target.x - start.x) * eased,
-        y: start.y + (target.y - start.y) * eased,
-        w: start.w + (target.w - start.w) * eased,
-        h: start.h + (target.h - start.h) * eased,
-      });
-      this.applyViewBox();
-      this.applyLiveScale();
+      this.shell.setView(
+        this.clampView({
+          x: start.x + (target.x - start.x) * eased,
+          y: start.y + (target.y - start.y) * eased,
+          w: start.w + (target.w - start.w) * eased,
+          h: start.h + (target.h - start.h) * eased,
+        }),
+        "set",
+      );
       if (t < 1) {
         this.animFrameId = requestAnimationFrame(step);
       } else {
@@ -919,11 +1572,11 @@ export class SvgMap {
          * 為何：標記半徑係 `markerR(base) = base / viewScale`，
          * 即係**隨縮放動態調整**，目的係令屏幕尺寸大致恆定。
          *
-         * 但 `animateViewBox` 只呼叫 `applyViewBox()`（改 SVG viewBox
-         * 同標籤透明度），**唔會**重建標記。而 `flyToChapter` 係喺
-         * 動畫**之前**就 render 咗（嗰時 `this.view` 仍然係舊值 0.70，
-         * `viewScale` = 1）—— 結果標記用咗「全港視圖」嘅尺寸畫，
-         * 動畫完之後冇人再更新，就一直維持咁大。
+         * 但轉場只呼叫 `applyViewBox()`（改 SVG viewBox 同標籤透明度），
+         * **唔會**重建標記。而 `flyToChapter` 係喺動畫**之前**就 render
+         * 咗（嗰時 `this.view` 仍然係舊值 0.70，`viewScale` = 1）——
+         * 結果標記用咗「全港視圖」嘅尺寸畫，動畫完之後冇人再更新，
+         * 就一直維持咁大。
          *
          * 實測：飛到第 150 章（span 0.0414°）之後，事件標記半徑
          * 0.008 user unit = **畫面寬度嘅 38.7%**，成個地圖被圓圈蓋住。
@@ -972,13 +1625,129 @@ export class SvgMap {
     }
     const btn = this.root.querySelector<HTMLButtonElement>("#legend-lang-btn");
     if (btn) btn.textContent = this.lang === "zh" ? "EN" : "中文";
+    // B6：圖層掣嘅文字亦要跟語言（`data-i18n="layer.<key>"`）
+    this.renderLayerControls();
+  }
+
+  /**
+   * 建立／更新 7 個圖層開關掣（P0-4）。
+   *
+   * ⚠️ 為何每次 `render()` 都重建
+   * ---------------------------
+   * `render()` 已經 `replaceChildren()` 四個圖層 —— 但 `#layer-controls`
+   * 喺 `.svg-map-wrap` 而唔係 `<svg>` 內，所以**唔會**被 `replaceChildren()`
+   * 清走。呢度重建係為咗語言切換（`data-i18n` 文字）同 `aria-pressed`
+   * 同步；重建之後一定要**重新綁 listener**（見 `bindLayerToggleButtons`）。
+   *
+   * 成本：7 個 `<button>` × `innerHTML`。實測唔係熱路徑 —— `render()`
+   * 每次手勢只跑一次（`onSettle`），唔係每幀。
+   */
+  private renderLayerControls(): void {
+    const host = this.root.querySelector<HTMLElement>("#layer-controls");
+    if (!host) return;
+    const dict = this.lang === "zh" ? LAYER_LABEL_ZH : LAYER_LABEL_EN;
+    host.innerHTML = LAYER_KEYS.map((key) => {
+      const on = this.layerState[key];
+      return (
+        `<button class="layer-toggle" type="button" data-layer="${key}"` +
+        ` data-i18n="layer.${key}" aria-pressed="${on}"` +
+        ` title="${dict[key]}">${dict[key]}</button>`
+      );
+    }).join("");
+    this.bindLayerToggleButtons();
+    this.applyLayerState();
+  }
+
+  /**
+   * 將 zone 資料變成**純資料模型**（唔含 DOM）。
+   *
+   * 為何抽成 public method 而唔係留喺 `render()` 內部
+   * ----------------------------------------------
+   * `render()` 需要真 DOM（`createElementNS`、`getBoundingClientRect`），
+   * 喺 node 環境完全跑唔到 → 即係「zone LOD 政策」同「cluster 正規化」
+   * 都只可以靠 Playwright 驗。抽成純函數之後：
+   *
+   *   · `tests/map-interaction.test.ts` 可以直接餵資料入去，
+   *     斷言 cluster 數、淡化比例、label 門檻 —— 全部 node 單測；
+   *   · `render()` 只負責「模型 → DOM」嘅機械轉換。
+   *
+   * @param viewW   目前視窗寬（user unit）—— 用嚟計 label 門檻。
+   */
+  evaluateZoneModel(viewW: number): ZoneModelEntry[] {
+    const cur = this.app.getCurrentChapter();
+    const out: ZoneModelEntry[] = [];
+    for (const z of this.data.zones.features) {
+      const zp = z.properties;
+      /*
+       * 規則 Z2：**只讀 `zone_type`**（`kind` 係 v1 向後兼容欄位）。
+       * 缺失時才 fallback 去 `kind` —— 令未經 B4 migration 嘅 v1 資料
+       * 仍然讀得到。
+       */
+      const zt: string = zp.zone_type ?? zp.kind;
+      const styleKey = ZONE_TYPE_STYLE[zt] ?? "nest";
+      const ring = (z.geometry as unknown as { coordinates: number[][][] })
+        .coordinates[0];
+      if (!ring || ring.length < 3) continue;
+
+      const d =
+        "M " +
+        ring
+          .map((pt) => {
+            const v = lonlatToViewbox(pt[0], pt[1]);
+            return `${v.x.toFixed(6)} ${v.y.toFixed(6)}`;
+          })
+          .join(" L ") +
+        " Z";
+
+      const cxRaw = ring.reduce((a, p) => a + p[0], 0) / ring.length;
+      const cyRaw = ring.reduce((a, p) => a + p[1], 0) / ring.length;
+      const c = lonlatToViewbox(cxRaw, cyRaw);
+
+      const rUser = zp.radius_m / 102940;
+      out.push({
+        id: zp.id,
+        name: zp.name,
+        d,
+        styleKey: ZONE_STYLE[styleKey] ? styleKey : "nest",
+        pattern: zp.display_style?.pattern ?? "solid",
+        evidenced: zp.radius_source === "members",
+        cx: c.x,
+        cy: c.y,
+        emphasized: (zp.chapters || []).includes(cur),
+        selected: this.app.getSelectedZoneId() === zp.id,
+        showLabel: (rUser * 2) / viewW >= 0.07,
+        dangerLevel:
+          zp.danger_level === null || zp.danger_level === undefined
+            ? null
+            : zp.danger_level,
+        radiusM: zp.radius_m,
+        summary: zp.summary || "",
+      });
+    }
+    /*
+     * z-order：面積大嘅先畫（下面），面積細嘅後畫（上面）。
+     * 唔咁做嘅話，一個細病窩會被大倖存區蓋住。
+     */
+    out.sort((a, b) => b.radiusM - a.radiusM);
+    return out;
   }
 
   render(): void {
     const cur = this.app.getCurrentChapter();
     this.applyViewBox();
+    this.renderLayerControls();
 
     const content = this.svg.querySelector("#map-content")!;
+
+    /*
+     * 內容密度：由 viewBox 寬（唯一輸入）決定。
+     *   zoneLod —— zone 畫成 cluster / boundary / full（spec §3.2）
+     *
+     * ⚠️ 呢個係「點畫」，唔係「畫唔畫」（規則 L1：zone 永遠 render）。
+     */
+    const zoneLod: ZoneLod = selectZoneLod(this.view.w);
+    const locWindow = chapterWindowFor("location");
+    const evWindow = chapterWindowFor("event", this.showAllEvents);
 
     // Active character routes（本章有出現嘅路線）
     const activeRoutes = (this.data.routesByChapter.get(cur) || []).filter(
@@ -988,7 +1757,14 @@ export class SvgMap {
       },
     );
 
-    // Active locations（本章 ± 3 章，避免大 cluster）
+    /*
+     * Active locations（spec §3.3：本章 ± 5 章）。
+     *
+     * ⚠️ V2 由 ± 3 放寬到 ± 5。
+     * A4 實測：深 zoom 落將軍澳時 location 由 72 個跌到 3 個 —— 一部分
+     * 就係 ± 3 太窄。相鄰章節嘅地點係最重要嘅空間上下文；密度問題
+     * 由標記聚合（marker aggregation）處理，唔應該靠砍窗口。
+     */
     const locationsToShow = this.data.locations.features.filter((l) => {
       // `map_hidden`：由人手核實排除嘅條目（例如「旺角」喺文中係比喻、
       // 「香港」係整體舞台設定）。資料仍然保留喺面板度，只係唔喺地圖
@@ -996,13 +1772,24 @@ export class SvgMap {
       if (l.properties.map_hidden) return false;
       const fp = l.properties.first_appearance;
       const chs = l.properties.chapters || [fp];
-      return chs.some((c: number) => Math.abs(c - cur) <= 3) || fp === cur;
+      return chs.some((c: number) => Math.abs(c - cur) <= locWindow) || fp === cur;
     });
 
-    // Active events（本章 ± 1 章作上下文）
+    /*
+     * Active events（spec §3.3：本章 ± 1 章，另有「顯示全部」開關）。
+     *
+     * ⚠️ `evWindow` 開咗開關會係 `Infinity` —— 嗰時要行**全部**章節，
+     * 唔可以只 loop ±N（`cur + Infinity` 唔會 match 任何 key）。
+     */
     const eventsToShow: EventFeature[] = [];
-    for (let d = -1; d <= 1; d++) {
-      eventsToShow.push(...(this.data.eventsByChapter.get(cur + d) || []));
+    if (Number.isFinite(evWindow)) {
+      for (let d = -evWindow; d <= evWindow; d++) {
+        eventsToShow.push(...(this.data.eventsByChapter.get(cur + d) || []));
+      }
+    } else {
+      for (const list of this.data.eventsByChapter.values()) {
+        eventsToShow.push(...list);
+      }
     }
 
     // 只重建標記圖層，底圖 <image> 保持不動（避免每次 render 重新載入 PNG）
@@ -1026,101 +1813,263 @@ export class SvgMap {
       fictionalById.set(l.properties.id, Boolean(l.properties.fictional));
     }
 
-    // Zones（倖存區／病窩）
+    // Zones（倖存區／病窩／據點）
     //
     // 為何要獨立一層、而且喺標記之下
     // ----------------------------
     // 區域係「面」，用嚟一眼睇到「呢一帶安全／危險」。畫喺標記之下
     // 就唔會遮住地名同事件點。
     //
-    // 顏色語意（同圖例一致）：
-    //   survivor（倖存區／安全區）→ 青綠色，代表安全
-    //   nest（病窩／巢穴／據點）  → 橙紅色，代表危險
+    // 幾何係多邊形（由 `scripts/merge_zone_dossiers.py` 產生）：
+    //   成員地點 ≥3 個 → 凸包 + 200 m 外擴（**證據**）
+    //   否則           → 48 邊形近似圓（**估算**，畫虛線）
+    // 呢個區分好重要 —— 唔可以令估算睇落同證據一樣確定。
     //
-    // 實線 vs 虛線：
-    //   實線 = 範圍有證據（由成員地點分佈推導，或文中明文描述）
-    //   虛線 = 範圍係估算（只有一個成員點，用按類型嘅預設半徑）
-    //   呢個區分好重要 —— 唔可以令估算睇落同證據一樣確定。
-    const ZONE_STYLE: Record<string, { fill: string; stroke: string }> = {
-      survivor: { fill: "#1abc9c", stroke: "#16a085" },
-      nest: { fill: "#e74c3c", stroke: "#c0392b" },
-    };
-    for (const z of this.data.zones.features) {
-      const zp = z.properties;
-      const chs = zp.chapters || [];
-      const active = chs.length === 0 || chs.some((c) => c <= cur && cur <= c + 12);
-      if (!active) continue;
-      const style = ZONE_STYLE[zp.kind] ?? ZONE_STYLE.nest;
-      // 米 → user unit（x 軸 = 經度）
-      // ⚠️ 區域半徑係**真實地理尺寸**，唔應該隨縮放改變 ——
-      // 所以呢個 r 唔入 scaledEls（同標記唔同）。
-      const r = zp.radius_m / 102940;
-      const { x, y } = lonlatToViewbox(
-        z.geometry.coordinates[0],
-        z.geometry.coordinates[1],
+    // ⚠️ V2（B6）：ZONE_STYLE / ZONE_TYPE_STYLE 同資料模型嘅建構搬去
+    // `evaluateZoneModel()`（純函數），呢度只負責「模型 → DOM」。
+    // 詳見 §「Zone LOD」同 `src/map/ZoneLayer.ts`。
+
+    const zoneModel = this.evaluateZoneModel(this.view.w);
+    /*
+     * Cluster 正規化（P0-2 / spec §3.2 L-Z0）。
+     *
+     * 為何要 `markerR(0.008)`：格邊長用**螢幕**尺寸（約 8 px）而唔係
+     * 地理尺寸 —— 咁樣簇會隨 zoom 自然分裂，同 location marker
+     * 用同一套政策（`render()` 下面 `cell = this.markerR(0.008)`）。
+     */
+    /** cluster LOD：多邊形淡到 4%、唔畫光暈／脈衝（spec §3.2 L-Z0）。 */
+    const zoneIsCluster = zoneLod === "cluster";
+    /*
+     * `minSep` = badge 直徑 × 1.1（user unit）—— 令「兩 cluster 中心距離
+     * 大過兩個 badge 唔會疊」。1.1 係 buffer（避免邊界貼住）。
+     *
+     * 因為 badge 直徑係 px-anchored（見 `clusterBadgeRadiusUser()`），
+     * 呢度要用**同一個 pxPerUser** 反推，唔可以寫死 user unit。
+     */
+    const clusterSepPx =
+      (CLUSTER_BADGE_DIAMETER_PX / 2) * 2 * 1.1;
+    const clusterSep = this.userUnitsFor(clusterSepPx);
+    const zoneClusters: ZoneClusterEntry[] =
+      zoneLod === "cluster"
+        ? clusterZones(zoneModel, this.markerR(0.008), clusterSep)
+        : [];
+
+    for (const zm of zoneModel) {
+      const style = ZONE_STYLE[zm.styleKey] ?? ZONE_STYLE.nest;
+      const selected = zm.selected;
+      const emphasized = zm.emphasized;
+      const d = zm.d;
+
+      const g = document.createElementNS(SVG_NS, "g");
+      g.setAttribute(
+        "class",
+        `zone zone-${zm.styleKey}${selected ? " is-selected" : ""}`,
       );
-      const circle = document.createElementNS(SVG_NS, "circle");
-      circle.setAttribute("cx", String(x));
-      circle.setAttribute("cy", String(y));
-      circle.setAttribute("r", String(r));
-      circle.setAttribute("class", "zone-area");
-      circle.setAttribute("fill", style.fill);
-      circle.setAttribute("fill-opacity", "0.12");
-      circle.setAttribute("stroke", style.stroke);
-      this.setScaled(circle, "stroke-width", 0.0009);
-      circle.setAttribute("stroke-opacity", "0.7");
-      if (zp.radius_source === "default") {
-        // 估算範圍：虛線，令佢睇落唔同實證範圍一樣確定
-        this.setScaled(circle, "stroke-dasharray", 0.004);
+      g.setAttribute("data-zone-id", zm.id);
+      g.setAttribute("data-zone-name", zm.name);
+      g.setAttribute("data-zone-lod", zoneLod);
+      /*
+       * 規則 Z3：`danger_level` 為 `null` = 資料**未評估**，唔可以當 0。
+       * 所以只有非 null 才寫落 DOM。
+       */
+      if (zm.dangerLevel !== null) {
+        g.setAttribute("data-danger-level", String(zm.dangerLevel));
       }
-      circle.setAttribute("data-zone-id", zp.id);
-      circle.setAttribute("data-zone-name", zp.name);
-      const title = document.createElementNS(SVG_NS, "title");
-      const srcLabel =
-        zp.radius_source === "members"
-          ? "範圍由成員地點分佈推導"
-          : zp.radius_source === "curated"
-            ? "範圍由文中描述推導"
-            : "範圍係估算（示意）";
-      title.textContent =
-        `${zp.name}（${zp.kind === "survivor" ? "倖存區／安全" : "病窩／危險"}）\n` +
-        `半徑約 ${Math.round(zp.radius_m)} m — ${srcLabel}\n` +
-        `${zp.evidence}`;
-      circle.appendChild(title);
-      zonesLayer.appendChild(circle);
 
       /*
-       * 區域常駐標籤
-       * ------------
-       * 只有 tooltip 唔夠 —— 用戶要 hover 才知係咩區域，一眼睇唔到
-       * 「邊度安全、邊度危險」。
-       *
-       * 顯示條件：區域圓形喺畫面上夠大（直徑 ≥ 畫面寬度 6%）才顯示，
-       * 否則細區域嘅字會疊埋一齊，反而更亂。
+       * 外發光：cluster 層唔畫 —— 全港 48 個光暈疊埋會變成一層霧，
+       * 反而蓋住底圖嘅道路同建築。
        */
-      const onScreenPct = (r * 2) / this.view.w;
-      if (onScreenPct >= 0.06) {
+      if (!zoneIsCluster) {
+        const glow = document.createElementNS(SVG_NS, "path");
+        glow.setAttribute("d", d);
+        glow.setAttribute("class", "zone-glow");
+        glow.setAttribute("fill", "none");
+        glow.setAttribute("stroke", style.glow);
+        this.setScaled(glow, "stroke-width", selected ? 0.010 : 0.006);
+        glow.setAttribute("opacity", selected ? "0.9" : emphasized ? "0.45" : "0.3");
+        g.appendChild(glow);
+      }
+
+      const area = document.createElementNS(SVG_NS, "path");
+      area.setAttribute("d", d);
+      area.setAttribute("class", "zone-area");
+      area.setAttribute("fill", style.fill);
+      const baseFill = zoneIsCluster ? 0.04 : emphasized ? 0.14 : 0.10;
+      area.setAttribute("fill-opacity", String(selected ? 0.22 : baseFill));
+      area.setAttribute("stroke", style.stroke);
+      this.setScaled(area, "stroke-width", selected ? 0.0022 : 0.0014);
+      area.setAttribute(
+        "stroke-opacity",
+        selected ? "1" : zoneIsCluster ? "0.5" : "0.78",
+      );
+      /*
+       * 規則：唔可以只靠顏色（灰度／色弱可辨）。`display_style.pattern`
+       * 由 B4 查表得嚟（`hatch` / `contour` / `noise` / `solid` / `pulse`）。
+       * 虛線節奏由 `map.css` 按 `data-pattern` 提供（B6 接手）。
+       */
+      area.setAttribute("data-pattern", zm.pattern);
+      if (zm.pattern === "hatch" || !zm.evidenced) {
+        // 估算範圍：虛線，令佢睇落唔同實證範圍一樣確定
+        this.setScaled(
+          area,
+          "stroke-dasharray",
+          zm.pattern === "hatch" ? 0.0028 : 0.0055,
+        );
+      }
+      g.appendChild(area);
+
+      /*
+       * 掃描光環（病窩專用，CSS 動畫驅動）—— 只有 full 層畫。
+       * 中觀層畫會令每個病窩都「跳」，反而干擾閱讀。
+       */
+      if (zm.styleKey === "nest" && zoneLod === "full") {
+        const pulse = document.createElementNS(SVG_NS, "path");
+        pulse.setAttribute("d", d);
+        pulse.setAttribute("class", "zone-pulse");
+        pulse.setAttribute("fill", "none");
+        pulse.setAttribute("stroke", style.stroke);
+        this.setScaled(pulse, "stroke-width", 0.0018);
+        g.appendChild(pulse);
+      }
+
+      // 徽記（特別記認）：每個區域一個圖騰，一眼分得出係咩類型
+      const badge = document.createElementNS(SVG_NS, "g");
+      badge.setAttribute("class", "zone-badge");
+      badge.setAttribute("transform", `translate(${zm.cx} ${zm.cy})`);
+      // cluster 層冇 polygon 光暈做視覺重量，所以徽記畫大少少
+      const badgeBase = zoneIsCluster ? 0.0078 : 0.0062;
+      const br = this.markerR(badgeBase);
+      const bcircle = document.createElementNS(SVG_NS, "circle");
+      bcircle.setAttribute("r", String(br));
+      bcircle.setAttribute("fill", "rgba(8, 13, 20, 0.82)");
+      bcircle.setAttribute("stroke", style.stroke);
+      bcircle.setAttribute("stroke-width", String(br * 0.16));
+      badge.appendChild(bcircle);
+      const glyph = document.createElementNS(SVG_NS, "path");
+      glyph.setAttribute("d", ZONE_GLYPH[style.glyph]);
+      glyph.setAttribute("fill", "none");
+      glyph.setAttribute("stroke", style.stroke);
+      glyph.setAttribute("stroke-width", String(br * 0.24));
+      glyph.setAttribute("stroke-linecap", "round");
+      glyph.setAttribute("stroke-linejoin", "round");
+      glyph.setAttribute(
+        "transform",
+        `translate(${(-br * 0.46).toFixed(6)} ${(-br * 0.46).toFixed(6)}) scale(${(br * 0.92).toFixed(6)})`,
+      );
+      badge.appendChild(glyph);
+      this.scaledEls.push({ el: badge, attr: "data-r", base: badgeBase });
+      g.appendChild(badge);
+
+      const title = document.createElementNS(SVG_NS, "title");
+      const srcLabel = zm.evidenced
+        ? "範圍由成員地點分佈推導"
+        : "範圍係估算（示意）";
+      // 規則 Z3：`null` = 未評估，唔可以寫成「0/5」（會變成「好安全」）
+      const dangerLabel =
+        zm.dangerLevel === null
+          ? "危險程度：未評估"
+          : `危險程度：${zm.dangerLevel}/5`;
+      title.textContent =
+        `${zm.name}（${style.label}）\n` +
+        `${dangerLabel}\n` +
+        `半徑約 ${Math.round(zm.radiusM)} m — ${srcLabel}\n` +
+        `${zm.summary}`;
+      g.appendChild(title);
+
+      // 區域標籤：只有夠大（畫面 ≥ 7%）才顯示，否則細區域嘅字會疊埋
+      // ⚠️ 門檻喺 `evaluateZoneModel()` 計（純函數，可單測）。
+      if (zm.showLabel) {
         const label = document.createElementNS(SVG_NS, "text");
-        label.setAttribute("x", String(x));
-        // 放喺圓形上方少許，避免遮住中心
-        label.setAttribute("y", String(y - r * 0.82));
+        label.setAttribute("x", String(zm.cx));
+        label.setAttribute("y", String(zm.cy - (zm.radiusM / 102940) * 0.88));
         label.setAttribute("text-anchor", "middle");
         label.setAttribute("class", "zone-label");
         label.setAttribute("fill", style.stroke);
         label.setAttribute("font-size", String(this.markerR(0.0042)));
         label.setAttribute("font-weight", "650");
         label.setAttribute("paint-order", "stroke");
-        label.setAttribute("stroke", "rgba(11, 15, 22, 0.85)");
-        label.setAttribute("stroke-width", String(this.markerR(0.0012)));
+        label.setAttribute("stroke", "rgba(8, 13, 20, 0.9)");
+        label.setAttribute("stroke-width", String(this.markerR(0.0014)));
         label.setAttribute("stroke-linejoin", "round");
         label.setAttribute("pointer-events", "none");
-        label.textContent = zp.name;
-        // 標籤字級亦要隨縮放調整
+        label.textContent = zm.name;
         this.scaledEls.push({ el: label, attr: "font-size", base: 0.0042 });
-        this.scaledEls.push({ el: label, attr: "stroke-width", base: 0.0012 });
-        zonesLayer.appendChild(label);
+        this.scaledEls.push({ el: label, attr: "stroke-width", base: 0.0014 });
+        g.appendChild(label);
       }
+
+      zonesLayer.appendChild(g);
     }
+
+    /*
+     * Cluster badge（macro LOD 專用）—— P0-2。
+     *
+     * 為何仍然逐個 zone 畫 `.zone-area`（唔係真係「只畫一個」）
+     * ------------------------------------------------------
+     * `tests/map-render.test.ts` Q5 斷言 `.zone-area` 總數 = `zones.geojson`
+     * features 數（規則 L1：zone 永遠 render）。cluster 層保留多邊形
+     * （fill-opacity 4%）＋ 額外 badge，係 B5 §7 D-8 同一折衷嘅延續。
+     */
+    for (let i = 0; i < zoneClusters.length; i++) {
+      const cl = zoneClusters[i];
+      const style =
+        ZONE_STYLE[cl.dominant] ?? ZONE_STYLE.nest;
+      /*
+       * ⚠️ B6 修正（2026-09-22）：badge 半徑**由螢幕 px 反推**，
+       * 唔可以再用固定 user unit（見 `ZoneLayer.clusterBadgeRadiusUser()`
+       * 同 B6-D5）。spec §3.2 L-Z0 硬性要求渲染直徑落喺 8–12 px；
+       * 固定 user unit 會隨 viewW 飄到 29.7–41.2 px（超 3.5–5 倍）。
+       *
+       * 需要 SVG 嘅 CSS 像素闊（`getBoundingClientRect().width`）——
+       * 因為 `preserveAspectRatio="meet"` 之下實際比例係
+       * `view.w / rect.width`，唔可以靠 viewBox 自己算。
+       */
+      const svgW = this.svgWidthPx();
+      const r = clusterBadgeRadiusUser(this.view.w, svgW, cl.count);
+      if (!(r > 0)) continue;
+      const cg = document.createElementNS(SVG_NS, "g");
+      cg.setAttribute("class", "zone-cluster");
+      cg.setAttribute("data-zone-cluster-count", String(cl.count));
+      cg.setAttribute("data-zone-cluster-ids", cl.memberIds.join(","));
+      cg.setAttribute("transform", `translate(${cl.x} ${cl.y})`);
+
+      const ring = document.createElementNS(SVG_NS, "circle");
+      ring.setAttribute("class", "zone-cluster-ring");
+      ring.setAttribute("r", String(r));
+      ring.setAttribute("stroke", style.stroke);
+      cg.appendChild(ring);
+
+      const glyph = document.createElementNS(SVG_NS, "path");
+      glyph.setAttribute("class", "zone-cluster-glyph");
+      glyph.setAttribute("d", ZONE_GLYPH[style.glyph]);
+      glyph.setAttribute(
+        "transform",
+        `translate(${(-r * 0.72).toFixed(6)} ${(-r * 1.15).toFixed(6)}) scale(${(r * 0.5).toFixed(6)})`,
+      );
+      glyph.setAttribute("stroke", style.stroke);
+      glyph.setAttribute("stroke-width", String(r * 0.3));
+      cg.appendChild(glyph);
+
+      const txt = document.createElementNS(SVG_NS, "text");
+      txt.setAttribute("class", "zone-cluster-count");
+      txt.setAttribute("y", String(r * 0.34));
+      txt.setAttribute("font-size", String(r * 0.95));
+      txt.setAttribute("fill", style.stroke);
+      txt.textContent = clusterLabel(cl.count);
+      cg.appendChild(txt);
+
+      const ctitle = document.createElementNS(SVG_NS, "title");
+      ctitle.textContent = `${cl.count} 個區域喺同一範圍（放大睇細節）`;
+      cg.appendChild(ctitle);
+
+      zonesLayer.appendChild(cg);
+    }
+    // 簇數寫落圖層，方便測試／除錯（唔參與視覺）
+    zonesLayer.setAttribute(
+      "data-zone-cluster-count",
+      String(zoneClusters.length),
+    );
 
     // Routes
     //
@@ -1347,13 +2296,49 @@ export class SvgMap {
       el.appendChild(titleEl);
       evLayer.appendChild(el);
     }
+
+    /*
+     * Zone 圖層啱啱被 `replaceChildren()` 重建，新嘅 `.zone-pulse` 冇
+     * `display` 屬性 = 預設會動。如果 `render()` 係喺互動期間發生
+     * （例如逐下點縮放），要即刻再暫停返，否則動畫會喺中途復活。
+     */
+    this.applyZonePulseState();
+
+    /*
+     * P0-6：為每個 `.zone-pulse` 寫 `--pulse-index`（0…n-1）。
+     *
+     * 為何要錯開相位
+     * ------------
+     * 21 條動畫如果同一個 frame 一齊到 keyframe 邊界，就會產生一個
+     * 超長 frame（實測 idle 20.1 fps）。`map.css` 用
+     * `animation-delay: calc(var(--pulse-index) * -0.4s)` 將佢哋攤開。
+     */
+    const pulses = this.svg.querySelectorAll<SVGElement>("#zones-layer .zone-pulse");
+    pulses.forEach((p, i) => p.style.setProperty("--pulse-index", String(i)));
+
+    /*
+     * ⚠️ `replaceChildren()` 會令 `hidden` 屬性消失，所以重建之後
+     * 一定要重新套用圖層開關（P0-4）。`applyLayerState()` 內部有
+     * 「值冇變就跳過」短路，所以平移動畫唔會產生額外 DOM 寫入。
+     */
+    this.applyLayerState();
   }
 
   /**
-   * Phase H/I：飛到指定章節。
+   * 飛到指定章節（Phase H/I）。
    *
    * 計算本章 ± 2 章所有 location 嘅 bounding box，加 25% padding，
-   * 再用 animateViewBox 平滑轉場。冇 location 就重繪現狀。
+   * 再用 `animateViewBox` 平滑轉場。冇 location 就重繪現狀。
+   *
+   * ⚠️ V2：bbox → viewBox 嘅換算搬入 `map-camera.viewBoxForGeoBounds`
+   * （純函數）。舊 code 喺呢度重複計一次 `fx/fy`，同
+   * `currentGeoBbox()` 係兩套**唔一致**嘅公式 —— 而 `currentGeoBbox`
+   * 嗰邊漏咗 `1/cos(φ₀)`。共用之後唔會再漂移。
+   *
+   * ⚠️ `animateViewBox` 必須留喺 `resolveCoord` 之後 ——
+   * `tests/phase-i.test.ts` 用
+   * `/flyToChapter\(_ch: number\): void \{([\s\S]+?)animateViewBox/`
+   * 抽 body 去驗證入面有 `resolveCoord`。
    */
   flyToChapter(_ch: number): void {
     const cur = _ch;
@@ -1388,50 +2373,17 @@ export class SvgMap {
       return;
     }
 
-    // 25% padding 留白
-    const lonPad = (lonMax - lonMin) * 0.25;
-    const latPad = (latMax - latMin) * 0.25;
-    lonMin = Math.max(BASEMAP_BBOX.lon_min, lonMin - lonPad);
-    lonMax = Math.min(BASEMAP_BBOX.lon_max, lonMax + lonPad);
-    latMin = Math.max(BASEMAP_BBOX.lat_min, latMin - latPad);
-    latMax = Math.min(BASEMAP_BBOX.lat_max, latMax + latPad);
-
-    // 避免單點章節造成 0 尺寸 viewBox
-    const minSpan = 0.02;
-    if (lonMax - lonMin < minSpan) {
-      const c = (lonMin + lonMax) / 2;
-      lonMin = c - minSpan / 2;
-      lonMax = c + minSpan / 2;
-    }
-    if (latMax - latMin < minSpan) {
-      const c = (latMin + latMax) / 2;
-      latMin = c - minSpan / 2;
-      latMax = c + minSpan / 2;
-    }
-
-    const fx0 =
-      (lonMin - BASEMAP_BBOX.lon_min) / (BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min);
-    const fx1 =
-      (lonMax - BASEMAP_BBOX.lon_min) / (BASEMAP_BBOX.lon_max - BASEMAP_BBOX.lon_min);
-    // y 軸反轉（SVG y 向下、緯度向北遞增）
-    const fy0 =
-      (BASEMAP_BBOX.lat_max - latMax) / (BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min);
-    const fy1 =
-      (BASEMAP_BBOX.lat_max - latMin) / (BASEMAP_BBOX.lat_max - BASEMAP_BBOX.lat_min);
-
-    // ⚠️ 目標視窗要夾到縮放範圍之內，否則飛去一個章節之後
-    // 用戶可以縮到細過底圖（露出黑邊）。
-    const rawW = Math.abs(fx1 - fx0) * BASE_VIEW.w;
-    const clampedW = Math.max(
-      BASE_VIEW.w / MAX_SCALE,
-      Math.min(BASE_VIEW.w / MIN_SCALE, rawW),
+    /*
+     * 25% padding、最少 0.02° 跨度（避免單點章節造成 0 尺寸 viewBox）、
+     * 以及「夾到縮放範圍之內」（否則飛去一個章節之後用戶可以縮到
+     * 細過底圖，露出黑邊）全部喺 `viewBoxForGeoBounds` 內部處理。
+     */
+    const target: ViewBox = viewBoxForGeoBounds(
+      BASEMAP_BBOX,
+      BASE_VIEW,
+      { lon_min: lonMin, lon_max: lonMax, lat_min: latMin, lat_max: latMax },
+      { padding: 0.25, minSpan: 0.02, minScale: MIN_SCALE, maxScale: MAX_SCALE },
     );
-    const target: ViewBox = this.clampView({
-      x: BASE_VIEW.x + Math.min(fx0, fx1) * BASE_VIEW.w,
-      y: BASE_VIEW.y + Math.min(fy0, fy1) * BASE_VIEW.h,
-      w: clampedW,
-      h: clampedW * (BASE_VIEW.h / BASE_VIEW.w),
-    });
     // 標記同路線唔跟 viewBox 縮放，所以要即刻重繪（章節已變）。
     this.render();
     this.animateViewBox(target);

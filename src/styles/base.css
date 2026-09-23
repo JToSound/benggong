@@ -1,0 +1,217 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   World Atlas V2 — Base（reset + 基礎排版 + 全域 reduced-motion）
+   ══════════════════════════════════════════════════════════════════════════
+   硬性（spec §7.3）：
+     · 文字最小 12px（現況 78.4% 文字 ≤11px、最差 9px @2.19:1 —— 必須消滅）。
+     · 所有文字對比 ≥4.5:1（正常）／≥3:1（大字：≥18.66px bold 或 ≥24px）。
+     · focus ring 唔可以被 clip-path 剪走（A7 P0-3）。
+
+   Token 全部由 tokens.css 提供；本檔**唔定義**任何色值。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Reset（最小、唔做 mass format） ─────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  /* 唔鎖 scroll-behavior: smooth —— 交由 motion.ts 控制（尊重 reduced motion） */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  background: var(--bg-base);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  /* 正文 14px（≥12px 下限）；標籤用 --fs-2xs = 12px */
+  font-size: var(--fs-sm);
+  line-height: var(--lh-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── 媒體 / 表單基礎 ─────────────────────────────────────────────────── */
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* ── 排版階梯（全部 ≥12px） ──────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 var(--sp-3);
+  line-height: var(--lh-tight);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+h1 {
+  font-size: var(--fs-2xl);
+}
+
+h2 {
+  font-size: var(--fs-xl);
+}
+
+h3 {
+  font-size: var(--fs-lg);
+}
+
+h4 {
+  font-size: var(--fs-md);
+}
+
+h5,
+h6 {
+  font-size: var(--fs-sm);
+}
+
+p {
+  margin: 0 0 var(--sp-3);
+}
+
+small,
+.text-label {
+  /* 輔助標籤：硬下限 12px，唔可以再細 */
+  font-size: var(--fs-2xs);
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ── 表格數字對齊（讀數用） ─────────────────────────────────────────── */
+.tabular,
+[data-numeric] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Focus（唔可以被 clip-path 剪走 —— A7 P0-3） ─────────────────────── */
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+
+/* 有 clip-path 嘅容器唔可以自己食咗 outline；提供內描邊 fallback */
+.clip-focus:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--focus-ring);
+}
+
+/* ── 互動目標（mobile ≥44×44，規則 C3） ─────────────────────────────── */
+.tap-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* ── 選字 ────────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--accent);
+  color: var(--text-inverse);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Reduced motion（CSS 層；JS 層由 src/motion.ts 負責）
+   ══════════════════════════════════════════════════════════════════════════
+   ⚠️ 現況 main.css:1107 / hud.css:564 用 animation-duration:0.001ms 全域 kill，
+      會令動畫「跳終態」→ zone 光環（終態 opacity 0）直接消失、skeleton 失效。
+      以下做法：全域收斂 + **逐個需要保留終態嘅元素指定靜態樣式**（唔靠壓縮 duration）。
+   ══════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-iteration-count: 1 !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /*
+   * 例外：需要保留「終態可見性」嘅元素 → 改為靜態樣式。
+   * 呢啲 class 係下游（B5/B6/B7/B8）應該用嘅 canonical 名，對應
+   * spec §5 白名單第 2/3/6/7 項嘅 reduced-motion fallback。
+   */
+  .zone-outline--selected {
+    animation: none;
+    stroke-opacity: 1;
+  }
+
+  .route-flow {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-opacity: 0.9;
+  }
+
+  .route--drawing .route-base {
+    animation: none;
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+  }
+
+  .skeleton::after {
+    animation: none;
+    transform: none;
+  }
+
+  .zone-glow {
+    animation: none;
+    stroke-opacity: 0.28;
+  }
+
+  .beacon-ping {
+    animation: none;
+    opacity: 0.55;
+    transform: scale(1);
+  }
+}

@@ -37,7 +37,7 @@
   "spoiler": { "levels": 0, "1": null, "2": null, "3": null, "default_max_level": 1 },
   "provisional_mode": {
     "enabled": true,
-    "banner": "⚠️ 部份資料（角色路線）仍待人工審閱。已發佈內容經自動驗證，但角色路線來源自私有審閱文件，未經最終人工確認。請勿引用作準確資料。"
+    "banner": "⚠️ 部份資料（角色路線）仍待自動推斷。已發佈內容由自動驗證流程檢查；角色路線座標屬程式化推斷結果，未經事實級核實。請勿引用作準確資料。"
   },
   "sources_enabled": ["bing_gang"],
   "sources_reserved": ["bing_gang_2"],

@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "schemas/place-inference.schema.json",
-  "title": "《病港》地點推斷候選（私有，需人手審閱）",
-  "description": "由上文下理推斷「模糊地點」（例如『A大樓』）嘅真實原型。此檔永不公開：evidence_excerpt 屬私有 material。推斷結果必須經人手審閱，才可以升級 location_precision 或改座標。",
+  "title": "《病港》地點推斷候選（私有，經自動推斷 + 多代理交叉驗證）",
+  "description": "由上文下理推斷「模糊地點」（例如『A大樓』）嘅真實原型。此檔永不公開：evidence_excerpt 屬私有 material。推斷結果必須經多代理交叉驗證或確定性規則判定，才可以升級 location_precision 或改座標。",
   "type": "object",
   "required": [
     "inference_id",
@@ -34,7 +34,7 @@
       "minItems": 1
     },
     "subject_names": {
-      "description": "對應 subject_ids 嘅名稱，方便人手審閱。",
+      "description": "對應 subject_ids 嘅名稱，方便自動驗證流程核對。",
       "type": "array",
       "items": { "type": "string" },
       "minItems": 1
@@ -56,7 +56,7 @@
       "maxItems": 2
     },
     "coordinate_source": {
-      "description": "座標來源，令審閱者可以回溯。",
+      "description": "座標來源，令自動驗證流程可以回溯。",
       "type": ["string", "null"],
       "enum": [
         "osm_way",
@@ -114,7 +114,7 @@
       }
     },
     "review_status": {
-      "description": "pending=待審；approved=可套用；rejected=否決；needs_info=證據不足。",
+      "description": "pending=待判定（未經多代理交叉驗證）；approved=可套用；rejected=否決；needs_info=證據不足。",
       "enum": ["pending", "approved", "rejected", "needs_info"],
       "default": "pending"
     },

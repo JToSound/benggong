@@ -1,0 +1,816 @@
+/* ===========================================================================
+ * Phase L — 未來感 HUD 重做
+ * ===========================================================================
+ *
+ * 用戶反饋：「UI/UX 太過簡陋、直接，好似直接塞資料噉，但係我想有未來感覺、
+ * 高質素嘅專業 UI/UX，並且可以用到特效、動畫令到畫面更加生動。」
+ *
+ * 設計語言：「戰術 HUD」（Tactical HUD）
+ * ------------------------------------
+ *   1. **切角框** —— 用 clip-path 切走四角，取代圓角。圓角係消費級
+ *      產品語言；切角係儀器／軍工語言。
+ *   2. **單色主調 + 單一強調色** —— 底調係近黑藍，強調色只有青色
+ *      （#38e8ff）。琥珀同紅只留畀「危險」語意，唔做裝飾。
+ *   3. **髮絲線** —— 1px 半透明線做分隔，唔用粗邊框。
+ *   4. **動效要克制但有方向** —— 進場由上而下、由左至右；唔用彈跳。
+ *      全部尊重 prefers-reduced-motion。
+ *   5. **掃描線 + 微網格** —— 令平面面板有「儀器」質感。
+ *
+ * 為何用 clip-path 而唔用 border-radius
+ * ------------------------------------
+ * 切角喺任何尺寸都保持銳利，而且唔會影響內容佈局（border-radius 大咗
+ * 會夾住文字）。代價係冇得用 border 畫框 —— 所以改用
+ * box-shadow inset 模擬。
+ *
+ * 為何另開一個檔案而唔係加落 main.css
+ * ----------------------------------
+ * main.css 已經有 1,000+ 行、而且歷史上有過重複嘅 #topbar 區塊。
+ * 新設計全部收喺呢個檔案，載入次序喺 main.css 之後，覆蓋舊規則 ——
+ * 咁樣「新設計」同「舊設計」嘅邊界清楚，日後刪舊嘢唔會誤刪新嘢。
+ */
+
+:root {
+  /* ---- HUD 專用 token ---- */
+  --hud-cyan: #38e8ff;
+  --hud-cyan-dim: rgba(56, 232, 255, 0.32);
+  --hud-cyan-faint: rgba(56, 232, 255, 0.10);
+  --hud-amber: #ffb347;
+  --hud-danger: #ff5a4d;
+  --hud-safe: #2fd6a8;
+  --hud-violet: #a06bd8;
+
+  --glass: rgba(12, 18, 27, 0.78);
+  --glass-solid: rgba(10, 15, 23, 0.94);
+  --hairline: rgba(120, 190, 220, 0.16);
+  --hairline-strong: rgba(120, 200, 235, 0.30);
+
+  --hud-clip: polygon(
+    10px 0, 100% 0, 100% calc(100% - 10px),
+    calc(100% - 10px) 100%, 0 100%, 0 10px
+  );
+  --hud-clip-sm: polygon(
+    6px 0, 100% 0, 100% calc(100% - 6px),
+    calc(100% - 6px) 100%, 0 100%, 0 6px
+  );
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ---- 全域細節 ---- */
+
+::selection {
+  background: var(--hud-cyan-dim);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.02); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(56, 232, 255, 0.28), rgba(56, 232, 255, 0.10));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hud-cyan-dim);
+  background-clip: padding-box;
+}
+
+:focus-visible {
+  outline: 1px solid var(--hud-cyan);
+  outline-offset: 2px;
+}
+
+/* ---- 頂欄：儀器面板 ---- */
+
+#topbar {
+  position: relative;
+  background: linear-gradient(180deg, rgba(20, 30, 44, 0.96), rgba(9, 14, 21, 0.96));
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: 0 1px 0 rgba(56, 232, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* 頂欄底部一條游走嘅發光線 —— 令靜態介面有「儀器運作中」嘅感覺 */
+#topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--hud-cyan), transparent);
+  animation: hud-sweep 6s var(--ease-in-out) infinite;
+}
+@keyframes hud-sweep {
+  0%, 100% { transform: translateX(-30%); opacity: 0.12; }
+  50%      { transform: translateX(30%); opacity: 0.6; }
+}
+
+#topbar h1 {
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 18px rgba(56, 232, 255, 0.35);
+}
+#topbar .tagline { letter-spacing: 0.03em; }
+#topbar .badge {
+  background: var(--hud-cyan-faint);
+  border: 1px solid var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+  letter-spacing: 0.06em;
+}
+
+.nav-btn {
+  clip-path: var(--hud-clip-sm);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--hairline);
+  letter-spacing: 0.04em;
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), transform var(--transition-fast);
+}
+.nav-btn:hover {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+  transform: translateY(-1px);
+}
+
+/*
+ * P2-3（a11y）：light 主題之下 `.nav-btn:hover` 嘅對比唔達標。
+ *
+ * 根因：`color: var(--hud-cyan)`（light = #0c6f88）疊喺
+ * `background: var(--hud-cyan-faint)`（半透明 accent）之上 —— 兩者色相相同，
+ * 實測對比只有 **~1.2**（遠低於 4.5:1）。
+ *
+ * Hover 係短暫狀態，但 WCAG 1.4.3 仍然適用 → light 之下改用 `--fg-primary`
+ * （同非 hover 一致），只靠背景／邊框顏色變化表達 hover。
+ * ⚠️ Dark 主題唔受影響（`--hud-cyan` = #38e8ff 亮青，對比足夠）。
+ */
+[data-theme="light"] .nav-btn:hover {
+  color: var(--fg-primary);
+}
+
+/* ---- 章節條：時間軸 scrubber ---- */
+
+.chapter-strip {
+  background: linear-gradient(180deg, rgba(11, 16, 24, 0.9), rgba(8, 12, 19, 0.9));
+  border-bottom: 1px solid var(--hairline);
+}
+.ch-pill {
+  position: relative;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  transition: background var(--transition-fast), color var(--transition-fast),
+    transform var(--transition-fast);
+}
+.ch-pill:hover {
+  background: var(--hud-cyan-faint);
+  color: var(--hud-cyan);
+  transform: translateY(-2px);
+}
+.ch-pill[aria-current="true"],
+.ch-pill.active {
+  background: var(--hud-cyan);
+  color: #05131a;
+  box-shadow: 0 0 0 1px var(--hud-cyan), 0 0 18px rgba(56, 232, 255, 0.55);
+  font-weight: 700;
+}
+
+/* ---- 地圖圖例：HUD 面板 ----
+ *
+ * 🔴 2026-09-23 緊急修正：呢度原本有一條
+ *   `.map-overlay { background: var(--glass); backdrop-filter: blur(10px) ... }`
+ * 規則 —— **完全錯誤**，會令整個地圖被模糊。
+ *
+ * 根因：`map.css`（V2）將 `.map-overlay` 定義為**全尺寸透明定位容器**
+ * （`position: absolute; inset: 0; pointer-events: none`），玻璃面板效果應該
+ * 落喺**內層** `.map-legend`（`map.css` 已定義）。但 `hud.css` 後載入 +
+ * 同等特異度 → 呢條規則贏 → 1060×741 嘅容器帶 `backdrop-filter: blur(10px)`
+ * → 底下成個地圖被模糊（用戶報「加咗個超級模糊嘅濾鏡，完全睇唔到地圖」）。
+ *
+ * 已移除。玻璃效果由 `map.css` 嘅 `.map-legend` 提供。
+ */
+@keyframes hud-in-left {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+.legend-title {
+  color: var(--hud-cyan);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+}
+.legend-item {
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+.legend-item:hover {
+  color: var(--fg-primary);
+  transform: translateX(2px);
+}
+.legend-item .dot,
+.legend-item .area { box-shadow: 0 0 10px currentColor; }
+.legend-lang-btn {
+  clip-path: var(--hud-clip-sm);
+  border: 1px solid var(--hairline);
+  background: rgba(255, 255, 255, 0.03);
+}
+.legend-lang-btn:hover {
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+}
+
+/* ---- 地圖控制 ---- */
+
+.map-ctrl {
+  clip-path: var(--hud-clip-sm);
+  background: var(--glass);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--hairline);
+  color: var(--fg-primary);
+  transition: all var(--transition-fast);
+}
+.map-ctrl:hover {
+  background: var(--hud-cyan);
+  color: #05131a;
+  border-color: var(--hud-cyan);
+  box-shadow: 0 0 20px rgba(56, 232, 255, 0.45);
+}
+.map-ctrl:active { transform: scale(0.94); }
+
+/* ---- 右側面板 ---- */
+
+.pane-story {
+  background: linear-gradient(180deg, rgba(11, 16, 24, 0.98), rgba(8, 12, 19, 0.98));
+  border-left: 1px solid var(--hairline);
+  box-shadow: -12px 0 32px rgba(0, 0, 0, 0.35);
+}
+
+.story-header {
+  border-bottom: 1px solid var(--hairline);
+  background: linear-gradient(180deg, rgba(56, 232, 255, 0.045), transparent);
+}
+.story-chapter-num {
+  color: var(--hud-cyan);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.story-summary,
+.story-events,
+.story-characters,
+.story-routes {
+  animation: hud-in-up 420ms var(--ease-out) both;
+}
+@keyframes hud-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ===========================================================================
+ * 區域圖層（SVG）
+ * =========================================================================== */
+
+.zone { cursor: pointer; }
+
+.zone-area {
+  transition: fill-opacity 220ms var(--ease-out), stroke-opacity 220ms var(--ease-out);
+}
+.zone:hover .zone-area { fill-opacity: 0.24; stroke-opacity: 1; }
+.zone.is-selected .zone-area { fill-opacity: 0.30; }
+
+/*
+ * 病窩掃描光環：由中心向外擴散。
+ *
+ * 為何只畀病窩：如果三種區域都脈動，畫面會變成「全部嘢都喺度跳」，
+ * 反而冇重點。只有危險區脈動，可以令用戶一眼掃到「邊度要避」。
+ */
+.zone-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: zone-scan 3.6s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+@keyframes zone-scan {
+  0%   { opacity: 0;    transform: scale(0.86); }
+  35%  { opacity: 0.55; }
+  100% { opacity: 0;    transform: scale(1.06); }
+}
+
+.zone-badge {
+  transition: transform 240ms var(--ease-out);
+  transform-origin: center;
+}
+.zone:hover .zone-badge { transform: scale(1.18); }
+
+.zone-label {
+  letter-spacing: 0.06em;
+  transition: opacity 200ms var(--ease-out);
+}
+.zone:hover .zone-label { opacity: 1; }
+
+.area-survivor  { border-color: var(--hud-safe);   color: var(--hud-safe); }
+.area-nest      { border-color: var(--hud-danger); color: var(--hud-danger); }
+.area-estimated { border-style: dashed; }
+
+/* ===========================================================================
+ * 區域檔案面板（Zone Dossier）
+ * =========================================================================== */
+
+.zone-dossier-mount {
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.zone-dossier-mount[hidden] { display: none; }
+
+.zd {
+  --zd-accent: var(--hud-cyan);
+  padding: 0 0 48px;
+  animation: hud-in-up 460ms var(--ease-out) both;
+}
+
+/* ---- 頭部 ---- */
+.zd-head {
+  position: relative;
+  padding: 18px 18px 16px;
+  background:
+    radial-gradient(
+      120% 100% at 0% 0%,
+      color-mix(in srgb, var(--zd-accent) 16%, transparent),
+      transparent 62%
+    ),
+    linear-gradient(180deg, rgba(16, 23, 33, 0.96), rgba(10, 15, 23, 0.96));
+  border-bottom: 1px solid var(--hairline);
+  overflow: hidden;
+}
+
+/* 頭部掃描線：CRT 質感 */
+.zd-head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.028) 0px,
+    rgba(255, 255, 255, 0.028) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+.zd-kind {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.zd-glyph {
+  font-size: 15px;
+  color: var(--zd-accent);
+  text-shadow: 0 0 14px var(--zd-accent);
+  animation: zd-glyph-pulse 2.8s var(--ease-in-out) infinite;
+}
+@keyframes zd-glyph-pulse {
+  0%, 100% { opacity: 0.75; }
+  50%      { opacity: 1; }
+}
+.zd-kind-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--zd-accent);
+  text-transform: uppercase;
+}
+.zd-kind-sub {
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+}
+
+.zd-name {
+  margin: 0 0 6px;
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.25;
+  text-shadow: 0 0 26px color-mix(in srgb, var(--zd-accent) 40%, transparent);
+}
+.zd-alias {
+  margin: 0 0 12px;
+  font-size: 11px;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+
+.zd-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 6px;
+  margin-top: 12px;
+}
+.zd-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 8px;
+  background: rgba(255, 255, 255, 0.035);
+  clip-path: var(--hud-clip-sm);
+  border-left: 2px solid var(--zd-accent);
+}
+.zd-metric b {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--fg-primary);
+  font-variant-numeric: tabular-nums;
+}
+.zd-metric i {
+  font-style: normal;
+  font-size: 9.5px;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+}
+
+.zd-hint {
+  margin: 0;
+  padding: 10px 18px;
+  font-size: 11.5px;
+  color: var(--fg-secondary);
+  line-height: 1.6;
+  border-bottom: 1px solid var(--hairline);
+  display: flex;
+  gap: 8px;
+}
+.zd-hint span { color: var(--zd-accent); flex-shrink: 0; }
+
+.zd-summary {
+  margin: 0;
+  padding: 14px 18px;
+  font-size: 12.5px;
+  line-height: 1.75;
+  color: var(--fg-primary);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--zd-accent) 7%, transparent),
+    transparent
+  );
+  border-bottom: 1px solid var(--hairline);
+}
+
+.zd-body { padding: 4px 0; }
+
+/* ---- 分節卡片（進場有 stagger，令內容「逐格亮起」） ---- */
+.zd-section {
+  padding: 12px 18px;
+  border-bottom: 1px solid rgba(120, 190, 220, 0.07);
+  animation: hud-in-up 380ms var(--ease-out) both;
+}
+.zd-section:nth-child(1) { animation-delay: 40ms; }
+.zd-section:nth-child(2) { animation-delay: 80ms; }
+.zd-section:nth-child(3) { animation-delay: 120ms; }
+.zd-section:nth-child(4) { animation-delay: 160ms; }
+.zd-section:nth-child(5) { animation-delay: 200ms; }
+.zd-section:nth-child(6) { animation-delay: 240ms; }
+
+.zd-section-title {
+  margin: 0 0 7px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--zd-accent);
+}
+.zd-icon { font-size: 11px; opacity: 0.9; }
+
+.zd-text {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.78;
+  color: var(--fg-secondary);
+}
+
+.zd-chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.zd-chip {
+  padding: 3px 9px;
+  font-size: 11px;
+  color: var(--fg-primary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--hairline);
+  clip-path: var(--hud-clip-sm);
+  transition: all var(--transition-fast);
+}
+.zd-chip:hover {
+  border-color: var(--zd-accent);
+  color: var(--zd-accent);
+  transform: translateY(-1px);
+}
+
+.zd-audit { list-style: none; margin: 0; padding: 0; }
+.zd-audit li {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 11px;
+  line-height: 1.6;
+  border-bottom: 1px dashed rgba(120, 190, 220, 0.10);
+}
+.zd-audit li:last-child { border-bottom: none; }
+.zd-audit i {
+  font-style: normal;
+  color: var(--fg-muted);
+  letter-spacing: 0.06em;
+}
+.zd-audit span { color: var(--fg-secondary); }
+
+.zd-evidence {
+  margin-top: 8px;
+  border: 1px solid var(--hairline);
+  clip-path: var(--hud-clip-sm);
+  background: rgba(0, 0, 0, 0.22);
+}
+.zd-evidence summary {
+  padding: 7px 10px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--hud-cyan);
+  cursor: pointer;
+  list-style: none;
+}
+.zd-evidence summary::-webkit-details-marker { display: none; }
+.zd-evidence summary::before { content: "▸ "; }
+.zd-evidence[open] summary::before { content: "▾ "; }
+.zd-evidence p {
+  margin: 0;
+  padding: 0 10px 10px;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--fg-secondary);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.zd-chapters { display: flex; flex-wrap: wrap; gap: 3px; }
+.zd-ch {
+  min-width: 26px;
+  padding: 2px 5px;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  color: var(--fg-muted);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.zd-ch:hover {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+  transform: translateY(-1px);
+}
+
+/* ---- 減少動效偏好 ---- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ===========================================================================
+ * 淺色主題覆蓋
+ * ===========================================================================
+ *
+ * HUD 樣式預設寫死深色（見上面註解）。淺色主題之下如果唔覆蓋，
+ * 就會出現「淺色底 + 淺色字」或者「深色底 + 深色字」。
+ * 呢一段將所有 HUD 表面改成淺色，同時保持切角、髮絲線同動效。
+ */
+
+[data-theme="light"] {
+  /* P2-3（a11y）：由 #0f7f9c（3.68:1，FAIL）改為 `tokens.css` 嘅 light `--accent`
+     值 #0c6f88（≥4.5:1 on rgb(223,231,227)）—— 統一兩套 token + 修對比。 */
+  --hud-cyan: #0c6f88;
+  --hud-cyan-dim: rgba(15, 127, 156, 0.30);
+  --hud-cyan-faint: rgba(15, 127, 156, 0.09);
+  --hud-amber: #a8761c;
+  --hud-danger: #c0392b;
+  --hud-safe: #1a8f6a;
+  --hud-violet: #7a4fa3;
+
+  --glass: rgba(255, 255, 255, 0.82);
+  --glass-solid: rgba(255, 255, 255, 0.96);
+  --hairline: rgba(40, 80, 110, 0.18);
+  --hairline-strong: rgba(40, 80, 110, 0.32);
+}
+
+[data-theme="light"] #topbar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(244, 241, 234, 0.97));
+  box-shadow: 0 1px 0 rgba(15, 127, 156, 0.12), 0 8px 24px rgba(31, 39, 51, 0.10);
+}
+[data-theme="light"] #topbar h1 { text-shadow: none; }
+[data-theme="light"] #topbar .badge {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+}
+
+[data-theme="light"] .nav-btn {
+  background: rgba(31, 39, 51, 0.035);
+  border-color: var(--hairline);
+  color: var(--fg-primary);
+}
+[data-theme="light"] .nav-btn:hover {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+}
+
+[data-theme="light"] .chapter-strip {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 241, 234, 0.92));
+}
+[data-theme="light"] .ch-pill {
+  background: rgba(31, 39, 51, 0.05);
+  color: var(--fg-secondary);
+}
+[data-theme="light"] .ch-pill[aria-current="true"],
+[data-theme="light"] .ch-pill.active {
+  background: var(--hud-cyan);
+  color: #fff;
+  box-shadow: 0 0 0 1px var(--hud-cyan), 0 0 16px rgba(15, 127, 156, 0.35);
+}
+
+/*
+ * 🔴 2026-09-23 緊急修正：`.map-overlay` 係**全尺寸透明容器**（`map.css` 定義），
+ * 唔係玻璃面板 —— 玻璃效果要落喺內層 `.map-legend`。
+ * 原本呢兩條規則（L654 同 L762，完全重複）令整個地圖蒙上一層玻璃 + 陰影。
+ */
+[data-theme="light"] .map-legend {
+  background: var(--glass);
+  box-shadow: inset 0 0 0 1px var(--hairline), 0 12px 32px rgba(31, 39, 51, 0.14);
+}
+[data-theme="light"] .legend-title { color: var(--hud-cyan); }
+[data-theme="light"] .legend-item:hover { color: var(--fg-primary); }
+
+[data-theme="light"] .map-ctrl {
+  background: var(--glass);
+  color: var(--fg-primary);
+  border-color: var(--hairline);
+}
+[data-theme="light"] .map-ctrl:hover {
+  background: var(--hud-cyan);
+  color: #fff;
+}
+
+[data-theme="light"] .pane-story {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 246, 241, 0.98));
+  box-shadow: -12px 0 32px rgba(31, 39, 51, 0.10);
+}
+[data-theme="light"] .story-header {
+  background: linear-gradient(180deg, rgba(15, 127, 156, 0.07), transparent);
+}
+
+[data-theme="light"] .zd-head {
+  background:
+    radial-gradient(
+      120% 100% at 0% 0%,
+      color-mix(in srgb, var(--zd-accent) 12%, transparent),
+      transparent 62%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 244, 239, 0.98));
+}
+[data-theme="light"] .zd-head::after { opacity: 0.35; }
+[data-theme="light"] .zd-name { text-shadow: none; }
+[data-theme="light"] .zd-metric { background: rgba(31, 39, 51, 0.045); }
+[data-theme="light"] .zd-chip {
+  background: rgba(31, 39, 51, 0.05);
+  color: var(--fg-primary);
+}
+[data-theme="light"] .zd-ch { background: rgba(31, 39, 51, 0.05); }
+[data-theme="light"] .zd-evidence { background: rgba(31, 39, 51, 0.04); }
+[data-theme="light"] .zd-section { border-bottom-color: rgba(40, 80, 110, 0.10); }
+[data-theme="light"] .zd-audit li { border-bottom-color: rgba(40, 80, 110, 0.12); }
+
+/* ===========================================================================
+ * 淺色主題覆蓋
+ * ===========================================================================
+ *
+ * HUD 樣式預設寫死深色（見上面註解）。淺色主題之下如果唔覆蓋，
+ * 就會出現「淺色底 + 淺色字」或者「深色底 + 深色字」。
+ * 呢一段將所有 HUD 表面改成淺色，同時保持切角、髮絲線同動效。
+ */
+
+[data-theme="light"] {
+  /* P2-3（a11y）：由 #0f7f9c（3.68:1，FAIL）改為 `tokens.css` 嘅 light `--accent`
+     值 #0c6f88（≥4.5:1 on rgb(223,231,227)）—— 統一兩套 token + 修對比。 */
+  --hud-cyan: #0c6f88;
+  --hud-cyan-dim: rgba(15, 127, 156, 0.30);
+  --hud-cyan-faint: rgba(15, 127, 156, 0.09);
+  --hud-amber: #a8761c;
+  --hud-danger: #c0392b;
+  --hud-safe: #1a8f6a;
+  --hud-violet: #7a4fa3;
+
+  --glass: rgba(255, 255, 255, 0.82);
+  --glass-solid: rgba(255, 255, 255, 0.96);
+  --hairline: rgba(40, 80, 110, 0.18);
+  --hairline-strong: rgba(40, 80, 110, 0.32);
+}
+
+[data-theme="light"] #topbar {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.97), rgba(244, 241, 234, 0.97));
+  box-shadow: 0 1px 0 rgba(15, 127, 156, 0.12), 0 8px 24px rgba(31, 39, 51, 0.10);
+}
+[data-theme="light"] #topbar h1 { text-shadow: none; }
+[data-theme="light"] #topbar .badge {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+}
+
+[data-theme="light"] .nav-btn {
+  background: rgba(31, 39, 51, 0.035);
+  border-color: var(--hairline);
+  color: var(--fg-primary);
+}
+[data-theme="light"] .nav-btn:hover {
+  background: var(--hud-cyan-faint);
+  border-color: var(--hud-cyan-dim);
+  color: var(--hud-cyan);
+}
+
+[data-theme="light"] .chapter-strip {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 241, 234, 0.92));
+}
+[data-theme="light"] .ch-pill {
+  background: rgba(31, 39, 51, 0.05);
+  color: var(--fg-secondary);
+}
+[data-theme="light"] .ch-pill[aria-current="true"],
+[data-theme="light"] .ch-pill.active {
+  background: var(--hud-cyan);
+  color: #fff;
+  box-shadow: 0 0 0 1px var(--hud-cyan), 0 0 16px rgba(15, 127, 156, 0.35);
+}
+
+/*
+ * 🔴 2026-09-23 緊急修正：`.map-overlay` 係**全尺寸透明容器**（`map.css` 定義），
+ * 唔係玻璃面板 —— 玻璃效果要落喺內層 `.map-legend`。
+ * 原本呢兩條規則（L654 同 L762，完全重複）令整個地圖蒙上一層玻璃 + 陰影。
+ */
+[data-theme="light"] .map-legend {
+  background: var(--glass);
+  box-shadow: inset 0 0 0 1px var(--hairline), 0 12px 32px rgba(31, 39, 51, 0.14);
+}
+[data-theme="light"] .legend-title { color: var(--hud-cyan); }
+[data-theme="light"] .legend-item:hover { color: var(--fg-primary); }
+
+[data-theme="light"] .map-ctrl {
+  background: var(--glass);
+  color: var(--fg-primary);
+  border-color: var(--hairline);
+}
+[data-theme="light"] .map-ctrl:hover {
+  background: var(--hud-cyan);
+  color: #fff;
+}
+
+[data-theme="light"] .pane-story {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 246, 241, 0.98));
+  box-shadow: -12px 0 32px rgba(31, 39, 51, 0.10);
+}
+[data-theme="light"] .story-header {
+  background: linear-gradient(180deg, rgba(15, 127, 156, 0.07), transparent);
+}
+
+[data-theme="light"] .zd-head {
+  background:
+    radial-gradient(
+      120% 100% at 0% 0%,
+      color-mix(in srgb, var(--zd-accent) 12%, transparent),
+      transparent 62%
+    ),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(246, 244, 239, 0.98));
+}
+[data-theme="light"] .zd-head::after { opacity: 0.35; }
+[data-theme="light"] .zd-name { text-shadow: none; }
+[data-theme="light"] .zd-metric { background: rgba(31, 39, 51, 0.045); }
+[data-theme="light"] .zd-chip {
+  background: rgba(31, 39, 51, 0.05);
+  color: var(--fg-primary);
+}
+[data-theme="light"] .zd-ch { background: rgba(31, 39, 51, 0.05); }
+[data-theme="light"] .zd-evidence { background: rgba(31, 39, 51, 0.04); }
+[data-theme="light"] .zd-section { border-bottom-color: rgba(40, 80, 110, 0.10); }
+[data-theme="light"] .zd-audit li { border-bottom-color: rgba(40, 80, 110, 0.12); }
