@@ -53,6 +53,14 @@ export interface BldRec {
 export interface TileGeometry {
   roads: RoadRec[];
   bld: BldRec[];
+  /**
+   * 該格嘅經緯範圍（度）。
+   *
+   * ⚠️ 只作**篩選**用途（`countBuildingsInView` 先做 bbox 相交測試，
+   * 唔相交就成格跳過）—— 唔加就會變成 O(全部已載入建築) 每 frame，
+   * 實測會令 Q10 冷 zoom 阻塞由 449 ms 升到 575 ms。
+   */
+  bbox?: { lon_min: number; lon_max: number; lat_min: number; lat_max: number };
 }
 
 export interface BaseDrawFrame {
@@ -254,6 +262,60 @@ interface TilePaths {
   roadUsed: Set<number>;
   bldUsed: Set<number>;
   buildings: number;
+  /** 該格經緯範圍（`countBuildingsInView` 先用佢篩選，唔相交就跳過）。 */
+  bbox: { lon_min: number; lon_max: number; lat_min: number; lat_max: number };
+  /**
+   * 每幢建築嘅質心（`[x0,y0, x1,y1, …]`，度空間）。
+   *
+   * ⚠️ 為何要存：B9 `RC-NOFAKEZOOM-ACCUM` —— no-fake-zoom 嘅「低密度」
+   * 判定原本用 `tileBuildingCount`（**跨已載入圖磚累加**）。LRU 上限 24 格，
+   * 所以「先睇過密集區再去稀疏區」會令稀疏區誤報 `ok`（唔顯示
+   * 「此區未有細節資料」）。正確語義係「**目前視窗內**有幾多幢」。
+   *
+   * 質心係每格常數，喺圖磚載入時計一次（唔係每 frame 重算）。
+   */
+  centroids: Float64Array;
+}
+
+/** 由質心陣列算 bbox（冇建築 → 空 bbox，永遠唔相交）。 */
+function bboxOfCentroids(c: Float64Array): {
+  lon_min: number;
+  lon_max: number;
+  lat_min: number;
+  lat_max: number;
+} {
+  if (c.length === 0) return { lon_min: 0, lon_max: 0, lat_min: 0, lat_max: 0 };
+  let x0 = Infinity;
+  let x1 = -Infinity;
+  let y0 = Infinity;
+  let y1 = -Infinity;
+  for (let i = 0; i < c.length; i += 2) {
+    if (c[i] < x0) x0 = c[i];
+    if (c[i] > x1) x1 = c[i];
+    if (c[i + 1] < y0) y0 = c[i + 1];
+    if (c[i + 1] > y1) y1 = c[i + 1];
+  }
+  if (!Number.isFinite(x0)) return { lon_min: 0, lon_max: 0, lat_min: 0, lat_max: 0 };
+  return { lon_min: x0, lon_max: x1, lat_min: y0, lat_max: y1 };
+}
+
+/** 由建築幾何算質心（`[x,y]` 對，度空間）。 */
+export function centroidsOf(bld: Array<{ pts: Float64Array }>): Float64Array {
+  const out = new Float64Array(bld.length * 2);
+  for (let i = 0; i < bld.length; i++) {
+    const pts = bld[i].pts;
+    const n = pts.length >> 1;
+    if (n === 0) continue;
+    let sx = 0;
+    let sy = 0;
+    for (let j = 0; j < n; j++) {
+      sx += pts[j * 2];
+      sy += pts[j * 2 + 1];
+    }
+    out[i * 2] = sx / n;
+    out[i * 2 + 1] = sy / n;
+  }
+  return out;
 }
 
 export class BaseGeometryLayer {
@@ -325,12 +387,15 @@ export class BaseGeometryLayer {
     if (this.tilePaths.has(key)) this.removeTile(key);
     const r = buildRoadPathsFrom(tile.roads);
     const b = buildBuildingPathsFrom(tile.bld);
+    const centroids = centroidsOf(tile.bld);
     this.tilePaths.set(key, {
       roads: r.paths,
       roadUsed: r.used,
       bld: b.paths,
       bldUsed: b.used,
       buildings: tile.bld.length,
+      bbox: tile.bbox ?? bboxOfCentroids(centroids),
+      centroids,
     });
     this.tileBuildingCount += tile.bld.length;
     this.aggregateDirty = true;
@@ -364,6 +429,7 @@ export class BaseGeometryLayer {
     const r = buildRoadPathsFrom(tile.roads);
     const buckets: Path2D[] = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
     const used = new Set<number>();
+    const centroids = new Float64Array(tile.bld.length * 2);
     let i = 0;
     while (i < tile.bld.length) {
       const end = Math.min(i + chunkSize, tile.bld.length);
@@ -372,6 +438,18 @@ export class BaseGeometryLayer {
         const bin = b.levels === 0 ? 0 : b.levels < 6 ? 1 : b.levels < 18 ? 2 : 3;
         ringToPath(buckets[bin], b.pts);
         used.add(bin);
+        // 質心同 `Path2D` 一齊喺同一片計，唔會另開一個長 task
+        const n = b.pts.length >> 1;
+        if (n > 0) {
+          let sx = 0;
+          let sy = 0;
+          for (let j = 0; j < n; j++) {
+            sx += b.pts[j * 2];
+            sy += b.pts[j * 2 + 1];
+          }
+          centroids[i * 2] = sx / n;
+          centroids[i * 2 + 1] = sy / n;
+        }
       }
       if (i < tile.bld.length) await yieldToEventLoop();
     }
@@ -383,6 +461,8 @@ export class BaseGeometryLayer {
       bld: paths,
       bldUsed: used,
       buildings: tile.bld.length,
+      bbox: tile.bbox ?? bboxOfCentroids(centroids),
+      centroids,
     });
     this.tileBuildingCount += tile.bld.length;
     this.aggregateDirty = true;
@@ -440,9 +520,53 @@ export class BaseGeometryLayer {
     return this.lastLowDensity;
   }
 
-  /** 目前圖磚嘅建築總數（測試／除錯用）。 */
+  /** 目前圖磚嘅建築總數（**跨已載入圖磚累加**，只作診斷用）。 */
   get buildingCount(): number {
     return this.tileBuildingCount;
+  }
+
+  /**
+   * 目前**視窗內**嘅建築數（B9 `RC-NOFAKEZOOM-ACCUM` 嘅修正）。
+   *
+   * ⚠️ 為何唔可以用 `tileBuildingCount`
+   * ----------------------------------
+   * `tileBuildingCount` 係**跨已載入圖磚累加**，而 LRU 上限係 24 格。
+   * 所以「先睇過密集區（例如將軍澳），再移去稀疏區」時，舊圖磚嘅建築
+   * 仍然計入 → 稀疏區誤報 `ok` → **唔會**顯示「此區未有細節資料」。
+   *
+   * 正確語義係「目前 viewBox 之內有幾多幢」。質心係每格常數（圖磚載入時
+   * 已計好），所以呢度只係 O(已載入建築數) 嘅簡單比較，唔需要重行幾何。
+   *
+   * @param latMin 視窗底部緯度（⚠️ **緯度**，唔係 user unit）
+   * @param latMax 視窗頂部緯度
+   */
+  countBuildingsInView(
+    lonMin: number,
+    lonMax: number,
+    latMin: number,
+    latMax: number,
+  ): number {
+    let n = 0;
+    for (const t of this.tilePaths.values()) {
+      // ⚠️ 先做 bbox 篩選：唔相交就成格跳過。唔做就會變成
+      //    O(全部已載入建築) 每 frame（實測 Q10 由 449 → 575 ms）。
+      const bb = t.bbox;
+      if (
+        bb.lon_max < lonMin ||
+        bb.lon_min > lonMax ||
+        bb.lat_max < latMin ||
+        bb.lat_min > latMax
+      ) {
+        continue;
+      }
+      const c = t.centroids;
+      for (let i = 0; i < c.length; i += 2) {
+        const x = c[i];
+        const y = c[i + 1];
+        if (x >= lonMin && x <= lonMax && y >= latMin && y <= latMax) n++;
+      }
+    }
+    return n;
   }
 
   /**
@@ -497,8 +621,20 @@ export class BaseGeometryLayer {
      * 東側 60% 嘅真空區就一直空白（B9 Q3/Q4 FAIL 嘅直接成因）。
      */
     const hatch = usesNoDetailHatch(view.w);
-    const low = hatch && isLowDensity(this.tileBuildingCount);
-    if (hatch) this.drawNoDetailHatch(ctx, frame, s, low);
+    /*
+     * ⚠️ 低密度判定用**視窗內**建築數，唔可以跨圖磚累加（B9 RC-NOFAKEZOOM-ACCUM）。
+     * 閘門仍然係 `level === 2`（原本語義）—— 紋理嘅閘門（`hatch`）係另一件事，
+     * 兩者刻意分開：紋理只喺 spec 嘅 `detail` tier 出現（見 Q3/Q4 嘅理由），
+     * 但「此區未有細節資料」嘅誠實狀態喺任何 level 2 都應該計。
+     */
+    const latTop = b.lat_max - (view.y - b.lat_min) * PROJ_COS;
+    const latBot = b.lat_max - (view.y + view.h - b.lat_min) * PROJ_COS;
+    const buildingsInView =
+      level === 2
+        ? this.countBuildingsInView(view.x, view.x + view.w, latBot, latTop)
+        : 0;
+    const low = level === 2 && isLowDensity(buildingsInView);
+    if (hatch) this.drawNoDetailHatch(ctx, frame, s, low, latTop, latBot);
 
     // ---- 綠地／工業區 ----
     if (this.greenPath) {
@@ -576,11 +712,10 @@ export class BaseGeometryLayer {
     }
 
     // ---- No-fake-zoom（spec §4.3）----
-    const buildings = level === 2 ? this.tileBuildingCount : 0;
     this.lastLowDensity = low;
 
     return {
-      buildings,
+      buildings: buildingsInView,
       hasTileGeometry: this.aggRoadUsed.size > 0,
       lowDensity: low,
       scale: s,
@@ -600,20 +735,24 @@ export class BaseGeometryLayer {
    * 會被蓋住，所以紋理只會喺資料真空區見到（見 `map-lod.ts` 嘅說明）。
    *
    * 線距／線粗／alpha 全部由 `map-lod.ts` 提供（唯一政策來源）。
+   *
+   * @param latTop 視窗頂部**緯度**（呼叫者已算好 —— 同低密度判定共用）
    */
   private drawNoDetailHatch(
     ctx: CanvasRenderingContext2D,
     frame: BaseDrawFrame,
     s: number,
     strong: boolean,
+    latTop: number,
+    latBot: number,
   ): void {
-    const { view, bbox, palette } = frame;
+    const { view, palette } = frame;
     const segs = noDetailHatchSegments({
       lonLeft: view.x,
       lonSpan: view.w,
       // ⚠️ view.y / view.h 係 user unit；矩陣要嘅係緯度（見 HatchFrame 註釋）。
-      latTop: bbox.lat_max - (view.y - bbox.lat_min) * PROJ_COS,
-      latBot: bbox.lat_max - (view.y + view.h - bbox.lat_min) * PROJ_COS,
+      latTop,
+      latBot,
       pxPerDeg: s,
     });
     if (segs.length === 0) return;

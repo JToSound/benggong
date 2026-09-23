@@ -14,6 +14,9 @@
 | **C** | `build_public_dataset.py` 改非破壞性（重跑唔削減凍結資產） | Gate 2 #2 | `c-characters-reproducibility.md` |
 | **A** | 「無細節陸地」紋理（解 B9 Q3/Q4「深 zoom 偏平」） | B9 Q3/Q4 | `a-deep-zoom-content-density.md` |
 | **B-MAX-1/2** | `SvgMap.ts` 改為 import `MAX_SCALE`（唔再寫死 64）；`phase-j-lod.test.ts` 改由政策模組讀 | 兩條路徑最深只到 Z6 | 同上 B 報告 §8 |
+| **Q10** | 冷 zoom 阻塞 632 → 449 ms（圖磚分片 + 快取 `svgWidthPx` + 去 `onReady` 冗餘 + 快取靜態螢幕層） | B9 Q10（**最長單一已達標**） | `q10-cold-zoom-blocking.md` |
+| **RC-NOFAKEZOOM-ACCUM** | 低密度判定改用視窗內建築質心（+ 圖磚 bbox 篩選） | B9 缺陷 / Q11 誠實性 | `rc-nofakezoom-accum.md` |
+| **殘留 `vite preview`** | 根因：`process.kill(-pid)` 喺 Windows 冇效 → 改 `taskkill /T /F` + PID 檔自愈 | e2e 穩定性 | （見 commit `ba0cdf1`） |
 
 ---
 
@@ -67,7 +70,7 @@
 |---|---|---|---|---|
 | 6 | **`characters.json` 可重現性** | 資料 | **高** | ✅ 已緩解（C 項：重跑唔會削減凍結資產）；**byte-level 重建**仍待做（要重建 Phase B → merge 全流程） |
 | 7 | **169 個塌縮座標** | C4 | 中 | 被 `inferred_from` 鎖定 |
-| 13 | **`RC-NOFAKEZOOM-ACCUM`** | C3 | 中 | `detailState` 用「跨已載入圖磚累加」→ 先去密集區再去稀疏區會誤報 `ok`（B9 已記錄） |
+| 13 | ~~**`RC-NOFAKEZOOM-ACCUM`**~~ | C3 | — | ✅ **已修**（見 `rc-nofakezoom-accum.md`） |
 | 14 | **`landuse=residential` 冇渲染** | C3 | 低 | 全港 11,398 個；對 `center` 錨點冇幫助（Z6 只佔 8.99%），但對市區內容密度有幫助 |
 
 ### 低優先（清理 / 完善）

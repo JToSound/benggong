@@ -530,9 +530,10 @@ describe("Q5 / Q6 / Q11：深 zoom 唔可以反向變空", () => {
       /*
        * ⚠️ 順序好重要：一定要**先**喺低 zoom 移到稀疏區，之後才放大。
        *
-       * `BaseGeometryLayer` 嘅 `tileBuildingCount` 係**累加**（LRU 24 格）。
-       * 如果先喺密集區放大過，快取會留住幾千幢建築，之後就算移到
-       * 荒地都唔會報 sparse。呢個測試刻意由乾淨 session 開始。
+       * 本測試刻意由**乾淨 session** 開始，驗證「本來就稀疏」嘅情況。
+       * 至於「先污染快取、再去稀疏區」嘅情況（B9 `RC-NOFAKEZOOM-ACCUM`）
+       * 由下面 ⭐ 嗰個測試專門驗證 —— 2026-09-24 已修好（`lowDensity`
+       * 改為用 `countBuildingsInView()` 而唔係跨圖磚累加值）。
        *
        * ⚠️ 為何係 3 次 zoom-in 而唔係 2 次
        * ---------------------------------
@@ -575,4 +576,77 @@ describe("Q5 / Q6 / Q11：深 zoom 唔可以反向變空", () => {
       await browser.close();
     }
   }, 180_000);
+
+  it("⭐ RC-NOFAKEZOOM-ACCUM：先去密集區、再去稀疏區都要報 sparse", async () => {
+    /*
+     * B9 記錄嘅缺陷：`lowDensity` 原本用 `tileBuildingCount`（**跨已載入
+     * 圖磚累加**），而 LRU 上限係 24 格。所以「先喺密集區（將軍澳）放大過，
+     * 之後搬去稀疏區」時，密集區嗰幾千幢建築仍然計入 → 稀疏區誤報 `ok`
+     * → 唔顯示「此區未有細節資料」（唔誠實）。
+     *
+     * 上面嗰個測試**刻意由乾淨 session 開始**去避開呢個 bug；本測試就係
+     * 專門驗證佢**已經修好**：一定要先入密集區污染快取，再搬去稀疏區。
+     *
+     * 修法：`countBuildingsInView()` 只計**目前 viewBox 內**嘅建築質心。
+     */
+    const browser = await launch();
+    if (!browser) return;
+    try {
+      const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+      await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+      await waitReady(page);
+      await page.waitForTimeout(500);
+
+      const rect = await page.evaluate(() => {
+        const r = document.querySelector("#svg-map")!.getBoundingClientRect();
+        return { x: r.x, y: r.y, w: r.width, h: r.height };
+      });
+
+      /*
+       * ① 先去**密集區**（將軍澳）放大到 level 2 → 圖磚載入幾千幢建築。
+       *
+       * 3 次 zoom-in（viewW ≈ 0.3186°）係可以搬得到 TKO 同 SPARSE 兩點嘅
+       * 級別（見上面 `reachableAt()` 嘅說明）；再 zoom-in 8 次 → viewW
+       * ≈ 0.039° ≤ 0.05 → level 2（圖磚層）。
+       */
+      const LOW_ZOOMS = 3;
+      const MID_ZOOMS = 8;
+      expect(reachableAt(LON_SPAN / 1.3 ** LOW_ZOOMS, TKO), "TKO 要搬得到").toBe(true);
+      await clickN(page, "#map-zoom-in", LOW_ZOOMS);
+      const atTko = await panTo(page, rect, TKO);
+      expect(
+        Math.abs(atTko.lon - TKO.lon) + Math.abs(atTko.lat - TKO.lat),
+        `panTo 應該搬到將軍澳（實際 ${atTko.lon.toFixed(4)},${atTko.lat.toFixed(4)}）`,
+      ).toBeLessThan(0.01);
+      await clickN(page, "#map-zoom-in", MID_ZOOMS);
+      await page.waitForTimeout(2500);
+
+      expect(await page.getAttribute("#basemap-canvas", "data-basemap-level")).toBe("2");
+      expect(
+        await page.getAttribute("#basemap-canvas", "data-detail-state"),
+        "密集區（將軍澳）應該係 ok",
+      ).toBe("ok");
+
+      /*
+       * ② 縮返去可以搬得遠嘅級別，搬去**稀疏區**，再放大到底。
+       *    圖磚快取（LRU）會留住密集區嗰幾千幢 —— 舊 code 就係喺呢度誤報 ok。
+       */
+      await clickN(page, "#map-zoom-out", MID_ZOOMS);
+      expect(reachableAt(LON_SPAN / 1.3 ** LOW_ZOOMS, SPARSE), "SPARSE 要搬得到").toBe(true);
+      const atSparse = await panTo(page, rect, SPARSE);
+      expect(
+        Math.abs(atSparse.lon - SPARSE.lon) + Math.abs(atSparse.lat - SPARSE.lat),
+        `panTo 應該搬到稀疏區（實際 ${atSparse.lon.toFixed(4)},${atSparse.lat.toFixed(4)}）`,
+      ).toBeLessThan(0.01);
+      await clickN(page, "#map-zoom-in", 16);
+      await page.waitForTimeout(2000);
+
+      expect(
+        await page.getAttribute("#basemap-canvas", "data-detail-state"),
+        "由密集區搬去稀疏區之後必須報 sparse —— 唔可以用跨圖磚累加值",
+      ).toBe("sparse");
+    } finally {
+      await browser.close();
+    }
+  }, 240_000);
 });

@@ -204,7 +204,7 @@ describe("繪製次序（靜態守門）", () => {
      * 有真實幾何嘅地方會被蓋住。
      */
     const iLand = SRC.indexOf("this.landPath, \"evenodd\"");
-    const iHatch = SRC.indexOf("this.drawNoDetailHatch(ctx, frame, s, low)");
+    const iHatch = SRC.indexOf("this.drawNoDetailHatch(");
     const iGreen = SRC.indexOf("palette.green");
     const iWater = SRC.indexOf("palette.water");
     const iBld = SRC.indexOf("buildingFills(palette)");

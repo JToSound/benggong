@@ -52,6 +52,14 @@ function bld(n: number, levels = 3) {
   return Array.from({ length: n }, () => ({ pts, levels }));
 }
 
+/** 一個以 `(cx, cy)` 為**精確質心**嘅正方形（4 點，唔重複最後一點）。 */
+function boxAt(cx: number, cy: number, d = 0.001, levels = 3) {
+  return {
+    pts: new Float64Array([cx - d, cy - d, cx + d, cy - d, cx + d, cy + d, cx - d, cy + d]),
+    levels,
+  };
+}
+
 describe("addTileChunked — 分片 + 讓出", () => {
   it("⭐ 每片之間讓出一次（N 片 = N−1 次讓出）", async () => {
     const { BaseGeometryLayer } = await loadLayer();
@@ -150,6 +158,73 @@ describe("addTileChunked — 分片 + 讓出", () => {
     // ceil(120 / 50) = 3 片 → 2 次讓出，而且全部喺完成之前
     expect(spy).toHaveBeenCalledTimes(2);
     expect(order).toEqual(["yield", "yield", "done"]);
+  });
+});
+
+describe("視窗內建築數（B9 RC-NOFAKEZOOM-ACCUM）", () => {
+  it("⭐ 只計視窗內嘅建築（唔可以跨圖磚累加）", async () => {
+    /*
+     * 原本嘅 bug：`lowDensity` 用 `tileBuildingCount`（**跨已載入圖磚累加**），
+     * LRU 上限 24 格 → 先睇過密集區再去稀疏區會誤報 `ok`，唔顯示
+     * 「此區未有細節資料」。
+     */
+    const { BaseGeometryLayer } = await loadLayer();
+    const geom = new BaseGeometryLayer();
+    const dense = Array.from({ length: 10 }, (_, i) => boxAt(0.001 + i * 0.001, 0.001));
+    const sparse = [boxAt(1.001, 1.001)];
+    await geom.addTileChunked("dense", { roads: [], bld: dense }, async () => {}, 4);
+    await geom.addTileChunked("sparse", { roads: [], bld: sparse }, async () => {}, 4);
+
+    // 累加值（舊行為）：11 —— 稀疏視窗會誤報「唔稀疏」
+    expect(geom.buildingCount).toBe(11);
+    // 視窗內（新行為）：稀疏格只有 1 幢
+    expect(geom.countBuildingsInView(1.0, 1.01, 1.0, 1.01)).toBe(1);
+    expect(geom.countBuildingsInView(0.0, 0.02, 0.0, 0.02)).toBe(10);
+    // 視窗外
+    expect(geom.countBuildingsInView(5, 6, 5, 6)).toBe(0);
+  });
+
+  it("視窗邊界係包含式（`>=` / `<=`）", async () => {
+    const { BaseGeometryLayer } = await loadLayer();
+    const geom = new BaseGeometryLayer();
+    await geom.addTileChunked(
+      "t",
+      { roads: [], bld: [boxAt(0.5, 0.5)] },
+      async () => {},
+      4,
+    );
+    expect(geom.countBuildingsInView(0.5, 0.5, 0.5, 0.5)).toBe(1);
+    expect(geom.countBuildingsInView(0.51, 0.6, 0.51, 0.6)).toBe(0);
+  });
+
+  it("質心計算：正方形質心 = 中心點", async () => {
+    const { centroidsOf } = await loadLayer();
+    const c = centroidsOf([boxAt(0.25, -0.75), boxAt(1.5, 2.25)]);
+    expect(c.length).toBe(4);
+    expect(c[0]).toBeCloseTo(0.25, 12);
+    expect(c[1]).toBeCloseTo(-0.75, 12);
+    expect(c[2]).toBeCloseTo(1.5, 12);
+    expect(c[3]).toBeCloseTo(2.25, 12);
+  });
+
+  it("移除圖磚之後唔再計入視窗數", async () => {
+    const { BaseGeometryLayer } = await loadLayer();
+    const geom = new BaseGeometryLayer();
+    await geom.addTileChunked("a", { roads: [], bld: [boxAt(0.1, 0.1)] }, async () => {}, 4);
+    await geom.addTileChunked("b", { roads: [], bld: [boxAt(0.1, 0.1)] }, async () => {}, 4);
+    expect(geom.countBuildingsInView(0, 1, 0, 1)).toBe(2);
+    geom.removeTile("a");
+    expect(geom.countBuildingsInView(0, 1, 0, 1)).toBe(1);
+    geom.clearTiles();
+    expect(geom.countBuildingsInView(0, 1, 0, 1)).toBe(0);
+  });
+
+  it("空幾何唔會污染質心（避免 NaN）", async () => {
+    const { centroidsOf } = await loadLayer();
+    const c = centroidsOf([{ pts: new Float64Array([]) }]);
+    expect(Number.isNaN(c[0])).toBe(false);
+    expect(c[0]).toBe(0);
+    expect(c[1]).toBe(0);
   });
 });
 

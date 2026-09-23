@@ -439,7 +439,23 @@ export class VectorBasemap {
            * ⚠️ 用 `addTileChunked`（唔用 `addTile`）：`Path2D` 建立同樣要
            * 分片，否則分片解碼省落嘅時間會喺呢一步一次過還返。
            */
-          await this.geom.addTileChunked(k, { roads, bld }, yieldToEventLoop, TILE_CHUNK);
+          /*
+           * 該格嘅經緯範圍 —— 交畀 `BaseGeometryLayer` 做「視窗內建築數」
+           * 嘅快速篩選（B9 `RC-NOFAKEZOOM-ACCUM`）。冇呢個 bbox 就會變成
+           * O(全部已載入建築) 每 frame。
+           */
+          const tileBbox = {
+            lon_min: m.bbox.lon_min + c * m.tile_deg,
+            lon_max: m.bbox.lon_min + (c + 1) * m.tile_deg,
+            lat_min: m.bbox.lat_min + r * m.tile_deg,
+            lat_max: m.bbox.lat_min + (r + 1) * m.tile_deg,
+          };
+          await this.geom.addTileChunked(
+            k,
+            { roads, bld, bbox: tileBbox },
+            yieldToEventLoop,
+            TILE_CHUNK,
+          );
           this.tilePoi.set(k, poi);
           this.poiOrderDirty = true;
           this.tileOrder.push(k);
