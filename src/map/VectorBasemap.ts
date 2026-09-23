@@ -123,6 +123,28 @@ const LABEL_FONT_STACK = '"Noto Sans TC", "PingFang HK", "Microsoft JhengHei", s
 /** 碰撞剔除嘅空間網格大細（CSS px）。 */
 const COLLIDE_CELL = 44;
 
+/** 標籤光暈粗細（CSS px）。 */
+const LABEL_HALO_WIDTH = 3.5;
+
+/**
+ * 圖磚處理分片大細（幢建築／片）。
+ *
+ * 實測：一格圖磚 ~4,500 幢建築，一次過「解碼 + 建 `Path2D`」要 ~59 ms
+ * （一個 59 ms longtask）。800 幢／片 ≈ 8–10 ms，全部落到 longtask
+ * 門檻（50 ms）之下。
+ */
+const TILE_CHUNK = 800;
+
+/**
+ * 讓出主線程（macrotask）。
+ *
+ * ⚠️ 一定要 `setTimeout`（macrotask）而唔係 `Promise.resolve()`
+ * （microtask）—— microtask 唔會讓瀏覽器 render 或者處理輸入，
+ * 分片就完全冇意義。
+ */
+const yieldToEventLoop = (): Promise<void> =>
+  new Promise<void>((resolve) => setTimeout(resolve, 0));
+
 export function assetUrl(p: string): string {
   const base = import.meta.env.BASE_URL || "/";
   return `${base.replace(/\/+$/, "")}/${p.replace(/^\/+/, "")}`;
@@ -159,6 +181,17 @@ export class VectorBasemap {
   private labelOrder: PoiRec[] = [];
   /** 量度過嘅文字寬度快取（key = rank|text）。 */
   private readonly labelWidths = new Map<string, number>();
+
+  /**
+   * 螢幕空間**靜態層**快取（海漸層／暗角）。
+   *
+   * 見 `layerCanvas()` 註釋 —— headless 軟件光柵化之下，全畫布漸層填色
+   * 係冷 zoom 阻塞嘅主要來源之一。
+   */
+  private readonly layerCache = new Map<
+    string,
+    { key: string; canvas: HTMLCanvasElement }
+  >();
 
   private loaded: Record<string, boolean> = {};
 
@@ -361,17 +394,37 @@ export class VectorBasemap {
       const [r, c] = k.split(",").map(Number);
       const url = `tiles/r${String(r).padStart(2, "0")}c${String(c).padStart(2, "0")}.json`;
       void this.fetchJSON(url)
-        .then((d) => {
+        .then(async (d) => {
           const q = m.quant;
           const roads = (d.roads as Array<number[]>).map((x) => ({
             cls: x[0],
             flags: x[1],
             pts: decodeDelta(x.slice(2), q),
           })) as RoadRec[];
-          const bld = (d.bld as Array<number[]>).map((x) => ({
-            pts: decodeDelta(x.slice(0, x.length - 1), q),
-            levels: x[x.length - 1],
-          })) as BldRec[];
+          /*
+           * ⚠️ 建築**分片解碼**（B9 Q10 冷 zoom 阻塞）。
+           *
+           * 一格圖磚實測有 ~4,500 幢建築，一次過 `decodeDelta` 出 4,500 個
+           * `Float64Array` + 建 `Path2D` 要 **~59 ms** —— 一個 59 ms 嘅
+           * longtask。分片之後每片 ~800 幢（約 8–10 ms），瀏覽器可以喺
+           * 片與片之間處理輸入同 render。
+           *
+           * ⚠️ 一定要用 macrotask 讓出（`setTimeout`）；`Promise.resolve()`
+           * 係 microtask，唔會讓出 rendering，分片就冇意義。
+           */
+          const rawBld = d.bld as Array<number[]>;
+          const bld: BldRec[] = [];
+          for (let i = 0; i < rawBld.length; i += TILE_CHUNK) {
+            const end = Math.min(i + TILE_CHUNK, rawBld.length);
+            for (let j = i; j < end; j++) {
+              const x = rawBld[j];
+              bld.push({
+                pts: decodeDelta(x.slice(0, x.length - 1), q),
+                levels: x[x.length - 1],
+              });
+            }
+            if (end < rawBld.length) await yieldToEventLoop();
+          }
           const poi = (d.poi as PoiRec[]).map((p) => ({
             ...p,
             lon: p.x / q,
@@ -382,8 +435,11 @@ export class VectorBasemap {
            * 聚合（`Path2D.addPath`）由 `BaseGeometryLayer.draw()` 喺
            * 下一個 frame 做一次 —— 唔會每格重行全部圖磚幾何。
            * 呢個就係 A8 P0-1（21,241 ms 阻塞）嘅修正核心。
+           *
+           * ⚠️ 用 `addTileChunked`（唔用 `addTile`）：`Path2D` 建立同樣要
+           * 分片，否則分片解碼省落嘅時間會喺呢一步一次過還返。
            */
-          this.geom.addTile(k, { roads, bld });
+          await this.geom.addTileChunked(k, { roads, bld }, yieldToEventLoop, TILE_CHUNK);
           this.tilePoi.set(k, poi);
           this.poiOrderDirty = true;
           this.tileOrder.push(k);
@@ -443,6 +499,10 @@ export class VectorBasemap {
     this.view = view;
     this.cssW = Math.max(1, cssW);
     this.cssH = Math.max(1, cssH);
+    if (dpr !== this.dpr) {
+      // DPR 變 → 量度過嘅文字寬度唔再啱
+      this.labelWidths.clear();
+    }
     this.dpr = dpr;
     const next = selectBasemapLevel(view.w);
     /*
@@ -486,13 +546,9 @@ export class VectorBasemap {
       this.canvas.height = pxH;
     }
 
-    // ---- 海 ----
+    // ---- 海 + 格線（螢幕空間；海同暗角係靜態 → 用快取 canvas blit）----
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-    const g = ctx.createLinearGradient(0, 0, 0, H);
-    g.addColorStop(0, this.palette.seaTop);
-    g.addColorStop(1, this.palette.seaBottom);
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, W, H);
+    this.blitSea(ctx, W, H);
     this.drawGrid(ctx, W, H);
 
     if (!this.manifest) return;
@@ -512,7 +568,7 @@ export class VectorBasemap {
     ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
     this.drawLabels(ctx, stats.scale, stats.offsetX, stats.offsetY);
     if (stats.lowDensity) this.drawNoDetailNotice(ctx, W, H);
-    this.drawVignette(ctx, W, H);
+    this.blitVignette(ctx, W, H);
 
     /*
      * No-fake-zoom 狀態（Q11）。
@@ -537,14 +593,65 @@ export class VectorBasemap {
    *
    * 為何要：平面填色嘅地圖四邊同中央一樣亮，睇落「平」同「未完成」。
    * 加一層由邊緣向內漸淡嘅黑，令視線自然集中喺中央。
+   *
+   * ⚠️ 內容係**螢幕空間、靜態**（只跟尺寸／DPR／配色），所以快取落
+   * 一張 canvas，每 frame 只 blit（見 `layerCanvas()` 註釋）。
    */
-  private drawVignette(ctx: CanvasRenderingContext2D, W: number, H: number): void {
-    const r = Math.hypot(W, H) / 2;
-    const g = ctx.createRadialGradient(W / 2, H / 2, r * 0.45, W / 2, H / 2, r);
-    g.addColorStop(0, "rgba(0,0,0,0)");
-    g.addColorStop(1, this.palette.vignette);
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, W, H);
+  private blitVignette(ctx: CanvasRenderingContext2D, W: number, H: number): void {
+    const c = this.layerCanvas("vignette", W, H, (g) => {
+      const r = Math.hypot(W, H) / 2;
+      const grad = g.createRadialGradient(W / 2, H / 2, r * 0.45, W / 2, H / 2, r);
+      grad.addColorStop(0, "rgba(0,0,0,0)");
+      grad.addColorStop(1, this.palette.vignette);
+      g.fillStyle = grad;
+      g.fillRect(0, 0, W, H);
+    });
+    if (c) ctx.drawImage(c, 0, 0, W, H);
+  }
+
+  /**
+   * 海（垂直漸層）。
+   *
+   * ⚠️ 同上：螢幕空間、靜態（只跟尺寸／DPR／配色）。
+   */
+  private blitSea(ctx: CanvasRenderingContext2D, W: number, H: number): void {
+    const c = this.layerCanvas("sea", W, H, (g) => {
+      const grad = g.createLinearGradient(0, 0, 0, H);
+      grad.addColorStop(0, this.palette.seaTop);
+      grad.addColorStop(1, this.palette.seaBottom);
+      g.fillStyle = grad;
+      g.fillRect(0, 0, W, H);
+    });
+    if (c) ctx.drawImage(c, 0, 0, W, H);
+  }
+
+  /**
+   * 螢幕空間靜態層嘅快取（B9 Q10 冷 zoom 阻塞）。
+   *
+   * 為何要快取：海漸層同暗角都係**全畫布**漸層填色（785k px）。headless
+   * Chromium 用**軟件光柵化**，每個漸層填色要逐像素計漸層值；快取之後
+   * 每 frame 只係一次 `drawImage`（唔需要再計漸層）。
+   *
+   * 快取鍵包含尺寸／DPR／配色 —— 三者任一改變就要重建。
+   */
+  private layerCanvas(
+    kind: "sea" | "vignette",
+    W: number,
+    H: number,
+    paint: (g: CanvasRenderingContext2D) => void,
+  ): HTMLCanvasElement | null {
+    const key = `${kind}|${Math.round(W)}x${Math.round(H)}@${this.dpr}|${this.palette.seaTop}|${this.palette.seaBottom}|${this.palette.vignette}`;
+    const cached = this.layerCache.get(kind);
+    if (cached && cached.key === key) return cached.canvas;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(W * this.dpr));
+    canvas.height = Math.max(1, Math.round(H * this.dpr));
+    const g = canvas.getContext("2d");
+    if (!g) return null;
+    g.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    paint(g);
+    this.layerCache.set(kind, { key, canvas });
+    return canvas;
   }
 
   /** 經緯網格（未來感底紋）。 */
@@ -688,9 +795,19 @@ export class VectorBasemap {
       if (hits(box)) continue;
       insert(box);
       drawnNames.add(p.n);
+      /*
+       * ⚠️ 唔可以用 sprite 快取（實測否決，2026-09-24）
+       * ------------------------------------------------
+       * 試過將「光暈 + 填色」預先畫落細 canvas 再 `drawImage`：
+       * 標籤成本**由 184 ms 升到 260 ms**（+41%）。原因係 `drawImage`
+       * 嘅目標座標係分數 px → 每次貼圖都要做**濾波重取樣**，比原生
+       * 字形光柵化更慢；而且連續縮放期間可見標籤集每格都變，命中率
+       * 唔足以抵銷建 canvas 嘅開銷。
+       * → 保持直接 `strokeText` + `fillText`。
+       */
       ctx.font = VectorBasemap.fontOf(p.r);
       ctx.strokeStyle = this.palette.labelHalo;
-      ctx.lineWidth = 3.5;
+      ctx.lineWidth = LABEL_HALO_WIDTH;
       ctx.strokeText(p.n, x, py);
       ctx.fillStyle = this.palette.label[p.r] ?? this.palette.label[5];
       ctx.fillText(p.n, x, py);
@@ -750,6 +867,8 @@ export class VectorBasemap {
     this.tilePoi.clear();
     this.tileOrder.length = 0;
     this.tilePending.clear();
+    this.labelWidths.clear();
+    this.layerCache.clear();
     this.geom.dispose();
   }
 }

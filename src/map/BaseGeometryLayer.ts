@@ -336,6 +336,58 @@ export class BaseGeometryLayer {
     this.aggregateDirty = true;
   }
 
+  /**
+   * 加入一格圖磚（**分片非同步**版本）。
+   *
+   * ⚠️ 為何要分片（B9 Q10 冷 zoom 阻塞）
+   * ----------------------------------
+   * CDP profile 實測：一格圖磚（~4,500 幢建築）嘅「`decodeDelta` +
+   * `Path2D` 建立」要 **~59 ms**，一次過做就係一個 59 ms 嘅 longtask。
+   * 分片之後每片（預設 600 幢）約 8–10 ms —— 瀏覽器可以喺片與片之間
+   * 處理輸入同 render，唔會再出現 50 ms 以上嘅阻塞。
+   *
+   * ⚠️ 總 CPU 工作量**不變**，只係由「一次長阻塞」變成「多次短工作」。
+   * 呢個係回應性嘅真實改善（唔係繞過量度）—— longtask API 只計 ≥50 ms
+   * 嘅 task，所以分片之後呢部分唔會再計入。
+   *
+   * @param yieldToEventLoop 讓出主線程嘅函數（呼叫者提供，通常係
+   *   `() => new Promise((r) => setTimeout(r, 0))`）。⚠️ 唔可以用
+   *   microtask（`Promise.resolve()`）—— microtask 唔會讓出 rendering。
+   */
+  async addTileChunked(
+    key: string,
+    tile: TileGeometry,
+    yieldToEventLoop: () => Promise<void>,
+    chunkSize = 600,
+  ): Promise<void> {
+    if (this.tilePaths.has(key)) this.removeTile(key);
+    const r = buildRoadPathsFrom(tile.roads);
+    const buckets: Path2D[] = [new Path2D(), new Path2D(), new Path2D(), new Path2D()];
+    const used = new Set<number>();
+    let i = 0;
+    while (i < tile.bld.length) {
+      const end = Math.min(i + chunkSize, tile.bld.length);
+      for (; i < end; i++) {
+        const b = tile.bld[i];
+        const bin = b.levels === 0 ? 0 : b.levels < 6 ? 1 : b.levels < 18 ? 2 : 3;
+        ringToPath(buckets[bin], b.pts);
+        used.add(bin);
+      }
+      if (i < tile.bld.length) await yieldToEventLoop();
+    }
+    const paths: Array<Path2D | null> = new Array(4).fill(null);
+    for (const bin of used) paths[bin] = buckets[bin];
+    this.tilePaths.set(key, {
+      roads: r.paths,
+      roadUsed: r.used,
+      bld: paths,
+      bldUsed: used,
+      buildings: tile.bld.length,
+    });
+    this.tileBuildingCount += tile.bld.length;
+    this.aggregateDirty = true;
+  }
+
   removeTile(key: string): void {
     const t = this.tilePaths.get(key);
     if (!t) return;
@@ -343,7 +395,6 @@ export class BaseGeometryLayer {
     this.tileBuildingCount -= t.buildings;
     this.aggregateDirty = true;
   }
-
   clearTiles(): void {
     this.tilePaths.clear();
     this.tileBuildingCount = 0;

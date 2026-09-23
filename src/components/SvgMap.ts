@@ -487,6 +487,21 @@ export class SvgMap {
   private basemap: VectorBasemap | null = null;
   /** 容器尺寸監察（用嚟喺 panel 開合／視窗縮放時重畫底圖）。 */
   private resizeObserver: ResizeObserver | null = null;
+
+  /**
+   * `svgWidthPx()` 嘅快取（CSS px）。
+   *
+   * ⚠️ 為何一定要快取：`getBoundingClientRect()` 會**強制同步 layout**。
+   * `render()` 嘅 cluster 迴圈每個 cluster 都叫一次 `svgWidthPx()`，
+   * 而 `render()` 又喺**每次按鈕縮放**都行一次 —— 即係一次冷 zoom
+   * （20 下）會做幾十次強制 layout。CDP CPU profile 實測
+   * `getBoundingClientRect` 佔 **59 ms**，就係呢度。
+   *
+   * 快取失效點：容器尺寸改變（`ResizeObserver`）。`viewBox` 改變**唔會**
+   * 改 CSS 尺寸，所以縮放唔需要失效。
+   * 0 唔會入快取（headless 早期未 layout，之後要再試）。
+   */
+  private svgWidthCache = 0;
   /** 向量底圖是否已失敗（失敗 = 退回 raster）。 */
   private basemapFailed = false;
 
@@ -657,7 +672,9 @@ export class SvgMap {
    * 而唔係畫一個錯尺寸嘅 badge。
    */
   private svgWidthPx(): number {
+    if (this.svgWidthCache > 0) return this.svgWidthCache;
     const r = this.svg.getBoundingClientRect();
+    if (r.width > 0) this.svgWidthCache = r.width;
     return r.width > 0 ? r.width : 0;
   }
 
@@ -1013,8 +1030,21 @@ export class SvgMap {
     if (!canvas) return;
     this.basemap = new VectorBasemap(canvas);
     this.basemap.onReady = () => {
+      const wasReady = this.wrap.classList.contains("basemap-vector-ready");
       this.wrap.classList.add("basemap-vector-ready");
-      this.syncBasemapView();
+      /*
+       * ⚠️ 只喺**第一次** ready 才 sync（B9 Q10 冷 zoom 阻塞）。
+       *
+       * `VectorBasemap.emitReady()` **每次圖磚載入都會 fire**。如果每次
+       * 都 sync：`getBoundingClientRect()`（強制同步 layout）＋
+       * `setView()`（`ensureTiles` + `scheduleDraw` → 再一次全畫布重繪）。
+       * 實測冷 zoom 載入 4 格圖磚 = **4 次冗餘重繪**，每格重繪都係一個
+       * 幾十 ms 嘅 task。
+       *
+       * 容器尺寸改變由 `ResizeObserver` 負責（見 `initBasemap()`），
+       * 所以呢度唔需要補。
+       */
+      if (!wasReady) this.syncBasemapView();
     };
     this.basemap.onError = (e) => {
       console.warn("[底圖] 向量底圖載入失敗，退回 raster：", e.message);
@@ -1032,7 +1062,11 @@ export class SvgMap {
      * 舊尺寸，右邊出現一條未繪製嘅空白。
      */
     if (typeof ResizeObserver !== "undefined") {
-      this.resizeObserver = new ResizeObserver(() => this.syncBasemapView());
+      this.resizeObserver = new ResizeObserver(() => {
+        // 容器尺寸變 → `svgWidthPx()` 快取失效（見該欄位註釋）
+        this.svgWidthCache = 0;
+        this.syncBasemapView();
+      });
       this.resizeObserver.observe(this.wrap);
     }
   }
