@@ -9,8 +9,13 @@ data/private/**
 # 防呆：即使上面規則改動，以下檔案都明確排除
 Bing-Gang-_full.jsonl
 Bing-Gang-_full-2.md
-*clean*.jsonl
-*clean*.md
+# ⚠️ 唔可以用全局 `*clean*` —— 會誤中 `docs/progress/*cleanup*.md`
+#    （實測已發生兩次：gate-2-legacy-cleanup.md、gate-2-raster-cleanup.md
+#     兩個進度報告都被靜默 ignore，令報告 commit 唔到）
+#    → 收窄為「repo 根目錄」+「data/ 之下」，保留防呆作用而唔誤中文件。
+/*clean*.jsonl
+/*clean*.md
+data/**/*clean*
 
 # ---- Node / Vite ----
 node_modules/
@@ -62,3 +67,31 @@ desktop.ini
 
 # 編年史子代理任務數據（中間檔案）
 .chronicle-task/
+
+# 區域抽取子代理任務數據
+#
+# ⚠️ 呢個目錄包含**由小說全文切出嚟嘅逐章文字檔**（`.zones-task/chapters/`），
+# 屬私有資料，同 `data/private/` 同等級 —— 永遠不得 commit、不得 deploy。
+# 合併後嘅公開結果喺 `data/public/zones.geojson`。
+.zones-task/
+
+# 視覺檢查截圖（臨時）
+.shots/
+
+# ---- 量測／審計產出（294 MB：raw 量測、截圖、log）----
+#
+# ⚠️ 為何要 ignore：`artifacts/` 有 294 MB，全部係**可再生**嘅量測輸出
+#    （Chromium 截圖、canvas raw metrics、longtask log、trace）。呢啲
+#    唔應該入 repo。
+#
+# ⚠️ 為何用 `artifacts/**` 而唔係 `artifacts/`：gitignore 規定「父目錄被
+#    排除就唔可以再 include 入面嘅檔案」。用 `artifacts/**` + `!artifacts/**/`
+#    令目錄本身唔被排除，之後才可以用 `!` 保留工具腳本。
+#
+# ✅ 例外：可重跑嘅診斷／分析**工具腳本**（合計 < 1 MB，多份進度報告有引用，
+#    例如 `artifacts/gate2/analyze-legacy-css.py`）。長期工具應該搬入
+#    `scripts/`（已有先例：`scripts/probe_zoom_coverage.py`）。
+artifacts/**
+!artifacts/**/
+!artifacts/**/*.py
+!artifacts/**/*.mjs
