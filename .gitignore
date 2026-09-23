@@ -37,6 +37,8 @@ coverage/
 .nyc_output/
 playwright-report/
 test-results/
+# e2e globalSetup 記錄 preview server PID（見 tests/e2e.global-setup.ts）
+.preview-server.pid
 
 # ---- 環境變數（只可 commit .env.example）----
 .env
