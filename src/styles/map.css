@@ -611,3 +611,33 @@
     transform: none;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   P1-2：地圖元素鍵盤焦點環（A7 驗收矩陣 §10.9）
+   ══════════════════════════════════════════════════════════════════════════
+
+   ⚠️ 為何唔用 `outline`：SVG 圖形（`<circle>` / `<path>` / `<g>`）冇 CSS
+   box model，Chromium 對 SVG 元素嘅 `outline` 支援唔一致（實測會出現
+   「focus 咗但完全睇唔到」）。所以改用 `filter: drop-shadow()` —— 佢係
+   按**圖形輪廓**發光，任何 SVG 形狀都一定見到。
+
+   顏色用 `--focus-ring`（`tokens.css` 嘅唯一顏色權威），同鍵盤焦點環
+   其他部分一致。雙層 shadow（3px 實邊 + 8px 光暈）確保淺色／深色底圖
+   都夠對比（底圖係 canvas，顏色唔可控）。 */
+
+#svg-map .zone:focus-visible,
+#svg-map .route-line:focus-visible,
+#svg-map .location-marker:focus-visible,
+#svg-map .location-marker-cluster:focus-visible,
+#svg-map .event-marker:focus-visible {
+  outline: none;
+  filter: drop-shadow(0 0 2px var(--focus-ring)) drop-shadow(0 0 7px var(--focus-ring));
+}
+
+/* 焦點中嘅元素要喺最上層 —— 否則可能被其他圖層蓋住（例如 zone label）。 */
+#svg-map .zone:focus-visible,
+#svg-map .location-marker:focus-visible,
+#svg-map .location-marker-cluster:focus-visible,
+#svg-map .event-marker:focus-visible {
+  z-index: 3;
+}

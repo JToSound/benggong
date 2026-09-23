@@ -63,6 +63,12 @@ import {
   resolveHit,
 } from "../map/map-interactions";
 import { MapControls } from "../map/MapControls";
+import {
+  MAP_INTERACTIVE_SELECTOR,
+  isNavigationAction,
+  resolveMapKey,
+  rovingIndex,
+} from "../map/map-keyboard";
 import type { LayerFlags } from "../types/state";
 import { prefersReducedMotion } from "../motion";
 import basemapCoords from "../../public/assets/hk-basemap-coords.json";
@@ -487,6 +493,43 @@ export class SvgMap {
   private basemap: VectorBasemap | null = null;
   /** 容器尺寸監察（用嚟喺 panel 開合／視窗縮放時重畫底圖）。 */
   private resizeObserver: ResizeObserver | null = null;
+
+  /**
+   * roving tabindex 記住嘅目標（`kbKeyOf()` 砌出嘅字串）。
+   *
+   * ⚠️ 為何要記住：`render()` 會 `replaceChildren()` 重建圖層 → 焦點會
+   * 消失。記住 key 之後，下一個 render 可以將 `tabindex="0"` 放返喺
+   * 「同一個」元素（例如同一個 zone）而唔係永遠跳返第一個。
+   */
+  private kbFocusKey = "";
+
+  /**
+   * 地圖元素應唔應該持有焦點。
+   *
+   * ⚠️ 為何需要（P1-2 回歸根因，2026-09-24 實測）
+   * ------------------------------------------
+   * `render()` 會 `replaceChildren()` **重建**圖層 → 啱啱聚焦嘅
+   * `.zone` / marker 元素會被銷毀 → 焦點跌返 `BODY`。後果：地圖自己嘅
+   * 快捷鍵（`0` 重置、`+` / `-` 縮放、方向鍵平移，全部綁喺 `#svg-map`
+   * 並要求焦點喺 SVG 之內）**靜默失效**。
+   *
+   * 呢個就係之前「加 tabindex 令 e2e fail、根因未明」嘅真正原因。
+   * 修法：記住「地圖應該有焦點」，喺 `render()` 尾部（`applyRovingTabindex()`）
+   * 用**同一個 key** 還原焦點；焦點離開地圖（`focusout` 去咗 SVG 以外）
+   * 就清除，唔會搶走焦點。
+   */
+  private kbWantFocus = false;
+
+  /**
+   * `render()` 進行中嘅守衛。
+   *
+   * ⚠️ 為何需要：`render()` 嘅 `replaceChildren()` 會**銷毀**當時聚焦嘅
+   * 地圖元素，瀏覽器隨即 fire 一個 `focusout`，而 `relatedTarget` 係
+   * `null`（唔係「去咗另一個元素」）。如果 `focusout` 喺呢個時候清除
+   * `kbWantFocus`，`applyRovingTabindex()` 就唔會還原焦點 —— 呢個就係
+   * 「明明加咗還原邏輯但焦點仍然變 BODY」嘅原因（實測）。
+   */
+  private rendering = false;
 
   /**
    * `svgWidthPx()` 嘅快取（CSS px）。
@@ -1238,6 +1281,21 @@ export class SvgMap {
       // 唔可以搶走輸入框嘅按鍵
       const t = e.target as Element | null;
       if (t && t.closest?.("input, textarea, select")) return;
+      /*
+       * ⚠️ 只跳過**方向鍵**（唔係整個 handler）。
+       *
+       * 焦點喺**地圖元素**（zone／marker／event）時，方向鍵係「喺元素之間
+       * 移動」（P1-2 roving tabindex，見 `bindMapKeyboard()`），唔應該同時
+       * 平移地圖。但 `0`（重置）／`+` / `-`（縮放）仍然要生效 ——
+       * 之前寫成「有地圖元素就成個 return」，連 `0` 都死埋（實測）。
+       */
+      const onMapEl = Boolean(t?.closest?.(MAP_INTERACTIVE_SELECTOR));
+      const isArrow =
+        e.key === "ArrowUp" ||
+        e.key === "ArrowDown" ||
+        e.key === "ArrowLeft" ||
+        e.key === "ArrowRight";
+      if (onMapEl && isArrow) return;
       const step = e.shiftKey ? 120 : 40;
       switch (e.key) {
         case "+":
@@ -1280,25 +1338,208 @@ export class SvgMap {
    *   · `resolveHit()` 嘅次序可以 node 單測；
    *   · handler 只管分派（`dispatchHit()`）。
    */
-  private bindSvgDelegation(): void {
-    /** 共用嘅命中處理 —— 由 `click` 同 `pointerup` 兩條路徑呼叫。 */
-    const handleHit = (targetEl: Element): void => {
-      const target = resolveHit(targetEl);
-      dispatchHit(target, {
-        onZone: (id) => this.app.setSelectedZone(id),
-        onRoute: (id) => {
-          const route = this.data.routes.features.find(
-            (f) => f.properties.id === id,
-          );
-          if (route) this.app.setChapter(route.properties.chapters_span[0]);
-        },
-        // 聚合標記：放大去拆開佢（而唔係選中單一地點）
-        onMarker: (id) => this.zoomToLocation(id),
-        onEvent: (id) => this.app.setSelectedEvent(id),
-      });
+  /**
+   * 共用嘅命中分派 —— `click` / `pointerup` / 鍵盤 `Enter` 三條路徑都經過。
+   *
+   * 抽成方法而唔係局部 arrow function：鍵盤啟動要由另一個 handler 呼叫
+   * （見 `bindMapKeyboard()`），而**行為必須完全一致**（唔可以兩套邏輯漂移）。
+   */
+  private handleHitAt(targetEl: Element): void {
+    const target = resolveHit(targetEl);
+    dispatchHit(target, {
+      onZone: (id) => this.app.setSelectedZone(id),
+      onRoute: (id) => {
+        const route = this.data.routes.features.find(
+          (f) => f.properties.id === id,
+        );
+        if (route) this.app.setChapter(route.properties.chapters_span[0]);
+      },
+      // 聚合標記：放大去拆開佢（而唔係選中單一地點）
+      onMarker: (id) => this.zoomToLocation(id),
+      onEvent: (id) => this.app.setSelectedEvent(id),
+    });
+  }
+
+  /**
+   * 點擊地圖元素之後，確保焦點**留喺地圖之內**（P1-2 回歸修正）。
+   *
+   * ⚠️ 為何一定要做（2026-09-24 實測）
+   * --------------------------------
+   * 為 `.zone` 等元素加 `tabindex` 之後，Chromium「點擊 → 聚焦最近可聚焦
+   * 祖先」嘅行為變咗：實測點完 zone 之後 `document.activeElement` 變
+   * **BODY**（唔係 SVG，亦唔係 zone）。後果係地圖自己嘅快捷鍵
+   * （`0` 重置、`+` / `-` 縮放、方向鍵平移）**全部靜默失效** ——
+   * 因為 `bindKeyboard()` 綁喺 `#svg-map`，要求焦點喺 SVG 之內。
+   *
+   * 呢個就係之前「加 tabindex 令 e2e fail、根因未明」嘅真正根因
+   * （`tests/map-interaction.e2e.test.ts` 嘅「輕觸要選中、拖曳要平移」）。
+   *
+   * 修法：明確 `focus()` 命中嘅元素；如果瀏覽器唔支援（SVG `<g>` +
+   * `tabindex` 喺 Chromium 支援唔一致），**退返 `#svg-map`** ——
+   * 寧願焦點落喺 SVG 根，都唔可以變 BODY。
+   */
+  private focusHitElement(target: Element): void {
+    if (typeof target.closest !== "function") return;
+    const el = target.closest(MAP_INTERACTIVE_SELECTOR) as SVGElement | null;
+    if (!el) return;
+    this.kbWantFocus = true;
+    el.focus();
+    if (document.activeElement !== el) this.svg.focus();
+  }
+
+  /**
+   * 將地圖元素標記為「可鍵盤操作」（P1-2 / A7 驗收矩陣 §10.9）。
+   *
+   * ⚠️ `tabindex` 一律先設 `-1`：**邊個係 `0` 由 `applyRovingTabindex()`
+   * 統一決定**（roving tabindex）。如果喺呢度直接設 `0`，48 個 zone 就會
+   * 變成 48 個 Tab stop —— 鍵盤用戶要 Tab 過百次才離開地圖，而且會撞紅
+   * `a11y-keyboard.e2e.test.ts` 嘅「全頁 Tab stop < 600」同「頂欄導覽要喺
+   * 20 次 Tab 內到達」。
+   */
+  private markInteractive(el: SVGElement, label: string): void {
+    el.setAttribute("tabindex", "-1");
+    el.setAttribute("role", "button");
+    el.setAttribute("aria-label", label);
+  }
+
+  /** 由元素嘅 class + `data-*` id 砌出穩定嘅識別 key（roving 記憶用）。 */
+  private kbKeyOf(el: Element): string {
+    const id =
+      el.getAttribute("data-zone-id") ??
+      el.getAttribute("data-loc-id") ??
+      el.getAttribute("data-event-id") ??
+      el.getAttribute("data-route-id") ??
+      "";
+    const cls = el.getAttribute("class") ?? "";
+    return `${cls.split(" ")[0]}|${id}`;
+  }
+
+  /** 目前 SVG 內全部互動元素（document order）。 */
+  private mapInteractiveEls(): SVGElement[] {
+    return Array.from(
+      this.svg.querySelectorAll<SVGElement>(MAP_INTERACTIVE_SELECTOR),
+    );
+  }
+
+  /**
+   * roving tabindex：確保**只有一個**互動元素係 `tabindex="0"`。
+   *
+   * 由 `render()` 尾部呼叫（圖層啱啱被 `replaceChildren()` 重建）。
+   * 會盡量將 `0` 放返喺上次嘅目標（`kbFocusKey`），令 render 之後焦點
+   * 位置唔會跳。
+   */
+  private applyRovingTabindex(): void {
+    const els = this.mapInteractiveEls();
+    if (els.length === 0) return;
+    let idx = 0;
+    if (this.kbFocusKey) {
+      const found = els.findIndex((e) => this.kbKeyOf(e) === this.kbFocusKey);
+      if (found >= 0) idx = found;
+    }
+    els.forEach((e, i) => e.setAttribute("tabindex", i === idx ? "0" : "-1"));
+    this.kbFocusKey = this.kbKeyOf(els[idx]);
+    /*
+     * ⚠️ 還原焦點：`render()` 啱啱 `replaceChildren()` 銷毀咗舊元素，
+     * 如果地圖之前持有焦點，要將焦點放返喺「同一個」元素（見 kbWantFocus）。
+     * 瀏覽器唔支援 SVG 元素 focus 時退返 `#svg-map` —— 絕對唔可以變 BODY。
+     */
+    if (this.kbWantFocus && document.activeElement !== els[idx]) {
+      els[idx].focus();
+      if (document.activeElement !== els[idx]) this.svg.focus();
+    }
+  }
+
+  /**
+   * 地圖元素嘅鍵盤導覽（P1-2 / A7 §10.9）。
+   *
+   * | 鍵 | 行為 |
+   * |---|---|
+   * | `Tab` / `Shift+Tab` | 進／出地圖（整個地圖**只有 1 個** Tab stop） |
+   * | `→` `↓` / `←` `↑` | 喺組內移動焦點（環繞） |
+   * | `Home` / `End` | 跳去第一個／最後一個 |
+   * | `Enter` / `Space` | 啟動（**同 click 完全同一條路徑**） |
+   * | `Escape` | 離開地圖元素 |
+   *
+   * ⚠️ SVG 元素**唔似** `<button>`：`Enter` 唔會自動合成 `click`，所以
+   * 一定要自己處理。方向鍵亦一定要 `preventDefault`，否則會捲動頁面。
+   */
+  private bindMapKeyboard(): void {
+    const setRoving = (els: SVGElement[], idx: number): void => {
+      els.forEach((x, i) => x.setAttribute("tabindex", i === idx ? "0" : "-1"));
+      this.kbFocusKey = this.kbKeyOf(els[idx]);
     };
 
-    this.svg.addEventListener("click", (e) => handleHit(e.target as Element));
+    this.svg.addEventListener("keydown", (e) => {
+      const t = e.target as Element | null;
+      if (!t || typeof t.closest !== "function") return;
+      const el = t.closest(MAP_INTERACTIVE_SELECTOR) as SVGElement | null;
+      if (!el) return;
+      const action = resolveMapKey(e.key);
+      if (action === "none") return;
+
+      if (isNavigationAction(action)) {
+        /*
+         * ⚠️ 一定要 `stopPropagation()`：`src/app.ts` 嘅 `bindKeys()` 綁喺
+         * `document`，會用 ArrowLeft/Right 改章節、Home/End 跳第一／最後章。
+         * 如果唔擋，用戶喺地圖元素之間移動焦點時**章節會一齊跳**。
+         */
+        e.preventDefault();
+        e.stopPropagation();
+        const els = this.mapInteractiveEls();
+        const next = rovingIndex(els.indexOf(el), action, els.length);
+        if (next < 0) return;
+        setRoving(els, next);
+        els[next].focus();
+        return;
+      }
+      if (action === "activate") {
+        e.preventDefault();
+        e.stopPropagation();
+        this.handleHitAt(el);
+        return;
+      }
+      if (action === "escape") {
+        e.preventDefault();
+        e.stopPropagation();
+        el.blur();
+      }
+    });
+
+    // 焦點一入到地圖就同步 roving 狀態（例如用滑鼠點完再用鍵盤）
+    this.svg.addEventListener("focusin", (e) => {
+      const t = e.target as Element | null;
+      if (!t || typeof t.closest !== "function") return;
+      const el = t.closest(MAP_INTERACTIVE_SELECTOR) as SVGElement | null;
+      if (!el) return;
+      this.kbWantFocus = true;
+      const els = this.mapInteractiveEls();
+      const i = els.indexOf(el);
+      if (i >= 0) setRoving(els, i);
+    });
+
+    /*
+     * 焦點離開地圖（去咗 SVG 以外）就唔應該再搶返嚟 —— 否則用戶
+     * Tab 去其他控制項之後，下一個 render 會將焦點拉返地圖。
+     */
+    this.svg.addEventListener("focusout", (e) => {
+      if (this.rendering) return; // 元素係被自己 render 銷毀，唔算「離開地圖」
+      const next = (e as FocusEvent).relatedTarget as Node | null;
+      if (next && this.svg.contains(next)) return;
+      this.kbWantFocus = false;
+    });
+  }
+
+  private bindSvgDelegation(): void {
+    /** 共用嘅命中處理 —— 由 `click` / `pointerup` / 鍵盤三條路徑呼叫。 */
+    const handleHit = (targetEl: Element): void => this.handleHitAt(targetEl);
+
+    this.svg.addEventListener("click", (e) => {
+      const t = e.target as Element;
+      this.focusHitElement(t);
+      handleHit(t);
+    });
+
+    this.bindMapKeyboard();
 
     /*
      * ⚠️ 補強（2026-09-23）：唔可以只靠 `click`。
@@ -1317,7 +1558,9 @@ export class SvgMap {
      */
     this.svg.addEventListener("pointerup", (e) => {
       if (this.shell.viewportRef.didJustPan) return;
-      handleHit(e.target as Element);
+      const t = e.target as Element;
+      this.focusHitElement(t);
+      handleHit(t);
     });
   }
 
@@ -1767,6 +2010,12 @@ export class SvgMap {
   }
 
   render(): void {
+    /*
+     * ⚠️ `rendering` 守衛：本方法會 `replaceChildren()` 重建圖層 →
+     * 銷毀當時聚焦嘅地圖元素 → `focusout`（`relatedTarget = null`）。
+     * 唔守衛就會喺還原焦點之前清走 `kbWantFocus`（見該欄位註釋）。
+     */
+    this.rendering = true;
     const cur = this.app.getCurrentChapter();
     this.applyViewBox();
     this.renderLayerControls();
@@ -1902,6 +2151,7 @@ export class SvgMap {
       g.setAttribute("data-zone-id", zm.id);
       g.setAttribute("data-zone-name", zm.name);
       g.setAttribute("data-zone-lod", zoneLod);
+      this.markInteractive(g, `區域：${zm.name}`);
       /*
        * 規則 Z3：`danger_level` 為 `null` = 資料**未評估**，唔可以當 0。
        * 所以只有非 null 才寫落 DOM。
@@ -2170,6 +2420,10 @@ export class SvgMap {
       el.setAttribute("opacity", String(opacity));
       el.setAttribute("data-route-id", route.properties.id);
       el.setAttribute("data-character-name", route.properties.character_name);
+      this.markInteractive(
+        el,
+        `${route.properties.character_name} 路線（ch${span[0]}-${span[1]}）`,
+      );
       const titleEl = document.createElementNS(SVG_NS, "title");
       titleEl.textContent = `${route.properties.character_name} 路線 (ch${span[0]}-${span[1]})`;
       el.appendChild(titleEl);
@@ -2249,6 +2503,12 @@ export class SvgMap {
         el.setAttribute("opacity", String(anyActive ? 0.9 : 0.45));
         el.setAttribute("data-loc-id", head.id);
         el.setAttribute("data-loc-name", head.name);
+        this.markInteractive(
+          el,
+          head.fictional
+            ? `地點：${head.name}（ch${head.first}・虛構座標）`
+            : `地點：${head.name}（ch${head.first}）`,
+        );
         const titleEl = document.createElementNS(SVG_NS, "title");
         // 虛構地點嘅座標係任意值（location_precision: fictional），
         // tooltip 要講清楚，唔可以當成精確位置。
@@ -2267,6 +2527,10 @@ export class SvgMap {
       // 保留 head 嘅 id，令現有查詢（[data-loc-id]）同點擊處理都搵得到
       g.setAttribute("data-loc-id", head.id);
       g.setAttribute("data-loc-name", head.name);
+      this.markInteractive(
+        g,
+        `${items.length} 個地點喺同一範圍（${head.name} 等）—— 按 Enter 放大`,
+      );
       const c = document.createElementNS(SVG_NS, "circle");
       c.setAttribute("cx", String(head.x));
       c.setAttribute("cy", String(head.y));
@@ -2325,6 +2589,7 @@ export class SvgMap {
       el.setAttribute("opacity", String(isCurrent ? 1.0 : 0.6));
       el.setAttribute("data-event-id", props.id);
       el.setAttribute("data-event-title", props.title);
+      this.markInteractive(el, `事件：${props.title}（ch${props.chapter}）`);
       const titleEl = document.createElementNS(SVG_NS, "title");
       titleEl.textContent = `[ch${props.chapter}] ${props.title}`;
       el.appendChild(titleEl);
@@ -2356,6 +2621,9 @@ export class SvgMap {
      * 「值冇變就跳過」短路，所以平移動畫唔會產生額外 DOM 寫入。
      */
     this.applyLayerState();
+    // P1-2：圖層啱啱被 replaceChildren() 重建 → 重新決定邊個元素係唯一 Tab stop
+    this.applyRovingTabindex();
+    this.rendering = false;
   }
 
   /**
