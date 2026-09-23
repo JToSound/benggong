@@ -118,7 +118,41 @@ const LABEL_SIZE: Array<{ size: number; weight: number }> = [
   { size: 9.5, weight: 400 },
 ];
 
-const LABEL_FONT_STACK = '"Noto Sans TC", "PingFang HK", "Microsoft JhengHei", system-ui, sans-serif';
+const LABEL_FONT_STACK =
+  '"Noto Sans TC", "PingFang HK", "Microsoft JhengHei", system-ui, sans-serif';
+
+/**
+ * 標籤字體字串（按 rank 預先算好）。
+ *
+ * ⚠️ 為何要預算：`ctx.font = …` 唔係免費 —— Chromium 要解析字串再做
+ * 字型查找。原本喺標籤迴圈**逐個標籤**指派（實測 ~343 次/frame），
+ * 而且每次都重新串接字串。預先算好 6 個 + 只在 rank 改變時指派
+ * （`labelOrder` 已按 rank 排序，所以通常只會指派 1–6 次）。
+ */
+const LABEL_FONTS: readonly string[] = LABEL_SIZE.map(
+  (st) => `${st.weight} ${st.size}px ${LABEL_FONT_STACK}`,
+);
+
+/** 按 rank 取字體字串（越界回最細字級）。 */
+function fontOfRank(rank: number): string {
+  return LABEL_FONTS[rank] ?? LABEL_FONTS[LABEL_FONTS.length - 1];
+}
+
+/**
+ * 量度文字寬度用嘅**獨立** 2D context。
+ *
+ * ⚠️ 為何唔用主 canvas 嘅 ctx：`measureText` 要先把 `ctx.font` 設成該
+ * 標籤嘅字體，會**干擾**繪製迴圈對 `ctx.font` 嘅狀態追蹤（令「只在
+ * rank 改變時指派」嘅守門失效）。獨立 context 之後，主 canvas 嘅
+ * `ctx.font` 只由繪製迴圈管理。
+ */
+let measureCtx: CanvasRenderingContext2D | null = null;
+function measureContext(): CanvasRenderingContext2D | null {
+  if (measureCtx) return measureCtx;
+  if (typeof document === "undefined") return null;
+  measureCtx = document.createElement("canvas").getContext("2d");
+  return measureCtx;
+}
 
 /** 碰撞剔除嘅空間網格大細（CSS px）。 */
 const COLLIDE_CELL = 44;
@@ -694,19 +728,14 @@ export class VectorBasemap {
     ctx.restore();
   }
 
-  /** 標籤字體（只跟 rank）。 */
-  private static fontOf(rank: number): string {
-    const st = LABEL_SIZE[rank] ?? LABEL_SIZE[5];
-    return `${st.weight} ${st.size}px ${LABEL_FONT_STACK}`;
-  }
-
   /** 文字寬度（量度一次，之後由快取讀 —— pan 期間零 `measureText`）。 */
   private labelWidth(ctx: CanvasRenderingContext2D, p: PoiRec): number {
     const key = `${p.r}|${p.n}`;
     const cached = this.labelWidths.get(key);
     if (cached !== undefined) return cached;
-    ctx.font = VectorBasemap.fontOf(p.r);
-    const w = ctx.measureText(p.n).width;
+    const m = measureContext() ?? ctx;
+    m.font = fontOfRank(p.r);
+    const w = m.measureText(p.n).width;
     this.labelWidths.set(key, w);
     return w;
   }
@@ -749,6 +778,14 @@ export class VectorBasemap {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.lineJoin = "round";
+    /*
+     * ⚠️ 光暈嘅 `strokeStyle` / `lineWidth` 係**每 frame 常數** → 喺迴圈外
+     * 設一次。原本逐個標籤指派，等於每 frame 做 ~343 次 CSS 顏色字串解析
+     * （`rgba(...)`）＋屬性驗證。實測連同字體快取一齊做，冷 zoom longtask
+     * 合計由 449 → 395 ms。
+     */
+    ctx.strokeStyle = this.palette.labelHalo;
+    ctx.lineWidth = LABEL_HALO_WIDTH;
 
     const grid = new Map<number, LabelBox[]>();
     const gkey = (cx: number, cy: number) =>
@@ -792,6 +829,8 @@ export class VectorBasemap {
     };
 
     const drawnNames = new Set<string>();
+    /** 目前 `ctx.font` 對應嘅 rank（-1 = 未設定）。見下面嘅指派守門。 */
+    let curRank = -1;
     for (const p of candidates) {
       const lv = LABEL_MIN_LEVEL[p.r] ?? 2;
       if (lv > this.level) continue;
@@ -821,11 +860,17 @@ export class VectorBasemap {
        * 唔足以抵銷建 canvas 嘅開銷。
        * → 保持直接 `strokeText` + `fillText`。
        */
-      ctx.font = VectorBasemap.fontOf(p.r);
-      ctx.strokeStyle = this.palette.labelHalo;
-      ctx.lineWidth = LABEL_HALO_WIDTH;
+      if (p.r !== curRank) {
+        /*
+         * `ctx.font` / `ctx.fillStyle` 指派唔係免費（字串解析 + 字型查找）
+         * → 只在 rank 改變時指派（`labelOrder` 已按 rank 排序，所以通常
+         * 只會指派 1–6 次而唔係 ~343 次）。
+         */
+        ctx.font = fontOfRank(p.r);
+        ctx.fillStyle = this.palette.label[p.r] ?? this.palette.label[5];
+        curRank = p.r;
+      }
       ctx.strokeText(p.n, x, py);
-      ctx.fillStyle = this.palette.label[p.r] ?? this.palette.label[5];
       ctx.fillText(p.n, x, py);
     }
   }
