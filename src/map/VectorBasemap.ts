@@ -161,6 +161,17 @@ const COLLIDE_CELL = 44;
 const LABEL_HALO_WIDTH = 3.5;
 
 /**
+ * `labelWidths` 快取上限（**唯一無上限嘅快取**）。
+ *
+ * ⚠️ 為何要設上限：key 係 `rank|文字`，而圖磚 POI 有 ~11,645 個建築名
+ * ＋全域標籤 7,847 個 —— 即係理論上 ~20,000 個 entry。長 session
+ * 行過全港會逐個累積（用戶報告「移動地圖一段時間之後 out of memory」，
+ * 呢個係唯一搵到嘅無上限結構）。設上限之後最壞情況係重新 `measureText`
+ * 一次（~0.14 ms），唔會影響正確性。
+ */
+const LABEL_WIDTH_CACHE_MAX = 12000;
+
+/**
  * 圖磚處理分片大細（幢建築／片）。
  *
  * 實測：一格圖磚 ~4,500 幢建築，一次過「解碼 + 建 `Path2D`」要 ~59 ms
@@ -736,6 +747,11 @@ export class VectorBasemap {
     const m = measureContext() ?? ctx;
     m.font = fontOfRank(p.r);
     const w = m.measureText(p.n).width;
+    if (this.labelWidths.size >= LABEL_WIDTH_CACHE_MAX) {
+      // FIFO 淘汰（Map 保留插入次序）
+      const oldest = this.labelWidths.keys().next().value;
+      if (oldest !== undefined) this.labelWidths.delete(oldest);
+    }
     this.labelWidths.set(key, w);
     return w;
   }

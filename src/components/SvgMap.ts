@@ -544,6 +544,32 @@ export class SvgMap {
    * 改 CSS 尺寸，所以縮放唔需要失效。
    * 0 唔會入快取（headless 早期未 layout，之後要再試）。
    */
+  /**
+   * `wrap` 嘅尺寸快取（CSS px）。
+   *
+   * ⚠️ 為何要快取：`syncBasemapView()` 由 `applyViewBox()` 呼叫，而
+   * `applyViewBox()` **每個 pan frame 都行一次**（見 `onChange`）。
+   * 原本每次都 `wrap.getBoundingClientRect()` → **每 frame 強制同步
+   * layout**（同 Q10 報告 §2.2 量到嘅 59 ms 同一類問題）。
+   *
+   * 快取失效點：`ResizeObserver`（容器尺寸改變）。⚠️ 同 `svgWidthPx()`
+   * 唔可以共用快取 —— 兩者係唔同元素（`wrap` vs `svg`）。
+   */
+  private wrapSizeCache: { w: number; h: number } | null = null;
+
+  /**
+   * `svgWidthPx()` 嘅快取（CSS px）。
+   *
+   * ⚠️ 為何一定要快取：`getBoundingClientRect()` 會**強制同步 layout**。
+   * `render()` 嘅 cluster 迴圈每個 cluster 都叫一次 `svgWidthPx()`，
+   * 而 `render()` 又喺**每次按鈕縮放**都行一次 —— 即係一次冷 zoom
+   * （20 下）會做幾十次強制 layout。CDP CPU profile 實測
+   * `getBoundingClientRect` 佔 **59 ms**，就係呢度。
+   *
+   * 快取失效點：容器尺寸改變（`ResizeObserver`）。`viewBox` 改變**唔會**
+   * 改 CSS 尺寸，所以縮放唔需要失效。
+   * 0 唔會入快取（headless 早期未 layout，之後要再試）。
+   */
   private svgWidthCache = 0;
   /** 向量底圖是否已失敗（失敗 = 退回 raster）。 */
   private basemapFailed = false;
@@ -1106,8 +1132,9 @@ export class SvgMap {
      */
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver(() => {
-        // 容器尺寸變 → `svgWidthPx()` 快取失效（見該欄位註釋）
+        // 容器尺寸變 → `svgWidthPx()` / `wrapSizeCache` 一齊失效
         this.svgWidthCache = 0;
+        this.wrapSizeCache = null;
         this.syncBasemapView();
       });
       this.resizeObserver.observe(this.wrap);
@@ -1137,12 +1164,22 @@ export class SvgMap {
   /** 將目前 viewBox 同容器尺寸交畀向量底圖。 */
   private syncBasemapView(): void {
     if (!this.basemap) return;
-    const r = this.wrap.getBoundingClientRect();
-    if (r.width < 2 || r.height < 2) return;
+    /*
+     * ⚠️ 尺寸行快取：本方法由 `applyViewBox()` 呼叫，而 `applyViewBox()`
+     * **每個 pan frame 都行一次** → 原本每 frame 一次強制同步 layout。
+     * 尺寸只會喺 `ResizeObserver` 通知時變（見 `initBasemap()`）。
+     */
+    let size = this.wrapSizeCache;
+    if (!size) {
+      const r = this.wrap.getBoundingClientRect();
+      if (r.width < 2 || r.height < 2) return;
+      size = { w: r.width, h: r.height };
+      this.wrapSizeCache = size;
+    }
     this.basemap.setView(
       { ...this.view },
-      r.width,
-      r.height,
+      size.w,
+      size.h,
       Math.min(window.devicePixelRatio || 1, 2),
     );
   }
