@@ -2,44 +2,36 @@
 //
 // ⚠️ 相對 Phase F 版本嘅改動：
 //   1. 只 import B1 嘅 `styles/index.css`（tokens + base），移除舊
-//      `main.css` / `timeline.css` / `hud.css`（B1 契約 §3.1；舊檔由主代理
-//      喺 Gate 2 legacy cleanup 刪）。
+//      `main.css` / `timeline.css` / `hud.css`（B1 契約 §3.1）。
 //   2. 開機注入本機 SVG sprite（`mountIconSprite()`）。
 //   3. bootstrap 單一 state store（`src/state/store.ts`）+ 由 URL 還原 state。
 import "./styles/index.css";
 
 /*
- * ⚠️ 過渡期雙軌（主代理 2026-09-21 裁定）
- * ------------------------------------
- * B1 只交付 tokens + base；B6／B7／B8 嘅元件 CSS 未交付之前，卸走舊
- * `main.css` / `timeline.css` / `hud.css` 會令版面完全解體（實測
- * `.svg-map-wrap` 變成 1400×26890、`#svg-map` viewBox 寬由 ~0.5 跌到
- * 0.1475，`tests/phase-j-lod.test.ts` 隨即變紅）。
+ * ══════════════════════════════════════════════════════════════════════════
+ * D 舊 CSS 遷移（階段 2–3 完成，2026-09-24）
+ * ══════════════════════════════════════════════════════════════════════════
+ * `main.css` / `timeline.css` / `hud.css` **已經刪除**。
  *
- * 所以**暫時**保留舊 CSS，等元件 CSS 陸續落地。舊檔本身**唔可以**
- * 被新 code 依賴；Gate 2 legacy cleanup 會連同呢三行一併刪除。
- * 載入次序：B1 token/base 先 → 舊 CSS 後（舊規則勝出，保持現況外觀）。
- */
-import "./styles/main.css";
-import "./styles/timeline.css";
-import "./styles/hud.css";
-
-/*
- * ══════════════════════════════════════════════════════════════════════════
- * D 舊 CSS 遷移（階段 1，2026-09-24）
- * ══════════════════════════════════════════════════════════════════════════
- * Gate 2 分析（`artifacts/gate2/analyze-legacy-css.py`）證實：上面三個舊檔
- * **唔係死碼** —— 有 **80 個 class 仍然被 `src/` 引用但 V2 CSS 冇定義**
- * （例：`.skip-link`（B8 P0-2）、`.basemap-layer`（Phase L 向量底圖）、
- * `.zd-*`（Zone Dossier 面板））。直接刪會壞。
+ * 為何之前唔可以刪：Gate 2 分析（`artifacts/gate2/analyze-legacy-css.py`）
+ * 證實佢哋**唔係死碼** —— 有 **158 個 class 仍然被 `src/` 引用**（其中 80 個
+ * V2 CSS 完全冇定義，例：`.skip-link`（B8 P0-2）、`.basemap-layer`（Phase L
+ * 向量底圖）、`.zd-*`（Zone Dossier 面板））。直接刪會壞。
  *
  * `legacy-migrated.css` 由 `scripts/migrate_legacy_css.py` **自動產生** ——
- * 將嗰 80 個 class 嘅規則由三個舊檔**原文照搬**過嚟（保留 `@media` 上下文
- * 同次序）。實測覆蓋 **80 / 80**。
+ * 將嗰 158 個 class 嘅規則由三個舊檔**原文照搬**過嚟（保留 `@media` 上下文
+ * 同原本次序）。實測覆蓋 **158 / 158**。
  *
- * ⚠️ 載入次序：刻意排喺三個舊檔**之後** —— 同名同特異度之下「後載入者勝」，
- * 所以行為同遷移前**完全一致**（可逆、可稽核）。呢個係階段 1 嘅關鍵：
- * 先證明「搬完冇變」，之後（階段 2/3）才可以刪舊檔。
+ * ⚠️ 為何「原文照搬 + 同一相對次序」就等價
+ * --------------------------------------
+ * 舊載入次序係 `tokens → base → main → timeline → hud → chronicle
+ * →（map / mobile 由元件注入）`。對任何仍然被引用嘅 class，**舊檔嘅規則係
+ * 實際生效嗰條**（同名同特異度之下「後載入者勝」）。
+ * 本檔排喺 `base` 之後、`chronicle` 之前 —— 即係**同一個相對位置** →
+ * 每一條原本生效嘅規則都仍然存在，而且先後次序不變 → **可證明等價**。
+ *
+ * （獨立驗證：本腳本自行掃 `src` 底下所有 `.ts` 檔算出「被引用嘅舊 class」
+ *   = 158 個，同 Gate 2 分析器嘅 ②80 + ③78 = 158 完全吻合。）
  */
 import "./styles/legacy-migrated.css";
 

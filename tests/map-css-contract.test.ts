@@ -41,8 +41,17 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const MAP_CSS = readFileSync("src/styles/map.css", "utf-8");
-const MAIN_CSS = readFileSync("src/styles/main.css", "utf-8");
-const HUD_CSS = readFileSync("src/styles/hud.css", "utf-8");
+/*
+ * ⚠️ 2026-09-24（D 舊 CSS 遷移）：`src/styles/main.css` / `hud.css` /
+ * `timeline.css` 已經刪除 —— 佢哋嘅**原文**整段搬入 `legacy-migrated.css`
+ * （由 `scripts/migrate_legacy_css.py` 自動產生，可從 git 歷史重跑）。
+ *
+ * 所以本檔嘅 `MAIN_CSS` 讀 `legacy-migrated.css`：
+ * 內容係三個舊檔嘅超集，原本嘅斷言（特異度、覆蓋、`.zone:hover .zone-area`）
+ * 全部仍然有意義。
+ */
+const LEGACY_CSS = readFileSync("src/styles/legacy-migrated.css", "utf-8");
+const MAIN_CSS = LEGACY_CSS;
 const TOKENS_CSS = readFileSync("src/styles/tokens.css", "utf-8");
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -138,31 +147,30 @@ export function propValue(block: string, prop: string): string | null {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// 1. 舊 CSS 嘅障礙確實存在（紀錄事實，唔係期望）
+// 1. `.zone-area` 命中契約（D 舊 CSS 遷移之後，2026-09-24）
+//
+// ⚠️ 原本呢一節係「舊 CSS 障礙（紀錄）」—— 斷言 `main.css` 有
+// `.zone-area { pointer-events: none }`、而 `hud.css` 冇。佢嘅註釋已經預告：
+// 「如果將來 Gate 2 刪咗舊 CSS，呢個測試會變紅 —— 嗰時就應該刪埋呢個測試」。
+//
+// D 遷移已經發生（三個舊檔嘅原文整段搬入 `legacy-migrated.css`），所以呢一節
+// 改寫成**遷移後嘅不變式**：舊層仍然有嗰條規則（唔可以靜默消失），而
+// `map.css` 用 id 特異度覆蓋佢（zone 要可點）。
 // ─────────────────────────────────────────────────────────────────────────────
 
-describe("CSS 契約：舊 CSS 障礙（紀錄）", () => {
-  it("`main.css` 真係有 `.zone-area { pointer-events: none }`（P0-1 根因）", () => {
-    /*
-     * 呢個斷言唔係「期望」而係**紀錄**：如果將來 Gate 2 刪咗舊 CSS，
-     * 呢個測試會變紅 —— 嗰時就應該刪埋呢個測試（同埋更新契約 §12 B6-D4）。
-     * 保留係為咗令「障礙已消失」變成一個明確嘅事件而唔係靜默變化。
-     */
-    const decls = declarationsFor(MAIN_CSS, ".zone-area");
-    const values = decls
+describe("CSS 契約：`.zone-area` 命中（D 遷移後）", () => {
+  it("舊層（`legacy-migrated.css`）仍然有 `.zone-area { pointer-events: none }`", () => {
+    const values = declarationsFor(MAIN_CSS, ".zone-area")
       .map((b) => propValue(b, "pointer-events"))
       .filter((v): v is string => v !== null);
-    expect(values, "main.css:458 應該仍然有 pointer-events: none").toContain(
-      "none",
-    );
+    expect(values, "舊層應該仍然有 pointer-events: none（唔可以靜默消失）").toContain("none");
   });
 
-  it("`hud.css` 冇 `.zone-area` 嘅 pointer-events（所以 main.css 係唯一來源）", () => {
-    const decls = declarationsFor(HUD_CSS, ".zone-area");
-    const values = decls
+  it("`map.css` 用 `#svg-map .zone-area`（特異度 (1,1,0)）覆蓋 → zone 可點", () => {
+    const values = declarationsFor(MAP_CSS, "#svg-map .zone-area")
       .map((b) => propValue(b, "pointer-events"))
       .filter((v): v is string => v !== null);
-    expect(values).toHaveLength(0);
+    expect(values, "map.css 要用 id 特異度蓋過舊層").toContain("auto");
   });
 });
 
