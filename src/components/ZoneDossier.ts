@@ -279,8 +279,13 @@ export class ZoneDossier {
 
         <div class="zd-body">${richSections}${sectionHtml}</div>
 
-        <section class="zd-section zd-section--meta" style="--zd-accent:${meta.color}">
-          <h4 class="zd-section-title"><span class="zd-icon">◇</span>資料來源</h4>
+        ${/*
+           * ⚠️ P1-5（C8）：原本「資料來源」係**預設展開**，直接顯示
+           * `抽取來源 A6`、`座標 legacy` 等**內部管線欄位** —— 對用戶冇意義，
+           * 而且係「工程師式文案」。改成漸進披露：預設收起，需要時才展開。
+           */ ""}
+        <details class="zd-section zd-section--meta zd-meta-details" style="--zd-accent:${meta.color}">
+          <summary class="zd-section-title"><span class="zd-icon">◇</span>資料來源與可信度</summary>
           <ul class="zd-audit">
             <li><i>範圍</i><span>${this.esc(p.range_evidence || "—")}</span></li>
             <li><i>範圍可信度</i><span>${radiusSrc}</span></li>
@@ -289,14 +294,35 @@ export class ZoneDossier {
           </ul>
           ${
             p.evidence
-              ? `<details class="zd-evidence"><summary>原文證據</summary><p>${this.esc(p.evidence)}</p></details>`
+              ? `<div class="zd-evidence"><p>${this.esc(p.evidence)}</p></div>`
               : ""
           }
-        </section>
+        </details>
 
         <section class="zd-section" style="--zd-accent:${meta.color}">
           <h4 class="zd-section-title"><span class="zd-icon">≡</span>出現章節</h4>
           <div class="zd-chapters">${chapterChips}</div>
+        </section>
+
+        ${/*
+           * ⚠️ P1-7（C8）：「dossier 打開之後，用戶唔知下一步可以做咩」。
+           * 加一行明確嘅 next step（全部用**已有**嘅 app 動作，唔新增 API）。
+           */ ""}
+        <section class="zd-section zd-next" style="--zd-accent:${meta.color}">
+          <h4 class="zd-section-title"><span class="zd-icon">→</span>下一步</h4>
+          <div class="zd-actions">
+            ${
+              p.first_appearance
+                ? `<button type="button" class="zd-action" data-goto-ch="${p.first_appearance}">跳到首現章節 ch${p.first_appearance}</button>`
+                : ""
+            }
+            ${
+              (p.event_ids || []).length
+                ? `<button type="button" class="zd-action" data-goto-ev="${this.esc(String((p.event_ids || [])[0]))}">睇呢區嘅第一個事件</button>`
+                : ""
+            }
+            <button type="button" class="zd-action zd-action--ghost" data-close-zd>收埋</button>
+          </div>
         </section>
       </article>
     `;
@@ -305,6 +331,17 @@ export class ZoneDossier {
       btn.addEventListener("click", () => {
         const ch = Number(btn.getAttribute("data-ch"));
         if (Number.isFinite(ch)) this.app.goToChapter(ch);
+      });
+    });
+
+    // P1-7：下一步 CTA
+    this.root.querySelectorAll<HTMLButtonElement>(".zd-action").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const ch = btn.getAttribute("data-goto-ch");
+        const ev = btn.getAttribute("data-goto-ev");
+        if (ch !== null) this.app.goToChapter(Number(ch));
+        else if (ev) this.app.setSelectedEvent(ev);
+        else if (btn.hasAttribute("data-close-zd")) this.app.setSelectedZone(null);
       });
     });
   }

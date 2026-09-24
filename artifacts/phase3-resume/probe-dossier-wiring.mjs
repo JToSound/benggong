@@ -48,6 +48,15 @@ try {
       hasOverview: !!document.querySelector(".zd-summary"),
       auditRows: document.querySelectorAll(".zd-audit li").length,
       kindSub: document.querySelector(".zd-kind-sub")?.textContent?.trim() ?? null,
+      // P1-5：內部欄位要收喺 <details>（預設唔展開）
+      metaIsDetails: document.querySelector(".zd-meta-details")?.tagName === "DETAILS",
+      metaOpenByDefault: document.querySelector(".zd-meta-details")?.hasAttribute("open") ?? null,
+      // P1-7：下一步 CTA
+      actions: Array.from(document.querySelectorAll(".zd-action")).map(e => e.textContent.trim()),
+      actionMinHeight: (() => {
+        const a = document.querySelector(".zd-action");
+        return a ? Math.round(a.getBoundingClientRect().height) : null;
+      })(),
     };
   });
   console.log("zoneId:", zoneId);

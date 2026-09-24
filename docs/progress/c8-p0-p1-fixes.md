@@ -12,6 +12,8 @@
 | **P0** | 編年史條目卡寬度 | **83 px**（文字逐字斷行） | **315 px** ✓ |
 | **P1-4** | `zone-dossiers.json` 有冇被用 | **從來冇 fetch**（`loadDossiers()` 死碼） | 按需載入 ✓（實測請求 1 次） |
 | **F6** | 誠實標示 | 寫死「人類聚居 · **安全**」、`review_status` 零 render | badge「待核實」+ 精度 ✓、`sub` = 「人類聚居」 |
+| **P1-5** | 內部欄位外露 | 「資料來源」**預設展開**，顯示 `抽取來源 A6`、`座標 legacy` | 收落 `<details>`，預設收起 ✓ |
+| **P1-7** | dossier 冇下一步 | 冇任何 CTA | 「跳到首現章節」／「睇呢區嘅第一個事件」／「收埋」✓ |
 
 ---
 
@@ -120,6 +122,43 @@ auditRows: 12
 
 ---
 
+## 3.5 P1-5 / P1-7：內部欄位漸進披露 + 下一步 CTA
+
+### P1-5
+
+原本「資料來源」係 `<section>` **預設展開**，直接顯示 `抽取來源 A6`、
+`座標 legacy` 等**內部管線欄位** —— 對用戶冇意義（C8 講嘅「工程師式文案」）。
+
+**修法**：改成 `<details class="zd-meta-details">`，`<summary>` 寫
+「資料來源與可信度」，**預設收起** ✓。`原文證據` 亦由嵌套 `<details>`
+改為內層 `<div>`（避免雙層 disclosure）。
+
+### P1-7
+
+C8 原話：「dossier 打開之後，用戶唔知下一步可以做咩」。
+**修法**：加 `zd-next` 區塊，3 個 CTA（全部用**已有** app 動作，唔新增 API）：
+
+| CTA | 動作 |
+|---|---|
+| 跳到首現章節 chN | `app.goToChapter(first_appearance)` |
+| 睇呢區嘅第一個事件 | `app.setSelectedEvent(event_ids[0])` |
+| 收埋 | `app.setSelectedZone(null)` |
+
+⚠️ 互動目標 `min-height: 44px`（B1 契約 C3：≥44×44 CSS px）—— 實測
+`getBoundingClientRect().height === 44` ✓
+
+### 量測
+
+```
+metaIsDetails: true          ← 係 <details>
+metaOpenByDefault: false     ← 預設收起 ✓
+actions: ["跳到首現章節 ch1", "睇呢區嘅第一個事件", "收埋"]
+actionMinHeight: 44          ← 符合契約 C3
+zone-dossiers.json 請求次數: 1
+```
+
+---
+
 ## 4. 驗證
 
 | 項 | 結果 |
@@ -151,7 +190,8 @@ auditRows: 12
 | P1-1 | 48 個 zone 喺世界視圖擠成一坨（559/1128 對重疊） | 需要 LOD／聚合策略重新設計 |
 | P1-2 | 揀 zone 唔 fly-to + 同 35 個 zone 重疊 | 需要 `flyTo` 接線 |
 | P1-3 | 手機 tap zone 面板唔自動開 | `BottomSheet` 接線 |
-| P1-5 | dossier 顯示「抽取來源 A6」等內部欄位 + 首屏 raw 信心度 % | 需要文案層 |
 | P1-6 | map pane 只佔 60.6%（spec 要 ≥70%） | 版面比例 |
-| P1-7 | dossier 冇「下一步」 | 需要 CTA |
 | P1-8 | 首屏即 fetch 全書資料（chronicle 1.4 MB + events 2.1 MB…） | 需要 lazy/分頁 |
+
+（P1-5、P1-7 已修 —— 見 §3.5。首屏 raw 信心度 % 保留但已加「信心度」標籤，
+同 review badge 並列。）
