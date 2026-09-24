@@ -424,6 +424,41 @@ def test_public_data_has_no_private_paths():
     )
 
 
+def test_no_silent_marker_stacking(loc):
+    """⚠️ DA8（C4 對抗驗收 2026-09-24）：唔可以有一群地點**疊埋**而冇人知。
+
+    為何要呢個測試：`rule_r6` 嘅 `fail` 門檻係「非推斷成員 > 20」——
+    實測有 **10 個 ≥5 成員嘅簇（171 個 location 完全同座標）**，全部係
+    `inferred_from` 鎖定 → **所有 gate 綠燈但實際疊埋** = 靜默。
+
+    本測試將「靜默」變成**明確斷言**：任何 ≥5 成員嘅簇，成員之間嘅距離
+    必須 ≥ `MIN_CLUSTER_SPACING_M`。唔得就紅 —— 逼上游處理（喺
+    `apply_place_inferences.py` 落偏移並寫入推斷記錄），而唔係靜靜接受。
+    """
+    import math
+
+    M_LON = 111320 * math.cos(math.radians(22.36))
+    M_LAT = 110570
+    MIN_CLUSTER_SPACING_M = 10.0
+
+    by_coord: dict[tuple[float, float], list[dict]] = {}
+    for f in loc:
+        c = f["geometry"]["coordinates"]
+        by_coord.setdefault((round(c[0], 9), round(c[1], 9)), []).append(f)
+
+    # 同一個座標 = 距離 0 m → 一定違規
+    stacked = {k: v for k, v in by_coord.items() if len(v) >= 5}
+    detail = [
+        f"{k} × {len(v)}：{[x['properties']['name'] for x in v[:4]]}"
+        for k, v in list(stacked.items())[:5]
+    ]
+    assert not stacked, (
+        f"⚠️ {len(stacked)} 個 ≥5 成員嘅座標簇（成員距離 0 m < "
+        f"{MIN_CLUSTER_SPACING_M} m）—— 標記會完全疊埋：\n"
+        + "\n".join(detail)
+    )
+
+
 def test_zones_have_no_evidence_field(zn):
     """`evidence` 欄位必須完全移除（唔係清空 —— 係冇呢個 key）。"""
     bad = [f["properties"]["id"] for f in zn if "evidence" in f["properties"]]

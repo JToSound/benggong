@@ -89,6 +89,97 @@ HEAD_WINDOW = 25
 #: 「相鄰」用詞 —— 錨定後要記錄（錨係地標本身，地點可能只係喺隔籬）。
 ADJACENT_WORDS = ("左邊", "右邊", "對面", "隔一條馬路", "附近", "旁邊", "毗鄰", "上蓋")
 
+#: ⚠️ 環形偏移（C4 對抗驗收 2026-09-24 發現嘅回歸）
+#: ------------------------------------------------
+#: 第一版直接寫**地標精確座標、零偏移** → 多個 location 錨去同一個地標就會
+#: **完全疊埋**（C4 實測 3 組：新都城中心三期／梁潔華小學／新都城中心三期賭場）。
+#: 而 `audit_coordinate_integrity.py` 嘅 R6（重複／近重複）門檻係 **20**，
+#: 得 2–3 個嘅簇**永遠捉唔到** → 即係「靜默疊埋」。
+#:
+#: 舊機制（`audit_location_coords.py` 規則 1b）本身有 40–220 m 偏移；
+#: 本腳本沿用同一數量級，令兩個機制一致。
+ANCHOR_RING_MIN_M = 40.0
+ANCHOR_RING_STEP_M = 30.0
+ANCHOR_RING_MAX_M = 220.0
+
+#: 「相鄰」關係嘅偏移距離（米）—— 文字講「喺地標隔籬」，唔應該擺喺地標中心。
+ADJACENT_OFFSET_M = 120.0
+
+#: 碰撞門檻（米）—— 兩個地點相距少於呢個數就當「疊埋」。
+#: ⚠️ 唔可以用精確相等：候選 `22.322799` vs 佔用 `22.3228` 相差 0.000001°
+#: ≈ **0.1 m**，精確比對會當成唔撞（C4 §4.14 實測）。
+COLLISION_MIN_M = 15.0
+
+
+def apply_offsets(
+    fixes: list[dict[str, Any]],
+    index: dict[str, tuple[float, float]],
+    occupied: set[tuple[float, float]] | None = None,
+) -> None:
+    """為錨定結果加**確定性**偏移（就地改 `fixes`）。
+
+    規則（完全確定性，唔用隨機）
+    --------------------------
+    1. 按最終座標分組（同一地標 = 同一組）。
+    2. 組內按 `id` 排序 → 第 i 個放喺環上：
+       · `relation == "adjacent"` → 半徑固定 `ADJACENT_OFFSET_M`（120 m）
+         （文字明講「喺地標隔籬」，唔應該擺喺地標中心）
+       · 其餘 → 半徑 `40 + 30×i`（上限 220 m）
+    3. 組內**只有 1 個** 而且 `relation == "at"` → **唔偏移**（保留精確錨定）。
+
+    ⚠️ 一定要有偏移：唔係就會令多個 location 座標完全相同，而 R6 嘅門檻（20）
+    捉唔到細簇 → 靜默疊埋。
+
+    ⚠️ **碰撞避免**（C4 對抗驗收 2026-09-24 §2）：偏移位置可能**巧合撞正**
+    另一個（推斷鎖定嘅）地點座標。實測：新都城中心三期嘅 40 m 北偏移
+    （`114.256992, 22.3228`）啱啱好等於梁潔華小學嘅 `inferred_from` 鎖定值。
+    所以最後要同 `occupied`（所有其他地點座標）比對，撞到就加大半徑重試
+    （確定性、有上限）。
+    """
+    groups: dict[tuple[float, float], list[dict[str, Any]]] = {}
+    for r in fixes:
+        groups.setdefault((r["to"][0], r["to"][1]), []).append(r)
+
+    for coord, members in groups.items():
+        members.sort(key=lambda r: r["id"])
+        n = len(members)
+        for i, r in enumerate(members):
+            adjacent = r.get("relation") == "adjacent"
+            # ⚠️ 零偏移只可以喺**個位冇被佔用**嘅時候用。實測：`不法者監獄`
+            # 錨去 `仁興工業大廈`（語義上正確 —— 監獄真係喺嗰幢樓），但嗰個
+            # 座標已經有 `仁興工業大廈` 呢個 location → 會疊標記。
+            if n == 1 and not adjacent and not (occupied and coord in occupied):
+                r["offset_m"] = 0.0
+                continue
+            radius = (
+                ADJACENT_OFFSET_M
+                if adjacent
+                else min(ANCHOR_RING_MAX_M, ANCHOR_RING_MIN_M + ANCHOR_RING_STEP_M * i)
+            )
+            bearing = 360.0 * i / max(n, 1)
+            rad = math.radians(bearing)
+            dlon = (radius * math.sin(rad)) / M_PER_DEG_LON
+            dlat = (radius * math.cos(rad)) / M_PER_DEG_LAT
+            # 碰撞避免：同其他地點座標比對，撞到就加大半徑（最多 6 次）
+            #
+            # ⚠️ 一定要用**距離門檻**而唔係精確相等（C4 對抗驗收 §4.14）：
+            # 候選 `22.322799` vs 佔用 `22.3228` 相差 0.000001° ≈ **0.1 m**
+            # → 精確比對當成「唔撞」→ 仍然疊標記。改用 < 15 m。
+            for attempt in range(7):
+                rr = radius + attempt * ANCHOR_RING_STEP_M
+                dlon = (rr * math.sin(rad)) / M_PER_DEG_LON
+                dlat = (rr * math.cos(rad)) / M_PER_DEG_LAT
+                cand = (round(coord[0] + dlon, 6), round(coord[1] + dlat, 6))
+                if not occupied or all(
+                    dist_m(cand, o) >= COLLISION_MIN_M for o in occupied
+                ):
+                    break
+            r["to"] = [cand[0], cand[1]]
+            r["offset_m"] = rr
+            r["offset_bearing_deg"] = round(bearing, 1)
+            if occupied:
+                occupied.add(cand)
+
 
 def has_locator(text: str, name: str) -> bool:
     """`name` 出現嘅位置前後 `LOCATOR_WINDOW` 字之內有冇**強**定位片語。"""
@@ -183,6 +274,15 @@ def run(write: bool = False, *, quiet: bool = False) -> dict[str, Any]:
         p = f["properties"]
         if p["id"] in seen:
             return
+        # ⚠️ 一定要跳過 `inferred_from` 非空嘅地點（2026-09-24 實測踩過）
+        # ------------------------------------------------------------
+        # 佢哋嘅座標被**上游推斷記錄**（`data/private/review/place-inference.jsonl`）
+        # 鎖定 —— 移動會破壞 `tests/test_apply_inferences.py::
+        # test_applied_coordinates_match_inference`。
+        # 實例：梁潔華小學（`inferred_from = inf_loc_0376`）。
+        # 同一規則已經喺 `infer_zone_membership.fix_marker_collapse()` 用咗。
+        if p.get("inferred_from"):
+            return
         cur = (f["geometry"]["coordinates"][0], f["geometry"]["coordinates"][1])
         target = index[anchor]
         d = dist_m(cur, target)
@@ -230,10 +330,74 @@ def run(write: bool = False, *, quiet: bool = False) -> dict[str, Any]:
         for f in by_name[nm]:
             try_fix(f, "C", hits[0], 0.80, overview)
 
+    # ---- 補：已經錨定過嘅（令腳本**冪等**）----
+    #
+    # ⚠️ 為何要（2026-09-24）：三個規則用「距離 > 容差」做觸發條件，所以
+    # **重跑時已經錨定嘅 location 唔會再入 `fixes`** → 之後加嘅偏移邏輯
+    # （`apply_offsets`）永遠唔會套用到佢哋。加呢個 pass 之後，重跑會由
+    # `coordinate_anchor.name` 重新取地標基準座標 → 重新計偏移 ✓ 冪等。
+    for f in doc["features"]:
+        p = f["properties"]
+        anc = p.get("coordinate_anchor")
+        if not anc or p["id"] in seen or p.get("inferred_from"):
+            continue
+        name = anc.get("name")
+        if name not in index:
+            continue
+        seen.add(p["id"])
+        base = index[name]
+        cur = (f["geometry"]["coordinates"][0], f["geometry"]["coordinates"][1])
+        fixes.append(
+            {
+                "id": p["id"],
+                "name": p["name"],
+                "rule": anc.get("rule", "A"),
+                "anchor": name,
+                "confidence": anc.get("confidence", 0.95),
+                "relation": anc.get("relation", "at"),
+                "distanceM": round(dist_m(cur, base), 1),
+                "from": [round(cur[0], 6), round(cur[1], 6)],
+                "to": [round(base[0], 6), round(base[1], 6)],
+            }
+        )
+
+    # ⚠️ 清理：`inferred_from` 非空嘅地點**唔應該**有 `coordinate_anchor`
+    # （座標由上游推斷鎖定，文字錨定對佢無效）。之前嘅 run 可能留低咗過期值。
+    stale = [
+        f["properties"]["id"]
+        for f in doc["features"]
+        if f["properties"].get("inferred_from") and f["properties"].get("coordinate_anchor")
+    ]
+    for f in doc["features"]:
+        if f["properties"]["id"] in stale:
+            f["properties"].pop("coordinate_anchor", None)
+    if stale:
+        log(f"清除 {len(stale)} 個過期 coordinate_anchor（inferred_from 鎖定）")
+
+    # ⚠️ 加確定性偏移（C4 對抗驗收發現：唔加就會多個 location 座標完全疊埋）
+    # `occupied` = 所有**唔喺 fixes 入面、而且唔係推斷鎖定**嘅地點座標。
+    #
+    # ⚠️ 為何要排除 `inferred_from` 鎖定嘅（2026-09-24 實測踩過「追逐」）
+    # --------------------------------------------------------------
+    # 推斷鎖定嘅座標由上游 `infer_places.py` / `apply_place_inferences.py`
+    # 產生，而且**會跟隨其他地點嘅位置**（例如 `inf_loc_0376`（梁潔華小學）
+    # 嘅 `inferred_lonlat` 就係「同新都城中心三期一樣」）。
+    # 如果碰撞避免考慮佢哋，就會變成互相追逐：
+    #   錨定推開 → 推斷跟隨 → 下次錨定再推開 → …（每次 hash 都唔同 = 唔冪等）
+    # 排除之後，本腳本嘅輸出**只依賴地標本身** → 穩定、冪等 ✓。
+    # （推斷鎖定簇嘅疊埋問題屬上游 DA8，唔係本腳本嘅職責。）
+    moving = {r["id"] for r in fixes}
+    occupied = {
+        (round(f["geometry"]["coordinates"][0], 6), round(f["geometry"]["coordinates"][1], 6))
+        for f in doc["features"]
+        if f["properties"]["id"] not in moving and not f["properties"].get("inferred_from")
+    }
+    apply_offsets(fixes, index, occupied)
+
     log(f"=== 建議修正：{len(fixes)} 個 location ===")
     for r in sorted(fixes, key=lambda x: -x["distanceM"]):
         log(
-            f"  [{r['rule']}] {r['name']:22} {r['distanceM']:7.0f} m → {r['anchor']}"
+            f"  [{r['rule']}] {r['name']:22} 偏移 {r.get('offset_m', 0.0):5.0f} m → {r['anchor']}"
             f"（信心 {r['confidence']}、{r['relation']}）"
         )
     log(f"規則分佈：{dict(Counter(r['rule'] for r in fixes))}")
@@ -251,14 +415,25 @@ def run(write: bool = False, *, quiet: bool = False) -> dict[str, Any]:
         p["coordinate_source"] = "text_landmark"
         p["coordinate_review_status"] = "auto_corrected"
         p["coordinate_confidence"] = r["confidence"]
+        # ⚠️ 冪等：`from` / `distance_m` 係「**第一次**錨定時」嘅事實，
+        # 重跑唔應該覆蓋（否則檔案 hash 每次唔同 → 唔冪等）。
+        prev = p.get("coordinate_anchor") or {}
         p["coordinate_anchor"] = {
             "name": r["anchor"],
             "coord": list(r["to"]),
             "rule": r["rule"],
             "relation": r["relation"],
             "confidence": r["confidence"],
-            "distance_m": r["distanceM"],
+            "distance_m": prev.get("distance_m", r["distanceM"]),
+            "offset_m": r.get("offset_m", 0.0),
+            "offset_bearing_deg": r.get("offset_bearing_deg"),
         }
+        # ⚠️ 2026-09-24（C4 對抗驗收 §4.12）：`from` 係「錨定**之前**嘅座標」。
+        # 如果佢同最終座標一樣（例如第一次跑嘅時候已經喺地標附近），
+        # 咁個欄位**冇任何資訊**，只會令人誤讀成「冇郁過」→ 唔寫。
+        origin = prev.get("from", r["from"])
+        if origin != list(r["to"]):
+            p["coordinate_anchor"]["from"] = origin
     LOCATIONS.write_text(
         json.dumps(doc, ensure_ascii=False, indent=1) + "\n", encoding="utf-8"
     )

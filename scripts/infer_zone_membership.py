@@ -670,6 +670,12 @@ def run(write: bool = True) -> dict:
     routes = rt_fc["features"]
     zones = zn_fc["features"]
 
+    # ⚠️ 2026-09-24（C4 對抗驗收 §0/§3）：input hash **唔可以**入
+    # `zone-membership.json`。原因：本步驟會改寫自己嘅 input
+    # （`locations/events/routes/zones`），所以 hash 係「跑之前」嘅狀態。
+    # 一旦嵌入輸出，**由唔收斂嘅起點跑一次，輸出就一定唔同** →
+    # `test_pipeline_is_idempotent` 喺 fresh checkout 會紅（CI 必紅）。
+    # 搬去 sidecar 之後，收斂性唔再受 input hash 影響。
     inputs = {
         "locations.geojson": sha256(PUBLIC / "locations.geojson"),
         "events.geojson": sha256(PUBLIC / "events.geojson"),
@@ -696,7 +702,6 @@ def run(write: bool = True) -> dict:
 
     report = {
         "schema_version": SCHEMA_VERSION,
-        "inputs": inputs,
         "counts": {
             "locations": len(locations),
             "events": len(events),
@@ -755,6 +760,8 @@ def run(write: bool = True) -> dict:
         # 呢個係 v1 基礎欄位 + `coordinate_*`；v2 遷移係下一個階段嘅事。
         dump(PUBLIC / "zones.geojson", zn_fc)
         dump(ARTIFACTS / "zone-membership.json", report)
+        # input hash 嘅 sidecar（唔參與收斂性）
+        dump(ARTIFACTS / "zone-membership-inputs.json", inputs)
 
     return report
 

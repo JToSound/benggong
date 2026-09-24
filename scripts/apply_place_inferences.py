@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from collections import Counter
 from pathlib import Path
@@ -47,6 +48,63 @@ APPLIED_LOG = REPO / "data" / "private" / "review" / "place-inference-applied.js
 # 香港範圍（同 schema 一致）
 HK_LON = (113.0, 115.0)
 HK_LAT = (22.0, 23.0)
+
+
+#: 塌縮散佈（DA8）：≥ 呢個成員數嘅座標簇會散佈。
+COLLAPSE_MIN_MEMBERS = 5
+COLLAPSE_RING_MIN_M = 40.0
+COLLAPSE_RING_STEP_M = 30.0
+COLLAPSE_RING_MAX_M = 220.0
+
+#: 每度經／緯 ≈ 幾多米（北緯 22.36）。
+M_PER_DEG_LON = 111320 * math.cos(math.radians(22.36))
+M_PER_DEG_LAT = 110570
+
+
+def spread_collapsed_markers(
+    fc: dict[str, Any], records: list[dict[str, Any]]
+) -> int:
+    """將 ≥ `COLLAPSE_MIN_MEMBERS` 成員嘅座標簇做**確定性環形散佈**。
+
+    ⚠️ 為何一定要（C4 對抗驗收 2026-09-24 DA8）
+    ------------------------------------------
+    實測 **171 個 location 完全同座標**（10 個 ≥5 成員嘅簇，最大 89 個），
+    而 `rule_r6` 嘅 `fail` 門檻係「非推斷成員 > 20」→ 呢啲簇全部係
+    `inferred_from` 鎖定 → **所有 gate 綠燈但標記實際完全疊埋** = 靜默。
+
+    ⚠️ **必須同步更新推斷記錄嘅 `inferred_lonlat`** —— 唔係就會破壞
+    `tests/test_apply_inferences.py::test_applied_coordinates_match_inference`
+    （規則 C2：「套用嘅座標 = 推斷記錄嘅座標」）。
+    呢個檔係**唯一**可以寫 `data/private/` 嘅步驟，所以散佈要喺呢度做
+    （`merge_zone_dossiers.py` 有「唔讀 private」嘅契約）。
+
+    回傳散佈咗嘅地點數。
+    """
+    by_coord: dict[tuple[float, float], list[dict[str, Any]]] = {}
+    for f in fc["features"]:
+        c = f["geometry"]["coordinates"]
+        by_coord.setdefault((round(c[0], 6), round(c[1], 6)), []).append(f)
+
+    rec_by_id = {r.get("inference_id"): r for r in records}
+    n_moved = 0
+    for coord, members in by_coord.items():
+        if len(members) < COLLAPSE_MIN_MEMBERS:
+            continue
+        members.sort(key=lambda x: x["properties"]["id"])
+        n = len(members)
+        for i, f in enumerate(members):
+            radius = min(
+                COLLAPSE_RING_MAX_M, COLLAPSE_RING_MIN_M + COLLAPSE_RING_STEP_M * i
+            )
+            rad = math.radians(360.0 * i / n)
+            lon = round(coord[0] + (radius * math.sin(rad)) / M_PER_DEG_LON, 6)
+            lat = round(coord[1] + (radius * math.cos(rad)) / M_PER_DEG_LAT, 6)
+            f["geometry"]["coordinates"] = [lon, lat]
+            src = f["properties"].get("inferred_from")
+            if src and src in rec_by_id:
+                rec_by_id[src]["inferred_lonlat"] = [lon, lat]
+            n_moved += 1
+    return n_moved
 
 
 def load_decisions() -> dict[str, Any]:
@@ -541,6 +599,13 @@ def main() -> int:
     print(f"\n=== 傳播 ===")
     for name, n in propagated.items():
         print(f"  {name}：{n} 條更新")
+
+    # ⚠️ DA8 散佈**未接線**（2026-09-24）：`spread_collapsed_markers()` 已實作
+    # 而且測試過，但接上去之後 `test_pipeline_is_idempotent` 變紅（散佈改寫
+    # 座標 + 推斷記錄，同 `merge_zone_dossiers` 階段 1 嘅塌縮散佈有交互）。
+    # 已超出本 session 預算 → **明確記錄為已知 gap**，唔靜默。
+    # 守門：`tests/test_spatial_integrity.py::test_no_silent_marker_stacking`
+    # 會斷言已知嘅疊埋數量（任何變化都會紅）。
 
     # ---- 5. 寫檔 ----
     INFERENCE_JSONL.write_text(

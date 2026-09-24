@@ -30,7 +30,7 @@ import fs from "node:fs";
 
 const BASE = process.env.BASE_URL || "http://localhost:5190/";
 const OUT = "artifacts/audit-A7/a7-probe-map2.json";
-const MAX_ARROW = 24;
+const MAX_ARROW = 200;
 
 const browser = await chromium.launch({ args: ["--no-proxy-server"] });
 const ctx = await browser.newContext({ viewport: { width: 1400, height: 900 } });

@@ -174,7 +174,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0004",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -215,7 +215,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0005",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -264,7 +264,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0006",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -311,7 +311,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0007",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -355,7 +355,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0008",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -370,17 +370,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.249417,
-          22.306256
+          114.253569,
+          22.306382
         ]
       },
       "properties": {
         "id": "loc_0009",
         "name": "學生休息室",
-        "display_name": "學生休息室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "學生休息室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.638,
           "y": 0.47
@@ -397,12 +397,16 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "coordinate_source": "legacy",
+        "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_loc_0009",
+        "zone_ids": [
+          "zone_fd96bd24d8"
+        ]
       }
     },
     {
@@ -410,17 +414,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253006,
-          22.307535
+          114.253569,
+          22.306382
         ]
       },
       "properties": {
         "id": "loc_0010",
         "name": "A樓地下活動房",
-        "display_name": "A樓地下活動房（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "A樓地下活動房（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.534,
           "y": 0.822
@@ -436,14 +440,15 @@
         "source": "bing_gang",
         "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_54e86462b5"
+          "zone_fd96bd24d8"
         ],
-        "coordinate_source": "legacy",
+        "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_loc_0010"
       }
     },
     {
@@ -451,17 +456,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.251943,
-          22.30375
+          114.253569,
+          22.306382
         ]
       },
       "properties": {
         "id": "loc_0011",
         "name": "C大樓裁衣部",
-        "display_name": "C大樓裁衣部（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "C大樓裁衣部（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.644,
           "y": 0.735
@@ -477,14 +482,15 @@
         "source": "bing_gang",
         "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_21f011edeb"
+          "zone_fd96bd24d8"
         ],
-        "coordinate_source": "legacy",
+        "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_loc_0011"
       }
     },
     {
@@ -518,7 +524,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0012",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -533,17 +539,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253304,
-          22.308495
+          114.253569,
+          22.306382
         ]
       },
       "properties": {
         "id": "loc_0013",
         "name": "病窩",
-        "display_name": "病窩（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "病窩（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.683,
           "y": 0.211
@@ -571,14 +577,15 @@
         "source": "bing_gang",
         "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_d3f76d3c94"
+          "zone_fd96bd24d8"
         ],
-        "coordinate_source": "legacy",
+        "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 1,
+        "coordinate_confidence": 0.55,
+        "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_loc_0013"
       }
     },
     {
@@ -777,7 +784,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0018",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -898,7 +905,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0022",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -939,7 +946,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0023",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -982,7 +989,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0024",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1548,7 +1555,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0037",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1591,7 +1598,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0038",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1636,7 +1643,7 @@
           "老賢房間"
         ],
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1677,7 +1684,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0040",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1718,7 +1725,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0041",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1759,7 +1766,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0042",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1901,7 +1908,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0045",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -1947,7 +1954,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0046",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -2076,7 +2083,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0049",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -2170,7 +2177,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0051",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -2218,7 +2225,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0052",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -2646,7 +2653,7 @@
         "source": "bing_gang",
         "position_source": "依附於「廣場」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -2775,7 +2782,7 @@
         "source": "bing_gang",
         "position_source": "依附於「廣場」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -2790,8 +2797,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253431,
-          22.30581
+          114.254452,
+          22.306033
         ]
       },
       "properties": {
@@ -2836,7 +2843,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0067",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -2851,8 +2858,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253431,
-          22.30581
+          114.254452,
+          22.306033
         ]
       },
       "properties": {
@@ -2877,7 +2884,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0068",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -2892,8 +2899,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253431,
-          22.30581
+          114.254452,
+          22.306033
         ]
       },
       "properties": {
@@ -2918,7 +2925,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0069",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -2959,7 +2966,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0070",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3000,7 +3007,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0071",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3041,7 +3048,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0072",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3126,7 +3133,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0074",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3167,7 +3174,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0075",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3211,7 +3218,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0076",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3255,7 +3262,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0077",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3304,7 +3311,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0078",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3460,7 +3467,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0082",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3586,7 +3593,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0085",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3634,8 +3641,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "legacy",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_71906d0c3d"
+        ]
       }
     },
     {
@@ -3709,7 +3719,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0089",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3750,7 +3760,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0090",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3793,7 +3803,7 @@
         "source": "bing_gang",
         "position_source": "依附於「大本營」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -3839,7 +3849,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0092",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -3855,7 +3865,7 @@
         "type": "Point",
         "coordinates": [
           114.2415,
-          22.3229
+          22.323262
         ]
       },
       "properties": {
@@ -3916,7 +3926,7 @@
         "type": "Point",
         "coordinates": [
           114.246904,
-          22.311948
+          22.312069
         ]
       },
       "properties": {
@@ -3981,7 +3991,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0095",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4022,7 +4032,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0096",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4069,7 +4079,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0097",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4084,17 +4094,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262513,
-          22.316766
+          114.25539,
+          22.305025
         ]
       },
       "properties": {
         "id": "loc_0098",
         "name": "露天停車場",
-        "display_name": "露天停車場（虛構）",
-        "location_type": "fictional",
+        "display_name": "露天停車場（推斷位置）",
+        "location_type": "district",
         "fictional": false,
-        "location_precision": "district",
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.165,
           "y": 0.676
@@ -4110,11 +4120,11 @@
         "source": "bing_gang",
         "position_source": "依附於「停車場」（由名配對）；精度繼承自父項（district）",
         "zone_ids": [
-          "zone_51bf7d8190"
+          "zone_50501d2eaf"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.8,
+        "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
@@ -4151,7 +4161,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0099",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4192,7 +4202,7 @@
         "source": "bing_gang",
         "position_source": "依附於「圖書館」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -4234,7 +4244,7 @@
         "position_source": "同章（[27]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0101",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4280,7 +4290,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0102",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4321,7 +4331,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0103",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4343,7 +4353,7 @@
       "properties": {
         "id": "loc_0104",
         "name": "學堂",
-        "display_name": "學堂（參考位置）",
+        "display_name": "學堂（推斷位置）",
         "location_type": "district",
         "fictional": false,
         "location_precision": "district",
@@ -4381,12 +4391,14 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
+        "coordinate_source": "manual_geometry",
+        "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.8,
         "spatial_evidence_count": 0,
         "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_review_status": "quarantined",
+        "position_source": "程式化座標校正：地名「學堂」配對到 district 座標，同原座標相差 2689 m（> 1200 m 門檻）",
+        "coord_corrected": true
       }
     },
     {
@@ -4420,7 +4432,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0105",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4461,7 +4473,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0106",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4476,17 +4488,17 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254575,
-          22.307634
+          114.254816,
+          22.304296
         ]
       },
       "properties": {
         "id": "loc_0108",
         "name": "大型活動室",
-        "display_name": "大型活動室（虛構）",
-        "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "display_name": "大型活動室（推斷位置）",
+        "location_type": "district",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.454,
           "y": 0.31
@@ -4502,11 +4514,11 @@
         "source": "bing_gang",
         "position_source": "同章（[29]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_54e86462b5"
+          "zone_50501d2eaf"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
@@ -4549,7 +4561,7 @@
           "董倫大宅"
         ],
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4728,7 +4740,7 @@
         "position_source": "同章（[32]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0113",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4771,7 +4783,7 @@
         "source": "bing_gang",
         "position_source": "依附於「圖書館」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -4813,7 +4825,7 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0115",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4854,7 +4866,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0116",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4895,7 +4907,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0117",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -4936,7 +4948,7 @@
         "source": "bing_gang",
         "position_source": "依附於「608號房」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -4977,7 +4989,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0119",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -5105,7 +5117,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0122",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -5150,7 +5162,7 @@
           "老賢的辦公室"
         ],
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -5242,7 +5254,6 @@
         "confidence": 0.97,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_llm_loc_0125",
         "zone_ids": [
           "zone_ec954725f8"
         ],
@@ -5253,7 +5264,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0125"
       }
     },
     {
@@ -5372,7 +5384,7 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -5544,7 +5556,7 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0132",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -5585,7 +5597,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0133",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -5709,7 +5721,6 @@
           "玄圓第三中學"
         ],
         "position_source": "同章（[43, 44]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0136",
         "zone_ids": [
           "zone_0190fb28f4"
         ],
@@ -5718,7 +5729,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 2,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0136"
       }
     },
     {
@@ -5752,7 +5764,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0137",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6137,7 +6149,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_4600c0fe59"
+          "zone_24f0592ad1"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -6394,7 +6406,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_54e86462b5"
+          "zone_24f0592ad1"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -6598,7 +6610,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0158",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6613,8 +6625,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25359,
-          22.30577
+          114.253698,
+          22.30527
         ]
       },
       "properties": {
@@ -6641,7 +6653,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0159",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6656,8 +6668,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25359,
-          22.30577
+          114.253698,
+          22.30527
         ]
       },
       "properties": {
@@ -6682,7 +6694,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0160",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6725,7 +6737,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0161",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6766,7 +6778,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0162",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6807,7 +6819,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0163",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6852,7 +6864,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0164",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6867,8 +6879,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253393,
-          22.3057
+          114.253512,
+          22.305515
         ]
       },
       "properties": {
@@ -6895,7 +6907,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0165",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6910,8 +6922,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253393,
-          22.3057
+          114.253512,
+          22.305515
         ]
       },
       "properties": {
@@ -6936,7 +6948,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0166",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -6979,7 +6991,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0167",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7022,7 +7034,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0168",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7037,8 +7049,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253393,
-          22.3057
+          114.253512,
+          22.305515
         ]
       },
       "properties": {
@@ -7063,7 +7075,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0169",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7078,8 +7090,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253393,
-          22.3057
+          114.253512,
+          22.305515
         ]
       },
       "properties": {
@@ -7104,7 +7116,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0170",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7145,7 +7157,7 @@
         "source": "bing_gang",
         "position_source": "依附於「工坊」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -7188,7 +7200,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0172",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7203,8 +7215,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253543,
-          22.305547
+          114.253435,
+          22.305338
         ]
       },
       "properties": {
@@ -7232,7 +7244,7 @@
         "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0173",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7247,8 +7259,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253543,
-          22.305547
+          114.253435,
+          22.305338
         ]
       },
       "properties": {
@@ -7276,7 +7288,7 @@
         "position_source": "同章（[58]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0174",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7372,7 +7384,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0176",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7664,7 +7676,7 @@
         "position_source": "同章（[61]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0183",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7832,7 +7844,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0187",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7873,7 +7885,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0188",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7916,7 +7928,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0189",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7959,7 +7971,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0191",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -7999,7 +8011,7 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -8014,8 +8026,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253429,
-          22.30581
+          114.252857,
+          22.304697
         ]
       },
       "properties": {
@@ -8051,7 +8063,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0193",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8096,7 +8108,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0194",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8140,7 +8152,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0195",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8264,7 +8276,7 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -8359,7 +8371,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0200",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8374,8 +8386,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253429,
-          22.30581
+          114.252858,
+          22.304697
         ]
       },
       "properties": {
@@ -8400,7 +8412,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0201",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8415,8 +8427,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253429,
-          22.30581
+          114.252858,
+          22.304694
         ]
       },
       "properties": {
@@ -8441,7 +8453,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0202",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8502,8 +8514,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252509,
-          22.305844
+          114.252408,
+          22.305707
         ]
       },
       "properties": {
@@ -8663,7 +8675,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0207",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8678,8 +8690,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252509,
-          22.305844
+          114.252408,
+          22.305707
         ]
       },
       "properties": {
@@ -8762,7 +8774,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0209",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8843,7 +8855,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0211",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8886,7 +8898,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0212",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8901,8 +8913,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.252426,
+          22.305483
         ]
       },
       "properties": {
@@ -8930,7 +8942,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0213",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8973,7 +8985,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0214",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -8988,8 +9000,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.252358,
+          22.305472
         ]
       },
       "properties": {
@@ -9014,7 +9026,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0215",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9029,8 +9041,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.252358,
+          22.305472
         ]
       },
       "properties": {
@@ -9057,7 +9069,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0216",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9072,8 +9084,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.252426,
+          22.305483
         ]
       },
       "properties": {
@@ -9098,7 +9110,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0217",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9139,7 +9151,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0218",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9180,7 +9192,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0219",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9224,7 +9236,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0220",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9282,8 +9294,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "legacy",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_24f0592ad1"
+        ]
       }
     },
     {
@@ -9317,7 +9332,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0222",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9358,7 +9373,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0223",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9373,8 +9388,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.252426,
+          22.305483
         ]
       },
       "properties": {
@@ -9420,7 +9435,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0224",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9463,7 +9478,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[72]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0225",
         "zone_ids": [
           "zone_71906d0c3d"
         ],
@@ -9472,7 +9486,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0225"
       }
     },
     {
@@ -9682,8 +9697,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.252426,
+          22.305483
         ]
       },
       "properties": {
@@ -9708,7 +9723,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0231",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -9749,7 +9764,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0232",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -10064,7 +10079,7 @@
         "type": "Point",
         "coordinates": [
           114.26276,
-          22.308841
+          22.309203
         ]
       },
       "properties": {
@@ -10094,7 +10109,7 @@
         ],
         "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": null,
+        "coordinate_confidence": 0.95,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated",
@@ -10102,11 +10117,14 @@
           "name": "將軍澳廣場",
           "coord": [
             114.26276,
-            22.308841
+            22.309203
           ],
           "rule": "A",
           "relation": "at",
-          "distance_m": 515.9
+          "confidence": 0.95,
+          "distance_m": 40.1,
+          "offset_m": 40.0,
+          "offset_bearing_deg": 0.0
         }
       }
     },
@@ -10115,8 +10133,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26276,
-          22.308841
+          114.263349,
+          22.308524
         ]
       },
       "properties": {
@@ -10144,19 +10162,22 @@
         ],
         "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": null,
+        "coordinate_confidence": 0.95,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated",
         "coordinate_anchor": {
           "name": "將軍澳廣場",
           "coord": [
-            114.26276,
-            22.308841
+            114.263349,
+            22.308524
           ],
           "rule": "A",
           "relation": "at",
-          "distance_m": 757.0
+          "confidence": 0.95,
+          "distance_m": 70.1,
+          "offset_m": 70.0,
+          "offset_bearing_deg": 120.0
         }
       }
     },
@@ -10228,7 +10249,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0244",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -10381,7 +10402,7 @@
         "source": "bing_gang",
         "position_source": "依附於「不良人據點」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -10799,7 +10820,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0257",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -10864,8 +10885,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26276,
-          22.308841
+          114.261919,
+          22.308389
         ]
       },
       "properties": {
@@ -10895,19 +10916,22 @@
         ],
         "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": null,
+        "coordinate_confidence": 0.95,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated",
         "coordinate_anchor": {
           "name": "將軍澳廣場",
           "coord": [
-            114.26276,
-            22.308841
+            114.261919,
+            22.308389
           ],
           "rule": "A",
           "relation": "at",
-          "distance_m": 726.0
+          "confidence": 0.95,
+          "distance_m": 99.9,
+          "offset_m": 100.0,
+          "offset_bearing_deg": 240.0
         }
       }
     },
@@ -10941,7 +10965,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[75]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0260",
         "zone_ids": [
           "zone_71906d0c3d"
         ],
@@ -10950,7 +10973,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0260"
       }
     },
     {
@@ -11183,7 +11207,7 @@
         "position_source": "同章（[80]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0267",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -11769,7 +11793,7 @@
         "source": "bing_gang",
         "position_source": "依附於「小學」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -12478,7 +12502,7 @@
         "source": "bing_gang",
         "position_source": "依附於「行人隧道」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -12601,7 +12625,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -12933,7 +12957,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_54e86462b5"
+          "zone_24f0592ad1"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -12974,7 +12998,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_54e86462b5"
+          "zone_24f0592ad1"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -13061,8 +13085,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "legacy",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_d3f76d3c94"
+        ]
       }
     },
     {
@@ -13180,7 +13207,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_21f011edeb"
+          "zone_24f0592ad1"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -13309,7 +13336,7 @@
         ],
         "position_source": "同章（[91, 104]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -13435,7 +13462,7 @@
         "source": "bing_gang",
         "position_source": "同章（[92]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -13476,7 +13503,7 @@
         "source": "bing_gang",
         "position_source": "同章（[92]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -13520,8 +13547,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.95,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "legacy",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_63245da8ee"
+        ]
       }
     },
     {
@@ -13890,7 +13920,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0332",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -14121,7 +14151,7 @@
         "type": "Point",
         "coordinates": [
           114.2729,
-          22.3166
+          22.316962
         ]
       },
       "properties": {
@@ -14279,7 +14309,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_54e86462b5"
+          "zone_24f0592ad1"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -14319,7 +14349,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[101]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0342",
         "zone_ids": [
           "zone_e335ebdbec"
         ],
@@ -14328,7 +14357,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0342"
       }
     },
     {
@@ -14602,7 +14632,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -14817,7 +14847,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0355",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -14858,7 +14888,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0356",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -15182,7 +15212,7 @@
         "type": "Point",
         "coordinates": [
           114.256992,
-          22.322438
+          22.3228
         ]
       },
       "properties": {
@@ -15210,7 +15240,7 @@
         ],
         "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": null,
+        "coordinate_confidence": 0.95,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated",
@@ -15218,12 +15248,17 @@
           "name": "新都城中心三期",
           "coord": [
             114.256992,
-            22.322438
+            22.3228
           ],
           "rule": "A",
           "relation": "at",
-          "distance_m": 847.0
-        }
+          "confidence": 0.95,
+          "distance_m": 40.1,
+          "offset_m": 40.0,
+          "offset_bearing_deg": 0.0
+        },
+        "position_source": "程式化座標校正：「新都城中心三期」嘅母體係「新都城」（district 對照表），但原座標相距 962 m —— 錨定返母體附近",
+        "coord_corrected": true
       }
     },
     {
@@ -15232,7 +15267,7 @@
         "type": "Point",
         "coordinates": [
           114.257775,
-          22.320284
+          22.320344
         ]
       },
       "properties": {
@@ -15370,7 +15405,7 @@
         "type": "Point",
         "coordinates": [
           114.258779,
-          22.31992
+          22.319981
         ]
       },
       "properties": {
@@ -15413,7 +15448,7 @@
         "type": "Point",
         "coordinates": [
           114.257297,
-          22.321263
+          22.322348
         ]
       },
       "properties": {
@@ -15450,12 +15485,18 @@
           "name": "新都城中心一期",
           "coord": [
             114.257297,
-            22.321263
+            22.322348
           ],
           "rule": "B",
           "relation": "adjacent",
           "confidence": 0.85,
-          "distance_m": 779.8
+          "distance_m": 120.0,
+          "offset_m": 120.0,
+          "offset_bearing_deg": 0.0,
+          "from": [
+            114.253087,
+            22.327208
+          ]
         }
       }
     },
@@ -15678,7 +15719,7 @@
         "type": "Point",
         "coordinates": [
           114.256504,
-          22.317287
+          22.317408
         ]
       },
       "properties": {
@@ -15721,7 +15762,7 @@
         "type": "Point",
         "coordinates": [
           114.256992,
-          22.322438
+          22.3228
         ]
       },
       "properties": {
@@ -15753,22 +15794,12 @@
         "zone_ids": [
           "zone_200f5e8911"
         ],
-        "coordinate_source": "text_landmark",
-        "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": null,
+        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_review_status": "needs_validation",
+        "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated",
-        "coordinate_anchor": {
-          "name": "新都城中心三期",
-          "coord": [
-            114.256992,
-            22.322438
-          ],
-          "rule": "B",
-          "relation": "adjacent",
-          "distance_m": 847.0
-        }
+        "zone_membership_review_status": "validated"
       }
     },
     {
@@ -15858,8 +15889,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.251951,
+          22.305406
         ]
       },
       "properties": {
@@ -15886,7 +15917,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0379",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -16065,7 +16096,7 @@
         "source": "bing_gang",
         "position_source": "依附於「詭區」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -16197,7 +16228,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -16253,8 +16284,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.251951,
+          22.305406
         ]
       },
       "properties": {
@@ -16289,7 +16320,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0388",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "position_source": "程式化座標校正：「翠林邨」屬「翠林村倖存區」範圍，但原座標距離區域中心 2030 m（區域半徑 656 m）—— 拉入區域內部",
         "coord_corrected": true,
@@ -16452,7 +16483,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -16552,8 +16583,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.248636,
+          22.323341
         ]
       },
       "properties": {
@@ -17113,7 +17144,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -17198,7 +17229,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -17871,7 +17902,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0425",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -18357,7 +18388,7 @@
         "type": "Point",
         "coordinates": [
           114.258518,
-          22.322959
+          22.323321
         ]
       },
       "properties": {
@@ -18400,12 +18431,18 @@
           "name": "新都城二期",
           "coord": [
             114.258518,
-            22.322959
+            22.323321
           ],
           "rule": "C",
           "relation": "at",
           "confidence": 0.8,
-          "distance_m": 2374.0
+          "distance_m": 40.1,
+          "offset_m": 40.0,
+          "offset_bearing_deg": 0.0,
+          "from": [
+            114.236801,
+            22.330179
+          ]
         }
       }
     },
@@ -18518,7 +18555,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
-        "inferred_from": "inf_llm_loc_0440",
         "zone_ids": [
           "zone_200f5e8911"
         ],
@@ -18527,7 +18563,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0440"
       }
     },
     {
@@ -18618,7 +18655,7 @@
         "type": "Point",
         "coordinates": [
           114.258518,
-          22.322959
+          22.322326
         ]
       },
       "properties": {
@@ -18649,7 +18686,7 @@
         ],
         "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": null,
+        "coordinate_confidence": 0.95,
         "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated",
@@ -18657,11 +18694,14 @@
           "name": "新都城二期",
           "coord": [
             114.258518,
-            22.322959
+            22.322326
           ],
           "rule": "A",
           "relation": "at",
-          "distance_m": 674.4
+          "confidence": 0.95,
+          "distance_m": 70.0,
+          "offset_m": 70.0,
+          "offset_bearing_deg": 180.0
         }
       }
     },
@@ -19120,8 +19160,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "legacy",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_8d2b97997f"
+        ]
       }
     },
     {
@@ -19441,7 +19484,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[143]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0462",
         "zone_ids": [
           "zone_71906d0c3d"
         ],
@@ -19450,7 +19492,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0462"
       }
     },
     {
@@ -19484,7 +19527,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0463",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -19623,7 +19666,7 @@
         "type": "Point",
         "coordinates": [
           114.256992,
-          22.322438
+          22.321805
         ]
       },
       "properties": {
@@ -19651,7 +19694,7 @@
         ],
         "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": null,
+        "coordinate_confidence": 0.95,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated",
@@ -19659,11 +19702,18 @@
           "name": "新都城中心三期",
           "coord": [
             114.256992,
-            22.322438
+            22.321805
           ],
           "rule": "A",
           "relation": "at",
-          "distance_m": 816.1
+          "confidence": 0.95,
+          "distance_m": 100.0,
+          "offset_m": 70.0,
+          "offset_bearing_deg": 180.0,
+          "from": [
+            114.256151,
+            22.321986
+          ]
         }
       }
     },
@@ -19974,13 +20024,13 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[151]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0474",
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": null,
-        "zone_membership_review_status": "quarantined"
+        "zone_membership_review_status": "quarantined",
+        "inferred_from": "inf_llm_loc_0474"
       }
     },
     {
@@ -20092,7 +20142,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -20177,13 +20227,13 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "position_source": "依附於「倖存區」（由名配對）；精度繼承自父項（approximate）",
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -20695,7 +20745,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -20912,13 +20962,13 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
-        "inferred_from": "inf_llm_loc_0496",
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_review_status": "needs_validation",
+        "inferred_from": "inf_llm_loc_0496"
       }
     },
     {
@@ -20992,7 +21042,7 @@
         "source": "bing_gang",
         "position_source": "同章（[109]）嘅 8 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -21378,7 +21428,7 @@
         "type": "Point",
         "coordinates": [
           114.256992,
-          22.322438
+          22.3228
         ]
       },
       "properties": {
@@ -21418,8 +21468,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.251951,
+          22.305406
         ]
       },
       "properties": {
@@ -21444,7 +21494,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0509",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -21561,7 +21611,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0512",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -21576,8 +21626,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.256787,
-          22.315822
+          114.256502,
+          22.315848
         ]
       },
       "properties": {
@@ -21602,12 +21652,12 @@
         "source": "bing_gang",
         "position_source": "同章（[115]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_d3cb81ec7d"
+          "zone_63245da8ee"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -21662,8 +21712,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.248636,
+          22.323341
         ]
       },
       "properties": {
@@ -21706,8 +21756,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.248636,
+          22.323341
         ]
       },
       "properties": {
@@ -21749,8 +21799,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.248636,
+          22.323341
         ]
       },
       "properties": {
@@ -21790,8 +21840,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.248641,
+          22.323344
         ]
       },
       "properties": {
@@ -21831,8 +21881,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.24864,
+          22.323344
         ]
       },
       "properties": {
@@ -21872,8 +21922,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.24864,
+          22.323344
         ]
       },
       "properties": {
@@ -21913,8 +21963,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.24864,
+          22.323344
         ]
       },
       "properties": {
@@ -21954,8 +22004,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248766,
-          22.323416
+          114.24864,
+          22.323344
         ]
       },
       "properties": {
@@ -22302,7 +22352,7 @@
         "source": "bing_gang",
         "position_source": "依附於「圖書館」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -22348,13 +22398,13 @@
           "zone_3371b02c9d"
         ],
         "position_source": "同章（[144]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0531",
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0531"
       }
     },
     {
@@ -22594,7 +22644,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0537",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -22637,7 +22687,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0538",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -22678,7 +22728,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0539",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -22719,7 +22769,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0540",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -22760,7 +22810,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0541",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -22801,7 +22851,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0542",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -22842,7 +22892,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0543",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -22883,7 +22933,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0544",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -23082,9 +23132,12 @@
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "quarantined"
+        "spatial_evidence_count": 1,
+        "zone_membership_source": "legacy",
+        "zone_membership_review_status": "needs_validation",
+        "zone_ids": [
+          "zone_dc65269329"
+        ]
       }
     },
     {
@@ -23223,7 +23276,13 @@
           "rule": "C",
           "relation": "at",
           "confidence": 0.8,
-          "distance_m": 2776.8
+          "distance_m": 0.0,
+          "offset_m": 0.0,
+          "offset_bearing_deg": null,
+          "from": [
+            114.257697,
+            22.301864
+          ]
         }
       }
     },
@@ -23258,12 +23317,12 @@
         "source": "bing_gang",
         "position_source": "同章（[155]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -23350,8 +23409,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25332,
-          22.306027
+          114.253,
+          22.306142
         ]
       },
       "properties": {
@@ -23377,12 +23436,12 @@
         "position_source": "同章（[158]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0556",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -23418,12 +23477,12 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -23433,8 +23492,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25332,
-          22.306027
+          114.253,
+          22.306142
         ]
       },
       "properties": {
@@ -23463,12 +23522,12 @@
         "position_source": "同章（[158]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0558",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -23507,12 +23566,12 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0559",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -23522,8 +23581,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25332,
-          22.306027
+          114.253,
+          22.306142
         ]
       },
       "properties": {
@@ -23549,12 +23608,12 @@
         "position_source": "同章（[158]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0560",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -23590,7 +23649,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -23631,7 +23690,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -23646,8 +23705,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254109,
-          22.305733
+          114.254069,
+          22.305706
         ]
       },
       "properties": {
@@ -23673,7 +23732,7 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0563",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -23688,8 +23747,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254109,
-          22.305733
+          114.25407,
+          22.305706
         ]
       },
       "properties": {
@@ -23715,7 +23774,7 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0564",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -23730,8 +23789,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254109,
-          22.305733
+          114.25407,
+          22.305705
         ]
       },
       "properties": {
@@ -23757,7 +23816,7 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0565",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -23772,8 +23831,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254109,
-          22.305733
+          114.254069,
+          22.305705
         ]
       },
       "properties": {
@@ -23802,7 +23861,7 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0566",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -23817,8 +23876,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254109,
-          22.305733
+          114.254069,
+          22.305706
         ]
       },
       "properties": {
@@ -23844,7 +23903,7 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_loc_0567",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -23885,7 +23944,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0568",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -23928,7 +23987,7 @@
         "source": "bing_gang",
         "position_source": "同章（[160]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -23969,7 +24028,7 @@
         "source": "bing_gang",
         "position_source": "同章（[160]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -24012,7 +24071,7 @@
         "source": "bing_gang",
         "position_source": "依附於「倖存區」（由名配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -24053,7 +24112,7 @@
         "source": "bing_gang",
         "position_source": "同章（[160]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -24096,7 +24155,7 @@
         "source": "bing_gang",
         "position_source": "同章（[161]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -24187,7 +24246,7 @@
         "position_source": "同章（[161]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "inferred_from": "inf_loc_0575",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -24242,8 +24301,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277722,
-          22.29731
+          114.277657,
+          22.297275
         ]
       },
       "properties": {
@@ -24322,8 +24381,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277722,
-          22.29731
+          114.277657,
+          22.297275
         ]
       },
       "properties": {
@@ -24374,8 +24433,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277722,
-          22.29731
+          114.277657,
+          22.297275
         ]
       },
       "properties": {
@@ -24413,8 +24472,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277722,
-          22.29731
+          114.277657,
+          22.297274
         ]
       },
       "properties": {
@@ -24455,8 +24514,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277722,
-          22.29731
+          114.277656,
+          22.297274
         ]
       },
       "properties": {
@@ -24496,8 +24555,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277722,
-          22.29731
+          114.277656,
+          22.297275
         ]
       },
       "properties": {
@@ -24606,13 +24665,13 @@
           "zone_3371b02c9d"
         ],
         "position_source": "同章（[163]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_llm_loc_0585",
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0585"
       }
     },
     {
@@ -24646,7 +24705,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0586",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -24730,13 +24789,13 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
-        "inferred_from": "inf_llm_loc_0588",
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": null,
-        "zone_membership_review_status": "quarantined"
+        "zone_membership_review_status": "quarantined",
+        "inferred_from": "inf_llm_loc_0588"
       }
     },
     {
@@ -24912,7 +24971,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0592",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -24927,8 +24986,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253429,
-          22.30581
+          114.252568,
+          22.306177
         ]
       },
       "properties": {
@@ -24955,7 +25014,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0593",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -24970,8 +25029,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253429,
-          22.30581
+          114.252522,
+          22.306265
         ]
       },
       "properties": {
@@ -24998,7 +25057,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0594",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25083,7 +25142,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0596",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25126,7 +25185,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0597",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25465,7 +25524,7 @@
         "source": "bing_gang",
         "position_source": "依附於「B橦大樓」（由描述配對）；精度繼承自父項（exact）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -25672,7 +25731,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0611",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25716,7 +25775,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0612",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25757,7 +25816,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0613",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25798,7 +25857,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0614",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25839,7 +25898,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0615",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25882,7 +25941,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0616",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -25925,7 +25984,7 @@
         "source": "bing_gang",
         "position_source": "依附於「圖書館」（由描述配對）；精度繼承自父項（approximate）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -26030,8 +26089,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253375,
-          22.30564
+          114.251951,
+          22.305406
         ]
       },
       "properties": {
@@ -26060,7 +26119,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0620",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -26434,7 +26493,6 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
-        "inferred_from": "inf_llm_loc_0629",
         "zone_ids": [
           "zone_ec954725f8"
         ],
@@ -26443,7 +26501,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_llm_loc_0629"
       }
     },
     {
@@ -27117,8 +27176,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.271048,
-          22.320302
+          114.253653,
+          22.307592
         ]
       },
       "properties": {
@@ -27126,8 +27185,8 @@
         "name": "存放數十個屍堆的廣場",
         "display_name": "存放數十個屍堆的廣場（虛構）",
         "location_type": "fictional",
-        "fictional": true,
-        "location_precision": "fictional",
+        "fictional": false,
+        "location_precision": "approximate",
         "story_position": {
           "x": 0.248,
           "y": 0.331
@@ -27141,13 +27200,16 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "position_source": "同章（[182]）嘅 4 個已解析地點質心附近（環形偏移，id hash 決定）",
+        "position_source": "依附於「病窩」（由描述配對）；精度繼承自父項（approximate）",
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_24f0592ad1"
+        ]
       }
     },
     {
@@ -28152,7 +28214,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0669",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -28193,7 +28255,7 @@
         "source": "bing_gang",
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -28647,7 +28709,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0681",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -28901,7 +28963,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0687",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -29025,7 +29087,8 @@
         "source": "bing_gang",
         "zone_ids": [
           "zone_14d4957e04",
-          "zone_2a22537f9c"
+          "zone_2a22537f9c",
+          "zone_52987957ac"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -29066,7 +29129,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0691",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -29448,7 +29511,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0700",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -29489,7 +29552,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0701",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -29530,7 +29593,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0702",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -29571,7 +29634,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0703",
         "zone_ids": [
-          "zone_24f0592ad1"
+          "zone_fd96bd24d8"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",

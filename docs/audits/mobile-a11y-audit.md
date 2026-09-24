@@ -476,8 +476,8 @@ keyboardReachable: els.filter(e => e.tabIndex >= 0).length   // ← 「有冇 ta
 
 | 指標 | 值 |
 |---|---|
-| `keyboardReachable` | **25**（24 次方向鍵 + 1 次 Tab 到達 25 個唔同元素） |
-| `keyboardActivatable` | **true**（`sel 0 → 1`、URL 由 `/` 變 `/?zone=zone_e0a9ccb6fd`） |
+| `keyboardReachable` | **65 / 66**（⚠️ 見下面「2026-09-24 修正」） |
+| `keyboardActivatable` | **true**（`sel 0 → 1`、URL 由 `/` 變 `/?zone=<id>`） |
 | `focusRingVisible` | **true** |
 | `tabEnteredMap` | **true** |
 | 互動元素總數 | 72（`.zone`／`.route-line`／`.location-marker`／`-cluster`／`.event-marker`） |
@@ -487,6 +487,40 @@ keyboardReachable: els.filter(e => e.tabIndex >= 0).length   // ← 「有冇 ta
 | 舊指標（對照） | `tabIndex >= 0` = **1** ← 證明舊指標失效 |
 
 **判定：§10.9 PASS**（原本 0/14）。
+
+---
+
+#### ⚠️ 2026-09-24 修正：第一次報嘅「25」係**探測假象**
+
+C7 對抗驗收（`docs/audits/c7-accessibility-c.md`）指出：第一次量到嘅
+`keyboardReachable = 25` **唔係**真實可達數 —— 探測腳本嘅
+`MAX_ARROW = 24`，即係「24 次方向鍵 + 1 次 Tab」最多只可以數到 25 個
+**唔同**元素。呢個係**探測上限**，唔係系統性質。
+
+C7 用 `MAX_ARROW = 200` 重測，發現**真正嘅 P1**：
+
+> roving tabindex 嘅清單包含**隱藏**元素（`#routes-layer` 預設 `hidden`
+> → 全部 `.route-line` 都 `display:none`）。`el.focus()` 對隱藏元素
+> **靜默失敗**，但 `kbFocusKey` 已經更新 → 下一次按鍵仍然由嗰個 index
+> 出發 → **roving 永遠卡死喺 index 48**。後果：**19 個標記／事件永遠
+> 無法用鍵盤到達**。
+
+**修法**（`SvgMap.mapInteractiveEls()`）：過濾隱藏元素 ——
+`closest("[hidden]")`（屬性檢查，短路）＋ `getClientRects().length > 0`
+（覆蓋其他 `display:none`）。
+
+**修復後實測**（同一探測、`MAX_ARROW = 200`）：
+
+| 指標 | 修復前（C7 量） | 修復後 |
+|---|---|---|
+| `keyboardReachable` | 48（卡死） | **65 / 66** |
+| `interactiveTotal` | 68 | 66 |
+| `keyboardActivatable` | true | true |
+| `focusRingVisible` | true | true |
+| roving 不變式 | 1×`0` / 67×`-1` | **1×`0` / 65×`-1`** ✓ |
+
+→ **教訓：量度指標本身一定要驗證上限。**「25」呢個數字啱啱好等於
+`MAX_ARROW + 1`，本身已經係一個應該起疑嘅信號。
 
 **重跑**：
 

@@ -440,16 +440,16 @@
             22.30581
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.265,
             22.317
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.25343,
@@ -524,8 +524,8 @@
             22.318
           ],
           [
-            114.25359,
-            22.30577
+            114.253698,
+            22.30527
           ],
           [
             114.25343,
@@ -656,20 +656,20 @@
             22.30581
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
             114.252761,
             22.305178
           ],
           [
-            114.25332,
-            22.306027
+            114.253,
+            22.306142
           ],
           [
             114.25343,
@@ -823,10 +823,10 @@
             "chapter": 6,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0029",
@@ -843,10 +843,10 @@
             "chapter": 10,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0004",
@@ -993,8 +993,8 @@
             "chapter": 37,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -1063,8 +1063,8 @@
             "chapter": 63,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -1113,8 +1113,8 @@
             "chapter": 75,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -1333,8 +1333,8 @@
             "chapter": 130,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -1396,7 +1396,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 0
+            "spatial_evidence_count": 1
           },
           {
             "location_id": "loc_0004",
@@ -1536,7 +1536,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.851
+        "real_waypoint_fraction": 0.878
       }
     },
     {
@@ -1577,8 +1577,8 @@
             22.30581
           ],
           [
-            114.252509,
-            22.305844
+            114.252408,
+            22.305707
           ],
           [
             114.25343,
@@ -1689,8 +1689,8 @@
             "chapter": 36,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -1739,8 +1739,8 @@
             "chapter": 61,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -1965,12 +1965,12 @@
             22.320809
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
-            114.277722,
-            22.29731
+            114.277657,
+            22.297275
           ],
           [
             114.2729,
@@ -1990,7 +1990,7 @@
           ],
           [
             114.2729,
-            22.3166
+            22.316962
           ],
           [
             114.262014,
@@ -2170,8 +2170,8 @@
             22.320809
           ],
           [
-            114.277722,
-            22.29731
+            114.277657,
+            22.297275
           ],
           [
             114.251601,
@@ -2330,8 +2330,8 @@
             22.319103891050585
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
             114.23559924467841,
@@ -2502,12 +2502,12 @@
             22.317
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.25343,
@@ -2550,8 +2550,8 @@
             22.30581
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.25343,
@@ -2642,20 +2642,20 @@
             "chapter": 6,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0013",
             "chapter": 20,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0006",
@@ -2682,8 +2682,8 @@
             "chapter": 28,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -2692,8 +2692,8 @@
             "chapter": 33,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -2712,8 +2712,8 @@
             "chapter": 65,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -2762,10 +2762,10 @@
             "chapter": 174,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0004",
@@ -2796,7 +2796,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.737
+        "real_waypoint_fraction": 0.895
       }
     },
     {
@@ -3138,8 +3138,8 @@
             "chapter": 33,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -3148,8 +3148,8 @@
             "chapter": 36,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -3178,8 +3178,8 @@
             "chapter": 63,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -3208,8 +3208,8 @@
             "chapter": 71,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -3362,8 +3362,8 @@
             22.30581
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.25343,
@@ -3374,8 +3374,8 @@
             22.30581
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.25343,
@@ -3432,10 +3432,10 @@
             "chapter": 9,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0038",
@@ -3462,10 +3462,10 @@
             "chapter": 14,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0004",
@@ -3513,7 +3513,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.778
+        "real_waypoint_fraction": 1.0
       }
     },
     {
@@ -3567,7 +3567,7 @@
           ],
           [
             114.257775,
-            22.320284
+            22.320344
           ],
           [
             114.2729,
@@ -3594,8 +3594,8 @@
             22.3166
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.2729,
@@ -3851,9 +3851,9 @@
             "chapter": 179,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
+            "coordinate_confidence": 0.55,
             "spatial_evidence_count": 0
           },
           {
@@ -3932,7 +3932,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.808
+        "real_waypoint_fraction": 0.846
       }
     },
     {
@@ -4085,8 +4085,8 @@
             "chapter": 66,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -4311,8 +4311,8 @@
             22.30581
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
             114.25343,
@@ -4555,8 +4555,8 @@
             "chapter": 71,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -4829,7 +4829,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 1
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0004",
@@ -4860,12 +4860,12 @@
             22.305178
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
             114.274015,
@@ -5048,8 +5048,8 @@
             22.3138
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
             114.24353826962692,
@@ -5057,11 +5057,11 @@
           ],
           [
             114.257775,
-            22.320284
+            22.320344
           ],
           [
             114.257775,
-            22.320284
+            22.320344
           ],
           [
             114.2566,
@@ -5069,7 +5069,7 @@
           ],
           [
             114.257775,
-            22.320284
+            22.320344
           ],
           [
             114.2566,
@@ -5081,23 +5081,23 @@
           ],
           [
             114.258518,
-            22.322959
+            22.323321
           ],
           [
             114.25343,
             22.30581
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
             114.258518,
-            22.322959
+            22.322326
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
             114.2566,
@@ -5105,7 +5105,7 @@
           ],
           [
             114.257775,
-            22.320284
+            22.320344
           ],
           [
             114.2415,
@@ -5535,7 +5535,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 1
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0705",
@@ -5578,8 +5578,8 @@
             22.30581
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.25343,
@@ -5666,10 +5666,10 @@
             "chapter": 14,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0004",
@@ -5717,7 +5717,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.778
+        "real_waypoint_fraction": 0.889
       }
     },
     {
@@ -5746,8 +5746,8 @@
             22.30581
           ],
           [
-            114.253431,
-            22.30581
+            114.254452,
+            22.306033
           ],
           [
             114.25343,
@@ -5790,8 +5790,8 @@
             22.328691989013503
           ],
           [
-            114.252509,
-            22.305844
+            114.252408,
+            22.305707
           ]
         ]
       },
@@ -6019,7 +6019,7 @@
           ],
           [
             114.2415,
-            22.3229
+            22.323262
           ],
           [
             114.25343,
@@ -6185,12 +6185,12 @@
             22.3166
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ],
           [
-            114.277722,
-            22.29731
+            114.277657,
+            22.297275
           ],
           [
             114.251601,
@@ -6249,8 +6249,8 @@
             22.32303538567178
           ],
           [
-            114.277722,
-            22.29731
+            114.277657,
+            22.297274
           ],
           [
             114.262014,
@@ -6741,8 +6741,8 @@
             22.303791
           ],
           [
-            114.253375,
-            22.30564
+            114.252426,
+            22.305483
           ]
         ]
       },
@@ -6890,8 +6890,8 @@
             22.309494
           ],
           [
-            114.277722,
-            22.29731
+            114.277657,
+            22.297275
           ],
           [
             114.256648,
@@ -6926,8 +6926,8 @@
             22.30581
           ],
           [
-            114.252509,
-            22.305844
+            114.252408,
+            22.305707
           ],
           [
             114.25343,
@@ -7141,8 +7141,8 @@
             "chapter": 63,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -7161,8 +7161,8 @@
             "chapter": 65,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -7324,7 +7324,7 @@
           ],
           [
             114.257775,
-            22.320284
+            22.320344
           ],
           [
             114.257718,
@@ -7335,8 +7335,8 @@
             22.322665
           ],
           [
-            114.253375,
-            22.30564
+            114.251951,
+            22.305406
           ],
           [
             114.23660798809796,
@@ -7547,7 +7547,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 1
+            "spatial_evidence_count": 0
           }
         ],
         "missing_waypoint_locations": null,
@@ -7588,8 +7588,8 @@
             22.30581
           ],
           [
-            114.252509,
-            22.305844
+            114.252408,
+            22.305707
           ],
           [
             114.26593,
@@ -7912,7 +7912,7 @@
           ],
           [
             114.2415,
-            22.3229
+            22.323262
           ],
           [
             114.23559924467841,
@@ -8026,8 +8026,8 @@
         "type": "LineString",
         "coordinates": [
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.265,
@@ -8038,8 +8038,8 @@
             22.30581
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.265,
@@ -8050,12 +8050,12 @@
             22.309773
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.257059,
@@ -8066,8 +8066,8 @@
             22.30581
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.272,
@@ -8098,8 +8098,8 @@
             22.308611
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.262014,
@@ -8110,12 +8110,12 @@
             22.318
           ],
           [
-            114.253375,
-            22.30564
+            114.251951,
+            22.305406
           ],
           [
-            114.253375,
-            22.30564
+            114.251951,
+            22.305406
           ],
           [
             114.262014,
@@ -8188,17 +8188,17 @@
           178,
           180
         ],
-        "precision": "fictional",
+        "precision": "approximate",
         "waypoints": [
           {
             "location_id": "loc_0013",
             "chapter": 3,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0029",
@@ -8225,10 +8225,10 @@
             "chapter": 6,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0029",
@@ -8255,20 +8255,20 @@
             "chapter": 10,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0013",
             "chapter": 12,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0050",
@@ -8295,10 +8295,10 @@
             "chapter": 45,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0143",
@@ -8375,10 +8375,10 @@
             "chapter": 91,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
-            "spatial_evidence_count": 1
+            "coordinate_confidence": 0.55,
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0427",
@@ -8496,7 +8496,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.567
+        "real_waypoint_fraction": 0.767
       }
     },
     {
@@ -8550,7 +8550,7 @@
           ],
           [
             114.257775,
-            22.320284
+            22.320344
           ],
           [
             114.25343,
@@ -9007,7 +9007,7 @@
           ],
           [
             114.2729,
-            22.3166
+            22.316962
           ],
           [
             114.26987914854658,
@@ -9423,8 +9423,8 @@
             22.30581
           ],
           [
-            114.25332,
-            22.306027
+            114.253,
+            22.306142
           ],
           [
             114.253267,
@@ -9885,7 +9885,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 0
+            "spatial_evidence_count": 1
           },
           {
             "location_id": "loc_0571",
@@ -9975,7 +9975,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 1
+            "spatial_evidence_count": 0
           },
           {
             "location_id": "loc_0699",
@@ -10306,7 +10306,7 @@
           ],
           [
             114.2415,
-            22.3229
+            22.323262
           ],
           [
             114.25343,
@@ -10345,8 +10345,8 @@
             22.305706
           ],
           [
-            114.253429,
-            22.30581
+            114.252522,
+            22.306265
           ],
           [
             114.251832,
@@ -10693,7 +10693,7 @@
             "coordinate_source": "legacy",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 0
+            "spatial_evidence_count": 1
           },
           {
             "location_id": "loc_0594",
@@ -10703,7 +10703,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 0
+            "spatial_evidence_count": 1
           },
           {
             "location_id": "loc_0488",
@@ -10793,7 +10793,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 1
+            "spatial_evidence_count": 0
           }
         ],
         "missing_waypoint_locations": null,
@@ -10863,7 +10863,7 @@
           ],
           [
             114.2729,
-            22.3166
+            22.316962
           ],
           [
             114.2729,
@@ -10871,11 +10871,11 @@
           ],
           [
             114.258518,
-            22.322959
+            22.323321
           ],
           [
             114.258518,
-            22.322959
+            22.323321
           ],
           [
             114.23660798809796,
@@ -10942,8 +10942,8 @@
             22.3166
           ],
           [
-            114.253304,
-            22.308495
+            114.253569,
+            22.306382
           ],
           [
             114.2729,
@@ -11049,8 +11049,8 @@
             "chapter": 33,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -11099,8 +11099,8 @@
             "chapter": 63,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -11369,9 +11369,9 @@
             "chapter": 179,
             "note": "病窩",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
+            "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
-            "coordinate_confidence": 0.35,
+            "coordinate_confidence": 0.55,
             "spatial_evidence_count": 0
           },
           {
@@ -11452,7 +11452,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 1
+            "spatial_evidence_count": 0
           }
         ],
         "missing_waypoint_locations": null,
@@ -11460,7 +11460,7 @@
         "source": "bing_gang",
         "confidence": 0.8,
         "review_status": "needs_review",
-        "real_waypoint_fraction": 0.881
+        "real_waypoint_fraction": 0.905
       }
     },
     {
@@ -11727,8 +11727,8 @@
             22.30581
           ],
           [
-            114.277722,
-            22.29731
+            114.277657,
+            22.297275
           ],
           [
             114.256648,
@@ -11996,8 +11996,8 @@
             "chapter": 33,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -12026,8 +12026,8 @@
             "chapter": 65,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -12066,8 +12066,8 @@
             "chapter": 149,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -12225,8 +12225,8 @@
             "chapter": 33,
             "note": "學堂",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "manual_geometry",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.8,
             "spatial_evidence_count": 0
           },
@@ -12284,7 +12284,7 @@
           ],
           [
             114.258518,
-            22.322959
+            22.322326
           ],
           [
             114.23660798809796,
@@ -12436,7 +12436,7 @@
             "coordinate_source": "cross_chapter_evidence",
             "coordinate_review_status": "needs_validation",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 0
+            "spatial_evidence_count": 1
           },
           {
             "location_id": "loc_0569",

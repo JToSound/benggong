@@ -1468,11 +1468,36 @@ export class SvgMap {
     return `${cls.split(" ")[0]}|${id}`;
   }
 
-  /** 目前 SVG 內全部互動元素（document order）。 */
+  /**
+   * 目前 SVG 內**真正可以聚焦**嘅互動元素（document order）。
+   *
+   * ⚠️ 一定要過濾隱藏元素（C7 對抗驗收 2026-09-24 發現嘅 P1）
+   * ----------------------------------------------------
+   * roving tabindex 係喺呢個清單上面移動。如果清單包含**隱藏**元素
+   * （例如 `#routes-layer` 預設 `hidden` → 全部 `.route-line` 都 `display:none`），
+   * 就會出現：`el.focus()` **靜默失敗**（隱藏元素唔可以聚焦）→
+   * 但 `kbFocusKey` 已經更新 → **下一次按鍵仍然由嗰個 index 出發** →
+   * roving 永遠卡死喺嗰度。
+   *
+   * 實測後果：C7 量到 forward navigation 由 index 48 之後全部唔動 →
+   * **19 個標記／事件永遠無法用鍵盤到達**。
+   *
+   * ⚠️ **只可以用 `closest("[hidden]")`（屬性檢查）—— 唔可以用
+   * `getClientRects()`**（2026-09-24 實測踩過）
+   * ------------------------------------------------------
+   * 第一版加咗 `el.getClientRects().length > 0` 去覆蓋「非 `hidden` 屬性嘅
+   * `display:none`」。後果：`mapInteractiveEls()` 每次呼叫都做 66 次
+   * `getClientRects()` → **每次都強制同步 layout** → `map-interaction` e2e
+   * **每個測試逾時 120–180 秒**（全套由 15 分鐘變成 33 分鐘未完）。
+   *
+   * `hiddenSelectors()`（`src/map/map-interactions.ts`）本身就係用
+   * **`hidden` 屬性**做圖層開關，所以 `closest("[hidden]")` 已經覆蓋
+   * C7 實測嘅 `#routes-layer` 個案 —— 而且係**零 layout 成本**。
+   */
   private mapInteractiveEls(): SVGElement[] {
     return Array.from(
       this.svg.querySelectorAll<SVGElement>(MAP_INTERACTIVE_SELECTOR),
-    );
+    ).filter((el) => !el.closest("[hidden]"));
   }
 
   /**

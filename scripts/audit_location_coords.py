@@ -143,10 +143,16 @@ def main() -> int:
     corrections: list[dict[str, Any]] = []
     for f in feats:
         p = f["properties"]
-        if p.get("map_hidden") or p.get("inferred_from"):
+        if p.get("map_hidden") or p.get("inferred_from") or p.get("coordinate_anchor"):
             # 已經有推斷證據（`inferred_from`）嘅座標唔應該被覆蓋 ——
             # 佢哋係經審閱嘅推斷結果，而 `test_applied_coordinates_match_inference`
             # 會驗證「套用嘅座標 = 推斷記錄嘅座標」。覆蓋會破壞呢個不變式。
+            #
+            # ⚠️ 2026-09-24 加 `coordinate_anchor`（由故事文字點名嘅現實地標錨定）：
+            # 佢係**比地名對照表更強**嘅證據。唔跳過就會同
+            # `scripts/anchor_locations_from_text.py` **互相打架** →
+            # `tests/test_apply_inferences.py::test_pipeline_is_idempotent` 紅
+            # （實測：新都城中心三期被呢度拉去 22.323342，錨定又拉返 22.3228）。
             continue
         nm = norm(p["name"])
         if nm in GENERIC_NAMES or len(nm) < 2:
@@ -197,7 +203,7 @@ def main() -> int:
     anchor_fixes: list[dict[str, Any]] = []
     for f in feats:
         p = f["properties"]
-        if p.get("map_hidden") or p.get("inferred_from"):
+        if p.get("map_hidden") or p.get("inferred_from") or p.get("coordinate_anchor"):
             continue
         if p.get("location_precision") not in ("fictional", "approximate"):
             continue

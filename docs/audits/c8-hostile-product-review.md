@@ -68,6 +68,7 @@
   - `src/components/ZoneDossier.ts:99-119` 讀嘅係 `zone.properties`（`government` / `leadership` / `social_structure` / `economy` / `defense` / `population` / `culture` / `notable_features` / `threats`）
   - 兩份資料係**唔同 schema**：`zone-dossiers.json` 有 `overview` / `governance` / `society` / `infrastructure` / `nest_profile` / `risk_profile` / `key_characters` / `evidence_sources` / `review_status`（例：`zone_14d4957e04` 艾寶琳倖存區嘅 `society.population_structure`、`infrastructure.security` 都有具體小說內容）；`zones.geojson` inline 欄位係另一份較薄嘅抽取
 - **影響**：直接命中「係咪換皮」——V2 造咗一份更豐富嘅 dossier 資料檔，但出街嘅面板仍然讀舊資料；同時解釋咗 Q2「空洞」嘅真正成因（**接線問題**，唔係資料問題）。
+- **⚠️ 「未載入」唔等於「未曝露」**：`dist/data/public/zone-dossiers.json` 係 deployed 靜態檔，任何人可以直接 `GET` 落嚟。C5（`docs/audits/c5-data-governance-c.md`）已確認該檔內仍有小說原文逃逸（F1），並列為 live 曝露 —— 所以 P1-4 唔可以理解為「呢個檔安全」。反而係：**內容有問題嘅檔一樣出咗街，只係前端冇用佢**。
 
 ### P1-5 dossier「資料來源」區直接顯示內部工程欄位；首屏故事面板顯示 raw ML 信心度
 

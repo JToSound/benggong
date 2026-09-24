@@ -63,7 +63,12 @@ describe("驗收矩陣 §2-12：public data safety", () => {
     const files = walk(PUBLIC_DIR, (f) => f.endsWith(".json") || f.endsWith(".geojson"));
     expect(files.length, "應該有 public 資料檔").toBeGreaterThan(0);
 
-    const pattern = /原文\s*[：:]\s*[「『"]/;
+    /*
+     * ⚠️ 2026-09-24 擴充（C5 對抗驗收發現逃逸）：原本只捉「原文」字樣 →
+     * `ch0092：「…」` 會逃逸（實測命中 `zones.geojson` 嘅 `population`）。
+     * 加多一條：**章節編號 + 冒號 + 引號** = 原文引用指紋。
+     */
+    const pattern = /原文\s*[：:]\s*[「『"]|ch\s*\d{1,4}\s*[：:]\s*[「『"]/;
     const offenders: string[] = [];
     for (const f of files) {
       const text = readFileSync(f, "utf-8");
