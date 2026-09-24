@@ -676,6 +676,22 @@ def main() -> int:
           f"（nest_profile {st['nest_profile_count']}）")
     print(f"  review_status：{st['review_status']}")
 
+    # 階段 4.5
+    #
+    # ⚠️ 為何要有（C5 對抗驗收 2026-09-24 發現版權紅線逃逸）
+    # ------------------------------------------------
+    # 三個偵測器（`audit_release.py` / `validate_public_data.py` /
+    # `validate_spatial_narrative.py`）原本只捉「`原文`」字樣 →
+    # **`ch0092：「…」`（冇「原文」二字）會逃逸**。實測：`zones.geojson`
+    # zone_d3f76d3c94（大本營）嘅 `population` 欄位含一句原文引用，已傳到
+    # `public/data/public/` 同 `dist/`。
+    # 呢個階段將公開資料消毒（刪原文引用、去私有路徑），令管線輸出**乾淨**。
+    print("\n[4.5/4 公開資料消毒（版權紅線 + 私有路徑）]")
+    import sanitise_public_data
+
+    st_san = sanitise_public_data.run(write=write)
+    print(f"  消毒 {st_san['n_fixes']} 處")
+
     if args.dry_run:
         print("\n（--dry-run：冇寫入）")
     else:

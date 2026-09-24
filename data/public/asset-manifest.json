@@ -23,7 +23,7 @@
     "事件坐標由自動流程投影及逐項指派。",
     "routes 為空：待自動關聯推斷完成後建立，避免捏造路線。",
     "本 dataset 由 LLM candidates 經 deterministic rules 生成；無全文、無 evidence excerpt 入公開檔案。",
-    "2026-09-16：角色合併（11 個異體併入 canonical），342 → 331。詳見 data/private/review/character-merge-applied.json。"
+    "2026-09-16：角色合併（11 個異體併入 canonical），342 → 331。詳見 專案私有記錄。"
   ],
   "files": {
     "zones.geojson": "zones.geojson"

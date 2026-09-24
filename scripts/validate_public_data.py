@@ -45,7 +45,18 @@ FORBIDDEN_PATTERNS: dict[str, re.Pattern[str]] = {
     # B4 之前 `zones.geojson` 48/48 個 feature 嘅 `evidence` 都係
     # `"ch73 原文：「…」"` 格式 —— 成段原文入咗公開 bundle（`npm run sync-data`
     # 之後前端任何人下載到）。規則 DS4 明文禁止。
-    "novel_quote": re.compile(r"原文\s*[：:「]|ch\s*\d+\s*原文"),
+    #
+    # ⚠️ 2026-09-24 擴充（C5 對抗驗收發現逃逸）：
+    # 原本只捉「`原文`」字樣 → **`ch0092：「…」`（冇「原文」二字）會逃逸**。
+    # 實測命中：`zones.geojson` zone_d3f76d3c94 嘅 `population` 欄位
+    # = `百多人（ch0092：「如果大本營百多個人一起拿著武器衝進不良人據點」）`
+    # → 已傳到 `public/data/public/` 同 `dist/`。
+    # 所以加多一條：**章節編號 + 冒號 + 引號** 本身就係原文引用嘅指紋。
+    "novel_quote": re.compile(
+        r"原文\s*[：:「]"
+        r"|ch\s*\d+\s*原文"
+        r"|ch\s*\d{1,4}\s*[：:]\s*[「『]"
+    ),
 }
 
 # 超過 100 字連續 CJK（無標點中斷）視為疑似小說原文段落。

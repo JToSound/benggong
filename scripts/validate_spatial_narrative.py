@@ -85,10 +85,20 @@ def check_dossier_refs(zn, dossiers_doc) -> list[str]:
 
 
 def check_copyright(zn) -> list[str]:
-    """規則 DS4：public zone 資料唔可以有 `chN 原文：「…」`。"""
+    """規則 DS4：public zone 資料唔可以有 `chN 原文：「…」`。
+
+    ⚠️ 2026-09-24 擴充（C5 對抗驗收發現逃逸）：原本只捉「`原文`」字樣 →
+    **`ch0092：「…」`（冇「原文」二字）會逃逸**。實測命中
+    `zones.geojson` zone_d3f76d3c94 嘅 `population` 欄位。
+    加多一條：**章節編號 + 冒號 + 引號** 本身就係原文引用嘅指紋。
+    """
     import re
 
-    pat = re.compile(r"原文\s*[：:「]|ch\s*\d+\s*原文")
+    pat = re.compile(
+        r"原文\s*[：:「]"
+        r"|ch\s*\d+\s*原文"
+        r"|ch\s*\d{1,4}\s*[：:]\s*[「『]"
+    )
     errors: list[str] = []
     for f in zn:
         for k, v in f["properties"].items():

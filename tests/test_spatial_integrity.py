@@ -54,7 +54,17 @@ import infer_zone_membership as izm  # noqa: E402
 ZONE_MERGER = SCRIPTS / "merge_zone_dossiers.py"
 
 #: 版權紅線樣式：`ch73 原文：「…」` / `原文：` / `原文:「`
-NOVEL_QUOTE_RE = re.compile(r"原文\s*[：:「]|ch\s*\d+\s*原文")
+NOVEL_QUOTE_RE = re.compile(
+    r"原文\s*[：:「]"
+    r"|ch\s*\d+\s*原文"
+    # ⚠️ 2026-09-24 擴充（C5 對抗驗收發現逃逸）：原本只捉「`原文`」字樣 →
+    # `ch0092：「…」`（冇「原文」二字）會逃逸。實測命中 `zones.geojson`
+    # zone_d3f76d3c94 嘅 `population` 欄位。
+    r"|ch\s*\d{1,4}\s*[：:]\s*[「『]"
+)
+
+#: `data/private/...` 路徑外洩（C5 F2：`asset-manifest.json` notes[4]）。
+PRIVATE_PATH_RE = re.compile(r"data/private/")
 
 #: pipeline 嘅 7 個輸出檔（idempotency 逐個比 SHA-256）
 PIPELINE_OUTPUTS = (
@@ -388,6 +398,29 @@ def test_public_data_has_no_novel_quotes():
     assert not hits, (
         f"⚠️ 版權紅線：{len(hits)} 處小說原文入咗 public 資料：\n"
         + "\n".join(f"  {n}: …{ctx}…" for n, g, ctx in hits[:5])
+    )
+
+
+def test_public_data_has_no_private_paths():
+    """⚠️ 紅線：`data/public/**` 唔可以出現 `data/private/...` 路徑。
+
+    C5 對抗驗收（2026-09-24）發現：`asset-manifest.json` 嘅 `notes[4]` 寫住
+    「詳見 data/private/review/character-merge-applied.json」，而 manifest 係
+    **deployed** 嘅（`dist/data/public/`）—— 私有目錄結構外洩。
+
+    修法：`scripts/sanitise_public_data.py` 將路徑換成「專案私有記錄」，
+    並且係 `merge_zone_dossiers.py` 階段 4.5（每次跑管線都消毒）。
+    """
+    hits = []
+    for path in sorted(PUBLIC.rglob("*")):
+        if path.suffix not in (".json", ".geojson"):
+            continue
+        text = path.read_text(encoding="utf-8")
+        for m in PRIVATE_PATH_RE.finditer(text):
+            hits.append((path.name, text[max(0, m.start() - 25): m.start() + 45]))
+    assert not hits, (
+        f"⚠️ {len(hits)} 處 `data/private/` 路徑入咗 public 資料：\n"
+        + "\n".join(f"  {n}: …{ctx}…" for n, ctx in hits[:5])
     )
 
 
