@@ -249,6 +249,32 @@ export class VectorBasemap {
   private readonly tileOrder: string[] = [];
   private readonly tilePending = new Set<string>();
 
+  /**
+   * 圖磚「唔存在／載入失敗」嘅**負快取**。
+   *
+   * ⚠️ 為何一定要有（用戶報告 renderer OOM 嘅直接成因，2026-09-24 實測）
+   * ------------------------------------------------------------------
+   * 圖磚格網係 `10×14 = 140` 格，但只有 **89 格**有檔案 —— 其餘 51 格
+   * 全部喺 bbox 上下邊緣（陸地之外，生成器冇出）。
+   *
+   * 原本 `ensureTiles()` 只檢查 `tilePoi` / `tilePending`，而失敗路徑係
+   * `.catch(() => {})` + `.finally(() => this.tilePending.delete(k))`
+   * → 失敗嘅格**兩個集合都唔在** → **下一個 `setView()` 會再試**。
+   * 而 `setView()` 係**每個 pan frame** 都行一次。
+   *
+   * `clampView()` 令視窗好容易停喺 bbox 邊緣（用戶拖到盡就會），
+   * 所以邊緣缺失格會**長期留在視窗內 → 每 frame 重試**。
+   *
+   * 實測（`artifacts/phase3-resume/probe-tile-404.mjs`，向北推 6 次）：
+   * 非 JSON 圖磚回應由 0 → **26**，而且新增嘅 fetch **全部**係失敗
+   * → 確認「重試風暴」。每個失敗請求都會加一筆
+   * `PerformanceResourceTiming`（唔會自動清）＋ 重新下載 `index.html`
+   * → 資源記錄無限增長 → renderer OOM。
+   *
+   * 清除時機：**層級改變**（換層 = 換一組圖磚，值得重試一次）。
+   */
+  private readonly tileMissing = new Set<string>();
+
   /** 目前配色（跟 `<html data-theme>`；色相來自 B1 token）。 */
   private palette: BasemapPalette = PALETTE_DARK;
   private themeListener: (() => void) | null = null;
@@ -434,7 +460,8 @@ export class VectorBasemap {
       }
     }
     for (const k of keys) {
-      if (this.tilePoi.has(k) || this.tilePending.has(k)) continue;
+      // ⚠️ `tileMissing` 一定要檢查 —— 唔係就會每 frame 重試缺失格（見該欄位註釋）
+      if (this.tilePoi.has(k) || this.tilePending.has(k) || this.tileMissing.has(k)) continue;
       this.tilePending.add(k);
       const [r, c] = k.split(",").map(Number);
       const url = `tiles/r${String(r).padStart(2, "0")}c${String(c).padStart(2, "0")}.json`;
@@ -515,7 +542,13 @@ export class VectorBasemap {
           this.emitReady();
         })
         .catch(() => {
-          /* 單一圖磚失敗唔應該令成個底圖消失 —— 其餘圖磚照畫 */
+          /*
+           * 單一圖磚失敗唔應該令成個底圖消失 —— 其餘圖磚照畫。
+           *
+           * ⚠️ 但**一定要記入負快取**：唔記就會每個 pan frame 再試一次
+           * （用戶報告 renderer OOM 嘅直接成因，見 `tileMissing` 註釋）。
+           */
+          this.tileMissing.add(k);
         })
         .finally(() => this.tilePending.delete(k));
     }
@@ -576,6 +609,11 @@ export class VectorBasemap {
     this.canvas.dataset.basemapLevel = String(next);
     if (next !== this.level) {
       this.level = next;
+      /*
+       * 換層 = 換一組圖磚 → 值得重試一次之前失敗嘅格
+       * （見 `tileMissing` 註釋：唔清就會永遠唔再試）。
+       */
+      this.tileMissing.clear();
       this.canvas.dispatchEvent(
         new CustomEvent("basemap-level-change", {
           bubbles: true,

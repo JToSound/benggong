@@ -1173,7 +1173,24 @@ export class SvgMap {
     if (!size) {
       const r = this.wrap.getBoundingClientRect();
       if (r.width < 2 || r.height < 2) return;
-      size = { w: r.width, h: r.height };
+      /*
+       * ⚠️ **一定要整數化**（用戶報告 renderer OOM 嘅核心防護）。
+       *
+       * `getBoundingClientRect()` 會回**分數** px，而且 sub-pixel layout
+       * 之下同一個容器可能逐幀回唔同值（例如 1019.998 / 1020.001）。
+       * 呢個值會經 `setView()` 傳落 `VectorBasemap.draw()`：
+       *
+       *     const pxW = Math.round(W * this.dpr);
+       *     if (this.canvas.width !== pxW) { this.canvas.width = pxW; … }
+       *
+       * `canvas.width = …` 會**重新分配 backing store**（~3–12 MB，
+       * 真瀏覽器係 GPU／shared memory）。如果尺寸逐幀抖動 → 每幀重新分配
+       * → **renderer OOM**。headless 係軟件渲染（malloc/free 即時）所以
+       * 重現唔到 —— 呢個正好解釋「headless 探測 heap 平穩但真瀏覽器 OOM」。
+       *
+       * 整數化之後尺寸恆定 → 唔會再重新分配。
+       */
+      size = { w: Math.round(r.width), h: Math.round(r.height) };
       this.wrapSizeCache = size;
     }
     this.basemap.setView(

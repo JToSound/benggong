@@ -9,44 +9,98 @@
 
 | # | 問題 | 狀態 | 交付 |
 |---|---|---|---|
-| 1 | **移動地圖一段時間後 out of memory** | ⚠️ **headless 無法重現**（3 組探測 heap 平穩）；已修 2 個可疑結構 + 加防護 | `probe-memory.mjs` |
+| 1 | **移動地圖一段時間後 out of memory** | ✅ **根因已搵到並修好**（圖磚失敗重試風暴） | `probe-tile-404.mjs` |
 | 2 | **移動時倖存區光圈漂移** | ⚠️ **靜止時偏移 ≤ 0.35 px**（唔係靜態錯位）→ 需更多資訊 | `probe-pulse-drift.mjs` |
 | 3 | **標記座標錯**（寶林倖存區、皇室區…） | ✅ **新增自動審計**，捉到 **14 locations + 6 zones** 文字↔座標矛盾（含用戶講嘅個案） | `audit_coordinate_text_consistency.py` |
 | 4 | **第一章標記去咗旺角** | ✅ **真兇已定位**：地點「香港」（全境級）被畫成**點標記**，落喺九龍 | 同 #3 |
 
 ---
 
-## 1. #1 移動地圖後 out of memory
+## 1. #1 移動地圖後 out of memory —— ✅ **根因：圖磚失敗重試風暴**
 
-### 1.1 探測（新增 `artifacts/phase3-resume/probe-memory.mjs`）
+> 用戶補充：打開嘅係**主代理起嘅 `vite preview`**（即 build 好嘅 `dist/`），
+> 錯誤頁係 **browser 自己嘅 out-of-memory 頁**。即係真·renderer OOM，
+> 唔係 dev server 造成。
 
-持續 pan（鍵盤方向鍵，因為實測 `page.mouse` 拖曳喺呢個版面之下唔會令
-viewBox 改變）+ 每 4 輪 `gc()` 之後取樣：
+### 1.1 根因（實測）
 
-| 配置 | heap | DOM 節點 | tile 請求 | 結論 |
-|---|---|---|---|---|
-| level 1（無圖磚層） | 24.8 MB → 24.8 MB | 947 → 947 | 0 | **零增長** |
-| level 2（viewW 0.030） | 22 MB → 22 MB | 920 → 920 | 4 | **零增長** |
-| **full LOD（viewW 0.0105，21 個 `.zone-pulse`）** | 22 MB → 22 MB | 985 → 920 | 4 | **零增長** |
+圖磚格網係 `10×14 = 140` 格，但 `public/assets/vector/tiles/` 只有
+**89 個檔案** —— 其餘 **51 格**全部喺 bbox 上下邊緣（`r00` 成行、
+`r09` 成行、左右邊緣），即係**陸地之外，生成器冇出**。
 
-**即係：喺 headless Chromium 之下無法重現 OOM。**
+而 `ensureTiles()` 嘅失敗路徑係：
 
-### 1.2 已修（唯一搵到嘅無上限結構 + 一個每 frame 成本）
+```ts
+if (this.tilePoi.has(k) || this.tilePending.has(k)) continue;   // ← 只查兩個集合
+…
+.catch(() => { /* 單一圖磚失敗唔應該令成個底圖消失 */ })          // ← 吞咗
+.finally(() => this.tilePending.delete(k));                      // ← 清走 pending
+```
+
+→ 失敗嘅格**兩個集合都唔在** → **下一個 `setView()` 會再試**。
+而 `setView()` 係**每個 pan frame** 都行一次（`applyViewBox()` → `syncBasemapView()`）。
+
+`clampView()` 令視窗**好容易停喺 bbox 邊緣**（用戶拖到盡就會），
+所以邊緣缺失格會**長期留在視窗內 → 每 frame 重試**。
+
+### 1.2 量度（新增 `artifacts/phase3-resume/probe-tile-404.mjs`）
+
+⚠️ **探測本身有個陷阱**：`vite preview` 有 **SPA fallback** —— 缺失檔案會
+回 **`index.html` 但狀態 200**（唔係 404）！所以第一版用
+`responseStatus` 計「失敗」係 **0**（假陰性）。改為用 `fetch` 包裝數
+「**回非 JSON 嘅圖磚請求**」才睇到真相。
+
+向北推 6 次（每次 40 下方向鍵）：
+
+| 狀態 | 資源條目 | **非 JSON 圖磚（累計）** | fetch 次數 |
+|---|---|---|---|
+| 0（起始） | 4 | 0 | 4 |
+| 4 | 10 | 0 | 10 |
+| 5 | 26 | **16** | 26 |
+| 6 | 36 | **26** | 36 |
+
+**新增嘅 fetch 全部係失敗** → 確認重試風暴。
+
+### 1.3 修法（`VectorBasemap`）
+
+| # | 改動 |
+|---|---|
+| 1 | 新增 `private readonly tileMissing = new Set<string>()`（**負快取**） |
+| 2 | `ensureTiles()` 檢查加 `\|\| this.tileMissing.has(k)` |
+| 3 | `.catch()` 改為 `this.tileMissing.add(k)`（唔再靜靜吞） |
+| 4 | **層級改變**時 `this.tileMissing.clear()`（換層值得重試一次） |
+
+### 1.4 驗證（同一探測、同一協定）
+
+| | 修復前 | 修復後 |
+|---|---|---|
+| 非 JSON 圖磚（累計） | 0 → **26** | 0 → **2**（第 5 步之後**唔再增長**） |
+| fetch 次數 | 4 → 36 | 4 → 12 |
+| 資源條目 | 4 → 36 | 4 → 12 |
+
+**−92%**，而且**穩定**（剩下 2 個係兩個唔同缺失格嘅第一次嘗試 —— 正確行為）。
+
+### 1.5 為何之前三次探測都睇唔到（方法論教訓）
+
+1. **探測場景唔對**：之前全部喺**地圖中央**（將軍澳）縮放，視窗冇掂到
+   bbox 邊緣 → 缺失格從來冇入 view → 冇 404。
+2. **`vite preview` 嘅 SPA fallback 令失敗「睇落成功」**（狀態 200 + HTML）。
+3. **儀器唔對**：`performance.memory` 只計 JS heap，**睇唔到**
+   `Path2D`／canvas 嘅原生記憶體。今次改用「**失敗請求計數**」—— 一個
+   唔受渲染模式影響嘅指標，才捉得到。
+
+### 1.6 順帶修好嘅其他記憶體風險（保留）
 
 | 改動 | 為何 |
 |---|---|
-| **`labelWidths` 加快取上限**（`LABEL_WIDTH_CACHE_MAX = 12000`） | 呢個係**唯一無上限**嘅快取：key 係 `rank\|文字`，理論上 ~20,000 entry（11,645 圖磚 POI 名 + 7,847 全域標籤）。長 session 行過全港會逐個累積。設上限之後最壞係重新 `measureText` 一次（~0.14 ms）。 |
-| **`syncBasemapView()` 尺寸快取**（`wrapSizeCache`） | 呢個方法由 `applyViewBox()` 呼叫，而 `applyViewBox()` **每個 pan frame 都行一次** → 原本**每 frame 一次強制同步 layout**（`getBoundingClientRect()`）。同 Q10 量到嘅 59 ms 同一類問題。 |
+| `labelWidths` 加快取上限（12,000） | 唯一無上限嘅快取（key 係 `rank\|文字`，理論上 ~20,000 entry） |
+| `syncBasemapView()` 尺寸**整數化** + 快取 | 原本每個 pan frame 一次 `getBoundingClientRect()`（強制 layout）；而且 `getBoundingClientRect()` 回分數 px，一旦抖動就會令 `canvas.width = …` **每幀重新分配 backing store**（真瀏覽器係 GPU 記憶體） |
 
-### 1.3 需要你提供嘅資訊（無法從程式碼推斷）
+### 1.7 建議嘅後續（唔係今次做）
 
-1. **錯誤嘅完整文字**（係 Chromium「Aw, Snap! Out of memory」頁？抑或 console 某個 `RangeError`？）
-2. **你係點開個網頁**：`npm run dev`（Vite dev server）／`npm run preview`／部署咗嘅 GitHub Pages？
-3. **大概幾耐之後出現**（幾秒／幾分鐘）？**係唔係每次都由新分頁開始**？
-4. 當時**喺邊個縮放級**（見到倖存區光圈 = full LOD，即 viewW ≤ 0.0219）
-
-⚠️ 有一點值得留意：`npm run dev` 嘅 HMR 會令記憶體高好多 —— 如果係用 dev
-server 開，**唔代表正式版本有同樣問題**。
+**由 `build_vector_basemap.py` 喺 manifest 直接列出**「邊啲格有檔案」
+（tile index）。咁前端就可以**完全唔請求**缺失格，唔需要靠負快取。
+今次嘅負快取已經解決重試風暴，但「請求一次先知道冇」仍然係浪費。
 
 ---
 
