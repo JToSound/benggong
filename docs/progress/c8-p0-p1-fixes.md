@@ -14,6 +14,9 @@
 | **F6** | 誠實標示 | 寫死「人類聚居 · **安全**」、`review_status` 零 render | badge「待核實」+ 精度 ✓、`sub` = 「人類聚居」 |
 | **P1-5** | 內部欄位外露 | 「資料來源」**預設展開**，顯示 `抽取來源 A6`、`座標 legacy` | 收落 `<details>`，預設收起 ✓ |
 | **P1-7** | dossier 冇下一步 | 冇任何 CTA | 「跳到首現章節」／「睇呢區嘅第一個事件」／「收埋」✓ |
+| **P1-2** | 揀 zone 唔 fly-to | viewBox 完全唔變（`0.70` 不變） | viewBox `0.70 → 0.0251`（放大 **~28×**）並置中 ✓ |
+| **P1-3** | 手機 tap zone 面板唔開 | 手機 snap 停留 `peek`，dossier top 727 | snap `peek → half`，dossier top **474** ✓ |
+| **P1-6** | map pane 只佔 60.6%（spec ≥70%） | — | ⚠️ **未修：同 spec 第 1 項衝突**（見 §3.6） |
 
 ---
 
@@ -159,6 +162,99 @@ zone-dossiers.json 請求次數: 1
 
 ---
 
+## 3.6 P1-2 / P1-3：zone fly-to + 手機面板自動開
+
+### P1-2 揀 zone 唔 fly-to
+
+**問題**：`app.ts` 只有 `svgMap.flyToChapter()`，**冇** zone fly-to
+→ 揀 zone 之後 viewBox 完全不變。而 48 個 zone 喺世界視圖擠成一坨
+（559/1128 對視覺重疊，抽樣 zone 同 **35 個**其他 zone 重疊）
+→ 用戶睇唔出「我揀咗邊個」。
+
+**修法**：`SvgMap` 新增 `flyToZone(zoneId)`：
+
+· **共用** `viewBoxForGeoBounds`（同 `flyToChapter` 一樣）—— 唔可以自己寫
+  投影，否則會再踩 §3.10 嘅 `1/cos(φ₀)` 漂移。守門測試斷言 body 內
+  **唔可以**出現 `M_PER_DEG_LAT` ✓
+· 處理 `Polygon` **同** `MultiPolygon`
+· `padding: 0.8`（唔係章節嘅 0.25）—— zone 係單一目標，需要更多周邊 context
+· `minSpan: 0.004`（唔係 0.02）—— 實測 48 個 zone 嘅經度跨度只有 **0.1039°**
+  （46/48 距質心 <0.03°）→ 單一 zone 更細，0.02 會飛得太遠，睇落似「冇 zoom 過」
+· `app.ts`：`zoneChanged && newZone` → `flyToZone`；⚠️ **`!first`**
+  （首次載入要保留 `initial_view`）；⚠️ 同章節飛行**互斥**
+  （`if (chapterChanged) … else if (zoneChanged …)` —— 兩個動畫唔可以打架）
+
+**量測**（`artifacts/phase3-resume/probe-zone-flyto.mjs`）：
+
+```
+zones 總數: 48
+點擊: zone_2a22537f9c
+viewBox before: 113.79 22.11 0.6999999999999886 0.5407159078620093
+viewBox after : 114.2263534 22.407849464691246 0.025121200000015165 0.019404903520845007
+viewBox 有變: true
+URL 有 ?zone=: true
+```
+
+### P1-3 手機 tap zone 面板唔自動開
+
+**問題**：C8 實測 dossier 內容 top = **1187px**，但手機 viewport 高只有
+**844px** → 用戶 tap 完見到「冇反應」（地圖郁咗但內容喺畫面外）。
+
+**修法**：`app.ts` —— zone 新揀而且 sheet 收埋（`COLLAPSED_SNAP`）就
+`setSheetSnap(EXPANDED_SNAP)`，**只喺 `matchMedia("(max-width: 1023px)")`**
+（= `mobile.css` 嘅 sheet 斷點）生效。
+
+⚠️ **踩過**：第一版將呢段放喺 `else if (zoneChanged && newZone)` **入面**
+→ 點 zone 有可能同時改章節 → `chapterChanged` 為真 → `else if` 被跳過
+→ snap 永遠唔升（實測：`after.snap` 仍然係 `peek`）。改成**獨立 if block** ✓
+
+⚠️ **唔可以無條件做**：桌面版 `#story-pane` 係側欄，`SNAP_PCT` =
+peek 25% / half 55% / full 92% → 會令側欄忽然變高。
+
+**量測**（`artifacts/phase3-resume/probe-mobile-sheet.mjs`）：
+
+| viewport | before | after |
+|---|---|---|
+| 手機 390×844 | `snap=peek`、dossierTop 727 | `snap=half`、dossierTop **474** ✓ |
+| 桌面 1440×900 | `snap=half` | `snap=half`（**不變 = 冇回歸**）✓ |
+
+---
+
+## 3.7 P1-6：map pane 面積 ≥70% —— ⚠️ 未修（同 spec 第 1 項衝突）
+
+### 量測（`artifacts/phase3-resume/probe-map-pane-area.mjs`）
+
+| viewport | `#map-pane` | 面積佔比 | topbar | chapter strip | story pane |
+|---|---|---|---|---|---|
+| 1440×900 | 1060×741 | **60.6%** | 65 | 94 | 380（展開） |
+| 1280×800 | 900×641 | **56.3%** | 65 | 94 | 380 |
+| 1920×1080 | 1540×921 | **68.4%** | 65 | 94 | 380 |
+
+（spec：`docs/specs/world-atlas-v2-product-spec.md:103`
+「地圖佔首屏 **≥70%** 面積」；驗收矩陣第 1 項喺 **1440px** 量。）
+
+### 為何冇修：兩項 spec 要求互相衝突
+
+1440×900 之下，`#map-pane` 高度 = `900 − 65 − 94 = 741`。要達 70%：
+
+```
+需要寬度 = 0.70 × (1440 × 900) / 741 = 1224 px
+→ story pane 只可以佔 1440 − 1224 = 216 px
+```
+
+而 story pane 現時係 **380px**，而且**預設展開**。三個選項：
+
+| 選項 | 效果 | 代價 |
+|---|---|---|
+| **A. 預設收起 story pane** | 1440×900 → **82.3%** ✓ | ✗ 違反驗收矩陣第 1 項「4 個主入口文字存在且可鍵盤達」—— 嗰 4 個入口喺 story pane 內 |
+| **B. story pane 改成 overlay**（浮喺地圖上，唔佔 layout 寬度） | 1440×900 → **82.3%** ✓ 而且入口仍可達 | 較大嘅版面重構（要處理遮蓋、z-index、focus trap、mobile 已有 sheet 機制） |
+| **C. 只縮短 chapter strip**（94 → 56） | 1440×900 → **63.7%** ✗ 仍然唔達標 | 低風險但**解唔到問題** |
+
+→ **B 係唯一同時滿足兩項要求嘅方案**，但屬**版面設計決策**（唔係 bug fix），
+需要用戶裁決。本輪**唔改**，並將證據（上面算術 + 量測）記錄落嚟。
+
+---
+
 ## 4. 驗證
 
 | 項 | 結果 |
@@ -190,8 +286,10 @@ zone-dossiers.json 請求次數: 1
 | P1-1 | 48 個 zone 喺世界視圖擠成一坨（559/1128 對重疊） | 需要 LOD／聚合策略重新設計 |
 | P1-2 | 揀 zone 唔 fly-to + 同 35 個 zone 重疊 | 需要 `flyTo` 接線 |
 | P1-3 | 手機 tap zone 面板唔自動開 | `BottomSheet` 接線 |
-| P1-6 | map pane 只佔 60.6%（spec 要 ≥70%） | 版面比例 |
 | P1-8 | 首屏即 fetch 全書資料（chronicle 1.4 MB + events 2.1 MB…） | 需要 lazy/分頁 |
+
+（P1-2、P1-3 已修 —— 見 §3.6。P1-6 **未修**，理由見 §3.7：同 spec 第 1 項
+衝突，需要用戶裁決 A/B/C。）
 
 （P1-5、P1-7 已修 —— 見 §3.5。首屏 raw 信心度 % 保留但已加「信心度」標籤，
 同 review badge 並列。）

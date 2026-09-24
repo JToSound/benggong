@@ -576,6 +576,17 @@ export class App {
 
     const chapterChanged = first || prev!.chapter !== s.chapter;
     const contextChanged = first || prev!.context !== s.context;
+
+    /*
+     * ⚠️ C8 P1-2（2026-09-25）：揀 zone 之後地圖**完全唔動**。
+     * 而 48 個 zone 喺世界視圖擠成一坨（559/1128 對視覺重疊）→ 用戶睇唔出
+     * 「我揀咗邊個」。所以 zone 改變（而且係新揀，唔係清除）就飛去嗰個 zone。
+     * ⚠️ `first` 唔可以飛 —— 首次載入應該保留 `initial_view`。
+     */
+    const zoneIdOf = (c: typeof s.context): string =>
+      c.kind === "zone" ? ((c as { zoneId?: string }).zoneId ?? "") : "";
+    const zoneChanged = !first && zoneIdOf(prev!.context) !== zoneIdOf(s.context);
+    const newZone = zoneIdOf(s.context);
     const viewChanged = first || prev!.view !== s.view;
     const themeChanged = first || prev!.theme !== s.theme;
     const snapChanged = first || prev!.sheetSnap !== s.sheetSnap;
@@ -585,6 +596,33 @@ export class App {
     if (chapterChanged) {
       this.chapterStrip.updateSelection();
       if (!first) this.svgMap.flyToChapter(s.chapter);
+    } else if (zoneChanged && newZone) {
+      // 揀 zone 優先：唔應該同時飛去章節（兩個動畫會打架）
+      this.svgMap.flyToZone(newZone);
+    }
+
+    /*
+     * ⚠️ C8 P1-3（2026-09-25）：手機 tap zone 之後，dossier 面板**唔會自動開**。
+     * 實測：dossier 內容 top = 1187px，但 viewport 高只有 844px
+     * → 用戶 tap 完見到嘅係「冇反應」（地圖郁咗，但面板內容喺畫面外）。
+     *
+     * ⚠️ 呢個 block **一定要獨立**，唔可以放喺上面嘅 `else if` 入面
+     * （實測踩過）：點 zone 有可能同時改章節 → `chapterChanged` 為真 →
+     * `else if` 被跳過 → snap 永遠唔會升。
+     *
+     * 修法：**只喺 sheet 生效嘅寬度**（`mobile.css` 斷點 `max-width: 1023px`）
+     * 將 snap 提到 `EXPANDED_SNAP`。
+     * ⚠️ 唔可以無條件做 —— 桌面版 `#story-pane` 係側欄，snap 會改佢高度
+     * （`SNAP_PCT` = peek 25% / half 55% / full 92%）→ 側欄會忽然變高。
+     */
+    if (
+      zoneChanged &&
+      newZone &&
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(max-width: 1023px)").matches &&
+      this.store.getState().sheetSnap === COLLAPSED_SNAP
+    ) {
+      this.store.setSheetSnap(EXPANDED_SNAP);
     }
     if (chapterChanged || contextChanged) this.svgMap.render();
 

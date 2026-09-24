@@ -2792,4 +2792,71 @@ export class SvgMap {
     this.render();
     this.animateViewBox(target);
   }
+
+  /**
+   * 飛去某個 zone（C8 P1-2，2026-09-25）。
+   *
+   * 為何要（C8 敵意產品審查）
+   * ------------------------
+   * 揀 zone 之後地圖**完全唔動**。而 48 個 zone 喺世界視圖擠成一坨
+   * （實測 559/1128 對視覺重疊，抽樣 zone 同 **35 個**其他 zone 嘅 rect
+   * 重疊）→ 用戶根本睇唔出「我揀咗邊個」，只見到 dossier 面板。
+   *
+   * 同 `flyToChapter` 一樣用 `viewBoxForGeoBounds`（共用 padding /
+   * minSpan / clamp 邏輯 —— 唔可以自己寫一套，否則會再踩 §3.10 嘅
+   * `1/cos(φ₀)` 漂移）。
+   *
+   * ⚠️ `padding` 用 **0.8**（唔係章節嘅 0.25）：zone 係單一目標，
+   * 需要更多周邊 context 才知道「喺成個將軍澳邊個位」。
+   * ⚠️ `minSpan` 用 **0.004**（唔係 0.02）：實測 48 個 zone 嘅經度跨度只有
+   * **0.1039°**（46/48 距質心 <0.03°）→ 單一 zone 更細，0.02 會飛得太遠，
+   * 睇落似「冇 zoom 過」。
+   */
+  flyToZone(zoneId: string): void {
+    const zone = this.data.zones.features.find(
+      (z) => z.properties.id === zoneId,
+    );
+    if (!zone) {
+      this.render();
+      return;
+    }
+    // zone 幾何係多邊形（Polygon / MultiPolygon）—— 兩種都要處理
+    const rings: number[][][] = [];
+    const g = zone.geometry as unknown as {
+      type: string;
+      coordinates: number[][][] | number[][][][];
+    };
+    if (g.type === "Polygon") rings.push(...(g.coordinates as number[][][]));
+    else if (g.type === "MultiPolygon")
+      for (const poly of g.coordinates as number[][][][]) rings.push(...poly);
+
+    let lonMin = Infinity;
+    let lonMax = -Infinity;
+    let latMin = Infinity;
+    let latMax = -Infinity;
+    let has = false;
+    for (const ring of rings) {
+      for (const pt of ring) {
+        if (pt.length < 2) continue;
+        lonMin = Math.min(lonMin, pt[0]);
+        lonMax = Math.max(lonMax, pt[0]);
+        latMin = Math.min(latMin, pt[1]);
+        latMax = Math.max(latMax, pt[1]);
+        has = true;
+      }
+    }
+    if (!has) {
+      this.render();
+      return;
+    }
+
+    const target: ViewBox = viewBoxForGeoBounds(
+      BASEMAP_BBOX,
+      BASE_VIEW,
+      { lon_min: lonMin, lon_max: lonMax, lat_min: latMin, lat_max: latMax },
+      { padding: 0.8, minSpan: 0.004, minScale: MIN_SCALE, maxScale: MAX_SCALE },
+    );
+    this.render();
+    this.animateViewBox(target);
+  }
 }
