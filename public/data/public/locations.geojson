@@ -10063,8 +10063,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.262789,
-          22.313506
+          114.26276,
+          22.308841
         ]
       },
       "properties": {
@@ -10090,14 +10090,24 @@
         "position_source": "程式化座標校正：「將軍澳廣場二樓超級市場」嘅母體係「將軍澳廣場」（district 對照表），但原座標相距 2748 m —— 錨定返母體附近",
         "coord_corrected": true,
         "zone_ids": [
-          "zone_e335ebdbec"
+          "zone_71906d0c3d"
         ],
-        "coordinate_source": "manual_geometry",
+        "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": 0.55,
+        "coordinate_confidence": null,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "將軍澳廣場",
+          "coord": [
+            114.26276,
+            22.308841
+          ],
+          "rule": "A",
+          "relation": "at",
+          "distance_m": 515.9
+        }
       }
     },
     {
@@ -10105,8 +10115,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26631064316777,
-          22.314835248340582
+          114.26276,
+          22.308841
         ]
       },
       "properties": {
@@ -10130,14 +10140,24 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_51bf7d8190"
+          "zone_71906d0c3d"
         ],
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.55,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": null,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "將軍澳廣場",
+          "coord": [
+            114.26276,
+            22.308841
+          ],
+          "rule": "A",
+          "relation": "at",
+          "distance_m": 757.0
+        }
       }
     },
     {
@@ -10844,8 +10864,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.261303,
-          22.315265
+          114.26276,
+          22.308841
         ]
       },
       "properties": {
@@ -10871,14 +10891,24 @@
         "position_source": "程式化座標校正：「將軍澳廣場二樓超市」嘅母體係「將軍澳廣場」（district 對照表），但原座標相距 2830 m —— 錨定返母體附近",
         "coord_corrected": true,
         "zone_ids": [
-          "zone_e335ebdbec"
+          "zone_71906d0c3d"
         ],
-        "coordinate_source": "manual_geometry",
+        "coordinate_source": "text_landmark",
         "coordinate_review_status": "auto_corrected",
-        "coordinate_confidence": 0.55,
+        "coordinate_confidence": null,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "將軍澳廣場",
+          "coord": [
+            114.26276,
+            22.308841
+          ],
+          "rule": "A",
+          "relation": "at",
+          "distance_m": 726.0
+        }
       }
     },
     {
@@ -12533,8 +12563,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -12648,15 +12681,12 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "zone_ids": [
-          "zone_dc65269329"
-        ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_source": null,
+        "zone_membership_review_status": "needs_validation"
       }
     },
     {
@@ -15151,8 +15181,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26297422751202,
-          22.317177843900204
+          114.256992,
+          22.322438
         ]
       },
       "properties": {
@@ -15176,14 +15206,24 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_51bf7d8190"
+          "zone_200f5e8911"
         ],
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.55,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": null,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "新都城中心三期",
+          "coord": [
+            114.256992,
+            22.322438
+          ],
+          "rule": "A",
+          "relation": "at",
+          "distance_m": 847.0
+        }
       }
     },
     {
@@ -15191,8 +15231,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.258772,
-          22.319407
+          114.257775,
+          22.320284
         ]
       },
       "properties": {
@@ -15329,8 +15369,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.259776,
-          22.319044
+          114.258779,
+          22.31992
         ]
       },
       "properties": {
@@ -15357,7 +15397,7 @@
         "source": "bing_gang",
         "position_source": "同章（[111]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_af344e29e8"
+          "zone_ec954725f8"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
@@ -15372,8 +15412,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252789,
-          22.326931
+          114.257297,
+          22.321263
         ]
       },
       "properties": {
@@ -15398,14 +15438,25 @@
         "source": "bing_gang",
         "position_source": "同章（[112]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_19c4406ae4"
+          "zone_200f5e8911"
         ],
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": 0.85,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "新都城中心一期",
+          "coord": [
+            114.257297,
+            22.321263
+          ],
+          "rule": "B",
+          "relation": "adjacent",
+          "confidence": 0.85,
+          "distance_m": 779.8
+        }
       }
     },
     {
@@ -15626,8 +15677,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.258498,
-          22.315534
+          114.256504,
+          22.317287
         ]
       },
       "properties": {
@@ -15654,12 +15705,12 @@
         "source": "bing_gang",
         "position_source": "同章（[113]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_63245da8ee"
+          "zone_d3cb81ec7d"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 1,
+        "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -15669,8 +15720,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26297422751202,
-          22.317177843900204
+          114.256992,
+          22.322438
         ]
       },
       "properties": {
@@ -15700,14 +15751,24 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0376",
         "zone_ids": [
-          "zone_51bf7d8190"
+          "zone_200f5e8911"
         ],
-        "coordinate_source": "cross_chapter_evidence",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.55,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": null,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "新都城中心三期",
+          "coord": [
+            114.256992,
+            22.322438
+          ],
+          "rule": "B",
+          "relation": "adjacent",
+          "distance_m": 847.0
+        }
       }
     },
     {
@@ -16050,8 +16111,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -16089,8 +16153,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -16174,8 +16241,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -18178,9 +18248,12 @@
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "spatial_evidence_count": 1,
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -18283,8 +18356,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.236801,
-          22.330179
+          114.258518,
+          22.322959
         ]
       },
       "properties": {
@@ -18317,12 +18390,23 @@
         "zone_ids": [
           "zone_200f5e8911"
         ],
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": 0.8,
         "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "新都城二期",
+          "coord": [
+            114.258518,
+            22.322959
+          ],
+          "rule": "C",
+          "relation": "at",
+          "confidence": 0.8,
+          "distance_m": 2374.0
+        }
       }
     },
     {
@@ -18436,13 +18520,13 @@
         "position_source": "冇同章（區內）錨點，用故事主場景（將軍澳校園一帶）",
         "inferred_from": "inf_llm_loc_0440",
         "zone_ids": [
-          "zone_63245da8ee"
+          "zone_200f5e8911"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 1,
-        "zone_membership_source": "name",
+        "spatial_evidence_count": 0,
+        "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
     },
@@ -18480,8 +18564,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -18515,13 +18602,13 @@
         "source": "bing_gang",
         "position_source": "同章（[136]）嘅 1 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_63245da8ee"
+          "zone_200f5e8911"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 1,
-        "zone_membership_source": "name",
+        "spatial_evidence_count": 0,
+        "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
     },
@@ -18530,8 +18617,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25740151064316,
-          22.316948409246965
+          114.258518,
+          22.322959
         ]
       },
       "properties": {
@@ -18558,14 +18645,24 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_ec954725f8"
+          "zone_200f5e8911"
         ],
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": null,
+        "spatial_evidence_count": 1,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "新都城二期",
+          "coord": [
+            114.258518,
+            22.322959
+          ],
+          "rule": "A",
+          "relation": "at",
+          "distance_m": 674.4
+        }
       }
     },
     {
@@ -18937,9 +19034,12 @@
         "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
-        "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "spatial_evidence_count": 1,
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -18976,9 +19076,12 @@
         "coordinate_source": "legacy",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "quarantined"
+        "spatial_evidence_count": 1,
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -19519,8 +19622,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25816635385672,
-          22.315138017853055
+          114.256992,
+          22.322438
         ]
       },
       "properties": {
@@ -19544,14 +19647,24 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_63245da8ee"
+          "zone_200f5e8911"
         ],
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.55,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": null,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "新都城中心三期",
+          "coord": [
+            114.256992,
+            22.322438
+          ],
+          "rule": "A",
+          "relation": "at",
+          "distance_m": 816.1
+        }
       }
     },
     {
@@ -19589,8 +19702,11 @@
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -21041,8 +21157,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -21258,8 +21377,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.26297422751202,
-          22.317177843900204
+          114.256992,
+          22.322438
         ]
       },
       "properties": {
@@ -21284,7 +21403,7 @@
         "source": "bing_gang",
         "inferred_from": "inf_loc_0508",
         "zone_ids": [
-          "zone_51bf7d8190"
+          "zone_200f5e8911"
         ],
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
@@ -21457,8 +21576,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257983,
-          22.31477
+          114.256787,
+          22.315822
         ]
       },
       "properties": {
@@ -21483,12 +21602,12 @@
         "source": "bing_gang",
         "position_source": "同章（[115]）嘅 5 個已解析地點質心附近（環形偏移，id hash 決定）",
         "zone_ids": [
-          "zone_63245da8ee"
+          "zone_d3cb81ec7d"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
-        "spatial_evidence_count": 1,
+        "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
       }
@@ -22804,13 +22923,13 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "zone_ids": [
-          "zone_dc65269329"
+          "zone_3dbd872a01"
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": "geometry",
+        "zone_membership_source": "name",
         "zone_membership_review_status": "validated"
       }
     },
@@ -23001,9 +23120,12 @@
         "coordinate_source": "cross_chapter_evidence",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.95,
-        "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "quarantined"
+        "spatial_evidence_count": 1,
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_dc65269329"
+        ]
       }
     },
     {
@@ -23052,8 +23174,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.257697,
-          22.301864
+          114.274015,
+          22.281868
         ]
       },
       "properties": {
@@ -23086,12 +23208,23 @@
         "zone_ids": [
           "zone_dc65269329"
         ],
-        "coordinate_source": "legacy",
-        "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.35,
+        "coordinate_source": "text_landmark",
+        "coordinate_review_status": "auto_corrected",
+        "coordinate_confidence": 0.8,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "coordinate_anchor": {
+          "name": "仁興工業大廈",
+          "coord": [
+            114.274015,
+            22.281868
+          ],
+          "rule": "C",
+          "relation": "at",
+          "confidence": 0.8,
+          "distance_m": 2776.8
+        }
       }
     },
     {
@@ -23204,15 +23337,12 @@
         "source": "bing_gang",
         "position_source": "同章（[156]）嘅 6 個已解析地點質心附近（環形偏移，id hash 決定）",
         "coord_corrected": true,
-        "zone_ids": [
-          "zone_dc65269329"
-        ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_source": null,
+        "zone_membership_review_status": "quarantined"
       }
     },
     {
@@ -24680,16 +24810,13 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "程式化座標校正：「不法者基地」屬「不法者監獄」範圍，但原座標距離區域中心 650 m（區域半徑 260 m）—— 拉入區域內部",
-        "zone_ids": [
-          "zone_dc65269329"
-        ],
         "coord_corrected": true,
         "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
-        "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_source": null,
+        "zone_membership_review_status": "quarantined"
       }
     },
     {
@@ -26820,8 +26947,11 @@
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "quarantined"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {
@@ -29160,8 +29290,11 @@
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.35,
         "spatial_evidence_count": 0,
-        "zone_membership_source": null,
-        "zone_membership_review_status": "needs_validation"
+        "zone_membership_source": "geometry",
+        "zone_membership_review_status": "validated",
+        "zone_ids": [
+          "zone_200f5e8911"
+        ]
       }
     },
     {

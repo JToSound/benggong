@@ -3566,8 +3566,8 @@
             22.318141
           ],
           [
-            114.258772,
-            22.319407
+            114.257775,
+            22.320284
           ],
           [
             114.2729,
@@ -4868,12 +4868,12 @@
             22.30564
           ],
           [
-            114.257697,
-            22.301864
+            114.274015,
+            22.281868
           ],
           [
-            114.257697,
-            22.301864
+            114.274015,
+            22.281868
           ],
           [
             114.252761,
@@ -4946,8 +4946,8 @@
             "chapter": 158,
             "note": "不法者監獄",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.35,
             "spatial_evidence_count": 1
           },
@@ -4956,8 +4956,8 @@
             "chapter": 162,
             "note": "不法者監獄",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.35,
             "spatial_evidence_count": 1
           },
@@ -5056,20 +5056,20 @@
             22.326264888990615
           ],
           [
-            114.258772,
-            22.319407
+            114.257775,
+            22.320284
           ],
           [
-            114.258772,
-            22.319407
+            114.257775,
+            22.320284
           ],
           [
             114.2566,
             22.3138
           ],
           [
-            114.258772,
-            22.319407
+            114.257775,
+            22.320284
           ],
           [
             114.2566,
@@ -5080,8 +5080,8 @@
             22.314658
           ],
           [
-            114.236801,
-            22.330179
+            114.258518,
+            22.322959
           ],
           [
             114.25343,
@@ -5092,8 +5092,8 @@
             22.30564
           ],
           [
-            114.25740151064316,
-            22.316948409246965
+            114.258518,
+            22.322959
           ],
           [
             114.253375,
@@ -5104,8 +5104,8 @@
             22.3138
           ],
           [
-            114.258772,
-            22.319407
+            114.257775,
+            22.320284
           ],
           [
             114.2415,
@@ -5382,8 +5382,8 @@
             "chapter": 133,
             "note": "皇室區",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.35,
             "spatial_evidence_count": 1
           },
@@ -5412,10 +5412,10 @@
             "chapter": 137,
             "note": "新都城二期",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 0
+            "spatial_evidence_count": 1
           },
           {
             "location_id": "loc_0224",
@@ -7323,8 +7323,8 @@
             22.32159661249714
           ],
           [
-            114.258772,
-            22.319407
+            114.257775,
+            22.320284
           ],
           [
             114.257718,
@@ -8549,8 +8549,8 @@
             22.319103891050585
           ],
           [
-            114.258772,
-            22.319407
+            114.257775,
+            22.320284
           ],
           [
             114.25343,
@@ -10357,8 +10357,8 @@
             22.29762146944381
           ],
           [
-            114.257697,
-            22.301864
+            114.274015,
+            22.281868
           ],
           [
             114.2773751888304,
@@ -10730,8 +10730,8 @@
             "chapter": 162,
             "note": "不法者監獄",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.35,
             "spatial_evidence_count": 1
           },
@@ -10870,12 +10870,12 @@
             22.3166
           ],
           [
-            114.236801,
-            22.330179
+            114.258518,
+            22.322959
           ],
           [
-            114.236801,
-            22.330179
+            114.258518,
+            22.322959
           ],
           [
             114.23660798809796,
@@ -11189,8 +11189,8 @@
             "chapter": 132,
             "note": "皇室區",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.35,
             "spatial_evidence_count": 1
           },
@@ -11199,8 +11199,8 @@
             "chapter": 133,
             "note": "皇室區",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.35,
             "spatial_evidence_count": 1
           },
@@ -12283,8 +12283,8 @@
             22.3229
           ],
           [
-            114.25740151064316,
-            22.316948409246965
+            114.258518,
+            22.322959
           ],
           [
             114.23660798809796,
@@ -12339,10 +12339,10 @@
             "chapter": 138,
             "note": "新都城二期",
             "confidence": 0.85,
-            "coordinate_source": "legacy",
-            "coordinate_review_status": "needs_validation",
+            "coordinate_source": "text_landmark",
+            "coordinate_review_status": "auto_corrected",
             "coordinate_confidence": 0.55,
-            "spatial_evidence_count": 0
+            "spatial_evidence_count": 1
           },
           {
             "location_id": "loc_0435",
