@@ -2128,6 +2128,29 @@ export class SvgMap {
         eventsToShow.push(...list);
       }
     }
+    /*
+     * ⚠️ 唔可以喺 `map_hidden` 嘅 location 座標上畫 event 標記
+     * （用戶 2026-09-24 報告：「第一章有個標記去咗旺角，應該係錯誤，
+     *   第一章嘅內容應該係喺將軍澳」）
+     * ------------------------------------------------------------------
+     * `map_hidden` 嘅語義（見下面 `locationsToShow` 嘅註釋）係「資料保留
+     * 喺面板度，但唔喺地圖標一個**誤導性嘅點**」。事件標記之前**冇**跟呢
+     * 個規則 —— 實測：`loc_0014`（「香港」，`map_hidden: true`、座標
+     * `114.1694, 22.3193` = 旺角）連住 **4 個第一章事件**
+     * （「病毒爆發」「M擲美工刀殺死阿明」「途人被怪物舔死」
+     *  「大眼尖叫引來病者群集」），所以第一章喺旺角出現 4 個標記。
+     *
+     * 呢 4 個事件冇 `zone_id`，冇更好嘅 fallback 座標 → 只可以唔畫。
+     * 資訊唔會消失：佢哋仍然喺事件列表／面板度。
+     */
+    const hiddenLocIds = new Set(
+      this.data.locations.features
+        .filter((l) => l.properties.map_hidden)
+        .map((l) => l.properties.id),
+    );
+    const eventsToPlot = eventsToShow.filter(
+      (e) => !hiddenLocIds.has(e.properties.location_id ?? ""),
+    );
 
     // 只重建標記圖層，底圖 <image> 保持不動（避免每次 render 重新載入 PNG）
     // 每次重建圖層之前清空縮放快取（舊元素已經唔存在）
@@ -2613,7 +2636,7 @@ export class SvgMap {
     }
 
     // Events
-    for (const ev of eventsToShow) {
+    for (const ev of eventsToPlot) {
       const props = ev.properties;
       const raw = ev.geometry.coordinates as [number, number];
       // 事件優先跟隨所屬 location 嘅錨點

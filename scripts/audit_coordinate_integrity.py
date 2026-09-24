@@ -585,7 +585,10 @@ def rule_r8(loc) -> dict:
         prec = p.get("location_precision")
         has_src = bool(p.get("position_source"))
         has_inf = bool(p.get("inferred_from"))
-        if prec in ("approximate", "fictional") and not has_src and not has_inf:
+        # 2026-09-24：由故事文字錨定（`coordinate_anchor`）**都係證據** ——
+        # 佢記錄咗地標名、規則（A/B/C）同距離，比 `position_source` 更具體。
+        has_anchor = bool(p.get("coordinate_anchor"))
+        if prec in ("approximate", "fictional") and not has_src and not has_inf and not has_anchor:
             n_no_evidence += 1
             if p.get("coordinate_review_status") != "needs_validation":
                 out.append(finding(p["id"], "R8_UNKNOWN", "fail",

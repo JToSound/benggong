@@ -629,6 +629,33 @@ def main() -> int:
           f"；鎖定（inferred_from）簇 {len(mc['locked_clusters'])} 個")
     print(f"  座標傳播：{collapse['propagation']}")
 
+    # 階段 1.5
+    #
+    # ⚠️ 為何一定要喺呢個位置（2026-09-24 實測踩過）
+    # ------------------------------------------
+    # 階段 1 嘅「標記塌縮修復」會**重寫**簇內地點嘅座標。如果由文字錨定
+    # 跑喺階段 1 **之前**，修正會被靜靜覆蓋（實測：10 個錨定全部被打回
+    # `legacy`）。而階段 2 係用**成員座標**推導 zone 幾何 → 所以錨定一定
+    # 要喺階段 1 之後、階段 2 之前。
+    print("\n[1.5/4 由故事文字錨定 location 座標]")
+    import anchor_locations_from_text
+
+    anc = anchor_locations_from_text.run(write=write, quiet=True)
+    print(f"  錨定 {anc['n_fixes']} 個 location（規則 A/B/C）")
+
+    # 階段 1.6
+    #
+    # ⚠️ 為何要（2026-09-24 實測踩過）
+    # ----------------------------
+    # `run_pipeline.py` 嘅 `propagate_location_coords.py` 跑喺本腳本**之前**，
+    # 所以階段 1.5 改咗 location 座標之後，`events` / `timeline` /
+    # `routes` 嘅座標仍然係**舊**嘅 → `test_route_coords_match_waypoint_locations`
+    # 會紅（「路線幾何係舊嘅」）。再跑一次傳播就同步返。
+    # ⚠️ 塌縮散佈本身冪等（散佈完就唔再係「完全相同座標」），所以重跑安全。
+    print("\n[1.6/4 重新傳播座標（錨定之後）]")
+    collapse2 = infer_zone_membership.fix_marker_collapse_and_propagate(write=write)
+    print(f"  座標傳播：{collapse2['propagation']}")
+
     # 階段 2
     print(f"\n[{PHASES[1][0]}]")
     base_merge(write=write)

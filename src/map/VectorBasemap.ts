@@ -623,7 +623,13 @@ export class VectorBasemap {
     }
     this.ensureLevelData(next);
     if (next === 2) this.ensureTiles();
-    this.scheduleDraw();
+    /*
+     * ⚠️ **同步**重繪，唔可以 `scheduleDraw()` —— 見 `drawNow()` 註釋：
+     * `setView()` 係喺 `MapViewport` 嘅 rAF callback 之內被呼叫，再排一個
+     * rAF 就會令 canvas 底圖落後 SVG overlay 整整 1 個 frame（用戶見到
+     * 「光圈跟唔上、同底圖分離」）。
+     */
+    this.drawNow();
   }
 
   private scheduleDraw(): void {
@@ -632,6 +638,42 @@ export class VectorBasemap {
       this.raf = 0;
       this.draw();
     });
+  }
+
+  /**
+   * **立即**重繪（取消已排隊嘅 rAF）。
+   *
+   * ⚠️ 為何一定要同步（用戶 2026-09-24 報告）
+   * ----------------------------------------
+   * > 「移動嘅時候啲倖存區等等嘅光圈會漂移…『跟唔上』及移動時
+   * >   『同底圖分離』，明顯提到係兩層嘢。」
+   *
+   * 呢個係**圖層唔同步**，唔係動畫問題：
+   *
+   * · `SvgMap.applyViewBox()` 係**同步**改 SVG `viewBox` → zone 光環／
+   *   標記（SVG 層）即刻跟住郁；
+   * · canvas 底圖（陸地／道路／建築）係經 `scheduleDraw()` 排喺
+   *   **下一個** rAF。
+   *
+   * `MapViewport` 本身已經用 rAF coalesce 指標事件，所以 `setView()`
+   * 係喺**一個 rAF callback 之內**被呼叫 —— 再排一個 rAF 就係**下一幀**
+   * → canvas 落後 SVG **整整 1 個 frame**。
+   *
+   * 快速拖曳時 1 frame ≈ 16 ms；以 1000 px/s 拖曳即係 **~16 px 位移**
+   * → 肉眼清楚見到「底圖同 overlay 分離」。
+   *
+   * 修法：`setView()` 直接同步重繪。`setView()` 每個 frame 最多行一次，
+   * 所以**總工作量不變**，只係提早喺同一幀做完（感知延遲反而改善）。
+   *
+   * ⚠️ 圖磚載入路徑（async）仍然用 `scheduleDraw()` —— 佢唔喺 rAF 之內，
+   * 同步重繪冇意義，而且會令解碼期間重繪多次。
+   */
+  private drawNow(): void {
+    if (this.raf) {
+      cancelAnimationFrame(this.raf);
+      this.raf = 0;
+    }
+    this.draw();
   }
 
   private draw(): void {

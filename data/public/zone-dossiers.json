@@ -1,10 +1,10 @@
 {
   "schema_version": 2,
   "generated_from": {
-    "zones": "45a4520dc8d62438f7327987b472e89f6b97a23ac00b3d2cce9e754a506f1c86",
+    "zones": "0be5501b5927dec545ab7ea76302645d17c7eeeda106b69d767f87968d933f2a",
     "chapter_summaries": "5e237c280210eefcb2a5053f983202ce92bd64ab40b7b522dcd3bff387cd1612",
-    "events": "9a2209972c9323bbc77ab39cce363e57932f1ca4cfa553fef2bbbd220484c6ff",
-    "timeline": "25c485351deaf20a330319d5115e2f015405f849538d396f474b7bf2eb8399f5"
+    "events": "bab9dff584d25c779e121bcb419a6b4a75308c5cb2a9a878dff5f784f61e99a3",
+    "timeline": "6e4fe9deb5cc5f2d0a906d40e8b42f280ec0142b0fe4f03ad32989512c49b025"
   },
   "dossiers": [
     {
@@ -268,8 +268,15 @@
         "danger_level": 1
       },
       "key_characters": [
+        "W",
+        "夏晴",
+        "小老鼠",
         "滿天",
-        "賴三"
+        "王達尼",
+        "瓦安",
+        "賴三",
+        "阿禮",
+        "黑鼠商團首領"
       ],
       "chapter_refs": [
         132,
@@ -898,6 +905,7 @@
         195
       ],
       "evidence_sources": [
+        "chapter-summaries",
         "zones-inline"
       ],
       "confidence": 1.0,
@@ -1104,7 +1112,7 @@
       "overview": "被病腦佔據的荒廢商場，是區內唯一有智力病者的巢穴。病腦把四樓改裝成婚禮會場，用人手花牌、紅地毯與被固定的死人營造婚禮，並透過與大本營的暗中交易換取活人與屍體作貢品。商場內有以真人殘肢拼成假人的高級衣店、亂葬岡更衣間、百貨超市、寵物店與玩具反斗城，沿途佈滿捲閘、灑水、強光等陷阱。M 兩度潛入，最終靠天拿水與火柴火燒病腦，再以棒球棍補刀摧毀此窩。",
       "nest_profile": {
         "threat_signature": "病腦（弱點為火，會假死）；舌女（酸性唾液、可舉起捲閘）；大鼻（有毒氣體）；自動捲閘與各種陷阱",
-        "activity_pattern": "活躍章節 ch2–ch10；區內事件 100 條",
+        "activity_pattern": "活躍章節 ch2–ch10；區內事件 96 條",
         "affected_radius": "半徑約 800.0 m（來源：members）"
       },
       "risk_profile": {
@@ -1117,7 +1125,6 @@
         "danger_level": 4
       },
       "key_characters": [
-        "W",
         "不破尚",
         "主角",
         "公仔",
@@ -1143,8 +1150,7 @@
         "送葬隊",
         "阿寶",
         "阿玲",
-        "阿登",
-        "黑鼠商團首領"
+        "阿登"
       ],
       "chapter_refs": [
         2,
@@ -1796,7 +1802,7 @@
       "overview": "位於艾寶琳倖存區外、僅一條馬路之隔的公園，內裡一片兒童遊樂場被竊屍賊改建成病窩：以輪胎、空酒瓶、車殼、染血滑梯、繩網與木板鐵板搭建，如同蟻窩。竊屍賊會分工、同居、尋食、存放屍體，並設祭壇供奉爛果實、死老鼠與人類衣物。公園高塔塔頂用血寫有「Hope」與「Road 38」，並藏有血繪地圖，成為追查白鯨下落的關鍵線索。",
       "nest_profile": {
         "threat_signature": "病童（以聲音催眠人腦產生幻覺、令人耳鳴）；舞者；舌女；大耳；偽裝的惡意倖存者；男病童；病童（會跟倖存者玩角色扮演）；竊屍賊",
-        "activity_pattern": "活躍章節 ch109–ch188；區內事件 16 條",
+        "activity_pattern": "活躍章節 ch109–ch188；區內事件 14 條",
         "affected_radius": "半徑約 220.0 m（來源：default）"
       },
       "risk_profile": {
@@ -2474,7 +2480,7 @@
       "overview": "靈實醫院位於將軍澳，前身部分為康健中心。醫院二、三樓聚集大量病者（病嘴、病牙），四樓則住著一隻會說人類語言、智商極高、被稱為「大BOSS」的病腦。人類滿天原是Dr.D的助手，偷走病腦研究後離開大本營，長駐此處與大BOSS成為朋友，並替牠隱瞞會說話的秘密。滿天憑四樓直通各層的秘密通道避開病者，密碼只有他與大BOSS知道。二人生活自得其樂，",
       "nest_profile": {
         "threat_signature": "病嘴；病牙；病腦；大眼；穿醫生白袍的神秘男人；非常厲害的病者（推測）；滿天；病童；病者；男病童的腦波影響；舌女；大耳；大鼻",
-        "activity_pattern": "活躍章節 ch39–ch195；區內事件 113 條",
+        "activity_pattern": "活躍章節 ch39–ch195；區內事件 115 條",
         "affected_radius": "半徑約 545.2 m（來源：members）"
       },
       "risk_profile": {
@@ -2541,8 +2547,7 @@
         "艾匡",
         "賴三",
         "銘凱",
-        "阿文",
-        "阿禮"
+        "阿文"
       ],
       "chapter_refs": [
         39,

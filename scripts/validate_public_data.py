@@ -88,6 +88,10 @@ ZONE_DANGER_BY_TYPE = {
 COORDINATE_SOURCE_ENUM = {
     "explicit_text", "cross_chapter_evidence", "zone_inference",
     "legacy", "manual_geometry",
+    # 2026-09-24：由**故事文字點名嘅現實地標**錨定（`anchor_locations_from_text.py`）。
+    # 證據強度：地標名出現喺 location 自己嘅名／別名（規則 A）、描述嘅定位片語
+    # （規則 B）、或 zone dossier 嘅定位片語（規則 C）。
+    "text_landmark",
 }
 COORDINATE_REVIEW_STATUS_ENUM = {
     "validated", "auto_corrected", "needs_validation", "quarantined",

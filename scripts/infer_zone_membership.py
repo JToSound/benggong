@@ -480,7 +480,12 @@ def backfill_locations(locations: list[dict], zones: list[dict],
         else:
             p.pop("zone_ids", None)
 
-        if p.get("inferred_from"):
+        if p.get("coordinate_anchor"):
+            # ⚠️ 文字錨定係**最強證據**（故事文字直接點名現實地標）→ 唔可以被
+            # 回填覆蓋成 legacy。2026-09-24 實測踩過：唔加呢個分支，10 個
+            # 錨定嘅座標雖然正確，但 `coordinate_source` 被打回 `legacy`。
+            p["coordinate_source"] = "text_landmark"
+        elif p.get("inferred_from"):
             p["coordinate_source"] = "cross_chapter_evidence"
         elif "校正" in (p.get("position_source") or ""):
             p["coordinate_source"] = "manual_geometry"
@@ -488,9 +493,17 @@ def backfill_locations(locations: list[dict], zones: list[dict],
             p["coordinate_source"] = "legacy"
 
         p["coordinate_review_status"] = (
-            "auto_corrected" if p.get("coord_corrected") else "needs_validation"
+            "auto_corrected"
+            if (p.get("coord_corrected") or p.get("coordinate_anchor"))
+            else "needs_validation"
         )
-        p["coordinate_confidence"] = _confidence_of_precision(p.get("location_precision"))
+        # ⚠️ 有文字錨定就用**規則信心**（A 0.95／B 0.85／C 0.80），
+        # 唔可以被 `location_precision` 推導嘅值覆蓋（2026-09-24 實測踩過）。
+        p["coordinate_confidence"] = (
+            (p.get("coordinate_anchor") or {}).get("confidence")
+            if p.get("coordinate_anchor")
+            else _confidence_of_precision(p.get("location_precision"))
+        )
         p["spatial_evidence_count"] = _chapter_overlap(p.get("chapters") or [], zchapters)
         p["zone_membership_source"] = m.get("source")
         p["zone_membership_review_status"] = m.get("review_status", "needs_validation")

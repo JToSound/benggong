@@ -439,6 +439,65 @@ Tab 8 → #btn-theme
 
 ---
 
+#### §10.9 更新（2026-09-24）：P1-2 已修，量測方法同時修正
+
+**已修**：見 `docs/progress/p1-2-map-keyboard-access.md`（roving tabindex +
+`role="button"` + `aria-label` + `Enter`／`Space` 啟動 + 方向鍵組內移動 +
+`drop-shadow` 焦點環）。
+
+**⚠️ 量測方法亦要修 —— 舊指標係錯嘅**
+
+舊 `a7-probe-map2.mjs` 只量：
+
+```js
+keyboardReachable: els.filter(e => e.tabIndex >= 0).length   // ← 「有冇 tabindex」
+```
+
+呢個指標有兩個問題：
+
+1. `tabindex="0"` **唔等於**真係可以用鍵盤揀到 —— 元素可能離屏／被遮蓋
+   （focus 到但用戶睇唔到），或者冇 `keydown` 路徑（focus 到但 `Enter` 冇反應）。
+2. **roving tabindex 之下只有一個 `tabindex="0"`** —— 舊指標會報「**1**」，
+   完全反映唔到「其實全部 72 個元素都可以用方向鍵到達」。實測：
+   新舊指標同時量到 `oldMetricHasTabindexGE0 = 1` vs
+   `keyboardReachable = 25`。
+
+**新量測方法（真鍵盤驅動，唔靠屬性推斷）**
+
+| 步驟 | 動作 |
+|---|---|
+| 1 | 焦點放 `#svg-map` → 按 `Tab` → 記低落到邊個地圖元素（`tabEnteredMap`） |
+| 2 | 連按 `ArrowRight`（環繞）24 次，每次記低 `document.activeElement` 嘅身份 → 數**唔同**元素 = `keyboardReachable` |
+| 3 | 按 `Enter` → 驗證真係觸發（`.zone.is-selected` 增加 **且** URL 帶 `zone=<id>`）= `keyboardActivatable` |
+| 4 | 逐像素比對 focused vs unfocused 截圖 = `focusRingVisible` |
+| 5 | 另報屬性覆蓋率同 roving 不變式 |
+
+**實測結果（`artifacts/audit-A7/a7-probe-map2.json`，1400×900）**
+
+| 指標 | 值 |
+|---|---|
+| `keyboardReachable` | **25**（24 次方向鍵 + 1 次 Tab 到達 25 個唔同元素） |
+| `keyboardActivatable` | **true**（`sel 0 → 1`、URL 由 `/` 變 `/?zone=zone_e0a9ccb6fd`） |
+| `focusRingVisible` | **true** |
+| `tabEnteredMap` | **true** |
+| 互動元素總數 | 72（`.zone`／`.route-line`／`.location-marker`／`-cluster`／`.event-marker`） |
+| 有 `role="button"` | **72 / 72（100%）** |
+| 有 `aria-label` | **72 / 72（100%）** |
+| roving 不變式 | `tabindex="0"` = **1**、`tabindex="-1"` = 71 ✓ |
+| 舊指標（對照） | `tabIndex >= 0` = **1** ← 證明舊指標失效 |
+
+**判定：§10.9 PASS**（原本 0/14）。
+
+**重跑**：
+
+```bash
+# 先起 preview（dist/）
+npx vite preview --port 5174 --strictPort &
+BASE_URL=http://localhost:5174/ node artifacts/audit-A7/a7-probe-map2.mjs
+```
+
+---
+
 #### P1-3：冇 `aria-live`、冇 `aria-current`、`aria-expanded` 只覆蓋 1 個控制項
 
 **實測（`a7-aria-summary.json`，mobile-390）**
@@ -1011,11 +1070,12 @@ BASE_URL=http://localhost:5190/ node artifacts/audit-A7/v2-mobile-a11y-runner.mj
   FAIL  10.6  搜尋結果可用方向鍵 + Enter 選取                        └─ afterArrow.activeIsResult:false
   FAIL  10.7  modal 有 role=dialog + aria-modal + trap + restore     └─ role:null, escaped:true
   FAIL  10.8  快捷鍵仍然有效                                         └─ ch 1→2 ✓；/ ✓；? undefined ✗
-  FAIL  10.9  地圖標記／區域可鍵盤選取                               └─ 0/14
+  PASS  10.9  地圖標記／區域可鍵盤選取                               └─ 25 個元素真鍵盤可達（2026-09-24 覆核）
 ── 11-network ──
   PASS  11.1  零外部請求
   PASS  11.2  冇 map / tile / geocoder 外部 host
-總計：3/17 PASS，14 FAIL
+總計：3/17 PASS，14 FAIL（原始審計）
+2026-09-24 覆核：10.9 轉 PASS → 4/17 PASS，13 FAIL
 ```
 
 > **本輪對 10.8 嘅修正**：上一輪報 `? → undefined` 係**測試方法問題**（`page.keyboard.press("?")` 唔會產生正確嘅 `key`）。本輪改用 `Shift+Slash` 測試，發現 `?` 快捷鍵本身係正常嘅（`app.ts:279`），**真正失效嘅原因係 P0-4 嘅連鎖後果**（Esc 之後 focus 卡喺隱藏 input）。同一樣，`ArrowRight` 喺搜尋／Esc 之後亦會失效。
@@ -1159,7 +1219,7 @@ A7_EXPECT_FAIL=1 BASE_URL=http://localhost:5190/ npx vitest run tests/mobile-a11
 | 10.6 | 搜尋方向鍵 + Enter | FAIL | 保持 |
 | 10.7 | modal `role=dialog` + `aria-modal` + trap + restore | FAIL | 保持 |
 | 10.8 | 快捷鍵有效 | FAIL（部分係測試問題） | **修正測試**：`?` 要用 `Shift+Slash`；並**加一個情境**：開搜尋 → Esc → 再測 `ArrowRight` / `/`（現況會失效，根因 P0-4） |
-| 10.9 | 地圖可鍵盤選取 | FAIL（0/19） | 保持 |
+| 10.9 | 地圖可鍵盤選取 | **PASS（2026-09-24 覆核）** | 由 0/19 → **25 個元素真鍵盤可達 + 可啟動 + 焦點環可見**。見下面「§10.9 更新」 |
 | 11.1 | 零外部請求 | PASS ✓ | 保持 |
 | 11.2 | 冇 map/tile/geocoder host | PASS ✓ | 保持 |
 

@@ -318,6 +318,9 @@ def test_r8_unsourced_coordinates_are_flagged(loc):
             continue
         if p.get("position_source") or p.get("inferred_from"):
             continue
+        # 2026-09-24：`coordinate_anchor`（由故事文字點名嘅現實地標）都係證據
+        if p.get("coordinate_anchor"):
+            continue
         n_no_evidence += 1
         if p.get("coordinate_review_status") != "needs_validation":
             unmarked.append((p["id"], p.get("coordinate_review_status")))
@@ -325,8 +328,13 @@ def test_r8_unsourced_coordinates_are_flagged(loc):
         f"{len(unmarked)} 個冇證據座標**冇**標 needs_validation（假裝已驗證）：{unmarked[:8]}"
     )
     # 記錄實測數字（A5 baseline 120；B4 冇改變佢，只係標記）
-    assert n_no_evidence == 120, (
-        f"冇證據座標數目由 120 變成 {n_no_evidence} —— 上游資料改咗，要重新審計"
+    #
+    # 2026-09-24：120 → **116**。原因係 4 個 location（loc_0242 / loc_0364 /
+    # loc_0443 / loc_0467）由 `scripts/anchor_locations_from_text.py` 依
+    # **故事文字點名嘅現實地標**錨定，取得 `coordinate_anchor` 證據 →
+    # 唔再屬於「冇證據座標」。呢個係**證據增加**，唔係放寬標準。
+    assert n_no_evidence == 116, (
+        f"冇證據座標數目由 116 變成 {n_no_evidence} —— 上游資料改咗，要重新審計"
     )
 
 
@@ -346,6 +354,8 @@ def test_r8_coordinate_source_is_known_enum(loc):
     allowed = {
         "explicit_text", "cross_chapter_evidence", "zone_inference",
         "legacy", "manual_geometry",
+        # 2026-09-24：由故事文字點名嘅現實地標錨定
+        "text_landmark",
     }
     bad = sorted({
         str(f["properties"].get("coordinate_source"))

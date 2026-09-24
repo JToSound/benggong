@@ -132,13 +132,22 @@ describe("B3 索引：eventsByZone（覆蓋率 + 同 B4 event_ids 一致）", ()
     }
   });
 
-  it("覆蓋率 ≥ 90.6%（B4 報告值；實測 1,627/1,796 = 90.59%）", () => {
+  it("覆蓋率 ≥ 90.6%（B4 基線；2026-09-24 重跑管線後 1,632/1,796 = 90.9%）", () => {
     const covered = new Set<string>();
     for (const list of world.indexes.eventsByZone.values()) {
       for (const e of list) covered.add(e.properties.id);
     }
     const ratio = covered.size / world.data.events.length;
-    expect(covered.size).toBe(1627); // 實測（B4 events.geojson.zone_id 覆蓋）
+    /*
+     * ⚠️ 2026-09-24：由 `toBe(1627)` 改為 `toBeGreaterThanOrEqual(1627)`。
+     *
+     * 原因：重跑 `merge_zone_dossiers.py`（座標錨定授權範圍）之後，
+     * 階段 3 嘅 `event→zone` join 覆蓋率由 1,627（90.59%）升到
+     * **1,632（90.9%）**。硬編碼 `toBe` 會將「改善」判成「失敗」——
+     * 呢個係**基線**，應該用 `≥`。
+     */
+    expect(covered.size).toBeGreaterThanOrEqual(1627); // B4 基線
+    expect(covered.size).toBe(1632); // 2026-09-24 實測
     expect(ratio).toBeGreaterThanOrEqual(0.9059); // 報告四捨五入為 90.6%
   });
 
