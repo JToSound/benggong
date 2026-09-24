@@ -104,4 +104,4 @@
 | A（Q3/Q4） | **(a) 徹底解決** → ✅ 完成 |
 | B（Q1） | **(a) 提高 `MAX_SCALE`** → ✅ 完成 |
 | C（`characters.json`） | **(a) 重建流程** → ✅ 已緩解（非破壞性契約）；byte-level 重建待做 |
-| D（舊 CSS 遷移） | **(a) 遷移 80 個 legacy class** → ⏳ 未做 |
+| D（舊 CSS 遷移） | **(a) 遷移 80 個 legacy class** → ✅ **階段 1+3 完成**（2026-09-24）：158 個被引用 class 原文搬入 `legacy-migrated.css`，三個舊檔已刪；44 檔 / 696 tests 全綠。報告：`d-legacy-css-migration.md`。⏳ 階段 2（移除 `!important`）／4（死 CSS 清理）／5（視覺回歸）未做 |

@@ -86,7 +86,8 @@
 | 5 | **用 `rm` 批量刪檔** | 本機 sandbox 直接 deny（一律用 `mv`） |
 | 6 | **`git checkout -b <含 slash 名>`** | 會摧毀 `.git`（本機環境限制） |
 | 7 | **保留 raster `fallbackToRaster()` 嘅預設 `href`** | 唔想為平時唔用嘅 2 MB PNG 付流量 |
-| 8 | **刪舊 CSS（Gate 2）** | **80 個 class 有引用但 V2 冇定義**（會版面解體） |
+| 8 | **直接刪舊 CSS（唔遷移）** | 80 個 class 有引用但 V2 冇定義 → 會版面解體。**2026-09-24 已改為「先原文整段搬入 `legacy-migrated.css`，再刪三個舊檔」**（D 遷移，見 `docs/progress/d-legacy-css-migration.md`） |
+| 9 | **CSS 遷移只搬「有 class 嘅規則」** | 實測漏咗 **67 條冇 class 嘅規則**（`#svg-map-mount`、`#topbar`、`:root`…）→ 兩個真回歸（SVG 溢出、`.ch-pill` 對比 1.02）。元素／id 選擇器一樣影響版面 |
 
 ---
 
@@ -94,8 +95,8 @@
 
 | # | 項 | 現況 |
 |---|---|---|
-| 1 | **spec §8 第 8 項「old dead CSS 已刪」** | 同 Gate 2 裁決衝突（見 §6 第 8 項）→ 待裁決 |
-| 2 | **P1-2 地圖元素鍵盤可達** | 嘗試加 `tabindex` 落 `g.zone` → **令 e2e fail**（根因未明）→ 已 revert |
+| 1 | **spec §8 第 8 項「old dead CSS 已刪」** | ✅ **已解決（2026-09-24）**：D 遷移階段 1+3 —— 158 個被引用 class 原文搬入 `legacy-migrated.css`，`main.css` / `hud.css` / `timeline.css` 已刪。⏳ 死 CSS 清理（階段 4）待做 |
+| 2 | **P1-2 地圖元素鍵盤可達** | ✅ **已解決（2026-09-24）**：roving tabindex + `role="button"` + `aria-label` + Enter/Space 啟動 + 焦點環。A7 §10.9 由 FAIL（0/14）→ PASS（量測方法亦升級為真鍵盤驅動）。見 `docs/progress/p1-2-map-keyboard-access.md` |
 | 3 | **P0-5 角色 dossier 內容** | `StoryPanel.ts:162` 仍係 `console.log` + TODO |
 | 4 | **Q3/Q4 深 zoom 偏平** | `center` flatRatio 0.8521→0.9549（FAIL） |
 | 5 | **Q10 冷 zoom 阻塞** | 合計 538 ms（目標 300 ms） |
