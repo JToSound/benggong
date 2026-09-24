@@ -641,3 +641,55 @@
 #svg-map .event-marker:focus-visible {
   z-index: 3;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Zone Dossier 誠實標示（F6，2026-09-25）
+   ══════════════════════════════════════════════════════════════════════════
+   為何要：`zones.geojson` 每個 zone 都有 `zone_review_status`，但 UI 之前
+   **完全冇 render**（C5 F6 / C8 P1）。後果：48 個 zone 只有 7 個 `validated`，
+   但用戶睇落全部都係「已核實事實」——違反 `DATA_GOVERNANCE.md §3`
+   「推測絕不可寫成事實」。
+
+   顏色一律用 token（唔可以 raw hex）：
+     validated       → --ok / 綠系
+     auto_inferred   → --warn / 黃系
+     needs_validation→ --danger / 紅系
+   ══════════════════════════════════════════════════════════════════════════ */
+.zd-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin-top: var(--sp-2);
+}
+
+.zd-review {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px var(--sp-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  font-size: var(--fs-2xs);
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--bg-elevated);
+  white-space: nowrap;
+}
+
+.zd-review--validated {
+  color: var(--safe);
+  border-color: currentColor;
+}
+
+.zd-review--auto_inferred {
+  color: var(--warn, var(--text-primary));
+  border-color: currentColor;
+}
+
+.zd-review--needs_validation {
+  color: var(--danger, var(--text-primary));
+  border-color: currentColor;
+}
+
+.zd-review--precision {
+  opacity: 0.85;
+}

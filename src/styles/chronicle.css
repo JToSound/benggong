@@ -25,8 +25,27 @@
   color: var(--text-primary);
 }
 
-/* 闊螢幕：左邊時期導覽（<=220px）＋ 右邊條目流。 */
-@media (min-width: 768px) {
+/*
+ * ⚠️ 容器查詢：用**面板寬度**而唔係 viewport 寬度（2026-09-25 修 C8 P0）
+ * ==================================================================
+ * 原本用 `@media (min-width: 768px)` → 只要 **viewport** ≥768px 就用兩欄
+ * （220px rail + 1fr）。但編年史係 render 入 `.pane-story`（**固定 380px**
+ * 側欄）—— 所以喺 1280／1440／1920／2560 任何桌面寬度之下，
+ * 卡片欄都只有 `380 − 220 − gap ≈ 115px` → `.chr-entry` 實測 **83px**，
+ * 文字變成「一欄一字」垂直排列，**完全不可讀**。
+ *
+ * 呢個係 C8 判定嘅 **P0**（編年史係 spec IA 四個主入口之一，1320 條記錄）。
+ *
+ * 修法：`#story-panel-mount` 做 container，查詢**容器**寬度。
+ * 380px 側欄 → 單欄（可讀 ✓）；將來若果編年史有全寬模式 → 自動變兩欄 ✓。
+ */
+#story-panel-mount {
+  container-type: inline-size;
+  container-name: story-pane;
+}
+
+/* 闊容器（≥700px）：左邊時期導覽（220px）＋ 右邊條目流。 */
+@container story-pane (min-width: 700px) {
   .chronicle {
     grid-template-columns: 220px minmax(0, 1fr);
     grid-template-rows: auto minmax(0, 1fr);
@@ -46,6 +65,7 @@
     grid-row: 2;
   }
 }
+
 
 /* ── 標題區 ──────────────────────────────────────────────────────────── */
 .chronicle-head {
@@ -493,5 +513,28 @@
   /* 目前所在嘅時期：終態可見性唔依賴 animation。 */
   .chr-rail-item[aria-current="true"] {
     background: var(--bg-elevated);
+  }
+}
+
+/*
+ * ⚠️ 窄容器規則一定要放喺**檔案最後**（2026-09-25 實測踩過）
+ * ====================================================
+ * 第一版將呢個 `@container` 塊放喺 `.chr-rail { flex-direction: column }`
+ * **之前** → 同特異度之下「後載入者勝」→ 基礎規則蓋過容器查詢 →
+ * `flex-direction: row` 永遠唔生效（實測 `getComputedStyle` 仍然係 `column`）。
+ * 幾何本身冇問題（容器查詢令兩欄唔生效，卡寬 83 → 315px），但 rail 仍然
+ * 垂直排列，喺窄側欄會浪費高度。
+ */
+@container story-pane (max-width: 699px) {
+  .chr-rail {
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: var(--sp-1);
+  }
+
+  .chr-rail > * {
+    flex: 0 0 auto;
   }
 }

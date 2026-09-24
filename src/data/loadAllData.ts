@@ -23,6 +23,8 @@ import type {
   LocationFeature,
   EventFeature,
   RouteFeature,
+  // ⚠️ 別名：`ZoneDossier` 亦係一個 component 名（`src/components/ZoneDossier.ts`）
+  ZoneDossier as ZoneDossierRecord,
 } from "../types/dataset";
 
 export type {
@@ -210,4 +212,43 @@ export async function loadAllData(): Promise<AppData> {
     eventsByChapter,
     routesByChapter,
   };
+}
+
+/*
+ * ══════════════════════════════════════════════════════════════════════════
+ * 按需載入 `zone-dossiers.json`（C8 P1-4，2026-09-25）
+ * ══════════════════════════════════════════════════════════════════════════
+ * 為何要加（C8 敵意產品審查嘅 P1-4）
+ * --------------------------------
+ * `data/public/zone-dossiers.json` 有 **48 個豐富 dossier**（每個 14 個欄位：
+ * `overview` / `governance` / `society` / `infrastructure` / `risk_profile` /
+ * `nest_profile` / `key_characters` / `chapter_refs` …），係 B4 + A6 嘅主要
+ * 交付物之一。但實測：
+ *
+ *   · `src/data/adapter/index.ts` 有 `loadDossiers()`（lazy、memoized）
+ *   · **但 `src/` 從來冇任何地方呼叫過佢** —— grep 只有定義同測試
+ *   · `ZoneDossier` component 讀嘅係 `zones.geojson` 嘅**舊 inline 欄位**
+ *
+ * 即係「48 個 dossier 白做」+ UI 睇落似「換皮」（C8 原話）。
+ *
+ * 呢個 loader 刻意**唔用** `adapter.loadDossiers(world)` —— 嗰個要 `World`
+ * 物件，而 `App` 揸嘅係 `AppData`（`buildWorldIndex(data)` 之後冇保留 `World`）。
+ * 放喺呢度可以重用同一個 `fetchJSON` + base path，唔使喺 component 重複。
+ */
+let zoneDossiersPromise: Promise<Map<string, ZoneDossierRecord>> | null = null;
+
+/** 按需載入 zone dossiers（memoized）。失敗 → 回空 Map（UI 退回 v1 欄位）。 */
+export function loadZoneDossiers(): Promise<Map<string, ZoneDossierRecord>> {
+  if (!zoneDossiersPromise) {
+    zoneDossiersPromise = fetchJSON<{ dossiers?: ZoneDossierRecord[] }>(
+      "./data/public/zone-dossiers.json",
+    )
+      .then((file) => {
+        const m = new Map<string, ZoneDossierRecord>();
+        for (const d of file.dossiers ?? []) m.set(d.zone_id, d);
+        return m;
+      })
+      .catch(() => new Map<string, ZoneDossierRecord>());
+  }
+  return zoneDossiersPromise;
 }
