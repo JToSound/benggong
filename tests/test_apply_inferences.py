@@ -29,10 +29,43 @@ JSONL = REPO / "data" / "private" / "review" / "place-inference.jsonl"
 DECISIONS = REPO / "data" / "private" / "review" / "place-inference-decisions.json"
 
 
+PUBLIC_DIR = REPO / "data" / "public"
+#: 管線最後一步 `sync_public_data.py` 會將 `data/public` 同步去呢度，
+#: 所以快照一定要**兩邊都包**（只包一邊會令另一半 dirty）。
+SERVED_DIR = REPO / "public" / "data" / "public"
+
+
 def _run(script: Path) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, str(script)], cwd=str(REPO), capture_output=True, text=True
     )
+
+
+@pytest.fixture(scope="module", autouse=True)
+def _restore_public_after_module():
+    """⚠️ 本模組會跑**完整管線**，而管線會改寫 `data/public/**` 同
+    `public/data/public/**`（最後一步 `sync_public_data.py`）。
+
+    原本冇還原 → 跑一次 pytest 之後 worktree 就有 **12 個檔**變 dirty，
+    之後嘅 `sync_public_data.py` 會將**中間狀態**同步出去 ✗
+    （C5 對抗驗收 2026-09-25 標記為 G3）。
+
+    ⚠️ 一定要係 **autouse + module scope 而且聲明喺 `ready` 之前** ——
+    因為 `ready` fixture 本身就會跑管線；如果快照喺測試內部才做，
+    影到嘅已經係被污染嘅狀態，還原就冇用 ✗（實測踩過）。
+    """
+    roots = (PUBLIC_DIR, SERVED_DIR)
+    snapshot = {
+        p: p.read_bytes() for root in roots for p in sorted(root.rglob("*")) if p.is_file()
+    }
+    yield
+    restored = 0
+    for path, data in snapshot.items():
+        if path.exists() and path.read_bytes() != data:
+            path.write_bytes(data)
+            restored += 1
+    if restored:
+        print(f"\n[teardown] 還原 {restored} 個被管線改寫嘅公開資料檔")
 
 
 @pytest.fixture(scope="module")
@@ -156,13 +189,32 @@ def test_pipeline_is_idempotent(ready):
     # 必然唔同 —— 但嗰個唔係「唔冪等」，係「比錯對象」。
     # 實測踩過呢個假失敗。
     before = LOCATIONS.read_text(encoding="utf-8")
-    r = _run(PIPELINE)
-    assert r.returncode == 0, (r.stderr or r.stdout)[-500:]
-    after = LOCATIONS.read_text(encoding="utf-8")
-    assert before == after, (
-        "管線唔冪等：重跑完整管線之後 locations.geojson 改變咗。"
-        "通常係某條規則依賴咗被自己改動嘅欄位（反饋循環）。"
-    )
+
+    # ⚠️ 快照 + 還原（2026-09-25，C5 對抗驗收 G3）
+    # ------------------------------------------
+    # 呢個測試會跑**完整管線**，而管線會改寫 `data/public/**`。原本冇還原
+    # → 跑一次 pytest 之後 worktree 就有 6 個檔變 dirty，之後嘅
+    # `sync_public_data.py` 會將**中間狀態**同步出去 ✗。
+    #
+    # 修法：跑之前快照 `data/public`，跑完（無論 pass / fail）還原。
+    # 測試嘅目的係「比對 before / after」，唔係「改動 repo」。
+    snapshot = {
+        p: p.read_bytes()
+        for p in sorted(PUBLIC_DIR.rglob("*"))
+        if p.is_file()
+    }
+    try:
+        r = _run(PIPELINE)
+        assert r.returncode == 0, (r.stderr or r.stdout)[-500:]
+        after = LOCATIONS.read_text(encoding="utf-8")
+        assert before == after, (
+            "管線唔冪等：重跑完整管線之後 locations.geojson 改變咗。"
+            "通常係某條規則依賴咗被自己改動嘅欄位（反饋循環）。"
+        )
+    finally:
+        for path, data in snapshot.items():
+            if path.read_bytes() != data:
+                path.write_bytes(data)
 
 
 def test_inference_count_stable_across_reruns(ready):
