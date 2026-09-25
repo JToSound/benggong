@@ -395,12 +395,37 @@ GitHub Pages 會 gzip 文字資源 ✓。
 「同兄弟地點一樣」）→ 寫入記錄 → `apply_place_inferences.py` 套用 →
 下次 `infer_places` 又由**新**座標重新推斷 → **自我參照迴圈** ✗
 
-**修法（建議，未做）**：令 `infer_places.py` **唔覆蓋已有 `approved` 記錄嘅
-`inferred_lonlat`** —— 推斷應該係**一次性**嘅，唔應該由自己嘅輸出重新推導。
-⚠️ 需要先確認「approve 之後唔再重推」符合治理要求（`DATA_GOVERNANCE.md`）。
+**具體機制（已定位，2026-09-25 再查）**
+
+逐欄 diff 顯示漂移全部集中喺 **大本營校園**嘅成員（`學生休息室`、
+`A樓地下活動房`、`C大樓裁衣部`、`病窩` …），位移 ~2 m（Δlat 0.000018°）。
+呢啲成員全部係 `inferred_from` 鎖定，佢哋嘅座標 = **校園質心**。
+
+→ **循環依賴**：
+
+```
+校園質心  ←  成員座標        （infer_places 嘅「同校園」規則）
+成員座標  ←  校園質心        （apply_place_inferences 套用推斷）
+```
+
+即係「由**自己上一次嘅輸出**再推導」→ 永遠唔收斂 ✗。
+
+**修法（建議，未做）**：校園質心應該只由**證據支持嘅成員**計算
+（例如 OSM `osm_way` 對照到嘅 Block A/B/C/D），**排除**「座標係由質心推導
+出嚟」嘅成員 —— 咁樣質心就唔再依賴自己嘅輸出 ✓。
+
+**已試過但無效（記錄落嚟避免重試）**：喺 `infer_places.py` 加「凍結已批核
+記錄嘅 `inferred_lonlat`」✗ —— 因為 JSONL 嘅 `inferred_lonlat` **每次都由
+當前座標重新推導**（唔係持久值）✗；真正嘅「已批核」喺
+`place-inference-decisions.json` 嘅 `rule_decisions` / `exceptions` ✓，
+但凍結輸出唔會斷開迴圈（迴圈喺**規則**層，唔喺**輸出**層）✗。
 
 **為何本輪唔修**：屬**推斷層重構**（唔係 C8 產品問題），而且會影響
-`data/private/` 嘅推斷記錄語意 → 應獨立處理。
+`data/private/` 嘅推斷記錄語意同 580 條候選嘅推導方式 → 應獨立處理。
+
+**影響**：`test_pipeline_is_idempotent` 係唯一紅嘅 gate（311/312 ✓）。
+⚠️ 唔影響產品功能（`data/public/` 嘅已 commit 狀態係一致嘅 ✓），
+只影響「由 HEAD 重跑管線」嘅可重現性。
 
 ---
 
