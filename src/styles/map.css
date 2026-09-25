@@ -288,10 +288,21 @@
    4. Cluster badge（P0-2 / spec §3.2 L-Z0）
    ══════════════════════════════════════════════════════════════════════════ */
 
+/*
+ * ⚠️ C8 P1-1（2026-09-25）：cluster badge 只有 **10 px 直徑**（spec
+ * `rendering-lod-strategy.md` §3.2 L-Z0 明文 8–12 px，**唔可以加大**），
+ * 而世界視圖同時 render **48 個 ~21 px 半透明 zone 圓** → badge 被淹沒。
+ *
+ * spec 只約束**直徑**，冇約束**對比** → 所以喺唔違規嘅前提下提升可辨識度：
+ *   · `fill` 由 `--bg-overlay`（半透明，底色透出嚟）改為 `--bg-base`（不透明）
+ *   · `stroke-width` 0.0006 → 0.0012（雙倍，令 10px 圓都有清晰輪廓）
+ * 兩個都係純視覺對比改動，唔影響幾何 → `cluster badge 直徑 ∈ [8,12] px`
+ * 嘅 e2e 斷言仍然成立。
+ */
 #svg-map .zone-cluster-ring {
-  fill: var(--bg-overlay);
+  fill: var(--bg-base);
   stroke: var(--accent-strong);
-  stroke-width: 0.0006;
+  stroke-width: 0.0012;
 }
 
 #svg-map .zone-cluster-count {
@@ -300,9 +311,10 @@
   font-weight: 700;
   text-anchor: middle;
   dominant-baseline: central;
+  /* 光暈加粗（0.0008 → 0.0014）：10px 圓入面嘅數字要喺任何底色上都睇得清 */
   paint-order: stroke;
   stroke: var(--bg-base);
-  stroke-width: 0.0008;
+  stroke-width: 0.0014;
   stroke-linejoin: round;
 }
 

@@ -16,7 +16,8 @@
 | **P1-7** | dossier 冇下一步 | 冇任何 CTA | 「跳到首現章節」／「睇呢區嘅第一個事件」／「收埋」✓ |
 | **P1-2** | 揀 zone 唔 fly-to | viewBox 完全唔變（`0.70` 不變） | viewBox `0.70 → 0.0251`（放大 **~28×**）並置中 ✓ |
 | **P1-3** | 手機 tap zone 面板唔開 | 手機 snap 停留 `peek`，dossier top 727 | snap `peek → half`，dossier top **474** ✓ |
-| **P1-6** | map pane 只佔 60.6%（spec ≥70%） | — | ⚠️ **未修：同 spec 第 1 項衝突**（見 §3.6） |
+| **P1-6** | map pane 只佔 60.6%（spec ≥70%） | — | ⚠️ **未修：同 spec 第 1 項衝突**（見 §3.7） |
+| **P1-1** | 48 zone 擠成一坨、cluster badge 被淹沒 | badge `fill` 半透明（`--bg-overlay`）、`stroke-width` 0.0006 | `fill` → **不透明** `--bg-base`、`stroke-width` **×2**、數字光暈加粗 ✓（**部分** —— 見 §3.8） |
 
 ---
 
@@ -252,6 +253,90 @@ peek 25% / half 55% / full 92% → 會令側欄忽然變高。
 
 → **B 係唯一同時滿足兩項要求嘅方案**，但屬**版面設計決策**（唔係 bug fix），
 需要用戶裁決。本輪**唔改**，並將證據（上面算術 + 量測）記錄落嚟。
+
+---
+
+## 3.8 P1-1：48 zone 擠成一坨 —— **部分修**（spec 層面張力）
+
+### C8 嘅證據
+
+· 幾何：48 個 zone 質心經度跨度 **0.1039°**、緯度 **0.0894°**；
+  **46/48（96%）** 距整體質心 **<0.03°**
+· DOM：zone 兩兩視覺重疊 **559 / 1128 對（49.6%）**；抽樣 zone 同 **35 個**其他 zone 重疊
+· LOD：世界視圖有 6 個 `zone-cluster` badge（counts 14/10/5/5/3/2），
+  但 badge 直徑只 **10px**、低對比 → 被 48 個 ~21px 半透明 zone 圓淹沒
+
+### ⚠️ 為何唔可以「加大 badge」
+
+`CLUSTER_BADGE_DIAMETER_PX = 10` **係 spec 明文要求**
+（`docs/specs/world-atlas-v2-rendering-lod-strategy.md` §3.2 L-Z0：
+「直徑 **8–12 px** 嘅 badge」），而且有 e2e 斷言
+（`tests/map-interaction.e2e.test.ts`「⭐ cluster badge 渲染直徑 ∈ [8,12] px」）✗
+
+**同時** spec 又要求「48 個 zone 永遠全部 render」✗
+→ **兩個 spec 要求合起來就係「10px badge + 48 個 21px 圓」= 必然擁擠**。
+
+### 本輪做咗（spec 只約束直徑，冇約束對比）
+
+| 項 | 前 | 後 |
+|---|---|---|
+| `.zone-cluster-ring` `fill` | `var(--bg-overlay)`（半透明，底色透出） | **`var(--bg-base)`**（不透明） |
+| `.zone-cluster-ring` `stroke-width` | 0.0006 | **0.0012**（×2） |
+| `.zone-cluster-count` `stroke-width`（光暈） | 0.0008 | **0.0014** |
+
+**驗證**（`tests/map-interaction.e2e.test.ts` 實瀏覽器量度）：
+
+```
+[B6] cluster badge 實測直徑： [
+  {"viewW":0.7,   "lod":"cluster","badges":6,"minPx":8.47,"maxPx":10.35},
+  {"viewW":0.319, "lod":"cluster","badges":5,"minPx":8.45,"maxPx":10.34},
+  {"viewW":0.189, "lod":"cluster","badges":6,"minPx":8.46,"maxPx":10.33}]
+[B6] cluster badge 重疊檢查： {"badges":6,"overlaps":0}
+```
+
+→ 直徑仍然 **8.45–10.35 px ∈ [8,12]** ✓（幾何完全冇變）、重疊 **0** ✓、
+`map-interaction.e2e.test.ts` **13 tests 全過** ✓
+
+### 仍然未解決（需要 spec 層面裁決）
+
+| 選項 | 效果 | 代價 |
+|---|---|---|
+| **A. 放寬 LOD spec 嘅 badge 直徑**（8–12 → 例如 14–20px） | badge 真正睇得到 | 改 spec + 改 e2e 斷言；而且 badge 之間可能開始重疊（現時 0） |
+| **B. 世界視圖降低 zone 圓嘅視覺權重**（opacity / 描邊） | badge 相對突出 | 改動 zone 喺 LOD 嘅外觀（spec 可能約束）；要重新量 Q 系列指標 |
+| **C. 接受擁擠，靠 fly-to + badge** | 已經做咗 P1-2（fly-to）✓ | 世界視圖仍然係「一坨」 |
+
+→ 屬 **spec 內部張力**（唔係實作 bug），需要用戶／spec owner 裁決。
+
+---
+
+## 3.9 P1-8：首屏 payload —— 已量測，未修
+
+### 量測（`artifacts/phase3-resume/probe-firstload-payload.mjs`）
+
+```
+=== 首屏 data/public 請求（9 個）===
+  2087 KB  data/public/events.geojson
+   922 KB  data/public/locations.geojson
+   401 KB  data/public/zones.geojson
+   368 KB  data/public/routes.geojson
+     0 KB  data/public/chronicle.json      ← ⚠️ 冇 content-length（gzip/chunked）
+     0 KB  data/public/characters.json
+     0 KB  data/public/chapter-appearances.json
+     0 KB  data/public/chapter-summaries.json
+     0 KB  data/public/map-config.json
+  合計 3.69 MB
+```
+
+⚠️ **量測限制**：部分檔（包括 `chronicle.json`）回應冇 `content-length`
+→ 實際總量**高於** 3.69 MB。C8 用另一方法量到 `chronicle.json` **1.4 MB**
+→ 真實首屏大約 **5 MB+**。
+
+### 建議修法（未做）
+
+`chronicle.json`（1.4 MB）只喺**打開編年史**時才需要 —— 應該由
+`loadAllData` 嘅 `Promise.all` 移出，改用 lazy loader
+（同 `loadZoneDossiers()` 一樣嘅 pattern）。預期首屏省 ~1.4 MB（−28%）。
+⚠️ 影響 `AppData.chronicle` 嘅型別（要容許未載入）同 `ChronicleView` 嘅載入態。
 
 ---
 
