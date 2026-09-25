@@ -55,15 +55,15 @@ python scripts/audit_coordinate_integrity.py # 新
 |---|---|---|---|
 | 首屏 networkidle | ≤1,500 ms | Playwright timing | 1,017 ms ✅ |
 | 首屏 JS transfer（gzip） | ≤60 KB | build 輸出 | 41.83 KB ✅ |
-| `*.geojson` gzip | 首屏資料 ≤1.2 MB | response header | **3.65 MB ❌** |
+| `*.geojson` gzip | 首屏資料 ≤1.2 MB | response header | ✅ **626 KB（2026-09-25 更正）**<br>⚠️ 原本寫 3.65 MB ❌ —— 嗰個係用 `vite preview` 量嘅，而 `vite preview` **唔壓縮**，所以量到嘅係 **raw** 大小。GitHub Pages 會 gzip 文字資源 → 原本嘅 ❌ 係**量測假象**。實測（`scripts/measure_payload_gzip.py`，gzip level 9）首屏 9 檔 raw 5.52 MB → **gzip 626 KB**。守門：`tests/test_payload_budget.py` |
 | 冷 zoom 主線程阻塞 | ≤300 ms | CDP longtask | **21,241 ms ❌** |
 | Pan frame rate | ≥55 fps | CDP | **29–31 fps ❌** |
 | Chronicle 首 render DOM | ≤4,000 nodes | DOM 計數 | **14,036 ❌** |
 | Zone selection | ≤100 ms | Playwright | 未量（zone 未 render） |
 | Search | ≤150 ms | Playwright | 0.6–10 ms ✅ |
 | Chronicle filter | ≤250 ms | Playwright | 10.6 ms ✅ |
-| 單一 tile payload | ≤1.0 MB | network | **4.15 MB ❌** |
-| `dist/` 總大小 | ≤20 MB | `du` | **53.6 MB ❌** |
+| 單一 tile payload | ≤1.0 MB | network | ✅ **0.77 MB（2026-09-25 更正）**<br>逐格圖磚最大 `tiles/r04c07.json` **0.77 MB** ✓。⚠️ `vector/roads-l1.json`（1.28 MB）同 `hk-basemap.png`（1.89 MB）**唔係**逐格圖磚（係整層檔／底圖）→ 唔計入呢行 |
+| `dist/` 總大小 | ≤20 MB | `du` | ⚠️ **21 MB（2026-09-25 更正）** —— 由 53.6 MB 大幅下降，但仍然**輕微超出** 20 MB 預算 1 MB。分佈：`assets/vector` 12 MB（道路／標籤向量層）、`data` 7.0 MB（未壓縮 JSON）、`assets` 其他 2 MB |
 
 > **規則 P1**：`artifacts/audit-A8/verify-budget.mjs`（25 項檢查）**必須**接入 CI 作 V2 效能 gate。現況 FAIL 17。
 

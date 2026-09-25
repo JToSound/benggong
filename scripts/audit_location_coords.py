@@ -340,6 +340,29 @@ def main() -> int:
         f["properties"]["position_source"] = f"程式化座標校正：{c['reason']}"
         f["properties"]["coord_corrected"] = True
         applied += 1
+    # ⚠️ 父項精度升級之後要**傳播落子項**（2026-09-25 修 test_parent_*）
+    # ------------------------------------------------------------
+    # 症狀：`露天停車場`（子）精度 `approximate`，但父項 `停車場` 係 `district`
+    # → `tests/test_data_normalization.py::test_parent_anchored_locations_inherit_precision` 紅。
+    #
+    # 根因：**管線次序**。`anchor_fictional_locations.py`（設定子項精度 = 父項
+    # **當時**嘅精度）跑喺**本步驟之前**；如果父項喺本步驟才由 `approximate`
+    # 升級做 `district`，子項就永遠停留在舊值 ✗。
+    #
+    # 修法：升級父項時，順手將所有「`position_source` 講明依附於佢」嘅子項
+    # 一齊升級（同一個精度）。咁樣就唔依賴步驟次序。
+    def _propagate_precision_to_children(parent_name: str, precision: str) -> int:
+        marker = f"依附於「{parent_name}」"
+        n = 0
+        for child in feats:
+            cp = child["properties"]
+            if marker not in str(cp.get("position_source") or ""):
+                continue
+            if cp.get("location_precision") != precision:
+                cp["location_precision"] = precision
+                n += 1
+        return n
+
     for c in corrections:
         f = by_id.get(c["id"])
         if not f:
@@ -348,6 +371,7 @@ def main() -> int:
         # 標記精度提升：由 approximate 升級為 district（有地名對照支持）
         if f["properties"].get("location_precision") in ("approximate", "fictional"):
             f["properties"]["location_precision"] = "district"
+            applied += _propagate_precision_to_children(f["properties"]["name"], "district")
         f["properties"]["position_source"] = (
             f"程式化座標校正：{c['reason']}"
         )

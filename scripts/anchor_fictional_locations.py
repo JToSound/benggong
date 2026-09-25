@@ -35,6 +35,7 @@ import argparse
 import hashlib
 import json
 import math
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -230,6 +231,35 @@ def main() -> int:
         f["geometry"]["coordinates"] = [lon, lat]
         p["position_source"] = src
 
+    # ---- 修復 pass：過時嘅「依附父項」精度繼承（2026-09-25）----
+    #
+    # ⚠️ 為何要（實測踩過）
+    # ------------------
+    # 上面嘅子項繼承只喺 `location_precision == "fictional"` 時觸發。但子項
+    # 一旦被升級（例如 `fictional` → `approximate`），**之後就永遠唔會再入呢條
+    # 分支**。如果父項**之後**才被升級（例如 `apply_place_inferences` 由推斷
+    # 記錄寫入 `district`），子項就停留在舊值，而 `position_source` 嘅文字
+    # 仍然寫住「精度繼承自父項（district）」→ **文字同實際值矛盾**。
+    #
+    # 實例：`露天停車場` 精度 `approximate`，但父項 `停車場` 係 `district`，
+    # 而 `position_source` 寫「精度繼承自父項（district）」
+    # → `tests/test_data_normalization.py::test_parent_anchored_locations_inherit_precision` 紅。
+    #
+    # 修法：掃**所有** `position_source` 講明依附父項嘅地點（唔理佢現時嘅
+    # 精度），將精度重新同步去父項嘅現值。咁樣就唔依賴步驟次序。
+    precision_repaired = 0
+    for f in feats:
+        p = f["properties"]
+        m = re.search(r"依附於「([^」]+)」", str(p.get("position_source") or ""))
+        if not m:
+            continue
+        parent = parent_props.get(m.group(1))
+        if parent is None:
+            continue
+        if p.get("location_precision") != parent["location_precision"]:
+            p["location_precision"] = parent["location_precision"]
+            precision_repaired += 1
+
     in_tko = sum(
         1
         for f in feats
@@ -244,6 +274,7 @@ def main() -> int:
     print(f"  位置有改動：{moved}（其中依附父項：{anchored_to_parent}）")
     print(f"  冇同章錨點（用後備）：{no_anchor}")
     print(f"  錨定後喺將軍澳範圍內：{in_tko} / {total_fic}")
+    print(f"  精度重新同步（過時嘅依附繼承）：{precision_repaired}")
 
     if args.dry_run:
         print("\n（--dry-run：冇寫入）")

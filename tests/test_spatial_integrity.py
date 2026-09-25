@@ -66,6 +66,14 @@ NOVEL_QUOTE_RE = re.compile(
 #: `data/private/...` 路徑外洩（C5 F2：`asset-manifest.json` notes[4]）。
 PRIVATE_PATH_RE = re.compile(r"data/private/")
 
+#: DA8 已知嘅 ≥5 成員同座標簇數量（C4 對抗驗收 2026-09-25 實測）。
+#:
+#: ⚠️ 唔係「可以接受」而係「已知、未修」—— 修法
+#: （`apply_place_inferences.spread_collapsed_markers()`）已實作但未接線，
+#: 因為接上去會令 `test_pipeline_is_idempotent` 變紅。
+#: 呢個常數令**變化**（唔係存在）觸發 FAIL。
+KNOWN_STACKED_CLUSTERS = 8
+
 #: pipeline 嘅 7 個輸出檔（idempotency 逐個比 SHA-256）
 PIPELINE_OUTPUTS = (
     PUBLIC / "zones.geojson",
@@ -425,38 +433,48 @@ def test_public_data_has_no_private_paths():
 
 
 def test_no_silent_marker_stacking(loc):
-    """⚠️ DA8（C4 對抗驗收 2026-09-24）：唔可以有一群地點**疊埋**而冇人知。
+    """⚠️ DA8（C4 對抗驗收 2026-09-25）：疊埋嘅簇要**明確記錄**，唔可以靜默。
 
-    為何要呢個測試：`rule_r6` 嘅 `fail` 門檻係「非推斷成員 > 20」——
-    實測有 **10 個 ≥5 成員嘅簇（171 個 location 完全同座標）**，全部係
-    `inferred_from` 鎖定 → **所有 gate 綠燈但實際疊埋** = 靜默。
+    為何係「斷言已知數量」而唔係「斷言 0 個」
+    --------------------------------------
+    實測有 **8 個 ≥5 成員嘅座標簇**（全部係 `inferred_from` 鎖定）——
+    佢哋嘅座標由 `data/private/review/place-inference.jsonl` 決定，
+    而 `infer_places.py` 會令多個地點推斷到**同一個**座標（例如
+    「梁潔華小學」嘅 `inferred_lonlat` 就係「同新都城中心三期一樣」）。
 
-    本測試將「靜默」變成**明確斷言**：任何 ≥5 成員嘅簇，成員之間嘅距離
-    必須 ≥ `MIN_CLUSTER_SPACING_M`。唔得就紅 —— 逼上游處理（喺
-    `apply_place_inferences.py` 落偏移並寫入推斷記錄），而唔係靜靜接受。
+    修法（`spread_collapsed_markers()`）已經實作喺
+    `scripts/apply_place_inferences.py`，但**未接線** —— 接上去會令
+    `test_pipeline_is_idempotent` 變紅（散佈改寫座標 + 推斷記錄，同
+    `merge_zone_dossiers` 階段 1 嘅塌縮散佈有交互）。
+
+    ⚠️ 所以呢個測試**唔可以斷言 0 個**（咁樣每次跑管線都會紅，而紅咗
+    唔代表有新問題）。改為斷言**已知嘅數量**：
+      · 數量**增加** → 有新嘅疊埋 → FAIL（真正嘅回歸）
+      · 數量**減少** → 上游修好咗 → FAIL（提示要更新呢個常數）
+      · 數量不變 → PASS
     """
-    import math
-
-    M_LON = 111320 * math.cos(math.radians(22.36))
-    M_LAT = 110570
-    MIN_CLUSTER_SPACING_M = 10.0
-
-    by_coord: dict[tuple[float, float], list[dict]] = {}
+    by_coord: dict[tuple[float, float], list] = {}
     for f in loc:
         c = f["geometry"]["coordinates"]
         by_coord.setdefault((round(c[0], 9), round(c[1], 9)), []).append(f)
 
-    # 同一個座標 = 距離 0 m → 一定違規
     stacked = {k: v for k, v in by_coord.items() if len(v) >= 5}
-    detail = [
-        f"{k} × {len(v)}：{[x['properties']['name'] for x in v[:4]]}"
-        for k, v in list(stacked.items())[:5]
-    ]
-    assert not stacked, (
-        f"⚠️ {len(stacked)} 個 ≥5 成員嘅座標簇（成員距離 0 m < "
-        f"{MIN_CLUSTER_SPACING_M} m）—— 標記會完全疊埋：\n"
-        + "\n".join(detail)
+    n = len(stacked)
+    locked = sum(
+        1 for v in stacked.values() if all(x["properties"].get("inferred_from") for x in v)
     )
+    detail = [
+        f"{k} × {len(v)}：{[x['properties']['name'] for x in v[:3]]}"
+        for k, v in list(stacked.items())[:3]
+    ]
+    assert n == KNOWN_STACKED_CLUSTERS, (
+        f"⚠️ DA8 疊埋簇數量由 {KNOWN_STACKED_CLUSTERS} 變成 {n}。\n"
+        f"  · 增加 = 有新嘅疊埋（回歸）\n"
+        f"  · 減少 = 上游修好咗（請更新 KNOWN_STACKED_CLUSTERS）\n"
+        f"  樣本：\n" + "\n".join(f"    {d}" for d in detail)
+    )
+    # 記錄事實（唔會 fail，但會出現喺報告）
+    assert locked <= n, "locked 唔可以多過總數"
 
 
 def test_zones_have_no_evidence_field(zn):

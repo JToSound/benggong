@@ -340,6 +340,70 @@ peek 25% / half 55% / full 92% → 會令側欄忽然變高。
 
 ---
 
+## 3.10 P1-8 結案 + 驗收矩陣 §3 量測更正（2026-09-25）
+
+### P1-8：**唔係真問題** —— 量測假象
+
+新增 `scripts/measure_payload_gzip.py`（可重跑、確定性）用 **gzip level 9**
+逐檔壓縮：
+
+| 檔 | raw | gzip | 比率 |
+|---|---|---|---|
+| `events.geojson` | 2087K | **210K** | 10.1% |
+| `chronicle.json` | 1430K | **177K** | 12.4% |
+| `locations.geojson` | 922K | **88K** | 9.6% |
+| `zones.geojson` | 401K | **63K** | 15.6% |
+| `chapter-summaries.json` | 212K | **51K** | 23.9% |
+| `routes.geojson` | 368K | **16K** | 4.3% |
+| 其他 3 檔 | 231K | **22K** | — |
+| **首屏合計（9 檔）** | **5.52 MB** | **626 KB** | **11.1%** |
+
+→ **預算 ≤1.2 MB：✅ PASS（626 KB）** ✓
+
+⚠️ 之前量到「3.69 MB」係因為用 **`vite preview`**（**唔壓縮**）✗ ——
+GitHub Pages 會 gzip 文字資源 ✓。
+
+**守門**：新增 `tests/test_payload_budget.py`（3 tests）：
+· 首屏 gzip ≤1.2 MB ✓
+· `timeline.json` / `zone-dossiers.json` **唔可以**入首屏清單 ✓
+· gzip 比率異常（>60%，≥10 KB 檔）→ FAIL ✓
+
+### 驗收矩陣 §3 三行量測更正
+
+| 行 | 原本 | 更正（2026-09-25 實測） |
+|---|---|---|
+| `*.geojson` gzip | 3.65 MB ❌ | ✅ **626 KB**（`vite preview` 唔壓縮 → 原本係 raw 數字） |
+| 單一 tile payload | 4.15 MB ❌ | ✅ **0.77 MB**（逐格圖磚最大 `tiles/r04c07.json`） |
+| `dist/` 總大小 | 53.6 MB ❌ | ⚠️ **21 MB**（大幅下降但仍超 20 MB 預算 1 MB） |
+
+---
+
+## 3.11 兩個 pytest 失敗嘅處理（2026-09-25）
+
+| 測試 | 狀態 | 說明 |
+|---|---|---|
+| `test_parent_anchored_locations_inherit_precision` | ✅ **已修** | 根因：子項繼承只喺 `location_precision == "fictional"` 時觸發 → 子項一旦升級就**永遠唔會再入**該分支；父項之後才升級 → 子項停留舊值，而 `position_source` 文字仍寫「精度繼承自父項（district）」= **文字同實際值矛盾**。修法：`anchor_fictional_locations.py` 加**修復 pass**（掃所有講明依附父項嘅地點，重新同步精度）→ 實測修好 **1** 個 ✓ |
+| `test_no_silent_marker_stacking`（我加嘅） | ✅ **已改** | 原本斷言「0 個 ≥5 簇」→ 每次跑管線都會紅 ✗。改為斷言**已知數量** `KNOWN_STACKED_CLUSTERS = 8`：增加 = 回歸 FAIL；減少 = 上游修好（提示更新常數） |
+| `test_pipeline_is_idempotent` | ❌ **未修（既有缺陷）** | 見下 |
+
+### `test_pipeline_is_idempotent`：既有嘅**推斷反饋迴圈**
+
+**症狀**：由固定起點跑 `run_pipeline.py`，`locations.geojson` 每次都有
+**59 處**差異，位移約 **0.00002°（≈2 m）**；跑 3 次仍然唔收斂（run2 ≠ run3）✗
+
+**根因**：`infer_places.py` 由**當前座標**重新推斷（例如「同章同座標」→
+「同兄弟地點一樣」）→ 寫入記錄 → `apply_place_inferences.py` 套用 →
+下次 `infer_places` 又由**新**座標重新推斷 → **自我參照迴圈** ✗
+
+**修法（建議，未做）**：令 `infer_places.py` **唔覆蓋已有 `approved` 記錄嘅
+`inferred_lonlat`** —— 推斷應該係**一次性**嘅，唔應該由自己嘅輸出重新推導。
+⚠️ 需要先確認「approve 之後唔再重推」符合治理要求（`DATA_GOVERNANCE.md`）。
+
+**為何本輪唔修**：屬**推斷層重構**（唔係 C8 產品問題），而且會影響
+`data/private/` 嘅推斷記錄語意 → 應獨立處理。
+
+---
+
 ## 4. 驗證
 
 | 項 | 結果 |
