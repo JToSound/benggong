@@ -247,6 +247,26 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
       // ---- ② 拖曳（要 reset 返先，因為選中會改 context） ----
       await page.keyboard.press("0");
       await page.waitForTimeout(1000);
+
+      /*
+       * ⚠️ 2026-10-05（P1-6）：story pane 改成**浮層**而且**揀 zone 會自動開**
+       * （見 `docs/progress/p1-6-map-pane-area.md`）。
+       * 浮層會蓋住地圖右邊 380px → 嗰邊嘅 zone 唔再「可點」
+       * （`pickClickableZone()` 用 `elementFromPoint` 判定，會過濾走）。
+       * 下面要重新 pick 一個可點嘅 zone，所以先收返個面板。
+       * ⚠️ 呢一步只係「還原可點區域」，冇改任何斷言。
+       */
+      const paneOpen = await page.evaluate(
+        () =>
+          !document
+            .querySelector("#story-pane")
+            ?.classList.contains("is-collapsed"),
+      );
+      if (paneOpen) {
+        await page.click("#btn-toggle-panel");
+        await page.waitForTimeout(500);
+      }
+
       for (let i = 0; i < 197; i++) await page.keyboard.press("k");
       await page.waitForTimeout(1200);
       for (let i = 0; i < 3; i++) await page.click("#map-zoom-in");

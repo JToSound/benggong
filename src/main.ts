@@ -46,6 +46,17 @@ import "./styles/legacy-migrated.css";
  */
 import "./styles/chronicle.css";
 
+/*
+ * V2 版面（P1-6）：story pane 改 overlay，令 `#map-pane` 拿到 workspace 嘅
+ * 全部闊度（1440×900 → 60.6% ⇒ **82.3%**，spec 要求 ≥70%）。
+ *
+ * ⚠️ 一定要排喺 `legacy-migrated.css` **之後** —— 本檔要贏過佢嘅
+ * `.panel-toggle { display: none }`（同名選擇器、同特異度 → 後載入者勝）。
+ * ⚠️ `mobile.css` 由 `BottomSheet` runtime 注入（最後載入），
+ * 佢嘅 `@media (max-width: 1023px)` 仍然會贏過本檔（手機 bottom sheet 不變）。
+ */
+import "./styles/layout.css";
+
 import { mountIconSprite } from "./ui/icons";
 import { App } from "./app";
 import { initRouter } from "./router";

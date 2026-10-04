@@ -304,7 +304,7 @@ export class App {
           <button id="btn-help" type="button" class="nav-btn" title="鍵盤快捷鍵（?）">?</button>
           <button id="btn-about" type="button" class="nav-btn">關於</button>
           <button id="btn-toggle-panel" type="button" class="nav-btn panel-toggle"
-                  aria-controls="story-pane" aria-expanded="true"
+                  aria-controls="story-pane" aria-expanded="false"
                   title="顯示／隱藏故事面板">面板</button>
         </nav>
       </header>
@@ -426,12 +426,19 @@ export class App {
         this.store.setSheetSnap(s.sheetSnap === COLLAPSED_SNAP ? EXPANDED_SNAP : COLLAPSED_SNAP);
       });
     }
-    // 窄螢幕預設收起（用 matchMedia 而唔係硬編闊度）。
-    if (typeof window !== "undefined" && typeof window.matchMedia === "function") {
-      if (window.matchMedia("(max-width: 1023px)").matches) {
-        this.store.setSheetSnap(COLLAPSED_SNAP);
-      }
-    }
+    /*
+     * ⚠️ C8 P1-6（2026-10-05 用戶裁決 (B)）：story pane 由「側欄」改為
+     * **浮層**（`src/styles/layout.css`），而且**預設收起**。
+     *
+     * 為何一定要預設收起：浮層雖然唔佔 layout 闊度（`#map-pane` 名義上
+     * 82.3%），但展開時會蓋住右邊 380px（21.7% 面積）→ 用戶真正睇到嘅
+     * 地圖**仍然只有 60.6%** ✗。要真正達到 spec 嘅「地圖佔首屏 ≥70%」，
+     * 首屏就唔可以有一個展開嘅浮層。
+     *
+     * ⚠️ 原本只喺 `max-width: 1023px` 預設收起（用 matchMedia）。改成
+     * **所有闊度**——唔再需要 matchMedia。
+     */
+    this.store.setSheetSnap(COLLAPSED_SNAP);
   }
 
   // ───────────────────────────────────────────────────────────────────────
@@ -547,7 +554,16 @@ export class App {
 
   /** store 變更 → 衍生 DOM 更新（規則 S2）。 */
   private onStateChange(): void {
-    const s = this.store.getState();
+    /*
+     * ⚠️ `let` 而唔係 `const`：下面「自動開 pane」會呼叫 `setSheetSnap()`，
+     * 而 `store.notify()` 係**同步 for-loop** → 會**即刻再入**本函數一次
+     * （內層已經跑完 `bottomSheet.render()` 同 `syncSurfaces()`）。
+     * 外層返嚟之後如果繼續用**舊** `s`，就會用舊狀態再覆蓋一次
+     * —— 實測：`is-collapsed` 被加返，pane 明明 `data-sheet-snap="half"`
+     * 但仍然 `visibility: hidden`（撳「編年史」完全冇反應）。
+     * 所以改完 snap 一定要**重讀 state**。
+     */
+    let s = this.store.getState();
     const prev = this.prevState;
     this.prevState = s;
 
@@ -602,27 +618,35 @@ export class App {
     }
 
     /*
-     * ⚠️ C8 P1-3（2026-09-25）：手機 tap zone 之後，dossier 面板**唔會自動開**。
-     * 實測：dossier 內容 top = 1187px，但 viewport 高只有 844px
-     * → 用戶 tap 完見到嘅係「冇反應」（地圖郁咗，但面板內容喺畫面外）。
+     * ⚠️ C8 P1-3（2026-09-25）＋ P1-6（2026-10-05）：story pane 變成
+     * **預設收起嘅浮層**之後，「內容只喺 pane 內」嘅操作一定要自動開返個 pane，
+     * 否則用戶見到「撳咗冇反應」。
+     *
+     * 判斷準則：**內容係唔係只喺 pane 內**（唔再按螢幕闊度 —— 浮層喺所有闊度
+     * 行為一致）：
+     *   ① context 係 **zone** → zone dossier 喺 `#zone-dossier-mount`（pane 內）
+     *   ② context 係 **location** → story panel（含 `.char-chip` 等）
+     *      喺 `#story-panel-mount`（pane 內）。⚠️ 包括 `?location=…` 深連結
+     *      （`contextChanged` 喺首次載入為真）。
+     *   ③ view 係 **chronicle** → 整個編年史喺 `#story-panel-mount`（pane 內）
+     *      ⚠️ 冇呢條嘅話撳頂欄「📜 編年史」會**完全冇反應**。
+     *
+     * ⚠️ 刻意**唔包**純 `chapter` context（含首屏）：換章節已經有可見回饋
+     * （地圖飛去該章 ＋ 章節條高亮），章節摘要一撳「面板」就有。
+     * 自動開會蓋住地圖，違背「首屏主 context = 地圖」。
      *
      * ⚠️ 呢個 block **一定要獨立**，唔可以放喺上面嘅 `else if` 入面
      * （實測踩過）：點 zone 有可能同時改章節 → `chapterChanged` 為真 →
      * `else if` 被跳過 → snap 永遠唔會升。
-     *
-     * 修法：**只喺 sheet 生效嘅寬度**（`mobile.css` 斷點 `max-width: 1023px`）
-     * 將 snap 提到 `EXPANDED_SNAP`。
-     * ⚠️ 唔可以無條件做 —— 桌面版 `#story-pane` 係側欄，snap 會改佢高度
-     * （`SNAP_PCT` = peek 25% / half 55% / full 92%）→ 側欄會忽然變高。
      */
-    if (
-      zoneChanged &&
-      newZone &&
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(max-width: 1023px)").matches &&
-      this.store.getState().sheetSnap === COLLAPSED_SNAP
-    ) {
+    const ctxKind = s.context.kind;
+    const wantPaneVisible =
+      (contextChanged && (ctxKind === "zone" || ctxKind === "location")) ||
+      (viewChanged && s.view === "chronicle");
+    if (wantPaneVisible && this.store.getState().sheetSnap === COLLAPSED_SNAP) {
       this.store.setSheetSnap(EXPANDED_SNAP);
+      // ⚠️ 一定要重讀 —— 見本函數開頭嘅說明（同步再通知會令外層用舊 state）。
+      s = this.store.getState();
     }
     if (chapterChanged || contextChanged) this.svgMap.render();
 
@@ -645,6 +669,13 @@ export class App {
     // 收合 class 只係衍生輸出（唔再係 state 本身）。
     const pane = this.root.querySelector<HTMLElement>("#story-pane");
     if (pane) pane.classList.toggle("is-collapsed", s.sheetSnap === COLLAPSED_SNAP);
+    /*
+     * ⚠️ `is-pane-open` 加喺 `.workspace`（衍生輸出，規則 S2）——
+     * `layout.css` 用佢將 `#map-controls` 向左讓開，否則浮層會蓋住
+     * 「放大／縮小」掣（實測：`subtree intercepts pointer events` → 撳唔到）。
+     */
+    const ws = this.root.querySelector<HTMLElement>(".workspace");
+    if (ws) ws.classList.toggle("is-pane-open", s.sheetSnap !== COLLAPSED_SNAP);
     const toggleBtn = this.root.querySelector("#btn-toggle-panel");
     if (toggleBtn) {
       toggleBtn.setAttribute("aria-expanded", String(s.sheetSnap !== COLLAPSED_SNAP));

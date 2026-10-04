@@ -222,7 +222,7 @@ describe("LOD × cluster 正規化", () => {
       // 三個都 > 0.175 → 全部係 L-Z0（cluster）層
       expect(viewW).toBeGreaterThan(Z_BANDS.macro);
       for (const count of [2, 6, 13, 48, 999]) {
-        const rUser = clusterBadgeRadiusUser(viewW, SVG_W, count);
+        const rUser = clusterBadgeRadiusUser(SVG_W / viewW, count);
         const pxPerUser = SVG_W / viewW;
         const diameterPx = rUser * 2 * pxPerUser;
         expect(
@@ -237,8 +237,8 @@ describe("LOD × cluster 正規化", () => {
   it("cluster badge 目標直徑 = 10 px（區間中位，唔貼邊界）", () => {
     const SVG_W = 1020;
     // count 由 2 去到 12+ 之間單調遞增，但全程留 1 px buffer
-    const d2 = clusterBadgeRadiusUser(0.7, SVG_W, 2) * 2 * (SVG_W / 0.7);
-    const d48 = clusterBadgeRadiusUser(0.7, SVG_W, 48) * 2 * (SVG_W / 0.7);
+    const d2 = clusterBadgeRadiusUser(SVG_W / 0.7, 2) * 2 * (SVG_W / 0.7);
+    const d48 = clusterBadgeRadiusUser(SVG_W / 0.7, 48) * 2 * (SVG_W / 0.7);
     expect(d2).toBeGreaterThanOrEqual(9);
     expect(d48).toBeLessThanOrEqual(11);
     expect(d2).toBeLessThan(d48); // 數量多 → 大少少
@@ -256,7 +256,7 @@ describe("LOD × cluster 正規化", () => {
     for (const viewW of [0.1751, 0.2, 0.35, 0.4, 0.55, 0.7, 0.9]) {
       for (const svgW of [600, 1020, 1600, 2400]) {
         for (const count of [2, 12, 48]) {
-          const rUser = clusterBadgeRadiusUser(viewW, svgW, count);
+          const rUser = clusterBadgeRadiusUser(svgW / viewW, count);
           const pxPerUser = svgW / viewW;
           const diameterPx = rUser * 2 * pxPerUser;
           // 同一個 count、任何 (viewW, svgW) 組合，px 直徑都要一樣
@@ -271,9 +271,12 @@ describe("LOD × cluster 正規化", () => {
   });
 
   it("clusterBadgeRadiusUser 對無效輸入回 0（唔會畫錯尺寸）", () => {
-    expect(clusterBadgeRadiusUser(0, 1020, 5)).toBe(0);
-    expect(clusterBadgeRadiusUser(0.7, 0, 5)).toBe(0);
-    expect(clusterBadgeRadiusUser(-1, 1020, 5)).toBe(0);
+    // ⚠️ 2026-10-05 簽名改為 `(pxPerUser, count)` —— 比例由呼叫者提供
+    // （`SvgMap.pxPerUser()` = `min(w/viewW, h/viewH)`）。所以
+    // 「比例無效」就係 `pxPerUser <= 0`（涵蓋舊版「svgWidthPx = 0」嘅情況）。
+    expect(clusterBadgeRadiusUser(0, 5)).toBe(0);
+    expect(clusterBadgeRadiusUser(-1, 5)).toBe(0);
+    expect(clusterBadgeRadiusUser(Number.NaN, 5)).toBe(0);
   });
 
   it("cluster badge 比單一 zone 徽記大（視覺上要夠重）", () => {
@@ -288,7 +291,7 @@ describe("LOD × cluster 正規化", () => {
      * badge 嘅**實心圓 + 高對比描邊 + 數量文字**。下面斷言
      * badge 嘅 stroke 用量足以維持可讀性（見 e2e 嘅不重疊斷言）。
      */
-    const r = clusterBadgeRadiusUser(0.7, 1020, 48);
+    const r = clusterBadgeRadiusUser(1020 / 0.7, 48);
     expect(r).toBeGreaterThan(0);
     expect(r).toBeLessThan(0.0078); // badge 係「精緻指示」而唔係「大徽記」
   });

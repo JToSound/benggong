@@ -253,7 +253,7 @@ describe("視覺煙霧測試", () => {
     const browser = await launch();
     if (!browser) return;
     try {
-      // 闊螢幕：面板內嵌，冇切換鈕
+      // 闊螢幕：面板係**浮層**（唔佔 layout），任何闊度都要有切換鈕
       const wide = await browser.newPage({ viewport: { width: 1600, height: 950 } });
       await wide.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
       await wide.waitForTimeout(900);
@@ -262,8 +262,19 @@ describe("視覺煙霧測試", () => {
         toggle: getComputedStyle(document.querySelector("#btn-toggle-panel")!).display,
         mapW: document.querySelector("#svg-map")!.getBoundingClientRect().width,
       }));
-      expect(w.pane, "闊螢幕面板應該內嵌").toBeGreaterThan(300);
-      expect(w.toggle, "闊螢幕唔需要切換鈕").toBe("none");
+      expect(w.pane, "面板闊度仍然係 380px（overlay 唔佔 layout）").toBeGreaterThan(300);
+      /*
+       * ⚠️ 2026-10-05 P1-6：原本斷言「闊螢幕唔需要切換鈕」（`display: none`）。
+       * story pane 改成**預設收起嘅浮層**之後，任何闊度都需要切換鈕
+       * → 改為斷言「唔可以係 none」。
+       */
+      expect(w.toggle, "任何闊度都要有面板切換鈕（浮層需要）").not.toBe("none");
+      /*
+       * ⭐ P1-6 核心：overlay 唔佔 layout 闊度 → 地圖用盡全闊
+       * （spec `world-atlas-v2-product-spec.md:103`「地圖佔首屏 ≥70%」）。
+       * 實測 1440×900：60.6% → 82.3%。
+       */
+      expect(w.mapW, "地圖應該用盡全闊（overlay 唔佔 layout）").toBeGreaterThan(1500);
       await wide.close();
 
       // 窄螢幕：面板收起，地圖用盡闊度

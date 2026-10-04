@@ -259,19 +259,29 @@ export const CLUSTER_BADGE_DIAMETER_PX = 10;
  * 為何要獨立成函數（唔喺 `render()` 直接除）
  * ---------------------------------------
  * 呢條式係 spec §3.2 L-Z0 嘅**唯一實現點**，一定要可以 node 單測
- * （唔需要起瀏覽器）。`render()` 只負責傳入當前 viewBox 寬同 SVG 像素寬。
+ * （唔需要起瀏覽器）。`render()` 只負責傳入當前嘅 px/user 比例。
  *
- * @param viewW    當前 viewBox 寬（user unit，度數）。
- * @param svgWidthPx SVG 元素嘅 CSS 像素闊（`getBoundingClientRect().width`）。
- * @param count    簇內 zone 數（多 = badge 大少少，但受 8–12 px 封頂）。
+ * ⚠️ 為何唔可以自己由 `svgWidthPx / viewW` 算比例（2026-10-05 實測事故）
+ * -----------------------------------------------------------------
+ * 舊簽名係 `(viewW, svgWidthPx, count)`，內部用 `pxPerUser = svgWidthPx / viewW`。
+ * 但 SVG 用 `preserveAspectRatio="meet"` → **真實比例係
+ * `min(w/viewW, h/viewH)`**，唔係闊度一條。
+ *
+ * 之前（地圖闊 1020 px）闊度比例啱啱大過高度比例少少 → 誤差 6% → badge 直徑
+ * 9.40 px（仍然落喺 spec 嘅 8–12 px 之內）→ **潛伏咗**。
+ * P1-6 將 story pane 改成 overlay 之後地圖變闊（1400 px）→ 高度變成限制因素
+ * → 誤差變成 **31.5%** → 實測直徑 **6.13–7.53 px**，跌出 spec 下限 ✗
+ * （`tests/map-interaction.e2e.test.ts` 變紅）。
+ *
+ * 修法：比例由**呼叫者**用同一個 `pxToUserUnits()`（即
+ * `min(w/viewW, h/viewH)`）算好再傳入 —— 唔再喺呢度重複（兼且錯）嘅假設。
+ *
+ * @param pxPerUser 螢幕 px / user unit（= `1 / min(w/viewW, h/viewH)`）。
+ * @param count     簇內 zone 數（多 = badge 大少少，但受 8–12 px 封頂）。
  * @returns user-unit 半徑；輸入無效（≤0）時回 0（呼叫者會跳過繪製）。
  */
-export function clusterBadgeRadiusUser(
-  viewW: number,
-  svgWidthPx: number,
-  count: number,
-): number {
-  if (!(viewW > 0) || !(svgWidthPx > 0)) return 0;
+export function clusterBadgeRadiusUser(pxPerUser: number, count: number): number {
+  if (!(pxPerUser > 0)) return 0;
   /*
    * 數量系數：2 → 9 px、12+ → 11 px（線性、封頂）。
    * 特意**唔**用舊版 0.9–1.25 嘅闊區間 —— 因為 spec 硬性要求
@@ -280,7 +290,6 @@ export function clusterBadgeRadiusUser(
    */
   const t = Math.min(1, Math.max(0, (count - 2) / 10));
   const diameterPx = 9 + 2 * t;
-  const pxPerUser = svgWidthPx / viewW;
   return diameterPx / 2 / pxPerUser;
 }
 

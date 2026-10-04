@@ -571,6 +571,9 @@ export class SvgMap {
    * 0 唔會入快取（headless 早期未 layout，之後要再試）。
    */
   private svgWidthCache = 0;
+
+  /** `svgHeightPx()` 嘅快取（同 `svgWidthCache` 一齊失效）。 */
+  private svgHeightCache = 0;
   /** 向量底圖是否已失敗（失敗 = 退回 raster）。 */
   private basemapFailed = false;
 
@@ -748,16 +751,46 @@ export class SvgMap {
   }
 
   /**
+   * SVG 元素嘅 CSS 像素高（同 `svgWidthPx()` 一樣有快取）。
+   *
+   * ⚠️ 為何一定要有高度：SVG 用 `preserveAspectRatio="meet"` →
+   * 真實比例係 `min(w / view.w, h / view.h)`。只睇闊度會**高估**比例
+   * （當闊度唔係限制因素時），令「由 px 反推 user unit」嘅所有計算偏細。
+   * 2026-10-05 P1-6 實測：地圖變闊之後 badge 直徑由 9.40 → 6.13 px（跌出 spec）。
+   */
+  private svgHeightPx(): number {
+    if (this.svgHeightCache > 0) return this.svgHeightCache;
+    const r = this.svg.getBoundingClientRect();
+    if (r.height > 0) this.svgHeightCache = r.height;
+    return r.height > 0 ? r.height : 0;
+  }
+
+  /**
+   * 螢幕 px / user unit —— `preserveAspectRatio="meet"` 之下嘅**真實**比例。
+   *
+   * ⚠️ 呢個係唯一計比例嘅地方。**唔可以**只除闊度（`w / view.w`）：
+   * 高度可能才係限制因素（`min(w/viewW, h/viewH)`）。
+   * 2026-10-05 P1-6 實測事故：地圖由 1020 → 1400 px 闊之後，高度變成限制
+   * 因素 → 只除闊度會高估比例 31.5% → badge 直徑跌到 6.13 px（spec 要 8–12）。
+   *
+   * 讀唔到容器時回 0 —— 呼叫者要跳過，唔可以當 1:1。
+   */
+  private pxPerUser(): number {
+    const w = this.svgWidthPx();
+    const h = this.svgHeightPx();
+    if (!(w > 0) || !(h > 0)) return 0;
+    const u = this.pxToUserUnits(w, h); // user unit / px
+    return u > 0 ? 1 / u : 0;
+  }
+
+  /**
    * 螢幕 px → 當前視圖嘅 user unit。
    *
-   * 用 `preserveAspectRatio="meet"`：實際比例係 `view.w / rect.width`
-   * （同 `pxToUserUnits` 一致）。讀唔到容器時回 0 —— 呼叫者要跳過，
-   * 唔可以當 1:1。
+   * 讀唔到容器時回 0 —— 呼叫者要跳過，唔可以當 1:1。
    */
   private userUnitsFor(px: number): number {
-    const w = this.svgWidthPx();
-    if (!(w > 0)) return 0;
-    return px * (this.view.w / w);
+    const k = this.pxPerUser();
+    return k > 0 ? px / k : 0;
   }
 
   /**
@@ -1132,8 +1165,9 @@ export class SvgMap {
      */
     if (typeof ResizeObserver !== "undefined") {
       this.resizeObserver = new ResizeObserver(() => {
-        // 容器尺寸變 → `svgWidthPx()` / `wrapSizeCache` 一齊失效
+        // 容器尺寸變 → `svgWidthPx()` / `svgHeightPx()` / `wrapSizeCache` 一齊失效
         this.svgWidthCache = 0;
+        this.svgHeightCache = 0;
         this.wrapSizeCache = null;
         this.syncBasemapView();
       });
@@ -2407,12 +2441,12 @@ export class SvgMap {
        * 同 B6-D5）。spec §3.2 L-Z0 硬性要求渲染直徑落喺 8–12 px；
        * 固定 user unit 會隨 viewW 飄到 29.7–41.2 px（超 3.5–5 倍）。
        *
-       * 需要 SVG 嘅 CSS 像素闊（`getBoundingClientRect().width`）——
-       * 因為 `preserveAspectRatio="meet"` 之下實際比例係
-       * `view.w / rect.width`，唔可以靠 viewBox 自己算。
+       * ⚠️ 2026-10-05 P1-6 修正：比例要用 `pxPerUser()`
+       * （= `min(w/viewW, h/viewH)`）。原本只除 SVG **闊度**，
+       * 地圖變闊之後高度變成限制因素 → 高估比例 31.5% →
+       * 實測直徑由 9.40 跌到 6.13 px（跌出 spec 下限）。
        */
-      const svgW = this.svgWidthPx();
-      const r = clusterBadgeRadiusUser(this.view.w, svgW, cl.count);
+      const r = clusterBadgeRadiusUser(this.pxPerUser(), cl.count);
       if (!(r > 0)) continue;
       const cg = document.createElementNS(SVG_NS, "g");
       cg.setAttribute("class", "zone-cluster");

@@ -1,0 +1,129 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   Workspace 版面（V2 自有）
+   ══════════════════════════════════════════════════════════════════════════
+
+   為何要有呢個檔
+   ==============
+   P1-6（spec `world-atlas-v2-product-spec.md:103` ＋ 驗收矩陣第 1 項）：
+   「地圖佔首屏 **≥70%** 面積」。實測 1440×900 之下 `#map-pane` 只有 **60.6%**
+   （topbar 65px ＋ chapter strip 94px ＋ **story pane 380px**）。
+
+   算術：要達 70% 需要地圖闊 **1224px** → story pane 只可以 216px。
+   但 story pane 承載產品一半內容（章節摘要／角色／編年史），
+   縮到 216px 唔可行。
+
+   裁決（用戶 2026-10-05）：**story pane 改成 overlay**（浮喺地圖上，唔佔
+   layout 闊度）→ `#map-pane` 拿到 workspace 嘅**全部闊度** = **82.3%** ✓，
+   而 story pane 內容仍然完整可達（頂欄「面板」掣開關，`aria-expanded` 同步）。
+
+   ⚠️ 為何唔可以「預設展開 ＋ overlay」就算數
+   ==========================================
+   咁樣 `#map-pane` 嘅**版面**面積雖然係 82.3%，但 overlay 會蓋住右邊 380px
+   （= 21.7% 面積）→ 用戶真正睇到嘅地圖**仍然只有 60.6%** ✗
+   —— 即係只滿足 spec 嘅**字面**，唔滿足「首屏主 context = 地圖」嘅**意圖**。
+   所以 overlay **預設收起**（`sheetSnap = "peek"`，見 `src/app.ts`）：
+   首屏地圖真係 ≥70%，而 story pane 一撳即開。
+
+   ⚠️ 為何「預設收起」唔會違反驗收矩陣第 1 項
+   ==========================================
+   第 1 項要求「4 個主入口文字存在且可鍵盤達」。實測嗰 4 個入口
+   （`探索地區`／`搵角色`／`搵事件`／`打開編年史`）係 **`OnboardingCard`**，
+   掛喺 **`#map-pane`**（浮喺地圖上，見 `src/app.ts` `render()` 內
+   `new OnboardingCard({ root: mapPane })`）—— **唔喺 story pane 內**
+   → 收起 story pane 完全唔影響佢哋。
+   （`tests/a11y-aria.test.ts` 嘅「4 個入口文字存在」斷言亦係讀
+   `src/components/OnboardingCard.ts`。）
+
+   ⚠️ 疊層次序（唔可以掉以輕心）
+   ============================
+   `mobile.css` 由 `BottomSheet` **runtime 注入**（`?inline` → `<style>`，
+   最後載入）。佢嘅 `@media (max-width: 1023px)` 用
+   `position: fixed !important` 將 story pane 變 bottom sheet
+   → 仍然贏過本檔 ✓（手機行為完全不變）。
+   本檔喺 `main.ts` 排喺 `chronicle.css` 之後 → 贏過
+   `legacy-migrated.css` 嘅 `.panel-toggle { display: none }`。
+
+   ⚠️ token 名稱
+   ============
+   舊 `legacy-migrated.css` 嘅 overlay 區塊用咗 `var(--shadow-lg)` 同
+   `var(--transition)` —— **兩個 token 都唔存在**（`tokens.css` 冇定義）
+   → 嗰兩條宣告一直係無效值。本檔用真實存在嘅 `--shadow-high` /
+   `--dur-normal` / `--ease-standard`。
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* workspace 係 overlay 嘅定位上下文 */
+.workspace {
+  position: relative;
+  /* story pane 闊度（單一來源）—— 控制項讓位同 pane 自己都用佢 */
+  --story-pane-w: 380px;
+}
+
+@media (max-width: 1279px) {
+  .workspace {
+    --story-pane-w: 320px;
+  }
+}
+
+/*
+ * 面板開關。
+ *
+ * 原本 `.panel-toggle { display: none }`，只喺 `<1024px`（story pane 變
+ * bottom sheet 時）才顯示。story pane 改成 overlay 之後，**任何闊度**
+ * 都需要開關 → 一律顯示。
+ */
+.panel-toggle {
+  display: inline-block;
+}
+
+/*
+ * story pane = 浮層（唔佔 layout 闊度）。
+ *
+ * ⚠️ `width` 用 `--story-pane-w`（單一來源）。原本由 `legacy-migrated.css`
+ * 定（380px／<1280px 320px），但本檔後載入 → 唔喺度講就冇覆蓋問題，
+ * 講咗就要一齊帶埋 1279px 斷點（上面已做）。
+ * `<1024px` 由 `mobile.css` 用 `width: 100% !important` 變 bottom sheet ✓。
+ */
+.pane-story {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--story-pane-w);
+  z-index: var(--z-panel);
+  box-shadow: var(--shadow-high);
+  transition: transform var(--dur-normal) var(--ease-standard);
+}
+
+/*
+ * ⚠️ 面板打開時，地圖控制項（`#map-controls`，`bottom: sp-3; right: sp-3`）
+ * 會**被浮層蓋住** → 撳唔到「放大／縮小」。
+ *
+ * 修法：面板開（`.workspace.is-pane-open`）就將控制項向左讓開一個面板闊度。
+ * `is-pane-open` 係 `sheetSnap` 嘅衍生輸出（規則 S2，由 `app.ts`
+ * `syncSurfaces()` 加／除）—— 唔係第二份 state。
+ *
+ * ⚠️ 只喺 `≥1024px` 生效：`<1024px` 面板係 bottom sheet（喺底部升起），
+ * 讓開「右邊」冇意義。
+ *
+ * ⚠️ 一定要 `!important`：`mobile.css`（runtime 注入、最後載入）有一條
+ * `.map-controls, #map-controls { right: calc(sp-3 + safe-right) !important }`
+ * （P1-7 safe-area）。唔加 `!important` 就會輸，規則靜默無效
+ * —— 2026-10-05 實測踩過（`wsClasses` 明明有 `is-pane-open`，但
+ * `computed right` 仍然係 12px）。
+ */
+@media (min-width: 1024px) {
+  #map-controls {
+    transition: right var(--dur-normal) var(--ease-standard);
+  }
+  .workspace.is-pane-open #map-controls {
+    right: calc(
+      var(--story-pane-w) + var(--sp-3) + var(--safe-right)
+    ) !important;
+  }
+}
+
+/*
+ * ⚠️ 收合狀態嘅 `visibility: hidden` ＋ `transform` 由 `mobile.css` §1 提供
+ * （全域、冇 media query）—— 唔喺度重複定義，避免兩處分叉。
+ * 見 `src/styles/mobile.css`「P0-1：收合面板唔可以 Tab 到」。
+ */

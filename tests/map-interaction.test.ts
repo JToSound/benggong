@@ -326,9 +326,9 @@ describe("A4 cluster 正規化（P0-2）", () => {
     // 用新嘅 px-anchored API（見 B6-D5）。SVG 闊 1020 px、viewW 0.7°。
     const SVG_W = 1020;
     const VW = 0.7;
-    const r2 = clusterBadgeRadiusUser(VW, SVG_W, 2);
-    const r12 = clusterBadgeRadiusUser(VW, SVG_W, 12);
-    const r99 = clusterBadgeRadiusUser(VW, SVG_W, 999);
+    const r2 = clusterBadgeRadiusUser(SVG_W / VW, 2);
+    const r12 = clusterBadgeRadiusUser(SVG_W / VW, 12);
+    const r99 = clusterBadgeRadiusUser(SVG_W / VW, 999);
     expect(r12).toBeGreaterThan(r2);
     expect(r99).toBeGreaterThan(r2);
     // 封頂：12 之後唔再變大

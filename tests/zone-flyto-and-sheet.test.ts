@@ -45,15 +45,41 @@ describe("C8 P1-2：zone fly-to", () => {
   });
 });
 
-describe("C8 P1-3：手機 tap zone 自動開面板", () => {
-  it("⭐ 只喺 sheet 生效嘅寬度做（唔可以無條件改 snap）", () => {
+describe("C8 P1-3 / P1-6：內容喺 pane 內就自動開面板", () => {
+  it("⭐ 準則係「內容只喺 pane 內」，唔再按螢幕闊度", () => {
+    /*
+     * ⚠️ 2026-10-05 P1-6 改動：story pane 由「側欄」變「**預設收起嘅浮層**」
+     * （`src/styles/layout.css`）。原本 P1-3 嘅自動開 pane 只喺
+     * `max-width: 1023px` 生效（因為桌面版 pane 係側欄、改 snap 會改高度）。
+     *
+     * 浮層化之後：**所有闊度行為一致** → 判斷準則改為
+     * 「內容係唔係只喺 pane 內」：
+     *   ① context 係 zone（dossier 喺 pane 內）
+     *   ② context 係 location（story panel 喺 pane 內，含 `?location=` 深連結）
+     *   ③ view 係 chronicle（整個 view 喺 pane 內）
+     * ⚠️ 唔包純 chapter context —— 首屏要保持「地圖主導」。
+     */
     const i = APP_TS.indexOf("this.svgMap.flyToZone(");
     expect(i).toBeGreaterThan(-1);
-    const body = APP_TS.slice(i, i + 1600);
-    expect(body, "要有寬度判斷").toContain('matchMedia?.("(max-width: 1023px)")');
-    expect(body, "要用 store 嘅 setSheetSnap").toContain("setSheetSnap(EXPANDED_SNAP)");
+    // 由 `flyToZone` 到自動開 pane 區塊之後嘅 `svgMap.render()` —— 取一段緊嘅窗
+    const j = APP_TS.indexOf(
+      "if (chapterChanged || contextChanged) this.svgMap.render();",
+      i,
+    );
+    expect(j, "搵唔到自動開 pane 區塊嘅結尾").toBeGreaterThan(i);
+    const body = APP_TS.slice(i, j);
+
+    expect(body, "要自動開 pane").toContain("setSheetSnap(EXPANDED_SNAP)");
     expect(body, "只喺收埋狀態下自動開（唔應該搶走用戶已展開嘅狀態）").toContain(
       "sheetSnap === COLLAPSED_SNAP",
+    );
+    expect(body, "① zone context 要自動開").toContain('ctxKind === "zone"');
+    expect(body, "② location context 要自動開（含深連結）").toContain(
+      'ctxKind === "location"',
+    );
+    expect(body, "③ 編年史要自動開").toContain('s.view === "chronicle"');
+    expect(body, "⚠️ 唔應該再按螢幕闊度判斷（浮層喺所有闊度行為一致）").not.toContain(
+      'matchMedia?.("(max-width: 1023px)")',
     );
   });
 
