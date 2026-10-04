@@ -86,8 +86,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -113,7 +113,7 @@
           "ent_3c0413f11b": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -294,8 +294,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -321,7 +321,7 @@
           "ent_dd034941ef": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -1418,8 +1418,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -1447,7 +1447,7 @@
           "ent_dd034941ef": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -1618,8 +1618,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -1645,7 +1645,7 @@
           "ent_05b1ee1378": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -1656,8 +1656,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -1683,7 +1683,7 @@
           "ent_1e7255557d": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -1734,8 +1734,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -1763,7 +1763,7 @@
           "ent_dd034941ef": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -1812,8 +1812,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -1841,7 +1841,7 @@
           "ent_dd034941ef": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -1852,8 +1852,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -1875,7 +1875,7 @@
         "source": "bing_gang",
         "character_roles": {},
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -2348,8 +2348,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -2377,7 +2377,7 @@
           "ent_dd034941ef": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -4134,8 +4134,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -4914,8 +4914,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254452,
-          22.306033
+          114.253941,
+          22.305922
         ]
       },
       "properties": {
@@ -5114,8 +5114,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254452,
-          22.306033
+          114.253941,
+          22.305922
         ]
       },
       "properties": {
@@ -5602,8 +5602,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -5635,7 +5635,7 @@
           "ent_dd034941ef": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -7367,7 +7367,7 @@
         "zone_id": "zone_50501d2eaf",
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.55,
+        "coordinate_confidence": 0.8,
         "spatial_evidence_count": 0
       }
     },
@@ -8656,8 +8656,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -12798,8 +12798,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253698,
-          22.30527
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
@@ -12832,8 +12832,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253698,
-          22.30527
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
@@ -12872,8 +12872,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253698,
-          22.30527
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
@@ -12914,8 +12914,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252857,
-          22.304697
+          114.253239,
+          22.305438
         ]
       },
       "properties": {
@@ -12996,8 +12996,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253512,
-          22.305515
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
@@ -13072,8 +13072,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253512,
-          22.305515
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
@@ -13154,8 +13154,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253512,
-          22.305515
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
@@ -15424,8 +15424,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -17632,8 +17632,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252408,
-          22.305707
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
@@ -18494,8 +18494,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252358,
-          22.305472
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -18642,8 +18642,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -18680,8 +18680,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252358,
-          22.305472
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -19402,8 +19402,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254452,
-          22.306033
+          114.253941,
+          22.305922
         ]
       },
       "properties": {
@@ -19972,8 +19972,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -21312,8 +21312,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -21490,8 +21490,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -34044,8 +34044,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -35640,8 +35640,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -36384,8 +36384,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -36578,8 +36578,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -36932,8 +36932,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -39112,8 +39112,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -42944,8 +42944,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252408,
-          22.305707
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
@@ -42978,8 +42978,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43484,8 +43484,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43524,8 +43524,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43680,8 +43680,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43718,8 +43718,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43758,8 +43758,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43796,8 +43796,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43834,8 +43834,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -43868,8 +43868,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -43902,8 +43902,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -43936,8 +43936,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -44539,7 +44539,7 @@
           "nina": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -44588,8 +44588,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -44628,8 +44628,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -44746,8 +44746,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -44786,8 +44786,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -44938,8 +44938,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48340,8 +48340,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48374,8 +48374,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48414,8 +48414,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48448,8 +48448,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48482,8 +48482,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48524,8 +48524,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48564,8 +48564,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48680,8 +48680,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48763,7 +48763,7 @@
           "ent_e0f7ae0d6d": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -48774,8 +48774,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48816,8 +48816,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48858,8 +48858,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48896,8 +48896,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -48963,7 +48963,7 @@
         "source": "bing_gang",
         "character_roles": {},
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -49001,7 +49001,7 @@
           "ent_05b1ee1378": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -49039,7 +49039,7 @@
           "ent_05b1ee1378": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -49079,7 +49079,7 @@
           "ent_919935f818": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -49117,7 +49117,7 @@
           "ent_919935f818": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -49978,8 +49978,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -50497,7 +50497,7 @@
           "ent_919935f818": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -50537,7 +50537,7 @@
           "ent_919935f818": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -50575,7 +50575,7 @@
           "ent_05b1ee1378": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -50624,8 +50624,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -50691,7 +50691,7 @@
           "ent_05b1ee1378": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -50846,8 +50846,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -51657,7 +51657,7 @@
           "ent_d61cc93d26": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -52424,8 +52424,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254069,
-          22.305705
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -52502,8 +52502,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -52618,8 +52618,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -52652,8 +52652,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -52686,8 +52686,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -52764,8 +52764,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -52844,8 +52844,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -54338,8 +54338,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -54378,8 +54378,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -54416,8 +54416,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -54460,8 +54460,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -54523,7 +54523,7 @@
         "source": "bing_gang",
         "character_roles": {},
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -55079,7 +55079,7 @@
           "ent_919935f818": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -55090,8 +55090,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -56200,8 +56200,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -56238,8 +56238,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254069,
-          22.305705
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -56272,8 +56272,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254069,
-          22.305705
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -57138,8 +57138,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253,
-          22.306142
+          114.25332,
+          22.306027
         ]
       },
       "properties": {
@@ -57316,8 +57316,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -57354,8 +57354,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -57388,8 +57388,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -57422,8 +57422,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -58184,8 +58184,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -58262,8 +58262,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -58484,8 +58484,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277656,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -59535,7 +59535,7 @@
           "ent_92f5c87f6d": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -59768,8 +59768,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -62339,7 +62339,7 @@
           "ent_da5ac3f022": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -63114,8 +63114,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -63141,7 +63141,7 @@
           "ent_7f6734f51b": "mentioned"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -63568,8 +63568,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -64538,8 +64538,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252408,
-          22.305707
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
@@ -65465,7 +65465,7 @@
           "ent_da5ac3f022": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -66964,8 +66964,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254452,
-          22.306033
+          114.253941,
+          22.305922
         ]
       },
       "properties": {
@@ -67388,8 +67388,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -67415,7 +67415,7 @@
           "ent_b9773b2977": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -67464,8 +67464,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -67491,7 +67491,7 @@
           "ent_b9773b2977": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0
@@ -67540,8 +67540,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -67567,7 +67567,7 @@
           "ent_dd034941ef": "subject"
         },
         "zone_id": "zone_fd96bd24d8",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0

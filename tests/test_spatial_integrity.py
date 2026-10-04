@@ -351,8 +351,19 @@ def test_r8_unsourced_coordinates_are_flagged(loc):
     # loc_0443 / loc_0467）由 `scripts/anchor_locations_from_text.py` 依
     # **故事文字點名嘅現實地標**錨定，取得 `coordinate_anchor` 證據 →
     # 唔再屬於「冇證據座標」。呢個係**證據增加**，唔係放寬標準。
-    assert n_no_evidence == 116, (
-        f"冇證據座標數目由 116 變成 {n_no_evidence} —— 上游資料改咗，要重新審計"
+    #
+    # 2026-10-04：116 → **123**（+7）。原因係修好推斷反饋迴圈之後
+    # （`infer_places.py` 嘅 `R-CHAPTER-CLUSTER` 錨點池唔再包含「由本規則
+    # 自己推導出嚟」嘅地點），有 7 個地點**失去**原本靠循環錨點鏈推導嘅座標：
+    #   loc_0068 中國銀行／loc_0201・loc_0202 D橦大樓４０３號病房／
+    #   loc_0379 病獵公會聖堂／loc_0509 和風／loc_0594 KTV館／loc_0620 賭場
+    #
+    # ⚠️ 呢個係**誠實度提升，唔係回歸**：嗰啲座標本來就係「用其他同樣由
+    # 推斷得出嘅座標」算出嚟（循環論證），唔構成證據。規則 C1 明文禁止猜，
+    # 所以正確做法係放棄推斷 + 標 `needs_validation`（下面 `unmarked` 斷言
+    # 仍然全部通過），而唔係維持一個會令管線唔收斂嘅循環。
+    assert n_no_evidence == 123, (
+        f"冇證據座標數目由 123 變成 {n_no_evidence} —— 上游資料改咗，要重新審計"
     )
 
 

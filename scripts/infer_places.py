@@ -1037,11 +1037,46 @@ def infer_from_resolved_context(
 CLUSTER_MAX_SPREAD_M = 500.0
 
 
+def load_previous_cluster_subjects() -> set[str]:
+    """由**上一輪**嘅 `place-inference.jsonl` 讀返 R-CHAPTER-CLUSTER 嘅 subject id。
+
+    為何要讀舊檔而唔係由 `locations.geojson` 推導
+    -------------------------------------------
+    `locations.geojson` 只有 `inferred_from`（= `inf_<loc_id>`），**冇記
+    pattern**；而 `coordinate_source` 會被 `infer_zone_membership.py` 覆寫成
+    `cross_chapter_evidence`，唔可以用嚟辨認規則。
+
+    為何安全
+    --------
+    `main()` 喺**最後**才用 `"w"` 覆寫 `OUT_JSONL`，所以執行期間讀到嘅
+    一定係上一輪嘅完整內容。檔案唔存在（全新 clone）→ 回空集，行為同
+    修復前一樣（唔會更差）。
+    """
+    out: set[str] = set()
+    if not OUT_JSONL.exists():
+        return out
+    try:
+        text = OUT_JSONL.read_text(encoding="utf-8")
+    except OSError:
+        return out
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        try:
+            r = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if r.get("pattern") == "R-CHAPTER-CLUSTER":
+            out.update(r.get("subject_ids") or [])
+    return out
+
+
 def infer_from_chapter_cluster(
     candidates: list[dict[str, Any]],
     covered: set[str],
     feats: list[dict[str, Any]],
     results_so_far: list[dict[str, Any]],
+    prev_cluster_subjects: set[str] | None = None,
 ) -> list[dict[str, Any]]:
     """R-CHAPTER-CLUSTER：同章已解析地點高度集中 → 未定位地點喺同一區。
 
@@ -1059,6 +1094,28 @@ def infer_from_chapter_cluster(
     ----------------
     只有一個錨點嘅話，「跨距 = 0」係假象（一點冇跨距可言），
     推斷會變成「喺嗰個點」而唔係「喺嗰一帶」。
+
+    ⚠️ 錨點池唔可以包含本規則自己嘅輸出（**跨輪**都要排除）
+    --------------------------------------------------
+    本規則嘅座標係「其他地點嘅質心」。如果佢自己嘅輸出又入返錨點池，
+    就會形成**正反饋**：
+
+        質心(錨點) → 本規則輸出 → 成為下輪錨點 → 質心改變 → …
+
+    實測（2026-10-04，`scripts/diagnose_pipeline_drift.py`）：每輪有 **56 個**
+    feature 漂移、全部 `inferred_from` 非空，其中 **51 個**就係本規則嘅輸出；
+    漂移量遞減（57 → 48 → 34 m）但**唔收斂** ✗。
+
+    ⚠️ 為何 `results_so_far` 唔夠（原本嘅守衛係**死代碼**）
+    ------------------------------------------------
+    `self_resolved` 原本只由 `results_so_far` 建立，但本函數喺 `main()` 只被
+    呼叫**一次**（而且係喺 `results` 仍未包含本規則輸出之前）→
+    `self_resolved` **永遠係空集**，守衛從未生效。
+
+    所以要**另外**傳入 `prev_cluster_subjects`：由**上一輪**嘅
+    `place-inference.jsonl` 讀返「上輪由本規則解析」嘅地點 id。
+    `infer_places.py` 喺最後才用 `"w"` 覆寫 JSONL，所以執行期間讀到嘅
+    一定係上一輪嘅內容。
     """
     import math
 
@@ -1068,9 +1125,10 @@ def infer_from_chapter_cluster(
     # **反饋循環**：套用 → 錨點變多 → 下一輪推斷唔同 → 套用 → …
     # 實測：管線因此唔冪等（重跑會改 locations.geojson）。
     #
-    # 判斷方法：睇 `inferred_from` 指向嘅推斷係唔係 R-CHAPTER-CLUSTER。
-    # 人工設定／其他規則解析嘅地點都可以做錨點（佢哋唔受本規則影響）。
-    self_resolved: set[str] = set()
+    # 兩邊都要排除：
+    #   ① 本輪 `results_so_far` 已經解析嘅（同一次執行內）
+    #   ② 上一輪 JSONL 記錄嘅（跨輪 —— 呢個才係實際生效嘅一半）
+    self_resolved: set[str] = set(prev_cluster_subjects or ())
     for r in results_so_far:
         if r["pattern"] == "R-CHAPTER-CLUSTER":
             self_resolved.update(r["subject_ids"])
@@ -1796,13 +1854,26 @@ def main() -> int:
         if chars_path.exists()
         else []
     )
-    cluster = infer_from_chapter_cluster(vague, covered_now, feats, results)
+    prev_cluster = load_previous_cluster_subjects()
+    cluster = infer_from_chapter_cluster(vague, covered_now, feats, results, prev_cluster)
     results += cluster
     if cluster:
         print(f"\n同章聚類推斷：{len(cluster)} 條")
 
+    # ⚠️ `R-DESC-RESOLVED` / `R-CHARACTER-BASE` 一樣係用「已解析地點」做錨點，
+    #    所以同樣要排除**由 `R-CHAPTER-CLUSTER` 推導出嚟**嘅地點 ——
+    #    否則佢哋嘅座標會跟住 cluster 輸出漂移（實測：修好 cluster 錨點池
+    #    之後，仍然有 6 個 `R-DESC-RESOLVED` 跟隨漂移 ✗）。
+    #
+    #    ⚠️ 兩邊都要排除：本輪 `cluster` 嘅 subject ＋ 上一輪 JSONL 記錄嘅。
+    cluster_subjects = set(prev_cluster) | {
+        i for r in cluster for i in r["subject_ids"]
+    }
+    resolved_stable = {
+        nm: rec for nm, rec in resolved.items() if rec["id"] not in cluster_subjects
+    }
     covered_now = {i for r in results for i in r["subject_ids"]}
-    ctx = infer_from_resolved_context(vague, covered_now, resolved, char_list)
+    ctx = infer_from_resolved_context(vague, covered_now, resolved_stable, char_list)
     results += ctx
     if ctx:
         from collections import Counter as _C

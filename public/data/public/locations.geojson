@@ -370,8 +370,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -397,13 +397,12 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[3]）嘅 3 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated",
-        "inferred_from": "inf_loc_0009",
         "zone_ids": [
           "zone_fd96bd24d8"
         ]
@@ -414,8 +413,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -442,13 +441,12 @@
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated",
-        "inferred_from": "inf_loc_0010"
+        "zone_membership_review_status": "validated"
       }
     },
     {
@@ -456,8 +454,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -484,13 +482,12 @@
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated",
-        "inferred_from": "inf_loc_0011"
+        "zone_membership_review_status": "validated"
       }
     },
     {
@@ -539,8 +536,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253569,
-          22.306382
+          114.2535,
+          22.306096
         ]
       },
       "properties": {
@@ -579,13 +576,12 @@
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated",
-        "inferred_from": "inf_loc_0013"
+        "zone_membership_review_status": "validated"
       }
     },
     {
@@ -2797,8 +2793,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254452,
-          22.306033
+          114.253941,
+          22.305922
         ]
       },
       "properties": {
@@ -2882,11 +2878,10 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0068",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
@@ -2899,8 +2894,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254452,
-          22.306033
+          114.253941,
+          22.305922
         ]
       },
       "properties": {
@@ -4104,7 +4099,7 @@
         "display_name": "露天停車場（推斷位置）",
         "location_type": "district",
         "fictional": false,
-        "location_precision": "approximate",
+        "location_precision": "district",
         "story_position": {
           "x": 0.165,
           "y": 0.676
@@ -4124,7 +4119,7 @@
         ],
         "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
-        "coordinate_confidence": 0.55,
+        "coordinate_confidence": 0.8,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
         "zone_membership_review_status": "validated"
@@ -4396,7 +4391,7 @@
         "coordinate_confidence": 0.8,
         "spatial_evidence_count": 0,
         "zone_membership_source": null,
-        "zone_membership_review_status": "quarantined",
+        "zone_membership_review_status": "needs_validation",
         "position_source": "程式化座標校正：地名「學堂」配對到 district 座標，同原座標相差 2689 m（> 1200 m 門檻）",
         "coord_corrected": true
       }
@@ -6625,8 +6620,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253698,
-          22.30527
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
@@ -6668,8 +6663,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253698,
-          22.30527
+          114.25359,
+          22.30577
         ]
       },
       "properties": {
@@ -6879,8 +6874,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253512,
-          22.305515
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
@@ -6922,8 +6917,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253512,
-          22.305515
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
@@ -7049,8 +7044,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253512,
-          22.305515
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
@@ -7090,8 +7085,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253512,
-          22.305515
+          114.253393,
+          22.3057
         ]
       },
       "properties": {
@@ -7215,8 +7210,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253435,
-          22.305338
+          114.253543,
+          22.305547
         ]
       },
       "properties": {
@@ -7259,8 +7254,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253435,
-          22.305338
+          114.253543,
+          22.305547
         ]
       },
       "properties": {
@@ -8026,8 +8021,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252857,
-          22.304697
+          114.253239,
+          22.305438
         ]
       },
       "properties": {
@@ -8061,7 +8056,6 @@
         "confidence": 0.8,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0193",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
@@ -8070,7 +8064,8 @@
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
         "zone_membership_source": "geometry",
-        "zone_membership_review_status": "validated"
+        "zone_membership_review_status": "validated",
+        "inferred_from": "inf_loc_0193"
       }
     },
     {
@@ -8386,8 +8381,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252858,
-          22.304697
+          114.253144,
+          22.305252
         ]
       },
       "properties": {
@@ -8410,11 +8405,10 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0201",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
@@ -8427,8 +8421,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252858,
-          22.304694
+          114.253144,
+          22.305253
         ]
       },
       "properties": {
@@ -8451,11 +8445,10 @@
         "confidence": 0.85,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0202",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
@@ -8514,8 +8507,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252408,
-          22.305707
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
@@ -8690,8 +8683,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252408,
-          22.305707
+          114.252509,
+          22.305844
         ]
       },
       "properties": {
@@ -8913,8 +8906,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -9000,8 +8993,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252358,
-          22.305472
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -9041,8 +9034,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252358,
-          22.305472
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -9084,8 +9077,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -9388,8 +9381,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -9697,8 +9690,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252426,
-          22.305483
+          114.253375,
+          22.30564
         ]
       },
       "properties": {
@@ -15915,11 +15908,10 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0379",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
@@ -16318,13 +16310,12 @@
         "confidence": 0.95,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0388",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
         "position_source": "程式化座標校正：「翠林邨」屬「翠林村倖存區」範圍，但原座標距離區域中心 2030 m（區域半徑 656 m）—— 拉入區域內部",
         "coord_corrected": true,
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "manual_geometry",
         "coordinate_review_status": "auto_corrected",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
@@ -16583,8 +16574,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -18901,11 +18892,10 @@
         "review_status": "reviewed",
         "source": "bing_gang",
         "position_source": "同章（[139]）嘅 2 個已解析地點質心附近（環形偏移，id hash 決定）",
-        "inferred_from": "inf_loc_0448",
         "zone_ids": [
           "zone_3371b02c9d"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 1,
@@ -21492,11 +21482,10 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0509",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
@@ -21712,8 +21701,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -21756,8 +21745,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -21799,8 +21788,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248636,
-          22.323341
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -21840,8 +21829,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.248641,
-          22.323344
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -21881,8 +21870,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24864,
-          22.323344
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -21922,8 +21911,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24864,
-          22.323344
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -21963,8 +21952,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24864,
-          22.323344
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -22004,8 +21993,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.24864,
-          22.323344
+          114.248766,
+          22.323416
         ]
       },
       "properties": {
@@ -23409,8 +23398,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253,
-          22.306142
+          114.25332,
+          22.306027
         ]
       },
       "properties": {
@@ -23492,8 +23481,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253,
-          22.306142
+          114.25332,
+          22.306027
         ]
       },
       "properties": {
@@ -23581,8 +23570,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.253,
-          22.306142
+          114.25332,
+          22.306027
         ]
       },
       "properties": {
@@ -23705,8 +23694,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254069,
-          22.305706
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -23747,8 +23736,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25407,
-          22.305706
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -23789,8 +23778,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.25407,
-          22.305705
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -23831,8 +23820,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254069,
-          22.305705
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -23876,8 +23865,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.254069,
-          22.305706
+          114.254109,
+          22.305733
         ]
       },
       "properties": {
@@ -24301,8 +24290,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -24381,8 +24370,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -24433,8 +24422,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -24472,8 +24461,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277657,
-          22.297274
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -24514,8 +24503,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277656,
-          22.297274
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -24555,8 +24544,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.277656,
-          22.297275
+          114.277722,
+          22.29731
         ]
       },
       "properties": {
@@ -24986,8 +24975,8 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          114.252568,
-          22.306177
+          114.252976,
+          22.306038
         ]
       },
       "properties": {
@@ -25055,11 +25044,10 @@
         "confidence": 0.8,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0594",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
@@ -26117,11 +26105,10 @@
         "confidence": 0.9,
         "review_status": "reviewed",
         "source": "bing_gang",
-        "inferred_from": "inf_loc_0620",
         "zone_ids": [
           "zone_fd96bd24d8"
         ],
-        "coordinate_source": "cross_chapter_evidence",
+        "coordinate_source": "legacy",
         "coordinate_review_status": "needs_validation",
         "coordinate_confidence": 0.55,
         "spatial_evidence_count": 0,
