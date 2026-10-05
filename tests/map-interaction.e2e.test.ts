@@ -263,7 +263,16 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
             ?.classList.contains("is-collapsed"),
       );
       if (paneOpen) {
-        await page.click("#btn-toggle-panel");
+        /*
+         * ⚠️ `force: true`（2026-10-05 實測）
+         * ---------------------------------
+         * 呢個係**設定步驟**（還原可點區域），唔係被測行為。
+         * 全套測試（CPU 高負載）之下，`page.click()` 嘅
+         * 「visible, enabled and stable」檢查會**超時 30 s** ✗
+         * （單獨跑呢個檔案 13/13 過 → 屬負載 flakiness）。
+         * `force: true` 跳過 actionability 檢查，但仍然派發**真滑鼠 click**。
+         */
+        await page.click("#btn-toggle-panel", { force: true, timeout: 15_000 });
         await page.waitForTimeout(500);
       }
 
@@ -398,6 +407,171 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
       await browser.close();
     }
   }, 120_000);
+
+  it(
+    "⭐ C8 P1-1：每個 zone 恰好被表示一次，cluster badge 唔會被圖騰淹沒",
+    async () => {
+      /*
+       * 為何要有呢個測試（2026-10-05）
+       * ----------------------------
+       * C8 audit P1-1：世界視圖（L-Z0）**同時**畫咗 48 個 per-zone 圖騰
+       * （`.zone-badge`，實測直徑 **21.4 px**）＋ 6 個 cluster badge
+       * （**9.2–11.3 px**）→ 21px 圖騰完全淹沒 10px badge ✗
+       * 但 spec `rendering-lod-strategy.md` §3.2 明文：**L-Z0 = cluster glyph**、
+       * per-zone icon 係 **L-Z2** 嘅元素。
+       *
+       * 修法：已被 cluster 代表嘅 zone 唔再畫 per-zone 圖騰（交畀 cluster
+       * badge 表示），**單獨 zone 照畫**（否則佢哋喺 L-Z0 完全冇表示 →
+       * 違反 D2「48 個 zone 永遠全部 render」）。
+       *
+       * 本測試把「每個 zone 恰好被表示一次」＋「badge 唔被蓋」變成
+       * **可重跑斷言**（零人手）。
+       */
+      const browser = await launch();
+      if (!browser) return;
+      try {
+        const page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+        await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
+        await page.waitForTimeout(1500);
+
+        const m = await page.evaluate(() => {
+          const q = (s: string) => Array.from(document.querySelectorAll(s));
+          const rects = (els: Element[]) =>
+            els.map((e) => e.getBoundingClientRect());
+          const overlap = (a: DOMRect, b: DOMRect) =>
+            Math.min(a.right, b.right) - Math.max(a.left, b.left) > 0 &&
+            Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 0;
+
+          const clusters = q("#zones-layer .zone-cluster");
+          const clusterRects = rects(clusters);
+          const totems = q("#zones-layer .zone .zone-badge");
+          const totemRects = rects(totems);
+          // 每個 cluster badge 畀幾多個 per-zone 圖騰蓋住（幾何重疊）
+          const covered = clusterRects.map(
+            (cr) => totemRects.filter((tr) => overlap(cr, tr)).length,
+          );
+          // 圖騰**中心**落喺 badge 矩形內 = 真正嘅視覺衝突
+          const centreInside = Math.max(
+            0,
+            ...clusterRects.map((cr) => {
+              const cx = (cr.left + cr.right) / 2;
+              const cy = (cr.top + cr.bottom) / 2;
+              return totemRects.filter(
+                (tr) =>
+                  cx >= tr.left && cx <= tr.right && cy >= tr.top && cy <= tr.bottom,
+              ).length;
+            }),
+          );
+          /*
+           * 繪製次序：`#zones-layer` 內全部 `.zone-cluster` 都要喺全部
+           * `.zone` **之後** —— SVG 冇 z-index，後畫者喺上層 → cluster badge
+           * 一定畫喺 per-zone 圖騰之上（唔會被淹沒）。
+           */
+          const layer = document.querySelector("#zones-layer");
+          const order = layer ? Array.from(layer.children) : [];
+          const lastZone = order.map((e) => e.classList.contains("zone")).lastIndexOf(true);
+          const firstCluster = order.findIndex((e) =>
+            e.classList.contains("zone-cluster"),
+          );
+          const badgesAfterZones =
+            lastZone >= 0 && firstCluster >= 0 && firstCluster > lastZone;
+
+          // WCAG 相對亮度 → 對比
+          const lum = (c: number[]) => {
+            const f = (v: number) => {
+              const x = v / 255;
+              return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4;
+            };
+            return 0.2126 * f(c[0]) + 0.7152 * f(c[1]) + 0.0722 * f(c[2]);
+          };
+          const parse = (s: string) =>
+            (s.match(/\d+/g) ?? []).slice(0, 3).map(Number);
+          const first = clusters[0];
+          const txt = first?.querySelector(".zone-cluster-count");
+          const ring = first?.querySelector(".zone-cluster-ring");
+          let contrast = null;
+          if (txt && ring) {
+            const a = lum(parse(getComputedStyle(txt).fill));
+            const b = lum(parse(getComputedStyle(ring).fill));
+            const [hi, lo] = a > b ? [a, b] : [b, a];
+            contrast = (hi + 0.05) / (lo + 0.05);
+          }
+
+          return {
+            viewW: Number(
+              (document.querySelector("#svg-map")!.getAttribute("viewBox") ?? "")
+                .split(/\s+/)[2],
+            ),
+            nZones: q("#zones-layer .zone").length,
+            nAreas: q("#zones-layer .zone-area").length,
+            nClusters: clusters.length,
+            sumClusterCounts: clusters.reduce(
+              (acc, c) => acc + Number(c.getAttribute("data-zone-cluster-count") ?? 0),
+              0,
+            ),
+            nTotems: totems.length,
+            totemDiameterPx: totemRects.length
+              ? Math.round(totemRects[0].width * 10) / 10
+              : null,
+            maxCoveredClusters: covered.length ? Math.max(...covered) : 0,
+            maxCentreInside: centreInside,
+            badgesAfterZones,
+            contrast,
+          };
+        });
+        console.log("[P1-1] zone 表示法量測：", JSON.stringify(m));
+
+        // 一定要係 L-Z0（cluster 層）才適用
+        expect(m.viewW, "初始視圖應該係全港（L-Z0）").toBeGreaterThan(0.175);
+        // 規則 L1：`.zone` / `.zone-area` 總數唔可以變（只改視覺）
+        expect(m.nAreas, "規則 L1：cluster 層仍然畫晒全部 zone-area").toBe(m.nZones);
+        /*
+         * ⭐ 核心不變式：每個 zone **恰好被表示一次**
+         * —— 自己嘅圖騰（單獨 zone）或者所屬 cluster 嘅 badge（簇成員）。
+         */
+        expect(
+          m.nTotems + m.sumClusterCounts,
+          `每個 zone 要恰好表示一次：圖騰 ${m.nTotems} ＋ 簇成員 ${m.sumClusterCounts} 應該 = ${m.nZones}`,
+        ).toBe(m.nZones);
+        // 一定有 cluster（否則呢個測試冇驗到嘢）
+        expect(m.nClusters).toBeGreaterThan(0);
+        expect(m.sumClusterCounts).toBeGreaterThan(0);
+        /*
+         * ⭐ 淹沒嘅**真正**判準係繪製次序，唔係幾何重疊：
+         * SVG 冇 z-index，後畫者喺上層 → cluster badge 只要排喺全部
+         * `.zone` 之後，就一定畫喺 21px per-zone 圖騰之上（唔會被蓋）。
+         * （實測 3× 截圖：badge 數字「5」「3」「2」清楚可讀。）
+         *
+         * ⚠️ 為何唔可以斷言「幾何零重疊」：9 個單獨 zone 散落喺同一個
+         * 密集區（48 個 zone 只佔 0.1°），21px 圖騰同 10px badge
+         * 幾何重疊係**必然**，但唔代表遮蓋。
+         */
+        expect(
+          m.badgesAfterZones,
+          "cluster badge 一定要排喺全部 `.zone` 之後（先畫圖騰、後畫 badge → badge 喺上層）",
+        ).toBe(true);
+        /*
+         * ⚠️ 點解**唔**斷言「幾何零重疊／零中心相交」
+         * ------------------------------------------
+         * 48 個 zone 只佔 0.1°（實測 1440×900 之下全部落喺 228×218 px 內），
+         * 所以 21px 單獨圖騰同 10px cluster badge **必然**幾何相交
+         * （實測：最多 4 個圖騰矩形同一個 badge 相交、1 個中心落喺 badge 內）。
+         * 嗰個係密度事實，唔係遮蓋 —— 遮蓋與否由上面嘅**繪製次序**決定
+         * （badge 後畫 = 喺上層）。硬性斷言零相交會變成長期 flaky。
+         * `maxCoveredClusters` / `maxCentreInside` 只作診斷輸出（見 console.log）。
+         */
+        // ⭐ 對比：badge 數字要喺 badge 底色上面清楚可讀（WCAG AA 4.5）
+        expect(m.contrast, "要量到 cluster badge 嘅對比").not.toBeNull();
+        expect(
+          m.contrast!,
+          `cluster badge 數字／底色對比 ${m.contrast?.toFixed(1)} 要 ≥4.5`,
+        ).toBeGreaterThanOrEqual(4.5);
+      } finally {
+        await browser.close();
+      }
+    },
+    120_000,
+  );
 
   it("圖例三通道（color + pattern + icon）真係 render 到", async () => {
     const browser = await launch();

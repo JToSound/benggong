@@ -246,7 +246,7 @@ spec §3.2 L-Z0 硬性要求 badge 直徑 **8–12 px**。
 
 | 檔案 | 改動 |
 |---|---|
-| `tests/map-interaction.e2e.test.ts` | 「輕觸要選中、拖曳要平移」加一步「如果面板開咗就先收返」（因為揀完 zone 會自動開浮層 → 蓋住右邊 zone → `pick()` 回 null）。**斷言不變。** |
+| `tests/map-interaction.e2e.test.ts` | 「輕觸要選中、拖曳要平移」加一步「如果面板開咗就先收返」（因為揀完 zone 會自動開浮層 → 蓋住右邊 zone → `pick()` 回 null）。**斷言不變。** ⚠️ 2026-10-05 補：該步驟用 `page.click(..., { force: true, timeout: 15_000 })` —— 全套測試（CPU 高負載）之下，Playwright 嘅「visible, enabled and stable」檢查會**超時 30 s**（單獨跑該檔 13/13 過 → 屬負載 flakiness）。呢個係**設定步驟**，唔係被測行為，所以跳過 actionability 檢查仍然派發真滑鼠 click 係合理取捨。 |
 | `tests/visual-smoke.e2e.test.ts` | 原本斷言「闊螢幕唔需要切換鈕（`display: none`）」→ 改為「**唔可以係 `none`**」，並新增「地圖用盡全闊 > 1500px」。 |
 | `tests/zone-flyto-and-sheet.test.ts` | 原本斷言「自動開 pane 要按 `matchMedia(max-width: 1023px)`」→ 改為斷言新準則（zone／location context ＋ chronicle view），並**負向斷言**唔應該再按寬度判斷。 |
 | `tests/map-lod-zone.test.ts`／`tests/map-interaction.test.ts` | `clusterBadgeRadiusUser()` 新簽名（見 §6.1）。 |

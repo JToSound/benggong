@@ -2273,6 +2273,33 @@ export class SvgMap {
         ? clusterZones(zoneModel, this.markerR(0.008), clusterSep)
         : [];
 
+    /*
+     * ⚠️ C8 P1-1（2026-10-05）：cluster 層唔可以再為「已被 cluster 代表」
+     * 嘅 zone 畫 per-zone 圖騰（`.zone-badge`）。
+     *
+     * 根因（spec 層面，唔係口味問題）
+     * ----------------------------
+     * `docs/specs/world-atlas-v2-rendering-lod-strategy.md` §3.2 明文定義：
+     *   · **L-Z0（viewW > 0.175°）= Cluster glyph**（8–12 px badge + kind icon + 數量）
+     *   · **L-Z2 = 完整**：pattern + **icon** + 內部 landmark + danger
+     * 即係「per-zone icon」係 **L-Z2** 嘅元素，唔係 L-Z0。
+     *
+     * 但實作喺 L-Z0 **同時**畫咗 48 個 per-zone 圖騰，而且為咗「補償冇
+     * polygon 光暈」刻意放大到 `0.0078` user unit → 實測直徑 **21.4 px**
+     * （1440×900）／**26.6 px**（1920×1080），而 cluster badge 只有
+     * **9.8–11.3 px** → 21px 圖騰完全淹沒 10px badge ✗
+     * （C8 audit P1-1：「被 48 個 ~21px 半透明 zone 圓淹沒」）。
+     *
+     * 修法（保守、可逆、spec 之內）
+     * --------------------------
+     * 已被 cluster 代表嘅 zone → 交畀 cluster badge 表示，唔畫 per-zone 圖騰。
+     * ⚠️ **單獨 zone（唔屬任何簇）仍然要畫** —— 否則佢哋喺 L-Z0 完全冇表示，
+     * 違反 spec D2「48 個 zone 永遠全部 render」。實測世界視圖 48 個 zone
+     * 之中 6 個簇佔 39 個 → **9 個單獨 zone** 保留圖騰。
+     * （`<g class="zone">` 本身、`.zone-area` polygon 同可點性**完全不變**。）
+     */
+    const clusteredZoneIds = new Set(zoneClusters.flatMap((c) => c.memberIds));
+
     for (const zm of zoneModel) {
       const style = ZONE_STYLE[zm.styleKey] ?? ZONE_STYLE.nest;
       const selected = zm.selected;
@@ -2353,33 +2380,40 @@ export class SvgMap {
         g.appendChild(pulse);
       }
 
-      // 徽記（特別記認）：每個區域一個圖騰，一眼分得出係咩類型
-      const badge = document.createElementNS(SVG_NS, "g");
-      badge.setAttribute("class", "zone-badge");
-      badge.setAttribute("transform", `translate(${zm.cx} ${zm.cy})`);
-      // cluster 層冇 polygon 光暈做視覺重量，所以徽記畫大少少
-      const badgeBase = zoneIsCluster ? 0.0078 : 0.0062;
-      const br = this.markerR(badgeBase);
-      const bcircle = document.createElementNS(SVG_NS, "circle");
-      bcircle.setAttribute("r", String(br));
-      bcircle.setAttribute("fill", "rgba(8, 13, 20, 0.82)");
-      bcircle.setAttribute("stroke", style.stroke);
-      bcircle.setAttribute("stroke-width", String(br * 0.16));
-      badge.appendChild(bcircle);
-      const glyph = document.createElementNS(SVG_NS, "path");
-      glyph.setAttribute("d", ZONE_GLYPH[style.glyph]);
-      glyph.setAttribute("fill", "none");
-      glyph.setAttribute("stroke", style.stroke);
-      glyph.setAttribute("stroke-width", String(br * 0.24));
-      glyph.setAttribute("stroke-linecap", "round");
-      glyph.setAttribute("stroke-linejoin", "round");
-      glyph.setAttribute(
-        "transform",
-        `translate(${(-br * 0.46).toFixed(6)} ${(-br * 0.46).toFixed(6)}) scale(${(br * 0.92).toFixed(6)})`,
-      );
-      badge.appendChild(glyph);
-      this.scaledEls.push({ el: badge, attr: "data-r", base: badgeBase });
-      g.appendChild(badge);
+      /*
+       * 徽記（特別記認）：每個區域一個圖騰，一眼分得出係咩類型。
+       *
+       * ⚠️ C8 P1-1：cluster 層之下，**已被 cluster badge 代表**嘅 zone
+       * 唔再畫圖騰（見上面 `clusteredZoneIds` 嘅說明）。單獨 zone 照畫。
+       */
+      if (!(zoneIsCluster && clusteredZoneIds.has(zm.id))) {
+        const badge = document.createElementNS(SVG_NS, "g");
+        badge.setAttribute("class", "zone-badge");
+        badge.setAttribute("transform", `translate(${zm.cx} ${zm.cy})`);
+        // cluster 層冇 polygon 光暈做視覺重量，所以單獨 zone 嘅徽記畫大少少
+        const badgeBase = zoneIsCluster ? 0.0078 : 0.0062;
+        const br = this.markerR(badgeBase);
+        const bcircle = document.createElementNS(SVG_NS, "circle");
+        bcircle.setAttribute("r", String(br));
+        bcircle.setAttribute("fill", "rgba(8, 13, 20, 0.82)");
+        bcircle.setAttribute("stroke", style.stroke);
+        bcircle.setAttribute("stroke-width", String(br * 0.16));
+        badge.appendChild(bcircle);
+        const glyph = document.createElementNS(SVG_NS, "path");
+        glyph.setAttribute("d", ZONE_GLYPH[style.glyph]);
+        glyph.setAttribute("fill", "none");
+        glyph.setAttribute("stroke", style.stroke);
+        glyph.setAttribute("stroke-width", String(br * 0.24));
+        glyph.setAttribute("stroke-linecap", "round");
+        glyph.setAttribute("stroke-linejoin", "round");
+        glyph.setAttribute(
+          "transform",
+          `translate(${(-br * 0.46).toFixed(6)} ${(-br * 0.46).toFixed(6)}) scale(${(br * 0.92).toFixed(6)})`,
+        );
+        badge.appendChild(glyph);
+        this.scaledEls.push({ el: badge, attr: "data-r", base: badgeBase });
+        g.appendChild(badge);
+      }
 
       const title = document.createElementNS(SVG_NS, "title");
       const srcLabel = zm.evidenced
