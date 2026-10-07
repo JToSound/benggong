@@ -1,0 +1,22 @@
+{
+ "note": "「必須存在」嘅 CSS class 契約（machine-readable）。目的：令 D4-3「docs 提及唔算使用」嘅判斷**唔再靠人**。凡列入 entries 嘅 class 一律唔可以判死、唔可以被 prune_dead_css.py 剪除，並由 tests/class-contract.test.ts 自動驗證佢仍然存在。",
+ "target": "src/styles/legacy-migrated.css",
+ "entries": {
+  "bg-error-panel": {
+   "producedBy": "src/main.ts",
+   "reason": "載入失敗畫面外框（src/main.ts:98）。⚠️ 只喺**失敗路徑**出現 —— 執行期探測（7 個正常狀態）永遠睇唔到 → 極易被誤判死。"
+  },
+  "bg-error-detail": {
+   "producedBy": "src/main.ts",
+   "reason": "載入失敗畫面嘅錯誤訊息（src/main.ts:100）。同上：只喺失敗路徑出現。"
+  },
+  "bg-error-hint": {
+   "producedBy": "src/main.ts",
+   "reason": "載入失敗畫面嘅提示（src/main.ts:101）。同上：只喺失敗路徑出現。"
+  },
+  "skip-link": {
+   "producedBy": "index.html",
+   "reason": "無障礙 skip link（B8 P0-2）。平時視覺上收埋（只喺 focus 時顯示）→ 截圖守衛同執行期探測都可能睇唔到。"
+  }
+ }
+}

@@ -55,6 +55,11 @@ CORPUS_GLOBS = [
 #: 所以分開處理：文件提及**唔算**使用，但會另外標示出嚟。
 DOC_GLOBS = ["docs/**/*.md"]
 
+#: 「必須存在」class 契約（D4-9）。列入嘅 class 一律唔會判死。
+#: 呢個補返 D4-3 嘅盲點：`docs/` 提及唔算使用，但如果契約**明文要求**
+#: 某 class 必須存在，就要有機器可讀嘅方法保護佢（唔係靠人記得）。
+DEFAULT_CONTRACT = REPO / "docs" / "contracts" / "class-contract.json"
+
 #: 最短前綴長度（太短嘅前綴（例如 `z-`）會令幾乎所有 class 都被判「有可能」）。
 MIN_PREFIX = 4
 
@@ -92,6 +97,21 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="可靠嘅零引用 class 分析")
     ap.add_argument("--json", required=True)
     ap.add_argument("--runtime", help="probe-dead-css.mjs 輸出（執行期出現過嘅 class）")
+    ap.add_argument(
+        "--contract",
+        help=(
+            "「必須存在」class 契約（D4-9）。預設 docs/contracts/class-contract.json。"
+            "列入嘅 class 一律唔會判死。"
+        ),
+    )
+    ap.add_argument(
+        "--fail-on-dead",
+        action="store_true",
+        help=(
+            "CI gate：若有任何 class 被判死（A＋B 靜態判準）→ exit 1。"
+            "⚠️ 只判 `dead`；`maybe-dynamic`（前綴拼接）唔會令 CI 紅。"
+        ),
+    )
     args = ap.parse_args()
 
     css = TARGET.read_text(encoding="utf-8")
@@ -104,6 +124,14 @@ def main() -> int:
         data = json.loads(Path(args.runtime).read_text(encoding="utf-8"))
         for state in data.get("states", {}).values():
             runtime.update(state.get("classes", []))
+
+    # D4-9：載入「必須存在」class 契約（唔存在就當空，唔會硬性要求）
+    contract: set[str] = set()
+    contract_path = Path(args.contract) if args.contract else DEFAULT_CONTRACT
+    if contract_path.exists():
+        cdata = json.loads(contract_path.read_text(encoding="utf-8"))
+        contract = set(cdata.get("entries", {}).keys())
+        print(f"  📜 class 契約：{len(contract)} 個（{contract_path.name}）")
 
     results = {}
     for cls, sels in sorted(classes.items()):
@@ -120,7 +148,9 @@ def main() -> int:
 
         in_docs = re.search(rf"(?<![\w-]){re.escape(cls)}(?![\w-])", doc_corpus) is not None
 
-        if literal or in_runtime:
+        if cls in contract:
+            verdict = "contract"
+        elif literal or in_runtime:
             verdict = "used"
         elif prefixes:
             verdict = "maybe-dynamic"
@@ -133,6 +163,7 @@ def main() -> int:
             "prefix_fragments": prefixes[:5],
             "runtime": in_runtime,
             "in_docs": in_docs,
+            "contract": cls in contract,
             "selectors": sels[:4],
             "n_selectors": len(sels),
         }
@@ -141,11 +172,13 @@ def main() -> int:
     doc_only = [c for c, v in results.items() if v["verdict"] == "dead" and v["in_docs"]]
     maybe = [c for c, v in results.items() if v["verdict"] == "maybe-dynamic"]
     used = [c for c, v in results.items() if v["verdict"] == "used"]
+    contracted = [c for c, v in results.items() if v["verdict"] == "contract"]
 
     print("=== D 階段 4：零引用 class 分析 ===")
     print(f"  目標：{TARGET.name}（{len(classes)} 個 class 選擇器）")
     print(f"  參考語料：{len(corpus):,} 字元")
     print(f"  ✅ 有引用        ：{len(used)}")
+    print(f"  📜 契約保護      ：{len(contracted)}")
     print(f"  ⚠️ 可能拼接      ：{len(maybe)}")
     print(f"  ❌ 判死（可移除） ：{len(dead)}")
     if args.runtime:
@@ -160,11 +193,33 @@ def main() -> int:
     print(f"\n  其中文件有提及：{len(doc_only)} 個")
 
     Path(args.json).write_text(
-        json.dumps({"summary": {"dead": dead, "maybe": maybe, "used": used}, "classes": results},
-                   ensure_ascii=False, indent=1),
+        json.dumps(
+            {
+                "summary": {
+                    "dead": dead,
+                    "maybe": maybe,
+                    "used": used,
+                    "contract": contracted,
+                },
+                "classes": results,
+            },
+            ensure_ascii=False,
+            indent=1,
+        ),
         encoding="utf-8",
     )
     print(f"\n已寫入 {args.json}")
+
+    if args.fail_on_dead and dead:
+        print(
+            f"\n❌ CI gate（D4-7）：有 {len(dead)} 個 class 被判死（A＋B 判準）——"
+            f"請剪除（`scripts/prune_dead_css.py`）或者提供引用證據：\n"
+            + "\n".join(f"    .{c}" for c in dead),
+            file=sys.stderr,
+        )
+        return 1
+    if args.fail_on_dead:
+        print("\n✅ CI gate（D4-7）：冇死 class（A＋B 判準；C 需要 browser → 喺 CI skip）")
     return 0
 
 

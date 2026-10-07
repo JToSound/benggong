@@ -42,6 +42,14 @@ jobs:
         run: python scripts/validate_novel.py --if-present
       - name: 公開資料驗證（schema + 治理掃描）
         run: python scripts/validate_public_data.py
+      - name: 公開 JSON canonical 形式（byte-level 重建契約）
+        run: python scripts/rebuild_public_json.py --check
+      - name: 死 CSS 三重判準（D4-7：A＋B 靜態；C 需要 browser → 喺 CI skip）
+        run: >-
+          python scripts/audit_dead_css.py
+          --json /tmp/dead-css.json
+          --contract docs/contracts/class-contract.json
+          --fail-on-dead
 
   private-data-guard:
     runs-on: ubuntu-latest

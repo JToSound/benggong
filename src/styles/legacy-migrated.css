@@ -409,7 +409,10 @@ html, body {
 }
 
 .legend-title {
-  color: var(--fg);
+  /* P1-6-7：原本係 `var(--fg)` —— 呢個 token 喺任何 stylesheet 都冇宣告，
+     而且**冇 fallback** → `color` 會靜默 fallback 到 `inherit`（睇落好似
+     「設計就係咁」）。改用同層級嘅 `--fg-primary`（由 legacy 自己宣告）。 */
+  color: var(--fg-primary);
   font-size: 12px;
   font-weight: 600;
   margin-bottom: 4px;

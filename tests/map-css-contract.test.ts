@@ -37,7 +37,7 @@
 //    2026-09-22 實測就係咁樣踩過：本檔全綠，但真 click 完全冇反應
 //    （根因喺 `MapViewport.onMouseUp()`，見 B6-D7 / B6-D5）。
 
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 
 const MAP_CSS = readFileSync("src/styles/map.css", "utf-8");
@@ -386,6 +386,90 @@ describe("CSS 契約：token 衛生（規則 T1）", () => {
     for (const px of sizes) {
       expect(px, "map.css 唔可以出現 < 12px 嘅字").toBeGreaterThanOrEqual(12);
     }
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 5b. P1-6-7：全 stylesheet token 衛生（捉「拼錯 → 靜默 fallback」）
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// 「`var(--fg)` 拼錯」係**靜默失敗**：屬性會 fallback 到 initial value
+// （例如 `color` 變 `inherit`），睇落好似「設計就係咁」。
+//
+// 呢個斷言掃 `src/styles` 下**所有** `.css`：
+//   凡係 `var(--x)` **冇 fallback** 嘅，`--x` 一定要喺「全專案 token 宇宙」
+//   （`tokens.css` ＋ 所有 stylesheet 嘅自訂屬性宣告）內。
+//
+// ⚠️ 為何用「全專案宇宙」而唔係「只 tokens.css」
+// -------------------------------------------------
+// `layout.css` 用 `var(--safe-right)`，而佢係喺 `mobile.css` 宣告
+// （`env(safe-area-inset-right)`）—— 呢個係**合法跨檔**用法。
+// 若只認 `tokens.css` 會誤報。用「宇宙」仍然捉得到真正嘅拼錯
+// （例如 `--fg` 喺任何檔都冇宣告，2026-10-07 就係咁捉到）。
+//
+// ⚠️ 有 fallback 嘅 `var(--x, fallback)` **唔算** dangling（CSS 保證有值）。
+describe("CSS 契約：token 衛生（全 stylesheet，P1-6-7）", () => {
+  const DIR = "src/styles";
+  const files = readdirSync(DIR)
+    .filter((f) => f.endsWith(".css"))
+    .sort();
+  const raw = new Map(files.map((f) => [f, readFileSync(`${DIR}/${f}`, "utf-8")]));
+
+  /** 收集一段 CSS 內所有 `--x:` 宣告。 */
+  const declared = (css: string): Set<string> =>
+    new Set(
+      (stripComments(css).match(/(--[\w-]+)\s*:/g) || []).map((s) =>
+        s.replace(/\s*:$/, ""),
+      ),
+    );
+
+  // 全專案 token 宇宙（tokens.css ＋ 所有 stylesheet 嘅宣告）
+  const universe = new Set<string>();
+  for (const f of files) for (const d of declared(raw.get(f)!)) universe.add(d);
+
+  /** 抽出「冇 fallback 又唔喺宇宙（亦唔係本檔宣告）」嘅 var(--x)。 */
+  const dangling = (css: string): string[] => {
+    const clean = stripComments(css);
+    const local = declared(css);
+    const out: string[] = [];
+    const re = /var\(\s*(--[\w-]+)\s*(,)?/g;
+    let m: RegExpExecArray | null;
+    while ((m = re.exec(clean)) !== null) {
+      if (m[2]) continue; // 有 fallback → 安全
+      if (!universe.has(m[1]) && !local.has(m[1])) out.push(m[1]);
+    }
+    return out;
+  };
+
+  it("每個 stylesheet 都冇「冇 fallback 又未定義」嘅 var(--x)", () => {
+    const problems: string[] = [];
+    for (const f of files) {
+      const d = [...new Set(dangling(raw.get(f)!))];
+      if (d.length) problems.push(`${f}: ${d.join(", ")}`);
+    }
+    expect(
+      problems,
+      "以下 CSS 用咗未定義又冇 fallback 嘅 token（拼錯會靜默失敗）：\n" +
+        problems.join("\n"),
+    ).toEqual([]);
+  });
+
+  it("⭐ 對照：偵測器捉得到真正嘅拼錯（唔係恆真）", () => {
+    /*
+     * 若呢個偵測器壞咗（例如永遠回空陣列），上面嘅斷言會變**假綠**。
+     * 所以餵一段已知有問題嘅 CSS 入去，確認佢真係捉得到。
+     */
+    const probe = ":root{--ok:1}.x{color:var(--ok);background:var(--nope)}";
+    expect(dangling(probe)).toEqual(["--nope"]);
+  });
+
+  it("`--fg` 呢類「半截」token 唔會回流（D 遷移遺留）", () => {
+    /*
+     * 具體回歸守衛：`legacy-migrated.css` 原本有一條 `color: var(--fg)`
+     * —— 應為 `--fg-primary`。呢個斷言令佢唔會再次出現。
+     */
+    const legacy = raw.get("legacy-migrated.css")!;
+    expect(stripComments(legacy)).not.toMatch(/var\(\s*--fg\s*\)/);
   });
 });
 

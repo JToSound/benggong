@@ -25,6 +25,9 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 TARGET = REPO / "src" / "styles" / "legacy-migrated.css"
 
+#: 「必須存在」class 契約（D4-9）—— 列入嘅 class 一律唔會剪除。
+DEFAULT_CONTRACT = REPO / "docs" / "contracts" / "class-contract.json"
+
 
 def find_rules(css: str) -> list[dict]:
     """回傳所有 style rule：{start, end, selector, depth}（字元 offset）。"""
@@ -61,10 +64,25 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="剪除死 class 規則")
     ap.add_argument("--analysis", required=True)
     ap.add_argument("--apply", action="store_true")
+    ap.add_argument(
+        "--contract",
+        help="「必須存在」class 契約（D4-9）。預設 docs/contracts/class-contract.json。",
+    )
     args = ap.parse_args()
 
     data = json.loads(Path(args.analysis).read_text(encoding="utf-8"))
-    dead = set(data["summary"]["dead"])
+
+    # D4-9：契約保護 —— 契約要求存在嘅 class 永遠唔剪
+    contract: set[str] = set()
+    cpath = Path(args.contract) if args.contract else DEFAULT_CONTRACT
+    if cpath.exists():
+        contract = set(
+            json.loads(cpath.read_text(encoding="utf-8")).get("entries", {}).keys()
+        )
+
+    dead = set(data["summary"]["dead"]) - contract
+    if contract:
+        print(f"📜 契約保護 {len(contract)} 個 class（唔會剪）：{', '.join(sorted(contract))}")
     print(f"死 class：{len(dead)} 個")
 
     css = TARGET.read_text(encoding="utf-8")
