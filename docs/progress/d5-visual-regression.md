@@ -153,7 +153,7 @@ UPDATE_VISUAL_BASELINE=1 npx vitest run tests/visual-regression.e2e.test.ts
 | ~~D5-7~~ | ~~加「殘留 server」守衛~~ → ✅ **已完成（見 §10）** | D5-1 |
 | D5-8 | 擴到淺色主題 ＋ 更多 viewport（1280／1920） | D5-4 |
 | D5-9 | 失敗時自動產生 side-by-side ＋ 差異熱圖 PNG | D5-6 |
-| D5-10 | 統一 `visual-shots.mjs` 同 helper（後者為唯一來源） | D5-5 |
+| ~~D5-10~~ | ~~統一 `visual-shots.mjs` 同 helper（後者為唯一來源）~~ → ✅ **已完成（2026-10-07，見 `d5-10-and-verification-expansion.md` §1）**：`.mjs` 直接 `import` TS helper（Node 22 type stripping），狀態由 7 → **11**，零重複 | D5-5 |
 
 ---
 

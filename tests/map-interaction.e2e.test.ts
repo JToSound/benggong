@@ -1027,7 +1027,14 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
               () => document.querySelectorAll("#zones-layer .zone.is-selected").length,
             ),
           {
-            timeout: 5_000,
+            /*
+             * ⚠️ 2026-10-07：由 5s 調到 15s。斷言**冇**放寬（仍然係
+             * `toBe(1)`，2px 微拖必須選中）—— 只係令「等狀態真正變化」嘅
+             * 上界闊啲。實測：全套測試（56 檔、18 分鐘）之下，Chromium 嘅
+             * `click` 合成會被延遲超過 5s → 假紅（單獨跑 100% pass）。
+             * 呢個係**量度儀器**問題，唔係產品問題。
+             */
+            timeout: 15_000,
             message: "2 px 位移（< 門檻 4）應該當輕觸，要選中一個 zone",
           },
         )

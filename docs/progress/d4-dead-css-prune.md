@@ -196,7 +196,7 @@ npx vitest run tests/dead-css-policy.test.ts
 
 | ID | 建議 | 針對 |
 |---|---|---|
-| D4-6 | `probe-dead-css-shots.mjs` 加「等地圖動畫定咗」（`viewBox` 連續兩帧相同）＋先跑雜訊底線，才做像素比對 | D4-4 |
-| D4-7 | 將三重判準接入 CI（Python job 可跑 A＋B；C 需要 browser → skip） | D4-1 |
-| D4-8 | **階段 5**：用本輪嘅截圖框架做視覺回歸（先解決 D4-4） | D4-5 |
-| D4-9 | 為 `docs/contracts/` 嘅 class 契約加自動檢查（令 D4-3 嘅判斷唔再靠人） | D4-3 |
+| ~~D4-6~~ | ~~`probe-dead-css-shots.mjs` 加「等地圖動畫定咗」（`viewBox` 連續兩帧相同）＋先跑雜訊底線，才做像素比對~~ → ✅ **已完成（2026-10-07）**：改用 helper `shoot()`；`--compare` 先量**跨 run** 底線（⚠️ 同一頁連影兩次 = 0 px，兩次獨立 run 最大 51 px／Δ12） | D4-4 |
+| ~~D4-7~~ | ~~將三重判準接入 CI（Python job 可跑 A＋B；C 需要 browser → skip）~~ → ✅ **已完成**：`audit_dead_css.py --fail-on-dead` ＋ CI step | D4-1 |
+| ~~D4-8~~ | ~~**階段 5**：用本輪嘅截圖框架做視覺回歸（先解決 D4-4）~~ → ✅ **已完成**（D 階段 5，見 `d5-visual-regression.md`） | D4-5 |
+| ~~D4-9~~ | ~~為 `docs/contracts/` 嘅 class 契約加自動檢查（令 D4-3 嘅判斷唔再靠人）~~ → ✅ **已完成**：`docs/contracts/class-contract.json` ＋ `audit_dead_css.py`／`prune_dead_css.py` `--contract` ＋ `tests/class-contract.test.ts` | D4-3 |

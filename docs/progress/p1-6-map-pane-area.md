@@ -299,7 +299,7 @@ C:/Users/User/AppData/Local/Microsoft/WindowsApps/python3.12.exe scripts/audit_r
 
 | ID | 建議 | 針對 |
 |---|---|---|
-| P1-6-6 | 把驗收矩陣第 1 項其餘兩項（預設 spoiler=1、無 blocking modal）補成自動斷言 | P1-6-5 |
-| P1-6-7 | 清 `legacy-migrated.css` 嘅 dangling token（要連 `map-css-contract.test.ts` 一齊加斷言：`var(--x)` 必須喺 `tokens.css` 有定義） | P1-6-3 |
-| P1-6-8 | 修 `probe-map-pane-area.mjs` 收檔（`finally { browser.close(); killTree(server) }`） | P1-6-4 |
-| P1-6-9 | 為「狀態處理器內再寫狀態」加通用守衛（例如 `onStateChange` 內禁止直接 `setXxx`，或統一用 `queueMicrotask`） | §5 嘅坑 |
+| ~~P1-6-6~~ | ~~把驗收矩陣第 1 項其餘兩項（預設 spoiler=1、無 blocking modal）補成自動斷言~~ → ✅ **已完成（commit `d8c8f81`，見 `acceptance-matrix-1.md`）** | P1-6-5 |
+| ~~P1-6-7~~ | ~~清 `legacy-migrated.css` 嘅 dangling token（要連 `map-css-contract.test.ts` 一齊加斷言：`var(--x)` 必須喺 `tokens.css` 有定義）~~ → ✅ **已完成（2026-10-07）**：捉到並修好 `var(--fg)`；新增全 stylesheet token 衛生斷言（用「全專案宇宙」以容許 `--safe-right` 之類合法跨檔） | P1-6-3 |
+| ~~P1-6-8~~ | ~~修 `probe-map-pane-area.mjs` 收檔（`finally { browser.close(); killTree(server) }`）~~ → ✅ **已完成**：新 `_probe-lib.mjs`（Windows `taskkill /T /F`）＋ `tests/probe-hygiene.test.ts` 棘輪守衛 | P1-6-4 |
+| ~~P1-6-9~~ | ~~為「狀態處理器內再寫狀態」加通用守衛（例如 `onStateChange` 內禁止直接 `setXxx`，或統一用 `queueMicrotask`）~~ → ✅ **已完成**：`store.notify()` 改為巢狀通知排隊 ＋ drain（同步、有界）＋ `tests/store-reentrancy.test.ts` | §5 嘅坑 |

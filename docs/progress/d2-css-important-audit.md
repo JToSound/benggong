@@ -198,14 +198,15 @@ npx vitest run tests/css-important-policy.test.ts
 
 ## 8. 下一步（只限「擴充自動驗證規則／加語義約束」，零人手）
 
-> **2026-10-07 更新：D2-8 已完成（見 §9）**，其餘仍未做。
+> **2026-10-07 更新：D2-8 已完成（見 §9）；D2-7／D2-9 亦已完成
+> （見 `d5-10-and-verification-expansion.md` §5）**，其餘仍未做。
 
 
 | ID | 建議 | 針對 |
 |---|---|---|
-| D2-7 | 將探測器擴到搜尋 overlay／編年史／dossier 展開狀態 | D2-3 |
+| ~~D2-7~~ | ~~將探測器擴到搜尋 overlay／編年史／dossier 展開狀態~~ → ✅ **已完成**：`artifacts/phase3-resume/probe-style-contract.mjs`（11 狀態，狀態來源 = `visual-shots.ts`） | D2-3 |
 | ~~D2-8~~ | ~~把「載入次序保險」清單轉為自動守衛~~ → ✅ **已完成**（見 §9）：`RUNTIME_STYLE_ORDER` + `injectStyleSheet()` 由程式碼強制排位，38 條 `!important` 全部移除 | D2-4 |
-| D2-9 | 階段 5：用本階段嘅量度框架做**視覺契約快照**（唔用像素，用 computed style／幾何） | D2-6 |
+| ~~D2-9~~ | ~~階段 5：用本階段嘅量度框架做**視覺契約快照**（唔用像素，用 computed style／幾何）~~ → ✅ **已完成**：`tests/helpers/style-snapshot.ts` ＋ `tests/visual-contract.e2e.test.ts` ＋ `tests/baselines/style-contract.json` | D2-6 |
 
 ---
 
