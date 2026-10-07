@@ -44,6 +44,8 @@ export interface ShotState {
   name: string;
   viewport: { width: number; height: number };
   isMobile?: boolean;
+  /** 主題（預設 dark）。⚠️ 淺色主題係一條**完全獨立**嘅視覺路徑。 */
+  theme?: "dark" | "light";
   /** 喺 `goto` 之後、截圖之前做嘅事（例如撳掣／轉章節）。 */
   act?: (page: Page) => Promise<void>;
 }
@@ -179,6 +181,87 @@ export async function comparePng(
   );
 }
 
+/**
+ * D5-9：失敗時寫低診斷圖（baseline｜current｜差異熱圖）。
+ *
+ * 為何需要
+ * ========
+ * 守衛失敗時淨係得「差異 7.33%／Δ247」—— 唔知**邊度**變 ✗。
+ * 呢個函數喺瀏覽器 canvas 內砌一張三格圖（原本／現在／差異熱圖），
+ * 寫落 `artifacts/visual-diff/<name>-*.png`，令排查唔需要人手重現 ✓。
+ */
+export async function writeDiffArtifacts(
+  page: Page,
+  name: string,
+  aDataUrl: string,
+  bDataUrl: string,
+): Promise<string[]> {
+  const imgs = await page.evaluate(
+    async ([ua, ub]) => {
+      const decode = async (url: string): Promise<HTMLImageElement> => {
+        const img = new Image();
+        img.src = url;
+        await img.decode();
+        return img;
+      };
+      const A = await decode(ua as string);
+      const B = await decode(ub as string);
+      const w = A.width;
+      const h = A.height;
+      const mk = (width: number): [HTMLCanvasElement, CanvasRenderingContext2D] => {
+        const c = document.createElement("canvas");
+        c.width = width;
+        c.height = h;
+        return [c, c.getContext("2d")!];
+      };
+      // ① baseline
+      const [ca, xa] = mk(w);
+      xa.drawImage(A, 0, 0, w, h);
+      // ② current
+      const [cb, xb] = mk(w);
+      xb.drawImage(B, 0, 0, w, h);
+      // ③ 差異熱圖（紅 = 差得多；灰 = 一樣）
+      const [cc, xc] = mk(w);
+      xc.drawImage(A, 0, 0, w, h);
+      const da = xa.getImageData(0, 0, w, h);
+      const db = xb.getImageData(0, 0, w, h);
+      const out = xc.createImageData(w, h);
+      for (let i = 0; i < da.data.length; i += 4) {
+        const d = Math.max(
+          Math.abs(da.data[i] - db.data[i]),
+          Math.abs(da.data[i + 1] - db.data[i + 1]),
+          Math.abs(da.data[i + 2] - db.data[i + 2]),
+        );
+        const lum = (da.data[i] + da.data[i + 1] + da.data[i + 2]) / 3;
+        const g = Math.round(lum * 0.35);
+        const t = Math.min(1, d / 64);
+        out.data[i] = Math.round(g + (255 - g) * t);
+        out.data[i + 1] = Math.round(g * (1 - t));
+        out.data[i + 2] = Math.round(g * (1 - t));
+        out.data[i + 3] = 255;
+      }
+      xc.putImageData(out, 0, 0);
+      return {
+        baseline: ca.toDataURL("image/png"),
+        current: cb.toDataURL("image/png"),
+        diff: cc.toDataURL("image/png"),
+      };
+    },
+    [aDataUrl, bDataUrl] as const,
+  );
+
+  const dir = "artifacts/visual-diff";
+  mkdirSync(dir, { recursive: true });
+  const written: string[] = [];
+  for (const [kind, url] of Object.entries(imgs)) {
+    const b64 = (url as string).replace(/^data:image\/png;base64,/, "");
+    const out = join(dir, `${name}-${kind}.png`);
+    writeFileSync(out, Buffer.from(b64, "base64"));
+    written.push(out);
+  }
+  return written;
+}
+
 /** 讀基線（PNG → data URL）。唔存在回 `null`。 */
 export function readBaseline(name: string): string | null {
   const p = join(BASELINE_DIR, `${name}.png`);
@@ -262,6 +345,28 @@ export const STATES: ShotState[] = [
     },
   },
   { name: "07-mobile-default", viewport: { width: 390, height: 844 }, isMobile: true },
+  /*
+   * ⚠️ D5-8（2026-10-07）：淺色主題係一條**完全獨立**嘅視覺路徑
+   * （`tokens.css` 有成套 `[data-theme="light"]` 覆蓋）→ 之前零覆蓋 ✗。
+   * 另外補 1280×800 同 1920×1080（`legacy-migrated.css` 有 1279px 斷點，
+   * 1280 正好喺斷點之上；1920 係大螢幕代表）。
+   */
+  {
+    name: "08-desktop-light-default",
+    viewport: { width: 1440, height: 900 },
+    theme: "light",
+  },
+  {
+    name: "09-desktop-light-chronicle",
+    viewport: { width: 1440, height: 900 },
+    theme: "light",
+    act: async (page) => {
+      await page.keyboard.press("Escape");
+      await page.click("#btn-mode", { force: true, timeout: 15_000 });
+    },
+  },
+  { name: "10-desktop-1280-default", viewport: { width: 1280, height: 800 } },
+  { name: "11-desktop-1920-default", viewport: { width: 1920, height: 1080 } },
 ];
 
 /** 開一個 page（已套好 localStorage 同 locale）。 */
@@ -276,14 +381,14 @@ export async function openShotPage(
     hasTouch: st.isMobile,
     isMobile: st.isMobile,
   });
-  await page.addInitScript(() => {
+  await page.addInitScript((theme) => {
     try {
       localStorage.setItem("binggang.onboarding.dismissed", "1");
-      localStorage.setItem("binggang.theme", "dark");
+      localStorage.setItem("binggang-theme", theme);
     } catch {
       /* */
     }
-  });
+  }, st.theme ?? "dark");
   return page;
 }
 

@@ -46,6 +46,7 @@ import {
   STATES,
   waitApp,
   writeBaseline,
+  writeDiffArtifacts,
 } from "./helpers/visual-shots";
 
 const BASE_URL = "http://localhost:5174";
@@ -148,13 +149,24 @@ describe("D 階段 5：視覺回歸", () => {
               `｜最大 Δ ${r.maxDelta}｜尺寸 ${r.aSize} vs ${r.bSize}`;
             report.push(line);
             console.log(`[D5] ${line.trim()}`);
+            const failed = r.diffPct > MAX_DIFF_PCT || r.maxDelta > MAX_DELTA;
+            if (failed) {
+              /*
+               * D5-9：失敗時寫低診斷圖（baseline｜current｜差異熱圖）——
+               * 冇嘅話淨係得「差異 X%」，唔知**邊度**變 ✗。
+               */
+              const files = await writeDiffArtifacts(page, st.name, baseline!, cur);
+              console.log(`[D5] 🔍 診斷圖：${files.join("、")}`);
+            }
             expect(
               r.diffPct,
-              `${st.name} 有 ${r.diffPct.toFixed(4)}% 像素唔同（上限 ${MAX_DIFF_PCT}%）`,
+              `${st.name} 有 ${r.diffPct.toFixed(4)}% 像素唔同（上限 ${MAX_DIFF_PCT}%）` +
+                `｜診斷圖喺 artifacts/visual-diff/${st.name}-*.png`,
             ).toBeLessThanOrEqual(MAX_DIFF_PCT);
             expect(
               r.maxDelta,
-              `${st.name} 最大通道差 Δ${r.maxDelta}（上限 ${MAX_DELTA}）`,
+              `${st.name} 最大通道差 Δ${r.maxDelta}（上限 ${MAX_DELTA}）` +
+                `｜診斷圖喺 artifacts/visual-diff/${st.name}-*.png`,
             ).toBeLessThanOrEqual(MAX_DELTA);
           } finally {
             await page.close();
