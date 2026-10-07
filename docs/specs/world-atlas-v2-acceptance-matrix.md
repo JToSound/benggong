@@ -31,7 +31,7 @@ python scripts/audit_coordinate_integrity.py # 新
 
 | # | 測試 | 現況 | V2 斷言 | Owner | Gate |
 |---|---|---|---|---|---|
-| 1 | 初次入站 1440px：title、4 主入口、safe spoiler、map visible、無 blocking modal | ⚠️ 部分（只有 2 入口） | `h1` 存在；4 個入口文字存在且可鍵盤達；預設 spoiler=1；`#map-pane` 面積 ≥70%；無 `.modal[open]` | B8 | 3 |
+| 1 | 初次入站 1440px：title、4 主入口、safe spoiler、map visible、無 blocking modal | ✅ **已達標**（2026-10-07；見 `docs/progress/p1-6-map-pane-area.md` ＋ `tests/panel-overlay.e2e.test.ts`） | `h1` 存在；4 個入口文字存在且可鍵盤達；預設 spoiler=1；`#map-pane` 面積 ≥70%；無 `.modal[open]` | B8 | 3 |
 | 2 | Zone：click survivor zone → dossier → related event → map state / URL update | ❌ 完全失敗（0/380 px 可點） | zone 中心 click → `?zone=` 出現；dossier 可見；related event click → `?event=`；`mode` 標籤一致 | B6 | 3 |
 | 3 | Infected nest：click → threat-oriented dossier、danger legend、no false governance fields | ❌ **完全冇測試** | `zone_type=infected_nest` → 顯示 `nest_profile`；**唔顯示** `governance`；legend 有 nest | B6/B7 | 3 |
 | 4 | Search：角色／zone／event／chapter，鍵盤 ↑↓/Enter/Esc | ❌ ArrowDown 無效 | 5 類齊；↑↓ 移動 `aria-activedescendant`；Enter 開啟；Esc 關閉 + focus 還原 | B8 | 3 |

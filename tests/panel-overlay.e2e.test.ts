@@ -386,3 +386,118 @@ describe("P1-6：浮層唔可以蓋住地圖控制項", () => {
     TIMEOUT,
   );
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 6. 驗收矩陣第 1 項（初次入站 1440px）—— 補完最後兩項
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// 矩陣第 1 項要求：`h1` 存在；4 個入口文字存在且可鍵盤達；**預設 spoiler=1**；
+// `#map-pane` 面積 ≥70%；**無 `.modal[open]`**。
+// 前面嘅 describe 已覆蓋「4 入口」（§3）同「≥70%」（§1）；
+// 呢度補「預設 spoiler=1」同「無 blocking modal」。
+
+describe("驗收矩陣 §1：預設 spoiler = 1（用 URL 正規化證明）", () => {
+  it(
+    "⭐ `?spoiler=1` 會被正規化走；`?spoiler=0` 會保留",
+    async () => {
+      /*
+       * 為何用 URL 正規化做證據
+       * ----------------------
+       * `src/state/url.ts` 嘅 `serialize()` 只喺
+       * `state.spoilerMax !== DEFAULT_SPOILER_MAX` 時才寫 `spoiler` 參數。
+       * 所以：
+       *   · `?spoiler=1` → 正規化之後**冇** `spoiler` → 證明 **1 就係預設** ✓
+       *   · `?spoiler=0` → 保留 → 對照組（證明唔係「乜都刪」）✓
+       * 呢個係**程式化、可重跑**嘅證明，唔使讀原始碼常數 ✓。
+       */
+      const browser = await launch();
+      if (!browser) return;
+      try {
+        for (const [query, shouldKeep] of [
+          ["?spoiler=1", false],
+          ["?spoiler=0", true],
+        ] as const) {
+          const page = await openPage(browser, DESKTOP, query);
+          await page.waitForTimeout(500);
+          const href = await page.evaluate(() => location.href);
+          const has = new URL(href).searchParams.has("spoiler");
+          expect(
+            has,
+            `${query} 正規化之後${shouldKeep ? "應該保留" : "唔應該有"} spoiler 參數（實際 ${href}）`,
+          ).toBe(shouldKeep);
+          await page.close();
+        }
+      } finally {
+        await browser.close();
+      }
+    },
+    TIMEOUT,
+  );
+
+  it(
+    "⭐ 首屏有 `h1`（頁面標題）而且只有一個",
+    async () => {
+      const browser = await launch();
+      if (!browser) return;
+      try {
+        const page = await openPage(browser, DESKTOP);
+        const h1 = await page.evaluate(() =>
+          Array.from(document.querySelectorAll("h1")).map((el) => ({
+            text: (el.textContent ?? "").trim(),
+            visible: el.getBoundingClientRect().width > 0,
+          })),
+        );
+        expect(h1, "首屏應該只有一個 h1").toHaveLength(1);
+        expect(h1[0].text.length, "h1 唔應該係空").toBeGreaterThan(0);
+        expect(h1[0].visible, "h1 應該可見").toBe(true);
+      } finally {
+        await browser.close();
+      }
+    },
+    TIMEOUT,
+  );
+
+  it(
+    "⭐ 首屏冇 blocking modal（無可見 `[role=dialog][aria-modal=true]`）",
+    async () => {
+      const browser = await launch();
+      if (!browser) return;
+      try {
+        const page = await openPage(browser, DESKTOP);
+        const blocking = await page.evaluate(() => {
+          const els = Array.from(
+            document.querySelectorAll('[role="dialog"][aria-modal="true"]'),
+          );
+          return els
+            .filter((el) => {
+              const cs = getComputedStyle(el);
+              if (cs.display === "none" || cs.visibility === "hidden") return false;
+              const r = el.getBoundingClientRect();
+              return r.width > 0 && r.height > 0;
+            })
+            .map((el) => el.id || el.getAttribute("class") || el.tagName);
+        });
+        expect(
+          blocking,
+          `首屏唔應該有 blocking modal，但見到：${blocking.join("、")}`,
+        ).toEqual([]);
+        // 對照：搜尋 overlay 一開就應該符合「blocking dialog」嘅形狀
+        await page.keyboard.press("/");
+        await page.waitForTimeout(600);
+        const afterOpen = await page.evaluate(
+          () =>
+            Array.from(
+              document.querySelectorAll('[role="dialog"][aria-modal="true"]'),
+            ).filter((el) => {
+              const r = el.getBoundingClientRect();
+              return r.width > 0 && r.height > 0;
+            }).length,
+        );
+        expect(afterOpen, "搜尋 overlay 開咗之後應該見到一個 dialog").toBeGreaterThan(0);
+      } finally {
+        await browser.close();
+      }
+    },
+    TIMEOUT,
+  );
+});
