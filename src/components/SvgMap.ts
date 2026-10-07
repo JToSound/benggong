@@ -73,6 +73,7 @@ import type { LayerFlags } from "../types/state";
 import { prefersReducedMotion } from "../motion";
 import basemapCoords from "../../public/assets/hk-basemap-coords.json";
 import mapCss from "../styles/map.css?inline";
+import { injectStyleSheet } from "../ui/inject-style-sheet";
 
 /*
  * 標準緯線校正（φ₀ = 22.36°）由 `src/map/map-camera.ts` 提供**唯一一份**。
@@ -677,11 +678,9 @@ export class SvgMap {
    * 詳見 `docs/contracts/b6-interface-contract.md` §10。
    */
   private injectMapCss(): void {
-    if (document.getElementById("map-v2-css")) return;
-    const style = document.createElement("style");
-    style.id = "map-v2-css";
-    style.textContent = mapCss;
-    document.head.appendChild(style);
+    // ⚠️ 2026-10-07（D 階段 2）：次序由 `RUNTIME_STYLE_ORDER` 保證
+    // （`map-v2-css` 喺 `b8-mobile-css` **之前**），唔靠呼叫次序。
+    injectStyleSheet("map-v2-css", mapCss);
   }
 
   constructor(root: HTMLElement, app: App) {

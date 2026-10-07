@@ -118,7 +118,7 @@
   .workspace.is-pane-open #map-controls {
     right: calc(
       var(--story-pane-w) + var(--sp-3) + var(--safe-right)
-    ) !important;
+    );
   }
 }
 

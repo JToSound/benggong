@@ -693,13 +693,32 @@ describe("A11 CSS 注入（契約 §10）", () => {
     expect(SVG_MAP).toContain('import mapCss from "../styles/map.css?inline"');
   });
 
-  it("注入嘅 <style id=\"map-v2-css\"> append 到 head（後載入勝）", () => {
-    expect(SVG_MAP).toContain('style.id = "map-v2-css"');
-    expect(SVG_MAP).toContain("document.head.appendChild(style)");
+  /*
+   * ⚠️ 2026-10-07（D 階段 2）：注入改為經 `injectStyleSheet()`。
+   *
+   * 原本嘅斷言係「`SvgMap.ts` 內有 `style.id = "map-v2-css"` 同
+   * `document.head.appendChild(style)`」—— 但次序原本係**隱式**嘅
+   * （取決於呼叫先後）。D 階段 2 移除咗 `mobile.css` 全部 `!important`，
+   * 令次序變成**唯一**嘅勝負依據 → 改為由
+   * `src/ui/inject-style-sheet.ts` 嘅 `RUNTIME_STYLE_ORDER` **強制**排位。
+   *
+   * 真瀏覽器嘅實際 `<head>` 次序由
+   * `tests/style-sheet-order.e2e.test.ts` 驗（唔喺度重複）。
+   */
+  const INJECT_HELPER = readFileSync("src/ui/inject-style-sheet.ts", "utf-8");
+
+  it("注入嘅 <style id=\"map-v2-css\"> 經 injectStyleSheet 排到 head（後載入勝）", () => {
+    expect(SVG_MAP).toContain('injectStyleSheet("map-v2-css", mapCss)');
+    // 排位邏輯：插喺次序更後嘅 runtime <style> 之前；冇就 append 到最尾
+    expect(INJECT_HELPER).toContain("document.head");
+    expect(INJECT_HELPER).toContain("appendChild");
+    expect(INJECT_HELPER).toContain("insertBefore");
   });
 
   it("注入係冪等（重複 init 唔會加第二個 <style>）", () => {
-    expect(SVG_MAP).toContain('document.getElementById("map-v2-css")');
+    expect(INJECT_HELPER, "要先用 getElementById 搵返既有 <style>").toContain(
+      "document.getElementById(id)",
+    );
   });
 
   it("注入發生喺 `root.innerHTML` **之前**（避免第一幀用舊 CSS）", () => {

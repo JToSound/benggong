@@ -3,6 +3,9 @@
 > 對應：`docs/progress/d-legacy-css-migration.md` §6「未做（階段 2 / 4 / 5）」
 > 前置：D 階段 1+3（舊 CSS 原文搬入 `legacy-migrated.css`）已完成
 > 硬規則：**零人手參與**（`AGENTS.md`）—— 全部驗證程式化、可重跑。
+>
+> **2026-10-07 更新：本階段已全部完成。** 上一輪保留嘅 38 條「載入次序保險」
+> 已藉「把次序變成**結構保證**」而移除 —— 見 §9。
 
 ---
 
@@ -13,11 +16,12 @@
 
 1. **建立可重跑嘅「必要性」量度儀器**（真 Chromium，4 個 config × 153 個
    computed value），並用**對照實驗**證明儀器有效；
-2. **實測結論**：46 條全部都可以移除而**零可見變化** —— 但其中 **38 條**係
-   「**載入次序保險**」（有競爭宣告），移除等於用「檔案載入次序」換走一個
-   保證 → **決定保留**，並逐條登記理由；
-3. **移除 8 條結構上冗餘**（冇任何競爭宣告 → 今日移除零風險，實測
-   0/153 有變），並加**契約測試**防止 `!important` 再次蔓延。
+2. **實測結論**：46 條全部都可以移除而**零可見變化**。
+   **2026-10-07 完成**：先將「載入次序」由隱式慣例變成**程式碼強制**
+   （`RUNTIME_STYLE_ORDER` + `injectStyleSheet()` + 兩層守衛），
+   再移除全部 46 條 → `mobile.css` / `layout.css` 現時 **零 `!important`**（見 §9）；
+3. **移除全部 46 條**，並加**兩層守衛**（靜態契約 + 真瀏覽器次序）＋
+   allowlist 契約，防止 `!important` 再次蔓延。
 
 ---
 
@@ -194,8 +198,99 @@ npx vitest run tests/css-important-policy.test.ts
 
 ## 8. 下一步（只限「擴充自動驗證規則／加語義約束」，零人手）
 
+> **2026-10-07 更新：D2-8 已完成（見 §9）**，其餘仍未做。
+
+
 | ID | 建議 | 針對 |
 |---|---|---|
 | D2-7 | 將探測器擴到搜尋 overlay／編年史／dossier 展開狀態 | D2-3 |
-| D2-8 | 把「載入次序保險」清單轉為**自動守衛**：斷言 `mobile.css` 一定係最後注入（令保險變成**結構保證**，唔再靠 `!important`） | D2-4 |
+| ~~D2-8~~ | ~~把「載入次序保險」清單轉為自動守衛~~ → ✅ **已完成**（見 §9）：`RUNTIME_STYLE_ORDER` + `injectStyleSheet()` 由程式碼強制排位，38 條 `!important` 全部移除 | D2-4 |
 | D2-9 | 階段 5：用本階段嘅量度框架做**視覺契約快照**（唔用像素，用 computed style／幾何） | D2-6 |
+
+---
+
+## 9. ✅ 完成（2026-10-07）：由「次序保險」變成「次序保證」
+
+### 9.1 問題
+
+上一輪（2026-10-05）保留 38 條 `!important`，理由係：移除之後
+`mobile.css` 嘅規則之所以仍然生效，**完全靠「檔案載入次序」**（同特異度
+之下後者勝），而嗰個次序原本係**隱式**嘅 —— 取決於 `SvgMap.init()` 同
+`BottomSheet` 建構嘅先後。任何人加一個新嘅執行期 stylesheet 就會令
+`mobile.css` **靜默**輸 → 手機版面／safe-area 無聲壞掉，而且冇 `!important`
+擋住。所以當時判斷「唔值得用保證換乾淨」。
+
+### 9.2 做法：將次序寫入程式碼（唔再靠慣例）
+
+新增 `src/ui/inject-style-sheet.ts`：
+
+```ts
+export const RUNTIME_STYLE_ORDER = ["map-v2-css", "b8-mobile-css"] as const;
+
+export function injectStyleSheet(id: string, css: string): void { … }
+```
+
+- 次序由 `RUNTIME_STYLE_ORDER` **明確聲明**；
+- `injectStyleSheet()` 每次呼叫都會將 `<style>` **重新排到正確位置**
+  （搵第一個次序更後嘅 runtime `<style>` 插喺佢前面；冇就 append 到最尾）
+  → **唔受呼叫次序影響** ✓；
+- 只理 `style[id]` —— bundled `<link>`（tokens／base／legacy-migrated／
+  layout）一定要留喺最前 ✓。
+
+兩個注入點改用同一個入口：`BottomSheet.injectMobileCss()`、
+`SvgMap.injectMapCss()` ✓。
+
+### 9.3 實測（真瀏覽器）
+
+```
+=== document.head 內 stylesheet 次序 ===
+  [0] link  id=(冇 id)          rules=515   ← Vite bundle
+  [1] style id=map-v2-css       rules=82
+  [2] style id=b8-mobile-css    rules=55    ← 最後 ✓
+```
+
+### 9.4 移除 38 條 + 驗證
+
+| 量度 | 結果 |
+|---|---|
+| 4 config × 127 個 computed value（同一 inventory 前後對比） | **0 條有變** ✓ |
+
+**最終狀態**：`mobile.css` / `layout.css` **零** `!important`
+（只剩 `base.css` 4 條 + `mobile.css` 3 條，全部係
+`@media (prefers-reduced-motion: reduce)` —— 正當用法）✓。
+
+全專案 `!important`：**49 條候選 → 0 條** ✓。
+
+### 9.5 新增守衛
+
+| 檔案 | 內容 | CI |
+|---|---|---|
+| `tests/style-sheet-order.test.ts`（4 tests） | `RUNTIME_STYLE_ORDER` 最後一定係 `b8-mobile-css`；兩個注入點都行 `injectStyleSheet()` 而且**唔可以自己 `createElement("style")`**；helper 真有 `insertBefore`／`appendChild` 重排；`mobile.css`／`layout.css` 零 `!important`（剔走 reduced-motion block 之後） | ✅ 跑到 |
+| `tests/style-sheet-order.e2e.test.ts`（2 tests） | 真瀏覽器：`head` 次序 = `bundle → map-v2-css → b8-mobile-css`（1440×900 同 390×844）；**行為證據**：`#map-controls .map-ctrl` 嘅 `min-height` 實際 = mobile.css 嘅 `44px`（唔靠 `!important`，靠次序） | ⚠️ skip（冇 browser） |
+
+> ⚠️ CI（ubuntu-latest）冇裝 Playwright browser → e2e 一律 skip，
+> 所以**靜態契約係 CI 唯一守衛** ✓（已喺測試檔頂部註明）。
+
+### 9.5b 更新既有測試（**保留原本意圖**）
+
+重構注入方式令 3 個「斷言舊實作」嘅契約測試變紅 —— 逐個更新，意圖不變：
+
+| 測試 | 原本斷言 | 更新後 |
+|---|---|---|
+| `map-interaction.test.ts` A11「append 到 head（後載入勝）」 | `SvgMap.ts` 內有 `style.id = "map-v2-css"` + `head.appendChild(style)` | `SvgMap.ts` 用 `injectStyleSheet("map-v2-css", mapCss)`；helper 有 `appendChild`／`insertBefore` 排位邏輯 |
+| `map-interaction.test.ts` A11「注入係冪等」 | `SvgMap.ts` 內有 `document.getElementById("map-v2-css")` | 冪等由 helper 提供 → 斷言 helper 內有 `document.getElementById(id)` |
+| `mobile-layout.e2e.test.ts`「`.map-controls` 距底有計入 safe-area」 | 搵一條**帶 `!important`** 嘅 `bottom` 規則 | 搵嗰條規則（唔再要求 `!important`）**＋ 斷言佢喺最後一個 stylesheet**（同特異度之下後者勝）—— 意圖（safe-area 要生效）不變 |
+
+> 教訓：呢類「靜態原始碼契約」測試會**綁死實作細節**。重構時一定要問
+> 「原本嘅**意圖**係咩」，而唔係照抄新嘅實作字串。
+
+### 9.6 為何「次序」比 `!important` 好
+
+| | `!important` | 明確次序 + 守衛 |
+|---|---|---|
+| 保證強度 | 強（無視次序） | 強（由程式碼強制排位） |
+| 失敗模式 | **靜默**（新規則無聲輸，要量 `getComputedStyle` 才捉到） | **響亮**（守衛測試變紅） |
+| 可讀性 | 要逐條查「為咩要 `!important`」 | 一眼睇到 `RUNTIME_STYLE_ORDER` |
+| 對未來改動 | 阻礙（新規則要記住加 `!important`） | 友好（照寫規則即可） |
+
+---

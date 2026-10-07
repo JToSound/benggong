@@ -61,12 +61,12 @@
 .pane-story.is-collapsed,
 .pane-story[data-sheet-snap="peek"] {
   visibility: hidden;
-  pointer-events: none !important;
+  pointer-events: none;
 }
 
 /* 收合時唔應該霸佔 grid 空間（令地圖填滿） */
 .pane-story.is-collapsed {
-  transform: translateX(100%) !important;
+  transform: translateX(100%);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -92,10 +92,10 @@
 #svg-map .location-marker:focus-visible,
 #svg-map .location-marker-cluster:focus-visible,
 #svg-map .route-line:focus-visible {
-  outline: 2px solid var(--focus-ring) !important;
-  outline-offset: 2px !important;
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
   /* clip-path 之下唯一保證可見嘅通道 */
-  box-shadow: inset 0 0 0 2px var(--focus-ring) !important;
+  box-shadow: inset 0 0 0 2px var(--focus-ring);
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -113,16 +113,16 @@
 .nav-btn {
   min-width: 44px;
   min-height: 44px;
-  padding: 0 var(--sp-2) !important;
-  font-size: var(--fs-sm) !important;
+  padding: 0 var(--sp-2);
+  font-size: var(--fs-sm);
 }
 
 /* 頂欄 8 個按鈕喺 390px 放唔落（8 x 44 = 352 + brand）→ 允許橫向捲 */
 #topbar nav {
-  display: flex !important;
-  gap: var(--sp-1) !important;
-  overflow-x: auto !important;
-  overflow-y: hidden !important;
+  display: flex;
+  gap: var(--sp-1);
+  overflow-x: auto;
+  overflow-y: hidden;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   max-width: 100%;
@@ -137,10 +137,10 @@
  * 負 margin 抵消）。呢度用簡單做法：內容盒 24px 高，外盒 44px。
  */
 .ch-pill {
-  min-width: 44px !important;
-  height: 44px !important;
-  padding: 0 !important;
-  font-size: var(--fs-sm) !important;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  font-size: var(--fs-sm);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -148,20 +148,20 @@
 
 /* `#strip-track` 要夠高容納 44px pill（原本 38px） */
 .strip-track {
-  height: 52px !important;
-  align-items: center !important;
+  height: 52px;
+  align-items: center;
 }
 
 /* 圖例語言鈕（A7 P1-1 #21：30.7 x 16） */
 .legend-lang-btn {
-  min-width: 44px !important;
-  min-height: 44px !important;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 /* 地圖控制（A7 P1-1 #22–24：30 x 30） */
 #map-controls .map-ctrl {
-  min-width: 44px !important;
-  min-height: 44px !important;
+  min-width: 44px;
+  min-height: 44px;
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -174,15 +174,15 @@
    ────────────────────────────────────────────────────────────────────────── */
 
 #topbar {
-  padding-top: calc(var(--sp-2) + var(--safe-top)) !important;
-  padding-left: calc(var(--sp-3) + var(--safe-left)) !important;
-  padding-right: calc(var(--sp-3) + var(--safe-right)) !important;
+  padding-top: calc(var(--sp-2) + var(--safe-top));
+  padding-left: calc(var(--sp-3) + var(--safe-left));
+  padding-right: calc(var(--sp-3) + var(--safe-right));
 }
 
 .map-controls,
 #map-controls {
-  bottom: calc(var(--sp-3) + var(--safe-bottom)) !important;
-  right: calc(var(--sp-3) + var(--safe-right)) !important;
+  bottom: calc(var(--sp-3) + var(--safe-bottom));
+  right: calc(var(--sp-3) + var(--safe-right));
 }
 
 /*
@@ -190,7 +190,7 @@
  * 用 `padding-bottom` 而唔係 `margin-bottom` —— 令內部滾動區域自己讓位。
  */
 .pane-story {
-  padding-bottom: calc(var(--sp-3) + var(--safe-bottom)) !important;
+  padding-bottom: calc(var(--sp-3) + var(--safe-bottom));
 }
 
 /* 頂部 level：章節條之後嘅內容區 */
@@ -208,8 +208,8 @@
    ────────────────────────────────────────────────────────────────────────── */
 
 #topbar h1 {
-  font-size: var(--fs-md) !important;
-  line-height: var(--lh-tight) !important;
+  font-size: var(--fs-md);
+  line-height: var(--lh-tight);
   /* 唔可以斷行 → 配合下面 brand 嘅 min-width: 0 令它自然縮 */
   white-space: nowrap;
   overflow: hidden;
@@ -243,18 +243,18 @@
 
 @media (max-width: 1023px) {
   .pane-story {
-    position: fixed !important;
+    position: fixed;
     left: 0;
-    right: 0 !important;
-    bottom: 0 !important;
-    top: auto !important;
-    width: 100% !important;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100%;
     max-width: none;
     height: 55dvh;
     /* 收合（peek）時嘅高度：25dvh（spec IA §5.4） */
-    padding: var(--sp-2) var(--sp-3) calc(var(--sp-3) + var(--safe-bottom)) !important;
+    padding: var(--sp-2) var(--sp-3) calc(var(--sp-3) + var(--safe-bottom));
     border-top: 1px solid var(--border-strong);
-    border-left: none !important;
+    border-left: none;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
     /* 內部滾動（唔係頁面滾動） */
     overflow-y: auto;
@@ -281,7 +281,7 @@
 
   /* 收合（peek）時唔應該有投影蓋住地圖 */
   .pane-story.is-collapsed {
-    box-shadow: var(--shadow-medium) !important;
+    box-shadow: var(--shadow-medium);
   }
 }
 

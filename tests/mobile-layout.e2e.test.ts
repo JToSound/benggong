@@ -361,7 +361,7 @@ describe("B8 mobile：safe-area（§2-9 / P1-7）", { timeout: E2E_TIMEOUT }, ()
       const page = await openMobile(browser);
       const r = await page.evaluate(() => {
         const el = document.querySelector(".map-controls") ?? document.querySelector("#map-controls");
-        if (!el) return { computed: "", ruleBottom: "" };
+        if (!el) return { computed: "", ruleBottom: "", ruleSheetIndex: -1, nSheets: 0 };
         /*
          * ⚠️ 唔可以直接睇 computed `bottom`：桌機／無 inset 環境下
          * `env(safe-area-inset-bottom, 0px)` 解析成 `0px`，`calc(12px + 0px)`
@@ -371,26 +371,46 @@ describe("B8 mobile：safe-area（§2-9 / P1-7）", { timeout: E2E_TIMEOUT }, ()
          * 嘅規則，斷言佢嘅 `bottom` 真係寫住 `env(safe-area-inset-bottom)`。
          */
         let ruleBottom = "";
-        for (const sheet of Array.from(document.styleSheets)) {
+        let ruleSheetIndex = -1;
+        const sheets = Array.from(document.styleSheets);
+        for (let si = 0; si < sheets.length; si++) {
           let rules: CSSRuleList;
           try {
-            rules = sheet.cssRules;
+            rules = sheets[si].cssRules;
           } catch {
             continue;
           }
           for (const rule of Array.from(rules)) {
             const st = (rule as CSSStyleRule).style;
             const sel = (rule as CSSStyleRule).selectorText ?? "";
-            if (st && /map-controls/.test(sel) && st.bottom && st.getPropertyPriority("bottom") === "important") {
+            if (st && /map-controls/.test(sel) && st.bottom) {
               ruleBottom = st.bottom;
+              ruleSheetIndex = si;
             }
           }
         }
-        return { computed: getComputedStyle(el).bottom, ruleBottom };
+        /*
+         * ⚠️ 2026-10-07（D 階段 2）：原本要求嗰條規則**帶 `!important`**。
+         * D 階段 2 移除咗 `mobile.css` 全部 `!important`，改為靠
+         * 「`#b8-mobile-css` 一定係最後一個 stylesheet」（由
+         * `src/ui/inject-style-sheet.ts` 嘅 `RUNTIME_STYLE_ORDER` 強制）。
+         * 所以呢度改為斷言：規則存在 **＋ 佢喺最後一個 stylesheet**（同特異度
+         * 之下後者勝）—— 意圖不變（safe-area 一定要生效）。
+         */
+        return {
+          computed: getComputedStyle(el).bottom,
+          ruleBottom,
+          ruleSheetIndex,
+          nSheets: sheets.length,
+        };
       });
-      expect(r.ruleBottom, `.map-controls 有一條 !important bottom 規則寫住 safe 區`).toMatch(
+      expect(r.ruleBottom, `.map-controls 要有一條 bottom 規則寫住 safe 區`).toMatch(
         /var\(\s*--safe-bottom\s*\)|env\(\s*safe-area-inset-bottom/,
       );
+      expect(
+        r.ruleSheetIndex,
+        "safe-area 規則要喺**最後**一個 stylesheet（冇 !important，靠後載入勝）",
+      ).toBe(r.nSheets - 1);
       expect(r.ruleBottom).toMatch(/calc\(/);
       /*
        * 對應嘅 `--safe-bottom` 一定要真係 `env(safe-area-inset-bottom)`。

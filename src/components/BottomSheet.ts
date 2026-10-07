@@ -43,6 +43,7 @@ import { DUR } from "../motion";
  * Gate 2 刪走舊 CSS 之後，改為喺 `main.ts` 直接 `import` 就可以移除呢段。
  */
 import mobileCss from "../styles/mobile.css?inline";
+import { injectStyleSheet } from "../ui/inject-style-sheet";
 
 /** 3 段 snap（同 `AppState.sheetSnap` 一致）。 */
 export type SheetSnap = "peek" | "half" | "full";
@@ -110,15 +111,14 @@ export function snapFromDrag(
 /**
  * 注入 B8 mobile CSS（`?inline` 字串 → `<style id="b8-mobile-css">`）。
  *
- * 幂等：已經注入就唔重複（多個 `BottomSheet` 實例唔會疊）。
+ * ⚠️ 2026-10-07（D 階段 2）：改用 `injectStyleSheet()`。
+ * 次序由 `RUNTIME_STYLE_ORDER` 保證（`b8-mobile-css` **一定最後**）——
+ * 因為 D 階段 2 移除咗 `mobile.css` 全部 `!important`，佢之所以仍然
+ * 蓋得過 `map.css`／舊 CSS，**完全靠「最後載入」**。
+ * 唔再用「呼叫次序」做隱式假設。
  */
 export function injectMobileCss(): void {
-  if (typeof document === "undefined") return;
-  if (document.getElementById("b8-mobile-css")) return;
-  const style = document.createElement("style");
-  style.id = "b8-mobile-css";
-  style.textContent = mobileCss;
-  document.head.appendChild(style);
+  injectStyleSheet("b8-mobile-css", mobileCss);
 }
 
 export class BottomSheet {
