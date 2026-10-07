@@ -147,16 +147,60 @@ export function createAppStore(options: CreateStoreOptions = {}): AppStore {
   let state: AppState = deepFreeze(createInitialState(options.initial));
   const listeners = new Set<(next: AppState, prev: AppState) => void>();
 
+  /*
+   * P1-6-9：狀態變更處理器內再寫狀態（re-entrancy）—— 通用守衛。
+   *
+   * ⚠️ 問題（MEMORY 教訓 #27）
+   * ------------------------
+   * `notify()` 係**同步** for-loop。如果訂閱者喺 handler 內再 `setXxx()`，
+   * `commit()` 會**同步再入**：內層 notify 即刻派新狀態，但外層 for-loop
+   * 返嚟之後會**繼續用舊嘅 `next`** 派畀後面嘅訂閱者 →
+   * 佢哋「先收到新狀態、再收到舊狀態」= **舊蓋新** ✗。
+   * 實測事故：`is-collapsed` 被加返，pane 明明 `data-sheet-snap="half"`
+   * 但仍然 `visibility: hidden`（撳「編年史」完全冇反應）。
+   *
+   * 修法：**巢狀 commit 嘅通知一律排隊**，由最外層嘅 drain 迴圈逐個派。
+   *   · 冇訂閱者會收到「比佢已經見過嘅更舊」嘅狀態 ✓
+   *   · 終止條件係 queue 清空（唔會 stack overflow）✓
+   *   · 仍然**同步**（drain 喺同一 call stack 內完成）→ 唔改變
+   *     「`setXxx()` 之後 `getState()` 已更新」嘅既有契約 ✓
+   */
+  const pendingNotify: Array<{ next: AppState; prev: AppState }> = [];
+  let draining = false;
+  /** 安全上限：防止「訂閱者無條件寫狀態」造成無限 drain（原本會 stack overflow）。 */
+  const MAX_DRAIN_ROUNDS = 100;
+
   function notify(next: AppState, prev: AppState): void {
-    for (const fn of listeners) {
-      try {
-        fn(next, prev);
-      } catch (err) {
-        // 一個訂閱者爆唔可以拖死其他訂閱者。
-        if (typeof console !== "undefined") {
-          console.warn("[world-atlas/store] 訂閱者拋錯", err);
+    pendingNotify.push({ next, prev });
+    if (draining) return; // 巢狀：交由最外層 drain 派
+    draining = true;
+    let rounds = 0;
+    try {
+      while (pendingNotify.length > 0) {
+        if (++rounds > MAX_DRAIN_ROUNDS) {
+          if (typeof console !== "undefined") {
+            console.warn(
+              `[world-atlas/store] 偵測到疑似無限狀態更新（> ${MAX_DRAIN_ROUNDS} 輪）——已中止派發`,
+            );
+          }
+          pendingNotify.length = 0;
+          break;
+        }
+        const item = pendingNotify.shift()!;
+        // 快照：訂閱者可能喺 handler 內訂閱／退訂（唔應該影響本輪）
+        for (const fn of [...listeners]) {
+          try {
+            fn(item.next, item.prev);
+          } catch (err) {
+            // 一個訂閱者爆唔可以拖死其他訂閱者。
+            if (typeof console !== "undefined") {
+              console.warn("[world-atlas/store] 訂閱者拋錯", err);
+            }
+          }
         }
       }
+    } finally {
+      draining = false;
     }
   }
 
