@@ -86,6 +86,24 @@ describe("D 階段 5：視覺回歸", () => {
             await waitApp(page);
 
             /*
+             * ⚠️ 殘留 server 守衛（雙重保險，2026-10-07）
+             * ----------------------------------------
+             * `e2e.global-setup.ts` 已經會核對「server 服務緊當前 dist/」，
+             * 但呢度再驗一次：**頁面實際載入嘅 CSS 檔名**要等於
+             * `dist/assets/` 內最新嗰個。
+             * 冇呢層嘅話，萬一 setup 邏輯有漏洞，守衛會比對
+             * 「舊 build vs 舊基線」→ **假綠** ✗✗（比假紅危險得多）。
+             */
+            const loadedCss = await page.evaluate(
+              () =>
+                document.querySelector('link[rel="stylesheet"]')?.getAttribute("href") ?? "",
+            );
+            expect(
+              loadedCss,
+              "頁面載入嘅 CSS 唔係 dist/ 最新嗰個 → 5174 有殘留舊 server ✗",
+            ).toContain(latestCssFile());
+
+            /*
              * ⚠️ 殘留 server 守衛（2026-10-07 實測踩過）
              * ----------------------------------------
              * `e2e.global-setup.ts` 會**沿用**已存在嘅 5174 server（只出 warning）。

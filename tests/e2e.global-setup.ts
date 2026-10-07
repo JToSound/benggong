@@ -121,6 +121,44 @@ function killTree(pid: number): void {
   }
 }
 
+/**
+ * 由 `index.html` 抽出 `/assets/xxx.js|css` 嘅檔名（排序後串埋）。
+ *
+ * 為何要咁樣比：Vite 嘅 asset 檔名有 content hash → **檔名變 = build 變** ✓。
+ */
+function assetNames(html: string): string {
+  const names = [...html.matchAll(/\/assets\/([A-Za-z0-9._-]+\.(?:js|css))/g)]
+    .map((m) => m[1])
+    .sort();
+  return names.join(",");
+}
+
+/**
+ * 5174 上面嘅 server 係唔係服務緊**當前** `dist/`？
+ *
+ * ⚠️ 為何需要（2026-10-07 實測踩過）
+ * --------------------------------
+ * 原本「5174 已經有 server 就沿用」嘅邏輯，如果嗰個 server 係**改動之前**
+ * 起嘅，佢會繼續服務舊 `dist/`（或者 Vite 內部快取）→ 之後所有 e2e 都係
+ * 測緊舊 build ✗ —— 而**視覺回歸守衛**會比對「舊 build vs 舊基線」→
+ * **假綠** ✗✗（比假紅危險得多）。
+ *
+ * 修法：沿用之前先核對「server 服務嘅 asset 檔名 == `dist/index.html` 嘅」。
+ * ⚠️ 5174 係 e2e 專用 port（`vite.config.ts` 嘅 dev server 係 **5173**）→
+ * 判定為「舊 build」時清走重起係安全 ✓。
+ */
+async function servedDistIsCurrent(): Promise<boolean> {
+  try {
+    const r = await fetch(BASE, { signal: AbortSignal.timeout(5000) });
+    if (!r.ok) return false;
+    const served = assetNames(await r.text());
+    const local = assetNames(readFileSync(join(process.cwd(), "dist", "index.html"), "utf-8"));
+    return local !== "" && served === local;
+  } catch {
+    return false;
+  }
+}
+
 export default async function globalSetup(_config: FullConfig): Promise<() => void> {
   clearStalePidFile();
 
@@ -147,12 +185,32 @@ export default async function globalSetup(_config: FullConfig): Promise<() => vo
         if (!(await probe(BASE, 1000))) break;
         await sleep(250);
       }
-    } else {
+    } else if (await servedDistIsCurrent()) {
       console.warn(
-        "[e2e] ⚠️ 5174 已經有 server 而且唔係本專案記錄嘅 PID —— 沿用（teardown 唔會關閉佢）。" +
-          " 如果測試卡死，檢查係否殘留 server（見 globalSetup 註解）。",
+        "[e2e] 5174 已經有 server 而且服務緊**當前** dist/ —— 沿用（teardown 唔會關閉佢）。",
       );
       return () => {};
+    } else {
+      /*
+       * ⚠️ 2026-10-07：殘留 server 服務緊**舊 build** → 一定要清走重起。
+       * 唔清嘅話之後所有 e2e 都係測舊 build，而**視覺回歸守衛**會變成
+       * 「舊 build vs 舊基線」→ **假綠** ✗✗。
+       * （5174 係 e2e 專用 port —— dev server 喺 5173 —— 所以清走係安全。）
+       */
+      console.warn(
+        "[e2e] ⚠️ 5174 有殘留 server 但服務緊**舊 build** → 清走重起" +
+          "（否則測試會測舊 dist，視覺守衛會假綠）。",
+      );
+      for (const pid of live) killTree(pid);
+      try {
+        unlinkSync(PID_FILE);
+      } catch {
+        /* 已刪 */
+      }
+      for (let i = 0; i < 20; i++) {
+        if (!(await probe(BASE, 1000))) break;
+        await sleep(250);
+      }
     }
   }
 

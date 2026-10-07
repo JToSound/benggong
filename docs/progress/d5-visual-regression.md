@@ -150,10 +150,44 @@ UPDATE_VISUAL_BASELINE=1 npx vitest run tests/visual-regression.e2e.test.ts
 
 | ID | 建議 | 針對 |
 |---|---|---|
-| D5-7 | 加「殘留 server」守衛（核對 CSS hash）＋ 自動清 5174 | **D5-1**（最高價值 —— 防假綠） |
+| ~~D5-7~~ | ~~加「殘留 server」守衛~~ → ✅ **已完成（見 §10）** | D5-1 |
 | D5-8 | 擴到淺色主題 ＋ 更多 viewport（1280／1920） | D5-4 |
 | D5-9 | 失敗時自動產生 side-by-side ＋ 差異熱圖 PNG | D5-6 |
 | D5-10 | 統一 `visual-shots.mjs` 同 helper（後者為唯一來源） | D5-5 |
+
+---
+
+## 10. ✅ D5-7 完成（2026-10-07）：殘留 server 守衛（雙重）
+
+### 10.1 問題
+
+`tests/e2e.global-setup.ts` 原本「5174 已經有 server 就沿用」✗ —— 如果嗰個
+server 服務緊**舊 build**，之後所有 e2e 都係測舊 build，而**視覺回歸守衛**
+會比對「舊 build vs 舊基線」→ **假綠** ✗✗（比假紅危險得多）。
+
+### 10.2 兩層守衛
+
+| 層 | 位置 | 做法 |
+|---|---|---|
+| **① 根因層** | `tests/e2e.global-setup.ts` | 沿用之前核對「server 服務嘅 `/assets/*` 檔名 == `dist/index.html` 嘅」（Vite asset 有 content hash → 檔名變 = build 變）→ 唔一致就**清走重起** ✓ |
+| **② 測試層** | `tests/visual-regression.e2e.test.ts` | 每次 assert「頁面實際載入嘅 CSS 檔名 == `dist/assets/` 最新嗰個」→ 唔一致就**大聲失敗** ✓ |
+
+⚠️ 清走 5174 係安全：`vite.config.ts` 嘅 dev server 係 **5173**，5174 專屬 e2e preview ✓。
+
+### 10.3 驗證（兩層都做咗）
+
+| 實驗 | 期望 | 實測 |
+|---|---|---|
+| 改 `dist/index.html` 嘅 asset 名（模擬「頁面載入唔存在於 dist 嘅檔」） | **測試層守衛紅** | ✅ `頁面載入嘅 CSS 唔係 dist/ 最新嗰個 → 5174 有殘留舊 server ✗` |
+| 由另一個目錄（`/tmp/olddist`，asset 名改成 `index-OLDBUILD.css`）起 server | **根因層偵測 + 清走** | ✅ `[e2e] ⚠️ 5174 有殘留 server 但服務緊**舊 build** → 清走重起` |
+| 乾淨環境跑守衛 | 通過 | ✅ 7/7（最大 4 px / Δ1） |
+
+### 10.4 已知限制（誠實記錄）
+
+| ID | 限制 | 說明 |
+|---|---|---|
+| **D5-11** | **「清走重起」對非 `vite preview` server 未必成功** | 實測用 `python -m http.server` 起嘅殘留 server，setup **偵測到** ✓ 亦嘗試清走 ✓，但嗰個 server 之後仍然服務舊 build ✗ → **測試層守衛照樣紅** ✓✓（即係**唔會假綠** ✓，但自動復原失敗 ✗）。另外：`vite preview` 實測會**即時讀 `dist/`** ✓ → 「preview 服務舊 build」呢個情境其實好難出現 ✓（真正風險係「由另一個目錄／另一個 checkout 起嘅 server」✓）。 |
+| D5-12 | **`assetNames()` 只比 `/assets/*.js|css`** | 如果將來有新 asset 目錄（例如 `/chunks/`）就要擴 ✓。 |
 
 ---
 
