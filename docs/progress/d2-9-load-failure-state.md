@@ -210,13 +210,18 @@ await page.goto(u.toString(), { waitUntil: "networkidle" });
 
 ---
 
-## 4. 新測試：`tests/load-failure-state.e2e.test.ts`（3 tests）
+## 4. 新測試：`tests/load-failure-state.e2e.test.ts`（**7** tests）
 
 | 測試 | 內容 |
 |---|---|
 | ⭐ 契約 class 都真係會 render | 讀 `class-contract.json` → 逐個 assert 佢喺「正常 ∪ 失敗」狀態出現過（**契約唔可以係空談**） |
+| ⭐ **失敗分支 ×4**（`it.each`） | HTTP 500／收到 HTML（SPA 回退）／JSON 解析失敗／網絡中斷 —— 逐個 assert `.bg-error-detail` 顯示**對應分支**嘅診斷訊息，而且四個分支都同時滿足結構契約（面板／`role=alert`／提示／重試掣） |
 | ⭐ 失敗畫面可見性 ＋ 觸控目標 | 面板可見、`role=alert`、訊息含 `HTTP 500` ＋ 檔名、重試掣 ≥44×44 |
 | ⭐ 撳「重試」可以復原 | 解除攔截 → 撳掣 → `.ch-pill` > 100（真係載入到）＋ 錯誤畫面消失 |
+
+⚠️ 為何要**逐個分支**都測：`fetchJSON()` 有四條唔同嘅失敗路徑，各自有
+**唔同嘅診斷訊息** —— 訊息係用戶唯一嘅線索（「收到 HTML」直接指出 SPA
+回退，同 HTTP 500 係完全唔同嘅根因）。只測一條分支證明唔到其餘三條仍然可達。
 
 ---
 
@@ -252,11 +257,11 @@ await page.goto(u.toString(), { waitUntil: "networkidle" });
 |---|---|
 | typecheck | **0** |
 | lint | **0** |
-| vitest 全套 | **57 檔 / 763 tests 全綠（exit 0）**（前一基線 759） |
+| vitest 全套 | **57 檔 / 767 tests 全綠（exit 0）**（前一基線 763） |
 | pytest | **327 passed** |
 | `visual-regression`（連跑 2 次） | ✅ 12 狀態；**04 同 12 都係 0 px／Δ0** |
 | `visual-contract` | ✅ 3 tests |
-| `load-failure-state` | ✅ 3 tests |
+| `load-failure-state` | ✅ **7 tests**（3 原有 ＋ 4 失敗分支） |
 | `map-interaction` | ✅ 14 tests |
 | `validate_public_data.py` | ✅ |
 | `audit_release.py` | ✅ |
@@ -282,9 +287,10 @@ await page.goto(u.toString(), { waitUntil: "networkidle" });
 
 ## 9. 下一步（全部程式化，零人手）
 
-1. **擴失敗模式覆蓋**：加「網絡中斷（`route.abort()`）」同「HTML 回退」
-   （`fulfill({ contentType: "text/html" })`）兩個變體 → 覆蓋 `fetchJSON`
-   嘅三條錯誤分支。
+1. ~~**擴失敗模式覆蓋**：加「網絡中斷（`route.abort()`）」同「HTML 回退」
+   （`fulfill({ contentType: "text/html" })`）兩個變體~~ → ✅ **已完成
+   （2026-10-10）**：連同「JSON 解析失敗」共 **4 個分支**，以 `it.each`
+   逐個 assert 對應診斷訊息 ＋ 結構契約（見 §4）。
 2. ~~**`probe-dead-css.mjs` 改用 `STATES`**（單一來源）~~ → ✅ **已完成
    （2026-10-10）**：原本寫死 7 個狀態 → 自動漏咗新狀態（包括失敗路徑）。
    改用 `STATES` ＋ `bootShotPage()` → **12 個狀態**，執行期 class 聯集
