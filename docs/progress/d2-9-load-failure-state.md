@@ -252,7 +252,7 @@ await page.goto(u.toString(), { waitUntil: "networkidle" });
 |---|---|
 | typecheck | **0** |
 | lint | **0** |
-| vitest 全套 | **57 檔 / 762 tests 全綠（exit 0）**（基線 759） |
+| vitest 全套 | **57 檔 / 763 tests 全綠（exit 0）**（前一基線 759） |
 | pytest | **327 passed** |
 | `visual-regression`（連跑 2 次） | ✅ 12 狀態；**04 同 12 都係 0 px／Δ0** |
 | `visual-contract` | ✅ 3 tests |
