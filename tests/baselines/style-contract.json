@@ -166,7 +166,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -336,7 +338,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -506,7 +510,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -676,7 +682,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -846,7 +854,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -1060,7 +1070,9 @@
      "overflow": "hidden"
     }
    },
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -1230,7 +1242,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -1400,7 +1414,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -1570,7 +1586,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -1740,7 +1758,9 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
   }
  },
  {
@@ -1910,7 +1930,71 @@
    },
    "#search-overlay": null,
    "#search-overlay .search-panel": null,
-   ".onboarding-card": null
+   ".onboarding-card": null,
+   ".bg-error-panel": null,
+   ".bg-retry-btn": null
+  }
+ },
+ {
+  "state": "12-desktop-load-failure",
+  "viewport": "1440x900",
+  "elements": {
+   "#topbar": null,
+   "#map-pane": null,
+   "#map-controls": null,
+   "#story-pane": null,
+   ".chapter-strip": null,
+   ".map-legend": null,
+   "#btn-toggle-panel": null,
+   "#search-overlay": null,
+   "#search-overlay .search-panel": null,
+   ".onboarding-card": null,
+   ".bg-error-panel": {
+    "rect": {
+     "x": 410,
+     "y": 108,
+     "w": 620,
+     "h": 259
+    },
+    "props": {
+     "display": "block",
+     "position": "static",
+     "z-index": "auto",
+     "pointer-events": "auto",
+     "visibility": "visible",
+     "font-size": "14px",
+     "font-weight": "400",
+     "line-height": "23.8px",
+     "color": "rgb(31, 39, 51)",
+     "background-color": "rgb(255, 255, 255)",
+     "border-top-width": "1px",
+     "border-top-color": "rgb(221, 214, 200)",
+     "overflow": "visible"
+    }
+   },
+   ".bg-retry-btn": {
+    "rect": {
+     "x": 446,
+     "y": 294,
+     "w": 72,
+     "h": 44
+    },
+    "props": {
+     "display": "inline-block",
+     "position": "static",
+     "z-index": "auto",
+     "pointer-events": "auto",
+     "visibility": "visible",
+     "font-size": "14px",
+     "font-weight": "400",
+     "line-height": "23.8px",
+     "color": "rgb(255, 255, 255)",
+     "background-color": "rgb(36, 114, 164)",
+     "border-top-width": "0px",
+     "border-top-color": "rgb(255, 255, 255)",
+     "overflow": "visible"
+    }
+   }
   }
  }
 ]

@@ -22,7 +22,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { chromium } from "@playwright/test";
 import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
-import { STATES, openShotPage, waitApp, waitStable } from "../../tests/helpers/visual-shots.ts";
+import { STATES, bootShotPage } from "../../tests/helpers/visual-shots.ts";
 import { collectSnapshot } from "../../tests/helpers/style-snapshot.ts";
 
 const WRITE = process.argv.includes("--write-baseline");
@@ -34,11 +34,7 @@ const browser = await chromium.launch({ args: LAUNCH_ARGS });
 const all = [];
 await withTeardown(browser, server, async () => {
   for (const st of STATES) {
-    const page = await openShotPage(browser, st);
-    await page.goto(BASE, { waitUntil: "networkidle" });
-    await waitApp(page);
-    if (st.act) await st.act(page);
-    await waitStable(page);
+    const page = await bootShotPage(browser, st, BASE);
     const snap = await collectSnapshot(
       page,
       st.name,

@@ -842,6 +842,18 @@ html, body {
 }
 .bg-retry-btn {
   padding: 9px 22px;
+  /*
+   * P1-6-10（2026-10-07）：由 `docs/contracts/class-contract.json` 帶動嘅
+   * 執行期驗證（`tests/load-failure-state.e2e.test.ts`）**捉到一個真 a11y 缺陷**
+   * —— 呢個掣實測只有 **42px** 高，低過專案自己嘅 44px 觸控目標標準
+   * （B8 §2-9 / VA3）。
+   *
+   * ⚠️ 為何重要：載入失敗畫面係**唯一**可以令用戶脫離失敗狀態嘅路徑 ——
+   * 掣太細會令觸控用戶卡死。呢個 class 只喺失敗路徑出現，所以之前嘅
+   * 正常狀態測試完全睇唔到。
+   */
+  min-height: 44px;
+  min-width: 44px;
   background: var(--accent-blue, #3498db);
   color: #fff;
   border: none;

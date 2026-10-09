@@ -35,8 +35,7 @@ import {
   diffSnapshots,
   type StateSnapshot,
 } from "./helpers/style-snapshot";
-import { openShotPage, STATES, waitApp, waitStable } from "./helpers/visual-shots";
-
+import { bootShotPage, STATES } from "./helpers/visual-shots";
 const BASE_URL = "http://localhost:5174";
 const TIMEOUT = 240_000;
 const BASELINE = "tests/baselines/style-contract.json";
@@ -58,11 +57,7 @@ async function collectAll(): Promise<StateSnapshot[]> {
   try {
     const out: StateSnapshot[] = [];
     for (const st of STATES) {
-      const page = await openShotPage(browser, st);
-      await page.goto(BASE_URL, { waitUntil: "networkidle" });
-      await waitApp(page);
-      if (st.act) await st.act(page);
-      await waitStable(page);
+      const page = await bootShotPage(browser, st, BASE_URL);
       out.push(
         await collectSnapshot(
           page,
@@ -133,10 +128,7 @@ describe("D2-9：關鍵樣式不變式（語意契約）", () => {
       if (!browser) return;
       try {
         const st = STATES.find((s) => s.name === "01-desktop-default")!;
-        const page = await openShotPage(browser, st);
-        await page.goto(BASE_URL, { waitUntil: "networkidle" });
-        await waitApp(page);
-        await waitStable(page);
+        const page = await bootShotPage(browser, st, BASE_URL);
         const pct = await page.evaluate(() => {
           const r = document.querySelector("#map-pane")?.getBoundingClientRect();
           if (!r) return 0;
@@ -161,10 +153,7 @@ describe("D2-9：關鍵樣式不變式（語意契約）", () => {
           const st = STATES.find(
             (s) => s.name === (theme === "dark" ? "01-desktop-default" : "08-desktop-light-default"),
           )!;
-          const page = await openShotPage(browser, st);
-          await page.goto(BASE_URL, { waitUntil: "networkidle" });
-          await waitApp(page);
-          await waitStable(page);
+          const page = await bootShotPage(browser, st, BASE_URL);
           const v = await page.evaluate(() =>
             getComputedStyle(document.documentElement).getPropertyValue("--bg-base").trim(),
           );

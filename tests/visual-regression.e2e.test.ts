@@ -37,14 +37,13 @@ import { chromium, type Browser } from "@playwright/test";
 import { describe, expect, it } from "vitest";
 
 import {
+  bootShotPage,
   comparePng,
   MAX_DELTA,
   MAX_DIFF_PCT,
-  openShotPage,
   readBaseline,
   shoot,
   STATES,
-  waitApp,
   writeBaseline,
   writeDiffArtifacts,
 } from "./helpers/visual-shots";
@@ -81,10 +80,8 @@ describe("D 階段 5：視覺回歸", () => {
       const report: string[] = [];
       try {
         for (const st of STATES) {
-          const page = await openShotPage(browser, st);
+          const page = await bootShotPage(browser, st, `${BASE_URL}/`);
           try {
-            await page.goto(`${BASE_URL}/`, { waitUntil: "networkidle" });
-            await waitApp(page);
 
             /*
              * ⚠️ 殘留 server 守衛（雙重保險，2026-10-07）
@@ -121,10 +118,6 @@ describe("D 階段 5：視覺回歸", () => {
               "頁面載入嘅 CSS 唔係 dist/ 最新嗰個 → 5174 有**殘留舊 server** ✗\n" +
                 "（跑視覺回歸之前一定要清 5174；見 README／本檔註解）",
             ).toContain(latestCssFile());
-            if (st.act) {
-              await st.act(page);
-              await page.waitForTimeout(400);
-            }
             const shot = await shoot(page);
 
             if (UPDATE) {

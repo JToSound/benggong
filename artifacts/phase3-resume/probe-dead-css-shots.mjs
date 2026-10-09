@@ -25,18 +25,14 @@ import { chromium } from "@playwright/test";
 import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
 import {
   STATES,
+  bootShotPage,
   comparePng,
-  openShotPage,
   shoot,
-  waitApp,
 } from "../../tests/helpers/visual-shots.ts";
 
 /** 影一張指定狀態（真瀏覽器，已等穩定）。 */
 async function capture(browser, st) {
-  const page = await openShotPage(browser, st);
-  await page.goto(BASE, { waitUntil: "networkidle" });
-  await waitApp(page);
-  if (st.act) await st.act(page);
+  const page = await bootShotPage(browser, st, BASE);
   const buf = await shoot(page);
   return { page, buf };
 }

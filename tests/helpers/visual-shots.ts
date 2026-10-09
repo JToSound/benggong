@@ -46,6 +46,28 @@ export interface ShotState {
   isMobile?: boolean;
   /** 主題（預設 dark）。⚠️ 淺色主題係一條**完全獨立**嘅視覺路徑。 */
   theme?: "dark" | "light";
+  /**
+   * 喺 `goto` **之前**做嘅事 —— 例如 `page.route(...)` 攔截請求。
+   *
+   * ⚠️ 一定要喺 `goto` 之前（route 註冊得太遲會漏咗首個請求）。
+   * 用途：模擬「載入失敗」狀態（見 `12-desktop-load-failure`）。
+   */
+  beforeGoto?: (page: Page) => Promise<void>;
+  /**
+   * 覆寫「等 app ready」嘅行為（預設 `waitApp`）。
+   *
+   * ⚠️ 失敗狀態**唔會有** `.ch-pill`（資料載入唔到）→ 用預設 `waitApp`
+   * 會 timeout。呢個 hook 令每個狀態可以自訂 ready 判準。
+   */
+  ready?: (page: Page) => Promise<void>;
+  /**
+   * 停用 service worker（預設 false）。
+   *
+   * ⚠️ 為何「模擬載入失敗」一定要開：`public/sw.js` 會**快取**資料檔 →
+   * 重試嗰次由 SW 回 200（**繞過 `page.route`**）→ 失敗狀態永遠唔會出現 ✗。
+   * （2026-10-07 實測：只攔 `characters.json` → 第一次 500、第二次 200 → app 照載入。）
+   */
+  blockServiceWorkers?: boolean;
   /** 喺 `goto` 之後、截圖之前做嘅事（例如撳掣／轉章節）。 */
   act?: (page: Page) => Promise<void>;
 }
@@ -67,17 +89,42 @@ export async function waitApp(page: Page): Promise<void> {
  *
  * ⚠️ 冇呢步嘅話，地圖 `flyTo` 動畫會令同一份程式碼都截到唔同圖 ✗
  */
-export async function waitStable(page: Page, maxMs = 10_000): Promise<void> {
-  const t0 = Date.now();
-  let prev: string | null = null;
-  for (;;) {
-    const vb = await page.evaluate(
-      () => document.querySelector("#svg-map")?.getAttribute("viewBox") ?? "",
-    );
-    if (vb === prev && vb !== "") break;
-    prev = vb;
-    if (Date.now() - t0 > maxMs) break;
-    await page.waitForTimeout(250);
+export async function waitStable(page: Page, maxMs = 12_000): Promise<void> {
+  /*
+   * ⚠️ 若 `#svg-map` **唔存在**（例如「載入失敗」畫面）→ 冇嘢要等，即刻返。
+   * 冇呢個守衛嘅話，`vb` 永遠係 `""` → 會白等到 `maxMs`（每次 +10s）。
+   */
+  const hasMap = await page.evaluate(() => !!document.querySelector("#svg-map"));
+  if (hasMap) {
+    /*
+     * ⚠️ 2026-10-08：由「連續 2 次相同」加強到「連續 4 次相同」。
+     *
+     * 為何：原本 2 次 × 250ms = 只要求 **250ms 無變化**。實測
+     * `flyToZone` 嘅 JS 動畫（緩動尾段／高負載掉帧）之下，兩個相隔
+     * 250ms 嘅樣本可以**碰巧相同** → 提早當「穩定」→ 截到**中途**位置
+     * → 同一份程式碼、同一個 baseline 出現 **60.4%** 差異 ✗。
+     *
+     * 加強之後：要 **4 × 200ms = 800ms 完全無變化** 才當穩定。
+     * 呢個係**量度儀器**層面嘅修正，唔會改變任何斷言。
+     */
+    const NEED = 4;
+    const INTERVAL = 200;
+    const t0 = Date.now();
+    let prev: string | null = null;
+    let stable = 0;
+    for (;;) {
+      const vb = await page.evaluate(
+        () => document.querySelector("#svg-map")?.getAttribute("viewBox") ?? "",
+      );
+      if (vb === prev && vb !== "") {
+        if (++stable >= NEED) break;
+      } else {
+        stable = 0;
+      }
+      prev = vb;
+      if (Date.now() - t0 > maxMs) break;
+      await page.waitForTimeout(INTERVAL);
+    }
   }
   await page.evaluate(
     () =>
@@ -291,10 +338,14 @@ export async function writeBaseline(page: Page, name: string, pngBuffer: Buffer)
 }
 
 /**
- * 7 個 canonical 狀態（同 `probe-dead-css-shots.mjs` 一致）。
+ * **12 個** canonical 狀態 —— 全專案**唯一來源**（D5-10）。
  *
- * 選擇理由：覆蓋三個主要 surface（地圖／故事面板／編年史／搜尋）＋
- * 兩種 viewport（1440×900 桌面、390×844 手機）＋「有揀中 zone」嘅狀態。
+ * 覆蓋：三個主要 surface（地圖／故事面板／編年史／搜尋）＋
+ * 兩種 viewport（1440×900 桌面、390×844 手機）＋「有揀中 zone」＋
+ * 淺色主題（獨立視覺路徑）＋ 1280／1920 邊界 ＋ **載入失敗路徑**。
+ *
+ * ⚠️ `visual-shots.mjs`／`probe-dead-css-shots.mjs`／`probe-style-contract.mjs`
+ * 同兩個 e2e 守衛都係**直接讀呢個陣列**（唔可以再自己抄一份）。
  */
 export const STATES: ShotState[] = [
   { name: "01-desktop-default", viewport: { width: 1440, height: 900 } },
@@ -317,16 +368,31 @@ export const STATES: ShotState[] = [
     name: "04-desktop-zone-selected",
     viewport: { width: 1440, height: 900 },
     act: async (page) => {
-      await page.keyboard.press("Escape");
-      for (let i = 0; i < 197; i++) await page.keyboard.press("k");
-      await waitStable(page, 12_000);
-      const z = await page.evaluate(() => {
-        const el = document.querySelector("#zones-layer .zone");
-        if (!el) return null;
-        const r = el.getBoundingClientRect();
-        return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
-      });
-      if (z) await page.mouse.click(z.x, z.y);
+      /*
+       * ⚠️ 2026-10-08：**唔用座標 click** —— 改用 URL 直接入「揀定 zone」狀態。
+       *
+       * 為何：原本係「點第一個 zone 嘅中心」。實測（同一份程式碼、同一個
+       * baseline）會有兩種結果：
+       *   · 點中預期嘅 zone → 正常；
+       *   · 地圖仍未完全定 → 座標唔中 → 撞到**另一個** zone
+       *     → 唔同 dossier（3.41% 像素差）／甚至冇選中（80.99%）✗
+       * 即係話，`page.mouse.click(座標)` 係**本質上 racy**。
+       *
+       * 修法：由 DOM 讀第一個 zone 嘅 `data-zone-id`，再用 URL 導航
+       * （`?zone=…&chapter=198`）—— **完全確定性**，唔受動畫時序影響。
+       * 呢個係**設定步驟**（狀態本身），唔係斷言。
+       */
+      const id = await page.evaluate(
+        () =>
+          document
+            .querySelector("#zones-layer .zone")
+            ?.getAttribute("data-zone-id") ?? null,
+      );
+      const u = new URL(page.url());
+      if (id) u.searchParams.set("zone", id);
+      u.searchParams.set("chapter", "198");
+      await page.goto(u.toString(), { waitUntil: "networkidle" });
+      await waitApp(page);
     },
   },
   {
@@ -367,6 +433,34 @@ export const STATES: ShotState[] = [
   },
   { name: "10-desktop-1280-default", viewport: { width: 1280, height: 800 } },
   { name: "11-desktop-1920-default", viewport: { width: 1920, height: 1080 } },
+  /*
+   * ⚠️ D2-9 擴狀態（2026-10-07）：**載入失敗**路徑。
+   *
+   * 為何一定要有：`docs/contracts/class-contract.json` 保護嘅
+   * `.bg-error-panel`／`-detail`／`-hint`／`.bg-retry-btn` **只喺失敗路徑出現**
+   * → 之前 11 個狀態全部係正常路徑 → 執行期探測永遠睇唔到 → 極易被誤判死
+   * （呢個正正係 D4-3 嘅盲點）。加咗呢個狀態之後，契約 class 有**執行期證據**。
+   *
+   * ⚠️ 確定性：只令 **一個** 請求（`characters.json`）回 500。
+   * `loadAllData()` 用 `Promise.all` → 若多過一個請求同時失敗，
+   * **reject 次序唔確定** → 錯誤訊息會飄 → 像素基線會 flaky ✗。
+   */
+  {
+    name: "12-desktop-load-failure",
+    viewport: { width: 1440, height: 900 },
+    blockServiceWorkers: true,
+    beforeGoto: async (page) => {
+      await page.route(/\/data\/public\/characters\.json$/, (route) =>
+        route.fulfill({ status: 500, contentType: "application/json", body: "{}" }),
+      );
+    },
+    ready: async (page) => {
+      // 失敗畫面出現之前有 3 次重試（0.6s + 1.2s）→ 要等耐啲。
+      await page.waitForSelector(".bg-error-panel", { timeout: 25_000 });
+      await page.evaluate(() => document.fonts && document.fonts.ready);
+      await page.waitForTimeout(400);
+    },
+  },
 ];
 
 /** 開一個 page（已套好 localStorage 同 locale）。 */
@@ -380,6 +474,8 @@ export async function openShotPage(
     deviceScaleFactor: 1,
     hasTouch: st.isMobile,
     isMobile: st.isMobile,
+    // 見 `blockServiceWorkers` 嘅說明（失敗狀態必須停 SW，否則 route 被繞過）。
+    serviceWorkers: st.blockServiceWorkers ? "block" : "allow",
   });
   await page.addInitScript((theme) => {
     try {
@@ -392,9 +488,58 @@ export async function openShotPage(
   return page;
 }
 
-/** 影一張（已停動畫 + 等穩定）。 */
+/**
+ * 影一張（已停動畫 + 等穩定）。
+ *
+ * ⚠️ 2026-10-08：加「**連續兩張截圖完全相同**」嘅等待。
+ *
+ * 為何需要：`waitStable()` 只等**地圖 viewBox** 穩定 —— 佢證明唔到
+ * 頁面其餘部分（頂欄、故事面板、章節條）已經 render 完。
+ * 實測：全套測試（CPU 高負載）之下，`04-desktop-zone-selected` 有時
+ * 捕捉到**未 render 完**嘅畫面（頂欄右邊控制項未出現、故事面板未開）
+ * → 同一份程式碼、同一個 baseline 出現 **80.99%** 差異 ✗
+ * （單獨跑 5/5 完全一致）。
+ *
+ * 做法：連影直到兩張相鄰截圖**逐 byte 相同**（= 畫面真係靜止）。
+ * 呢個係**量度儀器**層面嘅修正，唔會改變任何斷言。
+ */
 export async function shoot(page: Page): Promise<Buffer> {
   await page.addStyleTag({ content: FREEZE });
   await waitStable(page);
-  return page.screenshot({ animations: "disabled" });
+  let prev = await page.screenshot({ animations: "disabled" });
+  for (let i = 0; i < 25; i++) {
+    await page.waitForTimeout(120);
+    const next = await page.screenshot({ animations: "disabled" });
+    if (next.equals(prev)) return next;
+    prev = next;
+  }
+  return prev;
+}
+
+/**
+ * **開一個「已 boot 好」嘅 shot page** —— 全部呼叫者共用同一條程序。
+ *
+ * 程序（順序有意義）：
+ *   1. `openShotPage()`（viewport／locale／theme init script）；
+ *   2. `st.beforeGoto?.(page)`（例如 `page.route(...)` 攔截請求）；
+ *   3. `page.goto(baseUrl)`；
+ *   4. `st.ready ?? waitApp`（失敗狀態要自訂 ready 判準）；
+ *   5. `st.act?.(page)`；
+ *   6. `waitStable(page)`。
+ *
+ * ⚠️ 為何要抽成一個函數：之前 4 個呼叫者各自抄一次呢個序列 →
+ * 加 `beforeGoto`／`ready` 就要改 4 個地方（同 D5-10 嘅教訓一樣）。
+ */
+export async function bootShotPage(
+  browser: import("@playwright/test").Browser,
+  st: ShotState,
+  baseUrl: string,
+): Promise<Page> {
+  const page = await openShotPage(browser, st);
+  if (st.beforeGoto) await st.beforeGoto(page);
+  await page.goto(baseUrl, { waitUntil: "networkidle" });
+  await (st.ready ?? waitApp)(page);
+  if (st.act) await st.act(page);
+  await waitStable(page);
+  return page;
 }

@@ -15,12 +15,7 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { chromium } from "@playwright/test";
 import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
-import {
-  STATES,
-  openShotPage,
-  shoot,
-  waitApp,
-} from "../../tests/helpers/visual-shots.ts";
+import { STATES, bootShotPage, shoot } from "../../tests/helpers/visual-shots.ts";
 
 const outDir = process.argv[2] || "artifacts/phase3-resume/visual-shots";
 mkdirSync(outDir, { recursive: true });
@@ -31,10 +26,7 @@ const browser = await chromium.launch({ args: LAUNCH_ARGS });
 let n = 0;
 await withTeardown(browser, server, async () => {
   for (const st of STATES) {
-    const page = await openShotPage(browser, st);
-    await page.goto(BASE, { waitUntil: "networkidle" });
-    await waitApp(page);
-    if (st.act) await st.act(page);
+    const page = await bootShotPage(browser, st, BASE);
     const buf = await shoot(page);
     writeFileSync(`${outDir}/${st.name}.png`, buf);
     n++;

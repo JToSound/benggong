@@ -45,7 +45,10 @@ export const FINGERPRINT_PROPS: string[] = [
  * 要抽快照嘅元素（**容器／控制項**為主，避免文字 metrics 帶嚟跨機差異）。
  *
  * 覆蓋：頂欄、地圖容器、地圖控制項、故事面板、章節條、圖例、
- * 搜尋 overlay（連面板）、引導卡。
+ * 搜尋 overlay（連面板）、引導卡、**載入失敗畫面**（D2-9 擴狀態）。
+ *
+ * ⚠️ 失敗畫面嗰兩個 selector 只喺 `12-desktop-load-failure` 存在
+ * —— 其餘狀態會記錄 `null`（同樣係契約一部分：唔應該無端出現）。
  */
 export const SNAPSHOT_SELECTORS: string[] = [
   "#topbar",
@@ -58,6 +61,8 @@ export const SNAPSHOT_SELECTORS: string[] = [
   "#search-overlay",
   "#search-overlay .search-panel",
   ".onboarding-card",
+  ".bg-error-panel",
+  ".bg-retry-btn",
 ];
 
 export interface ElementFingerprint {

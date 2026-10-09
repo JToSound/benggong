@@ -14,6 +14,10 @@
    "producedBy": "src/main.ts",
    "reason": "載入失敗畫面嘅提示（src/main.ts:101）。同上：只喺失敗路徑出現。"
   },
+  "bg-retry-btn": {
+   "producedBy": "src/main.ts",
+   "reason": "載入失敗畫面嘅「重試」掣（src/main.ts:104，`#bg-retry-btn`）。只喺失敗路徑出現；⚠️ 佢係唯一可以令用戶脫離失敗狀態嘅控制項 → 一定要有可見樣式。"
+  },
   "skip-link": {
    "producedBy": "index.html",
    "reason": "無障礙 skip link（B8 P0-2）。平時視覺上收埋（只喺 focus 時顯示）→ 截圖守衛同執行期探測都可能睇唔到。"
