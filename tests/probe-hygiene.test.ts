@@ -107,4 +107,19 @@ describe("P1-6-8：探測腳本收檔衛生（棘輪）", () => {
     );
     expect(src, "唔應該自己再抄一份 STATES").not.toMatch(/name:\s*"\d\d-/);
   });
+
+  it("D4-1：`probe-dead-css.mjs` 由 `STATES` 讀狀態（唔可以自己抄一份）", () => {
+    /*
+     * ⚠️ 為何一定要守住：本檔係「執行期判準（C）」嘅唯一來源。
+     * 佢之前寫死 7 個狀態 → 新增「載入失敗」狀態之後自動漏咗 ——
+     * 而嗰個狀態正正含 `class-contract.json` 保護嘅 `.bg-error-panel`
+     * 等 class → 會令契約 class 被誤判死 ✗。
+     */
+    const src = readFileSync(`${DIR}/probe-dead-css.mjs`, "utf-8");
+    expect(src, "狀態要由 tests/helpers/visual-shots.ts 提供").toMatch(
+      /tests\/helpers\/visual-shots\.ts/,
+    );
+    expect(src, "要用 bootShotPage（共用開頁程序）").toMatch(/bootShotPage/);
+    expect(src, "唔應該自己寫死狀態名").not.toMatch(/"(desktop|mobile)-[a-z0-9-]+"/);
+  });
 });

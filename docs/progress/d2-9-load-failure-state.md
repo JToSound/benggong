@@ -285,7 +285,10 @@ await page.goto(u.toString(), { waitUntil: "networkidle" });
 1. **擴失敗模式覆蓋**：加「網絡中斷（`route.abort()`）」同「HTML 回退」
    （`fulfill({ contentType: "text/html" })`）兩個變體 → 覆蓋 `fetchJSON`
    嘅三條錯誤分支。
-2. **`probe-dead-css.mjs` 改用 `STATES`**（單一來源）—— 佢而家仍然自己
-   寫死狀態清單，會令「執行期 class 收集」漏咗新狀態（包括失敗畫面）。
+2. ~~**`probe-dead-css.mjs` 改用 `STATES`**（單一來源）~~ → ✅ **已完成
+   （2026-10-10）**：原本寫死 7 個狀態 → 自動漏咗新狀態（包括失敗路徑）。
+   改用 `STATES` ＋ `bootShotPage()` → **12 個狀態**，執行期 class 聯集
+   **192 個**（含契約 class 全部 5 個 `runtime=True`）。
+   守衛：`probe-hygiene.test.ts` 新增一條斷言。
 3. **P1-6-8 繼續遷移**：剩餘 ~18 個歷史探測腳本搬去 `_probe-lib.mjs`。
 4. **C 項全鏈重建**：`merge_characters.py` 決定前移入產生器。

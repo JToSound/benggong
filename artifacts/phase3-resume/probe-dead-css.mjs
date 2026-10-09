@@ -13,12 +13,22 @@
  *
  * ⚠️ P1-6-8（2026-10-07）：收檔改用 `_probe-lib.mjs`（Windows 安全）。
  *
+ * ⚠️ 2026-10-10（D4-1 教訓）：**狀態清單唔可以自己抄一份**。
+ * 原本本檔寫死 7 個狀態 → 新增「載入失敗」狀態之後就**自動漏咗**
+ * —— 而嗰個狀態正正含 `docs/contracts/class-contract.json` 保護嘅
+ * `.bg-error-panel` 等 class → 會令契約 class 被誤判死 ✗。
+ * 現在直接讀 `tests/helpers/visual-shots.ts` 嘅 `STATES`（唯一來源）
+ * ＋ `bootShotPage()`（共用開頁程序）→ 狀態數自動跟（現時 **12** 個，
+ * 包括 `12-desktop-load-failure`）。
+ *
  * 用法：node artifacts/phase3-resume/probe-dead-css.mjs <out.json>
  */
 import { writeFileSync } from "node:fs";
 import { chromium } from "@playwright/test";
 import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
+import { STATES, bootShotPage } from "../../tests/helpers/visual-shots.ts";
 
+/** 收集 DOM 內所有 class（用 attribute，SVG 都覆蓋）。 */
 const CLASSES = () => {
   const set = new Set();
   for (const el of Array.from(document.querySelectorAll("*"))) {
@@ -31,78 +41,18 @@ const CLASSES = () => {
 };
 
 const states = {};
-async function snap(page, name) {
-  const classes = await page.evaluate(CLASSES);
-  states[name] = { n: classes.length, classes };
-  console.log(`  ${name}: ${classes.length} 個 class`);
-}
 
 const server = await ensurePreviewServer();
 const browser = await chromium.launch({ args: LAUNCH_ARGS });
 
 await withTeardown(browser, server, async () => {
-  // ---- 桌面：多個狀態 ----
-  const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, locale: "zh-HK" });
-  await page.addInitScript(() => {
-    try {
-      localStorage.setItem("binggang.onboarding.dismissed", "1");
-    } catch {
-      /* */
-    }
-  });
-  await page.goto(BASE, { waitUntil: "networkidle" });
-  await page.waitForFunction(() => document.querySelectorAll(".ch-pill").length > 100, null, {
-    timeout: 20000,
-  });
-  await page.waitForTimeout(800);
-  await snap(page, "desktop-default");
-
-  await page.click("#btn-toggle-panel", { force: true, timeout: 15000 });
-  await page.waitForTimeout(600);
-  await snap(page, "desktop-pane-open");
-
-  await page.keyboard.press("Escape");
-  for (let i = 0; i < 197; i++) await page.keyboard.press("k");
-  await page.waitForTimeout(1200);
-  await snap(page, "desktop-ch198");
-
-  const z = await page.evaluate(() => {
-    const el = document.querySelector("#zones-layer .zone");
-    if (!el) return null;
-    const r = el.getBoundingClientRect();
-    return { x: r.x + r.width / 2, y: r.y + r.height / 2 };
-  });
-  if (z) {
-    await page.mouse.click(z.x, z.y);
-    await page.waitForTimeout(900);
-    await snap(page, "desktop-zone-selected");
+  for (const st of STATES) {
+    const page = await bootShotPage(browser, st, BASE);
+    const classes = await page.evaluate(CLASSES);
+    states[st.name] = { n: classes.length, classes };
+    console.log(`  ${st.name}: ${classes.length} 個 class`);
+    await page.close();
   }
-
-  await page.click("#btn-mode", { force: true, timeout: 15000 });
-  await page.waitForTimeout(1000);
-  await snap(page, "desktop-chronicle");
-
-  await page.keyboard.press("/");
-  await page.waitForTimeout(600);
-  await snap(page, "desktop-search-open");
-  await page.keyboard.press("Escape");
-  await page.waitForTimeout(400);
-  await page.close();
-
-  // ---- 手機 ----
-  const m = await browser.newPage({
-    viewport: { width: 390, height: 844 },
-    locale: "zh-HK",
-    hasTouch: true,
-    isMobile: true,
-  });
-  await m.goto(BASE, { waitUntil: "networkidle" });
-  await m.waitForFunction(() => document.querySelectorAll(".ch-pill").length > 100, null, {
-    timeout: 20000,
-  });
-  await m.waitForTimeout(800);
-  await snap(m, "mobile-default");
-  await m.close();
 });
 
 const all = new Set();
