@@ -54,6 +54,30 @@ interface ZonePick {
 }
 
 /**
+ * 設定步驟：縮放 `times` 下（令 zone／pulse／LOD 到達可測狀態）。
+ *
+ * ⚠️ 為何用**鍵盤**而唔係 `page.click("#map-zoom-in")`（2026-10-08）
+ * ------------------------------------------------------------------
+ * 呢個係**設定步驟**（唔係被測行為）。全套測試（CPU 高負載）之下，
+ * `page.click()` 嘅 actionability hit-test 會間歇失敗 —— 實測報
+ * 「`<image class="basemap-layer">` from `<svg id="svg-map">` subtree
+ * intercepts pointer events」→ 30s 超時 ✗（單獨跑 100% pass）。
+ *
+ * 鍵盤路徑**唔需要 hit-test**，而且係地圖**真正**嘅快捷鍵
+ * （`case "+": this.zoomBy(1.3)` —— 同掣完全一樣；實測兩者 viewBox 逐位相同）。
+ * 掣本身嘅可點性由 `panel-overlay.e2e.test.ts`
+ * （「pane 打開時 `#map-zoom-in` 仍然撳得到（而且真係 zoom 到）」）覆蓋 ✓。
+ *
+ * ⚠️ 斷言**冇**改（各測試嘅斷言完全不變）。
+ */
+async function zoomIn(page: Page, times = 1): Promise<void> {
+  await page.evaluate(() =>
+    (document.querySelector("#svg-map") as SVGElement | null)?.focus(),
+  );
+  for (let i = 0; i < times; i++) await page.keyboard.press("+");
+}
+
+/**
  * 揀「第一個**真正可點**嘅 zone」。
  *
  * 為何唔可以淨係揀「第一個夠大嘅 zone」（B8 迴歸修正，2026-09-23）
@@ -159,7 +183,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
       // 去到第 198 章（zone 最齊）再放大，令 zone 有足夠屏幕面積可點
       for (let i = 0; i < 197; i++) await page.keyboard.press("k");
       await page.waitForTimeout(1500);
-      for (let i = 0; i < 3; i++) await page.click("#map-zoom-in");
+      await zoomIn(page, 3);
       await page.waitForTimeout(900);
 
       // ---- ① `elementFromPoint(zone 中心)` 真係命中 .zone ----
@@ -226,7 +250,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
       await page.waitForTimeout(800);
       for (let i = 0; i < 197; i++) await page.keyboard.press("k");
       await page.waitForTimeout(1500);
-      for (let i = 0; i < 3; i++) await page.click("#map-zoom-in");
+      await zoomIn(page, 3);
       await page.waitForTimeout(900);
 
       const pick = (): Promise<ZonePick | null> =>
@@ -278,7 +302,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
 
       for (let i = 0; i < 197; i++) await page.keyboard.press("k");
       await page.waitForTimeout(1200);
-      for (let i = 0; i < 3; i++) await page.click("#map-zoom-in");
+      await zoomIn(page, 3);
       await page.waitForTimeout(900);
 
       const t2 = await pick();
@@ -387,7 +411,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
       expect(macro.labels, "cluster 層唔應該顯示 zone label").toBe(0);
 
       // ---- 放大之後 cluster 消失、進入更細嘅層 ----
-      for (let i = 0; i < 6; i++) await page.click("#map-zoom-in");
+      await zoomIn(page, 6);
       await page.waitForTimeout(1200);
       const zoomed = await page.evaluate(() => ({
         lods: Array.from(
@@ -764,7 +788,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
       // 深 zoom 令病窩進入 full 層（先有 pulse）
       for (let i = 0; i < 197; i++) await page.keyboard.press("k");
       await page.waitForTimeout(1500);
-      for (let i = 0; i < 10; i++) await page.click("#map-zoom-in");
+      await zoomIn(page, 10);
       await page.waitForTimeout(1200);
 
       const idx = await page.evaluate(() =>
@@ -852,7 +876,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
             ),
           );
           if (w <= target) return w;
-          await page.click("#map-zoom-in");
+          await zoomIn(page, 1);
           await page.waitForTimeout(400);
         }
         return page.evaluate(() =>
@@ -995,7 +1019,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
       await page.waitForTimeout(700);
       for (let i = 0; i < 197; i++) await page.keyboard.press("k");
       await page.waitForTimeout(1500);
-      for (let i = 0; i < 3; i++) await page.click("#map-zoom-in");
+      await zoomIn(page, 3);
       await page.waitForTimeout(900);
     };
 
@@ -1115,7 +1139,7 @@ describe("P0-1 zone 可點（實瀏覽器）", () => {
           ),
         );
         if (w <= 0.175) break;
-        await page.click("#map-zoom-in");
+        await zoomIn(page, 1);
         await page.waitForTimeout(400);
       }
       await page.waitForTimeout(800);
