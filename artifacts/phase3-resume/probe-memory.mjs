@@ -7,39 +7,13 @@
  * ⚠️ 需要 dist/；會自己起 vite preview（跑完關）。
  */
 
-import { spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
+import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
 
-const PORT = 5174;
-const BASE = `http://localhost:${PORT}/`;
 const rounds = Number(process.argv.find((a) => a.startsWith("--rounds="))?.slice(9) ?? 40);
 const urlArg = process.argv.find((a) => a.startsWith("--url="))?.slice(6) ?? "";
 
 const INIT = `(() => { try { localStorage.setItem("binggang.onboarding.dismissed", "1"); } catch (e) {} })();`;
-
-async function probe(url, ms = 3000) {
-  try {
-    const r = await fetch(url, { signal: AbortSignal.timeout(ms) });
-    return r.ok;
-  } catch {
-    return false;
-  }
-}
-
-async function ensureServer() {
-  if (await probe(BASE)) return null;
-  const s = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], {
-    cwd: process.cwd(),
-    shell: true,
-    stdio: "ignore",
-    detached: true,
-  });
-  for (let i = 0; i < 40; i++) {
-    if (await probe(BASE)) return s;
-    await new Promise((r) => setTimeout(r, 500));
-  }
-  throw new Error("preview server 起唔到");
-}
 
 const SAMPLE = () => {
   const m = performance.memory;
@@ -59,11 +33,11 @@ const SAMPLE = () => {
   };
 };
 
-const server = await ensureServer();
+const server = await ensurePreviewServer();
 const browser = await chromium.launch({
   args: ["--no-proxy-server", "--js-flags=--expose-gc"],
 });
-try {
+await withTeardown(browser, server, async () => {
   const ctx = await browser.newContext({
     viewport: { width: 1400, height: 900 },
     deviceScaleFactor: 1,
@@ -145,13 +119,4 @@ try {
     `\nΔ heap ${(last.heapMB - first.heapMB).toFixed(1)} MB｜Δ dom ${last.dom - first.dom}｜` +
       `Δ tileReq ${last.tileReq - first.tileReq}｜Δ pulse ${last.pulse - first.pulse}`,
   );
-} finally {
-  await browser.close();
-  if (server?.pid) {
-    try {
-      process.kill(-server.pid);
-    } catch {
-      /* 已死 */
-    }
-  }
-}
+});

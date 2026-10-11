@@ -14,11 +14,9 @@
  * `scripts/audit_css_important.py` 預先展開成長手屬性。
  */
 import { readFileSync, writeFileSync } from "node:fs";
-import { spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
+import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
 
-const PORT = 5174;
-const BASE = "http://localhost:" + PORT + "/";
 const INV = process.env.INV || "artifacts/phase3-resume/important-inventory.json";
 
 const CONFIGS = [
@@ -28,28 +26,6 @@ const CONFIGS = [
   // ⚠️ 要**打開面板**才量得到 `.workspace.is-pane-open` 之下嘅規則
   { name: "1440x900-dark-paneopen", width: 1440, height: 900, theme: "dark", openPane: true },
 ];
-
-const ok = async (u, ms = 3000) => {
-  try {
-    return (await fetch(u, { signal: AbortSignal.timeout(ms) })).ok;
-  } catch {
-    return false;
-  }
-};
-async function ensure() {
-  if (await ok(BASE)) return null;
-  const s = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], {
-    cwd: process.cwd(),
-    shell: true,
-    stdio: "ignore",
-    detached: true,
-  });
-  for (let i = 0; i < 40; i++) {
-    if (await ok(BASE)) return s;
-    await new Promise((r) => setTimeout(r, 500));
-  }
-  throw new Error("preview server 起唔到");
-}
 
 /** 喺頁面內量度：回傳 { key: [values...] }。 */
 const MEASURE = (items) => {
@@ -91,10 +67,10 @@ const items = inv.candidates.map((c) => ({
   value: c.value,
 }));
 
-const server = await ensure();
-const browser = await chromium.launch({ args: ["--no-proxy-server"] });
+const server = await ensurePreviewServer();
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
 const snapshot = { note: "D 階段 2：!important 候選嘅 computed value 快照", configs: {} };
-try {
+await withTeardown(browser, server, async () => {
   for (const cfg of CONFIGS) {
     const page = await browser.newPage({
       viewport: { width: cfg.width, height: cfg.height },
@@ -135,16 +111,7 @@ try {
     snapshot.configs[cfg.name] = await page.evaluate(MEASURE, items);
     await page.close();
   }
-} finally {
-  await browser.close();
-  if (server && server.pid) {
-    try {
-      process.kill(-server.pid);
-    } catch {
-      /* */
-    }
-  }
-}
+});
 
 const out = process.argv[2] || "artifacts/phase3-resume/important-values.json";
 writeFileSync(out, JSON.stringify(snapshot, null, 1), "utf-8");

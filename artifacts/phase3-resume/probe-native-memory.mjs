@@ -15,7 +15,6 @@
  * 用法：node artifacts/phase3-resume/probe-native-memory.mjs [--rounds=8]
  */
 
-import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";

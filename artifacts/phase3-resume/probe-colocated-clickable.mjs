@@ -1,30 +1,6 @@
 /** 驗證：co-located location 成員喺最大縮放之下有幾多個真正可點。 */
-import { spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
-
-const PORT = 5174;
-const BASE = "http://localhost:" + PORT + "/";
-const ok = async (u, ms = 3000) => {
-  try {
-    return (await fetch(u, { signal: AbortSignal.timeout(ms) })).ok;
-  } catch {
-    return false;
-  }
-};
-async function ensure() {
-  if (await ok(BASE)) return null;
-  const s = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], {
-    cwd: process.cwd(),
-    shell: true,
-    stdio: "ignore",
-    detached: true,
-  });
-  for (let i = 0; i < 40; i++) {
-    if (await ok(BASE)) return s;
-    await new Promise((r) => setTimeout(r, 500));
-  }
-  throw new Error("server");
-}
+import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
 
 const HIT = () => {
   const markers = Array.from(document.querySelectorAll("#locations-layer .location-marker"));
@@ -56,9 +32,9 @@ const HIT = () => {
   };
 };
 
-const server = await ensure();
-const browser = await chromium.launch({ args: ["--no-proxy-server"] });
-try {
+const server = await ensurePreviewServer();
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
+await withTeardown(browser, server, async () => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, locale: "zh-HK" });
   await page.addInitScript(() => {
     try {
@@ -102,13 +78,4 @@ try {
     await page.waitForTimeout(800);
     console.log("再放大 8 級之後：", JSON.stringify(await page.evaluate(HIT), null, 1));
   }
-} finally {
-  await browser.close();
-  if (server && server.pid) {
-    try {
-      process.kill(-server.pid);
-    } catch {
-      /* */
-    }
-  }
-}
+});

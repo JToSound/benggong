@@ -1,31 +1,7 @@
 /** D5 診斷：隔離測試 comparePng 嘅比對邏輯（用已知唔同嘅圖）。 */
-import { spawn } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { chromium } from "@playwright/test";
-
-const PORT = 5174;
-const BASE = "http://localhost:" + PORT + "/";
-const ok = async (u, ms = 3000) => {
-  try {
-    return (await fetch(u, { signal: AbortSignal.timeout(ms) })).ok;
-  } catch {
-    return false;
-  }
-};
-async function ensure() {
-  if (await ok(BASE)) return null;
-  const s = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"], {
-    cwd: process.cwd(),
-    shell: true,
-    stdio: "ignore",
-    detached: true,
-  });
-  for (let i = 0; i < 40; i++) {
-    if (await ok(BASE)) return s;
-    await new Promise((r) => setTimeout(r, 500));
-  }
-  throw new Error("no server");
-}
+import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
 
 const CMP = async ([ua, ub, scale]) => {
   const decode = async (url) => {
@@ -73,9 +49,9 @@ const CMP = async ([ua, ub, scale]) => {
   };
 };
 
-const server = await ensure();
-const browser = await chromium.launch({ args: ["--no-proxy-server"] });
-try {
+const server = await ensurePreviewServer();
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
+await withTeardown(browser, server, async () => {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
   await page.goto(BASE, { waitUntil: "networkidle" });
 
@@ -118,13 +94,4 @@ try {
   }, sp3);
   console.log("\nA = 基線，B = vs-sp3 經 canvas round-trip → 應該仍然有大差異");
   console.log(JSON.stringify(await page.evaluate(CMP, [baseline, rt, 0.5]), null, 1));
-} finally {
-  await browser.close();
-  if (server && server.pid) {
-    try {
-      process.kill(-server.pid);
-    } catch {
-      /* */
-    }
-  }
-}
+});

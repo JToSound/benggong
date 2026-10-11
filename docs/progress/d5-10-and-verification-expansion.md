@@ -341,8 +341,10 @@ D2-9 抽「關鍵元素嘅 computed style ＋ 幾何」成 JSON → 失敗可以
    （2026-10-08，見 `d2-9-load-failure-state.md`）**：新增第 12 個狀態
    `12-desktop-load-failure`；過程中捉到一個真 a11y 缺陷（重試掣 42px < 44px）
    並修好，另外令視覺守衛雜訊由 51px／Δ12 降到 **12px／Δ1**。
-2. **P1-6-8 繼續遷移**：將剩餘 ~18 個歷史探測腳本搬去 `_probe-lib.mjs`，
-   逐步縮細 `LEGACY` 清單。
+2. ~~**P1-6-8 繼續遷移**：將剩餘 ~18 個歷史探測腳本搬去 `_probe-lib.mjs`，
+   逐步縮細 `LEGACY` 清單。~~ → ✅ **已完成（2026-10-11，見
+   `p1-6-8-probe-migration.md`）**：18 個全部遷移，`LEGACY` 清單**刪除** ——
+   守衛由棘輪升級為**零容忍**，淨刪 481 行重複 bootstrap。
 3. **C 項全鏈重建**：將 `merge_characters.py` 嘅合併決定**前移入產生器**
    （讀同一份 `character-merge-decisions.json`），令 provisional 輸出直接係
    「已合併」狀態，再用 id 集合 hash 守住 —— 呢個係唯一可以逼近「由輸入重算」嘅路。

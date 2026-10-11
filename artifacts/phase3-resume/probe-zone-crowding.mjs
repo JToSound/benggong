@@ -1,19 +1,6 @@
 /** C8 P1-1：量測世界視圖下 zone 層嘅擁擠情況（spec L-Z0 應為 cluster glyph）。 */
-import { spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
-
-const PORT = 5174;
-const BASE = `http://localhost:${PORT}/`;
-async function ok(u, ms = 3000) {
-  try { return (await fetch(u, { signal: AbortSignal.timeout(ms) })).ok; } catch { return false; }
-}
-async function ensure() {
-  if (await ok(BASE)) return null;
-  const s = spawn("npx", ["vite", "preview", "--port", String(PORT), "--strictPort"],
-    { cwd: process.cwd(), shell: true, stdio: "ignore", detached: true });
-  for (let i = 0; i < 40; i++) { if (await ok(BASE)) return s; await new Promise(r => setTimeout(r, 500)); }
-  throw new Error("server");
-}
+import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
 
 const MEASURE = () => {
   const q = (s) => Array.from(document.querySelectorAll(s));
@@ -105,9 +92,9 @@ const MEASURE = () => {
   };
 };
 
-const server = await ensure();
-const browser = await chromium.launch({ args: ["--no-proxy-server"] });
-try {
+const server = await ensurePreviewServer();
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
+await withTeardown(browser, server, async () => {
   for (const vp of [{ width: 1440, height: 900 }, { width: 1920, height: 1080 }]) {
     const page = await browser.newPage({ viewport: vp, locale: "zh-HK", deviceScaleFactor: 3 });
     await page.addInitScript(() => {
@@ -136,7 +123,4 @@ try {
     console.log(JSON.stringify(m, null, 1));
     await page.close();
   }
-} finally {
-  await browser.close();
-  if (server?.pid) { try { process.kill(-server.pid); } catch { /* */ } }
-}
+});

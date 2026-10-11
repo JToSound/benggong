@@ -1,10 +1,5 @@
-import { spawn } from "node:child_process";
 import { chromium } from "@playwright/test";
-const PORT = 5174, BASE = `http://localhost:${PORT}/`;
-const ok = async (u, ms=3000) => { try { return (await fetch(u,{signal:AbortSignal.timeout(ms)})).ok; } catch { return false; } };
-async function ensure(){ if(await ok(BASE)) return null;
-  const s=spawn("npx",["vite","preview","--port",String(PORT),"--strictPort"],{cwd:process.cwd(),shell:true,stdio:"ignore",detached:true});
-  for(let i=0;i<40;i++){ if(await ok(BASE)) return s; await new Promise(r=>setTimeout(r,500)); } throw new Error("server"); }
+import { BASE, LAUNCH_ARGS, ensurePreviewServer, withTeardown } from "./_probe-lib.mjs";
 const M = () => {
   const q=(s)=>Array.from(document.querySelectorAll(s));
   const clusters=q("#locations-layer .location-marker-cluster");
@@ -17,9 +12,9 @@ const M = () => {
     layers: q("#locations-layer > *").length,
   };
 };
-const server = await ensure();
-const browser = await chromium.launch({ args:["--no-proxy-server"] });
-try {
+const server = await ensurePreviewServer();
+const browser = await chromium.launch({ args: LAUNCH_ARGS });
+await withTeardown(browser, server, async () => {
   for (const vp of [{width:1440,height:900},{width:1280,height:800}]) {
     const page = await browser.newPage({ viewport: vp, locale:"zh-HK" });
     await page.addInitScript(()=>{ try{localStorage.setItem("binggang.onboarding.dismissed","1");}catch{} });
@@ -35,4 +30,4 @@ try {
     console.log(JSON.stringify(await page.evaluate(M),null,1));
     await page.close();
   }
-} finally { await browser.close(); if(server?.pid){ try{process.kill(-server.pid);}catch{} } }
+});
