@@ -297,4 +297,5 @@ await page.goto(u.toString(), { waitUntil: "networkidle" });
    **192 個**（含契約 class 全部 5 個 `runtime=True`）。
    守衛：`probe-hygiene.test.ts` 新增一條斷言。
 3. **P1-6-8 繼續遷移**：剩餘 ~18 個歷史探測腳本搬去 `_probe-lib.mjs`。
-4. **C 項全鏈重建**：`merge_characters.py` 決定前移入產生器。
+4. ~~**C 項全鏈重建**：`merge_characters.py` 決定前移入產生器。~~
+   → ✅ **已完成（2026-10-11，見 `c-full-chain-rebuild.md`）**。

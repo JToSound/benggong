@@ -345,9 +345,13 @@ D2-9 抽「關鍵元素嘅 computed style ＋ 幾何」成 JSON → 失敗可以
    逐步縮細 `LEGACY` 清單。~~ → ✅ **已完成（2026-10-11，見
    `p1-6-8-probe-migration.md`）**：18 個全部遷移，`LEGACY` 清單**刪除** ——
    守衛由棘輪升級為**零容忍**，淨刪 481 行重複 bootstrap。
-3. **C 項全鏈重建**：將 `merge_characters.py` 嘅合併決定**前移入產生器**
+3. ~~**C 項全鏈重建**：將 `merge_characters.py` 嘅合併決定**前移入產生器**
    （讀同一份 `character-merge-decisions.json`），令 provisional 輸出直接係
-   「已合併」狀態，再用 id 集合 hash 守住 —— 呢個係唯一可以逼近「由輸入重算」嘅路。
+   「已合併」狀態，再用 id 集合 hash 守住 —— 呢個係唯一可以逼近「由輸入重算」嘅路。~~
+   → ✅ **已完成（2026-10-11，見 `c-full-chain-rebuild.md`）**：合併邏輯抽出成
+   `scripts/character_merge_core.py`（唯一實作）；產生器加 `--merge-decisions`
+   （opt-in）→ 344 → **333**。⚠️ byte-level 重建**依然唔可能** ——
+   殘餘 4 extra ＋ 1 missing（真正無法重現只有 2 條），已鎖成永久斷言。
 4. **D4-9 擴契約**：將「只喺失敗路徑／特殊狀態出現」嘅 class 陸續加入
    `class-contract.json` → **部分完成**（`bg-retry-btn` 已加；並且已有
    `tests/load-failure-state.e2e.test.ts` 提供執行期證據）。

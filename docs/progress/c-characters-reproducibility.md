@@ -201,7 +201,8 @@ gitignored、唔 deploy）。報告欄位：
 1. **凍結 `characters.json` 唔可以由現時輸入重算**（§2.3）。呢個係資料層嘅
    版本 skew，唔係程式 bug；本修復係「令重跑唔可以削減凍結資產」，唔係
    「令重算得到凍結狀態」。要真正 byte-level 重建，需要重建 Phase B →
-   merge 全流程（未做）。
+   merge 全流程 —— **2026-10-11 已做**（`c-full-chain-rebuild.md`），
+   ⚠️ 但實測**仍然唔可能**：殘餘 4 extra ＋ 1 missing。
 2. `locations.geojson` 嘅 704 vs 629 同理：`rebuild_geo_data.py` 亦唔喺 pipeline，
    本修復只保證重跑唔會覆蓋，唔會令 629 變成 704。
 3. reconcile 報告含實體名 → 只可以留私有目錄；`artifacts/c-repro/` 只放
@@ -220,6 +221,12 @@ gitignored、唔 deploy）。報告欄位：
    寫入 reconcile 報告 → 下次出現 skew 時可以程式化指出係邊個輸入版本變咗。
 3. **收窄 `--force`**：令 `--force` 只可以寫入非 `data/public` 嘅目錄
    （即強制 staging），由程式保證「公開資產永遠唔會被產生器覆蓋」。
-4. 若日後要真正重建 Phase B → merge 全流程，應該將 `merge_characters.py`
+4. ~~若日後要真正重建 Phase B → merge 全流程，應該將 `merge_characters.py`
    嘅合併決定**前移入產生器**（讀同一份 `character-merge-decisions.json`），
-   令 provisional 輸出直接係「已合併」狀態，再用本報告 §4 嘅 hash 斷言守住。
+   令 provisional 輸出直接係「已合併」狀態，再用本報告 §4 嘅 hash 斷言守住。~~
+   → ✅ **已完成（2026-10-11，見 `c-full-chain-rebuild.md`）**：
+   合併邏輯抽出成 `scripts/character_merge_core.py`（唯一實作），
+   產生器加 `--merge-decisions`（opt-in）→ provisional 直接係已合併狀態
+   （344 → **333**）。⚠️ 但 id 集合**仍然唔相同** —— 殘餘係
+   **4 extra ＋ 1 missing**，已逐條歸類並由
+   `tests/test_characters_full_rebuild.py` **鎖死**（唔可以多／少／換）。

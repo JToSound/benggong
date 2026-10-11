@@ -61,6 +61,17 @@ import unicodedata
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
+
+# ⚠️ 合併邏輯係**共用**嘅（`scripts/character_merge_core.py`）——
+# `merge_characters.py` 用同一份實作。兩份實作 = 兩套真相 → 分歧會靜默。
+# 只有 `--merge-decisions` 指明決定檔時才會用到（見 `main()`）。
+from character_merge_core import (  # noqa: E402
+    build_merge_map,
+    build_name_map,
+    merge_records_inplace,
+    propagate_references_inplace,
+)
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CANDIDATES = REPO_ROOT / "data/private/evidence/candidates.jsonl"
@@ -784,6 +795,7 @@ def main(
     out_dir: Path | None = None,
     private_review_dir: Path | None = None,
     force: bool = False,
+    merge_decisions: Path | None = None,
 ) -> int:
     parser = argparse.ArgumentParser(description="Phase B public dataset builder")
     parser.add_argument("--dry-run", action="store_true")
@@ -799,7 +811,20 @@ def main(
         default=None,
         help="私有報告目錄（預設 data/private/review）",
     )
+    parser.add_argument(
+        "--merge-decisions",
+        type=Path,
+        default=None,
+        help=(
+            "角色合併決定檔（**opt-in**）。指定咗就喺**寫入之前**套用合併 —— "
+            "即「合併決定前移入產生器」，令 provisional 輸出直接係**已合併**狀態。"
+            "⚠️ 預設**唔套用**：決定檔係私有嘅（CI 冇）→ 預設套用會令輸出"
+            "**取決於環境**（唔同機出唔同結果）。"
+        ),
+    )
     args = parser.parse_args(argv)
+    if merge_decisions is None:
+        merge_decisions = args.merge_decisions
 
     target_dir = Path(out_dir) if out_dir is not None else (args.out_dir or OUT_DIR)
     review_dir = (
@@ -969,6 +994,36 @@ def main(
 
     # ---- routes（暫時空 FeatureCollection：等 location-event 關聯經人手審閱後先有據可依）----
     route_fc = {"type": "FeatureCollection", "features": []}
+
+    # ---- 角色合併（**opt-in**：`--merge-decisions`；「合併決定前移入產生器」）----
+    #
+    # 為何要喺**寫入之前**做：咁樣 provisional 輸出直接係「已合併」狀態，
+    # 唔需要之後再跑破壞性嘅 `merge_characters.py`。
+    #
+    # ⚠️ 為何預設**唔做**：決定檔住喺 `data/private/`（CI 冇）→ 如果預設套用，
+    # 產生器嘅輸出就會**取決於環境**（本機 333、CI 344）→ 唔可重現。
+    # 所以一定要明確指明。
+    merge_report: dict[str, Any] | None = None
+    if merge_decisions is not None and Path(merge_decisions).exists():
+        decisions_doc = json.loads(Path(merge_decisions).read_text(encoding="utf-8"))
+        merge_map = build_merge_map(char_records, decisions_doc)
+        name_map = build_name_map(char_records, merge_map)
+        before_n = len(char_records)
+        char_records = merge_records_inplace(char_records, merge_map)
+        ref_hits = propagate_references_inplace(event_features, merge_map, name_map)
+        ref_hits += propagate_references_inplace(route_fc, merge_map, name_map)
+        ref_hits += propagate_references_inplace(tl_records, merge_map, name_map)
+        merge_report = {
+            "decisions": str(merge_decisions),
+            "merged_count": len(merge_map),
+            "characters_before": before_n,
+            "characters_after": len(char_records),
+            "reference_updates": ref_hits,
+        }
+        print(
+            f"  📜 角色合併：{before_n} → {len(char_records)}"
+            f"（{len(merge_map)} 個被合併；引用更新 {ref_hits} 處）"
+        )
 
     # ---- reconcile 對照（喺寫入之前讀凍結資產，先捕捉得到真實 baseline）----
     rec_report = reconcile_datasets(target_dir, char_resolved, loc_resolved, review_dir, write=True)
