@@ -38,7 +38,7 @@ delta。用整數 delta 而唔用浮點絕對座標，可以將每點由約 20 b
     public/assets/vector/water.json       內陸水體
     public/assets/vector/roads-l0.json    低縮放：主要道路（已重度簡化）
     public/assets/vector/roads-l1.json    中縮放：全部道路（中度簡化）
-    public/assets/vector/areas.json       公園／林地／工業區（面）
+    public/assets/vector/areas.json       公園／林地／工業區／住宅區（面）
     public/assets/vector/tiles/r{r}c{c}.json   高縮放：道路＋建築＋POI
 
 用法
@@ -148,6 +148,26 @@ SIMPLIFY_TOL = {
 MIN_BUILDING_AREA_M2 = 24.0
 MIN_WATER_AREA_M2 = 900.0
 MIN_AREA_M2 = 4000.0
+
+#: 住宅區（`landuse=residential`）嘅面積下限（平方米）。
+#:
+#: 為何同 `MIN_AREA_M2` 分開（#14）
+#: ---------------------------------
+#: 住宅區係**最細碎**嘅面層類別：全港 11,398 個，面積 p50 只有 1,345 m²，
+#: 過 4,000 m² 嘅只有 31.2%。用同一個門檻嘅話，66,000 m² 以下嘅屋邨群
+#: 會被切成一堆碎片，低縮放時變成雜訊 —— 而低縮放根本睇唔到 1 公頃嘅面。
+#:
+#: 實測（`scripts/measure_residential_areas.py`）：
+#:   4,000 m² → 保留 3,388 環 / 19,734 點 / +135 KiB / init +4.2 ms
+#: 成本遠低於 300 ms 冷 zoom 預算，所以維持同 `MIN_AREA_M2` 一致 ——
+#: 門檻嘅作用係**過濾亞像素雜訊**，唔係為咗省成本。
+MIN_RESIDENTIAL_AREA_M2 = 4000.0
+
+#: `areas.json` 嘅 `k` 值 → 語意。前端 `BaseGeometryLayer.setAreas` 用同一套。
+#: ⚠️ 兩邊必須一致（有測試把關）。
+AREA_KIND_GREEN = 0
+AREA_KIND_INDUSTRIAL = 1
+AREA_KIND_RESIDENTIAL = 2
 
 #: 經度 1 度 ≈ 幾多米（北緯 22.36）。
 M_PER_DEG_LON = 111320 * math.cos(math.radians(22.36))
@@ -530,26 +550,45 @@ def build_water(els: list[dict[str, Any]]) -> list[list[tuple[float, float]]]:
 
 
 def build_areas(els: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """公園／林地／工業區等大面積面層。"""
+    """公園／林地／工業區／住宅區等大面積面層。
+
+    `k` 值（同前端 `AREA_KIND_*` 一致）：
+        0 = 綠地（公園／林地／草地／墳場）
+        1 = 工業區
+        2 = 住宅區（`landuse=residential`；#14）
+
+    ⚠️ 為何住宅區要單獨一個 kind 而唔係併入綠地
+    ------------------------------------------
+    住宅區同綠地係**相反**嘅語意（人居 vs 自然），配色必須唔同。
+    併入 `green` 嘅話，市區會變成一片綠色 —— 同郊野公園冇分別，
+    反而抹走咗「呢度有人住」嘅資訊。所以前端要第三種色。
+    """
     out = []
     for e in els:
         t = e.get("tags") or {}
-        kind = None
+        kind: int | None = None
         if t.get("leisure") in ("park", "nature_reserve", "garden", "pitch", "sports_centre"):
-            kind = "green"
+            kind = AREA_KIND_GREEN
         elif t.get("natural") in ("wood", "scrub", "grassland"):
-            kind = "green"
+            kind = AREA_KIND_GREEN
         elif t.get("landuse") == "forest":
-            kind = "green"
+            kind = AREA_KIND_GREEN
         elif t.get("landuse") == "industrial":
-            kind = "industrial"
+            kind = AREA_KIND_INDUSTRIAL
         elif t.get("landuse") == "cemetery":
-            kind = "green"
+            kind = AREA_KIND_GREEN
+        elif t.get("landuse") == "residential":
+            kind = AREA_KIND_RESIDENTIAL
         if kind is None:
             continue
-        s = simplify_ring(geom_of(e), SIMPLIFY_TOL["area"], MIN_AREA_M2)
+        min_area = (
+            MIN_RESIDENTIAL_AREA_M2
+            if kind == AREA_KIND_RESIDENTIAL
+            else MIN_AREA_M2
+        )
+        s = simplify_ring(geom_of(e), SIMPLIFY_TOL["area"], min_area)
         if s:
-            out.append({"k": 0 if kind == "green" else 1, "r": encode_delta(s, closed=True)})
+            out.append({"k": kind, "r": encode_delta(s, closed=True)})
     return out
 
 
@@ -693,6 +732,27 @@ def main() -> int:
         "road_min_level": {str(k): v for k, v in ROAD_MIN_LEVEL.items()},
         "layers": {},
     }
+
+    # ⚠️ `--only` 嘅 footgun（已修）
+    # -----------------------------
+    # 舊行為：`manifest["layers"]` 由空開始，只填指定嘅層 → **其餘層嘅
+    # entry 會被靜默刪走**。前端讀 `manifest.layers.l1?.file` 之類會
+    # fallback 到硬編碼檔名（啱啱好唔會爆），但 manifest 本身已經係
+    # 殘缺、唔可以再當成「完整描述」。實測 `--only areas` 之後只剩
+    # `areas` 一個 entry —— 呢個係真 bug，唔係預期。
+    #
+    # 修正：`--only` 時由**現有 manifest** 讀回 `layers` 做基礎，再覆蓋
+    # 指定嘅層。咁樣 `--only areas` 只會更新 areas，其餘保持不變。
+    if only:
+        existing = OUT_DIR / "manifest.json"
+        if existing.exists():
+            try:
+                prev = json.loads(existing.read_text(encoding="utf-8"))
+                if isinstance(prev.get("layers"), dict):
+                    manifest["layers"] = prev["layers"]
+                    print(f"  （--only：由現有 manifest 保留 {len(prev['layers'])} 層）")
+            except (OSError, ValueError):
+                pass
 
     def write_json(name: str, obj: Any) -> int:
         p = OUT_DIR / name

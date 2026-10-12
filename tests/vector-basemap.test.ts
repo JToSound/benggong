@@ -15,6 +15,11 @@ import { describe, expect, it } from "vitest";
 import { readFileSync, existsSync } from "node:fs";
 import { resolve, join } from "node:path";
 import { ROAD_MIN_LEVEL } from "../src/map/VectorBasemap";
+import {
+  AREA_KIND_GREEN,
+  AREA_KIND_INDUSTRIAL,
+  AREA_KIND_RESIDENTIAL,
+} from "../src/map/BaseGeometryLayer";
 
 const REPO = resolve(__dirname, "..");
 const VECTOR = join(REPO, "public", "assets", "vector");
@@ -124,5 +129,51 @@ describe("向量底圖：資產完整性", () => {
       expect(Math.abs(x - r[0])).toBeLessThanOrEqual(1);
       expect(Math.abs(y - r[1])).toBeLessThanOrEqual(1);
     }
+  });
+});
+
+/* ─────────────────────────────────────────────────────────────────────────
+   #14：面層 kind 契約（住宅區）
+   ───────────────────────────────────────────────────────────────────────── */
+
+describe("面層 kind：Python ↔ TS 一致（#14）", () => {
+  it("三個 AREA_KIND_* 同 Python 逐一相同", () => {
+    expect(AREA_KIND_GREEN).toBe(pyInt("AREA_KIND_GREEN"));
+    expect(AREA_KIND_INDUSTRIAL).toBe(pyInt("AREA_KIND_INDUSTRIAL"));
+    expect(AREA_KIND_RESIDENTIAL).toBe(pyInt("AREA_KIND_RESIDENTIAL"));
+  });
+
+  it("kind 值互斥（唔可以撞）", () => {
+    const kinds = new Set([
+      AREA_KIND_GREEN,
+      AREA_KIND_INDUSTRIAL,
+      AREA_KIND_RESIDENTIAL,
+    ]);
+    expect(kinds.size).toBe(3);
+  });
+
+  it("areas.json 有住宅層，而且冇未知 kind", () => {
+    const f = join(VECTOR, "areas.json");
+    if (!existsSync(f)) return;
+    const { areas } = JSON.parse(readFileSync(f, "utf-8")) as {
+      areas: Array<{ k: number; r: number[] }>;
+    };
+    const kinds = new Set(areas.map((a) => a.k));
+    expect(kinds.has(AREA_KIND_RESIDENTIAL), "areas.json 冇住宅層").toBe(true);
+    const valid = new Set([
+      AREA_KIND_GREEN,
+      AREA_KIND_INDUSTRIAL,
+      AREA_KIND_RESIDENTIAL,
+    ]);
+    const bad = [...kinds].filter((k) => !valid.has(k));
+    expect(bad, `未知 kind：${bad}`).toEqual([]);
+  });
+
+  it("住宅層佔比顯著（防止靜默 revert）", () => {
+    const f = join(VECTOR, "areas.json");
+    if (!existsSync(f)) return;
+    const { areas } = JSON.parse(readFileSync(f, "utf-8")) as { areas: Array<{ k: number }> };
+    const n = areas.filter((a) => a.k === AREA_KIND_RESIDENTIAL).length;
+    expect(n, `住宅層只有 ${n} 個面`).toBeGreaterThan(2000);
   });
 });

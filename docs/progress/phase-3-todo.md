@@ -71,7 +71,7 @@
 | 6 | **`characters.json` 可重現性** | 資料 | **高** | ✅ 已緩解（C 項：重跑唔會削減凍結資產）；**byte-level 重建**仍待做（要重建 Phase B → merge 全流程） |
 | 7 | **169 個塌縮座標** | C4 | 中 | 被 `inferred_from` 鎖定 |
 | 13 | ~~**`RC-NOFAKEZOOM-ACCUM`**~~ | C3 | — | ✅ **已修**（見 `rc-nofakezoom-accum.md`） |
-| 14 | **`landuse=residential` 冇渲染** | C3 | 低 | 全港 11,398 個；對 `center` 錨點冇幫助（Z6 只佔 8.99%），但對市區內容密度有幫助 |
+| 14 | ~~**`landuse=residential` 冇渲染**~~ | C3 | — | ✅ **已完成**（見 `c3-residential-areas.md`）。**推翻舊結論**：舊「Z6 只佔 8.99%」無法重現（三種定義都唔同）；實測加 3,388 環入面層，init 增量 **4.3 ms**（冷 zoom 預算 300 ms 嘅 1.4%，風險證偽），視覺差 **2.72%** 畫面。已加 `AREA_KIND_RESIDENTIAL` ＋ 契約測試 ＋ 視覺證據 |
 
 ### 低優先（清理 / 完善）
 

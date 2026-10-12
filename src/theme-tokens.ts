@@ -28,6 +28,7 @@ export interface BasemapPalette {
   coastGlow: string;
   green: string;
   industrial: string;
+  residential: string;
   water: string;
   waterEdge: string;
   bld: [string, string, string, string];
@@ -98,6 +99,7 @@ export const TOKEN_COLORS_DARK: Readonly<Record<string, string>> = {
   "--bm-coast-glow": "rgba(60,170,200,0.22)",
   "--bm-green": "rgba(28,72,54,0.72)",
   "--bm-industrial": "rgba(66,52,40,0.62)",
+  "--bm-residential": "rgba(62,58,54,0.42)",
   "--bm-water": "#071120",
   "--bm-water-edge": "rgba(74,158,196,0.32)",
   "--bm-bld-1": "rgba(126,168,200,0.14)",
@@ -175,6 +177,7 @@ export const TOKEN_COLORS_LIGHT: Readonly<Record<string, string>> = {
   "--bm-coast-glow": "rgba(60,130,170,0.18)",
   "--bm-green": "rgba(150,200,160,0.6)",
   "--bm-industrial": "rgba(205,186,166,0.55)",
+  "--bm-residential": "rgba(186,178,170,0.5)",
   "--bm-water": "#c8d8e6",
   "--bm-water-edge": "rgba(60,120,160,0.35)",
   "--bm-bld-1": "rgba(90,110,130,0.16)",
@@ -237,6 +240,7 @@ function buildPalette(c: Readonly<Record<string, string>>): BasemapPalette {
     coastGlow: c["--bm-coast-glow"],
     green: c["--bm-green"],
     industrial: c["--bm-industrial"],
+    residential: c["--bm-residential"],
     water: c["--bm-water"],
     waterEdge: c["--bm-water-edge"],
     bld: [

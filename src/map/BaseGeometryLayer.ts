@@ -1,7 +1,7 @@
 /**
  * BaseGeometryLayer.ts — 由 `VectorBasemap` 抽出嘅**幾何繪製層**（spec §2.2）。
  *
- * 負責：陸地 / 綠地 / 工業區 / 內陸水體 / 建築 / 道路。
+ * 負責：陸地 / 綠地 / 工業區 / 住宅區 / 內陸水體 / 建築 / 道路。
  * 唔負責：海漸層、經緯格線、暗角、標籤（留喺 `VectorBasemap`）。
  *
  * 為何要拆出嚟
@@ -36,6 +36,18 @@ import {
 } from "./map-lod";
 import { PROJ_COS, type GeoBbox, type ViewBox } from "./map-camera";
 import type { BasemapPalette } from "../theme-tokens";
+
+/**
+ * `areas.json` 嘅 `k` 值 → 語意。
+ *
+ * ⚠️ 呢個係**刻意重複** `scripts/build_vector_basemap.py` 嘅
+ * `AREA_KIND_*` —— 產生器（Python）同消費者（TS）冇共用模組。
+ * 兩邊唔一致就會「有資料但畫錯色」或者「畫咗但當成另一類」。
+ * 有測試把關（`tests/vector-basemap.test.ts`）。
+ */
+export const AREA_KIND_GREEN = 0;
+export const AREA_KIND_INDUSTRIAL = 1;
+export const AREA_KIND_RESIDENTIAL = 2;
 
 export interface RoadRec {
   cls: number;
@@ -324,6 +336,7 @@ export class BaseGeometryLayer {
   private waterPath: Path2D | null = null;
   private greenPath: Path2D | null = null;
   private indusPath: Path2D | null = null;
+  private resiPath: Path2D | null = null;
 
   // ---- 全域道路（按 level 快取，唔再每次切層重建） ----
   private globalRoads: Record<0 | 1, RoadRec[]> = { 0: [], 1: [] };
@@ -360,9 +373,21 @@ export class BaseGeometryLayer {
   setAreas(areas: Array<{ k: number; pts: Float64Array }>): void {
     const green = new Path2D();
     const indus = new Path2D();
-    for (const a of areas) ringToPath(a.k === 0 ? green : indus, a.pts);
+    const resi = new Path2D();
+    for (const a of areas) {
+      const target =
+        a.k === AREA_KIND_GREEN
+          ? green
+          : a.k === AREA_KIND_INDUSTRIAL
+            ? indus
+            : a.k === AREA_KIND_RESIDENTIAL
+              ? resi
+              : null;
+      if (target) ringToPath(target, a.pts);
+    }
     this.greenPath = green;
     this.indusPath = indus;
+    this.resiPath = resi;
   }
 
   /** 設定某一級嘅全域道路（level 0 = roads-l0；level 1 = roads-l1）。 */
@@ -636,7 +661,11 @@ export class BaseGeometryLayer {
     const low = level === 2 && isLowDensity(buildingsInView);
     if (hatch) this.drawNoDetailHatch(ctx, frame, s, low, latTop, latBot);
 
-    // ---- 綠地／工業區 ----
+    // ---- 綠地／工業區／住宅區 ----
+    //
+    // ⚠️ 次序有意義：住宅區**最後**畫。住宅區同綠地經常共用邊界
+    // （屋邨裡面嘅公園），後畫嘅會疊喺上面 —— 而住宅區嘅 alpha 較高、
+    // 範圍較細碎，後畫可以清楚見到「邊度係屋邨」。
     if (this.greenPath) {
       ctx.fillStyle = palette.green;
       ctx.fill(this.greenPath, "evenodd");
@@ -644,6 +673,10 @@ export class BaseGeometryLayer {
     if (this.indusPath) {
       ctx.fillStyle = palette.industrial;
       ctx.fill(this.indusPath, "evenodd");
+    }
+    if (this.resiPath) {
+      ctx.fillStyle = palette.residential;
+      ctx.fill(this.resiPath, "evenodd");
     }
 
     // ---- 內陸水體 ----
@@ -778,6 +811,7 @@ export class BaseGeometryLayer {
     this.waterPath = null;
     this.greenPath = null;
     this.indusPath = null;
+    this.resiPath = null;
     this.globalRoads = { 0: [], 1: [] };
     this.globalRoadPaths = { 0: new Array(8).fill(null), 1: new Array(8).fill(null) };
     this.globalRoadUsed = { 0: new Set(), 1: new Set() };

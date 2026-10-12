@@ -82,6 +82,20 @@ async function activeDesc(page: Page): Promise<{ tag: string; id: string; cls: s
  */
 const E2E_TIMEOUT = 30_000;
 
+/*
+ * ⚠️ 逐個控制項量度嘅專用逾時（120 秒），唔可以同上面嘅 30 秒混用。
+ *
+ * 實測（2026-10-12）：`12 個控制項：逐個到達…` 呢個測試會**順序**開
+ * 12 個 page（每個都要 `goto` + `waitReady` + 量 ring），係本檔最重嘅
+ * 一個。單獨跑 OK，但喺**全套**（57 檔並行、Chromium 高負載）之下
+ * 會超過 30 秒 → 「Test timed out」**假失敗**。
+ *
+ * ⚠️ 修法係拉長逾時上界，**唔可以**放寬斷言（MEMORY #39：flaky 根因
+ * 通常係量度時序，唔係邏輯）。12 個 page × 每頁實測 ~2–9 秒 = 24–108 秒，
+ * 所以 120 秒足夠覆蓋最壞情況而仍然會喺真 hang 時 fail。
+ */
+const RING_SCAN_TIMEOUT = 120_000;
+
 // ─────────────────────────────────────────────────────────────────────────────
 // 10.1 第 1 個 Tab stop = `.skip-link`（P0-2）
 // ─────────────────────────────────────────────────────────────────────────────
@@ -514,7 +528,7 @@ describe("B8 keyboard：focus ring 逐像素（§2-10 / P0-3 / VA8）", { timeou
     } finally {
       await browser.close();
     }
-  });
+  }, RING_SCAN_TIMEOUT);
 });
 
 /**
