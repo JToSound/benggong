@@ -68,7 +68,7 @@
 
 | # | 項 | 影響 | 難度 | 備註 |
 |---|---|---|---|---|
-| 6 | **`characters.json` 可重現性** | 資料 | **高** | ✅ 已緩解（C 項：重跑唔會削減凍結資產）；**byte-level 重建**仍待做（要重建 Phase B → merge 全流程） |
+| 6 | **`characters.json` 可重現性** | 資料 | **高** | ✅ 已緩解（C 項：重跑唔會削減凍結資產）；**byte-level 重建**仍待做（要重建 Phase B → merge 全流程）。⚠️ **2026-10-12 更新**：殘餘由「4＋1」收窄至「**0＋1**」—— 補咗 4 條「鳥嘴」系列合併決定（根因＝上游 `character_definitions` 獨立群，非輸入 skew）。見 `c4-bird-beak-merge-closure.md` |
 | 7 | **169 個塌縮座標** | C4 | 中 | 被 `inferred_from` 鎖定 |
 | 13 | ~~**`RC-NOFAKEZOOM-ACCUM`**~~ | C3 | — | ✅ **已修**（見 `rc-nofakezoom-accum.md`） |
 | 14 | ~~**`landuse=residential` 冇渲染**~~ | C3 | — | ✅ **已完成**（見 `c3-residential-areas.md`）。**推翻舊結論**：舊「Z6 只佔 8.99%」無法重現（三種定義都唔同）；實測加 3,388 環入面層，init 增量 **4.3 ms**（冷 zoom 預算 300 ms 嘅 1.4%，風險證偽），視覺差 **2.72%** 畫面。已加 `AREA_KIND_RESIDENTIAL` ＋ 契約測試 ＋ 視覺證據 |
@@ -87,13 +87,14 @@
 
 ## 🎯 建議下一步
 
-**按影響排序**：
-1. **Q10 冷 zoom 阻塞**（`Q1–Q11` 唯一剩餘 FAIL；目標 300 ms）—— per-layer 增量更新或移入 worker
-2. **`RC-NOFAKEZOOM-ACCUM`**（低密度判定改用視窗內建築數 —— 同時令 Q11 更誠實）
-3. **P1-2 鍵盤可達**（逐屬性隔離測試搵根因）
-4. **批次 3：D 舊 CSS 遷移**（5 階段，每階段跑全套測試）
-5. **批次 4：C1–C8 對抗驗收**
-6. 資料完整性（`characters.json` byte-level 重建）
+**⚠️ 2026-10-12 更新（下列 1–5 已完成，見上方表格）**。真正剩餘：
+1. **`characters.json` byte-level 重建** —— 殘餘已收窄至「0 extra ＋ 1 missing」；
+   剩低係 `老師`（`ent_40e6666820`）真輸入 skew，同上游 `character_definitions`
+   群分裂嘅**治本**修法（見 `c4-bird-beak-merge-closure.md` §8）
+2. **`locations.geojson` 重建帳目**（704 vs 629）—— 同一套「重建帳目」方法
+3. **`老師`／`鳥嘴老師` 關係調查**（用 evidence 章節分佈 + aliases 交集，可程式化）
+4. **D 舊 CSS 遷移階段 2／4／5**（見裁決表）
+5. 低優先清理項（#8–#12）
 
 ---
 

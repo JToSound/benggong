@@ -11,7 +11,11 @@
 令殘餘**增加**或者**改變形狀**，呢度會即刻變紅。
 
 ⚠️ 刻意**唔**斷言「id 集合相同」—— 因為實測**唔可能**（輸入 skew）。
-斷言嘅係「殘餘＝**已知嘅 4＋1**，而且每一條都有解釋」。
+斷言嘅係「殘餘＝**已知嘅 0＋1**，而且每一條都有解釋」。
+
+⚠️ 2026-10-12 第四輪：殘餘由「4＋1」收窄到「0＋1」（補咗 4 條「鳥嘴」系列
+合併決定）。根因唔係輸入 skew，而係上游 `character_definitions` 把「鳥嘴」
+開成獨立互斥群 —— 診斷見 `scripts/diagnose_merge_groups.py`。
 """
 
 from __future__ import annotations
@@ -31,7 +35,6 @@ DECISIONS = REPO / "data" / "private" / "review" / "character-merge-decisions.js
 FROZEN = REPO / "data" / "public" / "characters.json"
 
 sys.path.insert(0, str(REPO / "scripts"))
-import build_public_dataset as bpd  # noqa: E402
 import verify_characters_rebuild as vcr  # noqa: E402
 
 #: 同 `tests/test_characters_reproducibility.py` 一致嘅凍結 id 錨
@@ -82,18 +85,19 @@ def test_generator_default_output_is_unchanged(rebuilt: dict[str, list[dict]]) -
 
 
 def test_full_chain_rebuild_reaches_merged_state(rebuilt: dict[str, list[dict]]) -> None:
-    """⭐ 加咗 `--merge-decisions` 之後，provisional 直接係「已合併」狀態（333）。
+    """⭐ 加咗 `--merge-decisions` 之後，provisional 直接係「已合併」狀態（329）。
 
-    ⚠️ 333 ≠ 330 —— 呢個就係「唔可以由輸入完整重現」嘅實測數字
-    （Gate 2 §3.2 亦量到同一個數）。
+    ⚠️ 329 ≠ 330 —— 呢個就係「唔可以由輸入完整重現」嘅實測數字
+    （第四輪補咗 4 條「鳥嘴」系列決定之後，由 333 收窄到 329）。
+    舊數字（第三輪）係 333；Gate 2 §3.2 亦量到 333（當時基線）。
     """
-    assert len(rebuilt["merged"]) == 333
+    assert len(rebuilt["merged"]) == 329
 
 
 def test_residual_is_exactly_the_documented_set(rebuilt: dict[str, list[dict]]) -> None:
-    """⭐⭐ 殘餘＝**已知嘅 4 extra ＋ 1 missing**（唔可以多、唔可以少、唔可以換）。
+    """⭐⭐ 殘餘＝**已知嘅 0 extra ＋ 1 missing**（唔可以多、唔可以少、唔可以換）。
 
-    ⚠️ 刻意**唔**斷言「id 集合相同」—— 實測**唔可能**（輸入 skew）。
+    ⚠️ 刻意**唔**斷言「id 集合相同」—— 實測**唔可能**（仍有 1 條真輸入 skew）。
     斷言嘅係「殘餘嘅**形狀**冇變」：名單、數量、以及每條都有解釋。
     """
     led = vcr.build_ledger(rebuilt["merged"], _frozen())
@@ -104,23 +108,29 @@ def test_residual_is_exactly_the_documented_set(rebuilt: dict[str, list[dict]]) 
     assert all(e["expected"] for e in led["extra"])
     assert all(m["expected"] for m in led["missing"])
     assert led["rebuilt_id_hash"] != led["frozen_id_hash"]
+    # ⚠️ 第四輪收緊：extra 必須**空**（唔可以靜默彈返 4 條返嚟）。
+    assert led["extra"] == [], f"extra 應該係空，實測 {[e['name'] for e in led['extra']]}"
+    assert len(led["missing"]) == 1
 
 
 def test_residual_classification(rebuilt: dict[str, list[dict]]) -> None:
-    """⭐ 4 個 extra 之中 3 個已經係凍結檔嘅 alias（＝本來就應該合併）。
+    """⭐ 第四輪之後：**冇任何** extra，「鳥嘴」系列已經全部閉合。
 
-    即係真正「無法重現」嘅只有 **2 條**：
-      · `鳥嘴老師`（凍結檔完全冇）
+    真正「無法重現」嘅只有 **1 條**：
       · `老師`／`ent_40e6666820`（輸入產生唔到）
+
+    ⚠️ 呢個測試係**收緊** —— 舊版要求「3 條 absorbed ＋ 1 條 unexplained」；
+    新版要求「0 條 extra」。如果將來 extra 又出現（例如上游決定檔被改壞），
+    呢度會即刻變紅。
     """
     led = vcr.build_ledger(rebuilt["merged"], _frozen())
     absorbed = [e["name"] for e in led["extra"] if e["absorbed_as_alias"]]
     unexplained = [e["name"] for e in led["extra"] if not e["absorbed_as_alias"]]
 
-    assert sorted(absorbed) == sorted(["鳥嘴先生", "鳥嘴兄", "鳥嘴弟兄"]), (
-        f"預期 3 個已併入 aliases，實測 {absorbed}"
-    )
-    assert unexplained == ["鳥嘴老師"], f"預期只剩「鳥嘴老師」無法解釋，實測 {unexplained}"
+    assert absorbed == [], f"預期冇 absorbed extra，實測 {absorbed}"
+    assert unexplained == [], f"預期冇 unexplained extra，實測 {unexplained}"
+    assert len(led["missing"]) == 1
+    assert led["missing"][0]["id"] == "ent_40e6666820"
 
 
 def test_merge_logic_has_a_single_implementation() -> None:
@@ -162,6 +172,6 @@ def test_ledger_cli_is_rerunnable_and_green() -> None:
         assert r.returncode == 0, f"帳目應該係綠：\n{r.stdout}\n{r.stderr}"
         led = json.loads(out.read_text(encoding="utf-8"))
         assert led["unexpected"] == []
-        assert led["rebuilt_count"] == 333
+        assert led["rebuilt_count"] == 329
         assert led["frozen_count"] == 330
         assert led["merge_decisions_applied"] is True

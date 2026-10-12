@@ -18,11 +18,13 @@
   · `absorbed_as_alias`：個名已經喺凍結檔嘅 aliases → 即「本來就應該合併」；
   · `unexplained`：兩邊都對唔上 → 真正嘅輸入 skew。
 
-⚠️ 已知殘餘（2026-10-11 實測）＝ **4 extra ＋ 1 missing**：
-  · `鳥嘴兄` / `鳥嘴先生` / `鳥嘴弟兄` —— 已喺凍結檔併入「主角」嘅 aliases
-    （即係**可以**用多幾條合併決定收窄，但會改動私有決定檔 → 唔喺本輪做）；
-  · `鳥嘴老師` —— 凍結檔完全冇（唔係記錄、唔係 alias）；
-  · `老師`（`ent_40e6666820`）—— 現時輸入產生唔到。
+⚠️ 殘餘（2026-10-12 第四輪實測）＝ **0 extra ＋ 1 missing**：
+  · `老師`（`ent_40e6666820`）—— 現時輸入產生唔到（真輸入 skew）。
+
+歷史（第三輪，2026-10-11）：曾經係 **4 extra ＋ 1 missing**：
+  · `鳥嘴兄` / `鳥嘴先生` / `鳥嘴弟兄` / `鳥嘴老師` —— 已喺第四輪補 4 條合併
+    決定閉合（根因：上游 `character_definitions` 把「鳥嘴」開成獨立群）。
+  · `老師`（`ent_40e6666820`）—— 仍然係真 skew。
 
 用法：
     python scripts/verify_characters_rebuild.py
@@ -46,14 +48,15 @@ FROZEN = REPO / "data" / "public" / "characters.json"
 DECISIONS = REPO / "data" / "private" / "review" / "character-merge-decisions.json"
 
 #: 已量測、已解釋嘅殘餘（**唯一真相來源**：`tests/test_characters_full_rebuild.py` 讀呢度）。
-EXPECTED_EXTRA: dict[str, str] = {
-    "鳥嘴兄": "已喺凍結檔併入「主角」嘅 aliases（可用更多合併決定收窄）",
-    "鳥嘴先生": "同上",
-    "鳥嘴弟兄": "同上",
-    "鳥嘴老師": "⚠️ 凍結檔完全冇（唔係記錄、唔係 alias）—— 輸入 skew",
-}
+#:
+#: ⚠️ 2026-10-12 第四輪更新：補咗 4 條「鳥嘴」系列合併決定之後，
+#: extra 由 4 條 → **0 條**。原本 4 條嘅根因唔係輸入 skew，而係上游
+#: `manual-resolutions.json` 嘅 `character_definitions`（Phase E v17 FINAL）
+#: 把「鳥嘴」開成獨立互斥群（同「主角」群零交集）→ 重建時變獨立 canonical。
+#: 診斷：`scripts/diagnose_merge_groups.py`（可重跑）。
+EXPECTED_EXTRA: dict[str, str] = {}
 EXPECTED_MISSING: dict[str, str] = {
-    "ent_40e6666820": "「老師」—— 現時輸入產生唔到（輸入 skew）",
+    "ent_40e6666820": "「老師」—— 現時輸入產生唔到（真輸入 skew；與「鳥嘴」系列無關）",
 }
 
 
